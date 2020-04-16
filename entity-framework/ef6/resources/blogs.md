@@ -1,35 +1,35 @@
 ---
-title: Blog Entity Framework-EF6
+title: Blog di Entity Framework - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: f8fcfb34-35de-4e82-b419-8f99fd2eb92a
-ms.openlocfilehash: 6900ce3d139f4ae017edc764d55a7b746561a226
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 84c173498dcdb73011d6a9ff317ccc1c31a46551
+ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417074"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81434283"
 ---
-# <a name="entity-framework-blogs"></a><span data-ttu-id="e7e73-102">Blog Entity Framework</span><span class="sxs-lookup"><span data-stu-id="e7e73-102">Entity Framework Blogs</span></span>
-<span data-ttu-id="e7e73-103">Oltre alla documentazione del prodotto, questi blog possono costituire una fonte di informazioni utili sui Entity Framework:</span><span class="sxs-lookup"><span data-stu-id="e7e73-103">Besides the product documentation, these blogs can be a source of useful information on Entity Framework:</span></span>
+# <a name="entity-framework-blogs"></a><span data-ttu-id="482bc-102">Blog di Entity Framework</span><span class="sxs-lookup"><span data-stu-id="482bc-102">Entity Framework Blogs</span></span>
+<span data-ttu-id="482bc-103">Oltre alla documentazione del prodotto, questi blog possono essere una fonte di informazioni utili su Entity Framework:</span><span class="sxs-lookup"><span data-stu-id="482bc-103">Besides the product documentation, these blogs can be a source of useful information on Entity Framework:</span></span>
 
-## <a name="ef-team-blogs"></a><span data-ttu-id="e7e73-104">Blog del team EF</span><span class="sxs-lookup"><span data-stu-id="e7e73-104">EF Team blogs</span></span>
+## <a name="ef-team-blogs"></a><span data-ttu-id="482bc-104">Blog del team di EF</span><span class="sxs-lookup"><span data-stu-id="482bc-104">EF Team blogs</span></span>
 
-- [<span data-ttu-id="e7e73-105">Blog di .NET-Tag: Entity Framework</span><span class="sxs-lookup"><span data-stu-id="e7e73-105">.NET Blog - Tag: Entity Framework</span></span>](https://blogs.msdn.microsoft.com/dotnet/tag/entity-framework/)
-- [<span data-ttu-id="e7e73-106">Blog di ADO.NET (non più in uso)</span><span class="sxs-lookup"><span data-stu-id="e7e73-106">ADO.NET Blog (no longer in use)</span></span>](https://blogs.msdn.microsoft.com/adonet/)
-- [<span data-ttu-id="e7e73-107">Blog di progettazione EF (non più in uso)</span><span class="sxs-lookup"><span data-stu-id="e7e73-107">EF Design Blog (no longer in use)</span></span>](https://blogs.msdn.microsoft.com/efdesign/)
+- [<span data-ttu-id="482bc-105">Blog .NET - Tag: Entity Framework</span><span class="sxs-lookup"><span data-stu-id="482bc-105">.NET Blog - Tag: Entity Framework</span></span>](https://blogs.msdn.microsoft.com/dotnet/tag/entity-framework/)
+- [<span data-ttu-id="482bc-106">ADO.NET Blog (non più in uso)</span><span class="sxs-lookup"><span data-stu-id="482bc-106">ADO.NET Blog (no longer in use)</span></span>](https://blogs.msdn.microsoft.com/adonet/)
+- [<span data-ttu-id="482bc-107">Blog di progettazione di EF (non più in uso)</span><span class="sxs-lookup"><span data-stu-id="482bc-107">EF Design Blog (no longer in use)</span></span>](https://blogs.msdn.microsoft.com/efdesign/)
 
-## <a name="current-and-former-ef-team-bloggers"></a><span data-ttu-id="e7e73-108">Blogger del team EF attuali e precedenti</span><span class="sxs-lookup"><span data-stu-id="e7e73-108">Current and former EF team bloggers</span></span>
+## <a name="current-and-former-ef-team-bloggers"></a><span data-ttu-id="482bc-108">Attuali ed ex blogger del team EF</span><span class="sxs-lookup"><span data-stu-id="482bc-108">Current and former EF team bloggers</span></span>
 
-- [<span data-ttu-id="e7e73-109">Arthur Vickers</span><span class="sxs-lookup"><span data-stu-id="e7e73-109">Arthur Vickers</span></span>](https://blog.oneunicorn.com/tag/entity-framework/)
-- [<span data-ttu-id="e7e73-110">Liguori di Brice</span><span class="sxs-lookup"><span data-stu-id="e7e73-110">Brice Lambson</span></span>](https://www.bricelam.net/)
-- [<span data-ttu-id="e7e73-111">Diego Vega</span><span class="sxs-lookup"><span data-stu-id="e7e73-111">Diego Vega</span></span>](https://blogs.msdn.microsoft.com/diego/)
-- [<span data-ttu-id="e7e73-112">Rowan Miller</span><span class="sxs-lookup"><span data-stu-id="e7e73-112">Rowan Miller</span></span>](https://romiller.com/category/entity-framework/)
-- [<span data-ttu-id="e7e73-113">Kadluczka Pawel</span><span class="sxs-lookup"><span data-stu-id="e7e73-113">Pawel Kadluczka</span></span>](https://blog.3d-logic.com/category/entity-framework/)
-- [<span data-ttu-id="e7e73-114">Alex James</span><span class="sxs-lookup"><span data-stu-id="e7e73-114">Alex James</span></span>](https://blogs.msdn.microsoft.com/alexj/tag/entity-framework/)
-- [<span data-ttu-id="e7e73-115">Michailov di Zlatko</span><span class="sxs-lookup"><span data-stu-id="e7e73-115">Zlatko Michailov</span></span>](https://blogs.msdn.microsoft.com/esql/tag/entity-framework/)
+- [<span data-ttu-id="482bc-109">Arthur Vickers</span><span class="sxs-lookup"><span data-stu-id="482bc-109">Arthur Vickers</span></span>](https://blog.oneunicorn.com/)
+- [<span data-ttu-id="482bc-110">Brice Lambson</span><span class="sxs-lookup"><span data-stu-id="482bc-110">Brice Lambson</span></span>](https://www.bricelam.net/)
+- [<span data-ttu-id="482bc-111">Diego Vega</span><span class="sxs-lookup"><span data-stu-id="482bc-111">Diego Vega</span></span>](https://blogs.msdn.microsoft.com/diego/)
+- [<span data-ttu-id="482bc-112">Rowan Miller</span><span class="sxs-lookup"><span data-stu-id="482bc-112">Rowan Miller</span></span>](https://romiller.com/category/entity-framework/)
+- [<span data-ttu-id="482bc-113">Pawel Kadluczka</span><span class="sxs-lookup"><span data-stu-id="482bc-113">Pawel Kadluczka</span></span>](https://blog.3d-logic.com/category/entity-framework/)
+- [<span data-ttu-id="482bc-114">Aleksej James</span><span class="sxs-lookup"><span data-stu-id="482bc-114">Alex James</span></span>](https://blogs.msdn.microsoft.com/alexj/)
+- [<span data-ttu-id="482bc-115">Zlatko Michailov</span><span class="sxs-lookup"><span data-stu-id="482bc-115">Zlatko Michailov</span></span>](https://blogs.msdn.microsoft.com/esql/)
 
-## <a name="ef-community-bloggers"></a><span data-ttu-id="e7e73-116">Blogger della community EF</span><span class="sxs-lookup"><span data-stu-id="e7e73-116">EF Community Bloggers</span></span>
+## <a name="ef-community-bloggers"></a><span data-ttu-id="482bc-116">Blogger della community di EF</span><span class="sxs-lookup"><span data-stu-id="482bc-116">EF Community Bloggers</span></span>
 
-- [<span data-ttu-id="e7e73-117">Julie Lerman</span><span class="sxs-lookup"><span data-stu-id="e7e73-117">Julie Lerman</span></span>](https://thedatafarm.com/blog/)  
-- [<span data-ttu-id="e7e73-118">Shawn Wildermuth</span><span class="sxs-lookup"><span data-stu-id="e7e73-118">Shawn Wildermuth</span></span>](https://wildermuth.com/Tag/%20Entity%20Framework)  
+- [<span data-ttu-id="482bc-117">Julie Lerman</span><span class="sxs-lookup"><span data-stu-id="482bc-117">Julie Lerman</span></span>](https://thedatafarm.com/blog/)  
+- [<span data-ttu-id="482bc-118">Shawn Wildermuth</span><span class="sxs-lookup"><span data-stu-id="482bc-118">Shawn Wildermuth</span></span>](https://wildermuth.com/Tag/%20Entity%20Framework)  

@@ -4,12 +4,12 @@ author: rick-anderson
 ms.date: 09/17/2019
 ms.assetid: 3c88427c-20c6-42ec-a736-22d3eccd5071
 uid: core/get-started/index
-ms.openlocfilehash: 0e7a1ee159cdf5b72448fe6d73c972975b1ab95b
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 7ace80bf326395d3b68f3e745100cd45356d7973
+ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
 ms.translationtype: HT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78412866"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81434097"
 ---
 # <a name="getting-started-with-ef-core"></a>Introduzione a EF Core
 
@@ -95,7 +95,7 @@ Definire una classe di contesto e le classi di entità che costituiscono il mode
 
 EF Core supporta anche il [reverse engineering](../managing-schemas/scaffolding.md) di un modello da un database esistente.
 
-Suggerimento: in una vera app, ogni classe verrebbe inserita in un file separato e la [stringa di connessione](../miscellaneous/connection-strings.md) verrebbe posizionata in un file di configurazione o in una variabile di ambiente. Per semplicità, in questa esercitazione tutto è contenuto in un solo file.
+Suggerimento: questa applicazione mantiene intenzionalmente le cose semplici per maggiore chiarezza. Le [stringhe di connessione](../miscellaneous/connection-strings.md) non devono essere archiviate nel codice per le applicazioni di produzione. Potrebbe anche essere preferibile suddividere ogni classe C# in un file separato.
 
 ## <a name="create-the-database"></a>Creare il database
 

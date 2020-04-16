@@ -1,15 +1,15 @@
 ---
 title: Strumenti ed estensioni - EF Core
 author: ErikEJ
-ms.date: 12/17/2019
+ms.date: 04/11/2020
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: e3806f7161fecfe66450d3e08f97caf3d2c84cf3
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 7727229fc50a4bfd39e05481399e392037402396
+ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
 ms.translationtype: HT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80634236"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81434110"
 ---
 # <a name="ef-core-tools--extensions"></a>Strumenti ed estensioni di EF Core
 
@@ -71,11 +71,11 @@ Libreria di plug-in che consente di registrare automaticamente le modifiche ai d
 
 [Repository GitHub](https://github.com/Arch/AutoHistory/)
 
-### <a name="efsecondlevelcachecore"></a>EFSecondLevelCache.Core
+### <a name="efcoresecondlevelcacheinterceptor"></a>EFCoreSecondLevelCacheInterceptor
 
-Estensione che consente di archiviare i risultati delle query di EF Core in una cache di secondo livello, in modo che le esecuzioni successive delle stesse query evitino l'accesso al database e recuperino i dati direttamente dalla cache. Per EF Core: 2.
+La memorizzazione nella cache di secondo livello è una cache della query. I risultati dei comandi EF verranno memorizzati nella cache, in modo che gli stessi comandi EF recupereranno i dati dalla cache anziché eseguirli di nuovo sul database. Per EF Core: 3.
 
-[Repository GitHub](https://github.com/VahidN/EFSecondLevelCache.Core/)
+[Repository GitHub](https://github.com/VahidN/EFCoreSecondLevelCacheInterceptor)
 
 ### <a name="geco"></a>Geco
 
@@ -172,13 +172,13 @@ Estende DbContext con operazioni in blocco ad alte prestazioni: BulkSaveChanges,
 
 ### <a name="expressionify"></a>Expressionify
 
-Aggiunta del supporto per la chiamata di metodi di estensione nelle espressioni lambda LINQ. Per EF Core: 3.1
+Aggiunta del supporto per la chiamata di metodi di estensione nelle espressioni lambda LINQ. Per EF Core: 3.
 
 [Repository GitHub](https://github.com/ClaveConsulting/Expressionify)
 
 ### <a name="xlinq"></a>XLinq
 
-Tecnologia LINQ (Language Integrated Query) per database relazionali. Consente di usare C# per scrivere query fortemente tipizzate. Per EF Core: 3.1
+Tecnologia LINQ (Language Integrated Query) per database relazionali. Consente di usare C# per scrivere query fortemente tipizzate. Per EF Core: 3.
 
 - Supporto C# completo per la creazione di query: più istruzioni all'interno di lambda, variabili, funzioni e così via.
 - Nessun gap semantico con SQL. XLinq dichiara istruzioni SQL (ad esempio `SELECT`, `FROM`, `WHERE`) come metodi C# di prima classe, combinando la sintassi familiare con IntelliSense, l'indipendenza dai tipi e il refactoring.
@@ -186,3 +186,27 @@ Tecnologia LINQ (Language Integrated Query) per database relazionali. Consente d
 Di conseguenza, SQL diventa semplicemente "un'altra" libreria di classi che espone l'API in locale, letteralmente *"SQL integrato nel linguaggio"* .
 
 [Sito Web](http://xlinq.live/)
+
+### <a name="ramses"></a>Ramses
+
+Hook del ciclo di vita (per SaveChanges). Per EF Core: 2, 3.
+
+[Repository GitHub](https://github.com/JValck/Ramses)
+
+### <a name="efcorenamingconventions"></a>EFCore.NamingConventions
+
+Per tutti i nomi di tabella e colonna verrà automaticamente usata la convenzione di denominazione snake_case, tutte maiuscole o tutte minuscole. Per EF Core: 3.
+
+[Repository GitHub](https://github.com/efcore/EFCore.NamingConventions)
+
+### <a name="simplersoftwareentityframeworkcoresqlservernodatime"></a>SimplerSoftware.EntityFrameworkCore.SqlServer.NodaTime
+
+Aggiunge il supporto nativo a EntityFrameworkCore per SQL Server per i tipi NodaTime. Per EF Core: 3.
+
+[Repository GitHub](https://github.com/StevenRasmussen/EFCore.SqlServer.NodaTime)
+
+### <a name="dabbleentityframeworkcoretemporalquery"></a>Dabble.EntityFrameworkCore.Temporal.Query
+
+Estensioni LINQ per Entity Framework Core 3.1 per supportare le query di tabelle temporali di Microsoft SQL Server. Per EF Core: 3.
+
+[Repository GitHub](https://github.com/Adam-Langley/efcore-temporal-query)

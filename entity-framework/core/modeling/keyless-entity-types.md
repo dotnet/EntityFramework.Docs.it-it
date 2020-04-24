@@ -1,27 +1,27 @@
 ---
-title: Tipi di entità senza chiave - Entity Framework CoreKeyless Entity Types - EF Core
-description: Come configurare i tipi di entità senza chiave utilizzando Entity Framework CoreHow to configure keyless entity types using Entity Framework Core
+title: Tipi di entità autofirmati-EF Core
+description: Come configurare i tipi di entità autochiave utilizzando Entity Framework Core
 author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 9/13/2019
 uid: core/modeling/keyless-entity-types
-ms.openlocfilehash: 496e1e8983ba2d5e15dbee02607ea3f2c861503e
-ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
+ms.openlocfilehash: 00e8f17c88fd51e39df3c1e45c648c203bbbe324
+ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81434214"
+ms.lasthandoff: 04/23/2020
+ms.locfileid: "82103126"
 ---
 # <a name="keyless-entity-types"></a>Tipi di entità senza chiave
 
 > [!NOTE]
-> Questa funzionalità è stata aggiunta in EF Core 2.1 con il nome dei tipi di query. In Entity Framework Core 3.0 il concetto è stato rinominato in tipi di entità senza chiave.
+> Questa funzionalità è stata aggiunta in EF Core 2,1 sotto il nome dei tipi di query. In EF Core 3,0 il concetto è stato rinominato in tipi di entità senza chiave. L' `[Keyless]` annotazione dei dati è diventata disponibile in EFCore 5,0.
 
-Oltre ai tipi di entità regolari, un modello di Entity Framework Core può contenere tipi di _entità senza chiave_, che possono essere utilizzati per eseguire query di database su dati che non contengono valori di chiave.
+Oltre ai normali tipi di entità, un modello di EF Core può contenere _tipi di entità_senza chiave, che possono essere usati per eseguire query di database su dati che non contengono valori di chiave.
 
-## <a name="defining-keyless-entity-types"></a>Definizione di tipi di entità senza chiaveDefining Keyless entity types
+## <a name="defining-keyless-entity-types"></a>Definizione di tipi di entità autochiave
 
-I tipi di entità senza chiave possono essere definiti usando l'annotazione dei dati o l'API Fluent:Keyless entity types can be defined using either the Data Annotation or the Fluent API:
+È possibile definire i tipi di entità con chiave fissa usando l'annotazione dei dati o l'API Fluent:
 
 ### <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
 
@@ -33,68 +33,68 @@ I tipi di entità senza chiave possono essere definiti usando l'annotazione dei 
 
 ***
 
-## <a name="keyless-entity-types-characteristics"></a>Caratteristiche dei tipi di entità senza chiaveKeyless entity types characteristics
+## <a name="keyless-entity-types-characteristics"></a>Caratteristiche di tipi di entità autochiave
 
-I tipi di entità senza chiave supportano molte delle stesse funzionalità di mapping dei tipi di entità regolari, ad esempio il mapping di ereditarietà e le proprietà di navigazione. Negli archivi relazionali possono configurare le colonne e gli oggetti di database di destinazione tramite metodi API fluenti o annotazioni dei dati.
+I tipi di entità autonome supportano molte delle stesse funzionalità di mapping dei normali tipi di entità, ad esempio il mapping di ereditarietà e le proprietà di navigazione. Negli archivi relazionali è possibile configurare gli oggetti e le colonne di database di destinazione tramite metodi API Fluent o annotazioni di dati.
 
-Tuttavia, sono diversi dai tipi di entità regolari in quanto:However, they are different from regular entity types in that they:
+Tuttavia, sono diversi dai normali tipi di entità in quanto:
 
-- Non può avere una chiave definita.
-- Non vengono mai rilevati per le modifiche in _DbContext_ e pertanto non vengono mai inseriti, aggiornati o eliminati nel database.
-- Non vengono mai scoperti per convenzione.
-- Supporta solo un sottoinsieme delle funzionalità di mapping di navigazione, in particolare:Only support a subset of navigation mapping capabilities, specifically:
-  - Non possono mai agire come la fine principale di una relazione.
-  - Potrebbero non avere spostamenti verso entità di proprietà
+- Non è possibile definire una chiave.
+- Non vengono mai rilevate per le modifiche apportate in _DbContext_ e pertanto non vengono mai inserite, aggiornate o eliminate nel database.
+- Non vengono mai individuati per convenzione.
+- Supporta solo un subset di funzionalità di mapping di navigazione, in particolare:
+  - Non possono mai fungere da entità finale principale di una relazione.
+  - Potrebbero non avere spostamenti sulle entità di proprietà
   - Possono contenere solo proprietà di navigazione di riferimento che puntano a entità regolari.
-  - Le entità non possono contenere proprietà di navigazione per i tipi di entità senza chiave.
-- È necessario essere `[Keyless]` configurati con `.HasNoKey()` un'annotazione dati o una chiamata al metodo.
-- Può essere mappato a una query di _definizione._ Una query di definizione è una query dichiarata nel modello che funge da origine dati per un tipo di entità senza chiave.
+  - Le entità non possono contenere proprietà di navigazione per i tipi di entità autochiave.
+- Deve essere configurato con un' `[Keyless]` annotazione dati o `.HasNoKey()` una chiamata al metodo.
+- Può essere mappato a una _query di definizione_. Una query di definizione è una query dichiarata nel modello che funge da origine dati per un tipo di entità autonome.
 
 ## <a name="usage-scenarios"></a>Scenari di utilizzo
 
-Alcuni degli scenari di utilizzo principali per i tipi di entità senza chiave sono:Some of the main usage scenarios for keyless entity types are:
+Di seguito sono riportati alcuni degli scenari di utilizzo principali per i tipi di entità autochiave:
 
-- Funge da tipo restituito per [le query SQL non elaborate.](xref:core/querying/raw-sql)
+- Fungendo da tipo restituito per le [query SQL non elaborate](xref:core/querying/raw-sql).
 - Mapping a viste di database che non contengono una chiave primaria.
-- Mapping a tabelle per le cui tabelle non è stata definita una chiave primaria.
-- Mapping alle query definite nel modello.
+- Mapping a tabelle in cui non è definita una chiave primaria.
+- Mapping a query definite nel modello.
 
 ## <a name="mapping-to-database-objects"></a>Mapping a oggetti di database
 
-Il mapping di un tipo di entità `ToTable` senza `ToView` chiave a un oggetto di database viene ottenuto utilizzando l'API o fluent. Dal punto di vista di EF Core, l'oggetto di database specificato in questo metodo è una _visualizzazione_, ovvero viene considerato come un'origine di query di sola lettura e non può essere la destinazione delle operazioni di aggiornamento, inserimento o eliminazione. Tuttavia, ciò non significa che l'oggetto di database è effettivamente necessario per essere una vista di database. In alternativa può essere una tabella di database che verrà considerata di sola lettura. Al contrario, per i tipi di entità regolari, Entity `ToTable` Framework Core presuppone che un oggetto di database specificato nel metodo può essere considerato come una _tabella_, ovvero può essere utilizzato come origine di query, ma anche destinato da operazioni di aggiornamento, eliminazione e inserimento. In effetti, è possibile specificare il `ToTable` nome di una vista di database in e tutto dovrebbe funzionare correttamente finché la vista è configurata per essere aggiornabile sul database.
+Il mapping di un tipo di entità autochiave a un oggetto di `ToTable` database `ToView` viene eseguito tramite l'API o Fluent. Dal punto di vista del EF Core, l'oggetto di database specificato in questo metodo è una _vista_, ovvero viene considerato come un'origine di query di sola lettura e non può essere la destinazione di operazioni di aggiornamento, inserimento o eliminazione. Tuttavia, ciò non significa che l'oggetto di database debba essere effettivamente una vista di database. In alternativa, può essere una tabella di database che verrà considerata di sola lettura. Viceversa, per i tipi di entità regolari, EF Core presuppone che un oggetto di database specificato nel `ToTable` metodo possa essere considerato come una _tabella_, ovvero può essere utilizzato come origine della query, ma anche come destinazione da operazioni di aggiornamento, eliminazione e inserimento. In realtà, è possibile specificare il nome di una vista di database `ToTable` in e tutto dovrebbe funzionare correttamente purché la vista sia configurata per essere aggiornabile nel database.
 
 > [!NOTE]
-> `ToView`presuppone che l'oggetto esista già nel database e che non verrà creato dalle migrazioni.
+> `ToView`presuppone che l'oggetto sia già presente nel database e non venga creato dalle migrazioni.
 
 ## <a name="example"></a>Esempio
 
-Nell'esempio seguente viene illustrato come utilizzare i tipi di entità senza chiave per eseguire una query su una vista di database.
+Nell'esempio seguente viene illustrato come utilizzare i tipi di entità autochiave per eseguire una query su una vista di database.
 
 > [!TIP]
 > È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/KeylessEntityTypes) di questo articolo in GitHub.
 
-In primo luogo, definiamo un semplice modello di Blog e Post:
+In primo luogo, viene definito un semplice modello di Blog e post:
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#Entities)]
 
-Successivamente, definiamo una semplice vista di database che ci permetterà di interrogare il numero di post associati a ogni blog:
+Viene quindi definita una semplice vista di database che consente di eseguire una query sul numero di post associati a ogni Blog:
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#View)]
 
-Successivamente, definiamo una classe per contenere il risultato dalla vista del database:Next, we define a class to hold the result from the database view:
+Viene quindi definita una classe che conterrà il risultato della vista di database:
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#KeylessEntityType)]
 
-Successivamente, si configura il tipo di entità `HasNoKey` senza chiave in _OnModelCreating_ usando l'API.
-Usiamo l'API di configurazione fluente per configurare il mapping per il tipo di entità keyless:We use fluent configuration API to configure the mapping for the keyless entity type:
+Successivamente, si configura il tipo di entità autochiave in _OnModelCreating_ usando l' `HasNoKey` API.
+Si usa l'API di configurazione Fluent per configurare il mapping per il tipo di entità autochiave:
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#Configuration)]
 
-Successivamente, configuriamo `DbContext` il `DbSet<T>`per includere il :
+Successivamente, viene configurato `DbContext` per includere: `DbSet<T>`
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#DbSet)]
 
-Infine, è possibile eseguire una query sulla vista del database nel modo standard:
+Infine, è possibile eseguire una query sulla vista di database nel modo standard:
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#Query)]
 

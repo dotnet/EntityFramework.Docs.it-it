@@ -3,14 +3,14 @@ title: Migrazioni Code First in ambienti Team-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 4c2d9a95-de6f-4e97-9738-c1f8043eff69
-ms.openlocfilehash: b3c4c35d636caf4ddd251dd78e026587abc57d42
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 46c22c997b8db53bb381d0b528c65733f1766849
+ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418889"
+ms.lasthandoff: 04/23/2020
+ms.locfileid: "82103165"
 ---
-# <a name="code-first-migrations-in-team-environments"></a>Migrazioni Code First in ambienti Team
+# <a name="code-first-migrations-in-team-environments"></a>Migrazioni Code First in ambienti team
 > [!NOTE]
 > Questo articolo presuppone che l'utente sappia come usare Migrazioni Code First negli scenari di base. In caso contrario, sarà necessario leggere [migrazioni Code First](~/ef6/modeling/code-first/migrations/index.md) prima di continuare.
 
@@ -24,7 +24,7 @@ Prima di esaminare come gestire le migrazioni di merge generate da più sviluppa
 
 ### <a name="each-team-member-should-have-a-local-development-database"></a>Ogni membro del team deve disporre di un database di sviluppo locale
 
-Le migrazioni utilizzano la tabella **\_\_MigrationsHistory** per archiviare quali migrazioni sono state applicate al database. Se si dispone di più sviluppatori che generano migrazioni diverse durante il tentativo di destinazione dello stesso database (e di conseguenza condividono un **\_\_tabella MigrationsHistory** ), le migrazioni saranno molto confuse.
+Le migrazioni utilizzano la ** \_ \_tabella MigrationsHistory** per archiviare quali migrazioni sono state applicate al database. Se si dispone di più sviluppatori che generano migrazioni diverse durante il tentativo di destinazione dello stesso database (e ** \_ \_** di conseguenza condividono una tabella MigrationsHistory), le migrazioni saranno molto confuse.
 
 Naturalmente, se si dispone di membri del team che non generano migrazioni, non si verificano problemi di condivisione di un database di sviluppo centrale.
 
@@ -98,22 +98,22 @@ Verranno monitorati il modello EF e le migrazioni attraverso alcune modifiche. P
 
 ![Punto di partenza](~/ef6/media/startingpoint.png)
 
-Developer \#1 e Developer \#2 ora apporta alcune modifiche al modello EF nella codebase locale. Developer \#1 aggiunge una proprietà **rating** a **Blog** e genera una migrazione **AddRating** per applicare le modifiche al database. Developer \#2 aggiunge una proprietà **Readers** a **Blog** e genera la migrazione **AddReaders** corrispondente. Entrambi gli sviluppatori eseguono **Update-database**per applicare le modifiche ai database locali e continuare a sviluppare l'applicazione.
+Developer \#1 e Developer \#2 ora apportano alcune modifiche al modello EF nella codebase locale. Developer \#1 aggiunge una proprietà **rating** a **Blog** e genera una migrazione **AddRating** per applicare le modifiche al database. Developer \#2 aggiunge una proprietà **Readers** a **Blog** e genera la migrazione **AddReaders** corrispondente. Entrambi gli sviluppatori eseguono **Update-database**per applicare le modifiche ai database locali e continuare a sviluppare l'applicazione.
 
 > [!NOTE]
-> Le migrazioni sono precedute da un timestamp, quindi il grafico indica che la migrazione AddReaders da Developer \#2 è successiva alla migrazione AddRating da Developer \#1. Se Developer \#1 o \#2 ha generato prima la migrazione, non fa alcuna differenza per quanto riguarda i problemi di lavoro di un team o il processo per unirli che verranno esaminati nella sezione successiva.
+> Le migrazioni sono precedute da un timestamp, quindi il grafico indica che la migrazione AddReaders da \#Developer 2 è successiva alla migrazione AddRating da \#Developer 1. Se Developer \#1 o \#2 ha generato la migrazione, non fa alcuna differenza per i problemi relativi all'utilizzo di un team o al processo per l'Unione dei processi che verranno esaminati nella sezione successiva.
 
 ![Modifiche locali](~/ef6/media/localchanges.png)
 
-Si tratta di un giorno fortunato per gli sviluppatori \#1 Man mano che si verificano prima di inviare le modifiche. Poiché non è stato archiviato alcun altro dato che ha sincronizzato il repository, può semplicemente inviare le modifiche senza eseguire alcuna operazione di merge.
+Si tratta di un giorno fortunato per \#Developer 1 Man mano che si verificano prima di inviare le modifiche. Poiché non è stato archiviato alcun altro dato che ha sincronizzato il repository, può semplicemente inviare le modifiche senza eseguire alcuna operazione di merge.
 
 ![Submit](~/ef6/media/submit.png)
 
-A questo punto è necessario che lo sviluppatore \#2 invii. Non sono così fortunati. Poiché un altro utente ha inviato modifiche dopo la sincronizzazione, sarà necessario eseguire il pull delle modifiche e unirle. Il sistema di controllo del codice sorgente sarà probabilmente in grado di unire automaticamente le modifiche a livello di codice poiché sono molto semplici. Lo stato del repository locale di Developer \#2 dopo la sincronizzazione viene illustrato nel grafico seguente. 
+A questo punto è possibile inviare \#lo sviluppatore 2. Non sono così fortunati. Poiché un altro utente ha inviato modifiche dopo la sincronizzazione, sarà necessario eseguire il pull delle modifiche e unirle. Il sistema di controllo del codice sorgente sarà probabilmente in grado di unire automaticamente le modifiche a livello di codice poiché sono molto semplici. Lo stato del repository \#locale di Developer 2 dopo la sincronizzazione viene illustrato nell'immagine seguente. 
 
 ![Pull](~/ef6/media/pull.png)
 
-In questa fase, lo sviluppatore \#2 può eseguire **Update-database** per rilevare la nuova migrazione di **AddRating** (che non è stata applicata al database di Developer \#2) e applicarla. A questo punto, la colonna **rating** viene aggiunta alla tabella **Blogs** e il database è sincronizzato con il modello.
+In questa fase Developer \#2 può eseguire **Update-database** per rilevare la nuova migrazione di **AddRating** (che non è stata applicata al \#database Developer 2) e applicarla. A questo punto, la colonna **rating** viene aggiunta alla tabella **Blogs** e il database è sincronizzato con il modello.
 
 Tuttavia, esistono due problemi:
 
@@ -141,10 +141,11 @@ Il processo seguente può essere usato per questo approccio, a partire dal momen
 2.  Sincronizzare con il controllo del codice sorgente.
 3.  Eseguire **Update-database** per applicare le nuove migrazioni che altri sviluppatori hanno archiviato.
     **_Nota:_** *se non vengono visualizzati avvisi dal comando Update-database, non ci sono nuove migrazioni da altri sviluppatori e non è necessario eseguire altre operazioni di merge.*
-4.  Eseguire **Add-migration &lt;pick\_un nome di\_&gt; – IgnoreChanges** (ad esempio, **Add-migrate merge – IgnoreChanges**). In questo modo viene generata una migrazione con tutti i metadati (incluso uno snapshot del modello corrente), ma verranno ignorate tutte le modifiche rilevate durante il confronto tra il modello corrente e lo snapshot nelle ultime migrazioni (ovvero si ottiene **un metodo vuoto** e **attivo** ).
-5.  Continuare a sviluppare o inviare al controllo del codice sorgente (dopo l'esecuzione degli unit test di corso).
+4.  Eseguire **Add-Migration &lt;pick\_a\_Name&gt; – IgnoreChanges** (ad esempio, **Add-migrate merge – IgnoreChanges**). In questo modo viene generata una migrazione con tutti i metadati (incluso uno snapshot del modello corrente), ma verranno ignorate tutte le modifiche rilevate durante il confronto tra il modello corrente e lo snapshot nelle ultime migrazioni (ovvero si ottiene **un metodo vuoto** e **attivo** ).
+5.  Eseguire **Update-database** per applicare nuovamente la migrazione più recente con i metadati aggiornati.
+6.  Continuare a sviluppare o inviare al controllo del codice sorgente (dopo l'esecuzione degli unit test di corso).
 
-Di seguito è riportato lo stato della codebase locale di Developer \#2 dopo aver usato questo approccio.
+Di seguito è riportato lo stato \#della codebase locale dello sviluppatore 2 dopo aver usato questo approccio.
 
 ![Migrazione di tipo merge](~/ef6/media/mergemigration.png)
 
@@ -152,7 +153,7 @@ Di seguito è riportato lo stato della codebase locale di Developer \#2 dopo ave
 
 Questa opzione è molto simile all'opzione 1, ma rimuove la migrazione vuota aggiuntiva, perché si tratta di un'opzione che richiede file di codice aggiuntivi nella soluzione.
 
-**Questo approccio è possibile solo se la migrazione più recente esiste solo nella codebase locale e non è ancora stata inviata al controllo del codice sorgente (ad esempio, se l'ultima migrazione è stata generata dall'utente che esegue il merge)** . La modifica dei metadati delle migrazioni che altri sviluppatori potrebbero avere già applicato al database di sviluppo, o ancora peggio applicati a un database di produzione, può causare effetti collaterali imprevisti. Durante il processo verrà eseguito il rollback dell'ultima migrazione nel database locale, che verrà nuovamente applicata ai metadati aggiornati.
+**Questo approccio è possibile solo se la migrazione più recente esiste solo nella codebase locale e non è ancora stata inviata al controllo del codice sorgente (ad esempio, se l'ultima migrazione è stata generata dall'utente che esegue il merge)**. La modifica dei metadati delle migrazioni che altri sviluppatori potrebbero avere già applicato al database di sviluppo, o ancora peggio applicati a un database di produzione, può causare effetti collaterali imprevisti. Durante il processo verrà eseguito il rollback dell'ultima migrazione nel database locale, che verrà nuovamente applicata ai metadati aggiornati.
 
 Mentre l'ultima migrazione deve trovarsi nella codebase locale, non sono previste restrizioni per il numero o l'ordine delle migrazioni che lo procedono. Possono essere presenti più migrazioni da più sviluppatori diversi e si applicano le stesse procedure, che sono state esaminate due per mantenerle semplici.
 
@@ -162,19 +163,19 @@ Il processo seguente può essere usato per questo approccio, a partire dal momen
 2.  Sincronizzare con il controllo del codice sorgente.
 3.  Eseguire **Update-database** per applicare le nuove migrazioni che altri sviluppatori hanno archiviato.
     **_Nota:_** *se non vengono visualizzati avvisi dal comando Update-database, non ci sono nuove migrazioni da altri sviluppatori e non è necessario eseguire altre operazioni di merge.*
-4.  Eseguire **Update-database – TargetMigration &lt;seconda\_ultima\_migrazione&gt;** (nell'esempio seguente si tratta di **Update-database – TargetMigration AddRating**). Questa operazione consente di riportare il database allo stato della seconda ultima migrazione, ovvero di annullare l'applicazione dell'ultima migrazione dal database.
-    **_Nota:_** *questo passaggio è necessario per rendere sicuro la modifica dei metadati della migrazione poiché i metadati vengono archiviati anche nel \_\_MigrationsHistoryTable del database. Questo è il motivo per cui è consigliabile usare questa opzione solo se l'ultima migrazione è solo nella codebase locale. Se per altri database era stata applicata l'ultima migrazione, sarebbe necessario eseguirne il rollback e riapplicare l'ultima migrazione per aggiornare i metadati.* 
-5.  Eseguire **Add-migrate &lt;nome completo\_\_incluso\_timestamp\_di\_Ultima\_migrazione**&gt; (nell'esempio seguente si tratta di **add-Migration 201311062215252\_AddReaders**).
+4.  Eseguire **Update-database – TargetMigration &lt;seconda\_Ultima\_migrazione&gt; ** (nell'esempio seguente si tratta di **Update-database – TargetMigration AddRating**). Questa operazione consente di riportare il database allo stato della seconda ultima migrazione, ovvero di annullare l'applicazione dell'ultima migrazione dal database.
+    **_Nota:_** *questo passaggio è necessario per rendere sicuro la modifica dei metadati della migrazione poiché i metadati vengono archiviati anche in \_ \_MigrationsHistoryTable del database. Questo è il motivo per cui è consigliabile usare questa opzione solo se l'ultima migrazione è solo nella codebase locale. Se per altri database era stata applicata l'ultima migrazione, sarebbe necessario eseguirne il rollback e riapplicare l'ultima migrazione per aggiornare i metadati.* 
+5.  Eseguire l'operazione **di &lt;aggiunta\_-\_migrazione\_nome\_completo\_,\_incluso il timestamp dell'ultima migrazione** &gt; (nell'esempio seguente si tratta di una procedura simile a **Add\_-Migration 201311062215252 AddReaders**).
     **_Nota:_** *è necessario includere il timestamp in modo che le migrazioni sappiano che si vuole modificare la migrazione esistente anziché eseguire l'impalcatura di una nuova.*
-    In questo modo i metadati per l'ultima migrazione vengono aggiornati in base al modello corrente. Quando il comando viene completato, verrà visualizzato l'avviso seguente, ma è esattamente quello che si desidera. "*Solo il codice della finestra di progettazione per la migrazione ' 201311062215252\_AddReaders ' è stato nuovamente sottoponte. Per eseguire nuovamente l'impalcatura dell'intera migrazione, usare il parametro-Force ".*
+    In questo modo i metadati per l'ultima migrazione vengono aggiornati in base al modello corrente. Quando il comando viene completato, verrà visualizzato l'avviso seguente, ma è esattamente quello che si desidera. "*Solo il codice della finestra di progettazione per\_la migrazione ' 201311062215252 AddReaders ' è stato nuovamente sottoponte. Per eseguire nuovamente l'impalcatura dell'intera migrazione, usare il parametro-Force ".*
 6.  Eseguire **Update-database** per applicare nuovamente la migrazione più recente con i metadati aggiornati.
 7.  Continuare a sviluppare o inviare al controllo del codice sorgente (dopo l'esecuzione degli unit test di corso).
 
-Di seguito è riportato lo stato della codebase locale di Developer \#2 dopo aver usato questo approccio.
+Di seguito è riportato lo stato \#della codebase locale dello sviluppatore 2 dopo aver usato questo approccio.
 
 ![Metadati aggiornati](~/ef6/media/updatedmetadata.png)
 
-## <a name="summary"></a>Summary
+## <a name="summary"></a>Riepilogo
 
 Quando si usa Migrazioni Code First in un ambiente team, si verificano alcuni problemi. Tuttavia, una conoscenza di base del funzionamento delle migrazioni e di alcuni semplici approcci per la risoluzione dei conflitti di merge rendono più semplice superare queste problematiche.
 

@@ -1,6 +1,6 @@
 ### YamlMime:Hub
 title: Documentazione di Entity Framework
-summary: Entity Framework Core è un mapper di database a oggetti moderno per .NET. Supporta le query LINQ, il rilevamento delle modifiche, gli aggiornamenti e le migrazioni dello schema. EF Core funziona con SQL Server, il database SQL di Azure, SQLite e Azure Cosmos.
+summary: Entity Framework Core è un mapper di database a oggetti moderno per .NET. Supporta le query LINQ, il rilevamento delle modifiche, gli aggiornamenti e le migrazioni dello schema. EF Core funziona con molti database, tra cui database SQL (locale e Azure), SQLite, MySQL, PostgreSQL e Azure Cosmos DB.
 brand: dotnet
 metadata:
   title: Documentazione di Entity Framework
@@ -9,13 +9,13 @@ metadata:
   ms.topic: hub-page
   author: WadePickett
   ms.author: wpickett
-  ms.date: 04/14/2020
-  ms.openlocfilehash: b5f82a93e767da1230795895c24fabd17448157a
-  ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
+  ms.date: 04/15/2020
+  ms.openlocfilehash: bfb96b06a2832b489e194fede0c04efebcc7496d
+  ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
   ms.translationtype: HT
   ms.contentlocale: it-IT
-  ms.lasthandoff: 04/16/2020
-  ms.locfileid: "81434351"
+  ms.lasthandoff: 04/23/2020
+  ms.locfileid: "82103100"
 highlightedContent:
   items:
   - title: Entity Framework Core
@@ -143,11 +143,15 @@ additionalContent:
       - url: core/providers/sql-server/index.md
         text: SQL Server
       - url: core/providers/sqlite/index.md
-        text: SQL Lite
+        text: SQLite
+      - url: http://www.npgsql.org/efcore/index.html
+        text: PostgreSQL
+      - url: https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql
+        text: MySQL e MariaDB
       - url: core/providers/cosmos/index.md
-        text: Cosmos
+        text: API SQL Cosmos DB
       - url: core/providers/in-memory/index.md
-        text: In memoria per il test
+        text: In memoria (test)
       - url: core/providers/index.md
         text: Tutti i provider di database correnti
     - title: Riferimenti alla riga di comando

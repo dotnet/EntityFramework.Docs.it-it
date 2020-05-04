@@ -1,15 +1,15 @@
 ---
-title: Testare i componenti usando EF Core - EF Core
+title: Test del codice che usa EF Core - EF Core
 description: Approcci diversi al test delle applicazioni che usano EF Core
 author: ajcvickers
-ms.date: 03/23/2020
+ms.date: 04/22/2020
 uid: core/miscellaneous/testing/index
-ms.openlocfilehash: b1ab37ebb0a3aae09d5d5b225f746cf83dfba170
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 308128b0d51b9e0d1fc1ebb0ed00e803100efb52
+ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
 ms.translationtype: HT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80634256"
+ms.lasthandoff: 04/29/2020
+ms.locfileid: "82538357"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>Test del codice che usa EF Core
 
@@ -20,6 +20,9 @@ Il test del codice che accede a un database richiede:
 
 In questo documento vengono illustrati i pro e contro di ognuna di queste scelte e viene illustrato il modo in cui è possibile usare EF Core con ogni approccio.  
 
+> [!TIP]
+> Per esaminare un esempio di codice che illustra i concetti introdotti in questo articolo, vedere [Esempio di test di EF Core](xref:core/miscellaneous/testing/testing-sample). 
+
 ## <a name="all-database-providers-are-not-equal"></a>Non tutti i provider di database sono uguali
 
 È molto importante comprendere che EF Core non è progettato per astrarre ogni aspetto del sistema di database sottostante.
@@ -27,10 +30,10 @@ EF Core è invece un set comune di modelli e concetti che può essere usato con 
 I provider di database EF Core sovrappongono quindi il comportamento e le funzionalità specifici del database su questo framework comune.
 Questo consente a ogni sistema di database di eseguire le funzionalità peculiari, mantenendo comunque i punti in comune, laddove appropriato, con altri sistemi di database. 
 
-Fondamentalmente, questo significa che cambiare provider di database cambierà il comportamento di EF Core e non ci può aspettare che l'applicazione funzioni correttamente a meno che non si tenga conto in modo esplicito di tutte le differenze a livello di comportamento.
+Fondamentalmente, questo significa che cambiare provider di database cambierà il comportamento di EF Core e non ci può aspettare che l'applicazione funzioni correttamente a meno che non si tenga conto in modo esplicito delle eventuali differenze a livello di comportamento.
 Detto questo, in molti casi questo cambiamento non creerà problemi perché esiste un elevato livello di elementi in comune tra i database relazionali.
 Questo aspetto è sia positivo che negativo.
-Positivo perché spostarsi tra database diversi può essere relativamente semplice.
+Positivo perché spostarsi tra sistemi di database diversi può essere relativamente semplice.
 Negativo perché può dare un falso senso di sicurezza se l'applicazione non è stata completamente testata per il nuovo sistema di database.  
 
 ## <a name="approach-1-production-database-system"></a>Approccio 1: Sistema di database di produzione
@@ -58,7 +61,9 @@ LocalDB non è privo di problemi:
 * Può causare ritardi durante la prima esecuzione dei test mentre il servizio viene attivato.
 
 Personalmente, non ho mai considerato un problema avere un servizio di database in esecuzione nel computer di sviluppo e in genere consiglio di usare Developer Edition.
-Tuttavia, potrebbe non essere appropriato per alcuni utenti, soprattutto con computer di sviluppo meno potenti.  
+Tuttavia, LocalDB potrebbe non essere appropriato per alcuni utenti, soprattutto con computer di sviluppo meno potenti.
+
+L'esecuzione di SQL Server (o qualsiasi altro sistema di database) in un contenitore Docker (o un contenitore simile) è un altro modo per evitare di eseguire il sistema di database direttamente nel computer di sviluppo.  
 
 ## <a name="approach-2-sqlite"></a>Approccio 2: SQLite
 
@@ -105,8 +110,8 @@ Tuttavia, non viene mai tentata la simulazione di DbContext o IQueryable,
 perché si tratta di un'operazione difficile, scomoda e fragile.
 **Evitare di farlo.**
 
-Per i testing unità che usano DbContext viene invece usato il database in memoria.
-In questo caso, l'uso del database in memoria è appropriato perché il test non dipende dal comportamento del database.
+Per i testing unità che usano DbContext viene invece usato il database in memoria EF.
+In questo caso, l'uso del database in memoria EF è appropriato perché il test non dipende dal comportamento del database.
 Semplicemente evitare questo approccio per testare le query o gli aggiornamenti di database effettivi.   
 
-Per indicazioni specifiche per EF Core sull'uso del database in memoria per il testing unità, vedere [Test con InMemory](xref:core/miscellaneous/testing/in-memory).
+In [Esempio di test di EF Core](xref:core/miscellaneous/testing/testing-sample) vengono presentati alcuni test che usano il database in memoria EF, nonché SQL Server e SQLite. 

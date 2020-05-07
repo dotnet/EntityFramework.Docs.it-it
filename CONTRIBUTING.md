@@ -1,11 +1,3 @@
----
-ms.openlocfilehash: 79a2a10cae9f8a5541bca132e407d4abbe95e093
-ms.sourcegitcommit: 87fcaba46535aa351db4bdb1231bd14b40e459b9
-ms.translationtype: HT
-ms.contentlocale: it-IT
-ms.lasthandoff: 04/22/2019
-ms.locfileid: "59929887"
----
 # <a name="contributing-to-the-entity-framework-documentation"></a>Contributo alla documentazione di Entity Framework
 
 Il processo per contribuire alla documentazione di Entity Framework con articoli ed esempi di codice è spiegato di seguito. I contributi possono essere semplici come le correzioni di errori di ortografia o complessi, ad esempio nuovi articoli.
@@ -18,8 +10,8 @@ Gli articoli sono archiviati come file markdown in questo repository. Per apport
 
 Sono necessarie delle conoscenze di base di [Git e GitHub.com](https://guides.github.com/activities/hello-world/).
 
-* Aprire un [problema](https://github.com/aspnet/EntityFramework.Docs/issues/new) che descriva ciò che si vuole fare, ad esempio modificare un articolo esistente o crearne uno nuovo. Attendere l'approvazione dal team EF prima di investire molto tempo.
-* Creare una copia tramite fork del repository [aspnet/EntityFramework.Docs](https://github.com/aspnet/EntityFramework.Docs/) e creare un ramo per le modifiche.
+* Aprire un [problema](https://github.com/dotnet/EntityFramework.Docs/issues/new) che descriva ciò che si vuole fare, ad esempio modificare un articolo esistente o crearne uno nuovo. Attendere l'approvazione dal team EF prima di investire molto tempo.
+* Creare un fork del repository [DotNet/EntityFramework. docs](https://github.com/dotnet/EntityFramework.Docs/) e creare un ramo per le modifiche.
 * Inviare una richiesta pull (PR) al master con le modifiche.
 * Rispondere ai commenti e suggerimenti per la richiesta pull.
 
@@ -86,7 +78,7 @@ DocFX richiede .NET Framework in Windows o Mono (per Linux o macOS).
 ### <a name="mono-instructions"></a>Istruzioni per Mono
 
 * Installare Mono tramite Homebrew: `brew install mono`.
-* Scaricare la [versione più recente di DocFX](https://github.com/dotnet/docfx/releases/tag/v2.7.2).
+* Scarica la [versione più recente di DocFX](https://github.com/dotnet/docfx/releases/tag/v2.7.2).
 * Estrarre in `\bin\docfx`.
 * Creare un alias per **docfx**:
 

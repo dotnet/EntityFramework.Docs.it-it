@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 10/05/2018
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 99bb420d95cb86443b63ba05ce9e6b4ab838eff9
-ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
+ms.openlocfilehash: c87864b3430d3cd42729c13ddde33c0cd9de9308
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: HT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82538448"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672982"
 ---
 # <a name="migrations"></a>Migrazioni
 
@@ -61,21 +61,25 @@ Nella directory **Migrations** del progetto vengono aggiunti tre file:
 
 Il timestamp nel nome file consente di mantenerne l'ordine cronologico e di visualizzare quindi la successione delle modifiche.
 
-> [!TIP]
-> È consentito spostare i file della cartella Migrations e modificarne lo spazio dei nomi manualmente. Le nuove migrazioni vengono create come migrazioni di pari livello rispetto all'ultima.
-> 
-> In alternativa, è possibile usare `-Namespace` (console di gestione pacchetti) o `--namespace` (interfaccia della riga di comando di .NET Core) per specificare lo spazio dei nomi in fase di generazione.
-> ### <a name="net-core-cli"></a>[Interfaccia della riga di comando di .NET Core](#tab/dotnet-core-cli)
-> 
-> ```dotnetcli
-> dotnet ef migrations add InitialCreate --namespace Your.Namespace
-> ```
-> 
-> ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
-> 
-> ``` powershell
-> Add-Migration InitialCreate -Namespace Your.Namespace
-> ```
+### <a name="namespaces"></a>Spazi dei nomi
+
+È consentito spostare i file della cartella Migrations e modificarne lo spazio dei nomi manualmente. Le nuove migrazioni vengono create come migrazioni di pari livello rispetto all'ultima.
+
+In alternativa, è possibile usare `-Namespace` (console di gestione pacchetti) o `--namespace` (interfaccia della riga di comando di .NET Core) per specificare lo spazio dei nomi in fase di generazione.
+
+### <a name="net-core-cli"></a>[Interfaccia della riga di comando di .NET Core](#tab/dotnet-core-cli)
+
+```dotnetcli
+dotnet ef migrations add InitialCreate --namespace Your.Namespace
+```
+
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+
+``` powershell
+Add-Migration InitialCreate -Namespace Your.Namespace
+```
+
+***
 
 ## <a name="update-the-database"></a>Aggiornare il database
 

@@ -2,14 +2,14 @@
 title: Novità di EF Core 5,0
 description: Panoramica delle nuove funzionalità di EF Core 5,0
 author: ajcvickers
-ms.date: 03/30/2020
+ms.date: 05/11/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew.md
-ms.openlocfilehash: c902988920e3b1a6039808fe0658fc19dee2728a
-ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
+ms.openlocfilehash: fcb2eb8df99a06eaf3459835347a4027a363b86b
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82103074"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672860"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Novità di EF Core 5,0
 
@@ -20,6 +20,38 @@ Questa pagina non duplica il [piano per EF Core 5,0](plan.md).
 Il piano descrive i temi generali per EF Core 5,0, inclusi tutti gli elementi che si prevede di includere prima di distribuire la versione finale.
 
 I collegamenti da qui vengono aggiunti alla documentazione ufficiale appena pubblicata.
+
+## <a name="preview-4"></a>Preview 4
+
+### <a name="configure-database-precisionscale-in-model"></a>Configurare la precisione del database/ridimensionare il modello
+
+È ora possibile specificare la precisione e la scala di una proprietà usando il generatore di modelli.
+Ad esempio:
+
+```CSharp
+modelBuilder
+    .Entity<Blog>()
+    .Property(b => b.Numeric)
+    .HasPrecision(16, 4);
+```
+
+La precisione e la scala possono comunque essere impostate tramite il tipo di database completo, ad esempio "Decimal (16, 4)". 
+
+La documentazione viene rilevata in base al problema [#527](https://github.com/dotnet/EntityFramework.Docs/issues/527).
+
+### <a name="specify-sql-server-index-fill-factor"></a>Specificare il fattore di riempimento dell'indice SQL Server
+
+È ora possibile specificare il fattore di riempimento quando si crea un indice in SQL Server.
+Ad esempio:
+
+```CSharp
+modelBuilder
+    .Entity<Customer>()
+    .HasIndex(e => e.Name)
+    .HasFillFactor(90);
+```
+
+La documentazione viene rilevata in base al problema [#2378](https://github.com/dotnet/EntityFramework.Docs/issues/2378).
 
 ## <a name="preview-3"></a>Preview 3
 
@@ -58,10 +90,10 @@ Ad esempio, per impostare un campo di supporto per la navigazione quando il camp
 modelBuilder.Entity<Blog>().Navigation(e => e.Posts).HasField("_myposts");
 ```
 
-Si noti che `Navigation` l'API non sostituisce la configurazione della relazione.
+Si noti che l' `Navigation` API non sostituisce la configurazione della relazione.
 Consente invece una configurazione aggiuntiva delle proprietà di navigazione nelle relazioni già individuate o definite.
 
-La documentazione viene rilevata in base al problema [#2302](https://github.com/dotnet/EntityFramework.Docs/issues/2302).
+Vedere la [documentazione relativa alla configurazione delle proprietà di navigazione](xref:core/modeling/relationships#configuring-navigation-properties).
 
 ### <a name="new-command-line-parameters-for-namespaces-and-connection-strings"></a>Nuovi parametri della riga di comando per spazi dei nomi e stringhe di connessione 
 
@@ -72,22 +104,25 @@ Ad esempio, per decompilare un database inserendo le classi context e Model in s
 dotnet ef dbcontext scaffold "connection string" Microsoft.EntityFrameworkCore.SqlServer --context-namespace "My.Context" --namespace "My.Model"
 ```
 
+Per informazioni dettagliate, vedere la documentazione sulle [migrazioni](xref:core/managing-schemas/migrations/index#namespaces) e la [Reverse Engineering](xref:core/managing-schemas/scaffolding#directories-and-namespaces) .
+
+---
 Inoltre, è ora possibile passare una stringa di connessione al `database-update` comando:
 
 ```
 dotnet ef database update --connection "connection string"
 ```
 
-Sono stati anche aggiunti parametri equivalenti ai comandi di PowerShell usati nella console di gestione pacchetti di Visual Studio.
+Per informazioni dettagliate, vedere la [documentazione degli strumenti](xref:core/miscellaneous/cli/dotnet#dotnet-ef-database-update) .
 
-La documentazione viene rilevata in base al problema [#2303](https://github.com/dotnet/EntityFramework.Docs/issues/2303).
+Sono stati anche aggiunti parametri equivalenti ai comandi di PowerShell usati nella console di gestione pacchetti di Visual Studio.
 
 ### <a name="enabledetailederrors-has-returned"></a>EnableDetailedErrors ha restituito
 
 Per motivi di prestazioni, EF non esegue controlli null aggiuntivi durante la lettura dei valori dal database.
 Ciò può causare eccezioni difficili da radice quando viene rilevato un valore null imprevisto.
 
-Se `EnableDetailedErrors` si utilizza, verrà aggiunto un controllo null aggiuntivo alle query in modo che, per un lieve sovraccarico delle prestazioni, questi errori siano più semplici da risalire a una causa radice.  
+`EnableDetailedErrors`Se si utilizza, verrà aggiunto un controllo null aggiuntivo alle query in modo che, per un lieve sovraccarico delle prestazioni, questi errori siano più semplici da risalire a una causa radice.  
 
 Ad esempio:
 ```CSharp
@@ -200,7 +235,7 @@ La documentazione aggiuntiva viene rilevata in base al problema [#1331](https://
 
 ### <a name="use-a-c-attribute-to-indicate-that-an-entity-has-no-key"></a>Usare un attributo C# per indicare che un'entità non ha una chiave
 
-È ora possibile configurare un tipo di entità senza chiavi usando il nuovo `KeylessAttribute`.
+È ora possibile configurare un tipo di entità senza chiavi usando il nuovo `KeylessAttribute` .
 Ad esempio:
 
 ```CSharp
@@ -270,7 +305,7 @@ La documentazione viene rilevata in base al problema [#2082](https://github.com/
 
 ### <a name="isrelational"></a>Relazionale
 
-È stato `IsRelational` aggiunto un nuovo metodo, oltre a quello esistente `IsSqlServer`, `IsSqlite`, e `IsInMemory`.
+`IsRelational`È stato aggiunto un nuovo metodo, oltre a quello esistente `IsSqlServer` , `IsSqlite` , e `IsInMemory` .
 Questo metodo può essere utilizzato per verificare se DbContext utilizza un provider di database relazionale.
 Ad esempio:
 
@@ -295,7 +330,7 @@ Usare il generatore di modelli in OnModelCreating per configurare un ETag:
 builder.Entity<Customer>().Property(c => c.ETag).IsEtagConcurrency();
 ```
 
-SaveChanges genera quindi un' `DbUpdateConcurrencyException` operazione in un conflitto di concorrenza, che [può essere gestita](https://docs.microsoft.com/ef/core/saving/concurrency) per implementare nuovi tentativi e così via.
+SaveChanges genera quindi un'operazione `DbUpdateConcurrencyException` in un conflitto di concorrenza, che [può essere gestita](https://docs.microsoft.com/ef/core/saving/concurrency) per implementare nuovi tentativi e così via.
 
 La documentazione viene rilevata in base al problema [#2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099).
 
@@ -327,7 +362,7 @@ La documentazione aggiuntiva viene rilevata in base al problema [#2079](https://
 
 ### <a name="query-translation-for-reverse"></a>Conversione di query per invertire
 
-Le query `Reverse` che utilizzano ora vengono convertite.
+Le query che utilizzano `Reverse` ora vengono convertite.
 Ad esempio:
 
 ```CSharp

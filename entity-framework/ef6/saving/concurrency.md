@@ -3,12 +3,12 @@ title: Gestione dei conflitti di concorrenza-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 2318e4d3-f561-4720-bbc3-921556806476
-ms.openlocfilehash: 81ae186201fdfac331b1d4e7836b222545fe78b5
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: a99f824fe256a10b84f539a5339a09624315efa4
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419692"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672718"
 ---
 # <a name="handling-concurrency-conflicts"></a>Gestione dei conflitti di concorrenza
 La concorrenza ottimistica comporta un tentativo ottimistico di salvare l'entità nel database con la speranza che i dati non siano stati modificati dopo che l'entità è stata caricata. Se si scopre che i dati sono stati modificati, viene generata un'eccezione ed è necessario risolvere il conflitto prima di ritentare il salvataggio. Questo argomento illustra come gestire tali eccezioni in Entity Framework. Le tecniche illustrate in questo argomento si applicano in modo analogo ai modelli creati con Code First ed EF Designer.  
@@ -52,7 +52,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Per simulare un'eccezione di concorrenza, è consigliabile impostare un punto di interruzione nella chiamata a SaveChanges, quindi modificare un'entità salvata nel database utilizzando un altro strumento, ad esempio SQL Management Studio. È anche possibile inserire una riga prima di SaveChanges per aggiornare direttamente il database usando SqlCommand. Ad esempio:  
+Per simulare un'eccezione di concorrenza, è consigliabile impostare un punto di interruzione nella chiamata a SaveChanges, quindi modificare un'entità salvata nel database utilizzando un altro strumento, ad esempio SQL Server Management Studio. È anche possibile inserire una riga prima di SaveChanges per aggiornare direttamente il database usando SqlCommand. Ad esempio:  
 
 ``` csharp
 context.Database.SqlCommand(

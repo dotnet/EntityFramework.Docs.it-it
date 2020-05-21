@@ -1,22 +1,20 @@
 ---
-title: Esempio di test di EF Core-EF Core
-description: Esempio che illustra come testare le applicazioni che usano EF Core
-author: ajcvickers
-ms.date: 04/22/2020
-uid: core/miscellaneous/testing/testing-sample
+title: ''
+description: ''
+author: ''
+ms.date: ''
+uid: ''
 no-loc:
 - Item
 - Tag
 - Items
 - Tags
-- items
-- tags
-ms.openlocfilehash: dda7191df7646aa06aab51d8d7891bd0ba155674
-ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
+ms.openlocfilehash: ae073fc0b3a99fb9de07a3e0a42c638fe0838a5a
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82564287"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672821"
 ---
 # <a name="ef-core-testing-sample"></a>Esempio di test di EF Core
 
@@ -34,21 +32,21 @@ L' [esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/
 
 ### <a name="the-model-and-business-rules"></a>Modello e regole business
 
-Il modello che supporta questa API è costituito da due Items tipi Tagsdi entità: e.
+Il modello che supporta questa API è costituito da due tipi di entità: Items e Tags .
 
-* Itemshanno un nome con distinzione tra maiuscole e minuscole e una raccolta di Tags.
-* Ogni Tag ha un'etichetta e un conteggio che rappresenta il numero di volte in cui è stato applicato Itema.
-* Ogni Item deve avere un solo Tag con con un'etichetta specificata.
+* Itemshanno un nome con distinzione tra maiuscole e minuscole e una raccolta di Tags .
+* Ogni Tag ha un'etichetta e un conteggio che rappresenta il numero di volte in cui è stato applicato a Item .
+* Ogni Item deve avere un solo Tag oggetto con un'etichetta specificata.
   * Se un elemento viene contrassegnato con la stessa etichetta più di una volta, il conteggio del tag esistente con tale etichetta viene incrementato al posto di un nuovo tag creato. 
-* L'eliminazione Item di un oggetto deve Tagseliminare tutti gli associati.
+* L'eliminazione di un oggetto Item deve eliminare tutti gli associati Tags .
 
-#### <a name="the-item-entity-type"></a>Tipo Item di entità
+#### <a name="the-item-entity-type"></a>ItemTipo di entità
 
-Tipo `Item` di entità:
+`Item`Tipo di entità:
 
 [!code-csharp[ItemEntityType](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Item.cs?name=ItemEntityType)]
 
-E la relativa configurazione `DbContext.OnModelCreating`in:
+E la relativa configurazione in `DbContext.OnModelCreating` :
 
 [!code-csharp[ConfigureItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/ItemsContext.cs?name=ConfigureItem)]
 
@@ -56,27 +54,27 @@ Si noti che il tipo di entità vincola il modo in cui può essere usato per rifl
 - La chiave primaria viene mappata direttamente al `_id` campo e non esposta pubblicamente
   - EF rileva e usa il costruttore privato che accetta il nome e il valore della chiave primaria.
 - La `Name` proprietà è di sola lettura e viene impostata solo nel costruttore. 
-- Tagsvengono esposti come per `IReadOnlyList<Tag>` impedire la modifica arbitraria.
-  - EF associa la `Tags` proprietà `_tags` al campo sottostante mediante la corrispondenza dei nomi. 
+- Tagsvengono esposti come `IReadOnlyList<Tag>` per impedire la modifica arbitraria.
+  - EF associa la `Tags` proprietà al `_tags` campo sottostante mediante la corrispondenza dei nomi. 
   - Il `AddTag` metodo accetta un'etichetta tag e implementa la regola business descritta in precedenza.
     Ovvero, viene aggiunto un tag solo per le nuove etichette.
     In caso contrario, il conteggio su un'etichetta esistente viene incrementato.
 - La `Tags` proprietà di navigazione è configurata per una relazione molti-a-uno
-  - Non è necessario disporre di una proprietà di navigazione Tag da Itema, pertanto non è inclusa.
-  - Inoltre, Tag non definisce una proprietà di chiave esterna.
+  - Non è necessario disporre di una proprietà di navigazione da Tag a Item , pertanto non è inclusa.
+  - Inoltre, non Tag definisce una proprietà di chiave esterna.
     Al contrario, EF creerà e gestirà una proprietà in stato shadow.
 
-#### <a name="the-tag-entity-type"></a>Tipo Tag di entità
+#### <a name="the-tag-entity-type"></a>TagTipo di entità
 
-Tipo `Tag` di entità:
+`Tag`Tipo di entità:
 
 [!code-csharp[TagEntityType](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Tag.cs?name=TagEntityType)]
 
-E la relativa configurazione `DbContext.OnModelCreating`in:
+E la relativa configurazione in `DbContext.OnModelCreating` :
 
 [!code-csharp[ConfigureTag](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/ItemsContext.cs?name=ConfigureTag)]
 
-In modo Itemanalogo a, Tag nasconde la chiave primaria e `Label` rende la proprietà di sola lettura.
+In modo analogo a Item , Tag nasconde la chiave primaria e rende la proprietà di sola `Label` lettura.
 
 ### <a name="the-itemscontroller"></a>ItemsController
 
@@ -85,23 +83,23 @@ Ottiene un oggetto `DbContext` dal contenitore di inserimento delle dipendenze t
 
 [!code-csharp[Constructor](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=Constructor)]
 
-Dispone di metodi per ottenere tutti Items o un Item oggetto con un nome specificato:
+Dispone di metodi per ottenere tutti Items o un oggetto Item con un nome specificato:
 
 [!code-csharp[Get](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=Get)]
 
-Dispone di un metodo per aggiungere un nuovo Item:
+Dispone di un metodo per aggiungere un nuovo Item :
 
 [!code-csharp[PostItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=PostItem)]
 
-Metodo per contrassegnare un Item oggetto con un'etichetta:
+Metodo per contrassegnare un oggetto Item con un'etichetta:
 
 [!code-csharp[PostTag](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=PostTag)]
 
-E un metodo per eliminare un Item oggetto e tutti Tagsgli associati:
+E un metodo per eliminare un oggetto Item e tutti gli associati Tags :
 
 [!code-csharp[DeleteItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=DeleteItem)]
 
-La maggior parte della convalida e della gestione degli errori è stata rimossa per ridurre il disordine.
+La maggior parte della convalida e della gestione degli errori sono state rimosse per ridurre il disordine.
 
 ## <a name="the-tests"></a>Test
 
@@ -160,11 +158,11 @@ Ad esempio:
 
 [!code-csharp[CanGetItems](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanGetItems)]
 
-Si noti che per eseguire il seeding del database e per eseguire i test vengono usate istanze DbContext diverse. In questo modo si garantisce che il test non stia usando (o inciampare) entità rilevate dal contesto durante il seeding.
+Si noti che per eseguire il seeding del database e per eseguire i test vengono usate istanze DbContext diverse. In questo modo si garantisce che il test non stia usando (o inciampare) le entità rilevate dal contesto durante il seeding.
 Corrisponde inoltre a ciò che accade in app Web e servizi.
 
 I test che mutano il database creano una seconda istanza di DbContext nel test per motivi analoghi.
-Ovvero creando un nuovo contesto pulito e quindi leggendolo dal database per assicurarsi che le modifiche siano state effettivamente salvate nel database. Ad esempio:
+Ovvero creando un nuovo contesto pulito e quindi leggendolo dal database per assicurarsi che le modifiche siano state salvate nel database. Ad esempio:
 
 [!code-csharp[CanAddItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanAddItem)]
 
@@ -180,9 +178,9 @@ Il test con un sistema di database diverso da quello usato nell'applicazione di 
 Questi sono trattati a livello concettuale nel [codice di test che usa EF Core](xref:core/miscellaneous/testing/index).  
 Le sezioni seguenti illustrano due esempi di problemi che si verificano nei test di questo esempio.
 
-### <a name="test-passes-when-application-is-broken"></a>Test superato quando l'applicazione è interruppe
+### <a name="test-passes-when-the-application-is-broken"></a>Test superato quando l'applicazione è interruppe
 
-Uno dei requisiti per l'applicazione è che "Items hanno un nome con distinzione tra maiuscole e minuscole e Tagsuna raccolta di".
+Uno dei requisiti per l'applicazione è che " Items hanno un nome con distinzione tra maiuscole e minuscole e una raccolta di Tags ".
 Questo è piuttosto semplice da testare:
 
 [!code-csharp[CanAddItemCaseInsensitive](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanAddItemCaseInsensitive)]
@@ -209,9 +207,9 @@ EF Core, da progettazione, non modifica questi comportamenti perché la forzatur
 Quando sappiamo che questo è un problema, possiamo correggere l'applicazione e compensare i test.
 Tuttavia, il punto in questo caso è che questo bug può essere ignorato se si verifica solo con il database in memoria EF o con i provider SQLite.
 
-### <a name="test-fails-when-application-is-correct"></a>Il test ha esito negativo quando l'applicazione è corretta 
+### <a name="test-fails-when-the-application-is-correct"></a>Il test ha esito negativo quando l'applicazione è corretta 
 
-Un altro requisito per l'applicazione è che "l'eliminazione di un Item oggetto dovrebbe eliminare tutti Tagsgli associati".
+Un altro requisito per l'applicazione è che "l'eliminazione di un Item dovrebbe eliminare tutti gli associati Tags ".
 Anche in questo caso, è facile da testare:
 
 [!code-csharp[DeleteItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=DeleteItem)]
@@ -225,6 +223,6 @@ Actual:   True
    at Tests.ItemsControllerTest.Can_remove_item_and_all_associated_tags()
 ```
 
-In questo caso l'applicazione funziona correttamente perché SQL Server supporta le [eliminazioni a cascata](xref:core/saving/cascade-delete). SQLite supporta inoltre le eliminazioni a catena, così come la maggior parte dei database relazionali, quindi il test di questa operazione su SQLite funziona.
+In questo caso, l'applicazione funziona correttamente perché SQL Server supporta le [eliminazioni a catena](xref:core/saving/cascade-delete). SQLite supporta inoltre le eliminazioni a catena, così come la maggior parte dei database relazionali, quindi il test di questa operazione su SQLite funziona.
 D'altra parte, il database in memoria EF [non supporta le eliminazioni a catena](https://github.com/dotnet/efcore/issues/3924).
 Questo significa che questa parte dell'applicazione non può essere testata con il provider di database in memoria EF.

@@ -2,14 +2,14 @@
 title: Novità di EF Core 5,0
 description: Panoramica delle nuove funzionalità di EF Core 5,0
 author: ajcvickers
-ms.date: 05/11/2020
+ms.date: 06/02/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew.md
-ms.openlocfilehash: fcb2eb8df99a06eaf3459835347a4027a363b86b
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 45d851a4b08a26dda0c24e20c79f42964fa4fae4
+ms.sourcegitcommit: 1f0f93c66b2b50e03fcbed90260e94faa0279c46
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672860"
+ms.lasthandoff: 06/04/2020
+ms.locfileid: "84418942"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Novità di EF Core 5,0
 
@@ -20,6 +20,117 @@ Questa pagina non duplica il [piano per EF Core 5,0](plan.md).
 Il piano descrive i temi generali per EF Core 5,0, inclusi tutti gli elementi che si prevede di includere prima di distribuire la versione finale.
 
 I collegamenti da qui vengono aggiunti alla documentazione ufficiale appena pubblicata.
+
+## <a name="preview-5"></a>Preview 5
+
+### <a name="database-collations"></a>Regole di confronto del database
+
+È ora possibile specificare le regole di confronto predefinite per un database nel modello EF.
+Questa operazione passerà a migrazioni generate per impostare le regole di confronto durante la creazione del database.
+Ad esempio:
+
+```CSharp
+modelBuilder.UseCollation("German_PhoneBook_CI_AS");
+```
+
+Migrations genera quindi quanto segue per creare il database in SQL Server:
+
+```sql
+CREATE DATABASE [Test]
+COLLATE German_PhoneBook_CI_AS;
+```
+
+È inoltre possibile specificare le regole di confronto da utilizzare per colonne di database specifiche.
+Ad esempio:
+
+```CSharp
+ modelBuilder
+     .Entity<User>()
+     .Property(e => e.Name)
+     .UseCollation("German_PhoneBook_CI_AS");
+```
+
+Per coloro che non utilizzano migrazioni, le regole di confronto sono ora decodificate dal database durante l'impalcatura di un DbContext.
+
+Infine, `EF.Functions.Collate()` consente di eseguire query ad hoc con regole di confronto diverse.
+Ad esempio:
+
+```CSharp
+context.Users.Single(e => EF.Functions.Collate(e.Name, "French_CI_AS") == "Jean-Michel Jarre");
+```
+
+Verrà generata la query seguente per SQL Server:
+
+```sql
+SELECT TOP(2) [u].[Id], [u].[Name]
+FROM [Users] AS [u]
+WHERE [u].[Name] COLLATE French_CI_AS = N'Jean-Michel Jarre'
+```
+
+Si noti che le regole di confronto ad hoc devono essere utilizzate con cautela, in quanto possono influire negativamente sulle prestazioni del database.
+
+La documentazione viene rilevata in base al problema [#2273](https://github.com/dotnet/EntityFramework.Docs/issues/2273).
+
+### <a name="flow-arguments-into-idesigntimedbcontextfactory"></a>Argomenti del flusso in IDesignTimeDbContextFactory
+
+Gli argomenti vengono ora propagati dalla riga di comando nel `CreateDbContext` metodo di [IDesignTimeDbContextFactory](https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1). Per indicare, ad esempio, che si tratta di una build di sviluppo, un argomento personalizzato, ad esempio, `dev` può essere passato dalla riga di comando:
+
+```
+dotnet ef migrations add two --verbose --dev
+``` 
+
+Questo argomento viene quindi inserito nella Factory, dove può essere usato per controllare la modalità di creazione e inizializzazione del contesto.
+Ad esempio:
+
+```CSharp
+public class MyDbContextFactory : IDesignTimeDbContextFactory<SomeDbContext>
+{
+    public SomeDbContext CreateDbContext(string[] args) 
+        => new SomeDbContext(args.Contains("--dev"));
+}
+```
+
+La documentazione viene rilevata in base al problema [#2419](https://github.com/dotnet/EntityFramework.Docs/issues/2419).
+
+### <a name="no-tracking-queries-with-identity-resolution"></a>Query senza rilevamento con risoluzione di identità
+
+È ora possibile configurare le query senza rilevamento per eseguire la risoluzione dell'identità.
+La query seguente, ad esempio, creerà una nuova istanza di Blog per ogni post, anche se ogni Blog ha la stessa chiave primaria. 
+
+```CSharp
+context.Posts.AsNoTracking().Include(e => e.Blog).ToList();
+```
+
+Tuttavia, a scapito di solito è leggermente più lento e si utilizza sempre una maggiore quantità di memoria, questa query può essere modificata per garantire la creazione di una sola istanza di Blog:
+
+```CSharp
+context.Posts.AsNoTracking().PerformIdentityResolution().Include(e => e.Blog).ToList();
+```
+
+Si noti che questa operazione è utile solo per le query senza rilevamento perché tutte le query di rilevamento presentano già questo comportamento. Inoltre, dopo la revisione dell'API, la `PerformIdentityResolution` sintassi verrà modificata.
+Vedere [#19877](https://github.com/dotnet/efcore/issues/19877#issuecomment-637371073).
+
+La documentazione viene rilevata in base al problema [#1895](https://github.com/dotnet/EntityFramework.Docs/issues/1895).
+
+### <a name="stored-persisted-computed-columns"></a>Colonne calcolate (rese permanente) archiviate
+
+La maggior parte dei database consente di archiviare i valori delle colonne calcolate dopo il calcolo.
+Quando questo occupa spazio su disco, la colonna calcolata viene calcolata una sola volta in Update, anziché ogni volta che viene recuperato il valore.
+Consente inoltre di indicizzare la colonna per alcuni database.
+
+EF Core 5,0 consente la configurazione delle colonne calcolate come archiviate.
+Ad esempio:
+ 
+```CSharp
+modelBuilder
+    .Entity<User>()
+    .Property(e => e.SomethingComputed)
+    .HasComputedColumnSql("my sql", stored: true);
+```
+
+### <a name="sqlite-computed-columns"></a>Colonne calcolate SQLite
+
+EF Core supporta ora le colonne calcolate nei database SQLite.
 
 ## <a name="preview-4"></a>Preview 4
 
@@ -50,8 +161,6 @@ modelBuilder
     .HasIndex(e => e.Name)
     .HasFillFactor(90);
 ```
-
-La documentazione viene rilevata in base al problema [#2378](https://github.com/dotnet/EntityFramework.Docs/issues/2378).
 
 ## <a name="preview-3"></a>Preview 3
 

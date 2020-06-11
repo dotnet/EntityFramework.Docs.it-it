@@ -4,12 +4,12 @@ description: Utilizzo degli operatori di confronto dei valori per controllare la
 author: ajcvickers
 ms.date: 03/20/2020
 uid: core/modeling/value-comparers
-ms.openlocfilehash: 9dfed7b7ef8163f4f5c94a0c81c510807c53c13d
-ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
+ms.openlocfilehash: 9e33bfb840606b746626daa1da7331904b495ab4
+ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80148271"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664117"
 ---
 # <a name="value-comparers"></a>Operatori di confronto del valore
 
@@ -94,7 +94,7 @@ Ad esempio, il mapping di una proprietà contenente un elenco di numeri:
 
 [!code-csharp[ListProperty](../../../samples/core/Modeling/ValueConversions/MappingListProperty.cs?name=ListProperty)]
 
-[Classe`List<T>`](/dotnet/api/system.collections.generic.list-1?view=netstandard-2.1):
+La [ `List<T>` classe](/dotnet/api/system.collections.generic.list-1?view=netstandard-2.1):
 * Con uguaglianza di riferimento; due elenchi contenenti gli stessi valori vengono considerati diversi.
 * È modificabile; i valori nell'elenco possono essere aggiunti e rimossi.
 
@@ -102,7 +102,7 @@ Una conversione tipica di un valore in una proprietà di elenco può convertire 
 
 [!code-csharp[ConfigureListProperty](../../../samples/core/Modeling/ValueConversions/MappingListProperty.cs?name=ConfigureListProperty)]
 
-È quindi necessario impostare un `ValueComparer<T>` sulla proprietà per forzare EF Core usare confronti corretti con questa conversione:
+È quindi necessario impostare un oggetto `ValueComparer<T>` sulla proprietà per forzare EF Core usare i confronti corretti con questa conversione:
 
 [!code-csharp[ConfigureListPropertyComparer](../../../samples/core/Modeling/ValueConversions/MappingListProperty.cs?name=ConfigureListPropertyComparer)]
 
@@ -110,8 +110,8 @@ Una conversione tipica di un valore in una proprietà di elenco può convertire 
 > L'API del generatore di modelli ("Fluent") per impostare un operatore di confronto dei valori non è stata ancora implementata.
 > Al contrario, il codice precedente chiama SetValueComparer nel IMutableProperty di livello inferiore esposto dal generatore come ' Metadata '.
 
-Il costruttore `ValueComparer<T>` accetta tre espressioni:
-* Espressione per il controllo della qualità
+Il `ValueComparer<T>` costruttore accetta tre espressioni:
+* Espressione per la verifica dell'uguaglianza
 * Espressione per la generazione di un codice hash
 * Espressione per lo snapshot di un valore  
 

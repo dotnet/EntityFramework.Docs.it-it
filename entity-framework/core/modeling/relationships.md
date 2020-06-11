@@ -4,12 +4,12 @@ description: Come configurare le relazioni tra i tipi di entità quando si usa E
 author: AndriySvyryd
 ms.date: 11/21/2019
 uid: core/modeling/relationships
-ms.openlocfilehash: 8d3df109f34c2a77305db1e2be2eea1694d7ad6b
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 3ed25b752970cf0f55d38f1ce5b8383f1c90edc3
+ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672760"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664143"
 ---
 # <a name="relationships"></a>Relazioni
 
@@ -152,7 +152,8 @@ Dopo la creazione della proprietà di navigazione, potrebbe essere necessario co
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NavigationConfiguration.cs?name=NavigationConfiguration&highlight=7-9)]
 
-[!NOTE] Questa chiamata non può essere utilizzata per creare una proprietà di navigazione. Viene usato solo per configurare una proprietà di navigazione che è stata creata in precedenza definendo una relazione o una convenzione.
+> [!NOTE]
+> Questa chiamata non può essere utilizzata per creare una proprietà di navigazione. Viene usato solo per configurare una proprietà di navigazione che è stata creata in precedenza definendo una relazione o una convenzione.
 
 ### <a name="foreign-key"></a>Chiave esterna
 
@@ -178,7 +179,7 @@ Dopo la creazione della proprietà di navigazione, potrebbe essere necessario co
 > L' `[ForeignKey]` annotazione può essere posizionata su una proprietà di navigazione nella relazione. Non è necessario che venga eseguita la proprietà di navigazione nella classe di entità dipendente.
 
 > [!NOTE]
-> Non è necessario che la proprietà specificata con `[ForeignKey]` in una proprietà di navigazione esista il tipo dipendente. In questo caso, il nome specificato verrà utilizzato per creare una chiave esterna Shadow.
+> Non è necessario che la proprietà specificata con `[ForeignKey]` su una proprietà di navigazione esista nel tipo dipendente. In questo caso, il nome specificato verrà utilizzato per creare una chiave esterna Shadow.
 
 ---
 

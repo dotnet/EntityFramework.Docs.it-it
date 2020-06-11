@@ -1,42 +1,42 @@
 ---
-title: Relazioni, proprietà di navigazione e chiavi esterne - EF6Relationships, navigation properties, and foreign keys - EF6
+title: Relazioni, proprietà di navigazione e chiavi esterne-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: 76169f25d01bed81ad0748c9e85a67bd112a6e65
-ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
+ms.openlocfilehash: 5807f7aeeb68328821cf45ac4f8c28efa17ed399
+ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81434326"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664195"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>Relazioni, proprietà di navigazione e chiavi esterne
 
-In questo articolo viene fornita una panoramica del modo in cui Entity Framework gestisce le relazioni tra le entità. Fornisce inoltre alcune indicazioni su come mappare e manipolare le relazioni.
+Questo articolo fornisce una panoramica del modo in cui Entity Framework gestisce le relazioni tra le entità. Vengono inoltre fornite alcune indicazioni su come eseguire il mapping e modificare le relazioni.
 
 ## <a name="relationships-in-ef"></a>Relazioni in EF
 
-Nei database relazionali, le relazioni (chiamate anche associazioni) tra tabelle vengono definite tramite chiavi esterne. Per chiave esterna si intende una colonna o combinazione di colonne utilizzata per stabilire e applicare un collegamento tra i dati di due tabelle. Esistono in genere tre tipi di relazioni: uno-a-uno, uno-a-molti, e molti-a-molti. In una relazione uno-a-molti, la chiave esterna viene definita nella tabella che rappresenta l'entità finale molti della relazione. La relazione molti-a-molti comporta la definizione di una terza tabella (denominata tabella di collegamento o di join), la cui chiave primaria è composta dalle chiavi esterne di entrambe le tabelle correlate. In una relazione uno-a-uno, la chiave primaria funge inoltre da chiave esterna e non esiste una colonna di chiave esterna separata per entrambe le tabelle.
+Nei database relazionali, le relazioni (dette anche associazioni) tra le tabelle vengono definite tramite chiavi esterne. Per chiave esterna si intende una colonna o combinazione di colonne utilizzata per stabilire e applicare un collegamento tra i dati di due tabelle. Esistono in genere tre tipi di relazioni: uno-a-uno, uno-a-molti e molti-a-molti. In una relazione uno-a-molti, la chiave esterna viene definita nella tabella che rappresenta le numerose entità finali della relazione. La relazione molti-a-molti implica la definizione di una terza tabella (denominata tabella di giunzione o join), la cui chiave primaria è costituita dalle chiavi esterne di entrambe le tabelle correlate. In una relazione uno-a-uno, la chiave primaria funge anche da chiave esterna e non esiste una colonna di chiave esterna separata per entrambe le tabelle.
 
-L'immagine seguente mostra due tabelle che fanno parte di una relazione uno-a-molti. La tabella **Course** è la tabella dipendente perché contiene la colonna **DepartmentID** che la collega alla tabella **Department.**
+Nella figura seguente sono illustrate due tabelle che fanno parte di una relazione uno-a-molti. La tabella **Course** è la tabella dipendente perché contiene la colonna **DepartmentID** che lo collega alla tabella **Department** .
 
-![Tavoli Reparto e Corso](~/ef6/media/database2.png)
+![Tabelle del reparto e del corso](~/ef6/media/database2.png)
 
-In Entity Framework, un'entità può essere correlata ad altre entità tramite un'associazione o una relazione. Ogni relazione contiene due estremità che descrivono il tipo di entità e la molteplicità del tipo (uno, zero o uno o molti) per le due entità in tale relazione. La relazione può essere regolata da un vincolo referenziale che descrive quale entità finale nella relazione riveste il ruolo principale e quale quello di dipendente.
+In Entity Framework, un'entità può essere correlata ad altre entità tramite un'associazione o una relazione. Ogni relazione contiene due entità finali che descrivono il tipo di entità e la molteplicità del tipo (uno, zero-o-uno o molti) per le due entità della relazione. La relazione può essere regolata da un vincolo referenziale che descrive quale entità finale nella relazione riveste il ruolo principale e quale quello di dipendente.
 
-Le proprietà di navigazione consentono di esplorare un'associazione tra due tipi di entità. Ogni oggetto può disporre di una proprietà di navigazione per ogni relazione di cui fa parte. Le proprietà di navigazione consentono di esplorare e gestire le relazioni in entrambe le direzioni, restituendo un oggetto di riferimento (se la molteplicità è uno o zero o uno) o una raccolta (se la molteplicità è molti). È inoltre possibile scegliere di eseguire la navigazione unidirezionale, nel qual caso si definisce la proprietà di navigazione solo su uno dei tipi che partecipano alla relazione e non su entrambi.
+Le proprietà di navigazione consentono di spostarsi in un'associazione tra due tipi di entità. Ogni oggetto può disporre di una proprietà di navigazione per ogni relazione di cui fa parte. Le proprietà di navigazione consentono di esplorare e gestire le relazioni in entrambe le direzioni, restituendo un oggetto di riferimento (se la molteplicità è uno o zero-o-uno) o una raccolta (se la molteplicità è molti). È anche possibile scegliere di disporre di una navigazione unidirezionale, nel qual caso si definisce la proprietà di navigazione solo su uno dei tipi che partecipano alla relazione e non su entrambi.
 
-È consigliabile includere nel modello le proprietà che eseguono il mapping alle chiavi esterne nel database. Con le proprietà di chiave esterna incluse, è possibile creare o modificare una relazione cambiando il valore della chiave esterna in un oggetto dipendente. Questo tipo di associazione viene definito associazione di chiavi esterne. L'uso di chiavi esterne è ancora più essenziale quando si lavora con entità disconnesse. Si noti che quando si lavora con 1-a-1 o 1-a-0.. 1 relazioni, non esiste una colonna di chiave esterna separata, la proprietà di chiave primaria funge da chiave esterna ed è sempre inclusa nel modello.
+È consigliabile includere nel modello le proprietà che vengono mappate alle chiavi esterne del database. Con le proprietà di chiave esterna incluse, è possibile creare o modificare una relazione cambiando il valore della chiave esterna in un oggetto dipendente. Questo tipo di associazione viene definito associazione di chiavi esterne. L'utilizzo di chiavi esterne è ancora più essenziale quando si utilizzano le entità disconnesse. Si noti che quando si lavora con 1 a 1 o 1 a 0. 1 relazioni, non esiste una colonna di chiave esterna separata, la proprietà della chiave primaria funge da chiave esterna ed è sempre inclusa nel modello.
 
-Quando le colonne di chiave esterna non sono incluse nel modello, le informazioni sull'associazione vengono gestite come oggetto indipendente. Le relazioni vengono rilevate tramite riferimenti a oggetti anziché proprietà di chiave esterna. Questo tipo di associazione è denominato *associazione indipendente.* Il modo più comune per modificare *un'associazione indipendente* consiste nel modificare le proprietà di navigazione generate per ogni entità che fa parte dell'associazione.
+Quando le colonne di chiavi esterne non sono incluse nel modello, le informazioni di associazione vengono gestite come oggetto indipendente. Le relazioni vengono rilevate tramite riferimenti a oggetti anziché proprietà di chiave esterna. Questo tipo di associazione viene definito *associazione indipendente*. Il modo più comune per modificare un' *associazione indipendente* consiste nel modificare le proprietà di navigazione generate per ogni entità che partecipa all'associazione.
 
-È possibile scegliere di utilizzare uno o entrambi i tipi di associazioni nel modello. Tuttavia, se si dispone di una relazione molti-a-molti pura connessa da una tabella di join che contiene solo chiavi esterne, il server DiF utilizzerà un'associazione indipendente per gestire tale relazione molti-a-molti.   
+È possibile scegliere di utilizzare uno o entrambi i tipi di associazioni nel modello. Tuttavia, se si dispone di una relazione molti-a-molti pura connessa da una tabella di join che contiene solo chiavi esterne, EF utilizzerà un'associazione indipendente per gestire una relazione molti-a-molti.   
 
-Nell'immagine seguente viene illustrato un modello concettuale creato con Entity Framework Designer. Il modello contiene due entità che partecipano alla relazione uno-a-molti. Entrambe le entità hanno proprietà di navigazione. **Course** è l'entità dipendente e ha la proprietà di chiave esterna **DepartmentID** definita.
+Nell'immagine seguente viene illustrato un modello concettuale creato con l'Entity Framework Designer. Il modello contiene due entità che fanno parte di una relazione uno-a-molti. Entrambe le entità hanno proprietà di navigazione. **Course** è l'entità dipendente ed è stata definita la proprietà di chiave esterna **DepartmentID** .
 
-![Tabelle Reparto e Corso con proprietà di navigazione](~/ef6/media/relationshipefdesigner.png)
+![Tabelle Department e Course con proprietà di navigazione](~/ef6/media/relationshipefdesigner.png)
 
-The following code snippet shows the same model that was created with Code First.
+Il frammento di codice seguente illustra lo stesso modello creato con Code First.
 
 ``` csharp
 public class Course
@@ -63,55 +63,55 @@ public class Department
 }
 ```
 
-## <a name="configuring-or-mapping-relationships"></a>Configurazione o mapping delle relazioni
+## <a name="configuring-or-mapping-relationships"></a>Configurazione o mapping di relazioni
 
-Nella parte restante di questa pagina viene illustrato come accedere e modificare i dati utilizzando le relazioni. Per informazioni sull'impostazione delle relazioni nel modello, vedere le pagine seguenti.
+Il resto di questa pagina illustra come accedere e modificare i dati usando le relazioni. Per informazioni sull'impostazione delle relazioni nel modello, vedere le pagine seguenti.
 
--   Per configurare le relazioni in Code First, vedere [Data Annotations](~/ef6/modeling/code-first/data-annotations.md) and [Fluent API – Relationships](~/ef6/modeling/code-first/fluent/relationships.md).
--   Per configurare le relazioni utilizzando Entity Framework Designer, vedere [Relazioni con Progettazione Entity Framework](~/ef6/modeling/designer/relationships.md).
+-   Per configurare le relazioni in Code First, vedere [annotazioni dei dati](~/ef6/modeling/code-first/data-annotations.md) e [API Fluent-relazioni](~/ef6/modeling/code-first/fluent/relationships.md).
+-   Per configurare le relazioni usando il Entity Framework Designer, vedere [relazioni con la finestra di progettazione EF](~/ef6/modeling/designer/relationships.md).
 
 ## <a name="creating-and-modifying-relationships"></a>Creazione e modifica di relazioni
 
-In *un'associazione*di chiave esterna , quando si modifica `EntityState.Unchanged` la `EntityState.Modified`relazione, lo stato di un oggetto dipendente con uno stato diventa . In una relazione indipendente, la modifica della relazione non aggiorna lo stato dell'oggetto dipendente.
+In un' *associazione di chiavi esterne*, quando si modifica la relazione, lo stato di un oggetto dipendente con uno `EntityState.Unchanged` stato viene modificato in `EntityState.Modified` . In una relazione indipendente, la modifica della relazione non aggiorna lo stato dell'oggetto dipendente.
 
-Negli esempi seguenti viene illustrato come utilizzare le proprietà di chiave esterna e le proprietà di navigazione per associare gli oggetti correlati. Con le associazioni di chiavi esterne, è possibile utilizzare uno dei due metodi per modificare, creare o modificare le relazioni. Con associazioni indipendenti, non è possibile utilizzare la proprietà di chiave esterna.
+Negli esempi seguenti viene illustrato come utilizzare le proprietà di chiave esterna e le proprietà di navigazione per associare gli oggetti correlati. Con le associazioni di chiavi esterne è possibile utilizzare uno dei metodi per modificare, creare o modificare le relazioni. Con associazioni indipendenti, non è possibile utilizzare la proprietà di chiave esterna.
 
 - Assegnando un nuovo valore a una proprietà di chiave esterna, come nell'esempio seguente.  
   ``` csharp
   course.DepartmentID = newCourse.DepartmentID;
   ```
 
-- Il codice seguente rimuove una relazione impostando la chiave esterna su **null**. Si noti che la proprietà della chiave esterna deve essere nullable.  
+- Il codice seguente rimuove una relazione impostando la chiave esterna su **null**. Si noti che la proprietà della chiave esterna deve ammettere i valori null.  
   ``` csharp
   course.DepartmentID = null;
   ```
 
   >[!NOTE]
-  > Se il riferimento si trova nello stato aggiunto (in questo esempio, l'oggetto corso), la proprietà di navigazione del riferimento non verrà sincronizzata con i valori chiave di un nuovo oggetto finché non viene chiamato SaveChanges. La sincronizzazione non si verifica in quanto il contesto dell'oggetto non contiene chiavi permanenti per gli oggetti aggiunti fino quando questi non vengono salvati. Se è necessario che nuovi oggetti siano completamente sincronizzati non appena si imposta la relazione, utilizzare uno dei metodi descritti di seguito.
+  > Se il riferimento è nello stato Added (in questo esempio, l'oggetto Course), la proprietà di navigazione Reference non verrà sincronizzata con i valori di chiave di un nuovo oggetto finché non viene chiamato SaveChanges. La sincronizzazione non si verifica in quanto il contesto dell'oggetto non contiene chiavi permanenti per gli oggetti aggiunti fino quando questi non vengono salvati. Se è necessario che i nuovi oggetti siano completamente sincronizzati non appena si imposta la relazione, usare uno dei metodi seguenti. *
 
-- Assegnando un nuovo oggetto a una proprietà di navigazione. Il codice seguente crea una relazione `department`tra un corso e un oggetto . Se gli oggetti sono associati al `course` contesto, `department.Courses` l'oggetto viene aggiunto anche `course` alla raccolta e la proprietà della chiave esterna corrispondente sull'oggetto viene impostata sul valore della proprietà key del reparto.  
+- Assegnando un nuovo oggetto a una proprietà di navigazione. Il codice seguente crea una relazione tra un corso e un oggetto `department` . Se gli oggetti sono collegati al contesto, `course` viene aggiunto anche alla `department.Courses` raccolta e la proprietà di chiave esterna corrispondente nell' `course` oggetto viene impostata sul valore della proprietà chiave del reparto.  
   ``` csharp
   course.Department = department;
   ```
 
-- Per eliminare la relazione, impostare la proprietà di navigazione su `null`. Se si utilizza Entity Framework basato su .NET 4.0, l'estremità correlata deve essere caricata prima di impostarla su null. Ad esempio:   
+- Per eliminare la relazione, impostare la proprietà di navigazione su `null` . Se si lavora con Entity Framework basata su .NET 4,0, è necessario caricare l'entità finale correlata prima di impostarla su null. Ad esempio:   
   ``` csharp
   context.Entry(course).Reference(c => c.Department).Load();
   course.Department = null;
   ```
 
-  A partire da Entity Framework 5.0, basato su .NET 4.5, è possibile impostare la relazione su null senza caricare l'entità finale correlata. È inoltre possibile impostare il valore corrente su null utilizzando il metodo seguente.   
+  A partire da Entity Framework 5,0, che è basato su .NET 4,5, è possibile impostare la relazione su null senza caricare l'entità finale correlata. È inoltre possibile impostare il valore corrente su null utilizzando il metodo seguente.   
   ``` csharp
   context.Entry(course).Reference(c => c.Department).CurrentValue = null;
   ```
 
-- Eliminando o aggiungendo un oggetto in una raccolta di entità. Ad esempio, è possibile aggiungere `Course` un `department.Courses` oggetto di tipo alla raccolta. Questa operazione crea una **course** relazione tra `department`un corso particolare e un particolare . Se gli oggetti sono associati al contesto, il riferimento **course** al reparto e la `department`proprietà di chiave esterna nell'oggetto corso verranno impostati sull'oggetto appropriato.  
+- Eliminando o aggiungendo un oggetto in una raccolta di entità. Ad esempio, è possibile aggiungere un oggetto di tipo `Course` alla `department.Courses` raccolta. Questa operazione crea una relazione tra un determinato **corso** e un particolare `department` . Se gli oggetti sono collegati al contesto, il riferimento al reparto e la proprietà di chiave esterna nell'oggetto **Course** verranno impostati sull'oggetto appropriato `department` .  
   ``` csharp
   department.Courses.Add(newCourse);
   ```
 
-- Utilizzando il `ChangeRelationshipState` metodo per modificare lo stato della relazione specificata tra due oggetti entità. Questo metodo viene utilizzato più comunemente quando si lavora con applicazioni a più livelli e *un'associazione indipendente* (non può essere utilizzato con un'associazione di chiave esterna). Inoltre, per utilizzare questo metodo `ObjectContext`è necessario scendere a , come illustrato nell'esempio seguente.  
-Nell'esempio seguente esiste una relazione molti-a-molti tra istruttori e corsi. La `ChangeRelationshipState` chiamata al `EntityState.Added` metodo e `SchoolContext` il passaggio del parametro indica che è stata aggiunta una relazione tra i due oggetti:
+- Utilizzando il `ChangeRelationshipState` metodo per modificare lo stato della relazione specificata tra due oggetti entità. Questo metodo viene in genere utilizzato quando si utilizzano applicazioni a più livelli e un' *associazione indipendente* (non può essere utilizzato con un'associazione di chiavi esterne). Inoltre, per usare questo metodo, è necessario eseguire l'elenco a discesa `ObjectContext` , come illustrato nell'esempio riportato di seguito.  
+Nell'esempio seguente esiste una relazione molti-a-molti tra docenti e corsi. Chiamando il `ChangeRelationshipState` metodo e passando il `EntityState.Added` parametro, è possibile `SchoolContext` verificare che sia stata aggiunta una relazione tra i due oggetti:
   ``` csharp
 
   ((IObjectContextAdapter)context).ObjectContext.
@@ -119,7 +119,7 @@ Nell'esempio seguente esiste una relazione molti-a-molti tra istruttori e corsi.
     ChangeRelationshipState(course, instructor, c => c.Instructor, EntityState.Added);
   ```
 
-  Si noti che se si sta aggiornando (non solo aggiungendo) una relazione, è necessario eliminare la relazione precedente dopo aver aggiunto quella nuova:
+  Si noti che se si sta aggiornando (non solo aggiungendo) una relazione, è necessario eliminare la relazione precedente dopo aver aggiunto quello nuovo:
 
   ``` csharp
   ((IObjectContextAdapter)context).ObjectContext.
@@ -129,9 +129,9 @@ Nell'esempio seguente esiste una relazione molti-a-molti tra istruttori e corsi.
 
 ## <a name="synchronizing-the-changes-between-the-foreign-keys-and-navigation-properties"></a>Sincronizzazione delle modifiche tra le chiavi esterne e le proprietà di navigazione
 
-Quando si modifica la relazione degli oggetti associati al contesto utilizzando uno dei metodi descritti in precedenza, Entity Framework deve mantenere sincronizzate chiavi esterne, riferimenti e raccolte. Entity Framework gestisce automaticamente questa sincronizzazione (nota anche come correzione delle relazioni) per le entità POCO con proxy. Per ulteriori informazioni, consultate [Utilizzo dei proxy.](~/ef6/fundamentals/proxies.md)
+Quando si modifica la relazione degli oggetti collegati al contesto utilizzando uno dei metodi descritti in precedenza, Entity Framework necessario che le chiavi esterne, i riferimenti e le raccolte siano sincronizzati. Entity Framework gestisce automaticamente questa sincronizzazione, nota anche come correzione della relazione, per le entità POCO con proxy. Per ulteriori informazioni, vedere [utilizzo di proxy](~/ef6/fundamentals/proxies.md).
 
-Se si utilizzano entità POCO senza proxy, è necessario assicurarsi che il **DetectChanges** metodo viene chiamato per sincronizzare gli oggetti correlati nel contesto. Si noti che le API seguenti attivano automaticamente una chiamata **DetectChanges.Note** that the following APIs automatically trigger a DetectChanges call.
+Se si utilizzano entità POCO senza proxy, è necessario assicurarsi che venga chiamato il metodo **DetectChanges** per sincronizzare gli oggetti correlati nel contesto. Si noti che le API seguenti attivano automaticamente una chiamata **DetectChanges** .
 
 -   `DbSet.Add`
 -   `DbSet.AddRange`
@@ -148,33 +148,33 @@ Se si utilizzano entità POCO senza proxy, è necessario assicurarsi che il **De
 
 ## <a name="loading-related-objects"></a>Caricamento di oggetti correlati
 
-In Entity Framework si usano comunemente le proprietà di navigazione per caricare le entità correlate all'entità restituita dall'associazione definita. Per ulteriori informazioni, vedere [Caricamento di oggetti correlati](~/ef6/querying/related-data.md).
+In Entity Framework si utilizzano comunemente le proprietà di navigazione per caricare entità correlate all'entità restituita dall'associazione definita. Per ulteriori informazioni, vedere [caricamento di oggetti correlati](~/ef6/querying/related-data.md).
 
 > [!NOTE]
 > In un'associazione di chiavi esterne, quando si carica un'entità finale correlata di un oggetto dipendente, l'oggetto correlato sarà caricato in base al valore della chiave esterna dell'oggetto dipendente attualmente in memoria:
 
 ``` csharp
     // Get the course where currently DepartmentID = 2.
-    Course course2 = context.Courses.First(c => c.DepartmentID == 2);
+    Course course = context.Courses.First(c => c.DepartmentID == 2);
 
     // Use DepartmentID foreign key property
     // to change the association.
-    course2.DepartmentID = 3;
+    course.DepartmentID = 3;
 
     // Load the related Department where DepartmentID = 3
     context.Entry(course).Reference(c => c.Department).Load();
 ```
 
-In un'associazione indipendente viene eseguita una query sull'entità finale correlata di un oggetto dipendente in base al valore della chiave esterna che è attualmente nel database. Tuttavia, se la relazione è stata modificata e la proprietà di riferimento nell'oggetto dipendente punta a un oggetto Principal diverso caricato nel contesto dell'oggetto, Entity Framework tenterà di creare una relazione come è definita nel client.
+In un'associazione indipendente viene eseguita una query sull'entità finale correlata di un oggetto dipendente in base al valore della chiave esterna che è attualmente nel database. Tuttavia, se la relazione è stata modificata e la proprietà Reference nell'oggetto dipendente punta a un oggetto Principal diverso caricato nel contesto dell'oggetto, Entity Framework tenterà di creare una relazione come definita nel client.
 
 ## <a name="managing-concurrency"></a>Gestione della concorrenza
 
-Nelle associazioni di chiave esterna e indipendente, i controlli di concorrenza sono basati sulle chiavi di entità e altre proprietà di entità definite nel modello. Quando si usa la finestra di progettazione di EF per creare un modello, impostare l'attributo `ConcurrencyMode` su **fixed** per specificare che la proprietà deve essere controllata per la concorrenza. Quando si utilizza Code First per `ConcurrencyCheck` definire un modello, usare l'annotazione sulle proprietà che si desidera controllare per la concorrenza. Quando si lavora con Code `TimeStamp` First è anche possibile usare l'annotazione per specificare che la proprietà deve essere controllata per la concorrenza. È possibile avere una sola proprietà timestamp in una determinata classe. Code First esegue il mapping di questa proprietà a un campo non nullable nel database.
+Nelle associazioni di chiave esterna e indipendente, i controlli della concorrenza sono basati sulle chiavi di entità e su altre proprietà di entità definite nel modello. Quando si usa la finestra di progettazione di Entity Framework per creare un modello, impostare l' `ConcurrencyMode` attributo su **fixed** per specificare che la proprietà deve essere controllata per la concorrenza. Quando si usa Code First per definire un modello, usare l' `ConcurrencyCheck` annotazione sulle proprietà di cui si vuole verificare la concorrenza. Quando si lavora con Code First è anche possibile usare l' `TimeStamp` annotazione per specificare che la proprietà deve essere controllata per la concorrenza. È possibile avere una sola proprietà timestamp in una determinata classe. Code First esegue il mapping di questa proprietà a un campo che non ammette i valori null nel database.
 
-È consigliabile usare sempre l'associazione di chiave esterna quando si lavora con entità che partecipano al controllo e alla risoluzione della concorrenza.
+Si consiglia di utilizzare sempre l'associazione di chiavi esterne quando si utilizzano entità che partecipano al controllo della concorrenza e alla risoluzione.
 
-Per ulteriori informazioni, vedere [Gestione dei conflitti](~/ef6/saving/concurrency.md)di concorrenza .
+Per ulteriori informazioni, vedere [gestione dei conflitti di concorrenza](~/ef6/saving/concurrency.md).
 
-## <a name="working-with-overlapping-keys"></a>Utilizzo di tasti sovrapposti
+## <a name="working-with-overlapping-keys"></a>Utilizzo di chiavi sovrapposte
 
 Le chiavi sovrapposte sono chiavi composte in cui alcune proprietà nella chiave fanno parte anche di un'altra chiave nell'entità. Non è possibile disporre di una chiave sovrapposta in un'associazione indipendente. Per modificare un'associazione di chiavi esterne che include chiavi sovrapposte, si consiglia di modificare i valori della chiave esterna anziché utilizzare i riferimenti a un oggetto.

@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 04/11/2020
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 246cf687f2a087e9a9a569c875b27712ebe80c5c
-ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
-ms.translationtype: HT
+ms.openlocfilehash: 41bc403b586c9e67033d6db0dc4418510bc7b061
+ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82538341"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664182"
 ---
 # <a name="ef-core-tools--extensions"></a>Strumenti ed estensioni di EF Core
 
@@ -216,3 +216,11 @@ Estensioni LINQ per Entity Framework Core 3.1 per supportare le query di tabelle
 Aggiunge il supporto di hierarchyid al provider SQL Server EF Core. Per EF Core: 3.
 
 [Repository GitHub](https://github.com/efcore/EFCore.SqlServer.HierarchyId)
+
+### <a name="linq2dbentityframeworkcore"></a>linq2db. EntityFrameworkCore
+
+Conversione alternativa di query LINQ in espressioni SQL. Per EF Core: 3.
+
+Include il supporto per le funzionalità avanzate di SQL, ad esempio CTE, copia bulk, hint di tabella, funzioni finestra, tabelle temporanee e operazioni di creazione/aggiornamento/eliminazione sul lato database.
+
+[Repository GitHub](https://github.com/linq2db/linq2db.EntityFrameworkCore)

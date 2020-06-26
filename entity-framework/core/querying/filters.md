@@ -3,12 +3,12 @@ title: Filtri di query globali - EF Core
 author: anpete
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: f6c59bcbab31edcbed22079a1320c060ce08c6f7
-ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+ms.openlocfilehash: 233289b0c50e15f4555b342bc654211ce04c24d3
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664130"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370461"
 ---
 # <a name="global-query-filters"></a>Filtri di query globali
 
@@ -52,7 +52,7 @@ Le espressioni del predicato passate alle chiamate di _HasQueryFilter_ verranno 
 > [!NOTE]
 > Attualmente EF Core non rileva i cicli nelle definizioni di filtro delle query globali, quindi è necessario prestare attenzione durante la definizione. Se specificato in modo non corretto, questo potrebbe causare cicli infiniti durante la conversione delle query.
 
-## <a name="accessing-entity-with-query-filter-using-reqiured-navigation"></a>Accesso all'entità con filtro query tramite la navigazione reqiured
+## <a name="accessing-entity-with-query-filter-using-required-navigation"></a>Accesso all'entità con filtro query tramite la navigazione obbligatoria
 
 > [!CAUTION]
 > L'uso della navigazione necessaria per accedere a un'entità con un filtro di query globale definito può causare risultati imprevisti. 

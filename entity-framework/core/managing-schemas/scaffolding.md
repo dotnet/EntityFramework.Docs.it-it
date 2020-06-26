@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/13/2018
 ms.assetid: 6263EF7D-4989-42E6-BDEE-45DA770342FB
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: cb20120154101a9b92b4bf2bc06d20b1dafe88c1
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 2422e7455dc4ef52f0a9d3bdaebfa02f62e6d50f
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672977"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370597"
 ---
 # <a name="reverse-engineering"></a> Reverse Engineering
 
@@ -85,11 +85,11 @@ Scaffold-DbContext ... -Tables Artist, Album
 
 ## <a name="preserving-names"></a>Conservazione dei nomi
 
-Per impostazione predefinita, i nomi delle tabelle e delle colonne sono corretti per una migliore corrispondenza con le convenzioni di denominazione .NET per i tipi e le proprietà. Se si specifica l'opzione nella console di gestione pacchetti `-UseDatabaseNames` o l'opzione nell'interfaccia della riga di comando, `--use-database-names` questo comportamento verrà disabilitato per quanto possibile. Gli identificatori .NET non validi verranno comunque corretti e i nomi sintetizzati, come le proprietà di navigazione, saranno comunque conformi alle convenzioni di denominazione .NET.
+Per impostazione predefinita, i nomi delle tabelle e delle colonne sono corretti per una migliore corrispondenza con le convenzioni di denominazione .NET per i tipi e le proprietà. `-UseDatabaseNames`Se si specifica l'opzione in PMC o l' `--use-database-names` opzione nel interfaccia della riga di comando di .NET Core, questo comportamento verrà disabilitato nel modo più possibile mantenendo i nomi originali del database. Gli identificatori .NET non validi verranno comunque corretti e i nomi sintetizzati, come le proprietà di navigazione, saranno comunque conformi alle convenzioni di denominazione .NET.
 
 ## <a name="fluent-api-or-data-annotations"></a>API Fluent o annotazioni dei dati
 
-Per impostazione predefinita, i tipi di entità vengono configurati tramite l'API Fluent. Specificare `-DataAnnotations` (PMC) o `--data-annotations` (CLI) per usare invece le annotazioni dei dati, quando possibile.
+Per impostazione predefinita, i tipi di entità vengono configurati tramite l'API Fluent. Specificare `-DataAnnotations` (PMC) o `--data-annotations` (interfaccia della riga di comando di .NET Core) per usare invece le annotazioni dei dati, quando possibile.
 
 Se ad esempio si usa l'API Fluent, l'impalcatura è la seguente:
 
@@ -109,7 +109,7 @@ public string Title { get; set; }
 
 ## <a name="dbcontext-name"></a>Nome DbContext
 
-Il nome della classe DbContext con impalcature sarà il nome del database con suffisso *per impostazione predefinita* . Per specificarne uno diverso, usare `-Context` in PMC e `--context` nell'interfaccia della riga di comando.
+Il nome della classe DbContext con impalcature sarà il nome del database con suffisso *per impostazione predefinita* . Per specificarne uno diverso, usare `-Context` in PMC e `--context` nel interfaccia della riga di comando di .NET Core.
 
 ## <a name="directories-and-namespaces"></a>Directory e spazi dei nomi
 
@@ -145,7 +145,7 @@ Scaffold-DbContext ... -Namespace Your.Namespace -ContextNamespace Your.DbContex
 
 ***
 
-## <a name="how-it-works"></a>Come funziona
+## <a name="how-it-works"></a>Funzionamento
 
 Il reverse engineering inizia con la lettura dello schema del database. Legge le informazioni su tabelle, colonne, vincoli e indici.
 

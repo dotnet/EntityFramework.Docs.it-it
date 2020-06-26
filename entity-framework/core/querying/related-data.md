@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: bfd6e161ed7f7bf96e61946f94c8eeadd24a72f5
-ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
+ms.openlocfilehash: 86b9d08377ea8295b746e5f0217a408edcfe1517
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81434188"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370473"
 ---
 # <a name="loading-related-data"></a>Caricamento di dati correlati
 
@@ -54,28 +54,40 @@ Entity Framework Core consente di usare le proprietà di navigazione nel modello
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
 
 > [!CAUTION]
-> A partire dalla versione 3.0.0, verrà `Include` aggiunta un'aggiunta di JOIN aggiuntiva alle query SQL prodotte dai provider relazionali, mentre le versioni precedenti generavano query SQL aggiuntive. Ciò può modificare in modo significativo le prestazioni delle query, nel bene e nel male. In particolare, LINQ query con un `Include` numero estremamente elevato di operatori potrebbe essere necessario essere suddivisi in più query LINQ separate per evitare il problema di esplosione cartesiana.
+> A partire dalla versione 3.0.0, ognuno di essi `Include` provocherà l'aggiunta di un join aggiuntivo alle query SQL prodotte dai provider relazionali, mentre le versioni precedenti generavano query SQL aggiuntive. Questo può modificare in modo significativo le prestazioni delle query, per un miglioramento o peggio. In particolare, potrebbe essere necessario suddividere le query LINQ con un numero di operatori estremamente elevato in `Include` più query LINQ separate per evitare il problema di esplosione cartesiana.
 
-### <a name="filtered-include"></a>Filtrato includono
+### <a name="filtered-include"></a>Inclusione filtrato
 
 > [!NOTE]
-> Questa funzionalità è stata introdotta in EF Core 5.0.This feature is introduced in EF Core 5.0.
+> Questa funzionalità è stata introdotta in EF Core 5,0.
 
-Quando si applica Include per caricare i dati correlati, è possibile applicare determinate operazioni enumerabili per la navigazione della raccolta inclusa, che consente di filtrare e ordinare i risultati.
+Quando si applica l'inclusione per caricare dati correlati, è possibile applicare determinate operazioni enumerabili sulla navigazione della raccolta inclusa, che consente di filtrare e ordinare i risultati.
 
-Le operazioni `Where`supportate `ThenBy`sono: `Skip`, `Take` `OrderBy`, `OrderByDescending`, , `ThenByDescending`, , e .
+Le operazioni supportate sono:,,, `Where` `OrderBy` `OrderByDescending` `ThenBy` , `ThenByDescending` , `Skip` e `Take` .
 
-Tali operazioni devono essere applicate nella navigazione della raccolta nell'espressione lambda passata al metodo Include, come illustrato nell'esempio seguente:Such operations should be applied on the collection navigation in the lambda passed to the Include method, as shown in example below:
+Tali operazioni devono essere applicate alla navigazione della raccolta nell'espressione lambda passata al metodo include, come illustrato nell'esempio seguente:
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#FilteredInclude)]
 
-Ogni navigazione inclusa consente un solo set univoco di operazioni di filtro. Nei casi in cui vengono applicate più`blog.Posts` operazioni di inclusione per una determinata navigazione di raccolta (negli esempi seguenti), le operazioni di filtro possono essere specificate solo in una di esse: 
+Ogni navigazione inclusa consente solo un set univoco di operazioni di filtro. Nei casi in cui vengono applicate più operazioni di inclusione per una determinata navigazione della raccolta ( `blog.Posts` negli esempi seguenti), le operazioni di filtro possono essere specificate solo in uno di essi: 
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludesFiltered1)]
 
-In alternativa, è possibile applicare operazioni identiche per ogni navigazione inclusa più volte:Alternatively, identical operations can be applied for each navigation that is included multiple times:
+In alternativa, è possibile applicare operazioni identiche per ogni navigazione inclusa più volte:
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludesFiltered2)]
+
+> [!CAUTION]
+> Nel caso di query di rilevamento, i risultati dell'inclusione filtrata possono essere imprevisti a causa della [correzione della navigazione](tracking.md). Tutte le entità rilevanti che sono state querried per le versioni precedenti e sono state archiviate in change tracker saranno presenti nei risultati della query di inclusione filtrata, anche se non soddisfano i requisiti del filtro. Si consiglia `NoTracking` di utilizzare le query o di ricreare DbContext quando si utilizza l'inclusione filtrata in tali situazioni.
+
+Esempio:
+
+```csharp
+var orders = context.Orders.Where(o => o.Id > 1000).ToList();
+
+// customer entities will have references to all orders where Id > 1000, rathat than > 5000
+var filtered = context.Customers.Include(c => c.Orders.Where(o => o.Id > 5000)).ToList();
+```
 
 ### <a name="include-on-derived-types"></a>Inclusione per i tipi derivati
 

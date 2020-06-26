@@ -4,14 +4,14 @@ author: bricelam
 ms.author: bricelam
 ms.date: 07/11/2019
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: 6eb8b817a809dedf999ccb98307f5d8e2e41c0fb
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: fe378fc962c0d491703a3e77dca4415ad510d673
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672951"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370628"
 ---
-# <a name="entity-framework-core-tools-reference---net-cli"></a>Informazioni di riferimento sugli strumenti di Entity Framework Core - Interfaccia della riga di comando di .NET
+# <a name="entity-framework-core-tools-reference---net-core-cli"></a>Guida di riferimento agli strumenti di Entity Framework Core-interfaccia della riga di comando di .NET Core
 
 Gli strumenti dell'interfaccia della riga di comando (CLI) per Entity Framework Core eseguono attività di sviluppo in fase di progettazione. Ad esempio, creano [migrazioni](/aspnet/core/data/ef-mvc/migrations?view=aspnetcore-2.0), applicano migrazioni e generano codice per un modello basato su un database esistente. I comandi sono un'estensione del comando [DotNet](/dotnet/core/tools) multipiattaforma, che fa parte del [.NET Core SDK](https://www.microsoft.com/net/core). Questi strumenti funzionano con i progetti .NET Core.
 
@@ -69,7 +69,7 @@ I `dotnet ef` comandi sono inclusi nel .NET Core SDK, ma per abilitare i comandi
 
 * Installare la versione di .NET Core SDK 2.1.200. Le versioni successive non sono compatibili con gli strumenti dell'interfaccia della riga di comando per EF Core 1,0 e 1,1.
 
-* Configurare l'applicazione per l'uso della versione di 2.1.200 SDK modificando il relativo file [Global. JSON](/dotnet/core/tools/global-json) . Questo file è in genere incluso nella directory della soluzione (uno sopra il progetto).
+* Configurare l'applicazione in modo che usi la versione di 2.1.200 SDK modificando il relativo [global.jssu](/dotnet/core/tools/global-json) file. Questo file è in genere incluso nella directory della soluzione (uno sopra il progetto).
 
 * Modificare il file di progetto e aggiungerlo `Microsoft.EntityFrameworkCore.Tools.DotNet` come `DotNetCliToolReference` elemento. Specificare la versione 1. x più recente, ad esempio: 1.1.6. Vedere l'esempio di file di progetto alla fine di questa sezione.
 
@@ -183,7 +183,7 @@ Elimina il database.
 
 Opzioni:
 
-|                   | Opzione                   | Description                                              |
+|                   | Opzione                   | Descrizione                                              |
 |:------------------|:-------------------------|:---------------------------------------------------------|
 | <nobr>`-f`</nobr> | <nobr>`--force`</nobr>   | Non confermare.                                           |
 |                   | <nobr>`--dry-run`</nobr> | Indica il database da eliminare, ma non eliminarlo. |
@@ -200,7 +200,7 @@ Argomenti:
 
 Opzioni:
 
-|                   | Opzione                   | Description                                              |
+|                   | Opzione                   | Descrizione                                              |
 |:------------------|:-------------------------|:---------------------------------------------------------|
 | <nobr>    </nobr> |  `--connection <CONNECTION>`        | Stringa di connessione al database. Il valore predefinito è quello specificato in `AddDbContext` o `OnConfiguring` . |
 
@@ -228,23 +228,24 @@ Argomenti:
 
 | Argomento       | Descrizione                                                                                                                                                                                                             |
 |:---------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<CONNECTION>` | Stringa di connessione al database. Per i progetti ASP.NET Core 2. x, il valore può essere *nome = \< nome della stringa di connessione>*. In tal caso, il nome deriva dalle origini di configurazione configurate per il progetto. |
+| `<CONNECTION>` | Stringa di connessione al database. Per i progetti ASP.NET Core 2. x, il valore può essere *Name \<name of connection string> =*. In tal caso, il nome deriva dalle origini di configurazione configurate per il progetto. |
 | `<PROVIDER>`   | Provider da usare. Si tratta in genere del nome del pacchetto NuGet, ad esempio: `Microsoft.EntityFrameworkCore.SqlServer` .                                                                                           |
 
 Opzioni:
 
-|                 | Opzione                                   | Description                                                                                                                                                                    |
+|                 | Opzione                                   | Descrizione                                                                                                                                                                    |
 |:----------------|:-----------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>`-d`</nobr> | `--data-annotations`                   | Utilizzare gli attributi per configurare il modello (laddove possibile). Se questa opzione viene omessa, viene usata solo l'API Fluent.                                                                |
 | `-c`            | `--context <NAME>`                       | Nome della `DbContext` classe da generare.                                                                                                                                 |
 |                 | `--context-dir <PATH>`                   | Directory in cui inserire il `DbContext` file di classe. I percorsi sono relativi alla directory del progetto. Gli spazi dei nomi sono derivati dai nomi delle cartelle.                                 |
-|                 | `--context-namespace <NAMESPACE>`        | Spazio dei nomi da utilizzare per la `DbContext` classe generata. Nota: esegue l'override di `--namespace` .                                 |
+|                 | `--context-namespace <NAMESPACE>`        | Spazio dei nomi da utilizzare per la `DbContext` classe generata. Nota: esegue l'override di `--namespace` . (Disponibile da EFCore 5.0.0 in poi).        |
 | `-f`            | `--force`                                | Sovrascrivere i file esistenti.                                                                                                                                                      |
 | `-o`            | `--output-dir <PATH>`                    | Directory in cui inserire i file della classe di entità. I percorsi sono relativi alla directory del progetto.                                                                                       |
-| `-n`            | `--namespace <NAMESPACE>`                | Spazio dei nomi da utilizzare per tutte le classi generate. Il valore predefinito è generato dallo spazio dei nomi radice e dalla directory di output.                    |
+| `-n`            | `--namespace <NAMESPACE>`                | Spazio dei nomi da utilizzare per tutte le classi generate. Il valore predefinito è generato dallo spazio dei nomi radice e dalla directory di output. (Disponibile da EFCore 5.0.0 in poi).        |
 |                 | <nobr>`--schema <SCHEMA_NAME>...`</nobr> | Schemi delle tabelle per cui generare i tipi di entità. Per specificare più schemi, ripetere `--schema` per ognuno di essi. Se questa opzione viene omessa, vengono inclusi tutti gli schemi.          |
 | `-t`            | `--table <TABLE_NAME>`...                | Tabelle per cui generare i tipi di entità. Per specificare più tabelle, ripetere `-t` o `--table` per ciascuna di esse. Se questa opzione viene omessa, vengono incluse tutte le tabelle.                |
 |                 | `--use-database-names`                   | Utilizzare i nomi di tabella e colonna esattamente come vengono visualizzati nel database. Se questa opzione viene omessa, i nomi di database vengono modificati in modo da essere conformi alle convenzioni di stile del nome C#. |
+|                 | `--no-onconfiguring`                     | Evita la generazione del `OnConfiguring` metodo nella `DbContext` classe generata. (Disponibile da EFCore 5.0.0 in poi).        |
 
 Nell'esempio seguente vengono assemblati tutti gli schemi e le tabelle e vengono inseriti i nuovi file nella cartella *Models* .
 
@@ -270,10 +271,10 @@ Argomenti:
 
 Opzioni:
 
-|                   | Opzione                             | Description                                                                                                      |
+|                   | Opzione                             | Descrizione                                                                                                      |
 |:------------------|:-----------------------------------|:-----------------------------------------------------------------------------------------------------------------|
 | <nobr>`-o`</nobr> | <nobr>`--output-dir <PATH>`</nobr> | Directory usata per l'output dei file. I percorsi sono relativi alla directory del progetto di destinazione. Il valore predefinito è "Migrations". |
-| <nobr>`-n`</nobr> | <nobr>`--namespace <NAMESPACE>`</nobr> | Spazio dei nomi da utilizzare per le classi generate. Il valore predefinito è generato dalla directory di output. |
+| <nobr>`-n`</nobr> | <nobr>`--namespace <NAMESPACE>`</nobr> | Spazio dei nomi da utilizzare per le classi generate. Il valore predefinito è generato dalla directory di output. (Disponibile da EFCore 5.0.0 in poi). |
 
 ## <a name="dotnet-ef-migrations-list"></a>elenco migrazioni di DotNet EF
 
@@ -285,7 +286,7 @@ Rimuove l'ultima migrazione (esegue il rollback delle modifiche del codice esegu
 
 Opzioni:
 
-|                   | Opzione    | Description                                                                     |
+|                   | Opzione    | Descrizione                                                                     |
 |:------------------|:----------|:--------------------------------------------------------------------------------|
 | <nobr>`-f`</nobr> | `--force` | Ripristinare la migrazione, ovvero eseguire il rollback delle modifiche applicate al database. |
 

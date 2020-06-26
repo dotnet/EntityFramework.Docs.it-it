@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 11/08/2017
 uid: core/managing-schemas/migrations/providers
-ms.openlocfilehash: efe95893f7dbfc8e5c4775e86d58abb32eee3c83
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 388829992687e626648889a47130cc61df1c0d1f
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416787"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370619"
 ---
 # <a name="migrations-with-multiple-providers"></a>Migrazioni con più provider
 
@@ -68,7 +68,7 @@ Id = table.Column<int>(nullable: false)
     .Annotation("Sqlite:Autoincrement", true),
 ```
 
-Se le operazioni possono essere applicate solo a un provider (oppure sono diverse tra i provider), usare la proprietà `ActiveProvider` per indicare quale provider è attivo.
+Se le operazioni possono essere applicate solo a un provider o sono diverse tra i provider, utilizzare la `ActiveProvider` proprietà per determinare quale provider è attivo:
 
 ``` csharp
 if (migrationBuilder.ActiveProvider == "Microsoft.EntityFrameworkCore.SqlServer")

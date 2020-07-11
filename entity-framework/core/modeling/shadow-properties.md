@@ -4,12 +4,12 @@ author: AndriySvyryd
 ms.date: 01/03/2020
 ms.assetid: 75369266-d2b9-4416-b118-ed238f81f599
 uid: core/modeling/shadow-properties
-ms.openlocfilehash: 229cfd83f75b01dff9ac9ad30ee55c7cc727c19e
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: b24ff85d8f5910a5625910e7225a94112d769824
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417412"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238281"
 ---
 # <a name="shadow-properties"></a>Proprietà shadow
 
@@ -17,33 +17,35 @@ Le proprietà shadow sono proprietà che non sono definite nella classe di entit
 
 ## <a name="foreign-key-shadow-properties"></a>Proprietà Shadow chiave esterna
 
-Le proprietà shadow vengono spesso utilizzate per le proprietà di chiave esterna, in cui la relazione tra due entità è rappresentata da un valore di chiave esterna nel database, ma la relazione viene gestita sui tipi di entità utilizzando le proprietà di navigazione tra l'entità tipi. Per convenzione, EF introdurrà una proprietà shadow quando viene individuata una relazione, ma non viene trovata alcuna proprietà di chiave esterna nella classe di entità dipendente.
+Le proprietà shadow vengono spesso utilizzate per le proprietà di chiave esterna, in cui la relazione tra due entità è rappresentata da un valore di chiave esterna nel database, ma la relazione viene gestita sui tipi di entità utilizzando le proprietà di navigazione tra i tipi di entità. Per convenzione, EF introdurrà una proprietà shadow quando viene individuata una relazione, ma non viene trovata alcuna proprietà di chiave esterna nella classe di entità dipendente.
 
-La proprietà verrà denominata `<navigation property name><principal key property name>` (la navigazione sull'entità dipendente, che fa riferimento all'entità principale, viene utilizzata per la denominazione). Se il nome della proprietà chiave principale include il nome della proprietà di navigazione, il nome sarà appena `<principal key property name>`. Se non è presente alcuna proprietà di navigazione nell'entità dipendente, il nome del tipo di entità viene usato al suo posto.
+La proprietà verrà denominata `<navigation property name><principal key property name>` (la navigazione sull'entità dipendente, che fa riferimento all'entità principale, viene utilizzata per la denominazione). Se il nome della proprietà chiave principale include il nome della proprietà di navigazione, il nome sarà semplicemente `<principal key property name>` . Se non è presente alcuna proprietà di navigazione nell'entità dipendente, il nome del tipo di entità viene usato al suo posto.
 
-Il seguente listato di codice, ad esempio, comporterà l'introduzione di una proprietà shadow `BlogId` all'entità `Post`:
+Il seguente listato di codice, ad esempio, comporterà l' `BlogId` introduzione di una proprietà shadow all' `Post` entità:
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/ShadowForeignKey.cs?name=Conventions&highlight=21-23)]
 
 ## <a name="configuring-shadow-properties"></a>Configurazione delle proprietà shadow
 
-Per configurare le proprietà shadow, è possibile usare l'API Fluent. Una volta chiamato l'overload di stringa di `Property`, è possibile concatenare qualsiasi chiamata di configurazione per altre proprietà. Nell'esempio seguente, poiché `Blog` non dispone di una proprietà CLR denominata `LastUpdated`, viene creata una proprietà shadow:
+Per configurare le proprietà shadow, è possibile usare l'API Fluent. Una volta chiamato l'overload di stringa di `Property` , è possibile concatenare qualsiasi chiamata di configurazione per altre proprietà. Nell'esempio seguente, poiché `Blog` non dispone di una proprietà CLR denominata `LastUpdated` , viene creata una proprietà shadow:
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ShadowProperty.cs?name=ShadowProperty&highlight=8)]
 
-Se il nome fornito al metodo `Property` corrisponde al nome di una proprietà esistente (una proprietà shadow o un oggetto definito nella classe di entità), il codice configurerà la proprietà esistente anziché introdurre una nuova proprietà shadow.
+Se il nome fornito al `Property` metodo corrisponde al nome di una proprietà esistente (una proprietà shadow o un oggetto definito nella classe di entità), il codice configurerà la proprietà esistente anziché introdurre una nuova proprietà shadow.
 
 ## <a name="accessing-shadow-properties"></a>Accesso alle proprietà shadow
 
-I valori delle proprietà shadow possono essere ottenuti e modificati tramite l'API `ChangeTracker`:
+I valori delle proprietà shadow possono essere ottenuti e modificati tramite l' `ChangeTracker` API:
 
 ``` csharp
 context.Entry(myBlog).Property("LastUpdated").CurrentValue = DateTime.Now;
 ```
 
-È possibile fare riferimento alle proprietà shadow nelle query LINQ tramite il metodo statico `EF.Property`:
+È possibile fare riferimento alle proprietà shadow nelle query LINQ tramite il `EF.Property` metodo statico:
 
 ``` csharp
 var blogs = context.Blogs
     .OrderBy(b => EF.Property<DateTime>(b, "LastUpdated"));
 ```
+
+Non è possibile accedere alle proprietà shadow dopo una query senza rilevamento poiché le entità restituite non vengono rilevate dallo strumento di rilevamento delle modifiche.

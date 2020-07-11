@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: aeb0f5f8-b212-4f89-ae83-c642a5190ba0
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: 062a7f292d16deb3840fd116f270edb11c6e0687
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: e955e93723fc371170641b0b3209cca014ef1c26
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672914"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238151"
 ---
 # <a name="connection-strings"></a>Stringhe di connessione
 
@@ -17,7 +17,7 @@ La maggior parte dei provider di database richiede una forma di stringa di conne
 
 ## <a name="winforms--wpf-applications"></a>WinForms & applicazioni WPF
 
-Le applicazioni WinForms, WPF e ASP.NET 4 hanno un modello di stringa di connessione provato e testato. La stringa di connessione deve essere aggiunta al file app. config dell'applicazione (Web. config se si usa ASP.NET). Se la stringa di connessione contiene informazioni riservate, ad esempio nome utente e password, è possibile proteggere il contenuto del file di configurazione utilizzando lo [strumento Gestione segreta](/aspnet/core/security/app-secrets#secret-manager).
+Le applicazioni WinForms, WPF e ASP.NET 4 hanno un modello di stringa di connessione provato e testato. La stringa di connessione deve essere aggiunta al file di App.config dell'applicazione (Web.config se si usa ASP.NET). Se la stringa di connessione contiene informazioni riservate, ad esempio nome utente e password, è possibile proteggere il contenuto del file di configurazione utilizzando lo [strumento Gestione segreta](/aspnet/core/security/app-secrets#secret-manager).
 
 ``` xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -31,7 +31,7 @@ Le applicazioni WinForms, WPF e ASP.NET 4 hanno un modello di stringa di conness
 ```
 
 > [!TIP]  
-> L' `providerName` impostazione non è necessaria per EF Core stringhe di connessione archiviate in app. config perché il provider di database è configurato tramite codice.
+> L' `providerName` impostazione non è necessaria per EF Core stringhe di connessione archiviate nel App.config perché il provider di database è configurato tramite codice.
 
 È quindi possibile leggere la stringa di connessione usando l' `ConfigurationManager` API nel metodo del `OnConfiguring` contesto. Per poter usare questa API, potrebbe essere necessario aggiungere un riferimento all' `System.Configuration` assembly del Framework.
 
@@ -73,7 +73,7 @@ Ad esempio, è possibile usare lo [strumento di gestione dei segreti](/aspnet/co
 
 ```dotnetcli
 dotnet user-secrets set ConnectionStrings.YourDatabaseAlias "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=YourDatabase"
-dotnet ef dbcontext scaffold Name=YourDatabaseAlias Microsoft.EntityFrameworkCore.SqlServer
+dotnet ef dbcontext scaffold Name=ConnectionStrings.YourDatabaseAlias Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 Oppure nell'esempio seguente viene illustrata la stringa di connessione archiviata in `appsettings.json` .
@@ -86,7 +86,7 @@ Oppure nell'esempio seguente viene illustrata la stringa di connessione archivia
 }
 ```
 
-Il contesto viene in genere configurato in `Startup.cs` con la stringa di connessione letta dalla configurazione. Si noti che il `GetConnectionString()` metodo cerca un valore di configurazione la cui chiave è `ConnectionStrings:<connection string name>` . È necessario importare lo spazio dei nomi [Microsoft. Extensions. Configuration](/dotnet/api/microsoft.extensions.configuration) per usare questo metodo di estensione.
+Il contesto viene in genere configurato in `Startup.cs` con la stringa di connessione letta dalla configurazione. Si noti che il `GetConnectionString()` metodo cerca un valore di configurazione la cui chiave è `ConnectionStrings:<connection string name>` . È necessario importare lo spazio dei nomi [Microsoft.Extensions.Configuration](/dotnet/api/microsoft.extensions.configuration) per usare questo metodo di estensione.
 
 ``` csharp
 public void ConfigureServices(IServiceCollection services)

@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: 86b9d08377ea8295b746e5f0217a408edcfe1517
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: d3a1810599771befb451715d93454fff63949771
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370473"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238307"
 ---
 # <a name="loading-related-data"></a>Caricamento di dati correlati
 
@@ -53,8 +53,53 @@ Entity Framework Core consente di usare le proprietà di navigazione nel modello
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
 
-> [!CAUTION]
-> A partire dalla versione 3.0.0, ognuno di essi `Include` provocherà l'aggiunta di un join aggiuntivo alle query SQL prodotte dai provider relazionali, mentre le versioni precedenti generavano query SQL aggiuntive. Questo può modificare in modo significativo le prestazioni delle query, per un miglioramento o peggio. In particolare, potrebbe essere necessario suddividere le query LINQ con un numero di operatori estremamente elevato in `Include` più query LINQ separate per evitare il problema di esplosione cartesiana.
+### <a name="single-and-split-queries"></a>Query single e Split
+
+> [!NOTE]
+> Questa funzionalità è stata introdotta in EF Core 5,0.
+
+Nei database relazionali, per impostazione predefinita, tutte le entità correlate vengono caricate introducendo i JOIN:
+
+```sql
+SELECT [b].[BlogId], [b].[OwnerId], [b].[Rating], [b].[Url], [p].[PostId], [p].[AuthorId], [p].[BlogId], [p].[Content], [p].[Rating], [p].[Title]
+FROM [Blogs] AS [b]
+LEFT JOIN [Post] AS [p] ON [b].[BlogId] = [p].[BlogId]
+ORDER BY [b].[BlogId], [p].[PostId]
+```
+
+Se in un Blog tipico sono presenti più post correlati, le righe per questi post duplicano le informazioni del Blog, causando il cosiddetto problema "esplosione cartesiana". Man mano che vengono caricate più relazioni uno-a-molti, la quantità di dati duplicati può aumentare e influire negativamente sulle prestazioni dell'applicazione.
+
+EF consente di specificare che una query LINQ specificata deve essere *suddivisa* in più query SQL. Anziché JOIN, le query suddivise eseguono una query SQL aggiuntiva per ogni spostamento uno-a-molti incluso:
+
+[!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs?name=AsSplitQuery&highlight=5)]
+
+Verrà generato il codice SQL seguente:
+
+```sql
+SELECT [b].[BlogId], [b].[OwnerId], [b].[Rating], [b].[Url]
+FROM [Blogs] AS [b]
+ORDER BY [b].[BlogId]
+
+SELECT [p].[PostId], [p].[AuthorId], [p].[BlogId], [p].[Content], [p].[Rating], [p].[Title], [b].[BlogId]
+FROM [Blogs] AS [b]
+INNER JOIN [Post] AS [p] ON [b].[BlogId] = [p].[BlogId]
+ORDER BY [b].[BlogId]
+```
+
+Anche se in questo modo si evitano i problemi di prestazioni associati ai JOIN e all'esplosione cartesiana, sono presenti anche alcuni svantaggi:
+
+* Anche se la maggior parte dei database garantisce la coerenza dei dati per le singole query, non esistono garanzie di questo tipo per più query. Ciò significa che se il database viene aggiornato simultaneamente durante l'esecuzione delle query, i dati risultanti potrebbero non essere coerenti. Questo problema può essere risolto eseguendo il wrapping delle query in una transazione serializzabile o snapshot, anche se ciò può creare problemi di prestazioni propri. Per ulteriori informazioni, consultare la documentazione del database.
+* Ogni query implica attualmente un round trip di rete aggiuntivo al database; Questo può compromettere le prestazioni, soprattutto se la latenza per il database è elevata, ad esempio servizi cloud. EF Core migliorerà questo in futuro suddividendo in batch le query in un singolo round trip.
+* Sebbene alcuni database consentano di usare contemporaneamente i risultati di più query (SQL Server con MARS, SQLite), la maggior parte consente di rendere attiva una sola query in un determinato punto. Ciò significa che tutti i risultati delle query precedenti devono essere memorizzati nel buffer nella memoria dell'applicazione prima di eseguire query successive, aumentando i requisiti di memoria in modo potenzialmente significativo.
+
+Sfortunatamente, non esiste una strategia per il caricamento di entità correlate che soddisfino tutti gli scenari. Valutare con attenzione i vantaggi e gli svantaggi delle query singole e divise e selezionare quello che soddisfa le proprie esigenze.
+
+> [!NOTE]
+> Le entità correlate uno-a-uno vengono sempre caricate tramite JOIN, in quanto ciò non ha alcun effetto sulle prestazioni.
+>
+> Al momento, l'uso della suddivisione delle query in SQL Server richiede impostazioni `MultipleActiveResultSets=true` nella stringa di connessione. Questo requisito verrà rimosso in un'anteprima futura.
+>
+> Le anteprime future di EF Core 5,0 consentiranno di specificare la suddivisione delle query come impostazione predefinita per il contesto.
 
 ### <a name="filtered-include"></a>Inclusione filtrato
 

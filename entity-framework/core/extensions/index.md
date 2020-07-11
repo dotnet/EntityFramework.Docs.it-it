@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 04/11/2020
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 47a5601e996afab9c0aa0538a2a2b47f204f7753
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 5b7945bd24ac19a82b08f4d5709555cf53485f4c
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370356"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238255"
 ---
 # <a name="ef-core-tools--extensions"></a>Strumenti ed estensioni di EF Core
 
@@ -157,6 +157,12 @@ Cache della query di secondo livello ad alte prestazioni. Per EF Core: 2.
 
 [Repository GitHub](https://github.com/SteffenMangold/EntityFrameworkCore.Cacheable)
 
+### <a name="entityframeworkcorencache"></a>EntityFrameworkCore. NCache
+
+NCache Entity Framework Core provider è un provider di cache di secondo livello distribuito per la memorizzazione nella cache dei risultati della query. L'architettura distribuita di NCache rende il livello di scalabilità e disponibilità elevata. Per EF Core 2.
+
+[Sito Web](https://www.alachisoft.com/ncache/ef-core-cache.html)
+
 ### <a name="entity-framework-plus"></a>Entity Framework Plus
 
 Estende DbContext con funzionalità quali: filtro di inclusione, controllo, memorizzazione nella cache, query Future, eliminazione in batch, aggiornamento in batch e molte altre. Per EF Core: 2, 3.
@@ -224,3 +230,9 @@ Conversione alternativa di query LINQ in espressioni SQL. Per EF Core: 3.
 Include il supporto per le funzionalità avanzate di SQL, ad esempio CTE, copia bulk, hint di tabella, funzioni finestra, tabelle temporanee e operazioni di creazione/aggiornamento/eliminazione sul lato database.
 
 [Repository GitHub](https://github.com/linq2db/linq2db.EntityFrameworkCore)
+
+### <a name="efcoresoftdelete"></a>EFCore.SoftDelete
+
+Implementazione per le entità che eliminano temporaneamente. Per EF Core: 3.
+
+[NuGet](https://www.nuget.org/packages/EFCore.SoftDelete)

@@ -5,12 +5,12 @@ author: lajones
 ms.date: 05/27/2020
 ms.assetid: e9dff604-3469-4a05-8f9e-18ac281d82a9
 uid: core/modeling/entity-properties
-ms.openlocfilehash: fcf3b0f8480fde2f3ba6b5fd601db115f1d246b8
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: d4e4c50d8c7febf5e42e9aa39352c0bb6a6bd409
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370513"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238216"
 ---
 # <a name="entity-properties"></a>Proprietà delle entità
 
@@ -36,7 +36,7 @@ Le proprietà specifiche possono essere escluse come segue:
 
 Per convenzione, quando si utilizza un database relazionale, viene eseguito il mapping delle proprietà delle entità alle colonne della tabella con lo stesso nome della proprietà.
 
-Se si preferisce configurare le colonne con nomi diversi, è possibile procedere come segue:
+Se si preferisce configurare le colonne con nomi diversi, è possibile eseguire questa operazione come frammento di codice seguente:
 
 ### <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
 
@@ -54,7 +54,7 @@ Quando si utilizza un database relazionale, il provider di database seleziona un
 
 Ad esempio, SQL Server esegue `DateTime` il mapping delle proprietà alle `datetime2(7)` colonne e `string` delle proprietà alle `nvarchar(max)` colonne (o a `nvarchar(450)` per le proprietà utilizzate come chiave).
 
-È inoltre possibile configurare le colonne in modo da specificare un tipo di dati esatto per una colonna. Il codice seguente, ad esempio, consente di configurare `Url` come stringa non Unicode con lunghezza massima `200` e `Rating` come decimale con precisione `5` e scala di `2` :
+È inoltre possibile configurare le colonne in modo da specificare un tipo di dati esatto per una colonna. Il codice seguente, ad esempio, Configura `Url` come una stringa non Unicode con lunghezza massima `200` e `Rating` come decimale con precisione `5` e scala di `2` :
 
 ### <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
 
@@ -87,7 +87,7 @@ Nell'esempio seguente, la configurazione di una lunghezza massima di 500 causer�
 
 ### <a name="precision-and-scale"></a>Precisione e scala
 
-A partire da EFCore 5,0, è possibile usare l'API Fluent per configurare la precisione e la scalabilità. Indica al provider di database la quantità di spazio di archiviazione necessaria per una determinata colonna. Si applica solo ai tipi di dati in cui il provider consente la precisione e la scalabilità variano, in genere solo `decimal` e `DateTime` .
+A partire da EFCore 5,0, è possibile usare l'API Fluent per configurare la precisione e la scalabilità. Indica al provider di database la quantità di spazio di archiviazione necessaria per una determinata colonna. Si applica solo ai tipi di dati in cui il provider consente la precisione e la scalabilità variano, in genere `decimal` e `DateTime` .
 
 Per le `decimal` proprietà, la precisione definisce il numero massimo di cifre necessarie per esprimere qualsiasi valore che la colonna conterrà e la scalabilità definisce il numero massimo di posizioni decimali necessarie. Per `DateTime` le proprietà, la precisione definisce il numero massimo di cifre necessarie per esprimere frazioni di secondi e la scala non viene utilizzata.
 
@@ -95,6 +95,10 @@ Per le `decimal` proprietà, la precisione definisce il numero massimo di cifre 
 > Entity Framework non esegue alcuna convalida della precisione o della scala prima di passare i dati al provider. È necessario che il provider o l'archivio dati venga convalidato in base alle esigenze. Ad esempio, quando la destinazione è SQL Server, una colonna con tipo di dati `datetime` non consente l'impostazione della precisione, mentre una `datetime2` può avere una precisione compresa tra 0 e 7 inclusi.
 
 Nell'esempio seguente, se si configura la `Score` Proprietà in modo che la precisione 14 e la scala 2 provochino la creazione di una colonna di tipo `decimal(14,2)` in SQL Server e la configurazione della `LastUpdated` Proprietà in modo che la precisione 3 provochi una colonna di tipo `datetime2(3)` :
+
+#### <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
+
+Attualmente non è possibile usare le annotazioni dei dati per la configurazione.
 
 #### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
@@ -116,7 +120,7 @@ Per convenzione, una proprietà il cui tipo .NET può contenere null verrà conf
 In C# 8 è stata introdotta una nuova funzionalità denominata [tipi di riferimento Nullable](/dotnet/csharp/tutorials/nullable-reference-types), che consente di aggiungere annotazioni ai tipi di riferimento, indicando se è possibile che contengano null o meno. Questa funzionalità è disabilitata per impostazione predefinita e, se abilitata, modifica il comportamento del EF Core nel modo seguente:
 
 * Se i tipi di riferimento nullable sono disabilitati (impostazione predefinita), tutte le proprietà con i tipi di riferimento .NET vengono configurate come facoltative per convenzione, ad esempio `string` .
-* Se sono abilitati i tipi di riferimento Nullable, le proprietà verranno configurate in base al supporto di valori null C# del tipo .NET: `string?` verranno configurate come facoltative, mentre verranno configurate in base alle `string` esigenze.
+* Se sono abilitati i tipi di riferimento Nullable, le proprietà verranno configurate in base al supporto di valori null C# del tipo .NET: `string?` verranno configurate come facoltative, ma `string` verranno configurate in base alle esigenze.
 
 Nell'esempio seguente viene illustrato un tipo di entità con proprietà obbligatorie e facoltative, con la funzionalità di riferimento Nullable disabilitata (impostazione predefinita) e abilitata:
 
@@ -156,7 +160,7 @@ Una proprietà che sarebbe facoltativa per convenzione può essere configurata i
 > [!NOTE]
 > Questa funzionalità è stata introdotta in EF Core 5,0.
 
-È possibile definire regole di confronto nelle colonne di testo, determinando il modo in cui vengono confrontate e ordinate. Ad esempio, di seguito viene configurata una colonna SQL Server per non fare distinzione tra maiuscole e minuscole:
+È possibile definire regole di confronto nelle colonne di testo, determinando il modo in cui vengono confrontate e ordinate. Nel frammento di codice seguente, ad esempio, viene configurata una colonna SQL Server per non fare distinzione tra maiuscole e minuscole:
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?range=42-43)]
 

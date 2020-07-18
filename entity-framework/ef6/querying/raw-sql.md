@@ -3,14 +3,15 @@ title: Query SQL non elaborate-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9e1ee76e-2499-408c-81e8-9b6c5d1945a0
-ms.openlocfilehash: 168aee67186535bf2a50705e86bfc5a88147e369
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: d336066b982e682e81067bbdac5b3781524cf6be
+ms.sourcegitcommit: d85263b5d5d665dbaf94de8832e2917bce048b34
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417095"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86451216"
 ---
-# <a name="raw-sql-queries"></a>Query SQL non elaborate
+# <a name="raw-sql-queries-ef6"></a>Query SQL non elaborate (EF6)
+
 Entity Framework consente di eseguire una query utilizzando LINQ con le classi di entità. Tuttavia, in alcuni casi è possibile che si desideri eseguire query utilizzando SQL RAW direttamente sul database. Ciò include la chiamata alle stored procedure, che può essere utile per i modelli di Code First che attualmente non supportano il mapping alle stored procedure. Le tecniche illustrate in questo argomento si applicano in modo analogo ai modelli creati con Code First ed EF Designer.  
 
 ## <a name="writing-sql-queries-for-entities"></a>Scrittura di query SQL per le entità  

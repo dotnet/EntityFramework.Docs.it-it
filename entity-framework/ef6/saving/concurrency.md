@@ -3,14 +3,15 @@ title: Gestione dei conflitti di concorrenza-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 2318e4d3-f561-4720-bbc3-921556806476
-ms.openlocfilehash: a99f824fe256a10b84f539a5339a09624315efa4
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 4d29fd7a4d9b6003f71bc8411cea2d863a4c5429
+ms.sourcegitcommit: d85263b5d5d665dbaf94de8832e2917bce048b34
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672718"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86451242"
 ---
-# <a name="handling-concurrency-conflicts"></a>Gestione dei conflitti di concorrenza
+# <a name="handling-concurrency-conflicts-ef6"></a>Gestione dei conflitti di concorrenza (EF6)
+
 La concorrenza ottimistica comporta un tentativo ottimistico di salvare l'entità nel database con la speranza che i dati non siano stati modificati dopo che l'entità è stata caricata. Se si scopre che i dati sono stati modificati, viene generata un'eccezione ed è necessario risolvere il conflitto prima di ritentare il salvataggio. Questo argomento illustra come gestire tali eccezioni in Entity Framework. Le tecniche illustrate in questo argomento si applicano in modo analogo ai modelli creati con Code First ed EF Designer.  
 
 Questo post non è il posto appropriato per una descrizione completa della concorrenza ottimistica. Le sezioni seguenti presuppongono una certa conoscenza della risoluzione della concorrenza e mostrano i modelli per le attività comuni.  

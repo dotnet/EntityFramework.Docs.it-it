@@ -4,12 +4,12 @@ description: Approcci diversi al test delle applicazioni che usano EF Core
 author: ajcvickers
 ms.date: 04/22/2020
 uid: core/miscellaneous/testing/index
-ms.openlocfilehash: 71222f17ac4cc1b71052a2e7e916ebcedd2ae0f4
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
-ms.translationtype: MT
+ms.openlocfilehash: 7929c284c2794b2fcc95235ae413d56895ebb6e2
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.translationtype: HT
 ms.contentlocale: it-IT
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370539"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526810"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>Test del codice che usa EF Core
 
@@ -63,7 +63,7 @@ LocalDB non è privo di problemi:
 Personalmente, non ho mai considerato un problema avere un servizio di database in esecuzione nel computer di sviluppo e in genere consiglio di usare Developer Edition.
 Tuttavia, LocalDB potrebbe non essere appropriato per alcuni utenti, soprattutto con computer di sviluppo meno potenti.
 
-L'esecuzione di SQL Server (o qualsiasi altro sistema di database) in un contenitore Docker (o un contenitore simile) è un altro modo per evitare di eseguire il sistema di database direttamente nel computer di sviluppo.  
+L'[esecuzione di SQL Server](/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15) (o qualsiasi altro sistema di database) in un contenitore Docker (o un contenitore simile) è un altro modo per evitare di eseguire il sistema di database direttamente nel computer di sviluppo.  
 
 ## <a name="approach-2-sqlite"></a>Approccio 2: SQLite
 
@@ -92,11 +92,11 @@ Vedere [Test con SQLite](xref:core/miscellaneous/testing/sqlite) per indicazioni
 ## <a name="approach-3-the-ef-core-in-memory-database"></a>Approccio 3: Database in memoria di EF Core
 
 EF Core viene fornito con un database in memoria usato per i test interni di EF Core stesso.
-Questo database è in genere **non adatto per il test di applicazioni che utilizzano EF Core**. In particolare:
+Questo database in generale **non è adatto per i test di applicazioni che usano EF Core**. In particolare:
 
 * Non è un database relazionale.
 * Non supporta le transazioni.
-* Non è possibile eseguire query SQL non elaborate.
+* Non supporta l'esecuzione di query SQL non elaborate.
 * Non è ottimizzato per le prestazioni.
 
 Nessuno di questi aspetti è di particolare importanza quando si eseguono test dei meccanismi interni di EF Core, perché questo approccio viene usato in modo specifico nei casi in cui il database non è rilevante per i test.

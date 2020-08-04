@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 04/11/2020
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 5b7945bd24ac19a82b08f4d5709555cf53485f4c
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
-ms.translationtype: MT
+ms.openlocfilehash: f450742b761ef3daf35e32cf87c63a8ee8a7b8c3
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.translationtype: HT
 ms.contentlocale: it-IT
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238255"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526407"
 ---
 # <a name="ef-core-tools--extensions"></a>Strumenti ed estensioni di EF Core
 
@@ -40,7 +40,7 @@ ORM che consente di creare classi estendibili e fortemente tipizzate per Entity 
 
 ### <a name="ef-core-power-tools"></a>EF Core Power Tools
 
-EF Core Power Tools è un'estensione di Visual Studio che espone varie attività di progettazione di EF Core in un'interfaccia utente intuitiva. Include la decompilazione di classi DbContext e classi di entità da database esistenti e [pacchetti di applicazione livello dati SQL Server](https://docs.microsoft.com/sql/relational-databases/data-tier-applications/data-tier-applications), la gestione delle migrazioni del database e le visualizzazioni del modello. Per EF Core: 2, 3.
+EF Core Power Tools è un'estensione di Visual Studio che espone varie attività di progettazione di EF Core in un'interfaccia utente intuitiva. Include la decompilazione di classi DbContext e classi di entità da database esistenti e [pacchetti di applicazione livello dati SQL Server](/sql/relational-databases/data-tier-applications/data-tier-applications), la gestione delle migrazioni del database e le visualizzazioni del modello. Per EF Core: 2, 3.
 
 [Wiki di GitHub](https://github.com/ErikEJ/EFCorePowerTools/wiki)
 
@@ -157,9 +157,9 @@ Cache della query di secondo livello ad alte prestazioni. Per EF Core: 2.
 
 [Repository GitHub](https://github.com/SteffenMangold/EntityFrameworkCore.Cacheable)
 
-### <a name="entityframeworkcorencache"></a>EntityFrameworkCore. NCache
+### <a name="entityframeworkcorencache"></a>EntityFrameworkCore.NCache
 
-NCache Entity Framework Core provider è un provider di cache di secondo livello distribuito per la memorizzazione nella cache dei risultati della query. L'architettura distribuita di NCache rende il livello di scalabilità e disponibilità elevata. Per EF Core 2.
+Il provider Entity Framework Core NCache è un provider di cache di secondo livello distribuito per la memorizzazione nella cache dei risultati delle query. L'architettura distribuita di NCache ne migliora la scalabilità e offre disponibilità elevata. Per EF Core 2.
 
 [Sito Web](https://www.alachisoft.com/ncache/ef-core-cache.html)
 
@@ -223,16 +223,16 @@ Aggiunge il supporto di hierarchyid al provider SQL Server EF Core. Per EF Core:
 
 [Repository GitHub](https://github.com/efcore/EFCore.SqlServer.HierarchyId)
 
-### <a name="linq2dbentityframeworkcore"></a>linq2db. EntityFrameworkCore
+### <a name="linq2dbentityframeworkcore"></a>linq2db.EntityFrameworkCore
 
-Conversione alternativa di query LINQ in espressioni SQL. Per EF Core: 3.
+Convertitore alternativo di query LINQ in espressioni SQL. Per EF Core: 3.
 
-Include il supporto per le funzionalità avanzate di SQL, ad esempio CTE, copia bulk, hint di tabella, funzioni finestra, tabelle temporanee e operazioni di creazione/aggiornamento/eliminazione sul lato database.
+Include il supporto per le funzionalità avanzate di SQL, ad esempio espressioni di tabella comuni, copia bulk, hint di tabella, funzioni finestra, tabelle temporanee e operazioni di creazione/aggiornamento/eliminazione sul lato database.
 
 [Repository GitHub](https://github.com/linq2db/linq2db.EntityFrameworkCore)
 
 ### <a name="efcoresoftdelete"></a>EFCore.SoftDelete
 
-Implementazione per le entità che eliminano temporaneamente. Per EF Core: 3.
+Implementazione per l'eliminazione temporanea di entità. Per EF Core: 3.
 
 [NuGet](https://www.nuget.org/packages/EFCore.SoftDelete)

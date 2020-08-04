@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/01/2018
 ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
-ms.openlocfilehash: 2222df84be7bfde3f252766bef1cfab39b476efa
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 85124b7e252797ccd952d0d332e7309eff97ba56
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370448"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526667"
 ---
 # <a name="spatial-data"></a>Dati spaziali
 
@@ -48,7 +48,7 @@ optionsBuilder.UseSqlServer(
 
 Esistono diversi tipi di dati spaziali. Il tipo da utilizzare dipende dai tipi di forme che si desidera consentire. Di seguito è illustrata la gerarchia di tipi NTS che è possibile usare per le proprietà nel modello. Si trovano nello `NetTopologySuite.Geometries` spazio dei nomi.
 
-* Geometry
+* Geometria
   * Point
   * LineString
   * Poligono
@@ -345,7 +345,7 @@ Poligono. NumInteriorRings | ✔ | ✔ | ✔ | ✔
 
 ## <a name="additional-resources"></a>Risorse aggiuntive
 
-* [Dati spaziali in SQL Server](https://docs.microsoft.com/sql/relational-databases/spatial/spatial-data-sql-server)
+* [Dati spaziali in SQL Server](/sql/relational-databases/spatial/spatial-data-sql-server)
 * [Home page di SpatiaLite](https://www.gaia-gis.it/fossil/libspatialite)
 * [Documentazione spaziale di npgsql](https://www.npgsql.org/efcore/mapping/nts.html)
 * [Documentazione di PostGIS](https://postgis.net/documentation/)

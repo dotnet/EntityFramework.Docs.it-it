@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: e52d3680360a1e83e05f04650c735c5a67680094
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.openlocfilehash: 2097d3cc9232d448191dbebbe3d14d86e80b91fe
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238764"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526433"
 ---
 # <a name="managing-migrations"></a>Gestione delle migrazioni
 
@@ -97,7 +97,7 @@ migrationBuilder.RenameColumn(
 
 ### <a name="adding-raw-sql"></a>Aggiunta di SQL non elaborato
 
-Sebbene la ridenominazione di una colonna possa essere eseguita tramite un'API incorporata, in molti casi ciò non è possibile. È ad esempio possibile che si desideri sostituire le `FirstName` proprietà e esistenti `LastColumn` con una singola `FullName` Proprietà nuova. La migrazione generata da EF Core sarà la seguente:
+Sebbene la ridenominazione di una colonna possa essere eseguita tramite un'API incorporata, in molti casi ciò non è possibile. È ad esempio possibile che si desideri sostituire le `FirstName` proprietà e esistenti `LastName` con una singola `FullName` Proprietà nuova. La migrazione generata da EF Core sarà la seguente:
 
 ``` csharp
 migrationBuilder.DropColumn(
@@ -109,7 +109,7 @@ migrationBuilder.DropColumn(
     table: "Customer");
 
 migrationBuilder.AddColumn<string>(
-    name: "Name",
+    name: "FullName",
     table: "Customer",
     nullable: true);
 ```
@@ -118,14 +118,14 @@ Come in precedenza, questo potrebbe causare una perdita di dati indesiderata. Pe
 
 ``` csharp
 migrationBuilder.AddColumn<string>(
-    name: "Name",
+    name: "FullName",
     table: "Customer",
     nullable: true);
 
 migrationBuilder.Sql(
 @"
     UPDATE Customer
-    SET Name = FirstName + ' ' + LastName;
+    SET FullName = FirstName + ' ' + LastName;
 ");
 
 migrationBuilder.DropColumn(
@@ -159,7 +159,7 @@ Questa operazione può essere utilizzata per gestire qualsiasi aspetto del datab
 * Ricerca full-text
 * Funzioni
 * Trigger
-* Visualizzazioni
+* Viste
 
 Nella maggior parte dei casi, EF Core effettuerà automaticamente il wrapping di ogni migrazione nella propria transazione durante l'applicazione delle migrazioni. Sfortunatamente, alcune operazioni di migrazione non possono essere eseguite all'interno di una transazione in alcuni database. in questi casi, è possibile rifiutare esplicitamente la transazione passando `suppressTransaction: true` a `migrationBuilder.Sql` .
 

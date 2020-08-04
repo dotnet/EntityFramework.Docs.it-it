@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: c3c1940b-136d-45d8-aa4f-cb5040f8980a
 uid: core/miscellaneous/rc2-rtm-upgrade
-ms.openlocfilehash: 779caad7883d13684b389dab7515be44bc42e1ef
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: f496806ea6330c60cf43068882b7de839e18e383
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416523"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526771"
 ---
 # <a name="upgrading-from-ef-core-10-rc2-to-rtm"></a>Aggiornamento da EF Core 1,0 RC2 a RTM
 
@@ -21,25 +21,25 @@ I nomi dei pacchetti di primo livello che in genere si installano in un'applicaz
 
 **È necessario aggiornare i pacchetti installati alle versioni RTM:**
 
-* I pacchetti di runtime (ad esempio, `Microsoft.EntityFrameworkCore.SqlServer`) sono stati modificati da `1.0.0-rc2-final` a `1.0.0`.
+* I pacchetti di runtime (ad esempio, `Microsoft.EntityFrameworkCore.SqlServer` ) sono stati modificati da `1.0.0-rc2-final` a `1.0.0` .
 
-* Il pacchetto di `Microsoft.EntityFrameworkCore.Tools` è stato modificato da `1.0.0-preview1-final` a `1.0.0-preview2-final`. Si noti che gli strumenti sono ancora in versione non definitiva.
+* Il `Microsoft.EntityFrameworkCore.Tools` pacchetto è stato modificato da `1.0.0-preview1-final` a `1.0.0-preview2-final` . Si noti che gli strumenti sono ancora in versione non definitiva.
 
 ## <a name="existing-migrations-may-need-maxlength-added"></a>È possibile che sia necessario aggiungere maxLength alle migrazioni esistenti
 
-In RC2 la definizione di colonna in una migrazione era simile `table.Column<string>(nullable: true)` e la lunghezza della colonna veniva cercata in alcuni metadati archiviati nel codice sottostante alla migrazione. Nella versione RTM la lunghezza è ora inclusa nel codice con impalcatura `table.Column<string>(maxLength: 450, nullable: true)`.
+In RC2 la definizione di colonna in una migrazione era simile a `table.Column<string>(nullable: true)` e la lunghezza della colonna veniva cercata in alcuni metadati archiviati nel codice sottostante alla migrazione. Nella versione RTM la lunghezza è ora inclusa nel codice con impalcature `table.Column<string>(maxLength: 450, nullable: true)` .
 
-Per tutte le migrazioni esistenti con impalcature precedenti all'uso di RTM non sarà specificato l'argomento `maxLength`. Ciò significa che verrà utilizzata la lunghezza massima supportata dal database (`nvarchar(max)` SQL Server). Questa operazione può essere corretta per alcune colonne, ma è necessario aggiornare le colonne che fanno parte di una chiave, una chiave esterna o un indice per includere una lunghezza massima. Per convenzione, 450 è la lunghezza massima utilizzata per chiavi, chiavi esterne e colonne indicizzate. Se nel modello è stata configurata in modo esplicito una lunghezza, è necessario utilizzare tale lunghezza.
+Per tutte le migrazioni esistenti con impalcature precedenti all'uso di RTM non sarà `maxLength` specificato l'argomento. Ciò significa che verrà utilizzata la lunghezza massima supportata dal database ( `nvarchar(max)` in SQL Server). Questa operazione può essere corretta per alcune colonne, ma è necessario aggiornare le colonne che fanno parte di una chiave, una chiave esterna o un indice per includere una lunghezza massima. Per convenzione, 450 è la lunghezza massima utilizzata per chiavi, chiavi esterne e colonne indicizzate. Se nel modello è stata configurata in modo esplicito una lunghezza, è necessario utilizzare tale lunghezza.
 
 ### <a name="aspnet-identity"></a>Identità ASP.NET
 
-Questa modifica ha effetto sui progetti che usano ASP.NET Identity e sono stati creati da un modello di progetto precedente alla versione RTM. Il modello di progetto include una migrazione utilizzata per creare il database. Questa migrazione deve essere modificata per specificare una lunghezza massima di `256` per le colonne seguenti.
+Questa modifica ha effetto sui progetti che usano ASP.NET Identity e sono stati creati da un modello di progetto precedente alla versione RTM. Il modello di progetto include una migrazione utilizzata per creare il database. Questa migrazione deve essere modificata per specificare la lunghezza massima di `256` per le colonne seguenti.
 
 * **AspNetRoles**
   * Nome
   * NormalizedName
 * **AspNetUsers**
-  * Email
+  * E-mail
   * NormalizedEmail
   * NormalizedUserName
   * UserName
@@ -50,9 +50,9 @@ Se la modifica iniziale viene applicata a un database, l'esito negativo della mo
 System.Data.SqlClient.SqlException (0x80131904): Column 'NormalizedName' in table 'AspNetRoles' is of a type that is invalid for use as a key column in an index.
 ```
 
-## <a name="net-core-remove-imports-in-projectjson"></a>.NET Core: rimuovere "Imports" in Project. JSON
+## <a name="net-core-remove-imports-in-projectjson"></a>.NET Core: rimuovere "Imports" in project.json
 
-Se la destinazione è .NET Core con RC2, è necessario aggiungere `imports` a Project. JSON come soluzione alternativa temporanea per alcune dipendenze di EF Core che non supportano .NET Standard. È ora possibile rimuovere questi elementi.
+Se la destinazione è .NET Core con RC2, è necessario aggiungere `imports` project.jscome soluzione alternativa temporanea per alcune delle dipendenze di EF core che non supportano .NET standard. È ora possibile rimuovere questi elementi.
 
 ``` json
 {
@@ -65,7 +65,7 @@ Se la destinazione è .NET Core con RC2, è necessario aggiungere `imports` a Pr
 ```
 
 > [!NOTE]  
-> A partire dalla versione 1,0 RTM, il [.NET Core SDK](https://www.microsoft.com/net/download/core) non supporta più `project.json` o lo sviluppo di applicazioni .NET Core con Visual Studio 2015. È consigliabile [eseguire la migrazione da project.json a csproj](https://docs.microsoft.com/dotnet/articles/core/migration/). Se si usa Visual Studio, è consigliabile eseguire l'aggiornamento a [Visual studio 2017](https://www.visualstudio.com/downloads/).
+> A partire dalla versione 1,0 RTM, il [.NET Core SDK](https://www.microsoft.com/net/download/core) non supporta più `project.json` o lo sviluppo di applicazioni .NET Core con Visual Studio 2015. È consigliabile [eseguire la migrazione da project.json a csproj](/dotnet/articles/core/migration/). Se si usa Visual Studio, è consigliabile eseguire l'aggiornamento a [Visual studio 2017](https://www.visualstudio.com/downloads/).
 
 ## <a name="uwp-add-binding-redirects"></a>UWP: aggiungere reindirizzamenti di binding
 

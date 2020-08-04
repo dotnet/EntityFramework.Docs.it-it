@@ -4,12 +4,12 @@ description: Panoramica delle nuove funzionalità di EF Core 5,0
 author: ajcvickers
 ms.date: 07/20/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: d42b2811d07516e9febedbc51fcb206000d38371
-ms.sourcegitcommit: 51148929e3889c48227d96c95c4e310d53a3d2c9
+ms.openlocfilehash: d7f5863e657e243ce733eda5dc8b40c1b92818ce
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86873383"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526875"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Novità di EF Core 5,0
 
@@ -47,7 +47,7 @@ public class MyController
 Le istanze di DbContext possono quindi essere create e utilizzate in base alle esigenze. Ad esempio:
 
 ```csharp
-public void DoSomehing()
+public void DoSomeThing()
 {
     using (var context = _contextFactory.CreateDbContext())
     {
@@ -503,7 +503,7 @@ La documentazione viene rilevata in base al problema [#2273](https://github.com/
 
 ### <a name="flow-arguments-into-idesigntimedbcontextfactory"></a>Argomenti del flusso in IDesignTimeDbContextFactory
 
-Gli argomenti vengono ora propagati dalla riga di comando nel `CreateDbContext` metodo di [IDesignTimeDbContextFactory](https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1). Per indicare, ad esempio, che si tratta di una build di sviluppo, è possibile passare un argomento personalizzato, ad esempio, `dev` nella riga di comando:
+Gli argomenti vengono ora propagati dalla riga di comando nel `CreateDbContext` metodo di [IDesignTimeDbContextFactory](/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1). Per indicare, ad esempio, che si tratta di una build di sviluppo, è possibile passare un argomento personalizzato, ad esempio, `dev` nella riga di comando:
 
 ```
 dotnet ef migrations add two --verbose --dev
@@ -774,7 +774,7 @@ La documentazione viene rilevata in base al problema [#2075](https://github.com/
 
 ### <a name="change-tracking-proxies"></a>Proxy di rilevamento delle modifiche
 
-EF Core ora possono generare proxy di runtime che implementano automaticamente [INotifyPropertyChanging](https://docs.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanging?view=netcore-3.1) e [INotifyPropertyChanged](https://docs.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged?view=netcore-3.1). Queste segnalano quindi le modifiche ai valori delle proprietà dell'entità direttamente a EF Core, evitando la necessità di analizzare le modifiche. Tuttavia, i proxy presentano un set di limitazioni, quindi non sono destinati a tutti.
+EF Core ora possono generare proxy di runtime che implementano automaticamente [INotifyPropertyChanging](/dotnet/api/system.componentmodel.inotifypropertychanging?view=netcore-3.1) e [INotifyPropertyChanged](/dotnet/api/system.componentmodel.inotifypropertychanged?view=netcore-3.1). Queste segnalano quindi le modifiche ai valori delle proprietà dell'entità direttamente a EF Core, evitando la necessità di analizzare le modifiche. Tuttavia, i proxy presentano un set di limitazioni, quindi non sono destinati a tutti.
 
 La documentazione viene rilevata in base al problema [#2076](https://github.com/dotnet/EntityFramework.Docs/issues/2076).
 
@@ -832,7 +832,7 @@ Il provider di database Azure Cosmos DB supporta ora la concorrenza ottimistica 
 builder.Entity<Customer>().Property(c => c.ETag).IsEtagConcurrency();
 ```
 
-SaveChanges genera quindi un'operazione `DbUpdateConcurrencyException` in un conflitto di concorrenza, che [può essere gestita](https://docs.microsoft.com/ef/core/saving/concurrency) per implementare nuovi tentativi e così via.
+SaveChanges genera quindi un'operazione `DbUpdateConcurrencyException` in un conflitto di concorrenza, che [può essere gestita](/ef/core/saving/concurrency) per implementare nuovi tentativi e così via.
 
 La documentazione viene rilevata in base al problema [#2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099).
 

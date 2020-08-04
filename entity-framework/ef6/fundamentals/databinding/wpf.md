@@ -3,19 +3,19 @@ title: Associazione dati con WPF-EF6
 author: divega
 ms.date: 05/19/2020
 ms.assetid: e90d48e6-bea7785-47ef-b756-7b89cce4daf0
-ms.openlocfilehash: c8e9e9a0810d8192e5184abbc7df2e74e4ee7edb
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: baeb75b1ee386ca58013048bcc31ea4074604673
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672902"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526849"
 ---
 # <a name="databinding-with-wpf"></a>Data binding con WPF
 
 > [!IMPORTANT]
 > **Questo documento è valido per WPF solo sul .NET Framework**
 >
-> Questo documento descrive l'associazione dati per WPF nel .NET Framework. Per i nuovi progetti .NET Core, è consigliabile usare [EF Core](/ef/core) anziché Entity Framework 6. La documentazione per l'associazione dati in EF Core viene rilevata nel [problema #778](https://github.com/dotnet/EntityFramework.Docs/issues/778).
+> Questo documento descrive l'associazione dati per WPF nel .NET Framework. Per i nuovi progetti .NET Core, è consigliabile usare [EF Core](/ef/core) anziché Entity Framework 6. La documentazione per l'associazione dati in EF Core è la seguente: [Introduzione con WPF](/ef/core/get-started/wpf).
 
 Questa procedura dettagliata illustra come associare tipi POCO ai controlli WPF in un modulo "Master-Detail". L'applicazione usa le API Entity Framework per popolare gli oggetti con i dati del database, rilevare le modifiche e salvare in modo permanente i dati nel database.
 
@@ -41,7 +41,7 @@ Se si usa Visual Studio 2010, è anche necessario installare NuGet. Per altre in
 
 ## <a name="create-the-application"></a>Creare l'applicazione
 
--   Aprire Visual Studio
+-   Aprire Visual Studio.
 -   **File- &gt; nuovo- &gt; progetto...**
 -   Selezionare **Windows**   nel riquadro a sinistra e **WPFApplication** nel riquadro a destra.
 -   Immettere **WPFwithEFSample**   come nome
@@ -202,7 +202,7 @@ Per creare il modello, verrà usato Entity Framework Designer, incluso come part
 
     ![Scegliere gli oggetti](~/ef6/media/chooseyourobjects.png)
 
-Una volta completato il processo di Reverse Engineering, il nuovo modello viene aggiunto al progetto e aperto per la visualizzazione nel Entity Framework Designer. Al progetto è stato aggiunto anche un file app. config con i dettagli della connessione per il database.
+Una volta completato il processo di Reverse Engineering, il nuovo modello viene aggiunto al progetto e aperto per la visualizzazione nel Entity Framework Designer. Al progetto è stato aggiunto anche un file di App.config con i dettagli della connessione per il database.
 
 #### <a name="additional-steps-in-visual-studio-2010"></a>Passaggi aggiuntivi in Visual Studio 2010
 
@@ -296,7 +296,7 @@ Ora che è disponibile una griglia per visualizzare le categorie, aggiungere una
 
 Il form dovrebbe essere simile al seguente:
 
-![Finestra di progettazione](~/ef6/media/designer.png) 
+![Designer](~/ef6/media/designer.png) 
 
 ## <a name="add-code-that-handles-data-interaction"></a>Aggiungere codice che gestisce l'interazione dei dati
 

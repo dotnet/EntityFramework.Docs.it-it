@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 01/03/2020
 uid: core/modeling/table-splitting
-ms.openlocfilehash: de24f8903af79ebd7f68e6b74288257883c1fa8d
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: e7428bc516a69310b6a6f521acc49aee0ba9f802
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417398"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526499"
 ---
 # <a name="table-splitting"></a>Suddivisione di tabelle
 
@@ -22,20 +22,20 @@ Per utilizzare la suddivisione della tabella è necessario eseguire il mapping d
 
 Uno scenario comune per la suddivisione delle tabelle consiste nell'utilizzare solo un subset delle colonne della tabella per ottenere un livello superiore di prestazioni o incapsulamento.
 
-In questo esempio `Order` rappresenta un subset di `DetailedOrder`.
+In questo esempio `Order` rappresenta un subset di `DetailedOrder` .
 
 [!code-csharp[Order](../../../samples/core/Modeling/TableSplitting/Order.cs?name=Order)]
 
 [!code-csharp[DetailedOrder](../../../samples/core/Modeling/TableSplitting/DetailedOrder.cs?name=DetailedOrder)]
 
-Oltre alla configurazione richiesta, viene chiamato `Property(o => o.Status).HasColumnName("Status")` per eseguire il mapping `DetailedOrder.Status` alla stessa colonna `Order.Status`.
+Oltre alla configurazione richiesta, viene chiamato `Property(o => o.Status).HasColumnName("Status")` per eseguire `DetailedOrder.Status` il mapping alla stessa colonna di `Order.Status` .
 
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=TableSplitting)]
 
 > [!TIP]
 > Per ulteriori informazioni sul contesto, vedere il [progetto di esempio completo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting) .
 
-## <a name="usage"></a>Uso
+## <a name="usage"></a>Utilizzo
 
 Il salvataggio e l'esecuzione di query sulle entità tramite la suddivisione delle tabelle vengono eseguite in modo analogo alle altre entità:
 
@@ -46,7 +46,7 @@ Il salvataggio e l'esecuzione di query sulle entità tramite la suddivisione del
 > [!NOTE]
 > Questa funzionalità è stata introdotta in EF Core 3,0.
 
-Se tutte le colonne utilizzate da un'entità dipendente sono `NULL` nel database, non verrà creata alcuna istanza per la query. In questo modo è possibile modellare un'entità dipendente facoltativa, in cui la proprietà relationship nell'entità è null. Si noti che questa situazione si verificherà anche che tutte le proprietà del dipendente sono facoltative e impostate su `null`, che potrebbe non essere previsto.
+Se tutte le colonne utilizzate da un'entità dipendente si trovano `NULL` nel database, non verrà creata alcuna istanza per tale entità quando viene eseguita una query. In questo modo è possibile modellare un'entità dipendente facoltativa, in cui la proprietà relationship nell'entità è null. Si noti che questo si verifica anche se tutte le proprietà del dipendente sono facoltative e sono impostate su `null` , che potrebbe non essere previsto.
 
 ## <a name="concurrency-tokens"></a>Token di concorrenza
 

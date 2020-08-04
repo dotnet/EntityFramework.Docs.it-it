@@ -4,12 +4,12 @@ author: roji
 ms.date: 12/16/2019
 ms.assetid: 85b92003-b692-417d-ac1d-76d40dce664b
 uid: core/modeling/indexes
-ms.openlocfilehash: 810fccc0c6b035f515107601b245811f7b4118a6
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 9565b499ababace3595153e7159e017d2df1cc5a
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416395"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526745"
 ---
 # <a name="indexes"></a>Indici
 
@@ -38,7 +38,7 @@ Se si tenta di inserire più di un'entità con gli stessi valori per il set di c
 
 ## <a name="index-name"></a>Nome dell'indice
 
-Per convenzione, gli indici creati in un database relazionale vengono denominati `IX_<type name>_<property name>`. Per gli indici composti, `<property name>` diventa un elenco di nomi di proprietà separato da un carattere di sottolineatura.
+Per convenzione, gli indici creati in un database relazionale vengono denominati `IX_<type name>_<property name>` . Per gli indici composti, `<property name>` diventa un elenco di nomi di proprietà separato da un carattere di sottolineatura.
 
 È possibile utilizzare l'API Fluent per impostare il nome dell'indice creato nel database:
 
@@ -46,20 +46,20 @@ Per convenzione, gli indici creati in un database relazionale vengono denominati
 
 ## <a name="index-filter"></a>Filtro indice
 
-Alcuni database relazionali consentono di specificare un indice filtrato o parziale. Ciò consente di indicizzare solo un subset di valori di una colonna, riducendo le dimensioni dell'indice e migliorando le prestazioni e l'utilizzo dello spazio su disco. Per ulteriori informazioni su SQL Server indici filtrati, [vedere la documentazione](https://docs.microsoft.com/sql/relational-databases/indexes/create-filtered-indexes)di.
+Alcuni database relazionali consentono di specificare un indice filtrato o parziale. Ciò consente di indicizzare solo un subset di valori di una colonna, riducendo le dimensioni dell'indice e migliorando le prestazioni e l'utilizzo dello spazio su disco. Per ulteriori informazioni su SQL Server indici filtrati, [vedere la documentazione](/sql/relational-databases/indexes/create-filtered-indexes)di.
 
 È possibile utilizzare l'API Fluent per specificare un filtro per un indice, fornito come espressione SQL:
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexFilter.cs?name=IndexFilter&highlight=5)]
 
-Quando si usa il provider di SQL Server EF aggiunge un filtro `'IS NOT NULL'` per tutte le colonne nullable che fanno parte di un indice univoco. Per eseguire l'override di questa convenzione è possibile specificare un valore `null`.
+Quando si usa il provider di SQL Server EF aggiunge un `'IS NOT NULL'` filtro per tutte le colonne nullable che fanno parte di un indice univoco. Per eseguire l'override di questa convenzione, è possibile specificare un `null` valore.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexNoFilter.cs?name=IndexNoFilter&highlight=6)]
 
 ## <a name="included-columns"></a>included_columns
 
-Alcuni database relazionali consentono di configurare un set di colonne che vengono incluse nell'indice, ma non fanno parte della relativa chiave. Questo può migliorare significativamente le prestazioni di esecuzione delle query quando tutte le colonne della query sono incluse nell'indice come colonne chiave o colonne, in quanto non è necessario accedere alla tabella stessa. Per ulteriori informazioni su SQL Server colonne incluse, [vedere la documentazione](https://docs.microsoft.com/sql/relational-databases/indexes/create-indexes-with-included-columns)di.
+Alcuni database relazionali consentono di configurare un set di colonne che vengono incluse nell'indice, ma non fanno parte della relativa chiave. Questo può migliorare significativamente le prestazioni di esecuzione delle query quando tutte le colonne della query sono incluse nell'indice come colonne chiave o colonne, in quanto non è necessario accedere alla tabella stessa. Per ulteriori informazioni su SQL Server colonne incluse, [vedere la documentazione](/sql/relational-databases/indexes/create-indexes-with-included-columns)di.
 
-Nell'esempio seguente, la colonna `Url` fa parte della chiave di indice, pertanto qualsiasi filtro di query su tale colonna può utilizzare l'indice. Inoltre, le query che accedono solo alle colonne `Title` e `PublishedOn` non dovranno accedere alla tabella e vengono eseguite in modo più efficiente:
+Nell'esempio seguente la `Url` colonna fa parte della chiave di indice, pertanto qualsiasi filtro di query su tale colonna può usare l'indice. Inoltre, le query che accedono solo alle `Title` `PublishedOn` colonne e non dovranno accedere alla tabella e vengono eseguite in modo più efficiente:
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexInclude.cs?name=IndexInclude&highlight=5-9)]

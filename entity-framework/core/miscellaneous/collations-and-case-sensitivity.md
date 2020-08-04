@@ -5,12 +5,12 @@ author: roji
 ms.date: 04/27/2020
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: b3874847922cb39aa57d50813e6e50ff7db72eb9
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 46a13d341c1b721bb243ee2b205bdc2f4d7e7aee
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370565"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526446"
 ---
 # <a name="collations-and-case-sensitivity"></a>Regole di confronto e distinzione tra maiuscole e minuscole
 
@@ -68,11 +68,11 @@ Si noti che alcuni database consentono di definire le regole di confronto durant
 
 Per impostazione predefinita, in .NET l'uguaglianza di stringhe fa distinzione tra maiuscole e minuscole: `s1 == s2` esegue un confronto ordinale che richiede che le stringhe siano identiche. Poiché le regole di confronto predefinite dei database variano e, poiché è auspicabile un'uguaglianza semplice per l'utilizzo degli indici, EF Core non tenta di convertire l'uguaglianza semplice in un'operazione con distinzione tra maiuscole e minuscole nel database: l'uguaglianza di C# viene convertita direttamente nell'uguaglianza SQL, che può o meno fare distinzione tra maiuscole e minuscole, a seconda del database specifico in uso e
 
-Inoltre, .NET fornisce overload di [`string.Equals`](https://docs.microsoft.com/dotnet/api/system.string.equals#System_String_Equals_System_String_System_StringComparison_) accettazione di un' [`StringComparison`](https://docs.microsoft.com/dotnet/api/system.stringcomparison) enumerazione, che consente di specificare la distinzione tra maiuscole e minuscole e le impostazioni cultura per il confronto. Per impostazione predefinita, EF Core si evita di tradurre questi overload in SQL e il tentativo di usarli comporta un'eccezione. Per una cosa, EF Core non conosce quali regole di confronto con distinzione tra maiuscole e minuscole o senza distinzione tra maiuscole e minuscole. Ancora più importante, l'applicazione di regole di confronto nella maggior parte dei casi impedisce l'utilizzo di indici, influire significativamente sulle prestazioni per un costrutto .NET molto semplice e di uso comune. Per forzare una query a usare il confronto tra maiuscole e minuscole o senza distinzione tra maiuscole e minuscole, specificare le regole di confronto in modo esplicito tramite, `EF.Functions.Collate` come [descritto](#explicit-collations-and-indexes)
+Inoltre, .NET fornisce overload di [`string.Equals`](/dotnet/api/system.string.equals#System_String_Equals_System_String_System_StringComparison_) accettazione di un' [`StringComparison`](/dotnet/api/system.stringcomparison) enumerazione, che consente di specificare la distinzione tra maiuscole e minuscole e le impostazioni cultura per il confronto. Per impostazione predefinita, EF Core si evita di tradurre questi overload in SQL e il tentativo di usarli comporta un'eccezione. Per una cosa, EF Core non conosce quali regole di confronto con distinzione tra maiuscole e minuscole o senza distinzione tra maiuscole e minuscole. Ancora più importante, l'applicazione di regole di confronto nella maggior parte dei casi impedisce l'utilizzo di indici, influire significativamente sulle prestazioni per un costrutto .NET molto semplice e di uso comune. Per forzare una query a usare il confronto tra maiuscole e minuscole o senza distinzione tra maiuscole e minuscole, specificare le regole di confronto in modo esplicito tramite, `EF.Functions.Collate` come [descritto](#explicit-collations-and-indexes)
 
 ## <a name="database-specific-information"></a>Informazioni specifiche del database
 
-* [SQL Server documentazione sulle regole di confronto](https://docs.microsoft.com/sql/relational-databases/collations/collation-and-unicode-support).
-* [Documentazione di Microsoft. Data. sqlite sulle regole di confronto](https://docs.microsoft.com/dotnet/standard/data/sqlite/collation).
+* [SQL Server documentazione sulle regole di confronto](/sql/relational-databases/collations/collation-and-unicode-support).
+* [Documentazione di Microsoft. Data. sqlite sulle regole di confronto](/dotnet/standard/data/sqlite/collation).
 * [Documentazione di PostgreSQL sulle regole di confronto](https://www.postgresql.org/docs/current/collation.html).
 * [Documentazione di MySQL sulle regole di confronto](https://dev.mysql.com/doc/refman/en/charset-general.html).

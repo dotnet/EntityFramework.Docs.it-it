@@ -3,12 +3,12 @@ title: Pianificare Entity Framework Core 5,0
 author: ajcvickers
 ms.date: 06/11/2020
 uid: core/what-is-new/ef-core-5.0/plan
-ms.openlocfilehash: a107f901b215e7abaa5905852f81c2d9ab094b98
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.openlocfilehash: 4abb6f500dce320dd0c32f8f3bf5c529b59fb28b
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238320"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526888"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>Pianificare Entity Framework Core 5,0
 
@@ -234,7 +234,7 @@ Rilevato da [#1675](https://github.com/dotnet/EntityFramework.Docs/issues/1675)
 
 Dimensioni T-Shirt: M
 
-Stato: completato. La nuova documentazione è disponibile nel [sito Microsoft docs](https://docs.microsoft.com/dotnet/standard/data/sqlite/?tabs=netcore-cli).
+Stato: completato. La nuova documentazione è disponibile nel [sito Microsoft docs](/dotnet/standard/data/sqlite/?tabs=netcore-cli).
 
 Il team EF possiede anche il provider Microsoft. Data. sqlite ADO.NET. Si prevede di documentare completamente questo provider nell'ambito della versione 5,0.
 

@@ -4,12 +4,12 @@ author: roji
 ms.date: 09/09/2019
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: 3acd446d64a94ffecb12c181e3910528d2293448
-ms.sourcegitcommit: 51148929e3889c48227d96c95c4e310d53a3d2c9
+ms.openlocfilehash: 7d262ab9fb45535b626ce8d503b31a5e9a4630d3
+ms.sourcegitcommit: 6f7af3f138bf7c724cbdda261f97e5cf7035e8d7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86873357"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88847566"
 ---
 # <a name="working-with-nullable-reference-types"></a>Utilizzo dei tipi di riferimento Nullable
 
@@ -26,9 +26,11 @@ La documentazione principale sulle proprietà obbligatorie e facoltative e la re
 
 ## <a name="dbcontext-and-dbset"></a>DbContext e DbSet
 
-Quando sono abilitati i tipi di riferimento Nullable, il compilatore C# genera avvisi per qualsiasi proprietà non nullable non inizializzata, in quanto questi contengono valori null. Di conseguenza, la pratica comune di disporre di proprietà DbSet non inizializzate su un tipo di contesto genera ora un avviso. Per risolvere il problema, rendere le proprietà di DbSet di sola lettura e inizializzarle come segue:
+Quando sono abilitati i tipi di riferimento Nullable, il compilatore C# genera avvisi per qualsiasi proprietà non nullable non inizializzata, in quanto questi contengono valori null. Di conseguenza, la pratica comune di disporre di proprietà DbSet non inizializzate su un tipo di contesto genera ora un avviso. Questo problema può essere risolto come segue:
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/NullableReferenceTypesContext.cs?name=Context&highlight=3-4)]
+
+Un'altra strategia consiste nell'usare le proprietà automatiche che non ammettono i valori null, ma per inizializzarle su null, usando l'operatore di indulgenza null (!) per disattivare l'avviso del compilatore. Il costruttore DbContext garantisce che tutte le proprietà DbSet vengano inizializzate e null non verrà mai osservato su di essi.
 
 ## <a name="non-nullable-properties-and-initialization"></a>Proprietà e inizializzazione non nullable
 

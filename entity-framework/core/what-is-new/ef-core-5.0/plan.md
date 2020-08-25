@@ -1,14 +1,14 @@
 ---
 title: Pianificare Entity Framework Core 5,0
 author: ajcvickers
-ms.date: 06/11/2020
+ms.date: 08/22/2020
 uid: core/what-is-new/ef-core-5.0/plan
-ms.openlocfilehash: 4abb6f500dce320dd0c32f8f3bf5c529b59fb28b
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: a0d41d6df844c9ca2c8a2dc8ba50ca669e23dced
+ms.sourcegitcommit: 6f7af3f138bf7c724cbdda261f97e5cf7035e8d7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526888"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88847579"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>Pianificare Entity Framework Core 5,0
 
@@ -25,7 +25,7 @@ EF Core 5,0 è attualmente pianificata per la versione allo [stesso tempo di .ne
 
 ### <a name="supported-platforms"></a>Piattaforme supportate
 
-EF Core 5,0 è pianificato per essere eseguito su qualsiasi piattaforma .NET 5,0 in base alla [convergenza di queste piattaforme con .NET Core](https://devblogs.microsoft.com/dotnet/introducing-net-5/). Ciò significa che in termini di .NET Standard e il TFM effettivo usato è ancora da definire.
+EF Core 5,0 è pianificato per essere eseguito su qualsiasi piattaforma .NET Standard 2,1, incluso .NET 5,0. Questo fa parte della più generale [convergenza tra piattaforme .NET e .NET Core](https://devblogs.microsoft.com/dotnet/introducing-net-5/).
 
 EF Core 5,0 non viene eseguito su .NET Framework.
 
@@ -41,13 +41,13 @@ Sono state estratte alcune aree o temi principali che costituiranno la base per 
 
 ## <a name="fully-transparent-many-to-many-mapping-by-convention"></a>Mapping molti-a-molti completamente trasparente per convenzione
 
-Sviluppatori leader: @smitpatel , @AndriySvyryd e@lajones
+Sviluppatori leader: @smitpatel , @AndriySvyryd e @lajones
 
 Rilevato da [#10508](https://github.com/aspnet/EntityFrameworkCore/issues/10508)
 
 Dimensioni della maglietta: L
 
-Stato: in corso
+Stato: completato
 
 Many-to-many è la [funzionalità più richiesta](https://github.com/aspnet/EntityFrameworkCore/issues/1368) (~ 506 voti) nel backlog di GitHub.
 
@@ -61,13 +61,13 @@ Oltre al supporto per l'esplorazione, è ora possibile effettuare il pull di que
 
 ## <a name="many-to-many-navigation-properties-aka-skip-navigations"></a>Proprietà di navigazione molti-a-molti (a. k. a "Ignora navigazione")
 
-Sviluppatori leader: @smitpatel e@AndriySvyryd
+Sviluppatori leader: @smitpatel e @AndriySvyryd
 
 Rilevato da [#19003](https://github.com/aspnet/EntityFrameworkCore/issues/19003)
 
 Dimensioni della maglietta: L
 
-Stato: in corso
+Stato: completato
 
 Come descritto nel primo tema, il supporto molti-a-molti presenta diversi aspetti.
 Questo tema rileva in modo specifico l'uso di esplorazioni Skip.
@@ -76,37 +76,37 @@ Il tipo di entità tabella di join può ancora esistere, ma non dovrebbe essere 
 
 ## <a name="table-per-type-tpt-inheritance-mapping"></a>Mapping di ereditarietà tabella per tipo (TPT)
 
-Sviluppatore principale:@AndriySvyryd
+Sviluppatore principale: @AndriySvyryd e @smitpatel
 
 Rilevato da [#2266](https://github.com/aspnet/EntityFrameworkCore/issues/2266)
 
 Dimensioni della maglietta: XL
 
-Stato: in corso
+Stato: completato
 
 Stiamo eseguendo TPT perché si tratta di una funzionalità estremamente richiesta (~ 289 voti, 3 in generale) e perché richiede alcune modifiche di basso livello che si ritiene siano appropriate per la natura fondamentale del piano generale .NET 5. Si prevede che questo provocherà modifiche di rilievo per i provider di database, anche se queste devono essere molto meno gravi rispetto alle modifiche necessarie per 3,0.
 
 ## <a name="filtered-include"></a>Inclusione filtrato
 
-Sviluppatore principale:@maumar
+Sviluppatore principale: @maumar
 
 Rilevato da [#1833](https://github.com/aspnet/EntityFrameworkCore/issues/1833)
 
 Dimensioni T-Shirt: M
 
-Stato: in corso
+Stato: completato
 
 L'inclusione filtrata è una funzionalità molto richiesta (~ 376 voti, 2 nel complesso) che non è una grande quantità di lavoro e che riteniamo che lo sblocco o renderà più semplice molti scenari che attualmente richiedono filtri a livello di modello o query più complesse.
 
 ## <a name="split-include"></a>Includi suddivisione
 
-Sviluppatore principale:@smitpatel
+Sviluppatore principale: @smitpatel
 
 Rilevato da [#20892](https://github.com/dotnet/efcore/issues/20892)
 
 Dimensioni della maglietta: L
 
-Stato: in corso
+Stato: completato
 
 EF Core 3,0 ha modificato il comportamento predefinito per creare una singola query SQL per una query LINQ specificata.
 Ciò ha causato regressioni di prestazioni elevate per le query che utilizzano Includi per più raccolte.
@@ -114,15 +114,27 @@ Ciò ha causato regressioni di prestazioni elevate per le query che utilizzano I
 In EF Core 5,0, viene mantenuto il nuovo comportamento predefinito.
 Tuttavia, EF Core 5,0 consentirà la generazione di più query per la raccolta, inclusi i casi in cui la presenza di una singola query causa un peggioramento delle prestazioni.
 
+## <a name="required-one-to-one-dependents"></a>Dipendenti uno-a-uno obbligatorio
+
+Sviluppatori leader: @AndriySvyryd e @smitpatel
+
+Rilevato da [#12100](https://github.com/dotnet/efcore/issues/12100)
+
+Dimensioni T-Shirt: M
+
+Stato: completato
+
+In EF Core 3,0 tutti i dipendenti, inclusi i tipi di proprietà, sono facoltativi (ad esempio, Person. Address può essere null). In EF Core 5,0, i dipendenti possono essere configurati in base alle esigenze.
+
 ## <a name="rationalize-totable-toquery-toview-fromsql-etc"></a>Razionalizzare ToTable, ToQuery, toview, dati da tabelle e così via
 
-Sviluppatori leader: @maumar e@smitpatel
+Sviluppatori leader: @AndriySvyryd e @smitpatel
 
 Rilevato da [#17270](https://github.com/aspnet/EntityFrameworkCore/issues/17270)
 
 Dimensioni della maglietta: L
 
-Stato: in corso
+Stato: completato
 
 Sono stati apportati miglioramenti alle versioni precedenti per il supporto di SQL non elaborato, tipi autochiave e aree correlate. Tuttavia, vi sono Gap e incoerenze nel modo in cui tutto funziona insieme nel suo complesso. L'obiettivo di 5,0 è correggerli e creare un'esperienza ottimale per la definizione, la migrazione e l'utilizzo di tipi diversi di entità e delle query e degli elementi di database associati. Questo può comportare anche aggiornamenti all'API di query compilata.
 
@@ -130,25 +142,27 @@ Si noti che questo elemento può comportare alcune modifiche sostanziali a livel
 
 ## <a name="general-query-enhancements"></a>Miglioramenti generali delle query
 
-Sviluppatori leader: @smitpatel e@maumar
+Sviluppatori leader: @smitpatel e @maumar
 
 Rilevato da [problemi contrassegnati con `area-query` nell'attività cardine 5,0](https://github.com/dotnet/efcore/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3Aarea-query+milestone%3A5.0.0+)
 
 Dimensioni della maglietta: XL
 
-Stato: in corso
+Stato: completato
 
 Il codice di traduzione query è stato riscritto in maniera estensiva per EF Core 3,0. Il codice di query si trova in genere in uno stato molto più solido a causa di questo problema. Per 5,0 non è prevista la creazione di modifiche di query principali, al di fuori di quelle necessarie per supportare TPT e ignorare le proprietà di navigazione. Tuttavia, è ancora necessario un lavoro significativo per risolvere alcuni debiti tecnici lasciati dalla revisione 3,0. Si prevede inoltre di correggere molti bug e implementare piccoli miglioramenti per migliorare ulteriormente l'esperienza complessiva della query.
 
 ## <a name="migrations-and-deployment-experience"></a>Migrazioni ed esperienza di distribuzione
 
-Sviluppatori leader:@bricelam
+Sviluppatori leader: @bricelam
 
 Rilevato da [#19587](https://github.com/dotnet/efcore/issues/19587)
 
 Dimensioni della maglietta: L
 
-Stato: in corso
+Stato: con ambito/fatto
+
+Ambito: la [funzionalità di aggregazione delle migrazioni](https://github.com/dotnet/efcore/issues/19693) è stata rinviata fino al termine della EF Core versione 5,0. Tuttavia, in EF Core 5,0 verranno inclusi diversi altri [miglioramenti mirati relativi alle migrazioni](https://github.com/dotnet/efcore/issues/19587#issuecomment-668794460) .
 
 Attualmente, molti sviluppatori migrano i database al momento dell'avvio dell'applicazione. Questa operazione è semplice, ma non è consigliata perché:
 
@@ -169,13 +183,15 @@ Il risultato è probabilmente costituito da numerosi miglioramenti di EF Core (a
 
 ## <a name="ef-core-platforms-experience"></a>Esperienza delle piattaforme EF Core
 
-Sviluppatori leader: @roji e@bricelam
+Sviluppatori leader: @roji e @bricelam
 
 Rilevato da [#19588](https://github.com/dotnet/efcore/issues/19588)
 
 Dimensioni della maglietta: L
 
-Stato: non avviato
+Stato: ambito/completato
+
+Ambito: le linee guida e gli esempi della piattaforma sono pubblicati per blazer, Novell, WinForms e WPF. Novell e altre operazioni AOT/linker sono ora pianificate per EF Core 6,0.
 
 Sono disponibili indicazioni utili per l'uso di EF Core in applicazioni Web tradizionali di tipo MVC. Linee guida per altre piattaforme e modelli di applicazione mancanti o non aggiornati. Per EF Core 5,0, si prevede di analizzare, migliorare e documentare l'esperienza di utilizzo di EF Core con:
 
@@ -195,13 +211,15 @@ Le aree specifiche da esaminare sono:
 
 ## <a name="performance"></a>Prestazioni
 
-Sviluppatore principale:@roji
+Sviluppatore principale: @roji
 
 Rilevato da [problemi contrassegnati con `area-perf` nell'attività cardine 5,0](https://github.com/dotnet/efcore/issues?utf8=%E2%9C%93&q=is%3Aissue+label%3Aarea-perf+milestone%3A5.0.0+)
 
 Dimensioni della maglietta: L
 
-Stato: in corso
+Stato: con ambito/fatto
+
+Ambito: sono stati apportati miglioramenti significativi alle prestazioni del provider npgsql. Altre attività di prestazioni sono ora pianificate per EF Core 6,0.
 
 Per EF Core, si prevede di migliorare la nostra suite di benchmark delle prestazioni e di apportare miglioramenti al runtime. Si prevede inoltre di completare la nuova API batch ADO.NET, che è stata prototipata durante il ciclo di rilascio 3,0. Inoltre, a livello di ADO.NET, vengono pianificati miglioramenti delle prestazioni aggiuntivi per il provider npgsql.
 
@@ -209,7 +227,7 @@ Nell'ambito di questo lavoro si prevede anche di aggiungere i contatori delle pr
 
 ## <a name="architecturalcontributor-documentation"></a>Documentazione dell'architettura/collaboratore
 
-Documento principale:@ajcvickers
+Documento principale: @ajcvickers
 
 Rilevato da [#1920](https://github.com/dotnet/EntityFramework.Docs/issues/1920)
 
@@ -228,7 +246,7 @@ Si ritiene ancora che questo aspetto è importante, ma sfortunatamente non verr�
 
 ## <a name="microsoftdatasqlite-documentation"></a>Documentazione di Microsoft. Data. sqlite
 
-Documento principale:@bricelam
+Documento principale: @bricelam
 
 Rilevato da [#1675](https://github.com/dotnet/EntityFramework.Docs/issues/1675)
 
@@ -240,7 +258,7 @@ Il team EF possiede anche il provider Microsoft. Data. sqlite ADO.NET. Si preved
 
 ## <a name="general-documentation"></a>Documentazione generale
 
-Documento principale:@ajcvickers
+Documento principale: @ajcvickers
 
 Rilevato da [problemi nel repository docs nell'attività cardine 5,0](https://github.com/dotnet/EntityFramework.Docs/issues?utf8=%E2%9C%93&q=is%3Aissue+milestone%3A5.0.0+)
 
@@ -259,7 +277,7 @@ Stato: in corso
 
 Rilevato da [problemi contrassegnati con `type-bug` nell'attività cardine 5,0](https://github.com/dotnet/efcore/issues?utf8=%E2%9C%93&q=is%3Aissue+milestone%3A5.0.0+label%3Atype-bug+)
 
-Sviluppatori: @roji , @maumar , @bricelam , @smitpatel , @AndriySvyryd ,@ajcvickers
+Sviluppatori: @roji , @maumar , @bricelam , @smitpatel , @AndriySvyryd , @ajcvickers
 
 Dimensioni della maglietta: L
 
@@ -273,11 +291,11 @@ La velocità in ingresso (problemi che finiscono come lavoro in un'attività car
 
 Rilevato da [problemi contrassegnati con `type-enhancement` nell'attività cardine 5,0](https://github.com/dotnet/efcore/issues?utf8=%E2%9C%93&q=is%3Aissue+milestone%3A5.0.0+label%3Atype-enhancement+)
 
-Sviluppatori: @roji , @maumar , @bricelam , @smitpatel , @AndriySvyryd ,@ajcvickers
+Sviluppatori: @roji , @maumar , @bricelam , @smitpatel , @AndriySvyryd , @ajcvickers
 
 Dimensioni della maglietta: L
 
-Stato: in corso
+Stato: completato
 
 Oltre alle funzionalità più importanti descritte in precedenza, sono stati riportati anche numerosi miglioramenti più piccoli pianificati per 5,0 per correggere i "tagli di carta". Si noti che molti di questi miglioramenti sono trattati anche dai temi più generali illustrati in precedenza.
 

@@ -4,12 +4,12 @@ description: Panoramica delle nuove funzionalità di EF Core 5,0
 author: ajcvickers
 ms.date: 07/20/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: d7f5863e657e243ce733eda5dc8b40c1b92818ce
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: 3a1f5c7d44ad0e4d648492c4edcf14678c73538e
+ms.sourcegitcommit: 6f7af3f138bf7c724cbdda261f97e5cf7035e8d7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526875"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88847593"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Novità di EF Core 5,0
 
@@ -18,6 +18,349 @@ EF Core 5,0 è attualmente in fase di sviluppo. Questa pagina conterrà una pano
 Questa pagina non duplica il [piano per EF Core 5,0](xref:core/what-is-new/ef-core-5.0/plan). Il piano descrive i temi generali per EF Core 5,0, inclusi tutti gli elementi che si prevede di includere prima di distribuire la versione finale.
 
 I collegamenti da qui vengono aggiunti alla documentazione ufficiale appena pubblicata.
+
+## <a name="preview-8"></a>Anteprima 8
+
+## <a name="table-per-type-tpt-mapping"></a>Mapping tabella per tipo (TPT)
+
+Per impostazione predefinita, EF Core esegue il mapping di una gerarchia di ereditarietà di tipi .NET a una singola tabella di database. Questa operazione è nota come mapping tabella per gerarchia (TPH). EF Core 5,0 consente inoltre di eseguire il mapping di ogni tipo .NET in una gerarchia di ereditarietà a una tabella di database differente. noto come mapping tabella per tipo (TPT).
+
+Si consideri, ad esempio, questo modello con una gerarchia mappata:
+
+```c#
+public class Animal
+{
+    public int Id { get; set; }
+    public string Species { get; set; }
+}
+
+public class Pet : Animal
+{
+    public string Name { get; set; }
+}
+
+public class Cat : Pet
+{
+    public string EdcuationLevel { get; set; }
+}
+
+public class Dog : Pet
+{
+    public string FavoriteToy { get; set; }
+}
+```
+
+Per impostazione predefinita, EF Core eseguirà il mapping a una singola tabella:
+
+```sql
+CREATE TABLE [Animals] (
+    [Id] int NOT NULL IDENTITY,
+    [Species] nvarchar(max) NULL,
+    [Discriminator] nvarchar(max) NOT NULL,
+    [Name] nvarchar(max) NULL,
+    [EdcuationLevel] nvarchar(max) NULL,
+    [FavoriteToy] nvarchar(max) NULL,
+    CONSTRAINT [PK_Animals] PRIMARY KEY ([Id])
+);
+```
+
+Tuttavia, il mapping di ogni tipo di entità a una tabella diversa comporterà invece una tabella per tipo:
+
+```sql
+CREATE TABLE [Animals] (
+    [Id] int NOT NULL IDENTITY,
+    [Species] nvarchar(max) NULL,
+    CONSTRAINT [PK_Animals] PRIMARY KEY ([Id])
+);
+
+CREATE TABLE [Pets] (
+    [Id] int NOT NULL,
+    [Name] nvarchar(max) NULL,
+    CONSTRAINT [PK_Pets] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Pets_Animals_Id] FOREIGN KEY ([Id]) REFERENCES [Animals] ([Id]) ON DELETE NO ACTION
+);
+
+CREATE TABLE [Cats] (
+    [Id] int NOT NULL,
+    [EdcuationLevel] nvarchar(max) NULL,
+    CONSTRAINT [PK_Cats] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Cats_Animals_Id] FOREIGN KEY ([Id]) REFERENCES [Animals] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Cats_Pets_Id] FOREIGN KEY ([Id]) REFERENCES [Pets] ([Id]) ON DELETE NO ACTION
+);
+
+CREATE TABLE [Dogs] (
+    [Id] int NOT NULL,
+    [FavoriteToy] nvarchar(max) NULL,
+    CONSTRAINT [PK_Dogs] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Dogs_Animals_Id] FOREIGN KEY ([Id]) REFERENCES [Animals] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Dogs_Pets_Id] FOREIGN KEY ([Id]) REFERENCES [Pets] ([Id]) ON DELETE NO ACTION
+);
+```
+
+Si noti che la creazione dei vincoli FOREIGN KEY mostrati in precedenza è stata aggiunta dopo aver diramato il codice per l'anteprima 8.
+
+È possibile eseguire il mapping dei tipi di entità a tabelle diverse usando gli attributi di mapping:
+
+```c#
+[Table("Animals")]
+public class Animal
+{
+    public int Id { get; set; }
+    public string Species { get; set; }
+}
+
+[Table("Pets")]
+public class Pet : Animal
+{
+    public string Name { get; set; }
+}
+
+[Table("Cats")]
+public class Cat : Pet
+{
+    public string EdcuationLevel { get; set; }
+}
+
+[Table("Dogs")]
+public class Dog : Pet
+{
+    public string FavoriteToy { get; set; }
+}
+```
+
+In alternativa `ModelBuilder` , usare la configurazione:
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Animal>().ToTable("Animals");
+    modelBuilder.Entity<Pet>().ToTable("Pets");
+    modelBuilder.Entity<Cat>().ToTable("Cats");
+    modelBuilder.Entity<Dog>().ToTable("Dogs");
+}
+```
+
+La documentazione viene rilevata in base al problema [#1979](https://github.com/dotnet/EntityFramework.Docs/issues/1979).
+
+### <a name="migrations-rebuild-sqlite-tables"></a>Migrazioni: ricompila tabelle SQLite
+
+Rispetto ad altri database, SQLite è relativamente limitato alle funzionalità di manipolazione dello schema. Per eliminare una colonna da una tabella esistente, ad esempio, è necessario eliminare e ricreare l'intera tabella. EF Core 5,0 le migrazioni supportano ora la ricompilazione automatica della tabella per le modifiche dello schema che lo richiedono.
+
+Si supponga, ad esempio, che sia stata `Unicorns` creata una tabella per un `Unicorn` tipo di entità:
+
+```c#
+public class Unicorn
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+```
+
+```sql
+CREATE TABLE "Unicorns" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Unicorns" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NULL,
+    "Age" INTEGER NOT NULL
+);
+```
+
+Si apprenderà quindi che l'archiviazione dell'età di un unicorno viene considerata molto scortese. Rimuovere quindi la proprietà, aggiungere una nuova migrazione e aggiornare il database. Questo aggiornamento avrà esito negativo quando si usa EF Core 3,1 perché la colonna non può essere eliminata. In EF Core 5,0 le migrazioni ricompilano invece la tabella:
+
+```sql
+CREATE TABLE "ef_temp_Unicorns" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Unicorns" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NULL
+);
+
+INSERT INTO "ef_temp_Unicorns" ("Id", "Name")
+SELECT "Id", "Name"
+FROM Unicorns;
+
+PRAGMA foreign_keys = 0;
+
+DROP TABLE "Unicorns";
+
+ALTER TABLE "ef_temp_Unicorns" RENAME TO "Unicorns";
+
+PRAGMA foreign_keys = 1;
+```
+
+Si noti che:
+* Viene creata una tabella temporanea con lo schema desiderato per la nuova tabella
+* I dati vengono copiati dalla tabella corrente nella tabella temporanea
+* L'imposizione della chiave esterna è disattivata
+* La tabella corrente è stata eliminata
+* La tabella temporanea è stata rinominata come nuova tabella
+
+La documentazione viene rilevata in base al problema [#2583](https://github.com/dotnet/EntityFramework.Docs/issues/2583).
+
+### <a name="table-valued-functions"></a>Funzioni con valori di tabella
+
+Questa funzionalità è stata fornita dalla community da [@pmiddleton](https://github.com/pmiddleton) . Molti ringraziamenti per il contributo.
+
+EF Core 5,0 include supporto di prima classe per il mapping di metodi .NET a funzioni con valori di tabella (funzioni con valori). Queste funzioni possono quindi essere usate nelle query LINQ in cui anche la composizione aggiuntiva sui risultati della funzione verrà convertita in SQL.
+
+Si consideri, ad esempio, questo TVF definito in un database SQL Server:
+
+```sql
+CREATE FUNCTION GetReports(@employeeId int)
+RETURNS @reports TABLE
+(
+    Name nvarchar(50) NOT NULL,
+    IsDeveloper bit NOT NULL
+)
+AS
+BEGIN
+    WITH cteEmployees AS
+    (
+        SELECT Id, Name, ManagerId, IsDeveloper
+        FROM Employees
+        WHERE Id = @employeeId
+        UNION ALL
+        SELECT e.Id, e.Name, e.ManagerId, e.IsDeveloper
+        FROM Employees e
+        INNER JOIN cteEmployees cteEmp ON cteEmp.Id = e.ManagerId
+    )
+    INSERT INTO @reports
+    SELECT Name, IsDeveloper
+    FROM cteEmployees
+    WHERE Id != @employeeId
+
+    RETURN
+END
+```
+
+Il modello di EF Core richiede due tipi di entità per l'uso di TVF:
+* `Employee`Tipo che esegue il mapping alla tabella Employees in modo normale
+* `Report`Tipo che corrisponde alla forma restituita da TVF
+
+```c#
+public class Employee
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public bool IsDeveloper { get; set; }
+
+    public int? ManagerId { get; set; }
+    public virtual Employee Manager { get; set; }
+}
+```
+
+```c#
+public class Report
+{
+    public string Name { get; set; }
+    public bool IsDeveloper { get; set; }
+}
+```
+
+Questi tipi devono essere inclusi nel modello di EF Core:
+
+```c#
+modelBuilder.Entity<Employee>();
+modelBuilder.Entity(typeof(Report)).HasNoKey();
+```
+
+Si noti che `Report` non ha una chiave primaria e che pertanto deve essere configurata come tale.
+
+Infine, è necessario eseguire il mapping di un metodo .NET a TVF nel database. Questo metodo può essere definito in DbContext usando il nuovo `FromExpression` Metodo:
+
+```c#
+public IQueryable<Report> GetReports(int managerId)
+    => FromExpression(() => GetReports(managerId));
+```
+
+Questo metodo usa un parametro e un tipo restituito che corrispondono ai TVF definiti in precedenza. Il metodo viene quindi aggiunto al modello di EF Core in OnModelCreating:
+
+```c#
+modelBuilder.HasDbFunction(() => GetReports(default));
+```
+
+(L'uso di un'espressione lambda qui è un modo semplice per passare `MethodInfo` a EF core. Gli argomenti passati al metodo vengono ignorati.
+
+È ora possibile scrivere query che chiamano `GetReports` e compongono i risultati. Ad esempio:
+
+```c#
+from e in context.Employees
+from rc in context.GetReports(e.Id)
+where rc.IsDeveloper == true
+select new
+{
+  ManagerName = e.Name,
+  EmployeeName = rc.Name,
+})
+```
+
+In SQL Server, viene convertito in:
+
+```sql
+SELECT [e].[Name] AS [ManagerName], [g].[Name] AS [EmployeeName]
+FROM [Employees] AS [e]
+CROSS APPLY [dbo].[GetReports]([e].[Id]) AS [g]
+WHERE [g].[IsDeveloper] = CAST(1 AS bit)
+```
+
+Si noti che SQL è rooted nella `Employees` tabella, chiama `GetReports` e quindi aggiunge un'altra clausola WHERE ai risultati della funzione.
+
+### <a name="flexible-queryupdate-mapping"></a>Mapping di query/aggiornamento flessibile
+
+EF Core 5,0 consente il mapping dello stesso tipo di entità a oggetti di database diversi. Tali oggetti possono essere tabelle, viste o funzioni.
+
+È ad esempio possibile eseguire il mapping di un tipo di entità sia a una vista di database che a una tabella di database:
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder
+        .Entity<Blog>()
+        .ToTable("Blogs")
+        .ToView("BlogsView");
+}
+```
+
+Per impostazione predefinita, EF Core effettuerà una query dalla vista e invierà gli aggiornamenti alla tabella. Ad esempio, eseguendo il codice seguente:
+
+```c#
+var blog = context.Set<Blog>().Single(e => e.Name == "One Unicorn");
+
+blog.Name = "1unicorn2";
+
+context.SaveChanges();
+```
+
+Restituisce una query sulla vista e quindi un aggiornamento alla tabella:
+
+```sql
+SELECT TOP(2) [b].[Id], [b].[Name], [b].[Url]
+FROM [BlogsView] AS [b]
+WHERE [b].[Name] = N'One Unicorn'
+
+SET NOCOUNT ON;
+UPDATE [Blogs] SET [Name] = @p0
+WHERE [Id] = @p1;
+SELECT @@ROWCOUNT;
+```
+
+### <a name="context-wide-split-query-configuration"></a>Configurazione della query Split a livello di contesto
+
+Le query suddivise (vedere di seguito) possono ora essere configurate come impostazione predefinita per qualsiasi query eseguita dal DbContext. Questa configurazione è disponibile solo per i provider relazionali e pertanto deve essere specificata come parte della `UseProvider` configurazione. Ad esempio:
+
+```c#
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    => optionsBuilder
+        .UseSqlServer(
+            Your.SqlServerConnectionString,
+            b => b.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
+```
+
+La documentazione viene rilevata in base al problema [#2407](https://github.com/dotnet/EntityFramework.Docs/issues/2407).
+
+### <a name="physicaladdress-mapping"></a>Mapping di PhysicalAddress
+
+Questa funzionalità è stata fornita dalla community da [@ralmsdeveloper](https://github.com/ralmsdeveloper) . Molti ringraziamenti per il contributo.
+
+La classe .NET [PhysicalAddress](/dotnet/api/system.net.networkinformation.physicaladdress) standard viene ora mappata automaticamente a una colonna di tipo stringa per i database che non hanno già il supporto nativo. Per ulteriori informazioni, vedere gli esempi riportati di `IPAddress` seguito.
 
 ## <a name="preview-7"></a>Anteprima 7
 
@@ -51,7 +394,7 @@ public void DoSomeThing()
 {
     using (var context = _contextFactory.CreateDbContext())
     {
-        // ...            
+        // ...
     }
 }
 ```
@@ -64,7 +407,7 @@ La documentazione viene rilevata in base al problema [#2523](https://github.com/
 
 ### <a name="reset-dbcontext-state"></a>Reimposta stato DbContext
 
-EF Core 5,0 introduce `ChangeTracker.Clear()` che cancella la DbContext di tutte le entità rilevate. Questa situazione in genere non è necessaria quando si usa la procedura consigliata per la creazione di una nuova istanza del contesto di breve durata per ogni unità di lavoro. Tuttavia, se è necessario reimpostare lo stato di un'istanza di DbContext, l'uso del nuovo `Clear()` metodo è più efficiente e affidabile rispetto alla disconnessione di massa di tutte le entità.  
+EF Core 5,0 introduce `ChangeTracker.Clear()` che cancella la DbContext di tutte le entità rilevate. Questa situazione in genere non è necessaria quando si usa la procedura consigliata per la creazione di una nuova istanza del contesto di breve durata per ogni unità di lavoro. Tuttavia, se è necessario reimpostare lo stato di un'istanza di DbContext, l'uso del nuovo `Clear()` metodo è più efficiente e affidabile rispetto alla disconnessione di massa di tutte le entità.
 
 La documentazione viene rilevata in base al problema [#2524](https://github.com/dotnet/EntityFramework.Docs/issues/2524).
 
@@ -154,7 +497,7 @@ EF Core supporta ora [salvataggio](/SQL/t-sql/language-elements/save-transaction
 Salvataggio può essere creato, rilasciato ed eseguito manualmente il rollback. Ad esempio:
 
 ```csharp
-context.Database.CreateSavepoint("MySavePoint"); 
+context.Database.CreateSavepoint("MySavePoint");
 ```
 
 Inoltre, EF Core ora verrà eseguito il rollback all'ultimo salvataggio quando l'esecuzione `SaveChanges` non riesce. Questo consente di ritentare SaveChanges senza ritentare l'intera transazione.
@@ -226,7 +569,7 @@ Si noti che le inclusioni filtrate con OrderBy/Skip/Take non sono supportate nel
 
 #### <a name="split-queries-with-collection-projections"></a>Suddividere query con proiezioni di raccolta
 
-`AsSplitQuery`può essere usato anche quando le raccolte vengono caricate nelle proiezioni. Ad esempio:
+`AsSplitQuery` può essere usato anche quando le raccolte vengono caricate nelle proiezioni. Ad esempio:
 
 ```CSharp
 context.Artists
@@ -262,7 +605,7 @@ Il nuovo IndexAttribute può essere inserito in un tipo di entità per specifica
 public class User
 {
     public int Id { get; set; }
-    
+
     [MaxLength(128)]
     public string FullName { get; set; }
 }
@@ -283,7 +626,7 @@ IndexAttribute può essere usato anche per specificare un indice che si estende 
 public class User
 {
     public int Id { get; set; }
-    
+
     [MaxLength(64)]
     public string FirstName { get; set; }
 
@@ -360,7 +703,7 @@ CREATE TABLE [Host] (
     [Id] int NOT NULL,
     [Address] nvarchar(45) NULL,
     CONSTRAINT [PK_Host] PRIMARY KEY ([Id]));
-``` 
+```
 
 Le entità possono quindi essere aggiunte in modo normale:
 
@@ -368,7 +711,7 @@ Le entità possono quindi essere aggiunte in modo normale:
 context.AddRange(
     new Host { Address = IPAddress.Parse("127.0.0.1")},
     new Host { Address = IPAddress.Parse("0000:0000:0000:0000:0000:0000:0000:0001")});
-``` 
+```
 
 E il SQL risultante inserirà l'indirizzo IPv4 o IPv6 normalizzato:
 
@@ -392,8 +735,8 @@ dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog
 In alternativa, nella console di gestione pacchetti:
 
 ```
-Scaffold-DbContext 'Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook' Microsoft.EntityFrameworkCore.SqlServer -NoOnConfiguring 
-``` 
+Scaffold-DbContext 'Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook' Microsoft.EntityFrameworkCore.SqlServer -NoOnConfiguring
+```
 
 Si consiglia di usare [una stringa di connessione denominata e una risorsa di archiviazione sicura, ad esempio i segreti utente](/core/managing-schemas/scaffolding?tabs=vs#configuration-and-user-secrets).
 
@@ -417,7 +760,7 @@ WHERE SUBSTRING([c].[ContactName], 1, 1) = N'A'
 
 ### <a name="simplify-case-blocks"></a>Semplificare i blocchi di case
 
-EF Core genera ora query migliori con blocchi di maiuscole e minuscole. Ad esempio, questa query LINQ: 
+EF Core genera ora query migliori con blocchi di maiuscole e minuscole. Ad esempio, questa query LINQ:
 
 ```CSharp
 context.Weapons
@@ -442,7 +785,7 @@ ORDER BY CASE
     END IS NOT NULL THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END, [w].[Id]");
-``` 
+```
 
 Ma ora viene convertito in:
 
@@ -453,11 +796,11 @@ ORDER BY CASE
     WHEN ([w].[Name] = N'Marcus'' Lancer') AND [w].[Name] IS NOT NULL THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END, [w].[Id]");
-``` 
+```
 
 ## <a name="preview-5"></a>Preview 5
 
-### <a name="database-collations"></a>Regole di confronto del database
+### <a name="database-collations"></a>Regole di confronto di database
 
 È ora possibile specificare le regole di confronto predefinite per un database nel modello EF. Questa operazione passerà a migrazioni generate per impostare le regole di confronto durante la creazione del database. Ad esempio:
 
@@ -507,14 +850,14 @@ Gli argomenti vengono ora propagati dalla riga di comando nel `CreateDbContext` 
 
 ```
 dotnet ef migrations add two --verbose --dev
-``` 
+```
 
 Questo argomento viene quindi inserito nella Factory, dove può essere usato per controllare la modalità di creazione e inizializzazione del contesto. Ad esempio:
 
 ```CSharp
 public class MyDbContextFactory : IDesignTimeDbContextFactory<SomeDbContext>
 {
-    public SomeDbContext CreateDbContext(string[] args) 
+    public SomeDbContext CreateDbContext(string[] args)
         => new SomeDbContext(args.Contains("--dev"));
 }
 ```
@@ -523,7 +866,7 @@ La documentazione viene rilevata in base al problema [#2419](https://github.com/
 
 ### <a name="no-tracking-queries-with-identity-resolution"></a>Query senza rilevamento con risoluzione di identità
 
-È ora possibile configurare le query senza rilevamento per eseguire la risoluzione dell'identità. La query seguente, ad esempio, creerà una nuova istanza di Blog per ogni post, anche se ogni Blog ha la stessa chiave primaria. 
+È ora possibile configurare le query senza rilevamento per eseguire la risoluzione dell'identità. La query seguente, ad esempio, creerà una nuova istanza di Blog per ogni post, anche se ogni Blog ha la stessa chiave primaria.
 
 ```CSharp
 context.Posts.AsNoTracking().Include(e => e.Blog).ToList();
@@ -544,7 +887,7 @@ La documentazione viene rilevata in base al problema [#1895](https://github.com/
 La maggior parte dei database consente di archiviare i valori delle colonne calcolate dopo il calcolo. Quando questo occupa spazio su disco, la colonna calcolata viene calcolata una sola volta in Update, anziché ogni volta che viene recuperato il valore. Consente inoltre di indicizzare la colonna per alcuni database.
 
 EF Core 5,0 consente la configurazione delle colonne calcolate come archiviate. Ad esempio:
- 
+
 ```CSharp
 modelBuilder
     .Entity<User>()
@@ -569,7 +912,7 @@ modelBuilder
     .HasPrecision(16, 4);
 ```
 
-La precisione e la scala possono comunque essere impostate tramite il tipo di database completo, ad esempio "Decimal (16, 4)". 
+La precisione e la scala possono comunque essere impostate tramite il tipo di database completo, ad esempio "Decimal (16, 4)".
 
 La documentazione viene rilevata in base al problema [#527](https://github.com/dotnet/EntityFramework.Docs/issues/527).
 
@@ -599,7 +942,7 @@ var blogs = context.Blogs
 Questa query restituirà i Blog insieme a ogni post associato, ma solo quando il titolo post contiene "Cheese".
 
 È possibile utilizzare Skip e Take anche per ridurre il numero di entità incluse. Ad esempio:
- 
+
 ```CSharp
 var blogs = context.Blogs
     .Include(e => e.Posts.OrderByDescending(post => post.Title).Take(5)))
@@ -621,9 +964,9 @@ Si noti che l' `Navigation` API non sostituisce la configurazione della relazion
 
 Vedere la [documentazione relativa alla configurazione delle proprietà di navigazione](xref:core/modeling/relationships#configuring-navigation-properties).
 
-### <a name="new-command-line-parameters-for-namespaces-and-connection-strings"></a>Nuovi parametri della riga di comando per spazi dei nomi e stringhe di connessione 
+### <a name="new-command-line-parameters-for-namespaces-and-connection-strings"></a>Nuovi parametri della riga di comando per spazi dei nomi e stringhe di connessione
 
-Le migrazioni e le impalcature consentono ora di specificare gli spazi dei nomi nella riga di comando. Ad esempio, per decompilare un database inserendo le classi context e Model in spazi dei nomi diversi: 
+Le migrazioni e le impalcature consentono ora di specificare gli spazi dei nomi nella riga di comando. Ad esempio, per decompilare un database inserendo le classi context e Model in spazi dei nomi diversi:
 
 ```
 dotnet ef dbcontext scaffold "connection string" Microsoft.EntityFrameworkCore.SqlServer --context-namespace "My.Context" --namespace "My.Model"
@@ -646,14 +989,14 @@ Sono stati anche aggiunti parametri equivalenti ai comandi di PowerShell usati n
 
 Per motivi di prestazioni, EF non esegue controlli null aggiuntivi durante la lettura dei valori dal database. Ciò può causare eccezioni difficili da radice quando viene rilevato un valore null imprevisto.
 
-`EnableDetailedErrors`Se si utilizza, verrà aggiunto un controllo null aggiuntivo alle query in modo che, per un lieve sovraccarico delle prestazioni, questi errori siano più semplici da risalire a una causa radice.  
+`EnableDetailedErrors`Se si utilizza, verrà aggiunto un controllo null aggiuntivo alle query in modo che, per un lieve sovraccarico delle prestazioni, questi errori siano più semplici da risalire a una causa radice.
 
 Ad esempio:
 ```CSharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder
         .EnableDetailedErrors()
-        .EnableSensitiveDataLogging() // Often also useful with EnableDetailedErrors 
+        .EnableSensitiveDataLogging() // Often also useful with EnableDetailedErrors
         .UseSqlServer(Your.SqlServerConnectionString);
 ```
 
@@ -676,7 +1019,7 @@ La documentazione viene rilevata in base al problema [#2199](https://github.com/
 È possibile accedervi usando il nuovo `EF.Functions.DataLength` metodo. Ad esempio:
 ```CSharp
 var count = context.Orders.Count(c => 100 < EF.Functions.DataLength(c.OrderDate));
-``` 
+```
 
 ## <a name="preview-2"></a>Preview 2
 

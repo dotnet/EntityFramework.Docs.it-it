@@ -3,18 +3,18 @@ title: Annotazioni dei dati Code First-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: 9fac2a90c46d78ff5fd632800cc0050276467773
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 17370b83aee9974161b1771e8a1dc99c2de27f0f
+ms.sourcegitcommit: 6f7af3f138bf7c724cbdda261f97e5cf7035e8d7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419185"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88847618"
 ---
-# <a name="code-first-data-annotations"></a>Annotazioni dei dati di Code First
+# <a name="code-first-data-annotations"></a>Annotazioni dei dati per Code First
 > [!NOTE]
 > **EF 4.1 solo e versioni successive** : le funzionalità, le API e così via descritte in questa pagina sono state introdotte in Entity Framework 4,1. Se si usa una versione precedente, alcune o tutte queste informazioni non sono valide.
 
-Il contenuto di questa pagina è stato adattato da un articolo scritto in origine da Julie Lerman (\<http://thedatafarm.com>).
+Il contenuto di questa pagina è stato adattato da un articolo scritto in origine da Julie Lerman ( \<http://thedatafarm.com> ).
 
 Entity Framework Code First consente di usare le proprie classi di dominio per rappresentare il modello su cui è basato EF per eseguire query, rilevamento delle modifiche e funzioni di aggiornamento. Code First utilizza un modello di programmazione denominato "Convenzione sulla configurazione". Code First presuppone che le classi seguano le convenzioni di Entity Framework e, in tal caso, verrà automaticamente illustrato come eseguire il processo. Tuttavia, se le classi non seguono le convenzioni, è possibile aggiungere configurazioni alle classi per fornire a EF le informazioni necessarie.
 
@@ -88,7 +88,7 @@ Entity Framework supporta chiavi composite-chiavi primarie costituite da più di
     }
 ```
 
-Il tentativo di usare la classe precedente nel modello EF genera un `InvalidOperationException`:
+Il tentativo di usare la classe precedente nel modello EF comporterebbe un errore `InvalidOperationException` :
 
 *Impossibile determinare l'ordinamento della chiave primaria composita per il tipo ' Passport '. Usare il metodo ColumnAttribute o HasKey per specificare un ordine per le chiavi primarie composte.*
 
@@ -135,9 +135,9 @@ Solo l'ordinamento relativo all'interno delle proprietà della chiave esterna de
     }
 ```
 
-## <a name="required"></a>Obbligatoria
+## <a name="required"></a>Obbligatorio
 
-L'annotazione obbligatoria indica a EF che è richiesta una particolare proprietà.
+L' `Required` annotazione indica a EF che è richiesta una particolare proprietà.
 
 L'aggiunta di required alla proprietà title forza EF (e MVC) a garantire che la proprietà disponga di dati.
 
@@ -163,7 +163,7 @@ L'attributo obbligatorio influirà anche sul database generato rendendo non null
 
 ## <a name="maxlength-and-minlength"></a>MaxLength e MinLength
 
-Gli attributi MaxLength e MinLength consentono di specificare convalide aggiuntive per le proprietà, esattamente come è stato fatto con required.
+Gli `MaxLength` `MinLength` attributi e consentono di specificare convalide di proprietà aggiuntive, esattamente come è stato fatto con `Required` .
 
 Ecco il BloggerName con i requisiti di lunghezza. Nell'esempio viene inoltre illustrato come combinare gli attributi.
 
@@ -220,9 +220,9 @@ Non è insolito descrivere le entità di dominio in un set di classi e quindi es
     }
 ```
 
-Si noti che BlogDetails non dispone di alcun tipo di proprietà chiave. Nella progettazione basata su dominio, BlogDetails viene definito oggetto valore. Entity Framework fa riferimento a oggetti valore come tipi complessi.  I tipi complessi non possono essere rilevati autonomamente.
+Si noti che non `BlogDetails` ha alcun tipo di proprietà chiave. Nella progettazione basata su dominio, `BlogDetails` viene definito oggetto valore. Entity Framework fa riferimento a oggetti valore come tipi complessi.I tipi complessi non possono essere rilevati autonomamente.
 
-Tuttavia, come proprietà nella classe Blog, BlogDetails verrà rilevata come parte di un oggetto Blog. Affinché il codice riconosca prima di tutto, è necessario contrassegnare la classe BlogDetails come ComplexType.
+Tuttavia, come proprietà nella `Blog` classe, `BlogDetails` verrà rilevata come parte di un `Blog` oggetto. Per poter riconoscere il codice prima, è necessario contrassegnare la `BlogDetails` classe come `ComplexType` .
 
 ``` csharp
     [ComplexType]
@@ -235,42 +235,42 @@ Tuttavia, come proprietà nella classe Blog, BlogDetails verrà rilevata come pa
     }
 ```
 
-A questo punto è possibile aggiungere una proprietà nella classe Blog per rappresentare il BlogDetails per tale Blog.
+A questo punto è possibile aggiungere una proprietà nella `Blog` classe per rappresentare `BlogDetails` per tale Blog.
 
 ``` csharp
         public BlogDetails BlogDetail { get; set; }
 ```
 
-Nel database la tabella Blog conterrà tutte le proprietà del Blog, incluse le proprietà contenute nella relativa proprietà BlogDetail. Per impostazione predefinita, ciascuna di esse è preceduta dal nome del tipo complesso BlogDetail.
+Nel database, la tabella conterrà `Blog` tutte le proprietà del Blog, incluse le proprietà contenute nella relativa `BlogDetail` Proprietà. Per impostazione predefinita, ciascuna di esse è preceduta dal nome del tipo complesso "BlogDetail".
 
 ![Tabella Blog con tipo complesso](~/ef6/media/jj591583-figure06.png)
 
 
 ## <a name="concurrencycheck"></a>ConcurrencyCheck
 
-L'annotazione ConcurrencyCheck consente di contrassegnare una o più proprietà da utilizzare per il controllo della concorrenza nel database quando un utente modifica o Elimina un'entità. Se si è lavorato con la finestra di progettazione di Entity Framework, questo si allinea con l'impostazione di ConcurrencyMode di una proprietà su fixed.
+L' `ConcurrencyCheck` annotazione consente di contrassegnare una o più proprietà da utilizzare per il controllo della concorrenza nel database quando un utente modifica o Elimina un'entità. Se si è lavorato con la finestra di progettazione di Entity Framework, questo si allinea impostando la proprietà `ConcurrencyMode` su `Fixed` .
 
-Verrà ora illustrato il funzionamento di ConcurrencyCheck aggiungendolo alla proprietà BloggerName.
+Verrà ora illustrato `ConcurrencyCheck` il funzionamento aggiungendolo alla `BloggerName` Proprietà.
 
 ``` csharp
     [ConcurrencyCheck, MaxLength(10, ErrorMessage="BloggerName must be 10 characters or less"),MinLength(5)]
     public string BloggerName { get; set; }
 ```
 
-Quando viene chiamato SaveChanges, a causa dell'annotazione ConcurrencyCheck nel campo BloggerName, il valore originale di tale proprietà verrà usato nell'aggiornamento. Il comando tenterà di individuare la riga corretta filtrando non solo sul valore della chiave, ma anche sul valore originale di BloggerName.  Di seguito sono riportate le parti critiche del comando UPDATE inviate al database, in cui è possibile notare che il comando aggiornerà la riga con PrimaryTrackingKey è 1 e BloggerName di "Julie", che rappresenta il valore originale quando tale Blog è stato recuperato dal database.
+Quando `SaveChanges` viene chiamato il metodo, a causa dell' `ConcurrencyCheck` annotazione nel `BloggerName` campo, il valore originale di tale proprietà verrà usato nell'aggiornamento. Il comando tenterà di individuare la riga corretta filtrando non solo sul valore della chiave, ma anche sul valore originale di `BloggerName` .Di seguito sono riportate le parti critiche del comando UPDATE inviate al database, in cui è possibile notare che il comando aggiornerà la riga che ha un `PrimaryTrackingKey` valore pari a 1 e a `BloggerName` di "Julie", che rappresenta il valore originale quando il Blog è stato recuperato dal database.
 
 ``` SQL
     where (([PrimaryTrackingKey] = @4) and ([BloggerName] = @5))
     @4=1,@5=N'Julie'
 ```
 
-Se nel frattempo è stato modificato il nome del blogger per quel blog, l'aggiornamento avrà esito negativo e si otterrà una DbUpdateConcurrencyException che è necessario gestire.
+Se nel frattempo è stato modificato il nome del blogger per quel blog, l'aggiornamento avrà esito negativo e si otterrà una **DbUpdateConcurrencyException** che è necessario gestire.
 
  
 
 ## <a name="timestamp"></a>TimeStamp
 
-È più comune usare i campi rowversion o timestamp per il controllo della concorrenza. Invece di usare l'annotazione ConcurrencyCheck, è possibile usare l'annotazione TimeStamp più specifica, purché il tipo della proprietà sia una matrice di byte. Code First considererà le proprietà timestamp come le proprietà ConcurrencyCheck, ma assicurerà anche che il campo del database generato da Code First non ammette i valori null. È possibile avere una sola proprietà timestamp in una determinata classe.
+È più comune usare i campi rowversion o timestamp per il controllo della concorrenza. Invece di usare l' `ConcurrencyCheck` annotazione, è possibile usare l'annotazione più specifica, purché `TimeStamp` il tipo della proprietà sia una matrice di byte. Code First considererà `Timestamp` le proprietà come le `ConcurrencyCheck` proprietà, ma assicurerà anche che il campo del database generato da Code First non ammette i valori null. È possibile avere una sola proprietà timestamp in una determinata classe.
 
 Aggiunta della proprietà seguente alla classe Blog:
 
@@ -289,23 +289,23 @@ genera prima di tutto una colonna timestamp che non ammette i valori null nella 
 
 Se si lascia Code First creare il database, può essere necessario modificare il nome delle tabelle e delle colonne che sta creando. È inoltre possibile utilizzare Code First con un database esistente. Non è sempre il caso che i nomi delle classi e delle proprietà nel dominio corrispondano ai nomi delle tabelle e delle colonne nel database.
 
-La mia classe è denominata Blog e per convenzione, il codice presuppone che questo venga mappato a una tabella denominata Blog. In caso contrario, è possibile specificare il nome della tabella con l'attributo Table. Qui, ad esempio, l'annotazione specifica che il nome della tabella è InternalBlogs.
+La classe è denominata `Blog` e per convenzione, il Code First presuppone che questo venga mappato a una tabella denominata `Blogs` . In caso contrario, è possibile specificare il nome della tabella con l' `Table` attributo. Qui, ad esempio, l'annotazione specifica che il nome della tabella è **InternalBlogs**.
 
 ``` csharp
     [Table("InternalBlogs")]
     public class Blog
 ```
 
-L'annotazione di colonna è un più adepto per specificare gli attributi di una colonna mappata. È possibile specificare un nome, un tipo di dati o anche l'ordine in cui una colonna viene visualizzata nella tabella. Di seguito è riportato un esempio dell'attributo Column.
+L' `Column` annotazione è più abile nella definizione degli attributi di una colonna mappata. È possibile specificare un nome, un tipo di dati o anche l'ordine in cui una colonna viene visualizzata nella tabella. Di seguito è riportato un esempio dell' `Column` attributo.
 
 ``` csharp
     [Column("BlogDescription", TypeName="ntext")]
     public String Description {get;set;}
 ```
 
-Non confondere l'attributo TypeName della colonna con DataType DataAnnotation. DataType è un'annotazione utilizzata per l'interfaccia utente e viene ignorata dal Code First.
+Non confondere `TypeName` l'attributo della colonna con DataType DataAnnotation. DataType è un'annotazione utilizzata per l'interfaccia utente e viene ignorata dal Code First.
 
-Di seguito è riportata la tabella dopo che è stata rigenerata. Il nome della tabella è stato modificato in InternalBlogs e la colonna di descrizione del tipo complesso è ora BlogDescription. Poiché il nome è stato specificato nell'annotazione, Code First non utilizzerà la convenzione di avvio del nome della colonna con il nome del tipo complesso.
+Di seguito è riportata la tabella dopo che è stata rigenerata. Il nome della tabella è stato modificato in **InternalBlogs** e la `Description` colonna del tipo complesso è ora `BlogDescription` . Poiché il nome è stato specificato nell'annotazione, Code First non utilizzerà la convenzione di avvio del nome della colonna con il nome del tipo complesso.
 
 ![Tabella e colonna di Blog rinominati](~/ef6/media/jj591583-figure08.png)
 
@@ -313,7 +313,7 @@ Di seguito è riportata la tabella dopo che è stata rigenerata. Il nome della t
 
 ## <a name="databasegenerated"></a>DatabaseGenerated
 
-Una funzionalità di database importante è la possibilità di disporre di proprietà calcolate. Se si esegue il mapping delle classi Code First a tabelle che contengono colonne calcolate, non si desidera che Entity Framework tenti di aggiornare tali colonne. Ma si vuole che EF restituisca tali valori dal database dopo l'inserimento o l'aggiornamento dei dati. È possibile usare l'annotazione DatabaseGenerated per contrassegnare le proprietà nella classe insieme all'enumerazione calcolata. Altre enumerazioni sono None e Identity.
+Una funzionalità di database importante è la possibilità di disporre di proprietà calcolate. Se si esegue il mapping delle classi Code First a tabelle che contengono colonne calcolate, non si desidera che Entity Framework tenti di aggiornare tali colonne. Ma si vuole che EF restituisca tali valori dal database dopo l'inserimento o l'aggiornamento dei dati. È possibile usare l' `DatabaseGenerated` annotazione per contrassegnare le proprietà della classe insieme all' `Computed` enum. Altre enumerazioni sono `None` e `Identity` .
 
 ``` csharp
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
@@ -322,18 +322,18 @@ Una funzionalità di database importante è la possibilità di disporre di propr
 
 È possibile utilizzare il database generato su colonne di tipo byte o timestamp al momento della generazione del database da parte del codice; in caso contrario, è consigliabile utilizzare questa opzione solo quando si fa riferimento a database esistenti perché Code First non sarà in grado di determinare la formula per la colonna calcolata.
 
-Per impostazione predefinita, una proprietà chiave che corrisponde a un numero intero diventerà una chiave di identità nel database. Ciò equivale all'impostazione di DatabaseGenerated su DatabaseGeneratedOption. Identity. Se non si desidera che sia una chiave di identità, è possibile impostare il valore su DatabaseGeneratedOption. None.
+Per impostazione predefinita, una proprietà chiave che corrisponde a un numero intero diventerà una chiave di identità nel database. Corrisponderebbe `DatabaseGenerated` a impostare su `DatabaseGeneratedOption.Identity` . Se non si desidera che sia una chiave di identità, è possibile impostare il valore su `DatabaseGeneratedOption.None` .
 
  
 
 ## <a name="index"></a>Indice
 
 > [!NOTE]
-> **Ef 6.1 e versioni successive** : l'attributo index è stato introdotto in Entity Framework 6,1. Se si usa una versione precedente, le informazioni contenute in questa sezione non sono valide.
+> **Ef 6.1 e versioni successive** : l' `Index` attributo è stato introdotto in Entity Framework 6,1. Se si usa una versione precedente, le informazioni contenute in questa sezione non sono valide.
 
 È possibile creare un indice in una o più colonne usando **IndexAttribute**. Se si aggiunge l'attributo a una o più proprietà, Entity Framework creerà l'indice corrispondente nel database durante la creazione del database oppure esegue l'impalcatura delle chiamate **CreateIndex** corrispondenti se si utilizza Migrazioni Code First.
 
-Il codice seguente, ad esempio, comporterà la creazione di un indice nella colonna **rating** della tabella **post** nel database.
+Il codice seguente, ad esempio, comporterà la creazione di un indice nella `Rating` colonna della `Posts` tabella nel database.
 
 ``` csharp
     public class Post
@@ -347,14 +347,14 @@ Il codice seguente, ad esempio, comporterà la creazione di un indice nella colo
     }
 ```
 
-Per impostazione predefinita, l'indice verrà denominato **ix\_&lt;nome della proprietà&gt;** (IX\_classificazione nell'esempio precedente). È anche possibile specificare un nome per l'indice. Nell'esempio seguente viene specificato che l'indice deve essere denominato **PostRatingIndex**.
+Per impostazione predefinita, l'indice verrà denominato **IX \_ &lt; Property Name &gt; ** (IX \_ rating nell'esempio precedente). È anche possibile specificare un nome per l'indice. Nell'esempio seguente viene specificato che l'indice deve essere denominato `PostRatingIndex` .
 
 ``` csharp
     [Index("PostRatingIndex")]
     public int Rating { get; set; }
 ```
 
-Per impostazione predefinita, gli indici non sono univoci, ma è possibile usare il parametro **univoco** denominato per specificare che un indice deve essere univoco. Nell'esempio seguente viene introdotto un indice univoco per il nome di accesso di un **utente**.
+Per impostazione predefinita, gli indici non sono univoci, ma è possibile usare il `IsUnique` parametro denominato per specificare che un indice deve essere univoco. Nell'esempio seguente viene introdotto un indice univoco per il `User` nome di accesso di un oggetto.
 
 ``` csharp
     public class User
@@ -371,7 +371,7 @@ Per impostazione predefinita, gli indici non sono univoci, ma è possibile usare
 
 ### <a name="multiple-column-indexes"></a>Indici a più colonne
 
-Gli indici che si estendono su più colonne vengono specificati utilizzando lo stesso nome in più annotazioni di indice per una tabella specificata. Quando si creano indici a più colonne, è necessario specificare un ordine per le colonne nell'indice. Il codice seguente, ad esempio, consente di creare un indice a più colonne in **rating** e **BlogId** denominato **IX\_BlogIdAndRating**. **BlogId** è la prima colonna dell'indice e la **classificazione** è la seconda.
+Gli indici che si estendono su più colonne vengono specificati utilizzando lo stesso nome in più annotazioni di indice per una tabella specificata. Quando si creano indici a più colonne, è necessario specificare un ordine per le colonne nell'indice. Il codice seguente, ad esempio, consente di creare un indice a più colonne in `Rating` e `BlogId` denominato **IX \_ BlogIdAndRating**. `BlogId` è la prima colonna nell'indice e `Rating` è il secondo.
 
 ``` csharp
     public class Post
@@ -395,9 +395,9 @@ Gli indici che si estendono su più colonne vengono specificati utilizzando lo s
 
 La convenzione Code First si occuperà delle relazioni più comuni nel modello, ma in alcuni casi è necessario aiuto.
 
-La modifica del nome della proprietà chiave nella classe Blog ha creato un problema con la relativa relazione con post. 
+La modifica del nome della proprietà chiave nella `Blog` classe ha creato un problema con la relativa relazione con `Post` . 
 
-Quando si genera il database, il codice Visualizza prima la proprietà BlogId nella classe post e la riconosce, dalla convenzione che corrisponde a un nome di classe più "ID", come chiave esterna per la classe Blog. Ma non esiste alcuna proprietà BlogId nella classe Blog. La soluzione consiste nel creare una proprietà di navigazione nel post e usare l'annotazione esterna per aiutare il codice a comprendere come compilare la relazione tra le due classi, usando la proprietà post. BlogId, e come specificare i vincoli nel database.
+Quando si genera il database, il codice Visualizza prima la `BlogId` proprietà nella classe post e la riconosce, in base alla convenzione che corrisponde al nome di una classe più l' **ID**, come chiave esterna della `Blog` classe. Ma non è presente alcuna `BlogId` proprietà nella classe Blog. La soluzione consiste nel creare una proprietà di navigazione in `Post` e utilizzare l'oggetto `ForeignKey` DataAnnotation per aiutare il codice a comprendere come compilare la relazione tra le due classi (utilizzando la `Post.BlogId` proprietà), nonché come specificare vincoli nel database.
 
 ``` csharp
     public class Post
@@ -413,20 +413,20 @@ Quando si genera il database, il codice Visualizza prima la proprietà BlogId ne
     }
 ```
 
-Il vincolo nel database Mostra una relazione tra InternalBlogs. PrimaryTrackingKey e Posts. BlogId. 
+Il vincolo nel database Mostra una relazione tra `InternalBlogs.PrimaryTrackingKey` e `Posts.BlogId` . 
 
 ![relazione tra InternalBlogs. PrimaryTrackingKey e Posts. BlogId](~/ef6/media/jj591583-figure09.png)
 
-InverseProperty viene usato quando sono presenti più relazioni tra le classi.
+`InverseProperty`Viene utilizzato quando si dispone di più relazioni tra le classi.
 
-Nella classe post può essere utile tenere traccia dell'autore di un post di Blog, oltre che di chi lo ha modificato. Di seguito sono riportate due nuove proprietà di navigazione per la classe post.
+Nella `Post` classe può essere utile tenere traccia dell'autore di un post di Blog, nonché di chi lo ha modificato. Di seguito sono riportate due nuove proprietà di navigazione per la classe post.
 
 ``` csharp
     public Person CreatedBy { get; set; }
     public Person UpdatedBy { get; set; }
 ```
 
-È anche necessario aggiungere la classe Person a cui fanno riferimento queste proprietà. La classe Person ha proprietà di navigazione al post, una per tutti i post scritti dalla persona e l'altra per tutti i post aggiornati da tale persona.
+È anche necessario aggiungere la `Person` classe a cui fanno riferimento queste proprietà. Alla `Person` classe sono associate proprietà di navigazione `Post` , una per tutti i post scritti dalla persona e l'altra per tutti i post aggiornati da tale persona.
 
 ``` csharp
     public class Person
@@ -438,11 +438,11 @@ Nella classe post può essere utile tenere traccia dell'autore di un post di Blo
     }
 ```
 
-Code First non è in grado di associare le proprietà nelle due classi in modo autonomo. La tabella di database per i post deve avere una chiave esterna per la persona CreatedBy e una per la persona UpdatedBy ma Code First creerà quattro proprietà di chiave esterna: Person\_ID, Person\_ID1, CreatedBy\_ID e UpdatedBy\_ID.
+Code First non è in grado di associare le proprietà nelle due classi in modo autonomo. La tabella di database per `Posts` deve avere una chiave esterna per la `CreatedBy` persona e una per la `UpdatedBy` persona, ma Code First creerà quattro proprietà di chiave esterna: ** \_ ID persona**, **Person \_ ID1**, ** \_ ID CreatedBy** e ** \_ ID UpdatedBy**.
 
 ![Tabella post con chiavi esterne aggiuntive](~/ef6/media/jj591583-figure10.png)
 
-Per risolvere questi problemi, è possibile utilizzare l'annotazione InverseProperty per specificare l'allineamento delle proprietà.
+Per risolvere questi problemi, è possibile utilizzare l' `InverseProperty` annotazione per specificare l'allineamento delle proprietà.
 
 ``` csharp
     [InverseProperty("CreatedBy")]
@@ -452,13 +452,13 @@ Per risolvere questi problemi, è possibile utilizzare l'annotazione InverseProp
     public List<Post> PostsUpdated { get; set; }
 ```
 
-Poiché la proprietà PostsWritten di PERSON sa che si riferisce al tipo post, la relazione verrà compilata con post. CreatedBy. Analogamente, PostsUpdated verrà connesso a post. UpdatedBy. E Code First non creerà le chiavi esterne aggiuntive.
+Poiché la `PostsWritten` Proprietà in person sa che si riferisce al `Post` tipo, la relazione verrà compilata con `Post.CreatedBy` . Analogamente, `PostsUpdated` verrà connesso a `Post.UpdatedBy` . E Code First non creerà le chiavi esterne aggiuntive.
 
 ![Tabella post senza chiavi esterne aggiuntive](~/ef6/media/jj591583-figure11.png)
 
  
 
-## <a name="summary"></a>Summary
+## <a name="summary"></a>Riepilogo
 
 Le annotazioni DataAnnotations non solo consentono di descrivere la convalida lato client e server nelle classi code first, ma consentono anche di migliorare e persino correggere i presupposti che Code First farà sulle classi in base alle convenzioni. Con le annotazioni DataAnnotations non solo è possibile gestire la generazione dello schema del database, ma è anche possibile eseguire il mapping delle classi Code First a un database preesistente.
 

@@ -65,6 +65,8 @@
               href: core/get-started/install/index.md
             - name: Esercitazione ASP.NET Core >>
               href: /aspnet/core/data/ef-rp/intro
+            - name: Blazor Server con linee guida di EF Core >>
+              href: /aspnet/core/blazor/blazor-server-ef-core
             - name: Esercitazione su .NET Core WPF
               href: core/get-started/wpf.md
             - name: Esercitazione su Xamarin

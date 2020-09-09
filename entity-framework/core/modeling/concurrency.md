@@ -1,20 +1,21 @@
 ---
 title: Token di concorrenza-EF Core
+description: Configurazione dei token di concorrenza per il controllo della concorrenza ottimistica in un modello di Entity Framework Core
 author: AndriySvyryd
 ms.date: 01/03/2020
 ms.assetid: bc8b1cb0-befe-4b67-8004-26e6c5f69385
 uid: core/modeling/concurrency
-ms.openlocfilehash: bfeb611f222f7195fe22d920b452b40cc4addf90
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 57718a1b0146f437bb4126524889c81ae0dfd895
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417288"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617555"
 ---
 # <a name="concurrency-tokens"></a>Token di concorrenza
 
 > [!NOTE]
-> Questa pagina illustra come configurare i token di concorrenza. Vedere [gestione dei conflitti di concorrenza](../saving/concurrency.md) per una spiegazione dettagliata del funzionamento del controllo della concorrenza in EF core ed esempi di come gestire i conflitti di concorrenza nell'applicazione.
+> Questa pagina illustra come configurare i token di concorrenza. Vedere [gestione dei conflitti di concorrenza](xref:core/saving/concurrency) per una spiegazione dettagliata del funzionamento del controllo della concorrenza in EF core ed esempi di come gestire i conflitti di concorrenza nell'applicazione.
 
 Le proprietà configurate come token di concorrenza vengono usate per implementare il controllo della concorrenza ottimistica.
 

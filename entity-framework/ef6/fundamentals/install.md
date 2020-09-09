@@ -1,14 +1,16 @@
 ---
 title: Ottenere Entity Framework-EF6
+description: Ottenere Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 122c38a2-f9e8-4ecc-9c72-a83bc9af7814
-ms.openlocfilehash: 2bdec6a9be228fbe934d0f46aa1bfafdfb2c971c
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/install
+ms.openlocfilehash: bfd016a93de73ada4487a454ec7abd9251aeecfe
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419468"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616252"
 ---
 # <a name="get-entity-framework"></a>Ottenere Entity Framework
 Entity Framework è costituito da EF Tools per Visual Studio e dal runtime di EF.
@@ -17,11 +19,11 @@ Entity Framework è costituito da EF Tools per Visual Studio e dal runtime di EF
 
 I Entity Framework Tools per Visual Studio includono EF designer e la procedura guidata modello EF e sono necessari per i flussi di lavoro First e Model First del database. Gli strumenti EF sono inclusi in tutte le versioni recenti di Visual Studio. Se si esegue un'installazione personalizzata di Visual Studio, è necessario assicurarsi che sia selezionato l'elemento "Entity Framework 6 Tools" scegliendo un carico di lavoro che lo includa o selezionandolo come singolo componente.
 
-Per alcune versioni precedenti di Visual Studio, gli strumenti EF aggiornati sono disponibili come download. Vedere [versioni di Visual Studio](~/ef6/what-is-new/visual-studio.md) per istruzioni su come ottenere la versione più recente degli strumenti EF per la versione di Visual Studio.
+Per alcune versioni precedenti di Visual Studio, gli strumenti EF aggiornati sono disponibili come download. Vedere [versioni di Visual Studio](xref:ef6/what-is-new/visual-studio) per istruzioni su come ottenere la versione più recente degli strumenti EF per la versione di Visual Studio.
 
 ## <a name="ef-runtime"></a>Runtime EF
 
-La versione più recente di Entity Framework è disponibile come [pacchetto NuGet EntityFramework](https://nuget.org/packages/EntityFramework/). Se non si ha familiarità con gestione pacchetti NuGet, si consiglia di leggere la [Panoramica di NuGet](https://docs.microsoft.com/nuget/consume-packages/overview-and-workflow).
+La versione più recente di Entity Framework è disponibile come [pacchetto NuGet EntityFramework](https://nuget.org/packages/EntityFramework/). Se non si ha familiarità con gestione pacchetti NuGet, si consiglia di leggere la [Panoramica di NuGet](/nuget/consume-packages/overview-and-workflow).
 
 ### <a name="installing-the-ef-nuget-package"></a>Installazione del pacchetto NuGet EF
 

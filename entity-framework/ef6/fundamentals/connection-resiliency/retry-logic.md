@@ -1,14 +1,16 @@
 ---
 title: Resilienza della connessione e logica di ripetizione dei tentativi-EF6
+description: Resilienza della connessione e logica di ripetizione dei tentativi in Entity Framework 6
 author: AndriySvyryd
 ms.date: 11/20/2019
 ms.assetid: 47d68ac1-927e-4842-ab8c-ed8c8698dff2
-ms.openlocfilehash: 50e65bed32d0cfcf42746da0d632f9e990424b97
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/connection-resiliency/retry-logic
+ms.openlocfilehash: 7d05c924f309e410bc457b7e46b0618d38c95569
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/15/2020
-ms.locfileid: "79402159"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616110"
 ---
 # <a name="connection-resiliency-and-retry-logic"></a>Resilienza della connessione e logica di ripetizione dei tentativi
 > [!NOTE]
@@ -32,7 +34,7 @@ Il tentativo di connessione viene gestito da un'implementazione dell'interfaccia
 
 ## <a name="enabling-an-execution-strategy"></a>Abilitazione di una strategia di esecuzione  
 
-Il modo più semplice per indicare a EF di usare una strategia di esecuzione è con il metodo SetExecutionStrategy della classe [DbConfiguration](~/ef6/fundamentals/configuring/code-based.md) :  
+Il modo più semplice per indicare a EF di usare una strategia di esecuzione è con il metodo SetExecutionStrategy della classe [DbConfiguration](xref:ef6/fundamentals/configuring/code-based) :  
 
 ``` csharp
 public class MyConfiguration : DbConfiguration
@@ -66,7 +68,7 @@ public class MyConfiguration : DbConfiguration
 
 Il SqlAzureExecutionStrategy tenterà immediatamente la prima volta che si verifica un errore temporaneo, ma ritarderà tra un tentativo e l'altro fino a quando non viene superato il limite massimo di tentativi o il tempo totale raggiunge il ritardo massimo.  
 
-Le strategie di esecuzione ripeteranno solo un numero limitato di eccezioni generalmente temporanee, sarà comunque necessario gestire altri errori, oltre a intercettare l'eccezione RetryLimitExceeded per il caso in cui un errore non è temporaneo o impiega troppo tempo per la risoluzione stesso.  
+Le strategie di esecuzione ripeteranno solo un numero limitato di eccezioni generalmente temporanee, sarà comunque necessario gestire altri errori, oltre a intercettare l'eccezione RetryLimitExceeded per il caso in cui un errore non è temporaneo o impiega troppo tempo per risolversi.  
 
 Esistono alcune limitazioni quando si usa una strategia di esecuzione di ripetizione dei tentativi:  
 
@@ -84,7 +86,7 @@ using (var db = new BloggingContext())
 }
 ```  
 
-Il flusso non è supportato quando viene registrata una strategia di esecuzione ritentata. Questa limitazione è dovuta al fatto che la connessione può essere trasformata in modo parziale attraverso i risultati restituiti. Quando si verifica questa situazione, EF deve eseguire di nuovo l'intera query, ma non dispone di un modo affidabile per sapere quali risultati sono già stati restituiti (i dati potrebbero essere stati modificati dopo l'invio della query iniziale, i risultati potrebbero essere restituiti in un ordine diverso, i risultati potrebbero non avere un identificatore univoco e così via).  
+Il flusso non è supportato quando viene registrata una strategia di esecuzione ritentata. Questa limitazione è dovuta al fatto che la connessione può essere trasformata in modo parziale attraverso i risultati restituiti. Quando si verifica questa situazione, EF deve eseguire di nuovo l'intera query, ma non dispone di un modo affidabile per sapere quali risultati sono già stati restituiti (i dati potrebbero essere stati modificati dopo l'invio della query iniziale, i risultati possono essere restituiti in un ordine diverso, i risultati potrebbero non avere un identificatore univoco e così via).  
 
 ## <a name="user-initiated-transactions-are-not-supported"></a>Le transazioni avviate dall'utente non sono supportate  
 

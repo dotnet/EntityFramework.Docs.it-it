@@ -1,15 +1,16 @@
 ---
 title: Resilienza della connessione-EF Core
+description: Uso della resilienza della connessione per ritentare automaticamente i comandi non riusciti con Entity Framework Core
 author: rowanmiller
 ms.date: 11/15/2016
 ms.assetid: e079d4af-c455-4a14-8e15-a8471516d748
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: 07646e6ead845c38537945a03367ac7f50784236
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 6dd3d3eadb218ab32f373e44e2013d017e2966d8
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416641"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617758"
 ---
 # <a name="connection-resiliency"></a>Resilienza della connessione
 
@@ -49,9 +50,9 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 ## <a name="execution-strategies-and-transactions"></a>Strategie di esecuzione e transazioni
 
-Una strategia di esecuzione che esegue automaticamente nuovi tentativi in caso di errori deve essere in grado di riprodurre ogni operazione in un blocco di tentativi che ha esito negativo. Quando sono abilitati nuovi tentativi, ogni operazione eseguita tramite EF Core diventa la propria operazione riproducibile. Ovvero ogni query e ogni chiamata a `SaveChanges()` verranno ritentate come un'unità se si verifica un errore temporaneo.
+Una strategia di esecuzione che esegue automaticamente nuovi tentativi in caso di errori deve essere in grado di riprodurre ogni operazione in un blocco di tentativi che ha esito negativo. Quando sono abilitati nuovi tentativi, ogni operazione eseguita tramite EF Core diventa la propria operazione riproducibile. Ovvero ogni query e ogni chiamata a `SaveChanges()` verrà ritentata come un'unità se si verifica un errore temporaneo.
 
-Tuttavia, se il codice avvia una transazione utilizzando `BeginTransaction()` si definisce un gruppo di operazioni che deve essere considerato come un'unità e tutti gli elementi all'interno della transazione dovranno essere riprodotti, si verificherà un errore. Se si tenta di eseguire questa operazione quando si usa una strategia di esecuzione, verrà generata un'eccezione simile alla seguente:
+Tuttavia, se il codice avvia una transazione utilizzando `BeginTransaction()` , si definisce un gruppo di operazioni che deve essere considerato come un'unità e tutti gli elementi all'interno della transazione dovranno essere riprodotti in caso di errore. Se si tenta di eseguire questa operazione quando si usa una strategia di esecuzione, verrà generata un'eccezione simile alla seguente:
 
 > InvalidOperationException: la strategia di esecuzione configurata ' SqlServerRetryingExecutionStrategy ' non supporta le transazioni avviate dall'utente. Usare la strategia di esecuzione restituita da 'DbContext.Database.CreateExecutionStrategy()' per eseguire tutte le operazioni nella transazione come un'unità con possibilità di ritentare.
 
@@ -79,20 +80,20 @@ Tuttavia, è necessario evitare di utilizzare chiavi generate dall'archivio per 
 
 ### <a name="option-2---rebuild-application-state"></a>Opzione 2: ricompilare lo stato dell'applicazione
 
-1. Elimina la `DbContext`corrente.
-2. Creare una nuova `DbContext` e ripristinare lo stato dell'applicazione dal database.
+1. Elimina l'oggetto corrente `DbContext` .
+2. Creare un nuovo `DbContext` e ripristinare lo stato dell'applicazione dal database.
 3. Informare l'utente che l'ultima operazione potrebbe non essere stata completata correttamente.
 
 ### <a name="option-3---add-state-verification"></a>Opzione 3: aggiungere la verifica dello stato
 
-Per la maggior parte delle operazioni che modificano lo stato del database, è possibile aggiungere il codice che controlla se è riuscito. EF fornisce un metodo di estensione per semplificare la `IExecutionStrategy.ExecuteInTransaction`.
+Per la maggior parte delle operazioni che modificano lo stato del database, è possibile aggiungere il codice che controlla se è riuscito. EF fornisce un metodo di estensione per semplificare questa operazione `IExecutionStrategy.ExecuteInTransaction` .
 
-Questo metodo avvia ed esegue il commit di una transazione e accetta anche una funzione nel parametro `verifySucceeded` richiamato quando si verifica un errore temporaneo durante il commit della transazione.
+Questo metodo avvia ed esegue il commit di una transazione e accetta anche una funzione nel `verifySucceeded` parametro richiamato quando si verifica un errore temporaneo durante il commit della transazione.
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/ConnectionResiliency/Program.cs#Verification)]
 
 > [!NOTE]
-> Qui `SaveChanges` viene richiamato con `acceptAllChangesOnSuccess` impostato su `false` per evitare di modificare lo stato dell'entità `Blog` su `Unchanged` se `SaveChanges` ha esito positivo. In questo modo è possibile ripetere la stessa operazione se il commit ha esito negativo e viene eseguito il rollback della transazione.
+> Qui `SaveChanges` viene richiamato con `acceptAllChangesOnSuccess` impostato su `false` per evitare di modificare lo stato dell' `Blog` entità in se ha `Unchanged` `SaveChanges` esito positivo. In questo modo è possibile ripetere la stessa operazione se il commit ha esito negativo e viene eseguito il rollback della transazione.
 
 ### <a name="option-4---manually-track-the-transaction"></a>Opzione 4: rilevare manualmente la transazione
 

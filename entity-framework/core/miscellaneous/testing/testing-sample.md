@@ -1,46 +1,49 @@
 ---
-title: ''
-description: ''
-author: ''
-ms.date: ''
-uid: ''
+title: Esempio di test di EF Core-EF Core
+description: Esempio che illustra come testare le applicazioni che usano Entity Framework Core
+author: ajcvickers
+ms.date: 04/22/2020
+uid: core/miscellaneous/testing/testing-sample
 no-loc:
 - Item
 - Tag
 - Items
 - Tags
-ms.openlocfilehash: ae073fc0b3a99fb9de07a3e0a42c638fe0838a5a
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+- items
+- tags
+ms.openlocfilehash: 839f932f48e1cc6cb1b4c86d5e1405e888d5227a
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672821"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617648"
 ---
 # <a name="ef-core-testing-sample"></a>Esempio di test di EF Core
 
 > [!TIP]
 > Il codice in questo documento è disponibile in GitHub come [esempio eseguibile](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/).
-> Si noti che alcuni di questi test **dovrebbero avere esito negativo**. I motivi di questo problema sono descritti di seguito. 
+> Si noti che alcuni di questi test **dovrebbero avere esito negativo**. I motivi di questo problema sono descritti di seguito.
 
 Questo documento illustra un esempio per il test del codice che usa EF Core.
 
 ## <a name="the-application"></a>Applicazione
 
 L' [esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) contiene due progetti:
-- ItemsWebApi: un' [API Web molto semplice supportata da ASP.NET Core](/aspnet/core/tutorials/first-web-api?view=aspnetcore-3.1&tabs=visual-studio) con un singolo controller
+
+- ItemsWebApi: un' [API Web molto semplice supportata da ASP.NET Core](/aspnet/core/tutorials/first-web-api) con un singolo controller
 - Test: un progetto di test [xUnit](https://xunit.net/) per testare il controller
 
 ### <a name="the-model-and-business-rules"></a>Modello e regole business
 
 Il modello che supporta questa API è costituito da due tipi di entità: Items e Tags .
 
-* Itemshanno un nome con distinzione tra maiuscole e minuscole e una raccolta di Tags .
-* Ogni Tag ha un'etichetta e un conteggio che rappresenta il numero di volte in cui è stato applicato a Item .
-* Ogni Item deve avere un solo Tag oggetto con un'etichetta specificata.
-  * Se un elemento viene contrassegnato con la stessa etichetta più di una volta, il conteggio del tag esistente con tale etichetta viene incrementato al posto di un nuovo tag creato. 
-* L'eliminazione di un oggetto Item deve eliminare tutti gli associati Tags .
+- Items hanno un nome con distinzione tra maiuscole e minuscole e una raccolta di Tags .
+- Ogni Tag ha un'etichetta e un conteggio che rappresenta il numero di volte in cui è stato applicato a Item .
+- Ogni Item deve avere un solo Tag oggetto con un'etichetta specificata.
+  - Se un elemento viene contrassegnato con la stessa etichetta più di una volta, il conteggio del tag esistente con tale etichetta viene incrementato al posto di un nuovo tag creato.
+- L'eliminazione di un oggetto Item deve eliminare tutti gli associati Tags .
 
-#### <a name="the-item-entity-type"></a>ItemTipo di entità
+#### <a name="the-no-locitem-entity-type"></a>ItemTipo di entità
 
 `Item`Tipo di entità:
 
@@ -51,11 +54,12 @@ E la relativa configurazione in `DbContext.OnModelCreating` :
 [!code-csharp[ConfigureItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/ItemsContext.cs?name=ConfigureItem)]
 
 Si noti che il tipo di entità vincola il modo in cui può essere usato per riflettere il modello di dominio e le regole business. In particolare:
+
 - La chiave primaria viene mappata direttamente al `_id` campo e non esposta pubblicamente
   - EF rileva e usa il costruttore privato che accetta il nome e il valore della chiave primaria.
-- La `Name` proprietà è di sola lettura e viene impostata solo nel costruttore. 
-- Tagsvengono esposti come `IReadOnlyList<Tag>` per impedire la modifica arbitraria.
-  - EF associa la `Tags` proprietà al `_tags` campo sottostante mediante la corrispondenza dei nomi. 
+- La `Name` proprietà è di sola lettura e viene impostata solo nel costruttore.
+- Tags vengono esposti come `IReadOnlyList<Tag>` per impedire la modifica arbitraria.
+  - EF associa la `Tags` proprietà al `_tags` campo sottostante mediante la corrispondenza dei nomi.
   - Il `AddTag` metodo accetta un'etichetta tag e implementa la regola business descritta in precedenza.
     Ovvero, viene aggiunto un tag solo per le nuove etichette.
     In caso contrario, il conteggio su un'etichetta esistente viene incrementato.
@@ -64,7 +68,7 @@ Si noti che il tipo di entità vincola il modo in cui può essere usato per rifl
   - Inoltre, non Tag definisce una proprietà di chiave esterna.
     Al contrario, EF creerà e gestirà una proprietà in stato shadow.
 
-#### <a name="the-tag-entity-type"></a>TagTipo di entità
+#### <a name="the-no-loctag-entity-type"></a>TagTipo di entità
 
 `Tag`Tipo di entità:
 
@@ -76,7 +80,7 @@ E la relativa configurazione in `DbContext.OnModelCreating` :
 
 In modo analogo a Item , Tag nasconde la chiave primaria e rende la proprietà di sola `Label` lettura.
 
-### <a name="the-itemscontroller"></a>ItemsController
+### <a name="the-no-locitemscontroller"></a>Il Items controller
 
 Il controller API Web è piuttosto semplice.
 Ottiene un oggetto `DbContext` dal contenitore di inserimento delle dipendenze tramite l'inserimento del costruttore:
@@ -104,29 +108,30 @@ La maggior parte della convalida e della gestione degli errori sono state rimoss
 ## <a name="the-tests"></a>Test
 
 I test sono organizzati per l'esecuzione con più configurazioni del provider di database:
-* Provider di SQL Server, che è il provider utilizzato dall'applicazione
-* Provider SQLite
-* Provider SQLite che usa i database SQLite in memoria
-* Provider di database in memoria EF
+
+- Provider di SQL Server, che è il provider utilizzato dall'applicazione
+- Provider SQLite
+- Provider SQLite che usa i database SQLite in memoria
+- Provider di database in memoria EF
 
 Questa operazione viene eseguita inserendo tutti i test in una classe di base, quindi ereditando da questo oggetto per eseguire il test con ogni provider.
 
 > [!TIP]
 > Se non si usa local DB, sarà necessario modificare la stringa di connessione SQL Server.
-
-> [!TIP]
-> Vedere [test con SQLite](xref:core/miscellaneous/testing/sqlite) per istruzioni sull'uso di SQLite per i test in memoria. 
+> Vedere [test con SQLite](xref:core/miscellaneous/testing/sqlite) per istruzioni sull'uso di SQLite per i test in memoria.
 
 I due test seguenti dovrebbero avere esito negativo:
-* `Can_remove_item_and_all_associated_tags`Quando si esegue con il provider di database in memoria EF
-* `Can_add_item_differing_only_by_case`Quando si esegue con il provider di SQL Server
+
+- `Can_remove_item_and_all_associated_tags` Quando si esegue con il provider di database in memoria EF
+- `Can_add_item_differing_only_by_case` Quando si esegue con il provider di SQL Server
 
 Questo aspetto viene trattato in modo più dettagliato di seguito.
 
 ### <a name="setting-up-and-seeding-the-database"></a>Impostazione e seeding del database
 
 XUnit, come la maggior parte dei framework di test, creerà una nuova istanza della classe di test per ogni esecuzione dei test.
-Inoltre, XUnit non eseguirà i test in una determinata classe di test in parallelo. Ciò significa che è possibile impostare e configurare il database nel costruttore di test e che sarà in uno stato noto per ogni test.
+Inoltre, XUnit non eseguirà i test in una determinata classe di test in parallelo.
+Ciò significa che è possibile impostare e configurare il database nel costruttore di test e che sarà in uno stato noto per ogni test.
 
 > [!TIP]
 > Questo esempio ricrea il database per ogni test.
@@ -134,11 +139,12 @@ Inoltre, XUnit non eseguirà i test in una determinata classe di test in paralle
 > Gli approcci per la riduzione di questo overhead sono trattati nella [condivisione dei database tra i test](xref:core/miscellaneous/testing/sharing-databases).
 
 Quando ogni test viene eseguito:
-* DbContextOptions sono configurati per il provider in uso e passati al costruttore della classe base
-  * Queste opzioni vengono archiviate in una proprietà e utilizzate in tutti i test per la creazione di istanze di DbContext
-* Viene chiamato un metodo di inizializzazione per creare ed eseguire il seeding del database
-  * Il metodo Seed garantisce che il database sia pulito e quindi ricreandolo
-  * Alcune entità di test note vengono create e salvate nel database
+
+- DbContextOptions sono configurati per il provider in uso e passati al costruttore della classe base
+  - Queste opzioni vengono archiviate in una proprietà e utilizzate in tutti i test per la creazione di istanze di DbContext
+- Viene chiamato un metodo di inizializzazione per creare ed eseguire il seeding del database
+  - Il metodo Seed garantisce che il database sia pulito e quindi ricreandolo
+  - Alcune entità di test note vengono create e salvate nel database
 
 [!code-csharp[Seeding](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=Seeding)]
 
@@ -158,15 +164,17 @@ Ad esempio:
 
 [!code-csharp[CanGetItems](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanGetItems)]
 
-Si noti che per eseguire il seeding del database e per eseguire i test vengono usate istanze DbContext diverse. In questo modo si garantisce che il test non stia usando (o inciampare) le entità rilevate dal contesto durante il seeding.
+Si noti che per eseguire il seeding del database e per eseguire i test vengono usate istanze DbContext diverse.
+In questo modo si garantisce che il test non stia usando (o inciampare) le entità rilevate dal contesto durante il seeding.
 Corrisponde inoltre a ciò che accade in app Web e servizi.
 
 I test che mutano il database creano una seconda istanza di DbContext nel test per motivi analoghi.
-Ovvero creando un nuovo contesto pulito e quindi leggendolo dal database per assicurarsi che le modifiche siano state salvate nel database. Ad esempio:
+Ovvero creando un nuovo contesto pulito e quindi leggendolo dal database per assicurarsi che le modifiche siano state salvate nel database.
+Ad esempio:
 
 [!code-csharp[CanAddItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanAddItem)]
 
-Due test leggermente più necessari coprono la logica di business in merito all'aggiunta di tag.
+Due test leggermente più necessari coprono la logica di business per l'aggiunta di tags .
 
 [!code-csharp[CanAddTag](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanAddTag)]
 
@@ -189,7 +197,7 @@ L'esecuzione di questo test nel database in memoria EF indica che tutto funziona
 Tutto sembra corretto quando si usa SQLite.
 Tuttavia, il test ha esito negativo quando viene eseguito su SQL Server.
 
-```
+```console
 System.InvalidOperationException : Sequence contains more than one element
    at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()
    at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
@@ -200,14 +208,14 @@ System.InvalidOperationException : Sequence contains more than one element
 ```
 
 Ciò è dovuto al fatto che il database in memoria EF e il database SQLite fanno distinzione tra maiuscole e minuscole per impostazione predefinita.
-SQL Server, d'altra parte, non fa distinzione tra maiuscole e minuscole. 
+SQL Server, d'altra parte, non fa distinzione tra maiuscole e minuscole.
 
 EF Core, da progettazione, non modifica questi comportamenti perché la forzatura di una modifica con distinzione maiuscole/minuscole può avere un notevole effetto sulle prestazioni.
 
 Quando sappiamo che questo è un problema, possiamo correggere l'applicazione e compensare i test.
 Tuttavia, il punto in questo caso è che questo bug può essere ignorato se si verifica solo con il database in memoria EF o con i provider SQLite.
 
-### <a name="test-fails-when-the-application-is-correct"></a>Il test ha esito negativo quando l'applicazione è corretta 
+### <a name="test-fails-when-the-application-is-correct"></a>Il test ha esito negativo quando l'applicazione è corretta
 
 Un altro requisito per l'applicazione è che "l'eliminazione di un Item dovrebbe eliminare tutti gli associati Tags ".
 Anche in questo caso, è facile da testare:
@@ -216,13 +224,14 @@ Anche in questo caso, è facile da testare:
 
 Questo test viene superato SQL Server e SQLite, ma ha esito negativo con il database in memoria EF.
 
-```
+```console
 Assert.False() Failure
 Expected: False
 Actual:   True
    at Tests.ItemsControllerTest.Can_remove_item_and_all_associated_tags()
 ```
 
-In questo caso, l'applicazione funziona correttamente perché SQL Server supporta le [eliminazioni a catena](xref:core/saving/cascade-delete). SQLite supporta inoltre le eliminazioni a catena, così come la maggior parte dei database relazionali, quindi il test di questa operazione su SQLite funziona.
+In questo caso, l'applicazione funziona correttamente perché SQL Server supporta le [eliminazioni a catena](xref:core/saving/cascade-delete).
+SQLite supporta inoltre le eliminazioni a catena, così come la maggior parte dei database relazionali, quindi il test di questa operazione su SQLite funziona.
 D'altra parte, il database in memoria EF [non supporta le eliminazioni a catena](https://github.com/dotnet/efcore/issues/3924).
 Questo significa che questa parte dell'applicazione non può essere testata con il provider di database in memoria EF.

@@ -1,17 +1,19 @@
 ---
 title: Viste di mapping pre-generate-EF6
+description: Viste di mapping pre-generate in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 917ba9c8-6ddf-4631-ab8c-c4fb378c2fcd
-ms.openlocfilehash: 1fda9fe9638adce9b24a6b81aa081effeb0def81
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/performance/pre-generated-views
+ms.openlocfilehash: 8318030603339c45c5c8459db580b7a8de5febda
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419391"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89615863"
 ---
 # <a name="pre-generated-mapping-views"></a>Viste di mapping pre-generate
-Prima che l'Entity Framework possa eseguire una query o salvare le modifiche apportate all'origine dati, deve generare un set di visualizzazioni di mapping per accedere al database. Queste viste di mapping sono un set di Entity SQL istruzione che rappresentano il database in modo astratto e fanno parte dei metadati memorizzati nella cache per ogni dominio dell'applicazione. Se si creano più istanze dello stesso contesto nello stesso dominio applicazione, verranno riutilizzate le visualizzazioni di mapping dei metadati memorizzati nella cache anziché rigenerarle. Poiché la generazione della visualizzazione del mapping è una parte significativa del costo complessivo dell'esecuzione della prima query, il Entity Framework consente di pregenerare le visualizzazioni di mapping e includerle nel progetto compilato. Per ulteriori informazioni, vedere  [considerazioni sulle prestazioni (Entity Framework)](~/ef6/fundamentals/performance/perf-whitepaper.md).
+Prima che l'Entity Framework possa eseguire una query o salvare le modifiche apportate all'origine dati, deve generare un set di visualizzazioni di mapping per accedere al database. Queste viste di mapping sono un set di Entity SQL istruzione che rappresentano il database in modo astratto e fanno parte dei metadati memorizzati nella cache per ogni dominio dell'applicazione. Se si creano più istanze dello stesso contesto nello stesso dominio applicazione, verranno riutilizzate le visualizzazioni di mapping dei metadati memorizzati nella cache anziché rigenerarle. Poiché la generazione della visualizzazione del mapping è una parte significativa del costo complessivo dell'esecuzione della prima query, il Entity Framework consente di pregenerare le visualizzazioni di mapping e includerle nel progetto compilato.Per ulteriori informazioni, vedere  [considerazioni sulle prestazioni (Entity Framework)](xref:ef6/fundamentals/performance/perf-whitepaper).
 
 ## <a name="generating-mapping-views-with-the-ef-power-tools-community-edition"></a>Generazione di visualizzazioni di mapping con EF Power Tools Community Edition
 

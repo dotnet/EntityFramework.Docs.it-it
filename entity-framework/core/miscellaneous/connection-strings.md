@@ -1,15 +1,16 @@
 ---
 title: Stringhe di connessione-EF Core
+description: Gestione delle stringhe di connessione in ambienti diversi con Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: aeb0f5f8-b212-4f89-ae83-c642a5190ba0
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: e955e93723fc371170641b0b3209cca014ef1c26
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.openlocfilehash: 5b37daa9ba2869ee58c1b95ad9cbaf6b2b491391
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238151"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617775"
 ---
 # <a name="connection-strings"></a>Stringhe di connessione
 

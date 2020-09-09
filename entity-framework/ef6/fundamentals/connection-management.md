@@ -1,14 +1,16 @@
 ---
 title: Gestione della connessione-EF6
+description: Gestione delle connessioni in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: ecaa5a27-b19e-4bf9-8142-a3fb00642270
-ms.openlocfilehash: a6352bbbc38c38bd5f30536736ec969056df2c7d
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/connection-management
+ms.openlocfilehash: c352e761a9891b5c275f32752f10de13222bf48e
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417987"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617220"
 ---
 # <a name="connection-management"></a>Gestione delle connessioni
 Questa pagina descrive il comportamento di Entity Framework per quanto riguarda il passaggio delle connessioni al contesto e la funzionalità dell'API **database. Connection. Open ()** .  
@@ -27,7 +29,7 @@ public DbContext(DbConnection existingConnection, DbCompiledModel model, bool co
 È possibile usarli, ma è necessario aggirare alcune limitazioni:  
 
 1. Se si passa una connessione aperta a una di queste, la prima volta che il Framework tenta di usarla, viene generata un'eccezione InvalidOperationException che indica che non è possibile aprire nuovamente una connessione già aperta.  
-2. Il flag contextOwnsConnection viene interpretato per indicare se la connessione all'archivio sottostante deve essere eliminata quando viene eliminato il contesto. Tuttavia, indipendentemente da questa impostazione, la connessione all'archivio viene sempre chiusa quando il contesto viene eliminato. Quindi, se si dispone di più DbContext con la stessa connessione, il contesto eliminato per primo chiude la connessione (analogamente, se è stata mista una connessione ADO.NET esistente con un DbContext, DbContext chiuderà sempre la connessione quando viene eliminata) .  
+2. Il flag contextOwnsConnection viene interpretato per indicare se la connessione all'archivio sottostante deve essere eliminata quando viene eliminato il contesto. Tuttavia, indipendentemente da questa impostazione, la connessione all'archivio viene sempre chiusa quando il contesto viene eliminato. Quindi, se si dispone di più DbContext con la stessa connessione, il contesto eliminato per primo chiude la connessione. in modo analogo, se è stata mista una connessione ADO.NET esistente con un DbContext, DbContext chiuderà sempre la connessione quando viene eliminata.  
 
 È possibile aggirare la prima limitazione precedente passando una connessione chiusa ed eseguendo solo il codice che la aprirebbe una volta creati tutti i contesti:  
 
@@ -128,7 +130,7 @@ Inoltre, il flag contextOwnsConnection controlla ora se la connessione è stata 
 Naturalmente, è comunque possibile che il DbContext prenda il controllo della connessione (è sufficiente impostare contextOwnsConnection su true o usare uno degli altri costruttori) se lo si desidera.  
 
 > [!NOTE]
-> Quando si utilizzano transazioni con questo nuovo modello, è necessario tenere presenti alcune considerazioni aggiuntive. Per informazioni dettagliate, vedere [utilizzo delle transazioni](~/ef6/saving/transactions.md).  
+> Quando si utilizzano transazioni con questo nuovo modello, è necessario tenere presenti alcune considerazioni aggiuntive. Per informazioni dettagliate, vedere [utilizzo delle transazioni](xref:ef6/saving/transactions).  
 
 ## <a name="databaseconnectionopen"></a>Database. Connection. Open ()  
 
@@ -140,7 +142,7 @@ In EF5 e versioni precedenti è presente un bug che indica che **ObjectContext. 
 ((IObjectContextAdapter)context).ObjectContext.Connection.State
 ```  
 
-Separatamente, se si apre la connessione al database chiamando database. Connection. Open () verrà aperto fino alla successiva esecuzione di una query o alla chiamata di un elemento che richiede una connessione al database (ad esempio, SaveChanges ()) ma dopo l'archivio sottostante la connessione verrà chiusa. Il contesto riaprirà e richiuderà la connessione ogni volta che è necessario eseguire un'altra operazione di database:  
+Separatamente, se si apre la connessione al database chiamando il database. Connection. Open () verrà aperto fino alla successiva esecuzione di una query o alla chiamata di qualsiasi elemento che richiede una connessione al database (ad esempio, SaveChanges ()) ma dopo la chiusura della connessione all'archivio sottostante. Il contesto riaprirà e richiuderà la connessione ogni volta che è necessario eseguire un'altra operazione di database:  
 
 ``` csharp
 using System;

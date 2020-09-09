@@ -1,15 +1,16 @@
 ---
 title: Campi sottoposti a backup-EF Core
+description: Configurazione dei campi di backup per le proprietà in un modello di Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a628795e-64df-4f24-a5e8-76bc261e7ed8
 uid: core/modeling/backing-field
-ms.openlocfilehash: e015c4f3fca767d25bee179c027813bd9fcf4c07
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: 36fc64efa08f2cdeb7005e3fc6335298f2426bde
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526758"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617586"
 ---
 # <a name="backing-fields"></a>Campi sottostanti
 
@@ -28,7 +29,7 @@ Nell'esempio seguente, la `Url` proprietà è configurata in modo da avere `_url
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/BackingField.cs#Sample)]
 
-Si noti che i campi sottoposti a backup vengono individuati solo per le proprietà incluse nel modello. Per ulteriori informazioni su quali proprietà sono incluse nel modello, vedere [inclusione & escluse le proprietà](included-properties.md).
+Si noti che i campi sottoposti a backup vengono individuati solo per le proprietà incluse nel modello. Per ulteriori informazioni su quali proprietà sono incluse nel modello, vedere [inclusione & escluse le proprietà](xref:core/modeling/entity-properties).
 
 È anche possibile configurare i campi di backup usando un'annotazione dei dati (disponibile in EFCore 5,0) o l'API Fluent, ad esempio se il nome del campo non corrisponde alle convenzioni precedenti:
 
@@ -53,7 +54,7 @@ Per il set completo di opzioni supportate, vedere l' [enumerazione PropertyAcces
 
 ## <a name="field-only-properties"></a>Proprietà solo campo
 
-È anche possibile creare una proprietà concettuale nel modello che non disponga di una proprietà CLR corrispondente nella classe di entità, ma usa invece un campo per archiviare i dati nell'entità. Questo è diverso dalle [proprietà shadow](shadow-properties.md), in cui i dati vengono archiviati nello strumento di rilevamento delle modifiche, anziché nel tipo CLR dell'entità. Le proprietà di solo campo vengono in genere utilizzate quando la classe di entità utilizza metodi anziché proprietà per ottenere o impostare valori oppure nei casi in cui i campi non devono essere esposti nel modello di dominio, ad esempio le chiavi primarie.
+È anche possibile creare una proprietà concettuale nel modello che non disponga di una proprietà CLR corrispondente nella classe di entità, ma usa invece un campo per archiviare i dati nell'entità. Questo è diverso dalle [proprietà shadow](xref:core/modeling/shadow-properties), in cui i dati vengono archiviati nello strumento di rilevamento delle modifiche, anziché nel tipo CLR dell'entità. Le proprietà di solo campo vengono in genere utilizzate quando la classe di entità utilizza metodi anziché proprietà per ottenere o impostare valori oppure nei casi in cui i campi non devono essere esposti nel modello di dominio, ad esempio le chiavi primarie.
 
 È possibile configurare una proprietà di solo campo fornendo un nome nell' `Property(...)` API:
 

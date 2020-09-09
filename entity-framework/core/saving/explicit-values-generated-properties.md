@@ -1,19 +1,20 @@
 ---
 title: Impostazione di valori espliciti per le proprietà generate - EF Core
+description: Informazioni sull'impostazione esplicita dei valori per le proprietà configurate come generate con Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 3f1993c2-cdf5-425b-bac2-a2665a20322b
 uid: core/saving/explicit-values-generated-properties
-ms.openlocfilehash: 43c4ab3c2a60645cdeff2a6cc40ce979f832f2fd
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 6a10e8d8c056ab66226f229dcb8b032ff83f06fe
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417569"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617249"
 ---
 # <a name="setting-explicit-values-for-generated-properties"></a>Impostazione di valori espliciti per le proprietà generate
 
-Una proprietà generata è una proprietà il cui valore viene generato (tramite EF o il database) al momento dell'aggiunta e/o dell'aggiornamento dell'entità. Per altre informazioni, vedere [Generated Properties](../modeling/generated-properties.md) (Proprietà generate).
+Una proprietà generata è una proprietà il cui valore viene generato (tramite EF o il database) al momento dell'aggiunta e/o dell'aggiornamento dell'entità. Per altre informazioni, vedere [Generated Properties](xref:core/modeling/generated-properties) (Proprietà generate).
 
 Potrebbero verificarsi situazioni in cui si vuole impostare un valore esplicito per una proprietà generata, anziché usarne uno generato.
 

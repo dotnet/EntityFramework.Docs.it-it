@@ -1,20 +1,21 @@
 ---
 title: Entità disconnesse - EF Core
+description: Utilizzo di entità disconnesse e non registrate tra più istanze di contesto in Entity Framework Core
 author: ajcvickers
 ms.author: avickers
 ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 421531e68ac98c0553938f1c24892701f22fef3c
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 52ba838c4d54771c51737c3940e5a88659f94144
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417597"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617277"
 ---
 # <a name="disconnected-entities"></a>Entità disconnesse
 
-Un'istanza di DbContext sottoporrà automaticamente a rilevamento delle modifiche le entità restituite dal database. Le modifiche apportate a queste entità verranno quindi rilevate quando viene chiamato SaveChanges e il database verrà aggiornato in base alle esigenze. Vedere [Salvataggio di base](basic.md) e [Dati correlati](related-data.md) per informazioni dettagliate.
+Un'istanza di DbContext sottoporrà automaticamente a rilevamento delle modifiche le entità restituite dal database. Le modifiche apportate a queste entità verranno quindi rilevate quando viene chiamato SaveChanges e il database verrà aggiornato in base alle esigenze. Vedere [Salvataggio di base](xref:core/saving/basic) e [Dati correlati](xref:core/saving/related-data) per informazioni dettagliate.
 
 Tuttavia, a volte le entità vengono sottoposte a query usando un'istanza di contesto e poi salvate con un'istanza diversa. Questo accade spesso in scenari "disconnessi", ad esempio un'applicazione Web in cui le entità vengono recuperate tramite query, inviate al client, modificate, inviate al server in una richiesta e quindi salvate. In questo caso, la seconda istanza del contesto deve sapere se le entità sono nuove (devono essere inserite) o esistenti (devono essere aggiornate).
 

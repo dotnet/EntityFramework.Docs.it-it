@@ -1,20 +1,22 @@
 ---
 title: 'Convenzioni basate su modelli: EF6'
+description: Convenzioni basate su modello in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0fc4eef8-29b8-4192-9c77-08fd33d3db3a
-ms.openlocfilehash: c873e9a216bd9bd1934f2149ae6af602072f3608
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/conventions/model
+ms.openlocfilehash: 30a79f505939220b3d4040778397eab972e6a712
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419171"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617180"
 ---
 # <a name="model-based-conventions"></a>Convenzioni basate su modelli
 > [!NOTE]
 > **Solo EF6 e versioni successive**: funzionalità, API e altri argomenti discussi in questa pagina sono stati introdotti in Entity Framework 6. Se si usa una versione precedente, le informazioni qui riportate, o parte di esse, non sono applicabili.  
 
-Le convenzioni basate su modelli sono un metodo avanzato per la configurazione del modello basato sulle convenzioni. Per la maggior parte degli scenari è consigliabile usare l' [API della convenzione di Code First personalizzata in DbModelBuilder](~/ef6/modeling/code-first/conventions/custom.md) . Prima di usare le convenzioni basate su modelli, è consigliabile conoscere l'API DbModelBuilder per le convenzioni.  
+Le convenzioni basate su modelli sono un metodo avanzato per la configurazione del modello basato sulle convenzioni. Per la maggior parte degli scenari è consigliabile usare l' [API della convenzione di Code First personalizzata in DbModelBuilder](xref:ef6/modeling/code-first/conventions/custom) . Prima di usare le convenzioni basate su modelli, è consigliabile conoscere l'API DbModelBuilder per le convenzioni.  
 
 Le convenzioni basate su modelli consentono la creazione di convenzioni che interessano proprietà e tabelle che non possono essere configurate tramite le convenzioni standard. Esempi di queste sono le colonne del discriminatore nella tabella per i modelli di gerarchia e le colonne di associazione indipendenti.  
 
@@ -46,7 +48,7 @@ public class BlogContext : DbContext
 }
 ```  
 
-È anche possibile aggiungere una convenzione in relazione a un'altra convenzione usando i metodi convenzioni. AddBefore\<\> o conventions. AddAfter\<\>. Per ulteriori informazioni sulle convenzioni che Entity Framework applica, vedere la sezione Note.  
+È anche possibile aggiungere una convenzione in relazione a un'altra convenzione usando i metodi Conventions. AddBefore \<\> o conventions. AddAfter \<\> . Per ulteriori informazioni sulle convenzioni che Entity Framework applica, vedere la sezione Note.  
 
 ``` csharp
 protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -83,7 +85,7 @@ class DiscriminatorRenamingConvention : IStoreModelConvention<EdmProperty>
 
 Un altro esempio più complesso di convenzioni basate su modelli in azione consiste nel configurare il modo in cui vengono denominate le associazioni indipendenti (IAs).  Si tratta di una situazione in cui le convenzioni del modello sono applicabili perché gli IAs vengono generati da EF e non sono presenti nel modello a cui l'API DbModelBuilder può accedere.  
 
-Quando EF genera un'IA, viene creata una colonna denominata EntityType_KeyName. Per un'associazione denominata Customer con una colonna chiave denominata CustomerId, ad esempio, verrebbe generata una colonna denominata Customer_CustomerId. La convenzione seguente rimuove il carattere '\_' dal nome della colonna generato per IA.  
+Quando EF genera un'IA, viene creata una colonna denominata EntityType_KeyName. Per un'associazione denominata Customer con una colonna chiave denominata CustomerId, ad esempio, verrebbe generata una colonna denominata Customer_CustomerId. La convenzione seguente rimuove il \_ carattere '' dal nome della colonna generato per Ia.  
 
 ``` csharp
 using System.Data.Entity;
@@ -146,7 +148,7 @@ public class ForeignKeyNamingConvention : IStoreModelConvention<AssociationType>
 
 ## <a name="extending-existing-conventions"></a>Estensione delle convenzioni esistenti   
 
-Se è necessario scrivere una convenzione simile a una delle convenzioni che Entity Framework si applica già al modello, è sempre possibile estendere tale convenzione per evitare che sia necessario riscriverla da zero.  Un esempio è la sostituzione della convenzione di corrispondenza ID esistente con una personalizzata.   Un ulteriore vantaggio dell'override della convenzione di chiave è che il metodo sottoposto a override verrà chiamato solo se non è presente alcuna chiave già rilevata o configurata in modo esplicito. Un elenco delle convenzioni usate da Entity Framework è disponibile qui: [http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx).  
+Se è necessario scrivere una convenzione simile a una delle convenzioni che Entity Framework si applica già al modello, è sempre possibile estendere tale convenzione per evitare che sia necessario riscriverla da zero.  Un esempio è la sostituzione della convenzione di corrispondenza ID esistente con una personalizzata.   Un ulteriore vantaggio dell'override della convenzione di chiave è che il metodo sottoposto a override verrà chiamato solo se non è presente alcuna chiave già rilevata o configurata in modo esplicito. Un elenco delle convenzioni usate da Entity Framework è disponibile qui: [http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx) .  
 
 ``` csharp
 using System.Data.Entity;
@@ -191,7 +193,7 @@ public class CustomKeyDiscoveryConvention : KeyDiscoveryConvention
 }
 ```  
 
-È quindi necessario aggiungere la nuova Convenzione prima della convenzione di chiave esistente. Dopo aver aggiunto il CustomKeyDiscoveryConvention, è possibile rimuovere IdKeyDiscoveryConvention.  Se non è stato rimosso il IdKeyDiscoveryConvention esistente, questa convenzione avrebbe ancora la precedenza sulla convenzione di individuazione ID poiché viene eseguita per prima, ma nel caso in cui non venga trovata alcuna proprietà "Key", verrà eseguita la convenzione "ID".  Questo comportamento si verifica perché ogni convenzione considera il modello aggiornato dalla convenzione precedente (anziché operare in modo indipendente e tutti gli elementi combinati) in modo che, se ad esempio una convenzione precedente abbia aggiornato un nome di colonna per trovare una corrispondenza tra interesse per la convenzione personalizzata (quando prima che il nome non fosse di interesse) verrà applicato a tale colonna.  
+È quindi necessario aggiungere la nuova Convenzione prima della convenzione di chiave esistente. Dopo aver aggiunto il CustomKeyDiscoveryConvention, è possibile rimuovere IdKeyDiscoveryConvention.  Se non è stato rimosso il IdKeyDiscoveryConvention esistente, questa convenzione avrebbe ancora la precedenza sulla convenzione di individuazione ID poiché viene eseguita per prima, ma nel caso in cui non venga trovata alcuna proprietà "Key", verrà eseguita la convenzione "ID".  Questo comportamento si verifica perché ogni convenzione considera il modello come aggiornato dalla convenzione precedente, invece di operare su di esso in modo indipendente e tutti combinati, in modo che, se, ad esempio, una convenzione precedente abbia aggiornato un nome di colonna per trovare una corrispondenza con un elemento di interesse per la convenzione personalizzata (quando prima che il nome non fosse di interesse), verrà applicato a tale colonna.  
 
 ``` csharp
 public class BlogContext : DbContext
@@ -209,4 +211,4 @@ public class BlogContext : DbContext
 
 ## <a name="notes"></a>Note  
 
-Un elenco delle convenzioni attualmente applicate da Entity Framework è disponibile nella documentazione di MSDN qui: [http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx).  Questo elenco viene estratto direttamente dal codice sorgente.  Il codice sorgente per Entity Framework 6 è disponibile su [GitHub](https://github.com/aspnet/entityframework6/) e molte delle convenzioni usate da Entity Framework sono ottimi punti di partenza per le convenzioni basate su modelli personalizzati.  
+Un elenco delle convenzioni attualmente applicate da Entity Framework è disponibile nella documentazione di MSDN qui: [http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx) .  Questo elenco viene estratto direttamente dal codice sorgente.  Il codice sorgente per Entity Framework 6 è disponibile su [GitHub](https://github.com/aspnet/entityframework6/) e molte delle convenzioni usate da Entity Framework sono ottimi punti di partenza per le convenzioni basate su modelli personalizzati.  

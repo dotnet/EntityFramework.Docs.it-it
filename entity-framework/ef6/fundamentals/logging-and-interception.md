@@ -1,14 +1,16 @@
 ---
 title: Registrazione e intercettazione delle operazioni di database-EF6
+description: Registrazione e intercettazione delle operazioni di database in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: b5ee7eb1-88cc-456e-b53c-c67e24c3f8ca
-ms.openlocfilehash: 35b0284a5ad8b2b732f074589bd458d243312575
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/logging-and-interception
+ms.openlocfilehash: bb5c3392b4f2e1f291d7ac373d07724f56d0eb30
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419478"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616191"
 ---
 # <a name="logging-and-intercepting-database-operations"></a>Registrazione e intercettazione delle operazioni di database
 > [!NOTE]
@@ -126,7 +128,7 @@ Esaminando l'output di esempio precedente, ognuno dei quattro comandi registrati
 
 Come illustrato sopra, la registrazione alla console è molto semplice. È anche facile accedere a memoria, file e così via usando diversi tipi di [TextWriter](https://msdn.microsoft.com/library/system.io.textwriter.aspx).  
 
-Se si ha familiarità con LINQ to SQL si può notare che in LINQ to SQL la proprietà log è impostata sull'oggetto TextWriter effettivo (ad esempio, console. out) mentre in EF la proprietà log è impostata su un metodo che accetta una stringa (ad esempio , Console. Write o console. out. Write). Il motivo è quello di separare EF da TextWriter accettando qualsiasi delegato che può fungere da sink per le stringhe. Si supponga, ad esempio, di avere già un Framework di registrazione e di definire un metodo di registrazione come il seguente:  
+Se si ha familiarità con LINQ to SQL si può notare che in LINQ to SQL la proprietà log è impostata sull'oggetto TextWriter effettivo (ad esempio, console. out) mentre in EF la proprietà log è impostata su un metodo che accetta una stringa (ad esempio, console. Write o console. out. Write). Il motivo è quello di separare EF da TextWriter accettando qualsiasi delegato che può fungere da sink per le stringhe. Si supponga, ad esempio, di avere già un Framework di registrazione e di definire un metodo di registrazione come il seguente:  
 
 ``` csharp
 public class MyLogger
@@ -194,7 +196,7 @@ Si supponga, ad esempio, di voler registrare solo una singola riga prima che ogn
 - Eseguire l'override di LogCommand per formattare e scrivere la riga singola di SQL  
 - Eseguire l'override di LogResult per non eseguire alcuna operazione.  
 
-Il codice avrà un aspetto simile al seguente:
+Il codice sarà simile al seguente:
 
 ``` csharp
 public class OneLineFormatter : DatabaseLogFormatter
@@ -261,11 +263,11 @@ Il codice di intercettazione è basato sul concetto di interfacce di intercettaz
 
 ### <a name="the-interception-context"></a>Contesto di intercettazione  
 
-Osservando i metodi definiti in una delle interfacce dell'intercettore è evidente che a ogni chiamata viene assegnato un oggetto di tipo DbInterceptionContext o un tipo derivato da questo, ad esempio DbCommandInterceptionContext\<\>. Questo oggetto contiene informazioni contestuali sull'azione che EF sta assumendo. Se, ad esempio, l'azione viene eseguita per conto di un DbContext, il DbContext viene incluso nel DbInterceptionContext. Analogamente, per i comandi eseguiti in modo asincrono, il flag asincrono viene impostato su DbCommandInterceptionContext.  
+Osservando i metodi definiti in una delle interfacce dell'intercettore è evidente che a ogni chiamata viene assegnato un oggetto di tipo DbInterceptionContext o un tipo derivato da questo, ad esempio DbCommandInterceptionContext \<\> . Questo oggetto contiene informazioni contestuali sull'azione che EF sta assumendo. Se, ad esempio, l'azione viene eseguita per conto di un DbContext, il DbContext viene incluso nel DbInterceptionContext. Analogamente, per i comandi eseguiti in modo asincrono, il flag asincrono viene impostato su DbCommandInterceptionContext.  
 
 ### <a name="result-handling"></a>Gestione dei risultati  
 
-La classe DbCommandInterceptionContext\<\> contiene le proprietà denominate result, OriginalResult, Exception e originalException. Queste proprietà vengono impostate su null/zero per le chiamate ai metodi di intercettazione che vengono chiamate prima dell'esecuzione dell'operazione, ovvero per... Esecuzione di metodi. Se l'operazione viene eseguita e ha esito positivo, result e OriginalResult vengono impostati sul risultato dell'operazione. Questi valori possono quindi essere osservati nei metodi di intercettazione che vengono chiamati dopo l'esecuzione dell'operazione, ovvero sul... Metodi eseguiti. Analogamente, se l'operazione genera, verranno impostate le proprietà Exception e originalException.  
+La \<\> classe DbCommandInterceptionContext contiene le proprietà denominate result, OriginalResult, Exception e originalException. Queste proprietà vengono impostate su null/zero per le chiamate ai metodi di intercettazione che vengono chiamate prima dell'esecuzione dell'operazione, ovvero per... Esecuzione di metodi. Se l'operazione viene eseguita e ha esito positivo, result e OriginalResult vengono impostati sul risultato dell'operazione. Questi valori possono quindi essere osservati nei metodi di intercettazione che vengono chiamati dopo l'esecuzione dell'operazione, ovvero sul... Metodi eseguiti. Analogamente, se l'operazione genera, verranno impostate le proprietà Exception e originalException.  
 
 #### <a name="suppressing-execution"></a>Eliminazione dell'esecuzione  
 

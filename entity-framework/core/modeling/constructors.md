@@ -1,15 +1,16 @@
 ---
 title: Tipi di entità con costruttori-EF Core
+description: Utilizzo di costruttori per associare dati a Entity Framework Core modello
 author: ajcvickers
 ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 uid: core/modeling/constructors
-ms.openlocfilehash: ddfaa8eebde388a9d3309f21b8891de593077956
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 58529a3a68e69a31249460d402027274404dce45
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417329"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617540"
 ---
 # <a name="entity-types-with-constructors"></a>Tipi di entità con costruttori
 
@@ -204,7 +205,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 Aspetti da considerare:
 
-* La chiave "Property" è ora un campo. Non si tratta di un campo `readonly` in modo che sia possibile utilizzare chiavi generate dall'archivio.
+* La chiave "Property" è ora un campo. Non è un `readonly` campo in modo che sia possibile usare le chiavi generate dall'archivio.
 * Le altre proprietà sono proprietà di sola lettura impostate solo nel costruttore.
 * Se il valore della chiave primaria viene impostato solo da EF o letto dal database, non è necessario includerlo nel costruttore. In questo modo, la chiave "Property" viene lasciata come un campo semplice e si rende chiaro che non deve essere impostata in modo esplicito durante la creazione di nuovi blog o post.
 
@@ -215,10 +216,10 @@ Aspetti da considerare:
 
 EF Core inoltre possibile inserire i "servizi" nel costruttore di un tipo di entità. Ad esempio, è possibile inserire quanto segue:
 
-* `DbContext`: istanza del contesto corrente, che può essere tipizzata anche come tipo DbContext derivato
-* `ILazyLoader`-servizio di caricamento lazy. per ulteriori informazioni, vedere la [documentazione relativa al caricamento lazy](../querying/related-data.md) .
-* `Action<object, string>`-un delegato di caricamento lazy. per altri dettagli, vedere la [documentazione relativa al caricamento lazy](../querying/related-data.md) .
-* `IEntityType`-i metadati EF Core associati a questo tipo di entità
+* `DbContext` : istanza del contesto corrente, che può essere tipizzata anche come tipo DbContext derivato
+* `ILazyLoader` -servizio di caricamento lazy. per ulteriori informazioni, vedere la [documentazione relativa al caricamento lazy](xref:core/querying/related-data) .
+* `Action<object, string>` -un delegato di caricamento lazy. per ulteriori informazioni, vedere la [documentazione relativa al caricamento lazy](xref:core/querying/related-data) .
+* `IEntityType` -i metadati di EF Core associati a questo tipo di entità
 
 > [!NOTE]  
 > A partire da EF Core 2,1, è possibile inserire solo i servizi noti da EF Core. Il supporto per l'inserimento di servizi applicativi viene preso in considerazione per una versione futura.
@@ -265,7 +266,7 @@ public class Post
 Ecco alcuni aspetti da tenere presente:
 
 * Il costruttore è privato, perché viene chiamato solo da EF Core ed è disponibile un altro costruttore pubblico per uso generale.
-* Il codice che usa il servizio inserito (ovvero il contesto) è difensivo rispetto a `null` per gestire i casi in cui EF Core non crea l'istanza.
+* Il codice che usa il servizio inserito (ovvero il contesto) è difensivo rispetto `null` alla gestione dei casi in cui EF Core non crea l'istanza.
 * Poiché il servizio viene archiviato in una proprietà di lettura/scrittura, verrà reimpostato quando l'entità è associata a una nuova istanza del contesto.
 
 > [!WARNING]  

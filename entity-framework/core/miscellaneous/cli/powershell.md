@@ -1,21 +1,22 @@
 ---
 title: Guida di riferimento agli strumenti di EF Core (console di gestione pacchetti)-EF Core
+description: Guida di riferimento per la console di gestione pacchetti Entity Framework Core Visual Studio
 author: bricelam
 ms.author: bricelam
 ms.date: 09/18/2018
 uid: core/miscellaneous/cli/powershell
-ms.openlocfilehash: 3893d561ccb7d97f3d9c25d9ea66509ad0f3da75
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 84ca41dc08f7bc813ee9491b66fc91b2854c7632
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370598"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617857"
 ---
 # <a name="entity-framework-core-tools-reference---package-manager-console-in-visual-studio"></a>Guida di riferimento agli strumenti di Entity Framework Core-Console di gestione pacchetti in Visual Studio
 
-Gli strumenti della console di gestione pacchetti (PMC) per Entity Framework Core eseguono attività di sviluppo in fase di progettazione. Ad esempio, creano [migrazioni](/aspnet/core/data/ef-mvc/migrations?view=aspnetcore-2.0), applicano migrazioni e generano codice per un modello basato su un database esistente. I comandi vengono eseguiti all'interno di Visual Studio tramite la [console di gestione pacchetti](/nuget/tools/package-manager-console). Questi strumenti funzionano sia con i progetti .NET Framework che con i progetti .NET Core.
+Gli strumenti della console di gestione pacchetti (PMC) per Entity Framework Core eseguono attività di sviluppo in fase di progettazione. Ad esempio, creano [migrazioni](/aspnet/core/data/ef-mvc/migrations), applicano migrazioni e generano codice per un modello basato su un database esistente. I comandi vengono eseguiti all'interno di Visual Studio tramite la [console di gestione pacchetti](/nuget/tools/package-manager-console). Questi strumenti funzionano sia con i progetti .NET Framework che con i progetti .NET Core.
 
-Se non si usa Visual Studio, è consigliabile usare gli [strumenti da riga di comando EF Core](dotnet.md) . Gli strumenti interfaccia della riga di comando di .NET Core sono multipiattaforma ed eseguiti all'interno di un prompt dei comandi.
+Se non si usa Visual Studio, è consigliabile usare gli [strumenti da riga di comando EF Core](xref:core/miscellaneous/cli/dotnet) . Gli strumenti interfaccia della riga di comando di .NET Core sono multipiattaforma ed eseguiti all'interno di un prompt dei comandi.
 
 ## <a name="installing-the-tools"></a>Installazione degli strumenti
 
@@ -133,8 +134,8 @@ La tabella seguente illustra i parametri comuni a tutti i comandi EF Core:
 
 | Parametro                 | Descrizione                                                                                                                                                                                                          |
 |:--------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -Contesto\<String>        | Classe `DbContext` da usare. Solo il nome della classe o completo con gli spazi dei nomi.  Se questo parametro viene omesso, EF Core trova la classe del contesto. Se sono presenti più classi di contesto, questo parametro è obbligatorio. |
-| -Progetto\<String>        | Progetto di destinazione. Se questo parametro viene omesso, come progetto di destinazione viene utilizzato il **progetto predefinito** per la **console di gestione pacchetti** .                                                                             |
+| -Contesto \<String>        | Classe `DbContext` da usare. Solo il nome della classe o completo con gli spazi dei nomi.  Se questo parametro viene omesso, EF Core trova la classe del contesto. Se sono presenti più classi di contesto, questo parametro è obbligatorio. |
+| -Progetto \<String>        | Progetto di destinazione. Se questo parametro viene omesso, come progetto di destinazione viene utilizzato il **progetto predefinito** per la **console di gestione pacchetti** .                                                                             |
 | <nobr>-Progetto</nobr>\<String> | Progetto di avvio. Se questo parametro viene omesso, il **progetto di avvio** nelle **proprietà della soluzione** viene utilizzato come progetto di destinazione.                                                                                 |
 | -Verbose                  | Mostra output dettagliato.                                                                                                                                                                                                 |
 
@@ -151,9 +152,9 @@ Parametri
 
 | Parametro                         | Descrizione                                                                                                             |
 |:----------------------------------|:------------------------------------------------------------------------------------------------------------------------|
-| <nobr>-Name\<String><nobr>       | Nome della migrazione. Si tratta di un parametro posizionale ed è obbligatorio.                                              |
-| <nobr>-OutputDir\<String></nobr> | Directory usata per l'output dei file. I percorsi sono relativi alla directory del progetto di destinazione. Il valore predefinito è "Migrations". |
-| <nobr>-Spazio dei nomi\<String></nobr> | Spazio dei nomi da utilizzare per le classi generate. Il valore predefinito è generato dalla directory di output. (Disponibile da EFCore 5.0.0 in poi). |
+| <nobr>-Name \<String><nobr>       | Nome della migrazione. Si tratta di un parametro posizionale ed è obbligatorio.                                              |
+| <nobr>-OutputDir \<String></nobr> | Directory usata per l'output dei file. I percorsi sono relativi alla directory del progetto di destinazione. Il valore predefinito è "Migrations". |
+| <nobr>-Spazio dei nomi \<String></nobr> | Spazio dei nomi da utilizzare per le classi generate. Il valore predefinito è generato dalla directory di output. (Disponibile da EFCore 5.0.0 in poi). |
 
 ## <a name="drop-database"></a>Drop-database
 
@@ -187,15 +188,15 @@ Parametri
 
 | Parametro                          | Descrizione                                                                                                                                                                                                                                                             |
 |:-----------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>-Connessione\<String></nobr> | Stringa di connessione al database. Per i progetti ASP.NET Core 2. x, il valore può essere *Name \<name of connection string> =*. In tal caso, il nome deriva dalle origini di configurazione configurate per il progetto. Si tratta di un parametro posizionale ed è obbligatorio. |
-| <nobr>-Provider\<String></nobr>   | Provider da usare. Si tratta in genere del nome del pacchetto NuGet, ad esempio: `Microsoft.EntityFrameworkCore.SqlServer` . Si tratta di un parametro posizionale ed è obbligatorio.                                                                                           |
-| -OutputDir\<String>               | Directory in cui inserire i file. I percorsi sono relativi alla directory del progetto.                                                                                                                                                                                             |
-| -ContextDir\<String>              | Directory in cui inserire il `DbContext` file. I percorsi sono relativi alla directory del progetto.                                                                                                                                                               |
-| -Spazio dei nomi\<String>               | Spazio dei nomi da utilizzare per tutte le classi generate. Il valore predefinito è generato dallo spazio dei nomi radice e dalla directory di output. (Disponibile da EFCore 5.0.0 in poi). |
-| -ContextNamespace\<String>        | Spazio dei nomi da utilizzare per la `DbContext` classe generata. Nota: esegue l'override di `-Namespace` . (Disponibile da EFCore 5.0.0 in poi). |
-| -Contesto\<String>                 | Nome della `DbContext` classe da generare.                                                                                                                                                                                                                          |
-| -Schemi\<String[]>               | Schemi delle tabelle per cui generare i tipi di entità. Se questo parametro viene omesso, vengono inclusi tutti gli schemi.                                                                                                                                                             |
-| -Tabelle\<String[]>                | Tabelle per cui generare i tipi di entità. Se questo parametro viene omesso, vengono incluse tutte le tabelle.                                                                                                                                                                         |
+| <nobr>-Connessione \<String></nobr> | Stringa di connessione al database. Per i progetti ASP.NET Core 2. x, il valore può essere *Name \<name of connection string> =*. In tal caso, il nome deriva dalle origini di configurazione configurate per il progetto. Si tratta di un parametro posizionale ed è obbligatorio. |
+| <nobr>-Provider \<String></nobr>   | Provider da usare. Si tratta in genere del nome del pacchetto NuGet, ad esempio: `Microsoft.EntityFrameworkCore.SqlServer` . Si tratta di un parametro posizionale ed è obbligatorio.                                                                                           |
+| -OutputDir \<String>               | Directory in cui inserire i file. I percorsi sono relativi alla directory del progetto.                                                                                                                                                                                             |
+| -ContextDir \<String>              | Directory in cui inserire il `DbContext` file. I percorsi sono relativi alla directory del progetto.                                                                                                                                                               |
+| -Spazio dei nomi \<String>               | Spazio dei nomi da utilizzare per tutte le classi generate. Il valore predefinito è generato dallo spazio dei nomi radice e dalla directory di output. (Disponibile da EFCore 5.0.0 in poi). |
+| -ContextNamespace \<String>        | Spazio dei nomi da utilizzare per la `DbContext` classe generata. Nota: esegue l'override di `-Namespace` . (Disponibile da EFCore 5.0.0 in poi). |
+| -Contesto \<String>                 | Nome della `DbContext` classe da generare.                                                                                                                                                                                                                          |
+| -Schemi \<String[]>               | Schemi delle tabelle per cui generare i tipi di entità. Se questo parametro viene omesso, vengono inclusi tutti gli schemi.                                                                                                                                                             |
+| -Tabelle \<String[]>                | Tabelle per cui generare i tipi di entità. Se questo parametro viene omesso, vengono incluse tutte le tabelle.                                                                                                                                                                         |
 | -DataAnnotations                   | Utilizzare gli attributi per configurare il modello (laddove possibile). Se questo parametro viene omesso, viene usata solo l'API Fluent.                                                                                                                                                      |
 | -UseDatabaseNames                  | Utilizzare i nomi di tabella e colonna esattamente come vengono visualizzati nel database. Se questo parametro viene omesso, i nomi di database vengono modificati in modo da essere conformi alle convenzioni di stile del nome C#.                                                                                       |
 | -Force                             | Sovrascrivere i file esistenti.                                                                                                                                                                                                                                               |
@@ -224,7 +225,7 @@ Parametri
 | *-Da*\<String>        | Migrazione iniziale. Le migrazioni possono essere identificate in base al nome o all'ID. Il numero 0 è un caso speciale che indica *prima della prima migrazione*. Il valore predefinito è 0.                                                              |
 | *Da a*\<String>          | Migrazione finale. L'impostazione predefinita è l'ultima migrazione.                                                                                                                                                                      |
 | <nobr>-Idempotente</nobr> | Genera uno script che può essere utilizzato in un database in qualsiasi migrazione.                                                                                                                                                         |
-| -Output\<String>        | File in cui scrivere il risultato. Se questo parametro viene omesso, il file viene creato con un nome generato nella stessa cartella in cui vengono creati i file di runtime dell'applicazione, ad esempio: */obj/debug/netcoreapp2.1/ghbkztfz.SQL/*. |
+| -Output \<String>        | File in cui scrivere il risultato. Se questo parametro viene omesso, il file viene creato con un nome generato nella stessa cartella in cui vengono creati i file di runtime dell'applicazione, ad esempio: */obj/debug/netcoreapp2.1/ghbkztfz.SQL/*. |
 
 > [!TIP]
 > I parametri to, from e output supportano la scheda-espansione.
@@ -248,7 +249,7 @@ Aggiorna il database all'ultima migrazione o a una migrazione specificata.
 | Parametro                           | Descrizione                                                                                                                                                                                                                                                     |
 |:------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>*-Migrazione*\<String></nobr> | Migrazione di destinazione. Le migrazioni possono essere identificate in base al nome o all'ID. Il numero 0 è un caso speciale che indica *prima della prima migrazione* e comporta il ripristino di tutte le migrazioni. Se non viene specificata alcuna migrazione, l'impostazione predefinita del comando è l'ultima migrazione. |
-| <nobr>-Connessione\<String></nobr>  | Stringa di connessione al database. Il valore predefinito è quello specificato in `AddDbContext` o `OnConfiguring` . |
+| <nobr>-Connessione \<String></nobr>  | Stringa di connessione al database. Il valore predefinito è quello specificato in `AddDbContext` o `OnConfiguring` . |
 
 > [!TIP]
 > Il parametro Migration supporta l'espansione tramite tabulazione.

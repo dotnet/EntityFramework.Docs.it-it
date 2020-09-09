@@ -1,22 +1,24 @@
 ---
 title: Supporto del provider per i tipi spaziali-EF6
+description: Supporto del provider per i tipi spaziali in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 1097cb00-15f5-453d-90ed-bff9403d23e3
-ms.openlocfilehash: 863f1b4551bd62160915eba90fee7ba6c49c169c
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/providers/spatial-support
+ms.openlocfilehash: 060d662aa8f03ea3510bd6b1fb7bdf904585efab
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416339"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89615788"
 ---
 # <a name="provider-support-for-spatial-types"></a>Supporto del provider per i tipi spaziali
 Entity Framework supporta l'utilizzo di dati spaziali tramite le classi DbGeography o DbGeometry. Queste classi si basano sulle funzionalità specifiche del database offerte dal provider Entity Framework. Non tutti i provider supportano i dati spaziali e quelli che possono avere prerequisiti aggiuntivi, ad esempio l'installazione di assembly di tipo spaziale. Altre informazioni sul supporto dei provider per i tipi spaziali sono disponibili di seguito.  
 
 Altre informazioni su come usare i tipi spaziali in un'applicazione sono disponibili in due procedure dettagliate, una per Code First, l'altra per Database First o Model First:  
 
-- [Tipi di dati spaziali in Code First](~/ef6/modeling/code-first/data-types/spatial.md)  
-- [Tipi di dati spaziali in EF designer](~/ef6/modeling/designer/data-types/spatial.md)  
+- [Tipi di dati spaziali in Code First](xref:ef6/modeling/code-first/data-types/spatial)  
+- [Tipi di dati spaziali in EF designer](xref:ef6/modeling/designer/data-types/spatial)  
 
 ## <a name="ef-releases-that-support-spatial-types"></a>Versioni EF che supportano i tipi spaziali  
 
@@ -30,7 +32,7 @@ A partire da i tipi spaziali EF6 sono supportati per le applicazioni destinate s
 
 I provider Entity Framework per EF5 che sono in grado di supportare i tipi spaziali sono:  
 
-- Provider di Microsoft SQL Server  
+- Provider Microsoft SQL Server  
     - Questo provider viene fornito come parte di EF5.  
     - Questo provider dipende da alcune librerie di basso livello aggiuntive che potrebbero dover essere installate. per informazioni dettagliate, vedere di seguito.  
 - [Devart dotConnect per Oracle](https://www.devart.com/dotconnect/oracle/)  
@@ -42,7 +44,7 @@ Se si è a conoscenza di un provider EF5 che supporta i tipi spaziali, contattar
 
 I provider Entity Framework per EF6 che sono in grado di supportare i tipi spaziali sono:  
 
-- Provider di Microsoft SQL Server  
+- Provider Microsoft SQL Server  
     - Questo provider viene fornito come parte di EF6.  
     - Questo provider dipende da alcune librerie di basso livello aggiuntive che potrebbero dover essere installate. per informazioni dettagliate, vedere di seguito.  
 - [Devart dotConnect per Oracle](https://www.devart.com/dotconnect/oracle/)  
@@ -52,8 +54,8 @@ Se si è a conoscenza di un provider EF6 che supporta i tipi spaziali, contattar
 
 ## <a name="prerequisites-for-spatial-types-with-microsoft-sql-server"></a>Prerequisiti per i tipi spaziali con Microsoft SQL Server  
 
-SQL Server supporto spaziale dipende dai tipi SqlGeography e SqlGeometry di basso livello SQL Server specifici. Questi tipi risiedono nell'assembly Microsoft. SqlServer. Types. dll e questo assembly non viene fornito come parte di EF o come parte del .NET Framework.  
+SQL Server supporto spaziale dipende dai tipi SqlGeography e SqlGeometry di basso livello SQL Server specifici. Questi tipi risiedono in Microsoft.SqlServer.Types.dll assembly e questo assembly non viene fornito come parte di EF o come parte del .NET Framework.  
 
-Quando si installa Visual Studio, viene spesso installata anche una versione di SQL Server, che includerà l'installazione di Microsoft. SqlServer. Types. dll.  
+Quando si installa Visual Studio, viene spesso installata anche una versione di SQL Server, che includerà l'installazione del Microsoft.SqlServer.Types.dll.  
 
-Se SQL Server non è installato nel computer in cui si desidera utilizzare tipi spaziali o se i tipi spaziali sono stati esclusi dall'installazione SQL Server, sarà necessario installarli manualmente. I tipi possono essere installati utilizzando `SQLSysClrTypes.msi`, che fa parte di Microsoft SQL Server Feature Pack. I tipi spaziali sono SQL Server specifici della versione, quindi è consigliabile [cercare "SQL Server Feature Pack"](https://www.microsoft.com/search/result.aspx?q=sql+server+feature+pack) nell'area download Microsoft, quindi selezionare e scaricare l'opzione che corrisponde alla versione di SQL Server che verrà usata.
+Se SQL Server non è installato nel computer in cui si desidera utilizzare tipi spaziali o se i tipi spaziali sono stati esclusi dall'installazione SQL Server, sarà necessario installarli manualmente. I tipi possono essere installati utilizzando `SQLSysClrTypes.msi` , che fa parte di Microsoft SQL Server Feature Pack. I tipi spaziali sono SQL Server specifici della versione, quindi è consigliabile [cercare "SQL Server Feature Pack"](https://www.microsoft.com/search/result.aspx?q=sql+server+feature+pack) nell'area download Microsoft, quindi selezionare e scaricare l'opzione che corrisponde alla versione di SQL Server che verrà usata.

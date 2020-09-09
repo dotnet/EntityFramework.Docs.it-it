@@ -1,15 +1,16 @@
 ---
 title: Configurazione di un DbContext-EF Core
+description: Strategie per la configurazione di oggetti DbContext con Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: d7a22b5a-4c5b-4e3b-9897-4d7320fcd13f
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: 9614449f6ead393b514f42b718b4cae5f97dfc98
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: 3e45199e6fc0c8c105ccb0bb03175b4b08716b3f
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526420"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617793"
 ---
 # <a name="configuring-a-dbcontext"></a>Configurazione di un DbContext
 
@@ -23,7 +24,7 @@ Anche se qualsiasi modello che fornisce le informazioni di configurazione necess
 
 ## <a name="configuring-dbcontextoptions"></a>Configurazione di DbContextOptions
 
-`DbContext`per eseguire qualsiasi operazione, è necessario disporre di un'istanza di `DbContextOptions` . L' `DbContextOptions` istanza contiene le informazioni di configurazione, ad esempio:
+`DbContext` per eseguire qualsiasi operazione, è necessario disporre di un'istanza di `DbContextOptions` . L' `DbContextOptions` istanza contiene le informazioni di configurazione, ad esempio:
 
 - Provider di database da usare, in genere selezionato richiamando un metodo come `UseSqlServer` o `UseSqlite` . Questi metodi di estensione richiedono il pacchetto del provider corrispondente, ad esempio `Microsoft.EntityFrameworkCore.SqlServer` o `Microsoft.EntityFrameworkCore.Sqlite` . I metodi sono definiti nello `Microsoft.EntityFrameworkCore` spazio dei nomi.
 - Qualsiasi stringa di connessione o identificatore necessario dell'istanza del database, in genere passato come argomento al metodo di selezione del provider menzionato in precedenza
@@ -109,7 +110,7 @@ using (var context = new BloggingContext())
 
 EF Core supporta `DbContext` l'utilizzo di con un contenitore di inserimento delle dipendenze. Il tipo di DbContext può essere aggiunto al contenitore del servizio usando il `AddDbContext<TContext>` metodo.
 
-`AddDbContext<TContext>`renderà il tipo di DbContext, `TContext` e l'oggetto corrispondente `DbContextOptions<TContext>` disponibile per l'inserimento dal contenitore del servizio.
+`AddDbContext<TContext>` renderà il tipo di DbContext, `TContext` e l'oggetto corrispondente `DbContextOptions<TContext>` disponibile per l'inserimento dal contenitore del servizio.
 
 Per ulteriori informazioni sull'inserimento delle dipendenze, vedere [più](#more-reading) avanti.
 
@@ -195,4 +196,4 @@ Usando l'inserimento di dipendenze, è possibile ottenere questo risultato regis
 ## <a name="more-reading"></a>Altre informazioni
 
 - Per altre informazioni sull'uso DI, vedere [inserimento delle dipendenze](/aspnet/core/fundamentals/dependency-injection) .
-- Per ulteriori informazioni, vedere [test](testing/index.md) .
+- Per ulteriori informazioni, vedere [test](xref:core/miscellaneous/testing/index) .

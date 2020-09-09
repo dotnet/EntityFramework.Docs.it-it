@@ -1,14 +1,16 @@
 ---
 title: Annotazioni dei dati Code First-EF6
+description: Annotazioni dei dati Code First in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: 17370b83aee9974161b1771e8a1dc99c2de27f0f
-ms.sourcegitcommit: 6f7af3f138bf7c724cbdda261f97e5cf7035e8d7
+uid: ef6/modeling/code-first/data-annotations
+ms.openlocfilehash: 37b2872b5fb40cf0dc346554b2cbb9e3fffd6bdc
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88847618"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617357"
 ---
 # <a name="code-first-data-annotations"></a>Annotazioni dei dati per Code First
 > [!NOTE]
@@ -135,7 +137,7 @@ Solo l'ordinamento relativo all'interno delle proprietà della chiave esterna de
     }
 ```
 
-## <a name="required"></a>Obbligatorio
+## <a name="required"></a>Necessario
 
 L' `Required` annotazione indica a EF che è richiesta una particolare proprietà.
 
@@ -391,7 +393,7 @@ Gli indici che si estendono su più colonne vengono specificati utilizzando lo s
 ## <a name="relationship-attributes-inverseproperty-and-foreignkey"></a>Attributi relazione: InverseProperty e ForeignKey
 
 > [!NOTE]
-> Questa pagina fornisce informazioni sulla configurazione delle relazioni nel modello di Code First usando le annotazioni dei dati. Per informazioni generali sulle relazioni in EF e su come accedere e modificare i dati usando le relazioni, vedere [relazioni & proprietà di navigazione](~/ef6/fundamentals/relationships.md). *
+> Questa pagina fornisce informazioni sulla configurazione delle relazioni nel modello di Code First usando le annotazioni dei dati. Per informazioni generali sulle relazioni in EF e su come accedere e modificare i dati usando le relazioni, vedere [relazioni & proprietà di navigazione](xref:ef6/fundamentals/relationships). *
 
 La convenzione Code First si occuperà delle relazioni più comuni nel modello, ma in alcuni casi è necessario aiuto.
 

@@ -1,15 +1,16 @@
 ---
 title: Provider di database SQLite-limitazioni-EF Core
+description: Limitazioni del provider di database Entity Framework Core SQLite rispetto ad altri provider
 author: bricelam
 ms.date: 07/16/2020
 ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
 uid: core/providers/sqlite/limitations
-ms.openlocfilehash: 393f5e80ce2e11dcb11c2048e06effa27e48dc13
-ms.sourcegitcommit: d85263b5d5d665dbaf94de8832e2917bce048b34
+ms.openlocfilehash: 2657bf03bc5cd0d5fb45c57e7f7605824deb44d2
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86451229"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616531"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>Limitazioni del provider di database SQLite per EF Core
 
@@ -33,7 +34,7 @@ SQLite non supporta in modo nativo i tipi di dati seguenti. EF Core possibile le
 
 Invece di `DateTimeOffset` , è consigliabile usare i valori DateTime. Quando si gestiscono più fusi orari, è consigliabile convertire i valori in formato UTC prima di salvare e quindi tornare al fuso orario appropriato.
 
-Il `Decimal` tipo fornisce un livello elevato di precisione. Se questo livello di precisione non è necessario, tuttavia, è consigliabile usare invece Double. È possibile usare un [convertitore di valori](../../modeling/value-conversions.md) per continuare a usare Decimal nelle classi.
+Il `Decimal` tipo fornisce un livello elevato di precisione. Se questo livello di precisione non è necessario, tuttavia, è consigliabile usare invece Double. È possibile usare un [convertitore di valori](xref:core/modeling/value-conversions) per continuare a usare Decimal nelle classi.
 
 ``` csharp
 modelBuilder.Entity<MyEntity>()
@@ -49,29 +50,29 @@ Per eseguire determinate operazioni verrà tentata una ricompilazione. Le ricomp
 
 | Operazione            | Supportato?  | Richiede la versione |
 |:---------------------|:------------|:-----------------|
-| AddCheckConstraint   | ✔ (ricompila) | 5.0              |
+| AddCheckConstraint   | ✔ (ricompila) | 5,0              |
 | AddColumn            | ✔           | 1.0              |
-| AddForeignKey        | ✔ (ricompila) | 5.0              |
-| AddPrimaryKey        | ✔ (ricompila) | 5.0              |
-| AddUniqueConstraint  | ✔ (ricompila) | 5.0              |
-| AlterColumn          | ✔ (ricompila) | 5.0              |
+| AddForeignKey        | ✔ (ricompila) | 5,0              |
+| AddPrimaryKey        | ✔ (ricompila) | 5,0              |
+| AddUniqueConstraint  | ✔ (ricompila) | 5,0              |
+| AlterColumn          | ✔ (ricompila) | 5,0              |
 | CreateIndex          | ✔           | 1.0              |
 | CreateTable          | ✔           | 1.0              |
-| DropCheckConstraint  | ✔ (ricompila) | 5.0              |
-| DropColumn           | ✔ (ricompila) | 5.0              |
-| DropForeignKey       | ✔ (ricompila) | 5.0              |
+| DropCheckConstraint  | ✔ (ricompila) | 5,0              |
+| DropColumn           | ✔ (ricompila) | 5,0              |
+| DropForeignKey       | ✔ (ricompila) | 5,0              |
 | DropIndex            | ✔           | 1.0              |
-| DropPrimaryKey       | ✔ (ricompila) | 5.0              |
+| DropPrimaryKey       | ✔ (ricompila) | 5,0              |
 | DropTable            | ✔           | 1.0              |
-| DropUniqueConstraint | ✔ (ricompila) | 5.0              |
+| DropUniqueConstraint | ✔ (ricompila) | 5,0              |
 | RenameColumn         | ✔           | 2.2.2            |
 | RenameIndex          | ✔ (ricompila) | 2.1              |
 | RenameTable          | ✔           | 1.0              |
-| EnsureSchema         | ✔ (no-op)   | 2.0              |
-| DropSchema           | ✔ (no-op)   | 2.0              |
-| Insert               | ✔           | 2.0              |
-| Aggiornamento               | ✔           | 2.0              |
-| Delete               | ✔           | 2.0              |
+| EnsureSchema         | ✔ (no-op)   | 2,0              |
+| DropSchema           | ✔ (no-op)   | 2,0              |
+| INS               | ✔           | 2,0              |
+| Aggiornamento               | ✔           | 2,0              |
+| Elimina               | ✔           | 2,0              |
 
 ## <a name="migrations-limitations-workaround"></a>Soluzione alternativa alle migrazioni
 

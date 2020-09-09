@@ -1,21 +1,22 @@
 ---
 title: Eliminazione a catena - EF Core
+description: Configurazione dei comportamenti di eliminazione per entità correlate quando viene eliminata un'entità principale
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 6e92b869d691d0224abf1997d9eb7ea035489c5d
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: cf17e6586b89376b2d7fcc0f9cbfc8e1c4f6ba58
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417614"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617401"
 ---
 # <a name="cascade-delete"></a>Eliminazione a catena
 
 Nella terminologia dei database, il termine eliminazione a catena viene usato comunemente per descrivere una caratteristica che consente di attivare automaticamente l'eliminazione di righe correlate in seguito all'eliminazione di una riga. Un concetto strettamente correlato, anch'esso coperto dai comportamenti di eliminazione di EF Core, è l'eliminazione automatica di un'entità figlio quando la relazione con un'entità padre è stata interrotta, operazione comunemente nota come "eliminazione degli orfani".
 
-EF Core implementa vari comportamenti di eliminazione diversi e consente di configurare i comportamenti di eliminazione di singole relazioni. EF Core implementa anche convenzioni per la configurazione automatica di comportamenti di eliminazione predefiniti utili per ogni relazione in base alla [obbligatorietà della relazione](../modeling/relationships.md#required-and-optional-relationships).
+EF Core implementa vari comportamenti di eliminazione diversi e consente di configurare i comportamenti di eliminazione di singole relazioni. EF Core implementa anche convenzioni per la configurazione automatica di comportamenti di eliminazione predefiniti utili per ogni relazione in base alla [obbligatorietà della relazione](xref:core/modeling/relationships#required-and-optional-relationships).
 
 ## <a name="delete-behaviors"></a>Comportamenti di eliminazione
 
@@ -30,7 +31,7 @@ Esistono tre azioni che EF può eseguire quando viene eliminata un'entità princ
 > [!NOTE]  
 > Il comportamento di eliminazione configurato nel modello di EF Core viene applicato solo quando l'entità principale viene eliminata usando EF Core e le entità dipendenti vengono caricate in memoria (come nel caso delle entità dipendenti con rilevamento delle modifiche). È necessario configurare un comportamento a catena corrispondente nel database per garantire l'applicazione dell'azione necessaria ai dati non sottoposti a rilevamento delle modifiche dal contesto. Se si usa EF Core per creare il database, questo comportamento a catena verrà configurato automaticamente.
 
-Per la seconda azione indicata in precedenza, l'impostazione di un valore di chiave esterna su Null non è valida se la chiave esterna non ammette valori Null. Una chiave esterna non nullable è equivalente a una relazione obbligatoria. In questi casi, EF Core tiene traccia che la proprietà di chiave esterna è stata contrassegnata come null fino a quando SaveChanges viene chiamato, in cui viene generata un'eccezione perché la modifica non può essere mantenuta nel database. La situazione è simile alla segnalazione di una violazione di vincolo dal database.
+Per la seconda azione indicata in precedenza, l'impostazione di un valore di chiave esterna su Null non è valida se la chiave esterna non ammette valori Null. Una chiave esterna che non ammette i valori null equivale a una relazione obbligatoria. In questi casi, EF Core rileva che la proprietà della chiave esterna è stata contrassegnata come null finché non viene chiamato SaveChanges, a quel punto viene generata un'eccezione in quanto la modifica non può essere resa permanente nel database. La situazione è simile alla segnalazione di una violazione di vincolo dal database.
 
 Sono disponibili quattro comportamenti di eliminazione, elencati nelle tabelle seguenti.
 
@@ -41,7 +42,7 @@ Per le relazioni facoltative (chiave esterna che ammette valori Null), _è_ poss
 | Nome del comportamento               | Effetto sull'entità dipendente/figlio in memoria    | Effetto sull'entità dipendente/figlio nel database  |
 |:----------------------------|:---------------------------------------|:---------------------------------------|
 | **Cascata**                 | Le entità vengono eliminate                   | Le entità vengono eliminate                   |
-| **ClientSetNull** (impostazione predefinita) | Le proprietà di chiave esterna vengono impostate su Null | nessuno                                   |
+| **ClientSetNull** (impostazione predefinita) | Le proprietà di chiave esterna vengono impostate su Null | Nessuno                                   |
 | **SetNull**                 | Le proprietà di chiave esterna vengono impostate su Null | Le proprietà di chiave esterna vengono impostate su Null |
 | **Limitare**                | nessuno                                   | nessuno                                   |
 
@@ -52,7 +53,7 @@ Per le relazioni obbligatorie (chiave esterna che non ammette valori Null), _non
 | Nome del comportamento         | Effetto sull'entità dipendente/figlio in memoria | Effetto sull'entità dipendente/figlio nel database |
 |:----------------------|:------------------------------------|:--------------------------------------|
 | **Cascade** (impostazione predefinita) | Le entità vengono eliminate                | Le entità vengono eliminate                  |
-| **ClientSetNull**     | SaveChanges genera un'eccezione                  | nessuno                                  |
+| **ClientSetNull**     | SaveChanges genera un'eccezione                  | Nessuno                                  |
 | **SetNull**           | SaveChanges genera un'eccezione                  | SaveChanges genera un'eccezione                    |
 | **Limitare**          | nessuno                                | nessuno                                  |
 

@@ -1,16 +1,16 @@
 ---
 title: Regole di confronto e distinzione maiuscole/minuscole-EF Core
-description: Come configurare le regole di confronto e la distinzione tra maiuscole e minuscole nel database e nelle query
+description: Configurazione delle regole di confronto e distinzione tra maiuscole e minuscole nel database e nelle query con Entity Framework Core
 author: roji
 ms.date: 04/27/2020
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: 46a13d341c1b721bb243ee2b205bdc2f4d7e7aee
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: da37652484e0cd36c2aa907e41e875ba381ff41e
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526446"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617809"
 ---
 # <a name="collations-and-case-sensitivity"></a>Regole di confronto e distinzione tra maiuscole e minuscole
 

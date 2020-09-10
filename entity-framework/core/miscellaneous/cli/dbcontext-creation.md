@@ -1,15 +1,16 @@
 ---
 title: Creazione DbContext della fase di progettazione-EF Core
+description: Strategie per la creazione di un DbContext in fase di progettazione con Entity Framework Core
 author: bricelam
 ms.author: bricelam
 ms.date: 09/16/2019
 uid: core/miscellaneous/cli/dbcontext-creation
-ms.openlocfilehash: 0b0271dcabea63a2529c091cc14cb9059d56ac8d
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: ef2eba93827e04a9731ba960c40e9a50168ca8ff
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672953"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619443"
 ---
 # <a name="design-time-dbcontext-creation"></a>Creazione di DbContext in fase di progettazione
 

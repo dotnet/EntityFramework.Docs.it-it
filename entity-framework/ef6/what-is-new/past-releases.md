@@ -1,15 +1,16 @@
 ---
 title: Versioni precedenti di Entity Framework-EF6
+description: Versioni precedenti di Entity Framework
 author: divega
 ms.date: 09/12/2019
 ms.assetid: 1060bb99-765f-4f32-aaeb-d6635d3dbd3e
 uid: ef6/what-is-new/past-releases
-ms.openlocfilehash: b7181334cd125c5cbf296d5b3674c0b5f087f438
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: e9dce5c545027658a98b375e7ffa15ebbb77369c
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/15/2020
-ms.locfileid: "79402173"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619728"
 ---
 # <a name="past-releases-of-entity-framework"></a>Versioni precedenti di Entity Framework
 
@@ -69,7 +70,7 @@ Le correzioni includono:
 ## <a name="ef-612"></a>EF 6.1.2
 Il runtime di EF 6.1.2 è stato rilasciato a NuGet nel dicembre 2014.
 Questa versione riguarda per lo più le correzioni di bug. Sono state inoltre accettate alcune importanti modifiche da parte dei membri della community:
-- **I parametri della cache di query possono essere configurati dal file app/Web. Configuration**
+- **I parametri della cache di query possono essere configurati dal file app/web.configuration**
     ``` xml
     <entityFramework>
       <queryCache size='1000' cleaningIntervalInSeconds='-1'/>
@@ -87,12 +88,12 @@ Questa versione contiene correzioni per i problemi riscontrati da un certo numer
 Il runtime di EF 6.1.0 è stato rilasciato a NuGet nel marzo 2014.
 Questo aggiornamento secondario include un numero significativo di nuove funzionalità:
 
-- Il **consolidamento degli strumenti** offre un modo coerente per creare un nuovo modello EF. Questa funzionalità [estende la procedura guidata ADO.NET Entity Data Model per supportare la creazione di modelli Code First](~/ef6/modeling/code-first/workflows/existing-database.md), incluso Reverse Engineering da un database esistente. Queste funzionalità in precedenza erano disponibili in qualità beta in EF Power Tools.
-- La **[gestione degli errori di commit delle transazioni](~/ef6/fundamentals/connection-resiliency/commit-failures.md)** fornisce CommitFailureHandler che consente di utilizzare la nuova funzionalità introdotta per intercettare le operazioni di transazione. Il CommitFailureHandler consente il ripristino automatico dagli errori di connessione durante il commit di una transazione.
-- **[IndexAttribute](~/ef6/modeling/code-first/data-annotations.md)** consente di specificare gli indici inserendo un `[Index]` attributo in una proprietà (o proprietà) del modello di Code First. Code First creerà quindi un indice corrispondente nel database.
+- Il **consolidamento degli strumenti** offre un modo coerente per creare un nuovo modello EF. Questa funzionalità [estende la procedura guidata ADO.NET Entity Data Model per supportare la creazione di modelli Code First](xref:ef6/modeling/code-first/workflows/existing-database), incluso Reverse Engineering da un database esistente. Queste funzionalità in precedenza erano disponibili in qualità beta in EF Power Tools.
+- La **[gestione degli errori di commit delle transazioni](xref:ef6/fundamentals/connection-resiliency/commit-failures)** fornisce CommitFailureHandler che consente di utilizzare la nuova funzionalità introdotta per intercettare le operazioni di transazione. Il CommitFailureHandler consente il ripristino automatico dagli errori di connessione durante il commit di una transazione.
+- **[IndexAttribute](xref:ef6/modeling/code-first/data-annotations)** consente di specificare gli indici inserendo un `[Index]` attributo in una proprietà (o proprietà) nel modello di Code First. Code First creerà quindi un indice corrispondente nel database.
 - **L'API di mapping pubblico** fornisce l'accesso alle informazioni EF sul modo in cui le proprietà e i tipi vengono mappati alle colonne e alle tabelle nel database. Nelle versioni precedenti questa API era interna.
-- **[La possibilità di configurare gli intercettori tramite il file app/Web. config](~/ef6/fundamentals/configuring/config-file.md)** consente di aggiungere gli intercettori senza ricompilare l'applicazione.
-- **System. Data. Entity. Infrastructure. Interceptor. DatabaseLogger**è un nuovo intercettore che semplifica la registrazione di tutte le operazioni di database in un file. In combinazione con la funzionalità precedente, in questo modo è possibile [attivare facilmente la registrazione delle operazioni di database per un'applicazione distribuita](~/ef6/fundamentals/configuring/config-file.md), senza dover ricompilare.
+- **[La possibilità di configurare gli intercettori tramite il file app/Web.config](xref:ef6/fundamentals/configuring/config-file)** consente di aggiungere gli intercettori senza ricompilare l'applicazione.
+- **System. Data. Entity. Infrastructure. Interceptor. DatabaseLogger**è un nuovo intercettore che semplifica la registrazione di tutte le operazioni di database in un file. In combinazione con la funzionalità precedente, in questo modo è possibile [attivare facilmente la registrazione delle operazioni di database per un'applicazione distribuita](xref:ef6/fundamentals/configuring/config-file), senza dover ricompilare.
 - Il **rilevamento delle modifiche del modello delle migrazioni** è stato migliorato in modo che le migrazioni con impalcature siano più accurate. sono state inoltre migliorate le prestazioni del processo di rilevamento delle modifiche.
 - **Miglioramenti delle prestazioni** , tra cui operazioni di database ridotte durante l'inizializzazione, ottimizzazioni per il confronto di uguaglianza di valori null nelle query LINQ, generazione di visualizzazioni più veloce (creazione di modelli) in più scenari e materializzazione più efficiente delle entità registrate con più associazioni.
 
@@ -110,23 +111,23 @@ Questo aspetto era importante in quanto le prestazioni di riscaldamento erano un
 Il runtime di EF 6.0.0 è stato rilasciato a NuGet nell'ottobre del 2013.
 Questa è la prima versione in cui è incluso un runtime EF completo nel [pacchetto NuGet EntityFramework](https://www.nuget.org/packages/EntityFramework/) che non dipende dai bit EF che fanno parte del .NET Framework.
 Lo stato di trasferimento delle parti rimanenti del runtime al pacchetto NuGet richiedeva una serie di modifiche di rilievo per il codice esistente.
-Per ulteriori informazioni sui passaggi manuali necessari per eseguire l'aggiornamento, vedere la sezione relativa all' [aggiornamento a Entity Framework 6](upgrading-to-ef6.md) .
+Per ulteriori informazioni sui passaggi manuali necessari per eseguire l'aggiornamento, vedere la sezione relativa all' [aggiornamento a Entity Framework 6](xref:ef6/what-is-new/upgrading-to-ef6) .
 
 Questa versione include numerose nuove funzionalità.
 Le funzionalità seguenti funzionano per i modelli creati con Code First o la finestra di progettazione EF:
 
-- La **[query asincrona e il salvataggio](~/ef6/fundamentals/async.md)** aggiungono il supporto per i modelli asincroni basati su attività introdotti in .NET 4,5.
-- La **[resilienza delle connessioni](~/ef6/fundamentals/connection-resiliency/retry-logic.md)** consente il ripristino automatico da errori di connessione temporanei.
-- La **[configurazione basata su codice](~/ef6/fundamentals/configuring/code-based.md)** offre la possibilità di eseguire la configurazione, che in genere è stata eseguita in un file di configurazione, nel codice.
-- La **[risoluzione delle dipendenze](~/ef6/fundamentals/configuring/dependency-resolution.md)** introduce il supporto per il modello di localizzatore del servizio ed è stato eseguito il factoring di alcune funzionalità che possono essere sostituite con implementazioni personalizzate.
-- La **[registrazione di intercettazione/SQL](~/ef6/fundamentals/logging-and-interception.md)** fornisce blocchi predefiniti di basso livello per l'intercettazione di operazioni EF con una semplice registrazione SQL compilata in primo piano.
-- I **miglioramenti della testabilità** semplificano la creazione di duplicati di test per DbContext e DbSet quando si [Usa un Framework fittizio](~/ef6/fundamentals/testing/mocking.md) o si [scrivono doppi test personalizzati](~/ef6/fundamentals/testing/writing-test-doubles.md).
-- **[È ora possibile creare DbContext con un DbConnection già aperto](~/ef6/fundamentals/connection-management.md)** che consente scenari in cui è utile se la connessione potrebbe essere aperta durante la creazione del contesto, ad esempio la condivisione di una connessione tra i componenti in cui non è possibile garantire lo stato della connessione.
-- Il **[supporto delle transazioni migliorato](~/ef6/saving/transactions.md)** fornisce il supporto per una transazione esterna al Framework, oltre a metodi migliorati per la creazione di una transazione all'interno del Framework.
+- La **[query asincrona e il salvataggio](xref:ef6/fundamentals/async)** aggiungono il supporto per i modelli asincroni basati su attività introdotti in .NET 4,5.
+- La **[resilienza delle connessioni](xref:ef6/fundamentals/connection-resiliency/retry-logic)** consente il ripristino automatico da errori di connessione temporanei.
+- La **[configurazione basata su codice](xref:ef6/fundamentals/configuring/code-based)** offre la possibilità di eseguire la configurazione, che in genere è stata eseguita in un file di configurazione, nel codice.
+- La **[risoluzione delle dipendenze](xref:ef6/fundamentals/configuring/dependency-resolution)** introduce il supporto per il modello di localizzatore del servizio ed è stato eseguito il factoring di alcune funzionalità che possono essere sostituite con implementazioni personalizzate.
+- La **[registrazione di intercettazione/SQL](xref:ef6/fundamentals/logging-and-interception)** fornisce blocchi predefiniti di basso livello per l'intercettazione di operazioni EF con una semplice registrazione SQL compilata in primo piano.
+- I **miglioramenti della testabilità** semplificano la creazione di duplicati di test per DbContext e DbSet quando si [Usa un Framework fittizio](xref:ef6/fundamentals/testing/mocking) o si [scrivono doppi test personalizzati](xref:ef6/fundamentals/testing/writing-test-doubles).
+- **[È ora possibile creare DbContext con un DbConnection già aperto](xref:ef6/fundamentals/connection-management)** che consente scenari in cui è utile se la connessione potrebbe essere aperta durante la creazione del contesto, ad esempio la condivisione di una connessione tra i componenti in cui non è possibile garantire lo stato della connessione.
+- Il **[supporto delle transazioni migliorato](xref:ef6/saving/transactions)** fornisce il supporto per una transazione esterna al Framework, oltre a metodi migliorati per la creazione di una transazione all'interno del Framework.
 - **Enumerazioni, prestazioni spaziali e migliori in .net 4,0** : spostando i componenti di base che si trovavano nel .NET Framework nel pacchetto di Entity Framework, ora è possibile offrire supporto enum, tipi di dati spaziali e miglioramenti delle prestazioni di EF5 in .NET 4,0.
 - **Miglioramento delle prestazioni di Enumerable. Contains nelle query LINQ**.
-- **Miglioramento del tempo di riscaldamento (generazione delle visualizzazioni)** , soprattutto per i modelli di grandi dimensioni.
-- **Pluralismo innestabile &amp; servizio di singolarità**.
+- **Miglioramento del tempo di riscaldamento (generazione delle visualizzazioni)**, soprattutto per i modelli di grandi dimensioni.
+- **Pluralità &amp; modulare Servizio di singolarità**.
 - Sono ora supportate le **implementazioni personalizzate di Equals o GetHashCode** sulle classi di entità.
 - **DbSet. AddRange/RemoveRange** fornisce un modo ottimizzato per aggiungere o rimuovere più entità da un set.
 - **DbChangeTracker. HasChanges** fornisce un modo semplice ed efficiente per verificare se sono presenti modifiche in sospeso da salvare nel database.
@@ -134,13 +135,13 @@ Le funzionalità seguenti funzionano per i modelli creati con Code First o la fi
 
 Le funzionalità seguenti si applicano solo a Code First:
 
-- Le **[convenzioni Code First personalizzate](~/ef6/modeling/code-first/conventions/custom.md)** consentono di scrivere convenzioni personalizzate per evitare la configurazione ripetitiva. Viene fornita un'API semplice per le convenzioni leggere, oltre ad alcuni blocchi predefiniti più complessi che consentono di creare convenzioni più complesse.
-- È ora supportata la **[Code First il mapping alle stored procedure INSERT/UPDATE/DELETE](~/ef6/modeling/code-first/fluent/cud-stored-procedures.md)** .
-- Gli **[script di migrazione di idempotente](~/ef6/modeling/code-first/migrations/index.md)** consentono di generare uno script SQL in grado di aggiornare un database con qualsiasi versione fino alla versione più recente.
-- La **[tabella di cronologia delle migrazioni configurabili](~/ef6/modeling/code-first/migrations/history-customization.md)** consente di personalizzare la definizione della tabella di cronologia delle migrazioni. Questa operazione è particolarmente utile per i provider di database che richiedono i tipi di dati appropriati e così via. per il corretto funzionamento della tabella di cronologia delle migrazioni.
+- Le **[convenzioni Code First personalizzate](xref:ef6/modeling/code-first/conventions/custom)** consentono di scrivere convenzioni personalizzate per evitare la configurazione ripetitiva. Viene fornita un'API semplice per le convenzioni leggere, oltre ad alcuni blocchi predefiniti più complessi che consentono di creare convenzioni più complesse.
+- È ora supportata la **[Code First il mapping alle stored procedure INSERT/UPDATE/DELETE](xref:ef6/modeling/code-first/fluent/cud-stored-procedures)** .
+- Gli **[script di migrazione di idempotente](xref:ef6/modeling/code-first/migrations/index)** consentono di generare uno script SQL in grado di aggiornare un database con qualsiasi versione fino alla versione più recente.
+- La **[tabella di cronologia delle migrazioni configurabili](xref:ef6/modeling/code-first/migrations/history-customization)** consente di personalizzare la definizione della tabella di cronologia delle migrazioni. Questa operazione è particolarmente utile per i provider di database che richiedono i tipi di dati appropriati e così via. per il corretto funzionamento della tabella di cronologia delle migrazioni.
 - Con **più contesti per database** viene rimossa la limitazione precedente di un modello di Code First per ogni database quando si utilizzano le migrazioni o quando Code First crea automaticamente il database.
-- **[DbModelBuilder. HasDefaultSchema](~/ef6/modeling/code-first/fluent/types-and-properties.md)** è una nuova API Code First che consente di configurare lo schema del database predefinito per un modello di Code First in un'unica posizione. In precedenza, lo schema predefinito Code First è stato hardcoded per &quot;&quot; dbo e l'unico modo per configurare lo schema a cui apparteneva una tabella era tramite l'API ToTable.
-- Il **Metodo DbModelBuilder. Configurations. AddFromAssembly** consente di aggiungere facilmente tutte le classi di configurazione definite in un assembly quando si utilizzano le classi di configurazione con l'API Code First Fluent.
+- **[DbModelBuilder. HasDefaultSchema](xref:ef6/modeling/code-first/fluent/types-and-properties)** è una nuova API Code First che consente di configurare lo schema del database predefinito per un modello di Code First in un'unica posizione. In precedenza, lo schema predefinito Code First è stato hardcoded in &quot; dbo &quot; e l'unico modo per configurare lo schema a cui apparteneva una tabella era tramite l'API ToTable.
+- **DbModelBuilder.Configurations. Il metodo AddFromAssembly** consente di aggiungere facilmente tutte le classi di configurazione definite in un assembly quando si utilizzano le classi di configurazione con l'API Code First Fluent.
 - **[Le operazioni di migrazione personalizzate](https://romiller.com/2013/02/27/ef6-writing-your-own-code-first-migration-operations/)** consentono di aggiungere altre operazioni da usare nelle migrazioni basate sul codice.
 - Il **livello di isolamento delle transazioni predefinito viene modificato in READ_COMMITTED_SNAPSHOT** per i database creati con Code First, consentendo una maggiore scalabilità e un minor numero di deadlock.
 - I **tipi di entità e complessi possono ora essere classi nestedinside**.
@@ -155,64 +156,64 @@ Di seguito è riportato un elenco di contenuto che viene raccolto in modo specif
 
 -   [Post di rilascio di EF 5](https://blogs.msdn.com/b/adonet/archive/2012/08/15/ef5-released.aspx)
 -   Nuove funzionalità di EF5
-    -   [Supporto enum in Code First](~/ef6/modeling/code-first/data-types/enums.md)
-    -   [Supporto enum in EF designer](~/ef6/modeling/designer/data-types/enums.md)
-    -   [Tipi di dati spaziali in Code First](~/ef6/modeling/code-first/data-types/spatial.md)
-    -   [Tipi di dati spaziali in EF designer](~/ef6/modeling/designer/data-types/spatial.md)
-    -   [Supporto del provider per i tipi spaziali](~/ef6/fundamentals/providers/spatial-support.md)
-    -   [Funzioni con valori di tabella](~/ef6/modeling/designer/advanced/tvfs.md)
-    -   [Più diagrammi per modello](~/ef6/modeling/designer/multiple-diagrams.md)
+    -   [Supporto enum in Code First](xref:ef6/modeling/code-first/data-types/enums)
+    -   [Supporto enum in EF designer](xref:ef6/modeling/designer/data-types/enums)
+    -   [Tipi di dati spaziali in Code First](xref:ef6/modeling/code-first/data-types/spatial)
+    -   [Tipi di dati spaziali in EF designer](xref:ef6/modeling/designer/data-types/spatial)
+    -   [Supporto del provider per i tipi spaziali](xref:ef6/fundamentals/providers/spatial-support)
+    -   [Funzioni con valori di tabella](xref:ef6/modeling/designer/advanced/tvfs)
+    -   [Più diagrammi per modello](xref:ef6/modeling/designer/multiple-diagrams)
 -   Impostazione del modello
-    -   [Creazione di un modello](~/ef6/modeling/index.md)
-    -   [Connessioni e modelli](~/ef6/fundamentals/configuring/connection-strings.md)
-    -   [Considerazioni sulle prestazioni](~/ef6/fundamentals/performance/perf-whitepaper.md)
-    -   [Utilizzo di Microsoft SQL Azure](~/ef6/fundamentals/connection-resiliency/retry-logic.md)
-    -   [Impostazioni del file di configurazione](~/ef6/fundamentals/configuring/config-file.md)
-    -   [Glossario](~/ef6/resources/glossary.md)
+    -   [Creazione di un modello](xref:ef6/modeling/index)
+    -   [Connessioni e modelli](xref:ef6/fundamentals/configuring/connection-strings)
+    -   [Considerazioni sulle prestazioni](xref:ef6/fundamentals/performance/perf-whitepaper)
+    -   [Utilizzo di Microsoft SQL Azure](xref:ef6/fundamentals/connection-resiliency/retry-logic)
+    -   [Impostazioni del file di configurazione](xref:ef6/fundamentals/configuring/config-file)
+    -   [Glossario](xref:ef6/resources/glossary)
     -   Code First
-        -   [Code First a un nuovo database (procedura dettagliata e video)](~/ef6/modeling/code-first/workflows/new-database.md)
-        -   [Code First a un database esistente (procedura dettagliata e video)](~/ef6/modeling/code-first/workflows/existing-database.md)
-        -   [Convenzioni](~/ef6/modeling/code-first/conventions/built-in.md)
-        -   [Annotazioni dei dati](~/ef6/modeling/code-first/data-annotations.md)
-        -   [API Fluent-configurazione/mapping delle proprietà & tipi](~/ef6/modeling/code-first/fluent/types-and-properties.md)
-        -   [API Fluent-configurazione delle relazioni](~/ef6/modeling/code-first/fluent/relationships.md)
-        -   [API Fluent con VB.NET](~/ef6/modeling/code-first/fluent/vb.md)
-        -   [Migrazioni Code First](~/ef6/modeling/code-first/migrations/index.md)
-        -   [Migrazioni Code First automatico](~/ef6/modeling/code-first/migrations/automatic.md)
-        -   [Migrate. exe](~/ef6/modeling/code-first/migrations/migrate-exe.md)
-        -   [Definizione di DbSet](~/ef6/modeling/code-first/dbsets.md)
+        -   [Code First a un nuovo database (procedura dettagliata e video)](xref:ef6/modeling/code-first/workflows/new-database)
+        -   [Code First a un database esistente (procedura dettagliata e video)](xref:ef6/modeling/code-first/workflows/existing-database)
+        -   [Convenzioni](xref:ef6/modeling/code-first/conventions/built-in)
+        -   [Annotazioni dei dati](xref:ef6/modeling/code-first/data-annotations)
+        -   [API Fluent-configurazione/mapping delle proprietà & tipi](xref:ef6/modeling/code-first/fluent/types-and-properties)
+        -   [API Fluent-configurazione delle relazioni](xref:ef6/modeling/code-first/fluent/relationships)
+        -   [API Fluent con VB.NET](xref:ef6/modeling/code-first/fluent/vb)
+        -   [Migrazioni Code First](xref:ef6/modeling/code-first/migrations/index)
+        -   [Migrazioni Code First automatico](xref:ef6/modeling/code-first/migrations/automatic)
+        -   [Migrate.exe](xref:ef6/modeling/code-first/migrations/migrate-exe)
+        -   [Definizione di DbSet](xref:ef6/modeling/code-first/dbsets)
     -   EF Designer
-        -   [Model First (procedura dettagliata e video)](~/ef6/modeling/designer/workflows/model-first.md)
-        -   [Database First (procedura dettagliata e video)](~/ef6/modeling/designer/workflows/database-first.md)
-        -   [Tipi complessi](~/ef6/modeling/designer/data-types/complex-types.md)
-        -   [Associazioni/relazioni](~/ef6/modeling/designer/relationships.md)
-        -   [Modello di ereditarietà TPT](~/ef6/modeling/designer/inheritance/tpt.md)
-        -   [Modello di ereditarietà TPH](~/ef6/modeling/designer/inheritance/tph.md)
-        -   [Eseguire query con stored procedure](~/ef6/modeling/designer/stored-procedures/query.md)
-        -   [Stored procedure con più set di risultati](~/ef6/modeling/designer/advanced/multiple-result-sets.md)
-        -   [Insert, Update & DELETE con stored procedure](~/ef6/modeling/designer/stored-procedures/cud.md)
-        -   [Eseguire il mapping di un'entità a più tabelle (suddivisione di entità)](~/ef6/modeling/designer/entity-splitting.md)
-        -   [Eseguire il mapping di più entità a una tabella (suddivisione di tabelle)](~/ef6/modeling/designer/table-splitting.md)
-        -   [Definizione di query](~/ef6/modeling/designer/advanced/defining-query.md)
-        -   [Modelli di generazione del codice](~/ef6/modeling/designer/codegen/index.md)
-        -   [Ripristino di ObjectContext](~/ef6/modeling/designer/codegen/legacy-objectcontext.md)
+        -   [Model First (procedura dettagliata e video)](xref:ef6/modeling/designer/workflows/model-first)
+        -   [Database First (procedura dettagliata e video)](xref:ef6/modeling/designer/workflows/database-first)
+        -   [Tipi complessi](xref:ef6/modeling/designer/data-types/complex-types)
+        -   [Associazioni/relazioni](xref:ef6/modeling/designer/relationships)
+        -   [Modello di ereditarietà TPT](xref:ef6/modeling/designer/inheritance/tpt)
+        -   [Modello di ereditarietà TPH](xref:ef6/modeling/designer/inheritance/tph)
+        -   [Eseguire query con stored procedure](xref:ef6/modeling/designer/stored-procedures/query)
+        -   [Stored procedure con più set di risultati](xref:ef6/modeling/designer/advanced/multiple-result-sets)
+        -   [Insert, Update & Delete con stored procedure](xref:ef6/modeling/designer/stored-procedures/cud)
+        -   [Eseguire il mapping di un'entità a più tabelle (suddivisione di entità)](xref:ef6/modeling/designer/entity-splitting)
+        -   [Eseguire il mapping di più entità a una tabella (suddivisione di tabelle)](xref:ef6/modeling/designer/table-splitting)
+        -   [Definizione di query](xref:ef6/modeling/designer/advanced/defining-query)
+        -   [Modelli di generazione del codice](xref:ef6/modeling/designer/codegen/index)
+        -   [Ripristino di ObjectContext](xref:ef6/modeling/designer/codegen/legacy-objectcontext)
 -   Uso del modello
-    -   [Utilizzo di DbContext](~/ef6/fundamentals/working-with-dbcontext.md)
-    -   [Esecuzione di query/ricerca di entità](~/ef6/querying/index.md)
-    -   [Utilizzo delle relazioni](~/ef6/fundamentals/relationships.md)
-    -   [Caricamento di entità correlate](~/ef6/querying/related-data.md)
-    -   [Utilizzo di dati locali](~/ef6/querying/local-data.md)
-    -   [Applicazioni a più livelli](~/ef6/fundamentals/disconnected-entities/index.md)
-    -   [Query SQL non elaborate](~/ef6/querying/raw-sql.md)
-    -   [Modelli di concorrenza ottimistica](~/ef6/saving/concurrency.md)
-    -   [Uso dei proxy](~/ef6/fundamentals/proxies.md)
-    -   [Rilevamento automatico delle modifiche](~/ef6/saving/change-tracking/auto-detect-changes.md)
-    -   [Query senza rilevamento](~/ef6/querying/no-tracking.md)
-    -   [Metodo Load](~/ef6/querying/load-method.md)
-    -   [Aggiungi/Connetti e Stati di entità](~/ef6/saving/change-tracking/entity-state.md)
-    -   [Utilizzo dei valori delle proprietà](~/ef6/saving/change-tracking/property-values.md)
-    -   [Data Binding con WPF (Windows Presentation Foundation)](~/ef6/fundamentals/databinding/wpf.md)
-    -   [Data Binding con WinForms (Windows Forms)](~/ef6/fundamentals/databinding/winforms.md)
+    -   [Utilizzo di DbContext](xref:ef6/fundamentals/working-with-dbcontext)
+    -   [Esecuzione di query/ricerca di entità](xref:ef6/querying/index)
+    -   [Operazioni con le relazioni](xref:ef6/fundamentals/relationships)
+    -   [Caricamento di entità correlate](xref:ef6/querying/related-data)
+    -   [Utilizzo di dati locali](xref:ef6/querying/local-data)
+    -   [Applicazioni a più livelli](xref:ef6/fundamentals/disconnected-entities/index)
+    -   [Query SQL non elaborate](xref:ef6/querying/raw-sql)
+    -   [Modelli di concorrenza ottimistica](xref:ef6/saving/concurrency)
+    -   [Uso dei proxy](xref:ef6/fundamentals/proxies)
+    -   [Rilevamento automatico delle modifiche](xref:ef6/saving/change-tracking/auto-detect-changes)
+    -   [Query senza rilevamento](xref:ef6/querying/no-tracking)
+    -   [Metodo Load](xref:ef6/querying/load-method)
+    -   [Aggiungi/Connetti e Stati di entità](xref:ef6/saving/change-tracking/entity-state)
+    -   [Utilizzo dei valori delle proprietà](xref:ef6/saving/change-tracking/property-values)
+    -   [Data Binding con WPF (Windows Presentation Foundation)](xref:ef6/fundamentals/databinding/wpf)
+    -   [Data Binding con WinForms (Windows Forms)](xref:ef6/fundamentals/databinding/winforms)
 
 ## <a name="ef-431"></a>EF 4.3.1
 Il runtime di EF 4.3.1 è stato rilasciato a NuGet nel febbraio 2012 poco dopo EF 4.3.0.

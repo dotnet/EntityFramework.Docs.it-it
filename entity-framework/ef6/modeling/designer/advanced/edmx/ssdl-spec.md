@@ -1,19 +1,21 @@
 ---
 title: Specifica SSDL-EF6
+description: Specifica SSDL in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: a4af4b1a-40f4-48cc-b2e0-fa8f5d9d5419
-ms.openlocfilehash: b20d1f99f1da9c53a8a164fccc461e07d19c879d
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/advanced/edmx/ssdl-spec
+ms.openlocfilehash: ab50579649c2e1b19d113cd127e52be995516e27
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418725"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620594"
 ---
 # <a name="ssdl-specification"></a>Specifica SSDL
 Store Schema Definition Language (SSDL) è un linguaggio basato su XML che descrive il modello di archiviazione di un'applicazione Entity Framework.
 
-In un'applicazione Entity Framework, i metadati del modello di archiviazione vengono caricati da un file con estensione SSDL (scritto in SSDL) in un'istanza di System. Data. Metadata. Edm. StoreItemCollection ed è possibile accedervi tramite metodi nel Classe System. Data. Metadata. Edm. MetadataWorkspace. Entity Framework usa i metadati del modello di archiviazione per tradurre le query sul modello concettuale in comandi specifici dell'archivio.
+In un'applicazione Entity Framework i metadati del modello di archiviazione vengono caricati da un file con estensione SSDL (scritto in SSDL) in un'istanza di System. Data. Metadata. Edm. StoreItemCollection ed è possibile accedervi usando i metodi della classe System. Data. Metadata. Edm. MetadataWorkspace. Entity Framework usa i metadati del modello di archiviazione per tradurre le query sul modello concettuale in comandi specifici dell'archivio.
 
 Il Entity Framework Designer (EF designer) archivia le informazioni sul modello di archiviazione in un file con estensione edmx in fase di progettazione. In fase di compilazione il Entity Designer utilizza le informazioni contenute in un file con estensione edmx per creare il file con estensione SSDL necessario per Entity Framework in fase di esecuzione.
 
@@ -31,16 +33,16 @@ Un elemento **Association** in Store Schema Definition Language (SSDL) specifica
 
 L'elemento **Association** può includere i seguenti elementi figlio (nell'ordine elencato):
 
--   Documentazione (zero o uno)
--   End (esattamente due)
--   ReferentialConstraint (zero o uno)
+-   Documentation (zero o un elemento)
+-   End (esattamente due elementi)
+-   ReferentialConstraint (zero o un elemento)
 -   Elementi Annotation (zero o più elementi)
 
 ### <a name="applicable-attributes"></a>Attributi applicabili
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **Association** .
 
-| Nome attributo | Obbligatorio | valore                                                                            |
+| Nome attributo | Obbligatorio | Valore                                                                            |
 |:---------------|:------------|:---------------------------------------------------------------------------------|
 | **Nome**       | Sì         | Il nome del vincolo di chiave esterna corrispondente nel database sottostante. |
 
@@ -49,7 +51,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 
 ### <a name="example"></a>Esempio
 
-Nell'esempio seguente viene illustrato un elemento **Association** che usa un elemento **ReferentialConstraint** per specificare le colonne che fanno parte del vincolo di chiave esterna **\_FK CustomerOrders** :
+Nell'esempio seguente viene illustrato un elemento **Association** che usa un elemento **ReferentialConstraint** per specificare le colonne che fanno parte del vincolo di chiave esterna ** \_ CustomerOrders FK** :
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -72,13 +74,13 @@ Nell'esempio seguente viene illustrato un elemento **Association** che usa un el
 
 ## <a name="associationset-element-ssdl"></a>Elemento AssociationSet (SSDL)
 
-L'elemento **associativo** in Store Schema Definition Language (SSDL) rappresenta un vincolo di chiave esterna tra due tabelle nel database sottostante. Le colonne della tabella che fanno parte del vincolo di chiave esterna vengono specificate in un elemento Association. L'elemento **Association** che corrisponde a **un elemento di associazione specificato è** specificato nell'attributo **Association** dell'elemento associationname.
+L'elemento **associativo** in Store Schema Definition Language (SSDL) rappresenta un vincolo di chiave esterna tra due tabelle nel database sottostante. Le colonne della tabella che fanno parte del vincolo di chiave esterna vengono specificate in un elemento Association. L'elemento **Association** che corrisponde a **un elemento di associazione specificato è** specificato nell'attributo **Association** dell'elemento associationname. **AssociationSet**
 
 Il mapping dei set di associazioni SSDL viene eseguito in set di associazioni CSDL da un elemento AssociationSetMapping. Tuttavia, se l'associazione CSDL per un determinato set di associazioni CSDL viene definita utilizzando un elemento ReferentialConstraint, non è necessario alcun elemento **AssociationSetMapping** corrispondente. In questo caso, se è presente un elemento **AssociationSetMapping** , i mapping che definisce verranno sottoposti a override dall'elemento **ReferentialConstraint** .
 
 L'elemento **associationname** può includere i seguenti elementi figlio (nell'ordine elencato):
 
--   Documentazione (zero o uno)
+-   Documentation (zero o un elemento)
 -   End (zero o due elementi)
 -   Elementi Annotation (zero o più elementi)
 
@@ -86,7 +88,7 @@ L'elemento **associationname** può includere i seguenti elementi figlio (nell'o
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento di **associazione** .
 
-| Nome attributo  | Obbligatorio | valore                                                                                                |
+| Nome attributo  | Obbligatorio | Valore                                                                                                |
 |:----------------|:------------|:-----------------------------------------------------------------------------------------------------|
 | **Nome**        | Sì         | Nome del vincolo di chiave esterna rappresentato dal set di associazioni.                          |
 | **Associazione** | Sì         | Nome dell'associazione che definisce le colonne che fanno parte del vincolo di chiave esterna. |
@@ -96,7 +98,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 
 ### <a name="example"></a>Esempio
 
-Nell'esempio seguente viene illustrato un elemento di **associazione** che rappresenta il vincolo di chiave esterna `FK_CustomerOrders` nel database sottostante:
+Nell'esempio seguente viene illustrato un elemento di **associazione** che rappresenta il `FK_CustomerOrders` vincolo di chiave esterna nel database sottostante:
 
 ``` xml
  <AssociationSet Name="FK_CustomerOrders"
@@ -180,7 +182,7 @@ Nella sintassi SSDL seguente viene illustrata la dichiarazione di un oggetto **E
  </Schema>
 ```
 
-È possibile utilizzare le stored procedure nel Entity Framework per abilitare gli scenari di lettura e scrittura sulle visualizzazioni. È possibile utilizzare una vista origine dati o una vista Entity SQL come tabella di base per il recupero dei dati e per l'elaborazione delle modifiche da parte delle stored procedure.
+È possibile utilizzare le stored procedure nel Entity Framework per abilitare gli scenari di lettura e scrittura sulle visualizzazioni.È possibile utilizzare una vista origine dati o una vista Entity SQL come tabella di base per il recupero dei dati e per l'elaborazione delle modifiche da parte delle stored procedure.
 
 È possibile usare l'elemento **DefiningQuery** per la destinazione Microsoft SQL Server Compact 3,5. Sebbene SQL Server Compact 3,5 non supporti stored procedure, è possibile implementare una funzionalità simile con l'elemento **DefiningQuery** . Un'altra situazione in cui può essere utile è nella creazione di stored procedure per risolvere una mancata corrispondenza tra i tipi di dati utilizzati nel linguaggio di programmazione e quelli dell'origine dati. È possibile scrivere un **DefiningQuery** che accetta un determinato set di parametri e quindi chiama un stored procedure con un set di parametri diverso, ad esempio un stored procedure che elimina i dati.
 
@@ -197,7 +199,7 @@ L'elemento **dipendente** può includere i seguenti elementi figlio (nell'ordine
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **dipendente** .
 
-| Nome attributo | Obbligatorio | valore                                                                                                                                                       |
+| Nome attributo | Obbligatorio | Valore                                                                                                                                                       |
 |:---------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Ruolo**       | Sì         | Lo stesso valore dell'attributo **Role** (se utilizzato) dell'elemento End corrispondente; in caso contrario, il nome della tabella che contiene la colonna di riferimento. |
 
@@ -206,7 +208,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 
 ### <a name="example"></a>Esempio
 
-Nell'esempio seguente viene illustrato un elemento Association che usa un elemento **ReferentialConstraint** per specificare le colonne che fanno parte del vincolo di chiave esterna **\_FK CustomerOrders** . L'elemento **dipendente** specifica la colonna **CustomerID** della tabella **Order** come entità finale dipendente del vincolo.
+Nell'esempio seguente viene illustrato un elemento Association che usa un elemento **ReferentialConstraint** per specificare le colonne che fanno parte del vincolo di chiave esterna ** \_ CustomerOrders FK** . L'elemento **dipendente** specifica la colonna **CustomerID** della tabella **Order** come entità finale dipendente del vincolo.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -268,7 +270,7 @@ Un elemento **end** (come figlio dell'elemento **Association** ) specifica la ta
 
 Un elemento **end** può includere i seguenti elementi figlio (nell'ordine elencato):
 
--   Documentazione (zero o un elemento)
+-   Documentation (zero o un elemento)
 -   OnDelete (zero o un elemento)
 -   Elementi Annotation (zero o più elementi)
 
@@ -276,18 +278,18 @@ Un elemento **end** può includere i seguenti elementi figlio (nell'ordine elenc
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **finale** quando è figlio di un elemento **Association** .
 
-| Nome attributo   | Obbligatorio | valore                                                                                                                                                                                                                                                                                                                                                                                      |
+| Nome attributo   | Obbligatorio | Valore                                                                                                                                                                                                                                                                                                                                                                                      |
 |:-----------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Tipo**         | Sì         | Il nome completo del set di entità SSDL che si trova in corrispondenza dell'entità finale del vincolo di chiave esterna.                                                                                                                                                                                                                                                                                          |
 | **Ruolo**         | No          | Valore dell'attributo **Role** nell'elemento Principal o dipendente dell'elemento ReferentialConstraint corrispondente (se usato).                                                                                                                                                                                                                                             |
-| **Molteplicità** | Sì         | **1**, **0.. 1**o **\*** in base al numero di righe che possono trovarsi alla fine del vincolo FOREIGN KEY. <br/> **1** indica che esiste esattamente una riga nell'entità finale del vincolo di chiave esterna. <br/> **0.. 1** indica che l'entità finale del vincolo di chiave esterna è pari a zero o a una riga. <br/> **\*** indica che sono presenti zero, una o più righe nell'entità finale del vincolo di chiave esterna. |
+| **Molteplicità** | Sì         | **1**, **0.. 1**o a **\*** seconda del numero di righe che possono trovarsi alla fine del vincolo FOREIGN KEY. <br/> **1** indica che esiste esattamente una riga nell'entità finale del vincolo di chiave esterna. <br/> **0.. 1** indica che l'entità finale del vincolo di chiave esterna è pari a zero o a una riga. <br/> **\*** indica che nell'entità finale del vincolo di chiave esterna sono presenti zero, una o più righe. |
 
 > [!NOTE]
 > Qualsiasi numero di attributi di annotazione (attributi XML personalizzati) può essere applicato all'elemento **finale** . Tuttavia, gli attributi personalizzati non possono appartenere ad alcuno spazio dei nomi XML riservato a CSDL. I nomi completi per due attributi personalizzati qualsiasi non possono essere uguali.
 
 #### <a name="example"></a>Esempio
 
-Nell'esempio seguente viene illustrato un elemento **Association** che definisce il vincolo di chiave esterna **\_FK CustomerOrders** . I valori di **molteplicità** specificati in ogni elemento **end** indicano che molte righe della tabella **Orders** possono essere associate a una riga nella tabella **Customers** , ma solo una riga nella tabella **Customers** può essere associata a una riga nella tabella **Orders** . Inoltre, l'elemento **OnDelete** indica che tutte le righe della tabella **Orders** che fanno riferimento a una determinata riga nella tabella **Customers** verranno eliminate se la riga della tabella **Customers** viene eliminata.
+Nell'esempio seguente viene illustrato un elemento **Association** che definisce il vincolo di chiave esterna ** \_ CustomerOrders FK** . I valori di **molteplicità** specificati in ogni elemento **end** indicano che molte righe della tabella **Orders** possono essere associate a una riga nella tabella **Customers** , ma solo una riga nella tabella **Customers** può essere associata a una riga nella tabella **Orders** . Inoltre, l'elemento **OnDelete** indica che tutte le righe della tabella **Orders** che fanno riferimento a una determinata riga nella tabella **Customers** verranno eliminate se la riga della tabella **Customers** viene eliminata.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -314,14 +316,14 @@ L'elemento **end** (come figlio dell'elemento **associationname** ) specifica un
 
 Un elemento **end** può includere i seguenti elementi figlio (nell'ordine elencato):
 
--   Documentazione (zero o uno)
+-   Documentation (zero o un elemento)
 -   Elementi Annotation (zero o più elementi)
 
 #### <a name="applicable-attributes"></a>Attributi applicabili
 
 Nella tabella seguente vengono descritti gli attributi che possono essere applicati all'elemento **finale** quando è figlio di un elemento di **associazione** .
 
-| Nome attributo | Obbligatorio | valore                                                                                                                  |
+| Nome attributo | Obbligatorio | Valore                                                                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------|
 | **EntitySet**  | Sì         | Il nome del set di entità SSDL in corrispondenza dell'entità finale del vincolo di chiave esterna.                                      |
 | **Ruolo**       | No          | Valore di uno degli attributi **Role** specificati in un elemento **end** dell'elemento Association corrispondente. |
@@ -365,7 +367,7 @@ Un elemento **EntityContainer** può avere zero o più degli elementi figlio seg
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **EntityContainer** .
 
-| Nome attributo | Obbligatorio | valore                                                                   |
+| Nome attributo | Obbligatorio | Valore                                                                   |
 |:---------------|:------------|:------------------------------------------------------------------------|
 | **Nome**       | Sì         | Nome del contenitore di entità. Il nome non può contenere caratteri punto (.). |
 
@@ -398,7 +400,7 @@ Un elemento **EntitySet** in Store Schema Definition Language (SSDL) rappresenta
 
 L'elemento **EntitySet** può includere i seguenti elementi figlio (nell'ordine elencato):
 
--   Documentazione (zero o un elemento)
+-   Documentation (zero o un elemento)
 -   DefiningQuery (zero o un elemento)
 -   Elementi Annotation
 
@@ -409,7 +411,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 > [!NOTE]
 > Alcuni attributi (non elencati qui) possono essere qualificati con l'alias del **negozio** . Questi attributi vengono utilizzati dalla procedura guidata Aggiorna modello in caso di aggiornamento di un modello.
 
-| Nome attributo | Obbligatorio | valore                                                                                    |
+| Nome attributo | Obbligatorio | Valore                                                                                    |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------|
 | **Nome**       | Sì         | Nome del set di entità.                                                              |
 | **EntityType** | Sì         | Nome completo del tipo di entità per il quale il set di entità contiene delle istanze. |
@@ -445,7 +447,7 @@ Un elemento **EntityType** in Store Schema Definition Language (SSDL) rappresent
 
 L'elemento **EntityType** può includere i seguenti elementi figlio (nell'ordine elencato):
 
--   Documentazione (zero o un elemento)
+-   Documentation (zero o un elemento)
 -   Key (zero o un elemento)
 -   Elementi Annotation
 
@@ -453,7 +455,7 @@ L'elemento **EntityType** può includere i seguenti elementi figlio (nell'ordine
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **EntityType** .
 
-| Nome attributo | Obbligatorio | valore                                                                                                                                                                  |
+| Nome attributo | Obbligatorio | Valore                                                                                                                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nome**       | Sì         | Nome del tipo di entità. Questo valore corrisponde generalmente al nome della tabella in cui il tipo di entità rappresenta una riga. Questo valore non può contenere punti (.). |
 
@@ -484,7 +486,7 @@ L'elemento **Function** in Store Schema Definition Language (SSDL) specifica una
 
 L'elemento **Function** può includere i seguenti elementi figlio (nell'ordine elencato):
 
--   Documentazione (zero o uno)
+-   Documentation (zero o un elemento)
 -   Parameter (zero o più)
 -   CommandText (zero o uno)
 -   ReturnType (zero o più)
@@ -492,7 +494,7 @@ L'elemento **Function** può includere i seguenti elementi figlio (nell'ordine e
 
 Un tipo restituito per una funzione deve essere specificato con l'elemento **returnType** o l'attributo **returnType** (vedere di seguito), ma non entrambi.
 
-È possibile importare stored procedure specificate nel modello di archiviazione nel modello concettuale di un'applicazione. Per ulteriori informazioni, vedere [esecuzione di query con stored procedure](~/ef6/modeling/designer/stored-procedures/query.md). L'elemento **Function** può essere utilizzato anche per definire funzioni personalizzate nel modello di archiviazione.  
+È possibile importare stored procedure specificate nel modello di archiviazione nel modello concettuale di un'applicazione. Per ulteriori informazioni, vedere [esecuzione di query con stored procedure](xref:ef6/modeling/designer/stored-procedures/query). L'elemento **Function** può essere utilizzato anche per definire funzioni personalizzate nel modello di archiviazione.  
 
 ### <a name="applicable-attributes"></a>Attributi applicabili
 
@@ -501,14 +503,14 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 > [!NOTE]
 > Alcuni attributi (non elencati qui) possono essere qualificati con l'alias del **negozio** . Questi attributi vengono utilizzati dalla procedura guidata Aggiorna modello in caso di aggiornamento di un modello.
 
-| Nome attributo             | Obbligatorio | valore                                                                                                                                                                                                              |
+| Nome attributo             | Obbligatorio | Valore                                                                                                                                                                                                              |
 |:---------------------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nome**                   | Sì         | Nome della stored procedure.                                                                                                                                                                                  |
 | **ReturnType**             | No          | Tipo restituito della stored procedure.                                                                                                                                                                           |
 | **Aggregata**              | No          | **True** se il stored procedure restituisce un valore di aggregazione. in caso contrario, **false**.                                                                                                                                  |
 | **BuiltIn**                | No          | **True** se la funzione è una funzione incorporata<sup>1</sup> . in caso contrario, **false**.                                                                                                                                  |
 | **StoreFunctionName**      | No          | Nome della stored procedure.                                                                                                                                                                                  |
-| **Attributo NiladicFunction**        | No          | **True** se la funzione è una funzione senza parametri<sup>2</sup> . In caso contrario, **false** .                                                                                                                                   |
+| **NiladicFunction**        | No          | **True** se la funzione è una funzione senza parametri<sup>2</sup> . In caso contrario, **false** .                                                                                                                                   |
 | **IsComposable**           | No          | **True** se la funzione è una funzione componibile<sup>3</sup> . In caso contrario, **false** .                                                                                                                                |
 | **ParameterTypeSemantics** | No          | Enumerazione che definisce la semantica dei tipi utilizzata per risolvere gli overload della funzione. L'enumerazione è definita nel file manifesto del provider per ogni definizione di funzione. Il valore predefinito è **AllowImplicitConversion**. |
 | **Schema**                 | No          | Nome dello schema in cui viene definita la stored procedure.                                                                                                                                                   |
@@ -574,14 +576,14 @@ L'elemento **OnDelete** in Store Schema Definition Language (SSDL) riflette il c
 
 Un elemento **OnDelete** può includere i seguenti elementi figlio (nell'ordine elencato):
 
--   Documentazione (zero o uno)
+-   Documentation (zero o un elemento)
 -   Elementi Annotation (zero o più elementi)
 
 ### <a name="applicable-attributes"></a>Attributi applicabili
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **OnDelete** .
 
-| Nome attributo | Obbligatorio | valore                                                                                               |
+| Nome attributo | Obbligatorio | Valore                                                                                               |
 |:---------------|:------------|:----------------------------------------------------------------------------------------------------|
 | **Azione**     | Sì         | **Cascade** o **None**. (Il valore con **restrizioni** è valido ma ha lo stesso comportamento di **None**). |
 
@@ -590,7 +592,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 
 ### <a name="example"></a>Esempio
 
-Nell'esempio seguente viene illustrato un elemento **Association** che definisce il vincolo di chiave esterna **\_FK CustomerOrders** . L'elemento **OnDelete** indica che tutte le righe della tabella **Orders** che fanno riferimento a una determinata riga della tabella **Customers** verranno eliminate se la riga della tabella **Customers** viene eliminata.
+Nell'esempio seguente viene illustrato un elemento **Association** che definisce il vincolo di chiave esterna ** \_ CustomerOrders FK** . L'elemento **OnDelete** indica che tutte le righe della tabella **Orders** che fanno riferimento a una determinata riga della tabella **Customers** verranno eliminate se la riga della tabella **Customers** viene eliminata.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -617,14 +619,14 @@ L'elemento **Parameter** in Store Schema Definition Language (SSDL) è un elemen
 
 L'elemento **Parameter** può includere i seguenti elementi figlio (nell'ordine elencato):
 
--   Documentazione (zero o uno)
+-   Documentation (zero o un elemento)
 -   Elementi Annotation (zero o più elementi)
 
 ### <a name="applicable-attributes"></a>Attributi applicabili
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **Parameter** .
 
-| Nome attributo | Obbligatorio | valore                                                                                                                                                                                                                           |
+| Nome attributo | Obbligatorio | Valore                                                                                                                                                                                                                           |
 |:---------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nome**       | Sì         | Nome del parametro.                                                                                                                                                                                                      |
 | **Tipo**       | Sì         | Tipo di parametro.                                                                                                                                                                                                             |
@@ -667,7 +669,7 @@ L'elemento **Principal** può includere i seguenti elementi figlio (nell'ordine 
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **Principal** .
 
-| Nome attributo | Obbligatorio | valore                                                                                                                                                      |
+| Nome attributo | Obbligatorio | Valore                                                                                                                                                      |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Ruolo**       | Sì         | Lo stesso valore dell'attributo **Role** (se utilizzato) dell'elemento End corrispondente; in caso contrario, il nome della tabella che contiene la colonna a cui si fa riferimento. |
 
@@ -676,7 +678,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 
 ### <a name="example"></a>Esempio
 
-Nell'esempio seguente viene illustrato un elemento Association che usa un elemento **ReferentialConstraint** per specificare le colonne che fanno parte del vincolo di chiave esterna **\_FK CustomerOrders** . L'elemento **Principal** specifica la colonna **CustomerID** della tabella **Customer** come entità finale principale del vincolo.
+Nell'esempio seguente viene illustrato un elemento Association che usa un elemento **ReferentialConstraint** per specificare le colonne che fanno parte del vincolo di chiave esterna ** \_ CustomerOrders FK** . L'elemento **Principal** specifica la colonna **CustomerID** della tabella **Customer** come entità finale principale del vincolo.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -707,7 +709,7 @@ Un elemento **Property** non può contenere elementi figlio.
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **Property** .
 
-| Nome attributo            | Obbligatorio | valore                                                                                                                                                                                                                           |
+| Nome attributo            | Obbligatorio | Valore                                                                                                                                                                                                                           |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nome**                  | Sì         | Nome della colonna corrispondente.                                                                                                                                                                                           |
 | **Tipo**                  | Sì         | Tipo della colonna corrispondente.                                                                                                                                                                                           |
@@ -752,14 +754,14 @@ L'elemento **PropertyRef** in Store Schema Definition Language (SSDL) fa riferim
 
 L'elemento **PropertyRef** può avere solo gli elementi figlio seguenti:
 
--   Documentazione (zero o uno)
+-   Documentation (zero o un elemento)
 -   Elementi Annotation
 
 ### <a name="applicable-attributes"></a>Attributi applicabili
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **PropertyRef** .
 
-| Nome attributo | Obbligatorio | valore                                |
+| Nome attributo | Obbligatorio | Valore                                |
 |:---------------|:------------|:-------------------------------------|
 | **Nome**       | Sì         | Nome della proprietà alla quale viene fatto riferimento. |
 
@@ -792,9 +794,9 @@ L'elemento **ReferentialConstraint** è un elemento figlio facoltativo dell'elem
 
 L'elemento **ReferentialConstraint** può avere gli elementi figlio seguenti:
 
--   Documentazione (zero o uno)
+-   Documentation (zero o un elemento)
 -   Principal (esattamente un elemento)
--   Dipendente (esattamente uno)
+-   Dependent (esattamente un elemento)
 -   Elementi Annotation (zero o più elementi)
 
 ### <a name="applicable-attributes"></a>Attributi applicabili
@@ -803,7 +805,7 @@ Qualsiasi numero di attributi di annotazione (attributi XML personalizzati) può
 
 ### <a name="example"></a>Esempio
 
-Nell'esempio seguente viene illustrato un elemento **Association** che usa un elemento **ReferentialConstraint** per specificare le colonne che fanno parte del vincolo di chiave esterna **\_FK CustomerOrders** :
+Nell'esempio seguente viene illustrato un elemento **Association** che usa un elemento **ReferentialConstraint** per specificare le colonne che fanno parte del vincolo di chiave esterna ** \_ CustomerOrders FK** :
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -898,19 +900,19 @@ L'elemento **schema** può contenere zero o più degli elementi figlio seguenti:
 -   Association Rules
 -   EntityType
 -   EntityContainer
--   Funzione
+-   Function
 
 L'elemento **schema** utilizza l'attributo **namespace** per definire lo spazio dei nomi per il tipo di entità e gli oggetti di associazione in un modello di archiviazione. All'interno di uno spazio dei nomi due oggetti non possono avere lo stesso nome.
 
-Uno spazio dei nomi del modello di archiviazione è diverso dallo spazio dei nomi XML dell'elemento **schema** . Uno spazio dei nomi del modello di archiviazione (definito dall'attributo **namespace** ) è un contenitore logico per tipi di entità e tipi di associazione. Lo spazio dei nomi XML, indicato dall'attributo **xmlns** , di un elemento **schema** è lo spazio dei nomi predefinito per gli elementi figlio e gli attributi dell'elemento **schema** . Gli spazi dei nomi XML del form https://schemas.microsoft.com/ado/YYYY/MM/edm/ssdl (dove aaaa e MM rappresentano rispettivamente l'anno e il mese) sono riservati per SSDL. Gli elementi e gli attributi personalizzati non possono essere in spazi dei nomi che hanno questo form.
+Uno spazio dei nomi del modello di archiviazione è diverso dallo spazio dei nomi XML dell'elemento **schema** . Uno spazio dei nomi del modello di archiviazione (definito dall'attributo **namespace** ) è un contenitore logico per tipi di entità e tipi di associazione. Lo spazio dei nomi XML, indicato dall'attributo **xmlns** , di un elemento **schema** è lo spazio dei nomi predefinito per gli elementi figlio e gli attributi dell'elemento **schema** . Gli spazi dei nomi XML del form https://schemas.microsoft.com/ado/YYYY/MM/edm/ssdl (dove aaaa e mm rappresentano rispettivamente l'anno e il mese) sono riservati per SSDL. Gli elementi e gli attributi personalizzati non possono essere in spazi dei nomi che hanno questo form.
 
 ### <a name="applicable-attributes"></a>Attributi applicabili
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **schema** .
 
-| Nome attributo            | Obbligatorio | valore                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Nome attributo            | Obbligatorio | Valore                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Spazio dei nomi**             | Sì         | Spazio dei nomi del modello di archiviazione. Il valore dell'attributo **namespace** viene utilizzato per formare il nome completo di un tipo. Se, ad esempio, un elemento **EntityType** denominato *Customer* si trova nello spazio dei nomi ExampleModel. Store, il nome completo di **EntityType** sarà ExampleModel. Store. Customer. <br/> Non è possibile utilizzare le seguenti stringhe come valore per l'attributo **namespace** : **System**, **Transient**o **EDM**. Il valore dell'attributo **namespace** non può corrispondere al valore dell'attributo **namespace** nell'elemento schema CSDL. |
+| **Namespace**             | Sì         | Spazio dei nomi del modello di archiviazione. Il valore dell'attributo **namespace** viene utilizzato per formare il nome completo di un tipo. Se, ad esempio, un elemento **EntityType** denominato *Customer* si trova nello spazio dei nomi ExampleModel. Store, il nome completo di **EntityType** sarà ExampleModel. Store. Customer. <br/> Non è possibile utilizzare le seguenti stringhe come valore per l'attributo **namespace** : **System**, **Transient**o **EDM**. Il valore dell'attributo **namespace** non può corrispondere al valore dell'attributo **namespace** nell'elemento schema CSDL. |
 | **Alias**                 | No          | Identificatore utilizzato al posto del nome dello spazio dei nomi. Se, ad esempio, un elemento **EntityType** denominato *Customer* si trova nello spazio dei nomi ExampleModel. Store e il valore dell'attributo **alias** è *StorageModel*, è possibile utilizzare StorageModel. Customer come nome completo dell'elemento **EntityType.**                                                                                                                                                                                                                                                                                    |
 | **Provider**              | Sì         | Provider di dati.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | **ProviderManifestToken** | Sì         | Token che indica al provider quale manifesto del provider restituire. Non è definito alcun formato per il token. I valori per il token sono definiti dal provider. Per informazioni sui token del manifesto del provider SQL Server, vedere SqlClient per Entity Framework.                                                                                                                                                                                                                                                                                                                        |

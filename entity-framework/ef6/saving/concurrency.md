@@ -1,14 +1,16 @@
 ---
 title: Gestione dei conflitti di concorrenza-EF6
+description: Gestione dei conflitti di concorrenza in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 2318e4d3-f561-4720-bbc3-921556806476
-ms.openlocfilehash: 4d29fd7a4d9b6003f71bc8411cea2d863a4c5429
-ms.sourcegitcommit: d85263b5d5d665dbaf94de8832e2917bce048b34
+uid: ef6/saving/concurrency
+ms.openlocfilehash: 1cec47ce346e8a6c86338747c01fba4d030e7388
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86451242"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619882"
 ---
 # <a name="handling-concurrency-conflicts-ef6"></a>Gestione dei conflitti di concorrenza (EF6)
 
@@ -16,7 +18,7 @@ La concorrenza ottimistica comporta un tentativo ottimistico di salvare l'entit�
 
 Questo post non è il posto appropriato per una descrizione completa della concorrenza ottimistica. Le sezioni seguenti presuppongono una certa conoscenza della risoluzione della concorrenza e mostrano i modelli per le attività comuni.  
 
-Molti di questi modelli utilizzano gli argomenti illustrati in utilizzo dei [valori delle proprietà](~/ef6/saving/change-tracking/property-values.md).  
+Molti di questi modelli utilizzano gli argomenti illustrati in utilizzo dei [valori delle proprietà](xref:ef6/saving/change-tracking/property-values).  
 
 La risoluzione dei problemi di concorrenza quando si utilizzano associazioni indipendenti (in cui la chiave esterna non è mappata a una proprietà nell'entità) è molto più difficile rispetto a quando si utilizzano le associazioni di chiave esterna. Se pertanto si intende eseguire la risoluzione della concorrenza nell'applicazione, è consigliabile eseguire sempre il mapping delle chiavi esterne alle entità. Tutti gli esempi seguenti presuppongono che si stiano usando associazioni di chiavi esterne.  
 
@@ -64,7 +66,7 @@ Il metodo entrys su DbUpdateConcurrencyException restituisce le istanze di DbEnt
 
 ## <a name="resolving-optimistic-concurrency-exceptions-as-client-wins"></a>Risoluzione delle eccezioni di concorrenza ottimistica come WINS client  
 
-L'esempio precedente che usa il ricaricamento è talvolta denominato WINS del database o WINS di archiviazione perché i valori nell'entità vengono sovrascritti dai valori del database. In alcuni casi può essere utile eseguire l'operazione opposta e sovrascrivere i valori nel database con i valori attualmente presenti nell'entità. Questa operazione viene a volte definita client WINS e può essere eseguita ottenendo i valori correnti del database e definendoli come valori originali per l'entità. Per informazioni sui valori correnti e originali, vedere [utilizzo dei valori delle proprietà](~/ef6/saving/change-tracking/property-values.md) . Per esempio:  
+L'esempio precedente che usa il ricaricamento è talvolta denominato WINS del database o WINS di archiviazione perché i valori nell'entità vengono sovrascritti dai valori del database. In alcuni casi può essere utile eseguire l'operazione opposta e sovrascrivere i valori nel database con i valori attualmente presenti nell'entità. Questa operazione viene a volte definita client WINS e può essere eseguita ottenendo i valori correnti del database e definendoli come valori originali per l'entità. Per informazioni sui valori correnti e originali, vedere [utilizzo dei valori delle proprietà](xref:ef6/saving/change-tracking/property-values) . Per esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())

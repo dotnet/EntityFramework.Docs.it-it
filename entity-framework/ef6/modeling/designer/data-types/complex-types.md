@@ -1,14 +1,16 @@
 ---
 title: Tipi complessi-EF designer-EF6
+description: Tipi complessi-EF designer in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9a8228ef-acfd-4575-860d-769d2c0e18a1
-ms.openlocfilehash: a3c5578acee23688c04772d2dd0a2221779af562
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/data-types/complex-types
+ms.openlocfilehash: 87b62c119894486cbb54adfc8d3af6208a6618a8
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418651"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620598"
 ---
 # <a name="complex-types---ef-designer"></a>Tipi complessi-EF designer
 In questo argomento viene illustrato come eseguire il mapping di tipi complessi con il Entity Framework Designer (Entity Designer) e come eseguire una query per le entità che contengono proprietà di tipo complesso.
@@ -28,7 +30,7 @@ Quando si utilizzano oggetti che rappresentano tipi complessi, tenere presente q
 
 -   I tipi complessi non dispongono di chiavi e pertanto non possono esistere in modo indipendente. I tipi complessi possono esistere solo come proprietà di tipi di entità o gli altri tipi complessi.
 -   I tipi complessi non possono partecipare alle associazioni e non possono contenere proprietà di navigazione.
--   Le proprietà del tipo complesso non possono essere **null**. Viene generata un' **eccezione InvalidOperationException **quando viene chiamato **DbContext. SaveChanges** e viene rilevato un oggetto complesso null. Le proprietà scalari degli oggetti complessi possono essere **null**.
+-   Le proprietà del tipo complesso non possono essere **null**. Si verifica un' **eccezione InvalidOperationException **quando viene chiamato **DbContext. SaveChanges**   e viene rilevato un oggetto complesso null. Le proprietà scalari degli oggetti complessi possono essere **null**.
 -   I tipi complessi non possono ereditare da altri tipi complessi.
 -   È necessario definire il tipo complesso come una **classe**. 
 -   EF rileva le modifiche apportate ai membri in un oggetto di tipo complesso quando viene chiamato **DbContext. DetectChanges** . Entity Framework chiama automaticamente **DetectChanges** quando vengono chiamati i membri seguenti: **DbSet. Find**, **DbSet. local**, **DbSet. Remove**, **DbSet. Add**, **DbSet. Connetti**, **DbContext. SaveChanges**, **DbContext. GetValidationErrors**, **DbContext. entry**, DbChangeTracker **. Entries**.
@@ -37,21 +39,21 @@ Quando si utilizzano oggetti che rappresentano tipi complessi, tenere presente q
 
 Se si dispone già di un'entità nel modello concettuale, potrebbe essere necessario effettuare il refactoring di alcune proprietà in una proprietà di tipo complesso.
 
-Nell'area di progettazione selezionare una o più proprietà (escluse le proprietà di navigazione) di un'entità, quindi fare clic con il pulsante destro del mouse e scegliere **refactoring-&gt; sposta in nuovo tipo complesso**.
+Nell'area di progettazione selezionare una o più proprietà (escluse le proprietà di navigazione) di un'entità, quindi fare clic con il pulsante destro del mouse e scegliere **refactoring- &gt; Sposta in nuovo tipo complesso**.
 
-![Refactoring](~/ef6/media/refactor.png)
+![Effettua il refactoring nel nuovo tipo complesso](~/ef6/media/refactor.png)
 
 Un nuovo tipo complesso con le proprietà selezionate viene aggiunto a **browser modello**. Al tipo complesso viene assegnato un nome predefinito.
 
 Una proprietà complessa del tipo appena creato sostituisce le proprietà selezionate. Tutti i mapping delle proprietà vengono mantenuti.
 
-![Refactoring 2](~/ef6/media/refactor2.png)
+![Effettua il refactoring nel nuovo tipo complesso 2](~/ef6/media/refactor2.png)
 
 ## <a name="create-a-new-complex-type"></a>Crea nuovo tipo complesso
 
 È anche possibile creare un nuovo tipo complesso che non contiene proprietà di un'entità esistente.
 
-Fare clic con il pulsante destro del mouse sulla cartella **tipi complessi** in browser modello, scegliere **tipo complesso AddNew...** . In alternativa, è possibile selezionare la cartella **tipi complessi** e premere il tasto **Inserisci** sulla tastiera.
+Fare clic con il pulsante destro del mouse sulla cartella **tipi complessi** in browser modello, scegliere **tipo complesso AddNew...**. In alternativa, è possibile selezionare la cartella **tipi complessi** e premere il tasto **ins**   sulla tastiera.
 
 ![Aggiungi nuovo tipo complesso](~/ef6/media/addnewcomplextype.png)
 
@@ -59,11 +61,11 @@ Un nuovo tipo complesso verrà aggiunto nella cartella con un nome predefinito. 
 
 ## <a name="add-properties-to-a-complex-type"></a>Aggiungere proprietà a un tipo complesso
 
-Le proprietà di un tipo complesso possono essere tipi scalari o tipi complessi esistenti. Tuttavia, le proprietà dei tipi complessi non possono avere riferimenti circolari. Ad esempio, un tipo complesso **OnsiteCourseDetails** non può avere una proprietà di tipo complesso **OnsiteCourseDetails**.
+Le proprietà di un tipo complesso possono essere tipi scalari o tipi complessi esistenti. Tuttavia, le proprietà dei tipi complessi non possono avere riferimenti circolari. Un tipo complesso **OnsiteCourseDetails**, ad esempio,   non può avere una proprietà di tipo complesso **OnsiteCourseDetails**.
 
 È possibile aggiungere una proprietà a un tipo complesso in uno dei modi elencati di seguito.
 
--   Fare clic con il pulsante destro del mouse su un tipo complesso in browser modello, scegliere **Aggiungi**, scegliere **proprietà scalare** o **proprietà complessa**, quindi selezionare il tipo di proprietà desiderato. In alternativa, è possibile selezionare un tipo complesso e quindi premere il tasto **inserisci** sulla tastiera.  
+-   Fare clic con il pulsante destro del mouse su un tipo complesso in browser modello, scegliere **Aggiungi**, scegliere **proprietà scalare**   o **proprietà complessa**, quindi selezionare il tipo di proprietà desiderato. In alternativa, è possibile selezionare un tipo complesso e premere il tasto **ins**   sulla tastiera.  
 
     ![Aggiungere proprietà a un tipo complesso](~/ef6/media/addpropertiestocomplextype.png)
 
@@ -90,21 +92,21 @@ Quando si rinomina un tipo complesso, tutti i riferimenti al tipo presenti nell'
 
 - oppure -
 
--   Fare clic con il pulsante destro del mouse su un tipo complesso in **browser modello** e scegliere **Proprietà**. Modificare il nome nella finestra **proprietà** .
+-   Fare clic con il pulsante destro del mouse su un tipo complesso in **browser modello** e scegliere **Proprietà**. Modificare il nome nella finestra **Proprietà**   .
 
 ## <a name="add-an-existing-complex-type-to-an-entity-and-map-its-properties-to-table-columns"></a>Aggiungere un tipo complesso esistente a un'entità ed eseguire il mapping delle proprietà alle colonne della tabella
 
 1.  Fare clic con il pulsante destro del mouse su un'entità, scegliere **Aggiungi nuovo**e selezionare **proprietà complessa**.
     Una proprietà del tipo complesso con un nome predefinito verrà aggiunta all'entità. Un tipo predefinito, scelto tra i tipi complessi esistenti, verrà assegnato alla proprietà.
-2.  Assegnare il tipo desiderato alla proprietà nella finestra **proprietà** .
+2.  Assegnare il tipo desiderato alla proprietà nella finestra **Proprietà**   .
     Dopo avere aggiunto una proprietà del tipo complesso a un'entità, è necessario eseguire il mapping delle proprietà alle colonne della tabella.
-3.  Fare clic con il pulsante destro del mouse su un tipo di entità nell'area di progettazione o nel **browser modello** e selezionare **mapping tabella**.
-    I mapping delle tabelle vengono visualizzati nella finestra **Dettagli mapping** .
-4.  Espandere il **nome della tabella Maps &lt;&gt;**  nodo.
-    Viene visualizzato un **mapping di colonne** nodo.
-5.  Espandere il nodo **Mapping colonne** .
-    Verrà visualizzato un elenco di tutte le colonne della tabella. Le proprietà predefinite, se presenti, a cui è associato il mapping delle colonne sono elencate sotto l'intestazione **valore/proprietà** .
-6.  Selezionare la colonna di cui si desidera eseguire il mapping, quindi fare clic con il pulsante destro del mouse sul campo **valore/proprietà** corrispondente .
+3.  Fare clic con il pulsante destro del mouse su un tipo di entità nell'area di progettazione o in **browser modello**   e selezionare **mapping tabella**.
+    I mapping delle tabelle vengono visualizzati nella finestra **Dettagli mapping**   .
+4.  Espandere il nodo **mapping a &lt; nome &gt; tabella**   .
+    Viene visualizzato un nodo **Mapping colonne**   .
+5.  Espandere il nodo **Mapping colonne**   .
+    Verrà visualizzato un elenco di tutte le colonne della tabella. Le proprietà predefinite, se presenti, a cui è associato il mapping delle colonne sono elencate sotto l'intestazione **valore/proprietà**   .
+6.  Selezionare la colonna di cui si desidera eseguire il mapping, quindi fare clic con il pulsante destro del mouse sul campo **valore/proprietà**corrispondente   .
     Verrà visualizzato un elenco a discesa di tutte le proprietà scalari.
 7.  Selezionare la proprietà appropriata.
 
@@ -113,7 +115,7 @@ Quando si rinomina un tipo complesso, tutti i riferimenti al tipo presenti nell'
 8.  Ripetere i passaggi 6 e 7 per ogni colonna della tabella.
 
 >[!NOTE]
-> Per eliminare un mapping di colonna, selezionare la colonna di cui si desidera eseguire il mapping, quindi fare clic sul campo **valore/proprietà** . Selezionare quindi **Elimina** dall'elenco a discesa.
+> Per eliminare un mapping di colonna, selezionare la colonna di cui si desidera eseguire il mapping, quindi fare clic sul campo **valore/proprietà**   . Selezionare quindi **Elimina** dall'elenco a discesa.
 
 ## <a name="map-a-function-import-to-a-complex-type"></a>Eseguire il mapping di un'importazione di funzioni a un tipo complesso
 
@@ -124,9 +126,9 @@ Le importazioni di funzioni sono basate sulle stored procedure. Per mappare un'i
     ![Importazioni di funzioni](~/ef6/media/functionimports.png)
 
 -   Specificare le impostazioni per la nuova importazione di funzioni come segue:
-    -   Specificare il stored procedure per cui si sta creando un'importazione di funzioni nel campo **Nome stored procedure** . Questo campo è un elenco a discesa in cui sono visualizzate tutte le stored procedure contenute nel modello di archiviazione.
-    -   Specificare il nome dell'importazione di funzioni nel campo **Nome importazione funzione** .
-    -   Selezionare  **complesse** come tipo restituito e quindi specificare il tipo restituito complesso specifico scegliendo il tipo appropriato dall'elenco a discesa.
+    -   Specificare il stored procedure per cui si sta creando un'importazione di funzioni nel campo **Nome stored procedure**   . Questo campo è un elenco a discesa in cui sono visualizzate tutte le stored procedure contenute nel modello di archiviazione.
+    -   Specificare il nome dell'importazione di funzioni nel campo **Nome importazione funzione**   .
+    -   Selezionare **complesso**   come tipo restituito e quindi specificare il tipo restituito complesso specifico scegliendo il tipo appropriato dall'elenco a discesa.
 
         ![Modifica importazione funzione](~/ef6/media/editfunctionimport.png)
 
@@ -136,7 +138,7 @@ Le importazioni di funzioni sono basate sulle stored procedure. Per mappare un'i
 ### <a name="customize-column-mapping-for-function-import"></a>Personalizzare il mapping delle colonne per l'importazione di funzioni
 
 -   Fare clic con il pulsante destro del mouse sull'importazione di funzioni in browser modello, quindi scegliere **mapping importazione funzioni**.
-    Viene visualizzata la finestra **Dettagli mapping** e viene visualizzato il mapping predefinito per l'importazione di funzioni. Le frecce indicano i mapping tra i valori della proprietà e i valori della colonna. Per impostazione predefinita, i nomi della colonna corrispondono ai nomi delle proprietà di tipo complesso. I nomi delle colonne predefiniti vengono visualizzati in grigio.
+    Viene visualizzata la finestra **Dettagli mapping**   che mostra il mapping predefinito per l'importazione di funzioni. Le frecce indicano i mapping tra i valori della proprietà e i valori della colonna. Per impostazione predefinita, i nomi della colonna corrispondono ai nomi delle proprietà di tipo complesso. I nomi delle colonne predefiniti vengono visualizzati in grigio.
 -   Se necessario, modificare i nomi delle colonne per renderli corrispondenti ai nomi delle colonne restituiti dalla stored procedure che corrisponde all'importazione di funzioni.
 
 ## <a name="delete-a-complex-type"></a>Eliminare un tipo complesso

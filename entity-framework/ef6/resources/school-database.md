@@ -1,36 +1,38 @@
 ---
 title: Database di esempio School-EF6
+description: Database di esempio School per Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e83a6a06-e63b-4530-8656-614bf609b12b
-ms.openlocfilehash: 1e9dc98edb8590021bbf3393e9edda1929d505e0
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/resources/school-database
+ms.openlocfilehash: c1576bdeaa3247c7c5c8fd5547c8402b4e301402
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416998"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620001"
 ---
 # <a name="school-sample-database"></a>Database di esempio School
 Questo argomento contiene lo schema e i dati per il database School. Il database School di esempio viene usato in vari punti dell'intera documentazione di Entity Framework.  
 
 > [!NOTE]
-> Il server di database installato con Visual Studio è diverso a seconda della versione di Visual Studio in uso. Per informazioni dettagliate su cosa usare, vedere [versioni di Visual Studio](~/ef6/what-is-new/visual-studio.md) .  
+> Il server di database installato con Visual Studio è diverso a seconda della versione di Visual Studio in uso. Per informazioni dettagliate su cosa usare, vedere [versioni di Visual Studio](xref:ef6/what-is-new/visual-studio) .  
 
 Ecco i passaggi per creare il database:
 
 - Aprire Visual Studio.  
-- **Visualizza** -> **Esplora server**  
-- Fare clic con il pulsante destro del mouse su **connessioni dati** -> **Aggiungi connessione...**  
+- **Visualizza**  ->  **Esplora server**  
+- Fare clic con il pulsante destro del mouse su **connessioni dati**  ->  **Aggiungi connessione...**  
 - Se non si è connessi a un database da Esplora server prima di selezionare **Microsoft SQL Server** come origine dati  
 - Connettersi a un database locale o a SQL Express, a seconda di quale installato  
 - Immettere **School** come nome del database  
 - Selezionare **OK** . verrà richiesto se si desidera creare un nuovo database, selezionare **Sì** .  
 - Il nuovo database verrà ora visualizzato in Esplora server  
 - Se si usa Visual Studio 2012 o versione successiva
-    - Fare clic con il pulsante destro del mouse sul database in Esplora server e selezionare **nuova query** .  
+    - Fare clic con il pulsante destro del mouse sul database in Esplora server e scegliere **Nuova query**  
     - Copiare il codice SQL seguente nella nuova query, quindi fare clic con il pulsante destro del mouse sulla query e scegliere **Esegui** .  
 - Se si usa Visual Studio 2010  
-    - Selezionare **i dati** -> **Editor Transact SQL** -> **nuova connessione query...**  
+    - Selezionare **Data**l'  ->  **Editor Transact-SQL**dati  ->  **nuova connessione query...**  
     - Immettere **.\SQLEXPRESS** come nome del server e fare clic su **OK** .  
     - Selezionare il database **STESample** dall'elenco a discesa nella parte superiore dell'editor di query  
     - Copiare il codice SQL seguente nella nuova query, quindi fare clic con il pulsante destro del mouse sulla query e scegliere **Esegui SQL**  

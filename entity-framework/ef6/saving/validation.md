@@ -1,20 +1,21 @@
 ---
 title: Convalida-EF6
+description: Convalida in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 77d6a095-c0d0-471e-80b9-8f9aea6108b2
-ms.openlocfilehash: 2c5e6f1b3f60862124bafcac42e8859a7591f8e6
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 0e0f5c581681e7b21b6591ade1541d774e7280bc
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416960"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619817"
 ---
 # <a name="data-validation"></a>Convalida dei dati
 > [!NOTE]
 > **EF 4.1 solo e versioni successive** : le funzionalità, le API e così via descritte in questa pagina sono state introdotte in Entity Framework 4,1. Se si usa una versione precedente, alcune o tutte le informazioni non sono valide
 
-Il contenuto di questa pagina è stato adattato da un articolo scritto in origine da Julie Lerman ([https://thedatafarm.com](https://thedatafarm.com)).
+Il contenuto di questa pagina è stato adattato da un articolo scritto in origine da Julie Lerman ( [https://thedatafarm.com](https://thedatafarm.com) ).
 
 Entity Framework offre un'ampia gamma di funzionalità di convalida che consentono di passare a un'interfaccia utente per la convalida sul lato client o per la convalida sul lato server. Quando si usa Code First, è possibile specificare convalide usando un'annotazione o configurazioni API Fluent. Le convalide aggiuntive, e più complesse, possono essere specificate nel codice e funzionano indipendentemente dal fatto che il modello sia in primo luogo, prima del modello o del database.
 
@@ -45,7 +46,7 @@ public class Post
 
 ## <a name="data-annotations"></a>Annotazioni dei dati
 
-Code First usa le annotazioni dell'assembly `System.ComponentModel.DataAnnotations` come mezzo per la configurazione delle classi code first. Queste annotazioni sono quelle che forniscono regole quali il `Required`, `MaxLength` e `MinLength`. Alcune applicazioni client .NET riconoscono anche queste annotazioni, ad esempio ASP.NET MVC. Con queste annotazioni è possibile ottenere la convalida lato client e lato server. Ad esempio, è possibile forzare la proprietà del titolo del Blog come una proprietà obbligatoria.
+Code First utilizza le annotazioni dell' `System.ComponentModel.DataAnnotations` assembly come mezzo per la configurazione delle classi code first. Tra queste annotazioni sono disponibili regole quali `Required` , `MaxLength` e `MinLength` . Alcune applicazioni client .NET riconoscono anche queste annotazioni, ad esempio ASP.NET MVC. Con queste annotazioni è possibile ottenere la convalida lato client e lato server. Ad esempio, è possibile forzare la proprietà del titolo del Blog come una proprietà obbligatoria.
 
 ``` csharp
 [Required]
@@ -58,9 +59,9 @@ Senza modifiche al codice o al markup aggiuntive nell'applicazione, un'applicazi
 
 Nel metodo di postback di questa visualizzazione di creazione, Entity Framework viene usato per salvare il nuovo blog nel database, ma la convalida lato client di MVC viene attivata prima che l'applicazione raggiunga tale codice.
 
-La convalida lato client non è tuttavia a prova di Bullet. Gli utenti possono indurre le funzionalità del browser o peggio ancora, un pirata informatico può usare alcuni espedienti per evitare le convalide dell'interfaccia utente. Tuttavia Entity Framework rileverà anche l'annotazione `Required` e la convaliderà.
+La convalida lato client non è tuttavia a prova di Bullet. Gli utenti possono indurre le funzionalità del browser o peggio ancora, un pirata informatico può usare alcuni espedienti per evitare le convalide dell'interfaccia utente. Tuttavia Entity Framework rileverà anche l' `Required` annotazione e la convaliderà.
 
-Un modo semplice per verificare questo problema è disabilitare la funzionalità di convalida lato client di MVC. Questa operazione può essere eseguita nel file Web. config dell'applicazione MVC. La sezione appSettings contiene una chiave per ClientValidationEnabled. Se si imposta questa chiave su false, l'interfaccia utente non potrà eseguire convalide.
+Un modo semplice per verificare questo problema è disabilitare la funzionalità di convalida lato client di MVC. È possibile eseguire questa operazione nel file di web.config dell'applicazione MVC. La sezione appSettings contiene una chiave per ClientValidationEnabled. Se si imposta questa chiave su false, l'interfaccia utente non potrà eseguire convalide.
 
 ``` xml
 <appSettings>
@@ -69,11 +70,11 @@ Un modo semplice per verificare questo problema è disabilitare la funzionalità
 </appSettings>
 ```
 
-Anche se la convalida lato client è disabilitata, si otterrà la stessa risposta nell'applicazione. Il messaggio di errore "il campo titolo è obbligatorio" verrà visualizzato come prima. Eccetto ora, sarà il risultato della convalida sul lato server. Entity Framework eseguirà la convalida sull'annotazione `Required` (prima che venga creato un comando `INSERT` da inviare al database) e restituisca l'errore a MVC che visualizzerà il messaggio.
+Anche se la convalida lato client è disabilitata, si otterrà la stessa risposta nell'applicazione. Il messaggio di errore "il campo titolo è obbligatorio" verrà visualizzato come prima. Eccetto ora, sarà il risultato della convalida sul lato server. Entity Framework eseguirà la convalida sull' `Required` annotazione (prima che venga creato un `INSERT` comando da inviare al database) e restituisca l'errore a MVC che visualizzerà il messaggio.
 
 ## <a name="fluent-api"></a>API Fluent
 
-È possibile usare l'API Fluent Code First anziché le annotazioni per ottenere lo stesso lato client & convalida lato server. Invece di utilizzare `Required`, verrà illustrato l'utilizzo di una convalida MaxLength.
+È possibile usare l'API Fluent Code First anziché le annotazioni per ottenere lo stesso lato client & convalida lato server. Invece di usare `Required` , vi mostrerò questa operazione usando una convalida MaxLength.
 
 Le configurazioni API Fluent vengono applicate come Code First creando il modello dalle classi. È possibile inserire le configurazioni eseguendo l'override del metodo OnModelCreating della classe DbContext. Di seguito è riportato un esempio di configurazione che specifica che la proprietà BloggerName non può contenere più di 10 caratteri.
 
@@ -114,7 +115,7 @@ public ActionResult Edit(int id, Blog blog)
 }
 ```
 
-La convalida non viene restituita automaticamente nella visualizzazione, motivo per cui viene usato il codice aggiuntivo che usa `ModelState.AddModelError`. In questo modo si garantisce che i dettagli dell'errore lo rendano nella visualizzazione che utilizzerà quindi il `ValidationMessageFor` HtmlHelper per visualizzare l'errore.
+La convalida non viene restituita automaticamente nella visualizzazione ed è per questo motivo che viene usato il codice aggiuntivo che usa `ModelState.AddModelError` . In questo modo si garantisce che i dettagli dell'errore lo rendano nella visualizzazione che utilizzerà quindi il `ValidationMessageFor` htmlHelper per visualizzare l'errore.
 
 ``` csharp
 @Html.ValidationMessageFor(model => model.BloggerName)
@@ -122,11 +123,11 @@ La convalida non viene restituita automaticamente nella visualizzazione, motivo 
 
 ## <a name="ivalidatableobject"></a>IValidatableObject
 
-`IValidatableObject` è un'interfaccia che risiede nella `System.ComponentModel.DataAnnotations`. Sebbene non faccia parte dell'API Entity Framework, è comunque possibile usarla per la convalida lato server nelle classi Entity Framework. `IValidatableObject` fornisce un metodo `Validate` che Entity Framework chiamerà durante SaveChanges oppure è possibile chiamarsi in qualsiasi momento in cui si desidera convalidare le classi.
+`IValidatableObject` è un'interfaccia che risiede in `System.ComponentModel.DataAnnotations` . Sebbene non faccia parte dell'API Entity Framework, è comunque possibile usarla per la convalida lato server nelle classi Entity Framework. `IValidatableObject` fornisce un `Validate` metodo che Entity Framework chiamerà durante SaveChanges oppure è possibile chiamarsi in qualsiasi momento in cui si desidera convalidare le classi.
 
-Configurazioni come `Required` e `MaxLength` eseguono la convalida su un singolo campo. Nel metodo `Validate` è possibile avere una logica ancora più complessa, ad esempio confrontando due campi.
+Configurazioni come `Required` ed `MaxLength` eseguono la convalida su un singolo campo. Nel `Validate` metodo è possibile avere una logica ancora più complessa, ad esempio confrontando due campi.
 
-Nell'esempio seguente, la classe `Blog` è stata estesa per implementare `IValidatableObject` e quindi fornire una regola in base alla quale il `Title` e la `BloggerName` non possono corrispondere.
+Nell'esempio seguente, la `Blog` classe è stata estesa per implementare `IValidatableObject` e quindi fornire una regola in base alla quale `Title` e `BloggerName` non possono corrispondere.
 
 ``` csharp
 public class Blog : IValidatableObject
@@ -152,19 +153,19 @@ public class Blog : IValidatableObject
 }
 ```
 
-Il costruttore `ValidationResult` accetta un `string` che rappresenta il messaggio di errore e una matrice di `string`che rappresentano i nomi dei membri associati alla convalida. Poiché questa convalida controlla sia la `Title` che la `BloggerName`, vengono restituiti entrambi i nomi di proprietà.
+Il `ValidationResult` costruttore accetta un oggetto `string` che rappresenta il messaggio di errore e una matrice di oggetti `string` che rappresentano i nomi dei membri associati alla convalida. Poiché questa convalida controlla sia `Title` che e `BloggerName` , vengono restituiti entrambi i nomi di proprietà.
 
-A differenza della convalida fornita dall'API Fluent, questo risultato di convalida verrà riconosciuto dalla vista e il gestore di eccezioni usato in precedenza per aggiungere l'errore in `ModelState` non è necessario. Poiché i nomi delle proprietà sono stati impostati nell'`ValidationResult`, le HtmlHelper di MVC visualizzano il messaggio di errore per entrambe le proprietà.
+A differenza della convalida fornita dall'API Fluent, questo risultato di convalida verrà riconosciuto dalla vista e il gestore di eccezioni usato in precedenza per aggiungere l'errore non `ModelState` è necessario. Poiché i nomi delle proprietà sono stati impostati in `ValidationResult` , le HtmlHelper di MVC visualizzano il messaggio di errore per entrambe le proprietà.
 
 ![Figura 2](~/ef6/media/figure02.png)
 
-## <a name="dbcontextvalidateentity"></a>DbContext.ValidateEntity
+## <a name="dbcontextvalidateentity"></a>DbContext. ValidateEntity
 
-`DbContext` dispone di un metodo sottoponibile a override denominato `ValidateEntity`. Quando si chiama `SaveChanges`, Entity Framework chiamerà questo metodo per ogni entità nella cache il cui stato non è `Unchanged`. È possibile inserire la logica di convalida direttamente qui o usare questo metodo per chiamare, ad esempio, il metodo `Blog.Validate` aggiunto nella sezione precedente.
+`DbContext` dispone di un metodo sottoponibile a override chiamato `ValidateEntity` . Quando si chiama `SaveChanges` , Entity Framework chiamerà questo metodo per ogni entità nella cache il cui stato non è `Unchanged` . È possibile inserire la logica di convalida direttamente qui o usare questo metodo per chiamare, ad esempio, il `Blog.Validate` metodo aggiunto nella sezione precedente.
 
-Di seguito è riportato un esempio di override di `ValidateEntity` che convalida nuove `Post`per assicurarsi che il titolo post non sia già stato utilizzato. Verifica prima di tutto se l'entità è un post e viene aggiunto il relativo stato. In tal caso, viene eseguita una ricerca nel database per verificare se è già presente un post con lo stesso titolo. Se è già presente un post esistente, viene creata una nuova `DbEntityValidationResult`.
+Di seguito è riportato un esempio di `ValidateEntity` override che convalida `Post` i nuovi per assicurarsi che il titolo post non sia già stato utilizzato. Verifica prima di tutto se l'entità è un post e viene aggiunto il relativo stato. In tal caso, viene eseguita una ricerca nel database per verificare se è già presente un post con lo stesso titolo. Se è già presente un post esistente, viene creato un nuovo oggetto `DbEntityValidationResult` .
 
-`DbEntityValidationResult` ospita una `DbEntityEntry` e un `ICollection<DbValidationErrors>` per una singola entità. All'inizio di questo metodo, viene creata un'istanza di un `DbEntityValidationResult` e quindi tutti gli errori individuati vengono aggiunti nella relativa raccolta di `ValidationErrors`.
+`DbEntityValidationResult` ospita un oggetto `DbEntityEntry` e un oggetto `ICollection<DbValidationErrors>` per una singola entità. All'inizio di questo metodo, viene creata un'istanza di un oggetto `DbEntityValidationResult` e quindi tutti gli errori individuati vengono aggiunti alla relativa `ValidationErrors` raccolta.
 
 ``` csharp
 protected override DbEntityValidationResult ValidateEntity (
@@ -198,11 +199,11 @@ protected override DbEntityValidationResult ValidateEntity (
 
 ## <a name="explicitly-triggering-validation"></a>Attivazione esplicita della convalida
 
-Una chiamata a `SaveChanges` attiva tutte le convalide descritte in questo articolo. Non è tuttavia necessario basarsi su `SaveChanges`. È possibile che si preferisca convalidare un'altra posizione nell'applicazione.
+Una chiamata a `SaveChanges` attiva tutte le convalide descritte in questo articolo. Ma non è necessario basarsi su `SaveChanges` . È possibile che si preferisca convalidare un'altra posizione nell'applicazione.
 
-`DbContext.GetValidationErrors` attiverà tutte le convalide, quelle definite dalle annotazioni o l'API Fluent, la convalida creata in `IValidatableObject` (ad esempio, `Blog.Validate`) e le convalide eseguite nel metodo `DbContext.ValidateEntity`.
+`DbContext.GetValidationErrors` attiverà tutte le convalide, quelle definite dalle annotazioni o l'API Fluent, la convalida creata in `IValidatableObject` (ad esempio, `Blog.Validate` ) e le convalide eseguite nel `DbContext.ValidateEntity` metodo.
 
-Il codice seguente chiamerà `GetValidationErrors` sull'istanza corrente di un `DbContext`. `ValidationErrors` sono raggruppati in base al tipo di entità in `DbEntityValidationResult`. Il codice scorre prima di tutto i `DbEntityValidationResult`restituiti dal metodo e quindi attraverso ogni `DbValidationError` all'interno di.
+Il codice seguente chiamerà `GetValidationErrors` sull'istanza corrente di un oggetto `DbContext` . `ValidationErrors` sono raggruppati in base al tipo di entità in `DbEntityValidationResult` . Il codice scorre prima di tutto l'oggetto `DbEntityValidationResult` restituito dal metodo e quindi attraverso ogni `DbValidationError` interno.
 
 ``` csharp
 foreach (var validationResult in db.GetValidationErrors())
@@ -223,7 +224,7 @@ Di seguito sono riportati alcuni altri punti da considerare quando si usa la con
 
 - Il caricamento lazy è disabilitato durante la convalida
 - EF convaliderà le annotazioni dei dati in proprietà non mappate (proprietà di cui non è stato eseguito il mapping a una colonna nel database)
-- La convalida viene eseguita dopo che le modifiche vengono rilevate durante `SaveChanges`. Se si apportano modifiche durante la convalida, è responsabilità dell'utente inviare una notifica a change tracker
+- La convalida viene eseguita dopo che le modifiche vengono rilevate durante `SaveChanges` . Se si apportano modifiche durante la convalida, è responsabilità dell'utente inviare una notifica a change tracker
 - `DbUnexpectedValidationException` viene generata se si verificano errori durante la convalida
 - I facet che Entity Framework include nel modello (lunghezza massima, obbligatoria e così via) provocheranno la convalida, anche se non sono presenti annotazioni di dati nelle classi e/o per la creazione del modello è stata usata la finestra di progettazione EF.
 - Regole di precedenza:
@@ -233,10 +234,10 @@ Di seguito sono riportati alcuni altri punti da considerare quando si usa la con
   - La convalida del tipo si verifica solo se la convalida della proprietà ha esito positivo
 - Se una proprietà è complessa, la relativa convalida includerà anche:
   - Convalida a livello di proprietà per le proprietà del tipo complesso
-  - Convalida a livello di tipo per il tipo complesso, inclusa la convalida `IValidatableObject` per il tipo complesso
+  - Convalida a livello di tipo per il tipo complesso, inclusa `IValidatableObject` la convalida sul tipo complesso
 
-## <a name="summary"></a>Summary
+## <a name="summary"></a>Riepilogo
 
 L'API di convalida in Entity Framework viene riprodotta molto bene con la convalida lato client in MVC, ma non è necessario basarsi sulla convalida lato client. Entity Framework si occuperà della convalida sul lato server per le annotazioni o le configurazioni applicate con l'API Code First Fluent.
 
-È stato inoltre illustrato un numero di punti di estensibilità per personalizzare il comportamento indipendentemente dal fatto che si utilizzi l'interfaccia `IValidatableObject` o si tocchi il metodo `DbContext.ValidateEntity`. Questi ultimi due metodi di convalida sono disponibili tramite il `DbContext`, indipendentemente dal fatto che si usi il flusso di lavoro Code First, Model First o Database First per descrivere il modello concettuale.
+È stato inoltre illustrato un numero di punti di estensibilità per personalizzare il comportamento se si usa l' `IValidatableObject` interfaccia o si tocca il `DbContext.ValidateEntity` metodo. Questi ultimi due metodi di convalida sono disponibili tramite `DbContext` , indipendentemente dal fatto che si utilizzi il flusso di lavoro Code First, Model First o database First per descrivere il modello concettuale.

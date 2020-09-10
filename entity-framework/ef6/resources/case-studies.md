@@ -1,14 +1,15 @@
 ---
 title: Case Study per Entity Framework-EF6
+description: Case Study per Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: cd5d3ae3-717d-4095-a2ef-0e8fd72b1a2f
-ms.openlocfilehash: d7982a3f89ac1e57b48039d828f287adf6dc5068
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: f6cabe34cfbdc5f15758678f458b2c0898198137
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417081"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620239"
 ---
 # <a name="microsoft-case-studies-for-entity-framework"></a>Case Study Microsoft per Entity Framework
 Il case study in questa pagina evidenzia alcuni progetti di produzione reali che hanno usato Entity Framework.
@@ -38,7 +39,7 @@ NEC ha voluto entrare sul mercato per la pubblicità digitale basata sul posto c
 A tale scopo, è stata avviata una coppia di applicazioni Web che consente di automatizzare i processi manuali necessari in una campagna pubblicitaria tradizionale.
 I siti sono stati creati con ASP.NET, Silverlight 3, AJAX e WCF, insieme al Entity Framework nel livello di accesso ai dati per comunicare con SQL Server 2008.
 
-> "Con SQL Server, abbiamo pensato che avessimo potuto ottenere la velocità effettiva necessaria per servire gli inserzionisti e le reti con informazioni in tempo reale e l'affidabilità per garantire che le informazioni nelle applicazioni cruciali fossero sempre disponibili"-Mike Corcoran, Director IT
+> "Con SQL Server, abbiamo pensato che potessimo ottenere la velocità effettiva necessaria per servire gli inserzionisti e le reti con informazioni in tempo reale e l'affidabilità per garantire che le informazioni nelle applicazioni cruciali fossero sempre disponibili"-Mike Corcoran, Director of IT
 
 ## <a name="darwin-dimensions"></a>Dimensioni di Darwin
 Grazie a un'ampia gamma di tecnologie Microsoft, il team di Darwin ha deciso di creare un portale di avatar online che i consumatori potevano usare per creare avatar accattivanti e realistici da usare in giochi, animazioni e pagine di social networking.
@@ -49,7 +50,7 @@ Nonostante la suddivisione dei membri del team in più paesi, il team che segue 
  .NET è la scelta ideale per lo sviluppo rapido e conveniente. " – Zachary Olsen, Architect  
 
 ## <a name="silverware"></a>Argenteria
-Con oltre 15 anni di esperienza nello sviluppo di soluzioni POS (Point-of-sale) per gruppi di ristoranti di piccole e medie dimensioni, il team di sviluppo di argenteria ha deciso di migliorare il proprio prodotto con funzionalità di livello aziendale per attirare le dimensioni più grandi catene di ristoranti.
+Con oltre 15 anni di esperienza nello sviluppo di soluzioni POS (Point-of-sale) per gruppi di ristoranti di piccole e medie dimensioni, il team di sviluppo di argenteria ha deciso di migliorare il proprio prodotto con funzionalità di livello aziendale per attirare catene di ristoranti più grandi.
 Utilizzando la versione più recente degli strumenti di sviluppo di Microsoft, è stato possibile creare la nuova soluzione quattro volte più velocemente rispetto a prima.
 Le nuove funzionalità principali come LINQ e la Entity Framework semplificano il passaggio da Crystal Reports a SQL Server 2008 e SQL Server Reporting Services (SSRS) per le proprie esigenze di archiviazione e Reporting dei dati.
 

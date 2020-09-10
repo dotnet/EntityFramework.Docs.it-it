@@ -1,14 +1,16 @@
 ---
 title: Uso delle transazioni-EF6
+description: Utilizzo delle transazioni in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0d0f1824-d781-4cb3-8fda-b7eaefced1cd
-ms.openlocfilehash: 7030dc675993339f72c935f6b430cead85fecb7f
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/saving/transactions
+ms.openlocfilehash: 65eebd82d4f9c583885af72d5b3cffd79fedf623
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419685"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619856"
 ---
 # <a name="working-with-transactions"></a>Utilizzo delle transazioni
 > [!NOTE]
@@ -20,7 +22,7 @@ Questo documento descrive l'uso delle transazioni in EF6, inclusi i migliorament
 
 In tutte le versioni di Entity Framework, ogni volta che si esegue **SaveChanges ()** per inserire, aggiornare o eliminare nel database, il Framework eseguirà il wrapping dell'operazione in una transazione. Questa transazione dura solo un tempo sufficiente per eseguire l'operazione e quindi viene completata. Quando si esegue un'altra operazione di questo tipo, viene avviata una nuova transazione.  
 
-A partire da EF6 **database. ExecuteSqlCommand ()** per impostazione predefinita esegue il wrapping del comando in una transazione se non ne è già presente uno. Sono disponibili overload di questo metodo che consentono di eseguire l'override di questo comportamento, se lo si desidera. Inoltre, in EF6 l'esecuzione di stored procedure incluse nel modello tramite API come **ObjectContext. ExecuteFunction ()** esegue la stessa operazione (ad eccezione del fatto che al momento non è possibile eseguire l'override del comportamento predefinito).  
+A partire da EF6 **Database.ExecuteSqlCommand ()** per impostazione predefinita, il comando viene eseguito in una transazione se non ne è già presente uno. Sono disponibili overload di questo metodo che consentono di eseguire l'override di questo comportamento, se lo si desidera. Inoltre, nell'esecuzione EF6 delle stored procedure incluse nel modello tramite API come **ObjectContext.ExecuteFunction ()** esegue la stessa operazione (ad eccezione del fatto che non è possibile eseguire l'override del comportamento predefinito al momento).  
 
 In entrambi i casi, il livello di isolamento della transazione corrisponde al livello di isolamento che il provider di database considera l'impostazione predefinita. Per impostazione predefinita, ad esempio, in SQL Server si tratta di READ COMMITTED.  
 
@@ -35,7 +37,7 @@ Tuttavia, alcuni utenti richiedono un maggiore controllo sulle transazioni. ques
 Prima di EF6 Entity Framework insistito sull'apertura della connessione al database stessa (generava un'eccezione se era stata passata una connessione già aperta). Poiché una transazione può essere avviata solo su una connessione aperta, questo significa che l'unico modo in cui un utente può eseguire il wrapping di più operazioni in un'unica transazione è stato usare un [TransactionScope](https://msdn.microsoft.com/library/system.transactions.transactionscope.aspx) o usare la proprietà **ObjectContext. Connection** e iniziare a chiamare **Open ()** e **BeginTransaction ()** direttamente nell'oggetto **EntityConnection** restituito. Inoltre, le chiamate API che hanno contattato il database avrebbero esito negativo se era stata avviata una transazione sulla connessione al database sottostante.  
 
 > [!NOTE]
-> La limitazione dell'accettazione solo delle connessioni chiuse è stata rimossa in Entity Framework 6. Per informazioni dettagliate, vedere [gestione della connessione](~/ef6/fundamentals/connection-management.md).  
+> La limitazione dell'accettazione solo delle connessioni chiuse è stata rimossa in Entity Framework 6. Per informazioni dettagliate, vedere [gestione della connessione](xref:ef6/fundamentals/connection-management).  
 
 A partire da EF6, il Framework offre ora:  
 
@@ -184,11 +186,11 @@ Questa sezione illustra in dettaglio il modo in cui le transazioni precedenti in
 
 ### <a name="connection-resiliency"></a>Resilienza della connessione  
 
-La nuova funzionalità di resilienza della connessione non funziona con le transazioni avviate dall'utente. Per informazioni dettagliate, vedere ripetizione delle [strategie di esecuzione](~/ef6/fundamentals/connection-resiliency/retry-logic.md#user-initiated-transactions-are-not-supported).  
+La nuova funzionalità di resilienza della connessione non funziona con le transazioni avviate dall'utente. Per informazioni dettagliate, vedere ripetizione delle [strategie di esecuzione](xref:ef6/fundamentals/connection-resiliency/retry-logic#user-initiated-transactions-are-not-supported).  
 
 ### <a name="asynchronous-programming"></a>Programmazione asincrona  
 
-L'approccio descritto nelle sezioni precedenti non necessita di altre opzioni o impostazioni per lavorare con i metodi di [query e salvataggio asincroni](~/ef6/fundamentals/async.md
+L'approccio descritto nelle sezioni precedenti non necessita di altre opzioni o impostazioni per lavorare con i metodi di [query e salvataggio asincroni](xref:ef6/fundamentals/async
 ). Tenere tuttavia presente che, a seconda delle operazioni eseguite all'interno dei metodi asincroni, è possibile che si verifichino transazioni con esecuzione prolungata, che possono a sua volta causare deadlock o un blocco negativo per le prestazioni dell'applicazione complessiva.  
 
 ### <a name="transactionscope-transactions"></a>Transazioni TransactionScope  
@@ -296,7 +298,7 @@ Esistono tuttavia alcune limitazioni all'approccio TransactionScope:
 
 Vantaggi dell'approccio TransactionScope:  
 
-- Verrà automaticamente aggiornata una transazione locale a una transazione distribuita se si esegue più di una connessione a un database specifico o si combina una connessione a un database con una connessione a un database diverso all'interno della stessa transazione (Nota: è necessario avere il servizio MSDTC configurato per consentire il funzionamento delle transazioni distribuite.  
+- Verrà automaticamente aggiornata una transazione locale a una transazione distribuita se si effettuano più connessioni a un determinato database o si combina una connessione a un database con una connessione a un database diverso all'interno della stessa transazione. Nota: è necessario che il servizio MSDTC sia configurato per consentire il funzionamento delle transazioni distribuite.  
 - Semplicità di codifica. Se si preferisce che la transazione sia in ambiente e gestita in modo implicito in background, anziché in modo esplicito sotto il controllo, l'approccio TransactionScope può essere più adatto.  
 
 In breve, con le nuove API database. BeginTransaction () e database. UseTransaction (), l'approccio TransactionScope non è più necessario per la maggior parte degli utenti. Se si continua a usare TransactionScope, tenere presente le limitazioni sopra riportate. È consigliabile usare invece l'approccio descritto nelle sezioni precedenti, laddove possibile.  

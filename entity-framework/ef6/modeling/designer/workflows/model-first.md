@@ -1,14 +1,16 @@
 ---
 title: Model First-EF6
+description: Model First in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e1b9c319-bb8a-4417-ac94-7890f257e7f6
-ms.openlocfilehash: 1b37805beb3d33f0b6dad2577a8abb3ea8f7b1e4
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/workflows/model-first
+ms.openlocfilehash: e995072f0f4ac23b755acc193719e5571e18f544
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418105"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620415"
 ---
 # <a name="model-first"></a>Model First
 Questo video e la procedura dettagliata forniscono un'introduzione allo sviluppo Model First con Entity Framework. Model First consente di creare un nuovo modello usando il Entity Framework Designer e quindi di generare uno schema del database dal modello. Il modello viene archiviato in un file EDMX (estensione edmx) e può essere visualizzato e modificato nella Entity Framework Designer. Le classi con cui si interagisce nell'applicazione vengono generate automaticamente dal file EDMX.
@@ -18,7 +20,7 @@ Questo video e la procedura dettagliata forniscono un'introduzione allo sviluppo
 
 **Presentato da**: [Rowan Miller](https://romiller.com/)
 
-**Video**: [wmv](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.wmv) | [MP4](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-mp4video-modelfirst.m4v) | [WMV (zip)](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.zip)
+**Video**: [WMV](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.wmv)  |  [MP4](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-mp4video-modelfirst.m4v)WMV  |  [(zip)](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.zip)
 
 ## <a name="pre-requisites"></a>Prerequisiti
 
@@ -31,7 +33,7 @@ Se si usa Visual Studio 2010, sarà anche necessario che [NuGet](https://visuals
 Per semplificare le operazioni, verrà compilata un'applicazione console di base che usa il Model First per eseguire l'accesso ai dati:
 
 -   Aprire Visual Studio.
--   **Nuovo progetto&gt; di&gt; file...**
+-   **File- &gt; nuovo- &gt; progetto...**
 -   Selezionare **Windows** nel menu a sinistra e nell' **applicazione console**
 -   Immettere **ModelFirstSample** come nome
 -   Selezionare **OK**.
@@ -40,7 +42,7 @@ Per semplificare le operazioni, verrà compilata un'applicazione console di base
 
 Per creare il modello, verrà usato Entity Framework Designer, incluso come parte di Visual Studio.
 
--   **Progetto-&gt; Aggiungi nuovo elemento...**
+-   **Progetto- &gt; Aggiungi nuovo elemento...**
 -   Selezionare **dati** dal menu a sinistra e quindi **ADO.NET Entity Data Model**
 -   Immettere **BloggingModel** come nome e fare clic su **OK**. viene avviata la procedura guidata Entity Data Model
 -   Selezionare il **modello vuoto** e fare clic su **fine** .
@@ -50,25 +52,25 @@ Per creare il modello, verrà usato Entity Framework Designer, incluso come part
 Il Entity Framework Designer viene aperto con un modello vuoto. A questo punto è possibile iniziare ad aggiungere entità, proprietà e associazioni al modello.
 
 -   Fare clic con il pulsante destro del mouse sull'area di progettazione e scegliere **Proprietà** .
--   Nella Finestra Proprietà modificare il **nome del contenitore di entità** in **BloggingContext**
-    *questo è il nome del contesto derivato che verrà generato automaticamente, il contesto rappresenta una sessione con il database, consentendo di eseguire query e salvare i dati*
--   Fare clic con il pulsante destro del mouse sull'area di progettazione e scegliere **Aggiungi nuova&gt; entità...**
+-   Nella finestra Proprietà modificare il **nome del contenitore di entità** in **BloggingContext** 
+     *questo è il nome del contesto derivato che verrà generato automaticamente, il contesto rappresenta una sessione con il database, consentendo di eseguire query e salvare i dati*
+-   Fare clic con il pulsante destro del mouse sull'area di progettazione e scegliere **Aggiungi nuova &gt; entità...**
 -   Immettere **Blog** come nome entità e **BlogId** come nome chiave e fare clic su **OK** .
 
     ![Aggiungi entità Blog](~/ef6/media/addblogentity.png)
 
--   Fare clic con il pulsante destro del mouse sulla nuova entità nell'area di progettazione e scegliere **Aggiungi nuova-&gt; proprietà scalare**, immettere **nome** come nome della proprietà.
+-   Fare clic con il pulsante destro del mouse sulla nuova entità nell'area di progettazione e scegliere **Aggiungi nuova &gt; proprietà scalare**, immettere **nome** come nome della proprietà.
 -   Ripetere questo processo per aggiungere una proprietà **URL** .
--   Fare clic con il pulsante destro del mouse sulla proprietà **URL** nell'area di progettazione e selezionare **proprietà**, nel finestra Proprietà modificare l'impostazione **Nullable** su **true**
-    in *questo modo è possibile salvare un blog nel database senza assegnargli un URL*
+-   Fare clic con il pulsante destro del mouse sulla proprietà **URL** nell'area di progettazione e selezionare **Proprietà**, nel finestra Proprietà modificare l'impostazione **Nullable** su **true**. in 
+     *questo modo è possibile salvare un blog nel database senza assegnargli un URL*
 -   Usando le tecniche appena apprese, aggiungere un'entità **post** con una proprietà della chiave **postid**
 -   Aggiungere le proprietà scalari del **titolo** e del **contenuto** all'entità **post**
 
 Ora che sono presenti due entità, è possibile aggiungere un'associazione (o relazione) tra di esse.
 
--   Fare clic con il pulsante destro del mouse sull'area di progettazione e scegliere **Aggiungi nuova-&gt; associazione...**
--   Fare in modo che un'estremità della relazione punti al **Blog** con una molteplicità di **uno** e l'altro punto finale da **inserire** con una molteplicità di **molti**
-    *questo significa che un Blog ha molti post e un post appartiene a* un Blog
+-   Fare clic con il pulsante destro del mouse sull'area di progettazione e scegliere **Aggiungi nuova &gt; associazione...**
+-   Fare in modo che un'estremità della relazione punti al **Blog** con una molteplicità di **uno** e l'altro punto finale a **post** con una molteplicità di **molti**di 
+     *questi significa che un Blog ha molti post e un post appartiene a* un Blog
 -   Verificare che la casella dell' **entità Aggiungi proprietà di chiave esterna a "post"** sia selezionata e fare clic su **OK** .
 
     ![Aggiungi associazione MF](~/ef6/media/addassociationmf.png)
@@ -83,17 +85,17 @@ Se si lavora in Visual Studio 2010, è necessario seguire alcuni passaggi aggiun
 
 Prima di tutto, è necessario ottenere la versione più recente di Entity Framework da NuGet.
 
--   **Progetto-&gt; Gestisci pacchetti NuGet...** 
-    *se non si ha l'opzione **Gestisci pacchetti NuGet...** è necessario installare la [versione più recente di NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) *
+-   **Progetto- &gt; Gestisci pacchetti NuGet...** 
+     *Se non si ha l'opzione **Gestisci pacchetti NuGet...** è necessario installare la [versione più recente di NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) *
 -   Selezionare la scheda **online**
 -   Selezionare il pacchetto **EntityFramework**
--   Fare clic su **Installa**
+-   Fai clic su **Install** (Installa).
 
 Successivamente, è necessario scambiare il modello per generare il codice che usa l'API DbContext, introdotta nelle versioni successive di Entity Framework.
 
 -   Fare clic con il pulsante destro del mouse su un punto vuoto del modello nella finestra di progettazione EF e scegliere **Aggiungi elemento di generazione codice...**
 -   Selezionare **modelli online** dal menu a sinistra e cercare **DbContext**
--   Selezionare il **Generatore EF 5. x DbContext per C\#** , immettere **BloggingModel** come nome e fare clic su **Aggiungi** .
+-   Selezionare il **Generatore EF 5. x DbContext per C \# **, immettere **BloggingModel** come nome e fare clic su **Aggiungi** .
 
     ![Modello DbContext](~/ef6/media/dbcontexttemplate.png)
 
@@ -182,8 +184,8 @@ Si inizierà aggiungendo una nuova entità User al modello.
 
     ![Aggiungi entità utente](~/ef6/media/adduserentity.png)
 
--   Fare clic con il pulsante destro del mouse sulla proprietà **username** nell'area di progettazione e selezionare **proprietà**, nel finestra Proprietà modificare l'impostazione **MaxLength** su **50**
-    *in questo modo i dati che possono essere archiviati nel nome utente verranno limitati a 50 caratteri* .
+-   Fare clic con il pulsante destro del mouse sulla proprietà **username** nell'area di progettazione e selezionare **Proprietà**, nel finestra Proprietà modificare l'impostazione **MaxLength** su **50**per 
+     *limitare i dati che possono essere archiviati nel nome utente a 50 caratteri*
 -   Aggiungere una proprietà scalare **DisplayName** all'entità **User**
 
 A questo punto si dispone di un modello aggiornato e si è pronti per aggiornare il database in modo da includere il nuovo tipo di entità utente.
@@ -195,6 +197,6 @@ A questo punto si dispone di un modello aggiornato e si è pronti per aggiornare
     *Lo script generato eliminerà tutte le tabelle esistenti e ricreerà lo schema da zero. Questo può funzionare per lo sviluppo locale, ma non è possibile eseguire il push delle modifiche a un database già distribuito. Se è necessario pubblicare le modifiche in un database che è già stato distribuito, sarà necessario modificare lo script o usare uno strumento di confronto dello schema per calcolare uno script di migrazione.*
 -   Fare clic con il pulsante destro del mouse sullo script e scegliere **Esegui**. verrà richiesto di specificare il database a cui connettersi, specificare il database locale o SQL Server Express, a seconda della versione di Visual Studio in uso
 
-## <a name="summary"></a>Summary
+## <a name="summary"></a>Riepilogo
 
 In questa procedura dettagliata è stato esaminato Model First sviluppo, che ci ha consentito di creare un modello nella finestra di progettazione EF e quindi di generare un database da tale modello. Il modello è stato quindi utilizzato per leggere e scrivere alcuni dati dal database. Infine, il modello è stato aggiornato e quindi ricreato lo schema del database in modo che corrisponda al modello.

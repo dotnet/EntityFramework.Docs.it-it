@@ -1,14 +1,16 @@
 ---
 title: Database First-EF6
+description: Database First in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: cc6ffdb3-388d-4e79-a201-01ec2577c949
-ms.openlocfilehash: d40cff4ddccf43a394ef4f244653372a5a89b05a
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/workflows/database-first
+ms.openlocfilehash: 095fc6d6882df306816e65995ff314f1a0e7178a
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418357"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620444"
 ---
 # <a name="database-first"></a>Database First
 Questo video e la procedura dettagliata forniscono un'introduzione allo sviluppo Database First con Entity Framework. Database First consente di decompilare un modello da un database esistente. Il modello viene archiviato in un file EDMX (estensione edmx) e può essere visualizzato e modificato nella Entity Framework Designer. Le classi con cui si interagisce nell'applicazione vengono generate automaticamente dal file EDMX.
@@ -18,7 +20,7 @@ In questo video viene fornita un'introduzione allo sviluppo Database First trami
 
 **Presentato da**: [Rowan Miller](https://romiller.com/)
 
-**Video**: [wmv](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.wmv) | [MP4](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-mp4video-databasefirst.m4v) | [WMV (zip)](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.zip)
+**Video**: [WMV](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.wmv)  |  [MP4](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-mp4video-databasefirst.m4v)WMV  |  [(zip)](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.zip)
 
 ## <a name="pre-requisites"></a>Prerequisiti
 
@@ -42,8 +44,8 @@ Il server di database installato con Visual Studio è diverso a seconda della ve
 Procediamo con la generazione del database.
 
 -   Aprire Visual Studio.
--   **Visualizza-&gt; Esplora server**
--   Fare clic con il pulsante destro del mouse su **connessioni dati-&gt; Aggiungi connessione...**
+-   **Visualizza- &gt; Esplora server**
+-   Fare clic con il pulsante destro del mouse su **connessioni dati- &gt; Aggiungi connessione...**
 -   Se non si è connessi a un database da Esplora server prima di selezionare Microsoft SQL Server come origine dati
 
     ![Seleziona origine dati](~/ef6/media/selectdatasource.png)
@@ -84,7 +86,7 @@ CREATE TABLE [dbo].[Posts] (
 Per semplificare le operazioni, verrà compilata un'applicazione console di base che usa il Database First per eseguire l'accesso ai dati:
 
 -   Aprire Visual Studio.
--   **Nuovo progetto&gt; di&gt; file...**
+-   **File- &gt; nuovo- &gt; progetto...**
 -   Selezionare **Windows** nel menu a sinistra e nell' **applicazione console**
 -   Immettere **DatabaseFirstSample** come nome
 -   Selezionare **OK**.
@@ -95,7 +97,7 @@ Per semplificare le operazioni, verrà compilata un'applicazione console di base
 
 Per creare il modello, verrà usato Entity Framework Designer, incluso come parte di Visual Studio.
 
--   **Progetto-&gt; Aggiungi nuovo elemento...**
+-   **Progetto- &gt; Aggiungi nuovo elemento...**
 -   Selezionare **dati** dal menu a sinistra e quindi **ADO.NET Entity Data Model**
 -   Immettere **BloggingModel** come nome e fare clic su **OK** .
 -   Viene avviata la **procedura guidata Entity Data Model**
@@ -113,7 +115,7 @@ Per creare il modello, verrà usato Entity Framework Designer, incluso come part
 
  
 
-Una volta completato il processo di Reverse Engineering, il nuovo modello viene aggiunto al progetto e aperto per la visualizzazione nel Entity Framework Designer. Al progetto è stato aggiunto anche un file app. config con i dettagli della connessione per il database.
+Una volta completato il processo di Reverse Engineering, il nuovo modello viene aggiunto al progetto e aperto per la visualizzazione nel Entity Framework Designer. Al progetto è stato aggiunto anche un file di App.config con i dettagli della connessione per il database.
 
 ![Modello iniziale](~/ef6/media/modelinitial.png)
 
@@ -123,17 +125,17 @@ Se si lavora in Visual Studio 2010, è necessario seguire alcuni passaggi aggiun
 
 Prima di tutto, è necessario ottenere la versione più recente di Entity Framework da NuGet.
 
--   **Progetto-&gt; Gestisci pacchetti NuGet...** 
-    *se non si ha l'opzione **Gestisci pacchetti NuGet...** è necessario installare la [versione più recente di NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) *
+-   **Progetto- &gt; Gestisci pacchetti NuGet...** 
+     *Se non si ha l'opzione **Gestisci pacchetti NuGet...** è necessario installare la [versione più recente di NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) *
 -   Selezionare la scheda **online**
 -   Selezionare il pacchetto **EntityFramework**
--   Fare clic su **Installa**
+-   Fai clic su **Install** (Installa).
 
 Successivamente, è necessario scambiare il modello per generare il codice che usa l'API DbContext, introdotta nelle versioni successive di Entity Framework.
 
 -   Fare clic con il pulsante destro del mouse su un punto vuoto del modello nella finestra di progettazione EF e scegliere **Aggiungi elemento di generazione codice...**
 -   Selezionare **modelli online** dal menu a sinistra e cercare **DbContext**
--   Selezionare il **Generatore EF 5. x DbContext per C\#** , immettere **BloggingModel** come nome e fare clic su **Aggiungi** .
+-   Selezionare il **Generatore EF 5. x DbContext per C \# **, immettere **BloggingModel** come nome e fare clic su **Aggiungi** .
 
     ![Modello DbContext](~/ef6/media/dbcontexttemplate.png)
 
@@ -227,6 +229,6 @@ Il modello è ora aggiornato per includere una nuova entità utente mappata alla
 
 ![Modello aggiornato](~/ef6/media/modelupdated.png)
 
-## <a name="summary"></a>Summary
+## <a name="summary"></a>Riepilogo
 
 In questa procedura dettagliata è stato esaminato Database First sviluppo, che ci ha consentito di creare un modello nella finestra di progettazione EF basata su un database esistente. Il modello è stato quindi utilizzato per leggere e scrivere alcuni dati dal database. Infine, il modello è stato aggiornato in modo da riflettere le modifiche apportate allo schema del database.

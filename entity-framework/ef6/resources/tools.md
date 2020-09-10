@@ -1,14 +1,15 @@
 ---
 title: Strumenti & estensioni-EF6
+description: Strumenti & estensioni in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 7f166290-d9f0-4eec-b4fd-e7a83068d977
-ms.openlocfilehash: 2b0a74417c9b5a21790865bbeb8f4194a2fb770f
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: e24485223baeaba875ea95adb99a364de8b72071
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419719"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620022"
 ---
 # <a name="entity-framework-tools--extensions"></a>Estensioni & Entity Framework Tools
 > [!IMPORTANT]  
@@ -21,5 +22,5 @@ Entity Framework è stato un O/RM popolare per molti anni. Di seguito sono ripor
 - [Profiler ORM](https://www.ormprofiler.com)  
 - [LINQPad](https://www.linqpad.net)  
 - [LLBLGen Pro](https://www.llblgen.com)  
-- [Huagati gli strumenti DBML/EDMX](https://www.huagati.com/dbmltools)  
+- [Strumenti Huagati DBML/EDMX](https://www.huagati.com/dbmltools)  
 - [Entity Developer](https://www.devart.com/entitydeveloper)  

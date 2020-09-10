@@ -1,14 +1,16 @@
 ---
 title: Versioni di Visual Studio-EF6
+description: Versioni di Visual Studio e Entity Framework 6
 author: divega
 ms.date: 07/05/2018
 ms.assetid: 028FF890-4EDB-4F03-AE53-72F9C33EC92F
-ms.openlocfilehash: 16bcdc6d0e7c5632d4f4c06ba285a7a666f24204
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/what-is-new/visual-studio
+ms.openlocfilehash: fab2b8924cdf3ea47d4372cf011c66fc718db1f9
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416940"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619718"
 ---
 # <a name="visual-studio-releases"></a>Versioni di Visual Studio
 
@@ -20,45 +22,45 @@ Di fatto, i vari esempi e procedure dettagliate nella documentazione di Entity F
 ## <a name="visual-studio-2017-157-and-newer"></a>Visual Studio 2017 15,7 e versioni successive
 
 - Questa versione di Visual Studio include la versione più recente di Entity Framework Tools e il runtime di EF 6,2 e non richiede passaggi di configurazione aggiuntivi.
-Per ulteriori informazioni su queste versioni, [vedere novità.](~/ef6/what-is-new/index.md)
+Per ulteriori informazioni su queste versioni, [vedere novità.](xref:ef6/what-is-new/index)
 - L'aggiunta di Entity Framework a nuovi progetti tramite gli strumenti EF aggiungerà automaticamente il pacchetto NuGet EF 6,2.
 È possibile eseguire manualmente l'installazione o l'aggiornamento a qualsiasi pacchetto NuGet EF disponibile online.
 - Per impostazione predefinita, l'istanza di SQL Server disponibile con questa versione di Visual Studio è un'istanza del database locale denominata MSSQLLocalDB.
-La sezione Server della stringa di connessione da usare è "(local DB)\\MSSQLLocalDB".
-Ricordarsi di usare una stringa Verbatim con prefisso `@` o doppio "\\\\" quando si specifica una stringa di connessione nel C# codice.  
+La sezione Server della stringa di connessione da usare è "(local DB) \\ MSSQLLocalDB".
+Ricordarsi di usare una stringa Verbatim con prefisso `@` o due barre rovesciate " \\ \\ " quando si specifica una stringa di connessione nel codice C#.  
 
 
 ## <a name="visual-studio-2015-to-visual-studio-2017-156"></a>Visual Studio 2015 a Visual Studio 2017 15,6
 
 - Queste versioni di Visual Studio includono Entity Framework Tools e 6.1.3 di Runtime.
-Per ulteriori informazioni su queste versioni, vedere le [versioni precedenti](~/ef6/what-is-new/past-releases.md#ef-613) .
+Per ulteriori informazioni su queste versioni, vedere le [versioni precedenti](xref:ef6/what-is-new/past-releases#ef-613) .
 - L'aggiunta di Entity Framework a nuovi progetti tramite gli strumenti EF aggiungerà automaticamente il pacchetto NuGet 6.1.3 di EF.
 È possibile eseguire manualmente l'installazione o l'aggiornamento a qualsiasi pacchetto NuGet EF disponibile online.
 - Per impostazione predefinita, l'istanza di SQL Server disponibile con questa versione di Visual Studio è un'istanza del database locale denominata MSSQLLocalDB.
-La sezione Server della stringa di connessione da usare è "(local DB)\\MSSQLLocalDB".
-Ricordarsi di usare una stringa Verbatim con prefisso `@` o doppio "\\\\" quando si specifica una stringa di connessione nel C# codice.  
+La sezione Server della stringa di connessione da usare è "(local DB) \\ MSSQLLocalDB".
+Ricordarsi di usare una stringa Verbatim con prefisso `@` o due barre rovesciate " \\ \\ " quando si specifica una stringa di connessione nel codice C#.  
 
 
 ## <a name="visual-studio-2013"></a>Visual Studio 2013
 - Questa versione di Visual Studio include e la versione precedente di Entity Framework strumenti e Runtime.
 Si consiglia di eseguire l'aggiornamento a Entity Framework Tools 6.1.3, usando [il programma di installazione](https://www.microsoft.com/download/details.aspx?id=40762) disponibile nell'area download Microsoft.
-Per ulteriori informazioni su queste versioni, vedere le [versioni precedenti](~/ef6/what-is-new/past-releases.md#ef-613) .
+Per ulteriori informazioni su queste versioni, vedere le [versioni precedenti](xref:ef6/what-is-new/past-releases#ef-613) .
 - Aggiungendo Entity Framework ai nuovi progetti usando gli strumenti EF aggiornati, verrà aggiunto automaticamente il pacchetto NuGet EF 6.1.3.
 È possibile eseguire manualmente l'installazione o l'aggiornamento a qualsiasi pacchetto NuGet EF disponibile online.
 - Per impostazione predefinita, l'istanza di SQL Server disponibile con questa versione di Visual Studio è un'istanza del database locale denominata MSSQLLocalDB.
-La sezione Server della stringa di connessione da usare è "(local DB)\\MSSQLLocalDB".
-Ricordarsi di usare una stringa Verbatim con prefisso `@` o doppio "\\\\" quando si specifica una stringa di connessione nel C# codice.  
+La sezione Server della stringa di connessione da usare è "(local DB) \\ MSSQLLocalDB".
+Ricordarsi di usare una stringa Verbatim con prefisso `@` o due barre rovesciate " \\ \\ " quando si specifica una stringa di connessione nel codice C#.  
 
 ## <a name="visual-studio-2012"></a>Visual Studio 2012
 
 - Questa versione di Visual Studio include e la versione precedente di Entity Framework strumenti e Runtime.
 Si consiglia di eseguire l'aggiornamento a Entity Framework Tools 6.1.3, usando [il programma di installazione](https://www.microsoft.com/download/details.aspx?id=40762) disponibile nell'area download Microsoft.
-Per ulteriori informazioni su queste versioni, vedere le [versioni precedenti](~/ef6/what-is-new/past-releases.md#ef-613) .
+Per ulteriori informazioni su queste versioni, vedere le [versioni precedenti](xref:ef6/what-is-new/past-releases#ef-613) .
 - Aggiungendo Entity Framework ai nuovi progetti usando gli strumenti EF aggiornati, verrà aggiunto automaticamente il pacchetto NuGet EF 6.1.3.
 È possibile eseguire manualmente l'installazione o l'aggiornamento a qualsiasi pacchetto NuGet EF disponibile online.
 - Per impostazione predefinita, l'istanza di SQL Server disponibile con questa versione di Visual Studio è un'istanza del database locale denominata v 11.0.
-La sezione Server della stringa di connessione da usare è "(local DB)\\v 11.0".
-Ricordarsi di usare una stringa Verbatim con prefisso `@` o doppio "\\\\" quando si specifica una stringa di connessione nel C# codice.  
+La sezione Server della stringa di connessione da usare è "(local DB) \\ v 11.0".
+Ricordarsi di usare una stringa Verbatim con prefisso `@` o due barre rovesciate " \\ \\ " quando si specifica una stringa di connessione nel codice C#.  
 
 ## <a name="visual-studio-2010"></a>Visual Studio 2010
 
@@ -69,5 +71,5 @@ Per creare applicazioni con le versioni più recenti di Entity Framework, è nec
 È consigliabile cambiare la generazione del codice in base a DbContext e Entity Framework 5, installando i modelli di generazione del codice DbContext per [C#](https://marketplace.visualstudio.com/items?itemName=EntityFrameworkTeam.EF5xDbContextGeneratorforC) o [Visual Basic](https://marketplace.visualstudio.com/items?itemName=EntityFrameworkTeam.EF5xDbContextGeneratorforVBNET).
 - Dopo aver installato le estensioni di gestione pacchetti NuGet, è possibile installare manualmente o eseguire l'aggiornamento a qualsiasi pacchetto NuGet EF disponibile online e usare EF6 con Code First, che non richiede una finestra di progettazione.
 - Per impostazione predefinita, l'istanza di SQL Server disponibile con questa versione di Visual Studio è SQL Server Express denominata SQLExpress.
-La sezione Server della stringa di connessione da usare è ".\\SQLExpress ".
-Ricordarsi di usare una stringa Verbatim con prefisso `@` o doppio "\\\\" quando si specifica una stringa di connessione nel C# codice.
+La sezione Server della stringa di connessione da usare è ". \\ SQLEXPRESS ".
+Ricordarsi di usare una stringa Verbatim con prefisso `@` o due barre rovesciate " \\ \\ " quando si specifica una stringa di connessione nel codice C#.

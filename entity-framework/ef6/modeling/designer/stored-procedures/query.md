@@ -1,14 +1,16 @@
 ---
 title: Stored procedure per query della finestra di progettazione-EF6
+description: Stored procedure di query della finestra di progettazione in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9554ed25-c5c1-43be-acad-5da37739697f
-ms.openlocfilehash: 2e0092b526278597e8477d47eeb642598647bb91
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/stored-procedures/query
+ms.openlocfilehash: c647516e1c6ea010c791df6857782b2304ceed1c
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418392"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620355"
 ---
 # <a name="designer-query-stored-procedures"></a>Stored procedure di query della finestra di progettazione
 In questa procedura dettagliata viene illustrato come utilizzare il Entity Framework Designer (Entity Designer) per importare stored procedure in un modello e quindi chiamare le stored procedure importate per recuperare i risultati. 
@@ -18,34 +20,34 @@ Si noti che Code First non supporta il mapping a stored procedure o funzioni. Tu
 var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]")`;
 ```
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>Prerequisiti
 
 Per completare questa procedura dettagliata, è necessario disporre di:
 
 - Una versione recente di Visual Studio.
-- [Database di esempio School](~/ef6/resources/school-database.md).
+- [Database di esempio School](xref:ef6/resources/school-database).
 
 ## <a name="set-up-the-project"></a>Configurare il progetto
 
 -   Aprire Visual Studio 2012.
--   Seleziona **file-&gt; progetto nuovo-&gt;**
--   Nel riquadro sinistro fare clic su **Visual C\#** , quindi selezionare il modello **console** .
--   Immettere **EFwithSProcsSample** come nome.
+-   Selezionare **file- &gt; nuovo- &gt; progetto**
+-   Nel riquadro sinistro fare clic su **Visual C \# **e quindi selezionare il modello **console** .
+-   Immettere **EFwithSProcsSample**   come nome.
 -   Selezionare **OK**.
 
 ## <a name="create-a-model"></a>Creare il modello
 
--   Fare clic con il pulsante destro del mouse sul progetto Esplora soluzioni e scegliere **aggiungi&gt; nuovo elemento**.
+-   Fare clic con il pulsante destro del mouse sul progetto in Esplora soluzioni e scegliere **Aggiungi- &gt; nuovo elemento**.
 -   Selezionare **dati** dal menu a sinistra e quindi selezionare **ADO.NET Entity Data Model** nel riquadro modelli.
 -   Immettere **EFwithSProcsModel. edmx** per il nome del file e quindi fare clic su **Aggiungi**.
 -   Nella finestra di dialogo Scegli contenuto Model selezionare **genera da database**, quindi fare clic su **Avanti**.
 -   Fare clic su **nuova connessione**.  
-    Nella finestra di dialogo Proprietà connessione immettere il nome del server (ad esempio, **(local DB)\\mssqllocaldb**), selezionare il metodo di autenticazione, digitare **School** per il nome del database, quindi fare clic su **OK**.  
+    Nella finestra di dialogo Proprietà connessione immettere il nome del server (ad esempio, **(local DB) \\ mssqllocaldb**), selezionare il metodo di autenticazione, digitare **School**   come nome del database, quindi fare clic su **OK**.  
     La finestra di dialogo scegliere la connessione dati viene aggiornata con l'impostazione di connessione al database.
--   Nella finestra di dialogo Scegli oggetti di database selezionare la casella di controllo **tabelle** per selezionare tutte le tabelle.  
+-   Nella finestra di dialogo Scegli oggetti di database selezionare la casella di controllo **tabelle**   per selezionare tutte le tabelle.  
     Inoltre, selezionare le stored procedure seguenti nel nodo **stored procedure e funzioni** : **GetStudentGrades** e **GetDepartmentName**. 
 
-    ![Importa](~/ef6/media/import.jpg)
+    ![Importazione di stored procedure](~/ef6/media/import.jpg)
 
     *A partire da Visual Studio 2012, EF Designer supporta l'importazione bulk di stored procedure. Per impostazione predefinita, l' **importazione delle stored procedure e delle funzioni selezionate nel modello set** è selezionata.*
 -   Fare clic su **fine**.
@@ -56,7 +58,7 @@ Affinché un'importazione di funzioni restituisca un tipo di entità, le colonne
 
 -   Fare clic con il pulsante destro del mouse sull'area di progettazione e scegliere **browser modello**.
 -   In **browser modello**selezionare **importazioni di funzioni**, quindi fare doppio clic sulla funzione **GetStudentGrades** .
--   Nella finestra di dialogo modifica importazione funzione selezionare **entità** e scegliere **StudentGrade**.  
+-   Nella finestra di dialogo modifica importazione funzione selezionare **entità**   e scegliere **StudentGrade**.  
     *La casella di controllo **importazione funzioni è componibile** nella parte superiore della finestra di dialogo **importazioni** di funzioni che consente di eseguire il mapping a funzioni componibili. Se si seleziona questa casella, solo le funzioni componibili (funzioni con valori di tabella) verranno visualizzate nell'elenco a discesa **stored procedure/nome funzione** . Se non si seleziona questa casella, nell'elenco verranno visualizzate solo le funzioni non componibili.*
 
 ## <a name="use-the-model"></a>Usare il modello

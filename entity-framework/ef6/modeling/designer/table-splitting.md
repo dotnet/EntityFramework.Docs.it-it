@@ -1,30 +1,32 @@
 ---
 title: Suddivisione di tabelle della finestra di progettazione-EF6
+description: Suddivisione di tabelle della finestra di progettazione in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 452f17c3-9f26-4de4-9894-8bc036e23b0f
-ms.openlocfilehash: f5e7532e6c0b473d8ce77cbd11e3e673b0af6cbe
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/table-splitting
+ms.openlocfilehash: 55642d7c3b4efc7467e8a40e68b4144728df270f
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418168"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620378"
 ---
 # <a name="designer-table-splitting"></a>Suddivisione di tabelle della finestra di progettazione
 In questa procedura dettagliata viene illustrato come eseguire il mapping di più tipi di entità a una singola tabella modificando un modello con il Entity Framework Designer (EF designer).
 
-Uno dei motivi per cui è consigliabile utilizzare la suddivisione delle tabelle è ritardare il caricamento di alcune proprietà quando si utilizza il caricamento lazy per caricare gli oggetti. È possibile separare le proprietà che potrebbero contenere quantità molto elevate di dati in un'entità distinta e caricarla solo quando necessario.
+Uno dei motivi per cui è consigliabile utilizzare la suddivisione delle tabelle è ritardare il caricamento di alcune proprietà quando si utilizza il caricamento lazy per caricare gli oggetti.È possibile separare le proprietà che potrebbero contenere quantità molto elevate di dati in un'entità distinta e caricarla solo quando necessario.
 
 Nell'immagine seguente vengono illustrate le finestre principali che vengono usate quando si usa la finestra di progettazione EF.
 
 ![EF Designer](~/ef6/media/efdesigner.png)
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>Prerequisiti
 
 Per completare questa procedura dettagliata, è necessario disporre di:
 
 - Una versione recente di Visual Studio.
-- [Database di esempio School](~/ef6/resources/school-database.md).
+- [Database di esempio School](xref:ef6/resources/school-database).
 
 ## <a name="set-up-the-project"></a>Configurare il progetto
 
@@ -32,7 +34,7 @@ Questa procedura dettagliata usa Visual Studio 2012.
 
 -   Aprire Visual Studio 2012.
 -   Scegliere **Nuovo** dal menu **File**e quindi fare clic su **Progetto**.
--   Nel riquadro sinistro fare clic su Visual C\#, quindi selezionare il modello applicazione console.
+-   Nel riquadro sinistro fare clic su Visual C \# e quindi selezionare il modello applicazione console.
 -   Immettere **TableSplittingSample** come nome del progetto e fare clic su **OK**.
 
 ## <a name="create-a-model-based-on-the-school-database"></a>Creare un modello basato sul database School
@@ -41,12 +43,12 @@ Questa procedura dettagliata usa Visual Studio 2012.
 -   Selezionare **dati** dal menu a sinistra e quindi selezionare **ADO.NET Entity Data Model** nel riquadro modelli.
 -   Immettere **TableSplittingModel. edmx** per il nome del file e quindi fare clic su **Aggiungi**.
 -   Nella finestra di dialogo Scegli contenuto Model selezionare **genera da database**, quindi fare clic su **Avanti.**
--   Fare clic su nuova connessione. Nella finestra di dialogo Proprietà connessione immettere il nome del server (ad esempio, **(local DB)\\mssqllocaldb**), selezionare il metodo di autenticazione, digitare **School** per il nome del database, quindi fare clic su **OK**.
+-   Fare clic su nuova connessione. Nella finestra di dialogo Proprietà connessione immettere il nome del server (ad esempio, **(local DB) \\ mssqllocaldb**), selezionare il metodo di autenticazione, digitare **School**   come nome del database, quindi fare clic su **OK**.
     La finestra di dialogo scegliere la connessione dati viene aggiornata con l'impostazione di connessione al database.
--   Nella finestra di dialogo Seleziona oggetti di database espandere le **tabelle** nodo e controllare la tabella **Person** . La tabella specificata verrà aggiunta al modello **School** .
+-   Nella finestra di dialogo Seleziona oggetti di database espandere il nodo **tabelle**   e controllare la tabella **Person** . La tabella specificata verrà aggiunta al modello **School** .
 -   Fare clic su **fine**.
 
-Viene visualizzata la Entity Designer, che fornisce un'area di progettazione per la modifica del modello. Tutti gli oggetti selezionati nella finestra di dialogo **Scegli oggetti di Database** vengono aggiunti al modello.
+Viene visualizzata la Entity Designer, che fornisce un'area di progettazione per la modifica del modello. Tutti gli oggetti selezionati nella finestra di dialogo **Scegli oggetti di database**   vengono aggiunti al modello.
 
 ## <a name="map-two-entities-to-a-single-table"></a>Eseguire il mapping di due entità a una singola tabella
 
@@ -56,30 +58,30 @@ In questa sezione si suddividerà l'entità **Person** in due entità, quindi la
 > L'entità **Person** non contiene proprietà che possono contenere grandi quantità di dati; viene usato solo come esempio.
 
 -   Fare clic con il pulsante destro del mouse su un'area vuota dell'area di progettazione, scegliere **Aggiungi nuovo**e fare clic su **entità**.
-    Verrà visualizzata la finestra di dialogo **nuova entità** .
--   Digitare **HireInfo** per il **nome dell'entità** e **PersonID** per il nome della **proprietà della chiave** .
+    Verrà visualizzata la finestra di dialogo **nuova entità**   .
+-   Digitare **HireInfo**   per il **nome dell'entità** e **PersonID** per il nome della **proprietà della chiave** .
 -   Fare clic su **OK**.
 -   Nell'area di progettazione verrà creato e visualizzato un nuovo tipo di entità.
--   Selezionare la proprietà  **assunto** del tipo di entità **Person** e premere **CTRL + X** .
--   Selezionare l'entità **HireInfo** e premere **CTRL + V** .
+-   Selezionare la proprietà **hiree**   del tipo di entità **Person**   e premere i tasti **CTRL + X** .
+-   Selezionare l'entità **HireInfo**   e premere **CTRL + V** .
 -   Creare un'associazione tra **Person** e **HireInfo**. A tale scopo, fare clic con il pulsante destro del mouse su un'area vuota dell'area di progettazione, scegliere **Aggiungi nuovo**e fare clic su **associazione**.
--   Verrà visualizzata la finestra di dialogo Aggiungi di **associazione** . Per impostazione predefinita, viene fornito il nome **PersonHireInfo** .
+-   Verrà visualizzata la finestra di dialogo **Aggiungi associazione**   . Per impostazione predefinita, viene fornito il nome **PersonHireInfo** .
 -   Specificare la molteplicità **1 (una)** su entrambe le estremità della relazione.
--   Premere **OK**.
+-   Fare clic su **OK**.
 
-Il passaggio successivo richiede la finestra **Dettagli Mapping** . Se questa finestra non è visibile, fare clic con il pulsante destro del mouse sull'area di progettazione e scegliere **Dettagli mapping**.
+Il passaggio successivo richiede la finestra **Dettagli mapping**   . Se questa finestra non è visibile, fare clic con il pulsante destro del mouse sull'area di progettazione e scegliere **Dettagli mapping**.
 
--   Selezionare il tipo di entità  **HireInfo** e fare clic su **&lt;aggiungere una tabella o una vista&gt;**  nella finestra  **Dettagli mapping** .
--   Selezionare **Person** dall'elenco **a discesa&lt;aggiungere una tabella o una vista&gt;**  campo. L'elenco contiene le tabelle o le viste a cui è possibile eseguire il mapping dell'entità selezionata.
+-   Selezionare il **HireInfo**   tipo di entità HireInfo e fare clic su ** &lt; Aggiungi tabella &gt; o vista**   nella finestra **Dettagli mapping**   .
+-   Selezionare **Person** nell'elenco a discesa ** &lt; aggiungere una tabella &gt; o un**campo di visualizzazione   . L'elenco contiene le tabelle o le viste a cui è possibile eseguire il mapping dell'entità selezionata.
     Per impostazione predefinita, è necessario eseguire il mapping delle proprietà appropriate.
 
-    ![Mapping](~/ef6/media/mapping.png)
+    ![Proprietà mapping](~/ef6/media/mapping.png)
 
 -   Selezionare l'associazione **PersonHireInfo** nell'area di progettazione.
 -   Fare clic con il pulsante destro del mouse sull'associazione nell'area di progettazione e scegliere **Proprietà**.
 -   Nella finestra **Proprietà** selezionare la proprietà **vincoli referenziali** , quindi fare clic sul pulsante con i puntini di sospensione.
 -   Selezionare **Person** dall'elenco a discesa **principale** .
--   Premere **OK**.
+-   Fare clic su **OK**.
 
  
 
@@ -126,7 +128,7 @@ Le istruzioni T-SQL seguenti sono state eseguite nel database **School** in segu
 
 -   L' **inserimento** seguente è stato eseguito in seguito all'esecuzione del contesto. SaveChanges () e combina i dati delle entità **Person** e **HireInfo**
 
-    ![Inserimento](~/ef6/media/insert.png)
+    ![Inserisci dati Person e HireInfo di combinazione](~/ef6/media/insert.png)
 
 -   L'istruzione **Select** seguente è stata eseguita in seguito all'esecuzione del contesto. People. FirstOrDefault () e seleziona solo le colonne di cui è stato eseguito il mapping a **Person**
 

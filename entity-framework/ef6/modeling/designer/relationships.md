@@ -1,18 +1,20 @@
 ---
 title: Relazioni-EF designer-EF6
+description: Relazioni-EF designer in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 402fe960-754b-470f-976b-e5de3e9986b5
-ms.openlocfilehash: d429c39dafbf183caabdc85748c188deb8dd6f66
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/relationships
+ms.openlocfilehash: f7c801dd8f8ae81cfe44283b7575cfe869ce26d3
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418245"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620428"
 ---
 # <a name="relationships---ef-designer"></a>Relazioni-EF designer
 > [!NOTE]
-> In questa pagina vengono fornite informazioni sulla configurazione delle relazioni nel modello mediante la finestra di progettazione EF. Per informazioni generali sulle relazioni in EF e su come accedere e modificare i dati usando le relazioni, vedere [relazioni & proprietà di navigazione](~/ef6/fundamentals/relationships.md).
+> In questa pagina vengono fornite informazioni sulla configurazione delle relazioni nel modello mediante la finestra di progettazione EF. Per informazioni generali sulle relazioni in EF e su come accedere e modificare i dati usando le relazioni, vedere [relazioni & proprietà di navigazione](xref:ef6/fundamentals/relationships).
 
 Le associazioni definiscono le relazioni tra i tipi di entità in un modello. In questo argomento viene illustrato come eseguire il mapping delle associazioni con la Entity Framework Designer (progettazione EF). Nell'immagine seguente vengono illustrate le finestre principali che vengono usate quando si usa la finestra di progettazione EF.
 
@@ -23,14 +25,14 @@ Le associazioni definiscono le relazioni tra i tipi di entità in un modello. In
 
 ## <a name="associations-overview"></a>Cenni preliminari sulle associazioni
 
-Quando si progetta il modello utilizzando la finestra di progettazione EF, un file con estensione edmx rappresenta il modello. Nel file con estensione edmx, un elemento **Association** definisce una relazione tra due tipi di entità. Un'associazione deve specificare i tipi di entità coinvolti nella relazione e il possibile numero di tipi di entità a ogni entità finale della relazione, che è noto come molteplicità. La molteplicità di un'entità finale di un'associazione può avere un valore pari a uno (1), zero o uno (0.. 1) o molti (\*). Queste informazioni vengono specificate in due elementi **end** figlio.
+Quando si progetta il modello utilizzando la finestra di progettazione EF, un file con estensione edmx rappresenta il modello. Nel file con estensione edmx, un elemento **Association** definisce una relazione tra due tipi di entità. Un'associazione deve specificare i tipi di entità coinvolti nella relazione e il possibile numero di tipi di entità a ogni entità finale della relazione, che è noto come molteplicità. La molteplicità di un'entità finale di un'associazione può avere un valore pari a uno (1), zero o uno (0.. 1) o molti ( \* ). Queste informazioni vengono specificate in due elementi **end** figlio.
 
 In fase di esecuzione, è possibile accedere alle istanze del tipo di entità in un'entità finale di un'associazione tramite proprietà di navigazione o chiavi esterne (se si sceglie di esporre chiavi esterne nelle entità). Con le chiavi esterne esposte, la relazione tra le entità viene gestita con un elemento **ReferentialConstraint** (un elemento figlio dell'elemento **Association** ). È consigliabile esporre sempre chiavi esterne per le relazioni nelle entità.
 
 > [!NOTE]
-> In molti-a-molti (\*:\*) non è possibile aggiungere chiavi esterne alle entità. In una relazione \*:\*, le informazioni di associazione vengono gestite con un oggetto indipendente.
+> In molti-a-molti ( \* : \* ) non è possibile aggiungere chiavi esterne alle entità. In una \* \* relazione: le informazioni di associazione vengono gestite con un oggetto indipendente.
 
-Per informazioni sugli elementi CSDL (**ReferentialConstraint**, **Association**e così via), vedere la [specifica CSDL](~/ef6/modeling/designer/advanced/edmx/csdl-spec.md).
+Per informazioni sugli elementi CSDL (**ReferentialConstraint**, **Association**e così via), vedere la [specifica CSDL](xref:ef6/modeling/designer/advanced/edmx/csdl-spec).
 
 ## <a name="create-and-delete-associations"></a>Creazione ed eliminazione di associazioni
 
@@ -47,7 +49,7 @@ La creazione di un'associazione con la finestra di progettazione EF aggiorna il 
     ![Aggiungi associazione](~/ef6/media/addassociation.png)
 
     > [!NOTE]
-    > È possibile scegliere di non aggiungere proprietà di navigazione o proprietà di chiave esterna alle entità finali dell'associazione deselezionando la **proprietà di navigazione **e **aggiungendo proprietà di chiave esterna al nome del tipo di entità &lt;&gt; **le caselle di controllo delle entità. Se si aggiunge una sola proprietà di navigazione, l'associazione sarà attraversabile in una sola direzione. Se non si aggiungono proprietà di navigazione, è necessario scegliere di aggiungere proprietà di chiave esterna per accedere alle entità finali dell'associazione.
+    > È possibile scegliere di non aggiungere proprietà di navigazione o proprietà di chiave esterna alle entità finali dell'associazione deselezionando le caselle di controllo **proprietà di navigazione **e **Aggiungi proprietà di chiave esterna all' &lt; &gt; entità nome tipo di entità **. Se si aggiunge una sola proprietà di navigazione, l'associazione sarà attraversabile in una sola direzione. Se non si aggiungono proprietà di navigazione, è necessario scegliere di aggiungere proprietà di chiave esterna per accedere alle entità finali dell'associazione.
     
 3.  Fare clic su **OK**.
 
@@ -65,16 +67,16 @@ Per eliminare un'associazione, effettuare una delle operazioni seguenti:
 
 È consigliabile esporre sempre chiavi esterne per le relazioni nelle entità. Entity Framework utilizza un vincolo referenziale per verificare che una proprietà funga da chiave esterna per una relazione.
 
-Se durante la creazione di una relazione è stata selezionata la casella di controllo ***Aggiungi proprietà chiave esterna al nome del tipo di entità &lt;&gt; entità*** , il vincolo referenziale è stato aggiunto.
+Se durante la creazione di una relazione è stata selezionata la casella di controllo ***Aggiungi proprietà chiave esterna all' &lt; &gt; entità nome tipo di entità*** , questo vincolo referenziale è stato aggiunto.
 
-Quando si usa Entity Framework Designer per aggiungere o modificare un vincolo referenziale, Entity Framework Designer aggiunge o modifica un elemento **ReferentialConstraint** nel contenuto CSDL del file con estensione edmx.
+Quando si usa Entity Framework Designer per aggiungere o modificare un vincolo referenziale, progettazione EF aggiunge o modifica un elemento **ReferentialConstraint**   nel contenuto CSDL del file con estensione edmx.
 
 -   Fare doppio clic sull'associazione che si desidera modificare.
-    Verrà visualizzata la finestra di dialogo  **vincolo referenziale** .
--   Dall'elenco a discesa **principale** selezionare l'entità principale nel vincolo referenziale.
-    Le proprietà chiave dell'entità vengono aggiunte alla **chiave principale** elenco nella finestra di dialogo.
--   Dall'elenco a discesa  **dipendente** selezionare l'entità dipendente nel vincolo referenziale.
--   Per ogni chiave principale con una chiave dipendente, selezionare una chiave dipendente corrispondente dagli elenchi a discesa nella colonna **chiave dipendente** .
+    Verrà visualizzata la finestra di dialogo **vincolo referenziale**   .
+-   Dall' **Principal**   elenco a discesa principale selezionare l'entità principale nel vincolo referenziale.
+    Le proprietà chiave dell'entità vengono aggiunte all'elenco **chiavi principali**   nella finestra di dialogo.
+-   Dall' **Dependent**   elenco a discesa dipendente selezionare l'entità dipendente nel vincolo referenziale.
+-   Per ogni chiave principale con una chiave dipendente, selezionare una chiave dipendente corrispondente dagli elenchi a discesa nella colonna **chiave dipendente**   .
 
     ![Vincolo Ref](~/ef6/media/refconstraint.png)
 
@@ -82,7 +84,7 @@ Quando si usa Entity Framework Designer per aggiungere o modificare un vincolo r
 
 ## <a name="create-and-edit-association-mappings"></a>Creare e modificare i mapping di associazione
 
-È possibile specificare il modo in cui un'associazione esegue il mapping al database nella finestra **Dettagli Mapping** della finestra di progettazione EF.
+È possibile specificare il modo in cui un'associazione esegue il mapping al database nella finestra **Dettagli mapping**   di EF designer.
 
 > [!NOTE]
 > È possibile eseguire il mapping solo dei dettagli per le associazioni per le quali non è specificato un vincolo referenziale. Se viene specificato un vincolo referenziale, viene inclusa una proprietà di chiave esterna nell'entità ed è possibile utilizzare i dettagli di mapping per l'entità per controllare la colonna a cui viene eseguito il mapping della chiave esterna.
@@ -90,24 +92,24 @@ Quando si usa Entity Framework Designer per aggiungere o modificare un vincolo r
 ### <a name="create-an-association-mapping"></a>Creazione di un mapping di associazione
 
 -   Fare clic con il pulsante destro del mouse su un'associazione nell'area di progettazione e scegliere **mapping tabella**.
-    Viene visualizzato il mapping di associazione nella finestra **Dettagli mapping** .
+    Viene visualizzato il mapping di associazione nella finestra **Dettagli mapping**   .
 -   Fare clic su **Aggiungi tabella o vista**.
     Verrà visualizzato un elenco a discesa che include tutte le tabelle presenti nel modello di archiviazione.
 -   Selezionare la tabella alla quale l'associazione verrà mappata.
-    La finestra **Dettagli Mapping** Visualizza entrambe le estremità dell'associazione e le proprietà chiave per il tipo di entità a ogni **estremità**.
--   Per ogni proprietà chiave, fare clic sul campo  **colonna** e selezionare la colonna a cui viene mappata la proprietà.
+    La finestra **Dettagli mapping**   Visualizza entrambe le estremità dell'associazione e le proprietà chiave per il tipo di entità a ogni **estremità**.
+-   Per ogni proprietà chiave, fare clic sul campo **colonna**   e selezionare la colonna a cui viene mappata la proprietà.
 
     ![Dettagli mapping 4](~/ef6/media/mappingdetails4.png)
 
 ### <a name="edit-an-association-mapping"></a>Modificare un mapping di associazione
 
 -   Fare clic con il pulsante destro del mouse su un'associazione nell'area di progettazione e scegliere **mapping tabella**.
-    Viene visualizzato il mapping di associazione nella finestra **Dettagli mapping** .
--   Fare clic su **mapping per &lt;nome tabella&gt;** .
+    Viene visualizzato il mapping di associazione nella finestra **Dettagli mapping**   .
+-   Fare clic su **mapping a &lt; nome &gt; tabella**.
     Verrà visualizzato un elenco a discesa che include tutte le tabelle presenti nel modello di archiviazione.
 -   Selezionare la tabella alla quale l'associazione verrà mappata.
-    La finestra **Dettagli Mapping** Visualizza entrambe le estremità dell'associazione e le proprietà chiave per il tipo di entità a ogni estremità.
--   Per ogni proprietà chiave, fare clic sul campo  **colonna** e selezionare la colonna a cui viene mappata la proprietà.
+    La finestra **Dettagli mapping**   Visualizza entrambe le estremità dell'associazione e le proprietà chiave per il tipo di entità a ogni estremità.
+-   Per ogni proprietà chiave, fare clic sul campo **colonna**   e selezionare la colonna a cui viene mappata la proprietà.
 
 ## <a name="edit-and-delete-navigation-properties"></a>Modificare ed eliminare le proprietà di navigazione
 
@@ -116,8 +118,8 @@ Le proprietà di navigazione sono proprietà di collegamento utilizzate per indi
 #### <a name="to-edit-navigation-properties"></a>Per modificare le proprietà di navigazione
 
 -   Selezionare una proprietà di navigazione nell'area di progettazione EF.
-    Le informazioni sulla proprietà di navigazione vengono visualizzate nella finestra di  **Proprietà** di Visual Studio.
--   Modificare le impostazioni delle proprietà nella finestra **proprietà** .
+    Le informazioni sulla proprietà di navigazione vengono visualizzate nella finestra **Proprietà**di Visual Studio   .
+-   Modificare le impostazioni delle proprietà nella finestra **Proprietà**   .
 
 #### <a name="to-delete-navigation-properties"></a>Per eliminare le proprietà di navigazione
 

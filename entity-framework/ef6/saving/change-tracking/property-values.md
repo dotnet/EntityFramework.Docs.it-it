@@ -1,14 +1,16 @@
 ---
 title: Uso dei valori delle proprietà-EF6
+description: Utilizzo dei valori delle proprietà in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e3278b4b-9378-4fdb-923d-f64d80aaae70
-ms.openlocfilehash: d8a18182754980d79b71df3f227b30c4ce40366f
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/saving/change-tracking/property-values
+ms.openlocfilehash: 53c0829920c77768eae26d23c3da7d0553f44b62
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416967"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619972"
 ---
 # <a name="working-with-property-values"></a>Utilizzo dei valori delle proprietà
 Per la maggior parte Entity Framework si occuperà di tenere traccia dello stato, dei valori originali e dei valori correnti delle proprietà delle istanze dell'entità. Tuttavia, potrebbero verificarsi alcuni casi, ad esempio gli scenari disconnessi, in cui si desidera visualizzare o modificare le informazioni di EF sulle proprietà. Le tecniche illustrate in questo argomento si applicano in modo analogo ai modelli creati con Code First ed EF Designer.  
@@ -287,7 +289,7 @@ L'oggetto clonato può essere utile per risolvere i problemi relativi agli aggio
 
 ## <a name="getting-and-setting-the-current-or-original-values-of-complex-properties"></a>Recupero e impostazione dei valori correnti o originali delle proprietà complesse  
 
-Il valore di un intero oggetto complesso può essere letto e impostato usando il metodo Property, così come può essere per una proprietà primitiva. Inoltre, è possibile eseguire il drill-down nell'oggetto complesso e leggere o impostare le proprietà di tale oggetto o persino un oggetto annidato. Di seguito sono riportati alcuni esempi:  
+Il valore di un intero oggetto complesso può essere letto e impostato usando il metodo Property, così come può essere per una proprietà primitiva. Inoltre, è possibile eseguire il drill-down nell'oggetto complesso e leggere o impostare le proprietà di tale oggetto o persino un oggetto annidato. Ecco alcuni esempi:  
 
 ``` csharp
 using (var context = new BloggingContext())

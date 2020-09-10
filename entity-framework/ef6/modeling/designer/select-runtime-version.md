@@ -1,14 +1,15 @@
 ---
 title: Selezione di Entity Framework versione runtime per i modelli di progettazione EF-EF6
+description: Selezione di Entity Framework versione runtime per i modelli di progettazione EF in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 7ace90a6-46f8-4f55-a88c-7cad9620085c
-ms.openlocfilehash: 40ad05c1f015e6a51150d04eee8d9aa581d72c33
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 77830aaa3c7365e05e867d4ced88bdb8a11e7d6b
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418147"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620401"
 ---
 # <a name="selecting-entity-framework-runtime-version-for-ef-designer-models"></a>Selezione di Entity Framework versione runtime per i modelli di progettazione EF
 > [!NOTE]
@@ -16,8 +17,7 @@ ms.locfileid: "78418147"
 
 A partire da EF6, la schermata seguente è stata aggiunta alla finestra di progettazione EF per consentire di selezionare la versione del runtime di destinazione durante la creazione di un modello. La schermata verrà visualizzata quando la versione più recente di Entity Framework non è ancora installata nel progetto. Se la versione più recente è già installata, verrà usata per impostazione predefinita.
 
-![Schermata](~/ef6/media/screen.png)
-
+![Seleziona versione runtime](~/ef6/media/screen.png)
 
 ## <a name="targeting-ef6x"></a>Destinazione di EF6. x
 
@@ -28,7 +28,7 @@ EF6 verrà disabilitato se è già installata una versione precedente di EF (poi
 1.  Fare clic con il pulsante destro del mouse sul progetto in Esplora soluzioni e scegliere **Gestisci pacchetti NuGet...**
 2.  Seleziona **aggiornamenti**
 3.  Selezionare **EntityFramework** (assicurarsi che sia in corso l'aggiornamento alla versione desiderata)
-4.  Fare clic su **Update** (Aggiorna).
+4.  Fare clic su **Aggiorna**
 
  
 
@@ -38,7 +38,7 @@ EF6 verrà disabilitato se è già installata una versione precedente di EF (poi
 
 Se è già installata una versione EF4. x del runtime, si noterà che la versione di EF è elencata nella schermata invece che in EF5. In questa situazione è possibile eseguire l'aggiornamento a EF5 attenendosi alla procedura seguente:
 
-1.  Selezione **strumenti-&gt; gestione pacchetti libreria-&gt; console di gestione pacchetti**
+1.  Selezione **strumenti- &gt; Gestione pacchetti libreria- &gt; console di gestione pacchetti**
 2.  Eseguire **Install-Package EntityFramework-Version 5.0.0**
 
  
@@ -47,5 +47,5 @@ Se è già installata una versione EF4. x del runtime, si noterà che la version
 
 È possibile installare il runtime EF4. x nel progetto attenendosi alla procedura seguente:
 
-1.  Selezione **strumenti-&gt; gestione pacchetti libreria-&gt; console di gestione pacchetti**
+1.  Selezione **strumenti- &gt; Gestione pacchetti libreria- &gt; console di gestione pacchetti**
 2.  Eseguire **Install-Package EntityFramework-Version 4.3.0**

@@ -1,14 +1,16 @@
 ---
 title: Rilevamento automatico delle modifiche-EF6
+description: Rilevamento automatico delle modifiche in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: a8d1488d-9a54-4623-a76b-e81329ff2756
-ms.openlocfilehash: 9af85fd7ca48a14432a1f33c59079fc438ef8810
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/saving/change-tracking/auto-detect-changes
+ms.openlocfilehash: 938af809ac89d3490da9885497fc5601453e1c34
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416977"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619999"
 ---
 # <a name="automatic-detect-changes"></a>Rilevamento automatico delle modifiche
 Quando si utilizza la maggior parte delle entità POCO, la determinazione del modo in cui un'entità è cambiata (e di conseguenza gli aggiornamenti che devono essere inviati al database) viene gestita dall'algoritmo di rilevamento delle modifiche. Il rilevamento delle modifiche funziona rilevando le differenze tra i valori di proprietà correnti dell'entità e i valori di proprietà originali archiviati in uno snapshot quando l'entità è stata sottoposta a query o collegata. Le tecniche illustrate in questo argomento si applicano in modo analogo ai modelli creati con Code First ed EF Designer.  

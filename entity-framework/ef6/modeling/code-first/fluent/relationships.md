@@ -1,18 +1,20 @@
 ---
 title: API Fluent-relazioni-EF6
+description: Relazioni API Fluent in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: fd73b4f8-16d5-40f1-9640-885ceafe67a1
-ms.openlocfilehash: 05f282c02699f8bf3c71197ac5e01000f1855917
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/fluent/relationships
+ms.openlocfilehash: 8cc56f7341df6da7f60f649308ea7042ef23b537
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419073"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616998"
 ---
 # <a name="fluent-api---relationships"></a>API Fluent-relazioni
 > [!NOTE]
-> Questa pagina fornisce informazioni sulla configurazione delle relazioni nel modello di Code First usando l'API Fluent. Per informazioni generali sulle relazioni in EF e su come accedere e modificare i dati usando le relazioni, vedere [relazioni & proprietà di navigazione](~/ef6/fundamentals/relationships.md).  
+> Questa pagina fornisce informazioni sulla configurazione delle relazioni nel modello di Code First usando l'API Fluent. Per informazioni generali sulle relazioni in EF e su come accedere e modificare i dati usando le relazioni, vedere [relazioni & proprietà di navigazione](xref:ef6/fundamentals/relationships).  
 
 Quando si lavora con Code First, si definisce il modello definendo le classi CLR del dominio. Per impostazione predefinita, Entity Framework utilizza le convenzioni di Code First per eseguire il mapping delle classi allo schema del database. Se si usano le convenzioni di denominazione Code First, nella maggior parte dei casi è possibile basarsi su Code First per configurare le relazioni tra le tabelle in base alle chiavi esterne e alle proprietà di navigazione definite nelle classi. Se non si seguono le convenzioni durante la definizione delle classi o se si desidera modificare la modalità di funzionamento delle convenzioni, è possibile utilizzare le annotazioni di dati o API Fluent per configurare le classi in modo Code First possibile eseguire il mapping delle relazioni tra le tabelle.  
 
@@ -95,8 +97,8 @@ modelBuilder.Entity<Instructor>()
 
 È possibile rimuovere le convenzioni di eliminazione a catena utilizzando:  
 
-modelBuilder. Conventions. Remove\<OneToManyCascadeDeleteConvention\>()  
-modelBuilder. Conventions. Remove\<ManyToManyCascadeDeleteConvention\>()  
+modelBuilder. Conventions. Remove \<OneToManyCascadeDeleteConvention\> ()  
+modelBuilder. Conventions. Remove \<ManyToManyCascadeDeleteConvention\> ()  
 
 Il codice seguente configura la relazione in modo che sia richiesta e quindi Disabilita l'eliminazione a catena.  
 

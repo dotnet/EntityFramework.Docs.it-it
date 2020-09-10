@@ -1,20 +1,22 @@
 ---
 title: Uso di DbContext-EF6
+description: Utilizzo di DbContext in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: b0e6bddc-8a87-4d51-b1cb-7756df938c23
-ms.openlocfilehash: d961ffd8bed7f5b2f82dcfa30fc0241b7437be50
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/working-with-dbcontext
+ms.openlocfilehash: 7845d401cb0b8910cbfbba80eca2fd098c051b7d
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416322"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618222"
 ---
 # <a name="working-with-dbcontext"></a>Uso di DbContext
 
-Per utilizzare Entity Framework per eseguire query, inserire, aggiornare ed eliminare dati utilizzando oggetti .NET, è innanzitutto necessario [creare un modello](~/ef6/modeling/index.md) che esegue il mapping delle entità e delle relazioni definite nel modello alle tabelle di un database.
+Per utilizzare Entity Framework per eseguire query, inserire, aggiornare ed eliminare dati utilizzando oggetti .NET, è innanzitutto necessario [creare un modello](xref:ef6/modeling/index) che esegue il mapping delle entità e delle relazioni definite nel modello alle tabelle di un database.
 
-Una volta creato un modello, la classe primaria con cui interagisce l'applicazione è `System.Data.Entity.DbContext` (spesso definita classe del contesto). È possibile usare un DbContext associato a un modello per:
+Una volta ottenuto un modello, la classe primaria con cui interagisce l'applicazione è `System.Data.Entity.DbContext` (spesso definita classe del contesto). È possibile usare un DbContext associato a un modello per:
 - Scrivere ed eseguire query   
 - Materializzare i risultati della query come oggetti entità
 - Rilevare le modifiche apportate a tali oggetti
@@ -35,12 +37,12 @@ public class ProductContext : DbContext
 }
 ```  
 
-Quando si dispone di un contesto, è necessario eseguire una query per, aggiungere (usando `Add` o `Attach` metodi) o rimuovere (usando `Remove`) entità nel contesto tramite queste proprietà. L'accesso a una proprietà `DbSet` in un oggetto Context rappresenta una query iniziale che restituisce tutte le entità del tipo specificato. Si noti che solo l'accesso a una proprietà non eseguirà la query. Una query viene eseguita nei casi seguenti:  
+Quando si dispone di un contesto, è necessario eseguire una query per, aggiungere (usando `Add` `Attach` i metodi o) o rimuovere (usando `Remove` ) entità nel contesto tramite queste proprietà. L'accesso a una `DbSet` Proprietà in un oggetto Context rappresenta una query iniziale che restituisce tutte le entità del tipo specificato. Si noti che solo l'accesso a una proprietà non eseguirà la query. Una query viene eseguita nei casi seguenti:  
 
 - Enumerata da un'istruzione `foreach` (C#) o `For Each` (Visual Basic).  
-- Viene enumerato da un'operazione di raccolta, ad esempio `ToArray`, `ToDictionary`o `ToList`.  
-- Gli operatori LINQ, ad esempio `First` o `Any`, vengono specificati nella parte più esterna della query.  
-- Viene chiamato uno dei metodi seguenti: il metodo di estensione `Load`, `DbEntityEntry.Reload`, `Database.ExecuteSqlCommand`e `DbSet<T>.Find`, se un'entità con la chiave specificata non è già stata caricata nel contesto.  
+- Viene enumerato da un'operazione di raccolta, ad esempio `ToArray` , `ToDictionary` o `ToList` .  
+- Gli operatori LINQ, ad esempio `First` o, `Any` vengono specificati nella parte più esterna della query.  
+- Viene chiamato uno dei metodi seguenti: il `Load` metodo di estensione, `DbEntityEntry.Reload` ,  `Database.ExecuteSqlCommand` e `DbSet<T>.Find` , se un'entità con la chiave specificata non viene trovata già caricata nel contesto.  
 
 ## <a name="lifetime"></a>Durata  
 

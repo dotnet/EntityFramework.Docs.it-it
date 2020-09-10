@@ -1,18 +1,20 @@
 ---
 title: Migrazioni Code First in ambienti Team-EF6
+description: Migrazioni Code First in ambienti team in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 4c2d9a95-de6f-4e97-9738-c1f8043eff69
-ms.openlocfilehash: 7ab66a8ec29b60bb2e0102fbca5745d352b07325
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+uid: ef6/modeling/code-first/migrations/teams
+ms.openlocfilehash: ec382ecb0b7c99e57447ee50119fc3699fe1f324
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370409"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617037"
 ---
 # <a name="code-first-migrations-in-team-environments"></a>Migrazioni Code First in ambienti team
 > [!NOTE]
-> Questo articolo presuppone che l'utente sappia come usare Migrazioni Code First negli scenari di base. In caso contrario, sarà necessario leggere [migrazioni Code First](~/ef6/modeling/code-first/migrations/index.md) prima di continuare.
+> Questo articolo presuppone che l'utente sappia come usare Migrazioni Code First negli scenari di base. In caso contrario, sarà necessario leggere [migrazioni Code First](xref:ef6/modeling/code-first/migrations/index) prima di continuare.
 
 ## <a name="grab-a-coffee-you-need-to-read-this-whole-article"></a>Prendi un caffè, devi leggere questo articolo
 
@@ -107,11 +109,11 @@ Developer \# 1 e Developer \# 2 ora apportano alcune modifiche al modello EF nel
 
 Si tratta di un giorno fortunato per Developer \# 1 Man mano che si verificano prima di inviare le modifiche. Poiché non è stato archiviato alcun altro dato che ha sincronizzato il repository, può semplicemente inviare le modifiche senza eseguire alcuna operazione di merge.
 
-![Invia](~/ef6/media/submit.png)
+![Invia modifiche](~/ef6/media/submit.png)
 
 A questo punto è \# possibile inviare lo sviluppatore 2. Non sono così fortunati. Poiché un altro utente ha inviato modifiche dopo la sincronizzazione, sarà necessario eseguire il pull delle modifiche e unirle. Il sistema di controllo del codice sorgente sarà probabilmente in grado di unire automaticamente le modifiche a livello di codice poiché sono molto semplici. Lo stato del \# repository locale di Developer 2 dopo la sincronizzazione viene illustrato nell'immagine seguente. 
 
-![Pull](~/ef6/media/pull.png)
+![Estrai dal controllo del codice sorgente](~/ef6/media/pull.png)
 
 In questa fase Developer \# 2 può eseguire **Update-database** per rilevare la nuova migrazione di **AddRating** (che non è stata applicata al \# Database Developer 2) e applicarla. A questo punto, la colonna **rating** viene aggiunta alla tabella **Blogs** e il database è sincronizzato con il modello.
 
@@ -175,7 +177,7 @@ Di seguito è riportato lo stato della \# codebase locale dello sviluppatore 2 d
 
 ![Metadati aggiornati](~/ef6/media/updatedmetadata.png)
 
-## <a name="summary"></a>Summary
+## <a name="summary"></a>Riepilogo
 
 Quando si usa Migrazioni Code First in un ambiente team, si verificano alcuni problemi. Tuttavia, una conoscenza di base del funzionamento delle migrazioni e di alcuni semplici approcci per la risoluzione dei conflitti di merge rendono più semplice superare queste problematiche.
 

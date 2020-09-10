@@ -1,19 +1,20 @@
 ---
 title: Creare ed eliminare API-EF Core
+description: API per la creazione e l'eliminazione di database con Entity Framework Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/07/2018
 uid: core/managing-schemas/ensure-created
-ms.openlocfilehash: 32ac6cd043df73cd041780ec4c8805675adc5ab1
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 25e7352269531e881e83e44ea90108f12d4dcbea
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416870"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619220"
 ---
 # <a name="create-and-drop-apis"></a>API di creazione ed eliminazione
 
-I metodi EnsureCreated e EnsureDeleted forniscono un'alternativa semplice alle [migrazioni](migrations/index.md) per la gestione dello schema del database. Questi metodi sono utili negli scenari in cui i dati sono temporanei e possono essere eliminati quando lo schema viene modificato. Ad esempio, durante la fase di prototipo, nei test o per le cache locali.
+I metodi EnsureCreated e EnsureDeleted forniscono un'alternativa semplice alle [migrazioni](xref:core/managing-schemas/migrations/index) per la gestione dello schema del database. Questi metodi sono utili negli scenari in cui i dati sono temporanei e possono essere eliminati quando lo schema viene modificato. Ad esempio, durante la fase di prototipo, nei test o per le cache locali.
 
 Alcuni provider (soprattutto quelli non relazionali) non supportano le migrazioni. Per questi provider, EnsureCreated è spesso il modo più semplice per inizializzare lo schema del database.
 

@@ -1,14 +1,16 @@
 ---
 title: Stringhe di connessione e modelli-EF6
+description: Stringhe di connessione e modelli in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 294bb138-978f-4fe2-8491-fdf3cd3c60c4
-ms.openlocfilehash: 2c9f084107e4de7f5439bf0082b46a3b538496e0
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/configuring/connection-strings
+ms.openlocfilehash: 2203d7f2168dc9d4ae5a6b1914742c7c2b6fbf77
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419297"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618439"
 ---
 # <a name="connection-strings-and-models"></a>Stringhe di connessione e modelli
 Questo argomento descrive il modo in cui Entity Framework individua la connessione al database da usare e come è possibile modificarla. I modelli creati con Code First e la finestra di progettazione EF sono trattati in questo argomento.  
@@ -44,7 +46,7 @@ Visual Studio 2010 include SQL Express per impostazione predefinita e Visual Stu
 
 ## <a name="use-code-first-with-connection-by-convention-and-specified-database-name"></a>USA Code First con connessione per convenzione e nome database specificato  
 
-Se nell'applicazione non è stata eseguita alcuna altra configurazione, chiamare il costruttore di stringa in DbContext con il nome del database che si desidera utilizzare provocherà l'esecuzione di DbContext in modalità Code First con una connessione di database creata per convenzione al database di nome. Ad esempio:  
+Se nell'applicazione non è stata eseguita alcuna altra configurazione, chiamare il costruttore di stringa in DbContext con il nome del database che si desidera utilizzare provocherà l'esecuzione di DbContext in modalità Code First con una connessione di database creata per convenzione al database con tale nome. Ad esempio:  
 
 ``` csharp  
 public class BloggingContext : DbContext
@@ -58,9 +60,9 @@ public class BloggingContext : DbContext
 
 In questo esempio DbContext utilizza "BloggingDatabase" come nome del database e crea una stringa di connessione per il database utilizzando SQL Express (installato con Visual Studio 2010) o il database locale (installato con Visual Studio 2012). Se entrambi sono installati, verrà utilizzato SQL Express.  
 
-## <a name="use-code-first-with-connection-string-in-appconfigwebconfig-file"></a>Usare Code First con la stringa di connessione nel file app. config/web. config  
+## <a name="use-code-first-with-connection-string-in-appconfigwebconfig-file"></a>Usare Code First con la stringa di connessione nel file app.config/web.config  
 
-È possibile scegliere di inserire una stringa di connessione nel file app. config o Web. config. Ad esempio:  
+È possibile scegliere di inserire una stringa di connessione nel file di app.config o web.config. Ad esempio:  
 
 ``` xml  
 <configuration>
@@ -86,7 +88,7 @@ public class BloggingContext : DbContext
 }
 ```  
 
-In alternativa, è possibile utilizzare il formato "nome =\<nome della stringa di connessione\>" per la stringa passata al costruttore DbContext. Ad esempio:  
+In alternativa, è possibile usare il formato "Name = \<connection string name\> " per la stringa passata al costruttore DbContext. Ad esempio:  
 
 ``` csharp  
 public class BloggingContext : DbContext
@@ -100,11 +102,11 @@ public class BloggingContext : DbContext
 
 Questo modulo rende esplicito che si prevede che la stringa di connessione venga trovata nel file di configurazione. Se non viene trovata una stringa di connessione con il nome specificato, verrà generata un'eccezione.  
 
-## <a name="databasemodel-first-with-connection-string-in-appconfigwebconfig-file"></a>Database/Model First con stringa di connessione nel file app. config/web. config  
+## <a name="databasemodel-first-with-connection-string-in-appconfigwebconfig-file"></a>Database/Model First con stringa di connessione nel file app.config/web.config  
 
 I modelli creati con la finestra di progettazione EF sono diversi da Code First in quanto il modello esiste già e non viene generato dal codice durante l'esecuzione dell'applicazione. Il modello è in genere presente come file EDMX nel progetto.  
 
-Nella finestra di progettazione verrà aggiunta una stringa di connessione EF al file app. config o Web. config. Questa stringa di connessione è speciale in quanto contiene informazioni su come trovare le informazioni nel file EDMX. Ad esempio:  
+Nella finestra di progettazione verrà aggiunta una stringa di connessione EF al file di app.config o web.config. Questa stringa di connessione è speciale in quanto contiene informazioni su come trovare le informazioni nel file EDMX. Ad esempio:  
 
 ``` xml  
 <configuration>  

@@ -1,15 +1,16 @@
 ---
 title: Salvataggio di dati correlati - EF Core
+description: Informazioni sul salvataggio di grafici di entità correlate e sulla gestione delle relazioni in Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 07b6680f-ffcf-412c-9857-f997486b386c
 uid: core/saving/related-data
-ms.openlocfilehash: 86d32b6172ee21c12a15e9ed4bb0142afc99c8bd
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 118d5933dd543a03bbe16fd8be1f00b7304e39c4
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417545"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618886"
 ---
 # <a name="saving-related-data"></a>Salvataggio di dati correlati
 
@@ -53,9 +54,9 @@ La rimozione di una relazione può avere effetti collaterali sull'entità dipend
 
 Per impostazione predefinita, per le relazioni obbligatorie viene configurato un comportamento di eliminazione a catena e l'entità figlio/dipendente verrà eliminata dal database. Per le relazioni facoltative, l'eliminazione a catena non viene configurata per impostazione predefinita, ma la proprietà di chiave esterna verrà impostata su Null.
 
-Vedere [Relazioni obbligatorie e facoltative](../modeling/relationships.md#required-and-optional-relationships) per informazioni su come configurare l'obbligatorietà delle relazioni.
+Vedere [Relazioni obbligatorie e facoltative](xref:core/modeling/relationships#required-and-optional-relationships) per informazioni su come configurare l'obbligatorietà delle relazioni.
 
-Vedere [Eliminazione a catena](cascade-delete.md) per altri dettagli su come funzionano i comportamenti di eliminazione, su come è possibile configurarli in modo esplicito e sulla modalità di selezione convenzionale.
+Vedere [Eliminazione a catena](xref:core/saving/cascade-delete) per altri dettagli su come funzionano i comportamenti di eliminazione, su come è possibile configurarli in modo esplicito e sulla modalità di selezione convenzionale.
 
 Nell'esempio seguente viene configurata un'eliminazione a catena per la relazione tra `Blog` e `Post`, pertanto l'entità `post` viene eliminata dal database.
 

@@ -4,12 +4,12 @@ description: Utilizzo degli operatori di confronto dei valori per controllare la
 author: ajcvickers
 ms.date: 03/20/2020
 uid: core/modeling/value-comparers
-ms.openlocfilehash: fa5352129977d858d54d4aede746b320c91b0ad3
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: d07aee866a542f55c4e1074c5782e67cb4035a89
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526784"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616682"
 ---
 # <a name="value-comparers"></a>Operatori di confronto del valore
 
@@ -19,12 +19,12 @@ ms.locfileid: "87526784"
 > [!TIP]  
 > Il codice in questo documento è disponibile in GitHub come [esempio eseguibile](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/ValueConversions/).
 
-## <a name="background"></a>Background
+## <a name="background"></a>Informazioni di base
 
 EF Core necessario confrontare i valori delle proprietà nei casi seguenti:
 
 * Determinare se una proprietà è stata modificata come parte del [rilevamento delle modifiche per gli aggiornamenti](xref:core/saving/basic)
-* Determinare se due valori di chiave sono uguali durante la risoluzione delle relazioni 
+* Determinare se due valori di chiave sono uguali durante la risoluzione delle relazioni
 
 Questa operazione viene gestita automaticamente per i tipi primitivi comuni, ad esempio int, bool, DateTime e così via.
 
@@ -66,6 +66,7 @@ Si consideri una proprietà che usa un convertitore di valori per eseguire il ma
 [!code-csharp[ConfigureImmutableClassProperty](../../../samples/core/Modeling/ValueConversions/MappingImmutableClassProperty.cs?name=ConfigureImmutableClassProperty)]
 
 Per le proprietà di questo tipo non sono necessari confronti o snapshot speciali perché:
+
 * L'uguaglianza viene sottoposta a override in modo da confrontare correttamente le istanze diverse
 * Il tipo non è modificabile, quindi non è possibile modificare un valore di snapshot
 
@@ -90,11 +91,12 @@ Quando possibile, è consigliabile utilizzare tipi non modificabili (classi o st
 Questa operazione è in genere più efficiente e presenta una semantica più pulita rispetto all'uso di un tipo modificabile.
 
 Tuttavia, in questo caso, è normale usare le proprietà dei tipi che l'applicazione non può modificare.
-Ad esempio, il mapping di una proprietà contenente un elenco di numeri: 
+Ad esempio, il mapping di una proprietà contenente un elenco di numeri:
 
 [!code-csharp[ListProperty](../../../samples/core/Modeling/ValueConversions/MappingListProperty.cs?name=ListProperty)]
 
-La [ `List<T>` classe](/dotnet/api/system.collections.generic.list-1?view=netstandard-2.1):
+La [ `List<T>` classe](/dotnet/api/system.collections.generic.list-1):
+
 * Con uguaglianza di riferimento; due elenchi contenenti gli stessi valori vengono considerati diversi.
 * È modificabile; i valori nell'elenco possono essere aggiunti e rimossi.
 
@@ -111,6 +113,7 @@ Una conversione tipica di un valore in una proprietà di elenco può convertire 
 > Al contrario, il codice precedente chiama SetValueComparer nel IMutableProperty di livello inferiore esposto dal generatore come ' Metadata '.
 
 Il `ValueComparer<T>` costruttore accetta tre espressioni:
+
 * Espressione per la verifica dell'uguaglianza
 * Espressione per la generazione di un codice hash
 * Espressione per lo snapshot di un valore  
@@ -123,20 +126,20 @@ Se possibile, non è possibile modificarlo.
 
 Lo snapshot viene creato clonando l'elenco con ToList.
 Anche in questo caso, questa operazione è necessaria solo se gli elenchi verranno mutati.
-In alternativa, se possibile, non è possibile modificarlo. 
+In alternativa, se possibile, non è possibile modificarlo.
 
 > [!NOTE]  
 > I convertitori di valori e gli operatori di confronto vengono costruiti utilizzando espressioni anziché delegati semplici.
 > Questo perché EF inserisce queste espressioni in un albero delle espressioni molto più complesso che viene quindi compilato in un delegato di Entity shaper.
 > Concettualmente, questo è simile all'incorporamento del compilatore.
-> Ad esempio, una conversione semplice può essere solo una compilazione compilata nel cast, anziché una chiamata a un altro metodo per eseguire la conversione.    
+> Ad esempio, una conversione semplice può essere solo una compilazione compilata nel cast, anziché una chiamata a un altro metodo per eseguire la conversione.
 
 ### <a name="key-comparers"></a>Operatori di confronto principali
 
 La sezione background illustra il motivo per cui i confronti chiave possono richiedere una semantica speciale.
 Assicurarsi di creare un operatore di confronto appropriato per le chiavi quando lo si imposta su una proprietà primaria, principale o di chiave esterna.
 
-Usare [SetKeyValueComparer](/dotnet/api/microsoft.entityframeworkcore.mutablepropertyextensions.setkeyvaluecomparer?view=efcore-3.1) nei rari casi in cui è richiesta una semantica diversa per la stessa proprietà.
+Usare [SetKeyValueComparer](/dotnet/api/microsoft.entityframeworkcore.mutablepropertyextensions.setkeyvaluecomparer) nei rari casi in cui è richiesta una semantica diversa per la stessa proprietà.
 
 > [!NOTE]  
 > SetStructuralComparer è obsoleto in EF Core 5,0.
@@ -146,7 +149,7 @@ Usare [SetKeyValueComparer](/dotnet/api/microsoft.entityframeworkcore.mutablepro
 
 In alcuni casi il confronto predefinito usato da EF Core potrebbe non essere appropriato.
 La mutazione di matrici di byte, ad esempio, non è rilevata per impostazione predefinita in EF Core.
-È possibile eseguirne l'override impostando un operatore di confronto diverso per la proprietà: 
+È possibile eseguirne l'override impostando un operatore di confronto diverso per la proprietà:
 
 [!code-csharp[OverrideComparer](../../../samples/core/Modeling/ValueConversions/OverridingByteArrayComparisons.cs?name=OverrideComparer)]
 

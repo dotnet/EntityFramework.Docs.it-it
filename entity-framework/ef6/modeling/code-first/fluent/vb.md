@@ -1,22 +1,24 @@
 ---
 title: API Fluent con VB.NET-EF6
+description: API Fluent con VB.NET in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 763dc6a2-764a-4600-896c-f6f13abf56ec
-ms.openlocfilehash: 1c889877b827408919c6170cf997e8805cc607cf
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/fluent/vb
+ms.openlocfilehash: d6430ee254c6f0d5f093961d25902326022226cd
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419059"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616981"
 ---
 # <a name="fluent-api-with-vbnet"></a>API Fluent con VB.NET
-Code First consente di definire il modello utilizzando le classi C\# o VB.NET. Facoltativamente, è possibile eseguire una configurazione aggiuntiva usando gli attributi delle classi e delle proprietà o usando un'API Fluent. Questa procedura dettagliata illustra come eseguire la configurazione dell'API Fluent usando VB.NET.
+Code First consente di definire il modello utilizzando \# le classi C o VB.NET. Facoltativamente, è possibile eseguire una configurazione aggiuntiva usando gli attributi delle classi e delle proprietà o usando un'API Fluent. Questa procedura dettagliata illustra come eseguire la configurazione dell'API Fluent usando VB.NET.
 
 In questa pagina si presuppone che l'utente abbia una conoscenza di base dei Code First. Per ulteriori informazioni su Code First, vedere le procedure dettagliate seguenti:
 
--   [Code First to a New Database](~/ef6/modeling/code-first/workflows/new-database.md) (Code First per un nuovo database)
--   [Code First a un database esistente](~/ef6/modeling/code-first/workflows/existing-database.md)
+-   [Code First to a New Database](xref:ef6/modeling/code-first/workflows/new-database) (Code First per un nuovo database)
+-   [Code First a un database esistente](xref:ef6/modeling/code-first/workflows/existing-database)
 
 ## <a name="pre-requisites"></a>Prerequisiti
 
@@ -29,7 +31,7 @@ Se si usa Visual Studio 2010, sarà anche necessario che [NuGet](https://visuals
 Per semplificare le operazioni, verrà compilata un'applicazione console di base che usa Code First per eseguire l'accesso ai dati.
 
 -   Aprire Visual Studio.
--   **Nuovo progetto&gt; di&gt; file...**
+-   **File- &gt; nuovo- &gt; progetto...**
 -   Selezionare **Windows** nel menu a sinistra e nell' **applicazione console**
 -   Immettere **CodeFirstVBSample** come nome
 -   Selezionare **OK**.
@@ -137,14 +139,14 @@ End Class
 
 Si sta per iniziare a usare i tipi del Entity Framework quindi è necessario aggiungere il pacchetto NuGet EntityFramework.
 
--   \* * Progetto –&gt; **Gestisci pacchetti NuGet...**
+-   * * Progetto- &gt; **Gestisci pacchetti NuGet...**
 > [!NOTE]
 > Se non si dispone dei **pacchetti NuGet di gestione...** opzione è necessario installare la [versione più recente di NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)
 -   Selezionare la scheda **online**
 -   Selezionare il pacchetto **EntityFramework**
--   Fare clic su **Installa**
+-   Fai clic su **Install** (Installa).
 
-A questo punto è possibile definire un contesto derivato, che rappresenta una sessione con il database, consentendo di eseguire query e salvare i dati. Viene definito un contesto che deriva da System. Data. Entity. DbContext ed espone un&gt; tipizzato&lt;TEntity per ogni classe del modello.
+A questo punto è possibile definire un contesto derivato, che rappresenta una sessione con il database, consentendo di eseguire query e salvare i dati. Si definisce un contesto che deriva da System. Data. Entity. DbContext ed espone una TEntity DbSet tipizzata &lt; &gt; per ogni classe del modello.
 
 -   Aggiungere una nuova classe al progetto, immettere **schoolContext** per nome classe
 -   Sostituire il contenuto della nuova classe con il codice seguente
@@ -171,7 +173,7 @@ End Class
 
 ## <a name="configuring-with-the-fluent-api"></a>Configurazione con l'API Fluent
 
-Questa sezione illustra come usare le API Fluent per configurare i tipi per il mapping delle tabelle, le proprietà al mapping delle colonne e le relazioni tra le tabelle\\tipo nel modello. L'API Fluent viene esposta tramite il tipo **DbModelBuilder** ed è più comunemente accessibile eseguendo l'override del metodo **OnModelCreating** in **DbContext**.
+Questa sezione illustra come usare le API Fluent per configurare i tipi per il mapping delle tabelle, le proprietà al mapping delle colonne e le relazioni tra \\ il tipo di tabella nel modello. L'API Fluent viene esposta tramite il tipo **DbModelBuilder** ed è più comunemente accessibile eseguendo l'override del metodo **OnModelCreating** in **DbContext**.
 
 -   Copiare il codice seguente e aggiungerlo al metodo **OnModelCreating** definito nella classe **schoolContext** . i commenti spiegano il funzionamento di ogni mapping
 

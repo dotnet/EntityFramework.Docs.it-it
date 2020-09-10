@@ -1,15 +1,16 @@
 ---
 title: Sequenze-EF Core
+description: Configurazione di sequenze in un modello di Entity Framework Core
 author: roji
 ms.date: 12/18/2019
 ms.assetid: 94f81a92-3c72-4e14-912a-f99310374e42
 uid: core/modeling/sequences
-ms.openlocfilehash: 6343e58dd79837cc69308a070c9814030505d7dd
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 1a212f3944ca95ebc7675ff29b2687c82fdf7fc7
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417440"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619080"
 ---
 # <a name="sequences"></a>Sequenze
 
@@ -18,7 +19,7 @@ ms.locfileid: "78417440"
 
 Una sequenza genera valori numerici univoci e sequenziali nel database. Le sequenze non sono associate a una tabella specifica e possono essere impostate più tabelle per creare valori dalla stessa sequenza.
 
-## <a name="basic-usage"></a>Utilizzo di base
+## <a name="basic-usage"></a>Uso di base
 
 È possibile impostare una sequenza nel modello e quindi utilizzarla per generare valori per le proprietà:
 

@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 6ff98d005c0a868d420509571378756c56edc54a
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.openlocfilehash: f65c07c79daf38e733c76f328843c90466c657f5
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238125"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619325"
 ---
 # <a name="owned-entity-types"></a>Tipi di entità di proprietà
 
@@ -75,7 +75,7 @@ Per configurare un'altra chiamata a PK `HasKey` :
 
 ## <a name="mapping-owned-types-with-table-splitting"></a>Mapping dei tipi di proprietà con suddivisione della tabella
 
-Quando si usano database relazionali, per impostazione predefinita i tipi di proprietà di riferimento vengono mappati alla stessa tabella del proprietario. Questa operazione richiede la suddivisione della tabella in due: alcune colonne verranno utilizzate per archiviare i dati del proprietario e alcune colonne verranno utilizzate per archiviare i dati dell'entità di proprietà. Si tratta di una funzionalità comune nota come [suddivisione della tabella](table-splitting.md).
+Quando si usano database relazionali, per impostazione predefinita i tipi di proprietà di riferimento vengono mappati alla stessa tabella del proprietario. Questa operazione richiede la suddivisione della tabella in due: alcune colonne verranno utilizzate per archiviare i dati del proprietario e alcune colonne verranno utilizzate per archiviare i dati dell'entità di proprietà. Si tratta di una funzionalità comune nota come [suddivisione della tabella](xref:core/modeling/table-splitting).
 
 Per impostazione predefinita, EF Core assegna un nome alle colonne del database per le proprietà del tipo di entità di proprietà che segue il modello _Navigation_OwnedEntityProperty_. Pertanto, le `StreetAddress` proprietà verranno visualizzate nella tabella ' Orders ' con i nomi ' ShippingAddress_Street ' è ShippingAddress_City '.
 
@@ -122,7 +122,7 @@ Si noti la `WithOwner` chiamata utilizzata per definire la proprietà di navigaz
 
 È anche possibile ottenere questo risultato usando `OwnedAttribute` sia in che in `OrderDetails` `StreetAddress` .
 
-Si noti inoltre la `Navigation` chiamata a. In EFCore 5,0, le proprietà di navigazione ai tipi di proprietà possono essere configurate ulteriormente [come per le proprietà di navigazione non di proprietà](relationships.md#configuring-navigation-properties).
+Si noti inoltre la `Navigation` chiamata a. In EFCore 5,0, le proprietà di navigazione ai tipi di proprietà possono essere configurate ulteriormente [come per le proprietà di navigazione non di proprietà](xref:core/modeling/relationships#configuring-navigation-properties).
 
 ## <a name="storing-owned-types-in-separate-tables"></a>Archiviazione di tipi di proprietà in tabelle separate
 
@@ -145,7 +145,7 @@ Alcune di queste limitazioni sono fondamentali per il funzionamento dei tipi di 
 ### <a name="by-design-restrictions"></a>Limitazioni di progettazione
 
 - Non è possibile creare un oggetto `DbSet<T>` per un tipo di proprietà
-- Non è possibile chiamare `Entity<T>()` con un tipo di proprietà in`ModelBuilder`
+- Non è possibile chiamare `Entity<T>()` con un tipo di proprietà in `ModelBuilder`
 
 ### <a name="current-shortcomings"></a>Carenze correnti
 

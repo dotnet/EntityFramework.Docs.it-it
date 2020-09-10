@@ -1,17 +1,19 @@
 ---
 title: Code First a un database esistente-EF6
+description: Code First a un database esistente in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: a7e60b74-973d-4480-868f-500a3899932e
-ms.openlocfilehash: 0a51f826422d7e2bff33b968605eace1e754c425
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/workflows/existing-database
+ms.openlocfilehash: 7cb58495ea287c59f46e804882cdc089d0f09e7b
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418875"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616930"
 ---
 # <a name="code-first-to-an-existing-database"></a>Code First a un database esistente
-Questo video e la procedura dettagliata forniscono un'introduzione allo sviluppo di Code First destinati a un database esistente. Code First consente di definire il modello utilizzando le classi C\# o VB.Net. Facoltativamente, è possibile eseguire una configurazione aggiuntiva usando gli attributi delle classi e delle proprietà oppure usando un'API Fluent.
+Questo video e la procedura dettagliata forniscono un'introduzione allo sviluppo di Code First destinati a un database esistente. Code First consente di definire il modello utilizzando \# le classi C o VB.NET. Facoltativamente, è possibile eseguire una configurazione aggiuntiva usando gli attributi delle classi e delle proprietà oppure usando un'API Fluent.
 
 ## <a name="watch-the-video"></a>Video
 Questo video è [ora disponibile su Channel 9](https://channel9.msdn.com/blogs/ef/code-first-to-existing-database-ef6-1-onwards-).
@@ -20,7 +22,7 @@ Questo video è [ora disponibile su Channel 9](https://channel9.msdn.com/blogs/e
 
 Per completare questa procedura dettagliata, è necessario che **Visual Studio 2012** o **Visual Studio 2013** sia installato.
 
-Sarà inoltre necessario installare la versione **6,1** (o successiva) del **Entity Framework Tools per Visual Studio** . Per informazioni sull'installazione della versione più recente del Entity Framework Tools, vedere [Get Entity Framework](~/ef6/fundamentals/install.md) .
+Sarà inoltre necessario installare la versione **6,1** (o successiva) del **Entity Framework Tools per Visual Studio** . Per informazioni sull'installazione della versione più recente del Entity Framework Tools, vedere [Get Entity Framework](xref:ef6/fundamentals/install) .
 
 ## <a name="1-create-an-existing-database"></a>1. creare un database esistente
 
@@ -29,8 +31,8 @@ In genere, quando si fa riferimento a un database esistente, questo verrà già 
 Procediamo con la generazione del database.
 
 -   Aprire Visual Studio.
--   **Visualizza-&gt; Esplora server**
--   Fare clic con il pulsante destro del mouse su **connessioni dati-&gt; Aggiungi connessione...**
+-   **Visualizza- &gt; Esplora server**
+-   Fare clic con il pulsante destro del mouse su **connessioni dati- &gt; Aggiungi connessione...**
 -   Se non si è connessi a un database da **Esplora server** prima di selezionare **Microsoft SQL Server** come origine dati
 
     ![Seleziona origine dati](~/ef6/media/selectdatasource.png)
@@ -75,7 +77,7 @@ VALUES ('.NET Framework Blog', 'http://blogs.msdn.com/dotnet/')
 Per semplificare le operazioni, verrà creata un'applicazione console di base che usa Code First per eseguire l'accesso ai dati:
 
 -   Aprire Visual Studio.
--   **Nuovo progetto&gt; di&gt; file...**
+-   **File- &gt; nuovo- &gt; progetto...**
 -   Selezionare **Windows** nel menu a sinistra e nell' **applicazione console**
 -   Immettere **CodeFirstExistingDatabaseSample** come nome
 -   Selezionare **OK**.
@@ -86,7 +88,7 @@ Per semplificare le operazioni, verrà creata un'applicazione console di base ch
 
 Si utilizzerà il Entity Framework Tools per Visual Studio per consentire la generazione di codice iniziale per eseguire il mapping al database. Questi strumenti generano solo codice che può essere digitato manualmente, se si preferisce.
 
--   **Progetto-&gt; Aggiungi nuovo elemento...**
+-   **Progetto- &gt; Aggiungi nuovo elemento...**
 -   Selezionare **dati** dal menu a sinistra e quindi **ADO.NET Entity Data Model**
 -   Immettere **BloggingContext** come nome e fare clic su **OK** .
 -   Viene avviata la **procedura guidata Entity Data Model**
@@ -106,7 +108,7 @@ Una volta completato il processo di Reverse Engineering, al progetto verrà aggi
 
 ### <a name="configuration-file"></a>File di configurazione
 
-Un file app. config è stato aggiunto al progetto. questo file contiene la stringa di connessione al database esistente.
+Al progetto è stato aggiunto un file di App.config. il file contiene la stringa di connessione al database esistente.
 
 ``` xml
 <connectionStrings>
@@ -122,7 +124,7 @@ Un file app. config è stato aggiunto al progetto. questo file contiene la strin
 ### <a name="derived-context"></a>Contesto derivato
 
 È stata aggiunta una classe **BloggingContext** al progetto. Il contesto rappresenta una sessione con il database, consentendo di eseguire query e salvare i dati.
-Il contesto espone un **&gt;DbSet&lt;TEntity** per ogni tipo nel modello. Si noterà anche che il costruttore predefinito chiama un costruttore di base usando la sintassi **Name =** . Questo indica Code First che la stringa di connessione da usare per questo contesto deve essere caricata dal file di configurazione.
+Il contesto espone una **DbSet &lt; TEntity &gt; ** per ogni tipo nel modello. Si noterà anche che il costruttore predefinito chiama un costruttore di base usando la sintassi **Name =** . Questo indica Code First che la stringa di connessione da usare per questo contesto deve essere caricata dal file di configurazione.
 
 ``` csharp
 public partial class BloggingContext : DbContext
@@ -221,8 +223,8 @@ La procedura guidata Code First per database è progettata per generare un set d
 
 ## <a name="using-code-first-migrations-to-an-existing-database"></a>Utilizzo di Migrazioni Code First a un database esistente
 
-Se si desidera utilizzare Migrazioni Code First con un database esistente, vedere [migrazioni Code First a un database esistente](~/ef6/modeling/code-first/migrations/existing-database.md).
+Se si desidera utilizzare Migrazioni Code First con un database esistente, vedere [migrazioni Code First a un database esistente](xref:ef6/modeling/code-first/migrations/existing-database).
 
-## <a name="summary"></a>Summary
+## <a name="summary"></a>Riepilogo
 
 In questa procedura dettagliata è stato esaminato Code First sviluppo usando un database esistente. È stato usato il Entity Framework Tools per Visual Studio per decompilare un set di classi di cui è stato eseguito il mapping al database e può essere usato per archiviare e recuperare i dati.

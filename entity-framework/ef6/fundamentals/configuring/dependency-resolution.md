@@ -1,14 +1,16 @@
 ---
 title: Risoluzione delle dipendenze-EF6
+description: Risoluzione delle dipendenze in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 32d19ac6-9186-4ae1-8655-64ee49da55d0
-ms.openlocfilehash: 6082124481f5795bbcb62fff2bb6a58ecdcb48e4
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/configuring/dependency-resolution
+ms.openlocfilehash: c23253dc5a413077e3980fcfa18ea83b5fc3970e
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417862"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618415"
 ---
 # <a name="dependency-resolution"></a>Risoluzione delle dipendenze
 > [!NOTE]
@@ -27,9 +29,9 @@ Il metodo GetService viene in genere chiamato da EF ed è gestito da un'implemen
 
 Se non diversamente specificato, qualsiasi oggetto restituito deve essere thread-safe poiché può essere usato come singleton. In molti casi l'oggetto restituito è una factory, nel qual caso la factory deve essere thread-safe, ma non è necessario che l'oggetto restituito dalla factory sia thread-safe perché per ogni uso viene richiesta una nuova istanza dalla factory.
 
-Questo articolo non contiene informazioni dettagliate su come implementare IDbDependencyResolver, ma funge da riferimento per i tipi di servizio (ovvero i tipi di interfaccia e di classe di base) per i quali EF chiama GetService e la semantica dell'oggetto chiave per ognuno di questi chiamate.
+Questo articolo non contiene informazioni dettagliate su come implementare IDbDependencyResolver, ma funge da riferimento per i tipi di servizio (ovvero i tipi di interfaccia e di classe di base) per i quali EF chiama GetService e la semantica dell'oggetto chiave per ognuna di queste chiamate.
 
-## <a name="systemdataentityidatabaseinitializertcontext"></a>System. Data. Entity. IDatabaseInitializer < TContext\>  
+## <a name="systemdataentityidatabaseinitializertcontext"></a>System. Data. Entity. IDatabaseInitializer<TContext\>  
 
 **Versione introdotta**: Ef 6.0.0  
 
@@ -37,7 +39,7 @@ Questo articolo non contiene informazioni dettagliate su come implementare IDbDe
 
 **Chiave**: non usata; sarà null  
 
-## <a name="funcsystemdataentitymigrationssqlmigrationsqlgenerator"></a>Func < System. Data. Entity. Migrations. SQL. MigrationSqlGenerator\>  
+## <a name="funcsystemdataentitymigrationssqlmigrationsqlgenerator"></a>Func<System. Data. Entity. Migrations. SQL. MigrationSqlGenerator\>  
 
 **Versione introdotta**: Ef 6.0.0
 
@@ -46,7 +48,7 @@ Questo articolo non contiene informazioni dettagliate su come implementare IDbDe
 **Key**: stringa che contiene il nome invariante del provider ADO.NET che specifica il tipo di database per cui verrà generato SQL. Ad esempio, viene restituito il generatore di SQL Server SQL per la chiave "System. Data. SqlClient".  
 
 >[!NOTE]
-> Per altri dettagli sui servizi correlati al provider in EF6, vedere la sezione [modello di provider EF6](~/ef6/fundamentals/providers/provider-model.md) .  
+> Per altri dettagli sui servizi correlati al provider in EF6, vedere la sezione [modello di provider EF6](xref:ef6/fundamentals/providers/provider-model) .  
 
 ## <a name="systemdataentitycorecommondbproviderservices"></a>System. Data. Entity. Core. Common. DbProviderServices  
 
@@ -57,18 +59,18 @@ Questo articolo non contiene informazioni dettagliate su come implementare IDbDe
 **Key**: stringa che contiene il nome invariante del provider ADO.NET che specifica il tipo di database per cui è necessario un provider. Il provider SQL Server, ad esempio, viene restituito per la chiave "System. Data. SqlClient".  
 
 >[!NOTE]
-> Per altri dettagli sui servizi correlati al provider in EF6, vedere la sezione [modello di provider EF6](~/ef6/fundamentals/providers/provider-model.md) .  
+> Per altri dettagli sui servizi correlati al provider in EF6, vedere la sezione [modello di provider EF6](xref:ef6/fundamentals/providers/provider-model) .  
 
 ## <a name="systemdataentityinfrastructureidbconnectionfactory"></a>System. Data. Entity. Infrastructure. IDbConnectionFactory  
 
 **Versione introdotta**: Ef 6.0.0  
 
-**Oggetto restituito**: la factory di connessione che verrà usata quando EF crea una connessione di database per convenzione. Ovvero, quando nessuna connessione o stringa di connessione viene assegnata a EF e non è possibile trovare una stringa di connessione nel file app. config o Web. config, questo servizio viene utilizzato per creare una connessione per convenzione. La modifica della factory di connessione può consentire a EF di usare un tipo diverso di database, ad esempio SQL Server Compact Edition, per impostazione predefinita.  
+**Oggetto restituito**: la factory di connessione che verrà usata quando EF crea una connessione di database per convenzione. Ovvero, quando nessuna connessione o stringa di connessione viene assegnata a EF e non è possibile trovare una stringa di connessione nella app.config o web.config, questo servizio viene utilizzato per creare una connessione per convenzione. La modifica della factory di connessione può consentire a EF di usare un tipo diverso di database, ad esempio SQL Server Compact Edition, per impostazione predefinita.  
 
 **Chiave**: non usata; sarà null  
 
 >[!NOTE]
-> Per altri dettagli sui servizi correlati al provider in EF6, vedere la sezione [modello di provider EF6](~/ef6/fundamentals/providers/provider-model.md) .  
+> Per altri dettagli sui servizi correlati al provider in EF6, vedere la sezione [modello di provider EF6](xref:ef6/fundamentals/providers/provider-model) .  
 
 ## <a name="systemdataentityinfrastructureimanifesttokenservice"></a>System. Data. Entity. Infrastructure. IManifestTokenService  
 
@@ -88,7 +90,7 @@ Questo articolo non contiene informazioni dettagliate su come implementare IDbDe
 
 **Chiave**: non usata; sarà null  
 
-## <a name="funcdbcontext-systemdataentityinfrastructureidbmodelcachekey"></a>Func < DbContext, System. Data. Entity. Infrastructure. IDbModelCacheKey\>  
+## <a name="funcdbcontext-systemdataentityinfrastructureidbmodelcachekey"></a>Func<DbContext, System. Data. Entity. Infrastructure. IDbModelCacheKey\>  
 
 **Versione introdotta**: Ef 6.0.0  
 
@@ -105,9 +107,9 @@ Questo articolo non contiene informazioni dettagliate su come implementare IDbDe
 **Chiave**: DbSptialServices viene richiesta in due modi. Per prima cosa, i servizi spaziali specifici del provider vengono richiesti usando un oggetto DbProviderInfo, che contiene il nome invariante e il token del manifesto, come chiave. In secondo luogo, è possibile chiedere a DbSpatialServices senza chiave. Viene usato per risolvere il "provider spaziale globale" usato per la creazione di tipi DbGeography o DbGeometry autonomi.  
 
 >[!NOTE]
-> Per altri dettagli sui servizi correlati al provider in EF6, vedere la sezione [modello di provider EF6](~/ef6/fundamentals/providers/provider-model.md) .  
+> Per altri dettagli sui servizi correlati al provider in EF6, vedere la sezione [modello di provider EF6](xref:ef6/fundamentals/providers/provider-model) .  
 
-## <a name="funcsystemdataentityinfrastructureidbexecutionstrategy"></a>Func < System. Data. Entity. Infrastructure. IDbExecutionStrategy\>  
+## <a name="funcsystemdataentityinfrastructureidbexecutionstrategy"></a>Func<System. Data. Entity. Infrastructure. IDbExecutionStrategy\>  
 
 **Versione introdotta**: Ef 6.0.0  
 
@@ -116,18 +118,18 @@ Questo articolo non contiene informazioni dettagliate su come implementare IDbDe
 **Key**: oggetto ExecutionStrategyKey contenente il nome invariante del provider e, facoltativamente, un nome del server per il quale verrà utilizzata la strategia di esecuzione.  
 
 >[!NOTE]
-> Per altri dettagli sui servizi correlati al provider in EF6, vedere la sezione [modello di provider EF6](~/ef6/fundamentals/providers/provider-model.md) .  
+> Per altri dettagli sui servizi correlati al provider in EF6, vedere la sezione [modello di provider EF6](xref:ef6/fundamentals/providers/provider-model) .  
 
-## <a name="funcdbconnection-string-systemdataentitymigrationshistoryhistorycontext"></a>Func < DbConnection, String, System. Data. Entity. Migrations. History. HistoryContext\>  
+## <a name="funcdbconnection-string-systemdataentitymigrationshistoryhistorycontext"></a>Func<DbConnection, String, System. Data. Entity. Migrations. History. HistoryContext\>  
 
 **Versione introdotta**: Ef 6.0.0  
 
-**Oggetto restituito**: Factory che consente a un provider di configurare il mapping di HistoryContext alla tabella `__MigrationHistory` utilizzata dalle migrazioni di EF. HistoryContext è un Code First DbContext e può essere configurato usando l'API Fluent normale per modificare elementi quali il nome della tabella e le specifiche di mapping delle colonne.  
+**Oggetto restituito**: Factory che consente a un provider di configurare il mapping di HistoryContext alla `__MigrationHistory` tabella usata dalle migrazioni di EF. HistoryContext è un Code First DbContext e può essere configurato usando l'API Fluent normale per modificare elementi quali il nome della tabella e le specifiche di mapping delle colonne.  
 
 **Chiave**: non usata; sarà null  
 
 >[!NOTE]
-> Per altri dettagli sui servizi correlati al provider in EF6, vedere la sezione [modello di provider EF6](~/ef6/fundamentals/providers/provider-model.md) .  
+> Per altri dettagli sui servizi correlati al provider in EF6, vedere la sezione [modello di provider EF6](xref:ef6/fundamentals/providers/provider-model) .  
 
 ## <a name="systemdatacommondbproviderfactory"></a>System. Data. Common. DbProviderFactory  
 
@@ -138,7 +140,7 @@ Questo articolo non contiene informazioni dettagliate su come implementare IDbDe
 **Key**: stringa che contiene il nome invariante del provider ADO.NET  
 
 >[!NOTE]
-> Questo servizio non viene in genere modificato direttamente perché l'implementazione predefinita Usa la registrazione del provider ADO.NET normale. Per altri dettagli sui servizi correlati al provider in EF6, vedere la sezione [modello di provider EF6](~/ef6/fundamentals/providers/provider-model.md) .  
+> Questo servizio non viene in genere modificato direttamente perché l'implementazione predefinita Usa la registrazione del provider ADO.NET normale. Per altri dettagli sui servizi correlati al provider in EF6, vedere la sezione [modello di provider EF6](xref:ef6/fundamentals/providers/provider-model) .  
 
 ## <a name="systemdataentityinfrastructureiproviderinvariantname"></a>System. Data. Entity. Infrastructure. IProviderInvariantName  
 
@@ -149,7 +151,7 @@ Questo articolo non contiene informazioni dettagliate su come implementare IDbDe
 **Key**: istanza di DbProviderFactory per la quale è richiesto un nome invariante.  
 
 >[!NOTE]
-> Per altri dettagli sui servizi correlati al provider in EF6, vedere la sezione [modello di provider EF6](~/ef6/fundamentals/providers/provider-model.md) .  
+> Per altri dettagli sui servizi correlati al provider in EF6, vedere la sezione [modello di provider EF6](xref:ef6/fundamentals/providers/provider-model) .  
 
 ## <a name="systemdataentitycoremappingviewgenerationiviewassemblycache"></a>System. Data. Entity. Core. mapping. ViewGeneration. IViewAssemblyCache  
 
@@ -175,7 +177,7 @@ Questo articolo non contiene informazioni dettagliate su come implementare IDbDe
 
 **Chiave**: non usata; sarà null.  
 
-## <a name="funcsystemdataentitydbcontext-actionstring-systemdataentityinfrastructureinterceptiondatabaselogformatter"></a>Func < System. Data. Entity. DbContext, Action < String\>, System. Data. Entity. Infrastructure. Interceptor. DatabaseLogFormatter\>  
+## <a name="funcsystemdataentitydbcontext-actionstring-systemdataentityinfrastructureinterceptiondatabaselogformatter"></a>Func<System. Data. Entity. DbContext, Action<String \> , System. Data. Entity. Infrastructure. Interceptor. DatabaseLogFormatter\>  
 
 **Versione introdotta**: Ef 6.0.0  
 
@@ -183,7 +185,7 @@ Questo articolo non contiene informazioni dettagliate su come implementare IDbDe
 
 **Chiave**: non usata; sarà null.  
 
-## <a name="funcsystemdataentitydbcontext"></a>Func < System. Data. Entity. DbContext\>  
+## <a name="funcsystemdataentitydbcontext"></a>Func<System. Data. Entity. DbContext\>  
 
 **Versione introdotta**: Ef 6.1.0  
 
@@ -191,7 +193,7 @@ Questo articolo non contiene informazioni dettagliate su come implementare IDbDe
 
 **Key**: oggetto Type per il tipo di DbContext derivato per il quale è necessaria una factory.  
 
-## <a name="funcsystemdataentitycoremetadataedmimetadataannotationserializer"></a>Func < System. Data. Entity. Core. Metadata. Edm. IMetadataAnnotationSerializer\>  
+## <a name="funcsystemdataentitycoremetadataedmimetadataannotationserializer"></a>Func<System. Data. Entity. Core. Metadata. Edm. IMetadataAnnotationSerializer\>  
 
 **Versione introdotta**: Ef 6.1.0  
 
@@ -199,7 +201,7 @@ Questo articolo non contiene informazioni dettagliate su come implementare IDbDe
 
 **Key**: il nome dell'annotazione da serializzare o deserializzare.  
 
-## <a name="funcsystemdataentityinfrastructuretransactionhandler"></a>Func < System. Data. Entity. Infrastructure. TransactionHandler\>  
+## <a name="funcsystemdataentityinfrastructuretransactionhandler"></a>Func<System. Data. Entity. Infrastructure. TransactionHandler\>  
 
 **Versione introdotta**: Ef 6.1.0  
 

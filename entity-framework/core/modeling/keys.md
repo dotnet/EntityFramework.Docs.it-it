@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/keys
-ms.openlocfilehash: abd65a5ea079a49fd7a3bbc84a9337f6ee19fab1
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: ed4600258de460877ee4f94586a2fbe794e82ed1
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416467"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619339"
 ---
 # <a name="keys"></a>Chiavi
 
@@ -41,25 +41,25 @@ Per convenzione, una proprietà denominata `Id` o `<type name>Id` verrà configu
 
 ## <a name="primary-key-name"></a>Nome chiave primaria
 
-Per convenzione, le chiavi primarie dei database relazionali vengono create con il nome `PK_<type name>`. È possibile configurare il nome del vincolo PRIMARY KEY come segue:
+Per convenzione, le chiavi primarie dei database relazionali vengono create con il nome `PK_<type name>` . È possibile configurare il nome del vincolo PRIMARY KEY come segue:
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/KeyName.cs?name=KeyName&highlight=5)]
 
 ## <a name="key-types-and-values"></a>Tipi di chiave e valori
 
-Mentre EF Core supporta l'utilizzo di proprietà di qualsiasi tipo primitivo come chiave primaria, inclusi `string`, `Guid`, `byte[]` e altri, non tutti i database supportano tutti i tipi come chiavi. In alcuni casi i valori di chiave possono essere convertiti automaticamente in un tipo supportato. in caso contrario, la conversione deve essere [specificata manualmente](xref:core/modeling/value-conversions).
+Mentre EF Core supporta l'utilizzo di proprietà di qualsiasi tipo primitivo come chiave primaria, tra cui `string` , `Guid` `byte[]` e altri, non tutti i database supportano tutti i tipi come chiavi. In alcuni casi i valori di chiave possono essere convertiti automaticamente in un tipo supportato. in caso contrario, la conversione deve essere [specificata manualmente](xref:core/modeling/value-conversions).
 
 Quando si aggiunge una nuova entità al contesto, le proprietà chiave devono sempre avere un valore non predefinito, ma alcuni tipi verranno [generati dal database](xref:core/modeling/generated-properties). In tal caso, EF tenterà di generare un valore temporaneo quando l'entità viene aggiunta per finalità di rilevamento. Dopo la chiamata a [SaveChanges](/dotnet/api/Microsoft.EntityFrameworkCore.DbContext.SaveChanges) , il valore temporaneo verrà sostituito dal valore generato dal database.
 
 > [!Important]
-> Se una proprietà chiave ha il valore generato dal database e viene specificato un valore non predefinito quando viene aggiunta un'entità, Entity Framework presuppone che l'entità esista già nel database e tenterà di aggiornarla invece di inserirne una nuova. Per evitare questo problema, disabilitare la generazione di valori o vedere [come specificare valori espliciti per le proprietà generate](../saving/explicit-values-generated-properties.md).
+> Se una proprietà chiave ha il valore generato dal database e viene specificato un valore non predefinito quando viene aggiunta un'entità, Entity Framework presuppone che l'entità esista già nel database e tenterà di aggiornarla invece di inserirne una nuova. Per evitare questo problema, disabilitare la generazione di valori o vedere [come specificare valori espliciti per le proprietà generate](xref:core/saving/explicit-values-generated-properties).
 
 ## <a name="alternate-keys"></a>Chiavi alternative
 
 Una chiave alternativa funge da identificatore univoco alternativo per ogni istanza di entità oltre alla chiave primaria. può essere usato come destinazione di una relazione. Quando si utilizza un database relazionale, viene eseguito il mapping al concetto di indice/vincolo univoco nelle colonne chiave alternative e di uno o più vincoli di chiave esterna che fanno riferimento alle colonne.
 
 > [!TIP]
-> Se si vuole semplicemente applicare l'univocità in una colonna, definire un indice univoco anziché una chiave alternativa (vedere [indici](indexes.md)). In EF le chiavi alternative sono di sola lettura e forniscono una semantica aggiuntiva sugli indici univoci, perché possono essere utilizzate come destinazione di una chiave esterna.
+> Se si vuole semplicemente applicare l'univocità in una colonna, definire un indice univoco anziché una chiave alternativa (vedere [indici](xref:core/modeling/indexes)). In EF le chiavi alternative sono di sola lettura e forniscono una semantica aggiuntiva sugli indici univoci, perché possono essere utilizzate come destinazione di una chiave esterna.
 
 Quando necessario, vengono in genere introdotte chiavi alternative e non è necessario configurarle manualmente. Per convenzione, viene introdotta una chiave alternativa quando si identifica una proprietà che non è la chiave primaria come destinazione di una relazione.
 
@@ -73,6 +73,6 @@ Quando necessario, vengono in genere introdotte chiavi alternative e non è nece
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/AlternateKeyComposite.cs?name=AlternateKeyComposite&highlight=4)]
 
-Infine, per convenzione, l'indice e il vincolo introdotti per una chiave alternativa verranno denominati `AK_<type name>_<property name>` (per chiavi alternative composite `<property name>` diventerà un elenco di nomi di proprietà separato da un carattere di sottolineatura. È possibile configurare il nome dell'indice e del vincolo UNIQUE della chiave alternativa:
+Infine, per convenzione, gli indici e i vincoli introdotti per una chiave alternativa verranno denominati `AK_<type name>_<property name>` (per le chiavi alternative composite `<property name>` diventa un elenco di nomi di proprietà separati da un carattere di sottolineatura). È possibile configurare il nome dell'indice e del vincolo UNIQUE della chiave alternativa:
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/AlternateKeyName.cs?name=AlternateKeyName&highlight=5)]

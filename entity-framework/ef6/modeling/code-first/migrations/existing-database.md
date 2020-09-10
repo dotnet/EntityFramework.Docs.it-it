@@ -1,14 +1,16 @@
 ---
 title: Migrazioni Code First con un database esistente-EF6
+description: Migrazioni Code First con un database esistente in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: f0cc4f93-67dd-4664-9753-0a9f913814db
-ms.openlocfilehash: eb7948eafb1322cabcf69b47bd5411f762fe8498
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/migrations/existing-database
+ms.openlocfilehash: f7638cac17bf9152c829ae415fc941aa0a0c6cab
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418993"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616943"
 ---
 # <a name="code-first-migrations-with-an-existing-database"></a>Migrazioni Code First con un database esistente
 > [!NOTE]
@@ -17,7 +19,7 @@ ms.locfileid: "78418993"
 Questo articolo illustra l'uso di Migrazioni Code First con un database esistente, uno che non è stato creato da Entity Framework.
 
 > [!NOTE]
-> Questo articolo presuppone che l'utente sappia come usare Migrazioni Code First negli scenari di base. In caso contrario, sarà necessario leggere [migrazioni Code First](~/ef6/modeling/code-first/migrations/index.md) prima di continuare.
+> Questo articolo presuppone che l'utente sappia come usare Migrazioni Code First negli scenari di base. In caso contrario, sarà necessario leggere [migrazioni Code First](xref:ef6/modeling/code-first/migrations/index) prima di continuare.
 
 ## <a name="screencasts"></a>Screencast
 
@@ -33,7 +35,7 @@ Basandosi sui concetti del video precedente, [questo screencast](https://channel
 
 ## <a name="step-1-create-a-model"></a>Passaggio 1: creare un modello
 
-Il primo passaggio consiste nel creare un modello di Code First destinato al database esistente. L'argomento [Code First a un database esistente](~/ef6/modeling/code-first/workflows/existing-database.md) fornisce istruzioni dettagliate su come eseguire questa operazione.
+Il primo passaggio consiste nel creare un modello di Code First destinato al database esistente. L'argomento [Code First a un database esistente](xref:ef6/modeling/code-first/workflows/existing-database) fornisce istruzioni dettagliate su come eseguire questa operazione.
 
 >[!NOTE]
 > Prima di apportare modifiche al modello che richiederebbero modifiche allo schema del database, è importante attenersi ai passaggi rimanenti di questo argomento. Per la procedura seguente è necessario che il modello sia sincronizzato con lo schema del database.
@@ -42,7 +44,7 @@ Il primo passaggio consiste nel creare un modello di Code First destinato al dat
 
 Il passaggio successivo consiste nell'abilitare le migrazioni. È possibile eseguire questa operazione eseguendo il comando **Enable-Migrations** nella console di gestione pacchetti.
 
-Questo comando crea una cartella nella soluzione denominata migrazioni e inserisce una singola classe al suo interno chiamata configurazione. La classe di configurazione consente di configurare le migrazioni per l'applicazione. per altre informazioni, vedere l'argomento [migrazioni Code First](~/ef6/modeling/code-first/migrations/index.md) .
+Questo comando crea una cartella nella soluzione denominata migrazioni e inserisce una singola classe al suo interno chiamata configurazione. La classe di configurazione consente di configurare le migrazioni per l'applicazione. per altre informazioni, vedere l'argomento [migrazioni Code First](xref:ef6/modeling/code-first/migrations/index) .
 
 ## <a name="step-3-add-an-initial-migration"></a>Passaggio 3: aggiungere una migrazione iniziale
 
@@ -53,10 +55,10 @@ Al termine della creazione e dell'applicazione delle migrazioni al database loca
 
 ### <a name="option-one-use-existing-schema-as-a-starting-point"></a>Opzione uno: utilizzare lo schema esistente come punto di partenza
 
-Migrazioni Code First utilizza uno snapshot del modello archiviato nella migrazione più recente per rilevare le modifiche apportate al modello (è possibile trovare informazioni dettagliate su questo in [migrazioni Code First in ambienti Team](~/ef6/modeling/code-first/migrations/teams.md)). Poiché si presuppone che i database abbiano già lo schema del modello corrente, verrà generata una migrazione vuota (no-op) con il modello corrente come snapshot.
+Migrazioni Code First utilizza uno snapshot del modello archiviato nella migrazione più recente per rilevare le modifiche apportate al modello (è possibile trovare informazioni dettagliate su questo in [migrazioni Code First in ambienti Team](xref:ef6/modeling/code-first/migrations/teams)). Poiché si presuppone che i database abbiano già lo schema del modello corrente, verrà generata una migrazione vuota (no-op) con il modello corrente come snapshot.
 
 1.  Eseguire il comando **Add-Migration InitialCreate – IgnoreChanges** nella console di gestione pacchetti. In questo modo viene creata una migrazione vuota con il modello corrente come snapshot.
-2.  Eseguire il comando **Update-database** nella console di gestione pacchetti. Verrà applicata la migrazione InitialCreate al database. Poiché la migrazione effettiva non contiene alcuna modifica, viene semplicemente aggiunta una riga alla \_\_tabella MigrationsHistory che indica che la migrazione è già stata applicata.
+2.  Eseguire il comando **Update-database** nella console di gestione pacchetti. Verrà applicata la migrazione InitialCreate al database. Poiché la migrazione effettiva non contiene alcuna modifica, viene semplicemente aggiunta una riga alla \_ \_ tabella MigrationsHistory che indica che la migrazione è già stata applicata.
 
 ### <a name="option-two-use-empty-database-as-a-starting-point"></a>Opzione due: usare un database vuoto come punto di partenza
 
@@ -64,7 +66,7 @@ In questo scenario sono necessarie migrazioni per poter creare l'intero database
 
 1.  Eseguire il comando **Add-Migration InitialCreate** nella console di gestione pacchetti. In questo modo viene creata una migrazione per creare lo schema esistente.
 2.  Impostare come commento tutto il codice nel metodo up della migrazione appena creata. Questo consentirà di applicare la migrazione al database locale senza provare a ricreare tutte le tabelle e così via.
-3.  Eseguire il comando **Update-database** nella console di gestione pacchetti. Verrà applicata la migrazione InitialCreate al database. Poiché la migrazione effettiva non contiene alcuna modifica (perché è stata impostata temporaneamente come commento), verrà semplicemente aggiunta una riga alla \_\_tabella MigrationsHistory che indica che la migrazione è già stata applicata.
+3.  Eseguire il comando **Update-database** nella console di gestione pacchetti. Verrà applicata la migrazione InitialCreate al database. Poiché la migrazione effettiva non contiene alcuna modifica (perché è stata impostata temporaneamente come commento), viene semplicemente aggiunta una riga alla \_ \_ tabella MigrationsHistory che indica che la migrazione è già stata applicata.
 4.  Annulla il commento del codice nel metodo up. Ciò significa che quando questa migrazione viene applicata ai database futuri, lo schema già esistente nel database locale verrà creato dalle migrazioni.
 
 ## <a name="things-to-be-aware-of"></a>Aspetti da tenere presenti
@@ -80,7 +82,7 @@ Di seguito sono riportati alcuni esempi di quando è necessario tenere presente 
 **Se è stato usato il valore ' opzione uno: USA schema esistente come punto di partenza ' dal passaggio 3:**
 
 -   Se le modifiche future apportate al modello richiedono la modifica o l'eliminazione di uno degli oggetti di database denominati in modo diverso, sarà necessario modificare la migrazione con impalcatura per specificare il nome corretto. Le API Migrations hanno un parametro nome facoltativo che consente di eseguire questa operazione.
-    Ad esempio, lo schema esistente potrebbe includere una tabella post con una colonna chiave esterna BlogId con un indice denominato IndexFk\_BlogId. Tuttavia, per le migrazioni predefinite si prevede che questo indice sia denominato IX\_BlogId. Se si modifica il modello che comporta l'eliminazione di questo indice, sarà necessario modificare la chiamata DropIndex con impalcatura per specificare il nome di IndexFk\_BlogId.
+    Ad esempio, lo schema esistente può includere una tabella post con una colonna chiave esterna BlogId con un indice denominato IndexFk \_ BlogId. Tuttavia, per le migrazioni predefinite si prevede che questo indice sia denominato IX \_ BlogId. Se si modifica il modello che comporta l'eliminazione di questo indice, sarà necessario modificare la chiamata DropIndex con impalcatura per specificare il nome del BlogId IndexFk \_ .
 
 **Se è stato usato "opzione due: USA database vuoto come punto di partenza" dal passaggio 3:**
 

@@ -1,14 +1,16 @@
 ---
 title: Relazioni, proprietà di navigazione e chiavi esterne-EF6
+description: Relazioni, proprietà di navigazione e chiavi esterne in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: 5807f7aeeb68328821cf45ac4f8c28efa17ed399
-ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+uid: ef6/fundamentals/relationships
+ms.openlocfilehash: 63349d9a81065ea4e15a5f97ef5298cb3dc67339
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664195"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618393"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>Relazioni, proprietà di navigazione e chiavi esterne
 
@@ -67,8 +69,8 @@ public class Department
 
 Il resto di questa pagina illustra come accedere e modificare i dati usando le relazioni. Per informazioni sull'impostazione delle relazioni nel modello, vedere le pagine seguenti.
 
--   Per configurare le relazioni in Code First, vedere [annotazioni dei dati](~/ef6/modeling/code-first/data-annotations.md) e [API Fluent-relazioni](~/ef6/modeling/code-first/fluent/relationships.md).
--   Per configurare le relazioni usando il Entity Framework Designer, vedere [relazioni con la finestra di progettazione EF](~/ef6/modeling/designer/relationships.md).
+-   Per configurare le relazioni in Code First, vedere [annotazioni dei dati](xref:ef6/modeling/code-first/data-annotations) e [API Fluent-relazioni](xref:ef6/modeling/code-first/fluent/relationships).
+-   Per configurare le relazioni usando il Entity Framework Designer, vedere [relazioni con la finestra di progettazione EF](xref:ef6/modeling/designer/relationships).
 
 ## <a name="creating-and-modifying-relationships"></a>Creazione e modifica di relazioni
 
@@ -129,7 +131,7 @@ Nell'esempio seguente esiste una relazione molti-a-molti tra docenti e corsi. Ch
 
 ## <a name="synchronizing-the-changes-between-the-foreign-keys-and-navigation-properties"></a>Sincronizzazione delle modifiche tra le chiavi esterne e le proprietà di navigazione
 
-Quando si modifica la relazione degli oggetti collegati al contesto utilizzando uno dei metodi descritti in precedenza, Entity Framework necessario che le chiavi esterne, i riferimenti e le raccolte siano sincronizzati. Entity Framework gestisce automaticamente questa sincronizzazione, nota anche come correzione della relazione, per le entità POCO con proxy. Per ulteriori informazioni, vedere [utilizzo di proxy](~/ef6/fundamentals/proxies.md).
+Quando si modifica la relazione degli oggetti collegati al contesto utilizzando uno dei metodi descritti in precedenza, Entity Framework necessario che le chiavi esterne, i riferimenti e le raccolte siano sincronizzati. Entity Framework gestisce automaticamente questa sincronizzazione, nota anche come correzione della relazione, per le entità POCO con proxy. Per ulteriori informazioni, vedere [utilizzo di proxy](xref:ef6/fundamentals/proxies).
 
 Se si utilizzano entità POCO senza proxy, è necessario assicurarsi che venga chiamato il metodo **DetectChanges** per sincronizzare gli oggetti correlati nel contesto. Si noti che le API seguenti attivano automaticamente una chiamata **DetectChanges** .
 
@@ -144,11 +146,11 @@ Se si utilizzano entità POCO senza proxy, è necessario assicurarsi che venga c
 -   `DbContext.GetValidationErrors`
 -   `DbContext.Entry`
 -   `DbChangeTracker.Entries`
--   Esecuzione di una query LINQ su un`DbSet`
+-   Esecuzione di una query LINQ su un `DbSet`
 
 ## <a name="loading-related-objects"></a>Caricamento di oggetti correlati
 
-In Entity Framework si utilizzano comunemente le proprietà di navigazione per caricare entità correlate all'entità restituita dall'associazione definita. Per ulteriori informazioni, vedere [caricamento di oggetti correlati](~/ef6/querying/related-data.md).
+In Entity Framework si utilizzano comunemente le proprietà di navigazione per caricare entità correlate all'entità restituita dall'associazione definita. Per ulteriori informazioni, vedere [caricamento di oggetti correlati](xref:ef6/querying/related-data).
 
 > [!NOTE]
 > In un'associazione di chiavi esterne, quando si carica un'entità finale correlata di un oggetto dipendente, l'oggetto correlato sarà caricato in base al valore della chiave esterna dell'oggetto dipendente attualmente in memoria:
@@ -173,7 +175,7 @@ Nelle associazioni di chiave esterna e indipendente, i controlli della concorren
 
 Si consiglia di utilizzare sempre l'associazione di chiavi esterne quando si utilizzano entità che partecipano al controllo della concorrenza e alla risoluzione.
 
-Per ulteriori informazioni, vedere [gestione dei conflitti di concorrenza](~/ef6/saving/concurrency.md).
+Per ulteriori informazioni, vedere [gestione dei conflitti di concorrenza](xref:ef6/saving/concurrency).
 
 ## <a name="working-with-overlapping-keys"></a>Utilizzo di chiavi sovrapposte
 

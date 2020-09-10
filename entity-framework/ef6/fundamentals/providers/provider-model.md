@@ -1,24 +1,26 @@
 ---
 title: Modello di provider Entity Framework 6-EF6
+description: Il modello di provider Entity Framework 6 in Entity Framework 6
 author: divega
 ms.date: 06/27/2018
 ms.assetid: 066832F0-D51B-4655-8BE7-C983C557E0E4
-ms.openlocfilehash: 8bda3f51e8934f2add862c30e60f1185f068c515
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/providers/provider-model
+ms.openlocfilehash: af5522a5f8cf03fbf2725f7cf85673c3aa43aa27
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419360"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618378"
 ---
 # <a name="the-entity-framework-6-provider-model"></a>Modello di provider Entity Framework 6
 
-Il modello di provider Entity Framework consente l'utilizzo Entity Framework con tipi diversi di server di database. Ad esempio, è possibile collegare un provider per consentire l'uso di EF con Microsoft SQL Server, mentre un altro provider può essere collegato per consentire l'uso di EF con Microsoft SQL Server Compact edizione. I provider per EF6 di cui si è consapevoli sono reperibili nella pagina [provider di Entity Framework](~/ef6/fundamentals/providers/index.md) .
+Il modello di provider Entity Framework consente l'utilizzo Entity Framework con tipi diversi di server di database. Ad esempio, è possibile collegare un provider per consentire l'uso di EF con Microsoft SQL Server, mentre un altro provider può essere collegato per consentire l'uso di EF con Microsoft SQL Server Compact edizione. I provider per EF6 di cui si è consapevoli sono reperibili nella pagina [provider di Entity Framework](xref:ef6/fundamentals/providers/index) .
 
 Sono state necessarie alcune modifiche al modo in cui EF interagisce con i provider per consentire il rilascio di EF con una licenza open source. Queste modifiche richiedono la ricompilazione dei provider EF rispetto agli assembly EF6 insieme ai nuovi meccanismi per la registrazione del provider.
 
 ## <a name="rebuilding"></a>Ricostruzione
 
-Con EF6, il codice principale che in precedenza faceva parte del .NET Framework viene ora fornito come assembly fuori banda (OOB). Per informazioni dettagliate su come compilare le applicazioni in EF6, vedere la pagina [aggiornamento delle applicazioni per EF6](~/ef6/what-is-new/upgrading-to-ef6.md) . Sarà inoltre necessario ricompilare i provider utilizzando queste istruzioni.
+Con EF6, il codice principale che in precedenza faceva parte del .NET Framework viene ora fornito come assembly fuori banda (OOB). Per informazioni dettagliate su come compilare le applicazioni in EF6, vedere la pagina [aggiornamento delle applicazioni per EF6](xref:ef6/what-is-new/upgrading-to-ef6) . Sarà inoltre necessario ricompilare i provider utilizzando queste istruzioni.
 
 ## <a name="provider-types-overview"></a>Panoramica sui tipi di provider
 
@@ -32,7 +34,7 @@ EF dipende dalla presenza di un tipo derivato da [System. Data. Common. DbProvid
 
 ### <a name="dbproviderservices"></a>DbProviderServices
 
-EF dipende dalla presenza di un tipo derivato da DbProviderServices per fornire funzionalità aggiuntive necessarie per EF oltre alle funzionalità già fornite dal provider ADO.NET. Nelle versioni precedenti di EF la classe DbProviderServices fa parte della .NET Framework ed è stata trovata nello spazio dei nomi System. Data. Common. A partire da EF6 questa classe fa ora parte di EntityFramework. dll e si trova nello spazio dei nomi System. Data. Entity. Core. Common.
+EF dipende dalla presenza di un tipo derivato da DbProviderServices per fornire funzionalità aggiuntive necessarie per EF oltre alle funzionalità già fornite dal provider ADO.NET. Nelle versioni precedenti di EF la classe DbProviderServices fa parte della .NET Framework ed è stata trovata nello spazio dei nomi System. Data. Common. A partire da EF6 questa classe fa ora parte di EntityFramework.dll e si trova nello spazio dei nomi System. Data. Entity. Core. Common.
 
 Altre informazioni sulle funzionalità di base di un'implementazione di DbProviderServices sono disponibili in [MSDN](https://msdn.microsoft.com/library/ee789835.aspx). Si noti, tuttavia, che al momento della stesura di queste informazioni non viene aggiornata per EF6, anche se la maggior parte dei concetti è ancora valida. Anche le implementazioni SQL Server e SQL Server Compact di DbProviderServices vengono archiviate nella [codebase Open Source](https://github.com/aspnet/EntityFramework6/) e possono fungere da riferimenti utili per altre implementazioni.
 
@@ -60,9 +62,9 @@ Si tratta di servizi facoltativi che consentono a un provider di aggiungere il s
 
 Si tratta di un servizio facoltativo che consente di usare le migrazioni di Entity Framework per la generazione di SQL usata per la creazione e la modifica di schemi di database per Code First. Per supportare le migrazioni, è necessaria un'implementazione. Se viene fornita un'implementazione di, questa verrà utilizzata anche quando i database vengono creati utilizzando inizializzatori di database o il metodo database. Create.
 
-### <a name="funcdbconnection-string-historycontextfactory"></a>Func < DbConnection, String, HistoryContextFactory >
+### <a name="funcdbconnection-string-historycontextfactory"></a>Func<DbConnection, String, HistoryContextFactory>
 
-Si tratta di un servizio facoltativo che consente a un provider di configurare il mapping di HistoryContext alla tabella `__MigrationHistory` usata dalle migrazioni di EF. HistoryContext è un Code First DbContext e può essere configurato usando l'API Fluent normale per modificare elementi quali il nome della tabella e le specifiche di mapping delle colonne. L'implementazione predefinita di questo servizio restituita da EF per tutti i provider può funzionare per un determinato server di database se tutti i mapping predefiniti di tabelle e colonne sono supportati da tale provider. In tal caso, il provider non deve fornire un'implementazione di questo servizio.
+Si tratta di un servizio facoltativo che consente a un provider di configurare il mapping di HistoryContext alla `__MigrationHistory` tabella usata dalle migrazioni di EF. HistoryContext è un Code First DbContext e può essere configurato usando l'API Fluent normale per modificare elementi quali il nome della tabella e le specifiche di mapping delle colonne. L'implementazione predefinita di questo servizio restituita da EF per tutti i provider può funzionare per un determinato server di database se tutti i mapping predefiniti di tabelle e colonne sono supportati da tale provider. In tal caso, il provider non deve fornire un'implementazione di questo servizio.
 
 ### <a name="idbproviderfactoryresolver"></a>IDbProviderFactoryResolver
 
@@ -70,7 +72,7 @@ Si tratta di un servizio facoltativo per ottenere il DbProviderFactory corretto 
 
 ## <a name="registering-dbproviderservices"></a>Registrazione di DbProviderServices
 
-L'implementazione di DbProviderServices da usare può essere registrata nel file di configurazione dell'applicazione (app. config o Web. config) o usando la configurazione basata su codice. In entrambi i casi, la registrazione utilizza come chiave il "nome invariante" del provider. In questo modo è possibile registrare e utilizzare più provider in un'unica applicazione. Il nome invariante usato per le registrazioni EF corrisponde al nome invariante usato per la registrazione del provider ADO.NET e per le stringhe di connessione. Ad esempio, per SQL Server viene usato il nome invariante "System. Data. SqlClient".
+L'implementazione di DbProviderServices da usare può essere registrata nel file di configurazione dell'applicazione (app.config o web.config) o usando la configurazione basata su codice. In entrambi i casi, la registrazione utilizza come chiave il "nome invariante" del provider. In questo modo è possibile registrare e utilizzare più provider in un'unica applicazione. Il nome invariante usato per le registrazioni EF corrisponde al nome invariante usato per la registrazione del provider ADO.NET e per le stringhe di connessione. Ad esempio, per SQL Server viene usato il nome invariante "System. Data. SqlClient".
 
 ### <a name="config-file-registration"></a>Registrazione nel file di configurazione
 
@@ -102,7 +104,7 @@ public class MyConfiguration : DbConfiguration
 
 ## <a name="resolving-additional-services"></a>Risoluzione di servizi aggiuntivi
 
-Come indicato in precedenza nella sezione _Panoramica dei tipi di provider_ , è possibile usare una classe DbProviderServices anche per risolvere servizi aggiuntivi. Questo è possibile perché DbProviderServices implementa IDbDependencyResolver e ogni tipo di DbProviderServices registrato viene aggiunto come "resolver predefinito". Il meccanismo IDbDpendencyResolver viene descritto più dettagliatamente nella [risoluzione delle dipendenze](~/ef6/fundamentals/configuring/dependency-resolution.md). Non è tuttavia necessario comprendere tutti i concetti in questa specifica per risolvere servizi aggiuntivi in un provider.
+Come indicato in precedenza nella sezione _Panoramica dei tipi di provider_ , è possibile usare una classe DbProviderServices anche per risolvere servizi aggiuntivi. Questo è possibile perché DbProviderServices implementa IDbDependencyResolver e ogni tipo di DbProviderServices registrato viene aggiunto come "resolver predefinito". Il meccanismo IDbDpendencyResolver viene descritto più dettagliatamente nella [risoluzione delle dipendenze](xref:ef6/fundamentals/configuring/dependency-resolution). Non è tuttavia necessario comprendere tutti i concetti in questa specifica per risolvere servizi aggiuntivi in un provider.
 
 Il modo più comune per la risoluzione dei servizi aggiuntivi da parte di un provider consiste nel chiamare DbProviderServices. AddDependencyResolver per ogni servizio nel costruttore della classe DbProviderServices. Ad esempio, SqlProviderServices (il provider EF per SQL Server) presenta codice simile al seguente per l'inizializzazione:
 
@@ -210,7 +212,7 @@ Quando viene installato il pacchetto NuGet EntityFramework, viene registrato un 
 
 Entrambi questi comandi si occupano di aggiungere una sezione entityFramework al file di configurazione e di aggiungere una raccolta Providers, se necessario.
 
-È previsto che questi comandi vengano chiamati dallo script Install. ps1 NuGet. Ad esempio, install. ps1 per il provider SQL Compact ha un aspetto simile al seguente:
+È previsto che questi comandi vengano chiamati dallo script install.ps1 NuGet. Ad esempio, install.ps1 per il provider SQL Compact è simile a quanto segue:
 
 ``` powershell
 param($installPath, $toolsPath, $package, $project)
@@ -244,7 +246,7 @@ Il servizio che è stato risolto e a questo punto dovrebbe essere incluso con la
 
 ## <a name="resolving-a-dbproviderfactory-with-ef"></a>Risoluzione di un DbProviderFactory con EF
 
-DbProviderFactory è uno dei tipi di provider fondamentali richiesti da EF, come descritto nella sezione _Panoramica dei tipi di provider_ . Come già indicato, non si tratta di un tipo EF e la registrazione non è in genere parte della configurazione di EF, ma è invece la normale registrazione del provider ADO.NET nel file Machine. config e/o nel file di configurazione dell'applicazione.
+DbProviderFactory è uno dei tipi di provider fondamentali richiesti da EF, come descritto nella sezione _Panoramica dei tipi di provider_ . Come già indicato, non si tratta di un tipo EF e la registrazione non è in genere parte della configurazione di Entity Framework, ma è invece la registrazione del provider ADO.NET normale nel file di machine.config e/o nel file di configurazione dell'applicazione.
 
 Nonostante questo EF usi ancora il meccanismo di risoluzione delle dipendenze normale quando si cerca un DbProviderFactory da usare. Il sistema di risoluzione predefinito usa la registrazione ADO.NET normale nei file di configurazione, quindi questo è in genere trasparente. Tuttavia, a causa del normale meccanismo di risoluzione delle dipendenze, significa che è possibile usare un IDbDependencyResolver per risolvere un DbProviderFactory anche quando non è stata eseguita la registrazione normale di ADO.NET.
 

@@ -1,18 +1,19 @@
 ---
 title: Pianificare Entity Framework Core 5,0
+description: Funzionalità pianificate per Entity Framework Core 5,0
 author: ajcvickers
 ms.date: 08/22/2020
 uid: core/what-is-new/ef-core-5.0/plan
-ms.openlocfilehash: a0d41d6df844c9ca2c8a2dc8ba50ca669e23dced
-ms.sourcegitcommit: 6f7af3f138bf7c724cbdda261f97e5cf7035e8d7
+ms.openlocfilehash: 5ac7a48a70959b625b7c602ee48dc08a360bee73
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88847579"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618673"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>Pianificare Entity Framework Core 5,0
 
-Come descritto nel [processo di pianificazione](xref:core/what-is-new/release_planning), l'input è stato raccolto dagli stakeholder in un piano provvisorio per la versione di EF Core 5,0.
+Come descritto nel [processo di pianificazione](xref:core/what-is-new/release-planning), l'input è stato raccolto dagli stakeholder in un piano provvisorio per la versione di EF Core 5,0.
 
 > [!IMPORTANT]
 > Questo piano è ancora in fase di elaborazione. Niente qui è un impegno. Questo piano è un punto di partenza che si evolverà Man mano che si apprenderanno altre informazioni. È possibile che venga effettuato il pull di alcuni elementi attualmente non pianificati per 5,0. È possibile che vengano apportate alcune operazioni attualmente pianificate per 5,0.
@@ -309,4 +310,4 @@ Inoltre, consideriamo sempre i [problemi più votati](https://github.com/dotnet/
 
 ## <a name="suggestions"></a>Suggerimenti
 
-I commenti e i suggerimenti dei clienti sulla pianificazione sono importanti. Il modo migliore per indicare l'importanza di un problema consiste nel votare (Pollice in su) per tale problema in GitHub. Questi dati vengono quindi inseriti nel [processo di pianificazione](xref:core/what-is-new/release_planning) per la versione successiva.
+I commenti e i suggerimenti dei clienti sulla pianificazione sono importanti. Il modo migliore per indicare l'importanza di un problema consiste nel votare (Pollice in su) per tale problema in GitHub. Questi dati vengono quindi inseriti nel [processo di pianificazione](xref:core/what-is-new/release-planning) per la versione successiva.

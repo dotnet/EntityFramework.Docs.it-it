@@ -1,20 +1,22 @@
 ---
 title: Migrazioni Code First automatico-EF6
+description: Migrazioni Code First automatico in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0eb86787-2161-4cb4-9cb8-67c5d6e95650
-ms.openlocfilehash: 2713afaf09707b7696e90464aac9945c2d82d274
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/migrations/automatic
+ms.openlocfilehash: 541adf5aed517685b54d675730996c12ff0c824a
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419000"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618087"
 ---
 # <a name="automatic-code-first-migrations"></a>Migrazioni Code First automatico
 Le migrazioni automatiche consentono di usare Migrazioni Code First senza avere un file di codice nel progetto per ogni modifica apportata. Non tutte le modifiche possono essere applicate automaticamente. ad esempio, per rinominare le colonne è necessario utilizzare una migrazione basata su codice.
 
 > [!NOTE]
-> Questo articolo presuppone che l'utente sappia come usare Migrazioni Code First negli scenari di base. In caso contrario, sarà necessario leggere [migrazioni Code First](~/ef6/modeling/code-first/migrations/index.md) prima di continuare.
+> Questo articolo presuppone che l'utente sappia come usare Migrazioni Code First negli scenari di base. In caso contrario, sarà necessario leggere [migrazioni Code First](xref:ef6/modeling/code-first/migrations/index) prima di continuare.
 
 ## <a name="recommendation-for-team-environments"></a>Raccomandazione per gli ambienti Team
 
@@ -97,7 +99,7 @@ Per iniziare a usare le migrazioni sono necessari un progetto e un modello Code 
     public string Url { get; set; }
 ```
 
-Se è necessario eseguire di nuovo l'applicazione, si otterrebbe un'eccezione InvalidOperationException che indica che il modello che supporta *il contesto ' BlogContext ' è stato modificato dopo la creazione del database. Si consiglia di utilizzare Migrazioni Code First per aggiornare il database (* [ *http://go.microsoft.com/fwlink/?LinkId=238269* ](https://go.microsoft.com/fwlink/?LinkId=238269) *).*
+Se è necessario eseguire di nuovo l'applicazione, si otterrebbe un'eccezione InvalidOperationException che indica che il modello che supporta *il contesto ' BlogContext ' è stato modificato dopo la creazione del database. Si consiglia di utilizzare Migrazioni Code First per aggiornare il database (* [*http://go.microsoft.com/fwlink/?LinkId=238269*](https://go.microsoft.com/fwlink/?LinkId=238269) *).*
 
 Come suggerisce l'eccezione, è ora possibile iniziare a usare Migrazioni Code First. Poiché si vogliono usare le migrazioni automatiche, si specifica l'opzione **-EnableAutomaticMigrations** .
 
@@ -209,6 +211,6 @@ A questo punto è possibile usare **Update-database** per ottenere migrazioni Co
 
 -   Eseguire il comando **Update-database** nella console di gestione pacchetti.
 
-## <a name="summary"></a>Summary
+## <a name="summary"></a>Riepilogo
 
 In questa procedura dettagliata è stato illustrato come utilizzare le migrazioni automatiche per eseguire il push delle modifiche del modello nel database. È stato anche illustrato come eseguire il patibolo ed eseguire migrazioni basate su codice tra le migrazioni automatiche quando è necessario un maggiore controllo.

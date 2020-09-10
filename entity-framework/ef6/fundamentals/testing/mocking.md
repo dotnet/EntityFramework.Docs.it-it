@@ -1,14 +1,16 @@
 ---
 title: Test con un Framework fittizio-EF6
+description: Test con un Framework fittizio in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: bd66a638-d245-44d4-8e71-b9c6cb335cc7
-ms.openlocfilehash: 790e077c5b30c4a68a96b3c1a99b40893b2bbe55
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/testing/mocking
+ms.openlocfilehash: 01890ab3bb8dbf0caa7b3eff797e53b06bc8ec9b
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419346"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618308"
 ---
 # <a name="testing-with-a-mocking-framework"></a>Test con un Framework fittizio
 > [!NOTE]
@@ -23,7 +25,7 @@ Esistono due approcci diversi che possono essere usati per creare una versione i
 - **Creare doppi test personalizzati** : questo approccio prevede la scrittura di un'implementazione in memoria personalizzata del contesto e di DbSet. In questo modo è possibile controllare in che modo le classi si comportano, ma possono coinvolgere la scrittura e la creazione di una quantità ragionevole di codice.  
 - **Usare un Framework fittizio per creare doppi di test** : usando un Framework fittizio, ad esempio MOQ, è possibile avere le implementazioni in memoria del contesto e i set creati dinamicamente in fase di esecuzione.  
 
-In questo articolo viene affrontato l'uso di un Framework fittizio. Per creare doppi test personalizzati, vedere [test con i doppi test personalizzati](writing-test-doubles.md).  
+In questo articolo viene affrontato l'uso di un Framework fittizio. Per creare doppi test personalizzati, vedere [test con i doppi test personalizzati](xref:ef6/fundamentals/testing/writing-test-doubles).  
 
 Per illustrare l'uso di EF con un Framework fittizio, verrà usato MOQ. Il modo più semplice per ottenere MOQ consiste nell'installare il [pacchetto MOQ da NuGet](https://nuget.org/packages/Moq/).  
 
@@ -84,7 +86,7 @@ namespace TestingDemo
 
 Si noti che le proprietà DbSet nel contesto sono contrassegnate come virtuali. Questo consentirà al Framework fittizio di derivare dal contesto ed eseguire l'override di queste proprietà con un'implementazione fittizia.  
 
-Se si usa Code First, è possibile modificare direttamente le classi. Se si usa la finestra di progettazione EF, sarà necessario modificare il modello T4 che genera il contesto. Aprire il \<model_name\>. File Context.tt annidato sotto il file edmx, trovare il frammento di codice seguente e aggiungere la parola chiave virtual come illustrato.  
+Se si usa Code First, è possibile modificare direttamente le classi. Se si usa la finestra di progettazione EF, sarà necessario modificare il modello T4 che genera il contesto. Aprire il \<model_name\> . File Context.tt annidato sotto il file edmx, trovare il frammento di codice seguente e aggiungere la parola chiave virtual come illustrato.  
 
 ``` csharp
 public string DbSet(EntitySet entitySet)
@@ -150,7 +152,7 @@ namespace TestingDemo
 
 ## <a name="testing-non-query-scenarios"></a>Test di scenari non di query  
 
-Questo è tutto ciò che è necessario fare per iniziare a testare i metodi non query. Il test seguente usa MOQ per creare un contesto. Viene quindi creata una\> del Blog di DbSet\<e i relativi collegamenti verranno restituiti dalla proprietà Blogs del contesto. Successivamente, il contesto viene usato per creare un nuovo BlogService che viene quindi usato per creare un nuovo Blog, usando il metodo AddBlog. Infine, il test verifica che il servizio abbia aggiunto un nuovo blog e abbia chiamato SaveChanges nel contesto.  
+Questo è tutto ciò che è necessario fare per iniziare a testare i metodi non query. Il test seguente usa MOQ per creare un contesto. Crea quindi un DbSet \<Blog\> e lo collega per essere restituito dalla proprietà Blogs del contesto. Successivamente, il contesto viene usato per creare un nuovo BlogService che viene quindi usato per creare un nuovo Blog, usando il metodo AddBlog. Infine, il test verifica che il servizio abbia aggiunto un nuovo blog e abbia chiamato SaveChanges nel contesto.  
 
 ``` csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -182,7 +184,7 @@ namespace TestingDemo
 
 ## <a name="testing-query-scenarios"></a>Test di scenari di query  
 
-Per poter eseguire query sul doppio del test di DbSet, è necessario configurare un'implementazione di IQueryable. Il primo passaggio consiste nel creare alcuni dati in memoria: si sta usando un elenco\<\>Blog. Successivamente, viene creato un contesto e un DBSet\<Blog\> quindi collegare l'implementazione di IQueryable per DbSet, che delegano solo al provider LINQ to Objects che funziona con List\<T\>.  
+Per poter eseguire query sul doppio del test di DbSet, è necessario configurare un'implementazione di IQueryable. Il primo passaggio consiste nel creare alcuni dati in memoria, ovvero l'uso di un elenco \<Blog\> . Successivamente, creiamo un contesto e DBSet \<Blog\> quindi l'implementazione di IQueryable per DBSet, che delegano solo al provider LINQ to Objects che funziona con List \<T\> .  
 
 È quindi possibile creare un BlogService in base ai doppi test e verificare che i dati restituiti da GetAllBlogs siano ordinati in base al nome.  
 
@@ -235,7 +237,7 @@ In Entity Framework 6 è stato introdotto un set di metodi di estensione che è 
 
 Poiché Entity Framework query utilizzano LINQ, i metodi di estensione sono definiti in IQueryable e IEnumerable. Tuttavia, poiché sono progettati solo per essere utilizzati con Entity Framework è possibile che venga visualizzato l'errore seguente se si tenta di utilizzarli in una query LINQ che non è una query Entity Framework:
 
-> L'oggetto IQueryable di origine non implementa IDbAsyncEnumerable{0}. Solo le origini che implementano IDbAsyncEnumerable possono essere usate per Entity Framework operazioni asincrone. Per ulteriori informazioni, vedere [http://go.microsoft.com/fwlink/?LinkId=287068](https://go.microsoft.com/fwlink/?LinkId=287068).  
+> L'oggetto IQueryable di origine non implementa IDbAsyncEnumerable {0} . Solo le origini che implementano IDbAsyncEnumerable possono essere usate per Entity Framework operazioni asincrone. Per ulteriori informazioni [http://go.microsoft.com/fwlink/?LinkId=287068](https://go.microsoft.com/fwlink/?LinkId=287068) , vedere.  
 
 Mentre i metodi asincroni sono supportati solo quando si esegue su una query EF, è consigliabile usarli nel unit test quando vengono eseguiti su un test in memoria Double di un DbSet.  
 

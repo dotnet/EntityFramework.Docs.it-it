@@ -1,16 +1,17 @@
 ---
 title: Reverse Engineering-EF Core
+description: Reverse Engineering di un modello da un database esistente usando Entity Framework Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/13/2018
 ms.assetid: 6263EF7D-4989-42E6-BDEE-45DA770342FB
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: 423e0502a53f2d99dba6938198fffba9cf0f9ade
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: e88be834aa1f2f3be41657f07bc7ace3e34c58aa
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526472"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619219"
 ---
 # <a name="reverse-engineering"></a> Reverse Engineering
 
@@ -145,7 +146,7 @@ Scaffold-DbContext ... -Namespace Your.Namespace -ContextNamespace Your.DbContex
 
 ***
 
-## <a name="how-it-works"></a>Come funziona
+## <a name="how-it-works"></a>Funzionamento
 
 Il reverse engineering inizia con la lettura dello schema del database. Legge le informazioni su tabelle, colonne, vincoli e indici.
 
@@ -155,9 +156,9 @@ Infine, il modello viene utilizzato per generare il codice. Le classi del tipo d
 
 ## <a name="limitations"></a>Limitazioni
 
-* Non tutti gli elementi di un modello possono essere rappresentati utilizzando uno schema di database. Ad esempio, le informazioni sulle [**gerarchie di ereditarietà**](../modeling/inheritance.md), i [**tipi di proprietà**](../modeling/owned-entities.md)e la suddivisione delle [**tabelle**](../modeling/table-splitting.md) non sono presenti nello schema del database. Per questo motivo, questi costrutti non verranno mai decodificati.
+* Non tutti gli elementi di un modello possono essere rappresentati utilizzando uno schema di database. Ad esempio, le informazioni sulle [**gerarchie di ereditarietà**](xref:core/modeling/inheritance), i [**tipi di proprietà**](xref:core/modeling/owned-entities)e la suddivisione delle [**tabelle**](xref:core/modeling/table-splitting) non sono presenti nello schema del database. Per questo motivo, questi costrutti non verranno mai decodificati.
 * Inoltre, **alcuni tipi di colonna** potrebbero non essere supportati dal provider EF core. Queste colonne non verranno incluse nel modello.
-* È possibile definire i [**token di concorrenza**](../modeling/concurrency.md)in un modello di EF core per impedire a due utenti di aggiornare la stessa entità nello stesso momento. Alcuni database hanno un tipo speciale per rappresentare questo tipo di colonna (ad esempio, rowversion in SQL Server), nel qual caso è possibile decompilare queste informazioni; Tuttavia, altri token di concorrenza non verranno decodificati.
+* È possibile definire i [**token di concorrenza**](xref:core/modeling/concurrency)in un modello di EF core per impedire a due utenti di aggiornare la stessa entità nello stesso momento. Alcuni database hanno un tipo speciale per rappresentare questo tipo di colonna (ad esempio, rowversion in SQL Server), nel qual caso è possibile decompilare queste informazioni; Tuttavia, altri token di concorrenza non verranno decodificati.
 * [La funzionalità del tipo di riferimento Nullable di C# 8](/dotnet/csharp/tutorials/nullable-reference-types) non è attualmente supportata in reverse engineering: EF core genera sempre il codice c# che presuppone che la funzionalità sia disabilitata. Ad esempio, le colonne di testo Nullable verranno sottoposto a impalcatura come proprietà con tipo `string` , non `string?` con l'API Fluent o le annotazioni dei dati utilizzate per configurare se una proprietà è obbligatoria o meno. È possibile modificare il codice con impalcature e sostituirle con annotazioni di supporto per i valori null C#. Il supporto dell'impalcatura per i tipi di riferimento nullable viene rilevato da Issue [#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520).
 
 ## <a name="customizing-the-model"></a>Personalizzazione del modello

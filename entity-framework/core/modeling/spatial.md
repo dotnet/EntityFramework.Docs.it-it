@@ -1,16 +1,17 @@
 ---
 title: Dati spaziali-EF Core
+description: Utilizzo di dati spaziali in un modello di Entity Framework Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/01/2018
 ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
-ms.openlocfilehash: 85124b7e252797ccd952d0d332e7309eff97ba56
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: 42386fb132f135d725a2068d91dc49c7f613e277
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526667"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616687"
 ---
 # <a name="spatial-data"></a>Dati spaziali
 
@@ -32,7 +33,7 @@ Npgsql.EntityFrameworkCore.PostgreSQL   | [Npgsql. EntityFrameworkCore. PostgreS
 
 ## <a name="reverse-engineering"></a>Reverse Engineering
 
-I pacchetti NuGet spaziali abilitano anche [Reverse Engineering](../managing-schemas/scaffolding.md) modelli con proprietà spaziali, ma è necessario installare il pacchetto ***prima*** di eseguire `Scaffold-DbContext` o `dotnet ef dbcontext scaffold` . In caso contrario, si riceveranno avvisi relativi alla mancata individuazione dei mapping dei tipi per le colonne e le colonne verranno ignorate.
+I pacchetti NuGet spaziali abilitano anche [Reverse Engineering](xref:core/managing-schemas/scaffolding) modelli con proprietà spaziali, ma è necessario installare il pacchetto ***prima*** di eseguire `Scaffold-DbContext` o `dotnet ef dbcontext scaffold` . In caso contrario, si riceveranno avvisi relativi alla mancata individuazione dei mapping dei tipi per le colonne e le colonne verranno ignorate.
 
 ## <a name="nettopologysuite-nts"></a>NetTopologySuite (NTS)
 
@@ -51,7 +52,7 @@ Esistono diversi tipi di dati spaziali. Il tipo da utilizzare dipende dai tipi d
 * Geometria
   * Point
   * LineString
-  * Poligono
+  * Polygon
   * GeometryCollection
     * MultiPoint
     * MultiLineString

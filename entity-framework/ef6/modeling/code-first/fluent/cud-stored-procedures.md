@@ -1,14 +1,16 @@
 ---
 title: Code First stored procedure INSERT, Update e Delete-EF6
+description: Code First stored procedure INSERT, Update e DELETE in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9a7ae7f9-4072-4843-877d-506dd7eef576
-ms.openlocfilehash: bfc56671814aec1965ac054ff901297e5cdbbecb
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/fluent/cud-stored-procedures
+ms.openlocfilehash: 4db54d7199baa408017159e25ce79a9d70707c59
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419087"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618122"
 ---
 # <a name="code-first-insert-update-and-delete-stored-procedures"></a>Stored procedure di inserimento, aggiornamento ed eliminazione di Code First
 > [!NOTE]
@@ -28,7 +30,7 @@ modelBuilder
 
 In questo modo Code First utilizzerà alcune convenzioni per compilare la forma prevista delle stored procedure nel database.  
 
-- Tre stored procedure denominate **\<type_name\>_Insert**, **\<** type_name\>_update **e\<type_name\>_Delete (ad** esempio, Blog_Insert, Blog_Update e Blog_Delete).  
+- Tre stored procedure denominate ** \<type_name\> _Insert**, ** \<type_name\> _update** e ** \<type_name\> _Delete** (ad esempio, Blog_Insert, Blog_Update e Blog_Delete).  
 - I nomi dei parametri corrispondono ai nomi di proprietà.  
   > [!NOTE]
   > Se si usa HasColumnName () o l'attributo Column per rinominare la colonna per una determinata proprietà, questo nome viene usato per i parametri anziché il nome della proprietà.  
@@ -162,7 +164,7 @@ END
 
 ## <a name="relationships-without-a-foreign-key-in-the-class-independent-associations"></a>Relazioni senza una chiave esterna nella classe (associazioni indipendenti)  
 
-Quando una proprietà di chiave esterna è inclusa nella definizione della classe, il parametro corrispondente può essere rinominato in modo analogo a qualsiasi altra proprietà. Quando esiste una relazione senza una proprietà di chiave esterna nella classe, il nome del parametro predefinito è **\<navigation_property_name\>_\<primary_key_name\>** .  
+Quando una proprietà di chiave esterna è inclusa nella definizione della classe, il parametro corrispondente può essere rinominato in modo analogo a qualsiasi altra proprietà. Quando esiste una relazione senza una proprietà di chiave esterna nella classe, il nome del parametro predefinito è ** \<navigation_property_name\> _ \<primary_key_name\> **.  
 
 Le definizioni di classe seguenti, ad esempio, comportano un Blog_BlogId parametro previsto nelle stored procedure per inserire e aggiornare i post.  
 
@@ -214,7 +216,7 @@ modelBuilder
 
 - Se l'entità contiene token di concorrenza, il stored procedure può facoltativamente avere un parametro di output che restituisce il numero di righe aggiornate o eliminate (righe interessate). Questo parametro deve essere configurato con il metodo RowsAffectedParameter.  
 Per impostazione predefinita, EF usa il valore restituito da ExecuteNonQuery per determinare il numero di righe interessate. La specifica di un parametro di output interessato da righe è utile se si esegue qualsiasi logica nel SPROC che comporterebbe il valore restituito di ExecuteNonQuery come errato (dal punto di vista di EF) al termine dell'esecuzione.  
-- Per ogni token di concorrenza sarà presente un parametro denominato **\<property_name\>_Original** (ad esempio, Timestamp_Original). Viene passato il valore originale di questa proprietà, ovvero il valore quando viene eseguita una query dal database.  
+- Per ogni token di concorrenza sarà presente un parametro denominato ** \<property_name\> _Original** , ad esempio Timestamp_Original. Viene passato il valore originale di questa proprietà, ovvero il valore quando viene eseguita una query dal database.  
     - I token di concorrenza calcolati dal database, ad esempio i timestamp, avranno solo un parametro di valore originale.  
     - Anche le proprietà non calcolate impostate come token di concorrenza avranno un parametro per il nuovo valore nella procedura di aggiornamento. Vengono utilizzate le convenzioni di denominazione già discusse per i nuovi valori. Un esempio di un token di questo tipo consiste nell'usare l'URL di un Blog come token di concorrenza, il nuovo valore è necessario perché può essere aggiornato a un nuovo valore dal codice (a differenza di un token timestamp che viene aggiornato solo dal database).  
 
@@ -330,8 +332,8 @@ modelBuilder
 
 Se non viene fornita nessun'altra configurazione, per impostazione predefinita viene usata la forma stored procedure seguente.  
 
-- Due stored procedure denominate **\<type_one\>\<** type_two\> **_Insert e\<type_one\>\<** type_two\>_Delete, ad esempio PostTag_Insert e PostTag_Delete  
-- I parametri saranno i valori chiave per ogni tipo. Il nome di ogni parametro **\<type_name\>_\<property_name\>** (ad esempio, Post_PostId e Tag_TagId).
+- Due stored procedure denominate ** \<type_one\> \<type_two\> _Insert** e ** \<type_one\> \<type_two\> _Delete** , ad esempio PostTag_Insert e PostTag_Delete.  
+- I parametri saranno i valori chiave per ogni tipo. Nome di ogni parametro ** \<type_name\> \<property_name\> ** , ad esempio Post_PostId e Tag_TagId.
 
 Di seguito sono riportate le stored procedure di esempio INSERT e Update.  
 

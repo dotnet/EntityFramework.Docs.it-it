@@ -1,15 +1,16 @@
 ---
 title: Introduzione con EF Core e Novell-EF Core
+description: Esercitazione introduttiva per l'uso di Novell per creare app per dispositivi mobili con Entity Framework Core
 author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: 14fe61e0ddd648f824bfe3c1c91a58af91b1c2d4
-ms.sourcegitcommit: d85263b5d5d665dbaf94de8832e2917bce048b34
+ms.openlocfilehash: b4a7e2260337d74329d309e9db32fe97a2131d73
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86453039"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619286"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>Introduzione con EF Core e Novell
 
@@ -136,7 +137,7 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-### <a name="create"></a>Create
+### <a name="create"></a>Crea
 
 * Inserire un nuovo record.
   * La `Save_Clicked` funzione di `AddBlogPage.xaml.cs` inserisce un nuovo `Blog` oggetto nel database SQLite.
@@ -177,7 +178,7 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-### <a name="delete"></a>Delete
+### <a name="delete"></a>Elimina
 
 * Eliminare tutti i record con Cascade ai record figlio.
   * La `DeleteAll_Clicked` funzione di `BlogsPage.xaml.cs` Elimina tutti i `Blog` record nel database SQLite e sovrappone le eliminazioni a tutti i `Blog` `Post` record figlio.
@@ -197,6 +198,6 @@ In questa Guida introduttiva si è appreso come usare un'applicazione Novell. Fo
 
 Altri argomenti Entity Framework Core di interesse per gli sviluppatori Novell:
 
-* [Configurazione di un`DbContext`](xref:core/miscellaneous/configuring-dbcontext)
+* [Configurazione di un `DbContext`](xref:core/miscellaneous/configuring-dbcontext)
 * Vedere altre informazioni sulle [espressioni di query LINQ](/dotnet/csharp/programming-guide/concepts/linq/basic-linq-query-operations)
 * [Configurare il modello](xref:core/modeling/index) per specificare elementi come la [lunghezza obbligatoria](xref:core/modeling/entity-properties#required-and-optional-properties) e [massima](xref:core/modeling/entity-properties#maximum-length)

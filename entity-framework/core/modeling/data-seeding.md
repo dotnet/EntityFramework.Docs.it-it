@@ -1,16 +1,17 @@
 ---
 title: Seeding dei dati-EF Core
+description: Uso del seeding dei dati per popolare un database con un set di dati iniziale usando Entity Framework Core
 author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/02/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/data-seeding
-ms.openlocfilehash: 5c056c600f696ad1443ddb7b8c95c4b0ead06d21
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: cdf189a4d2ec00f2bb094045541a98d1a66ffefc
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417226"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619385"
 ---
 # <a name="data-seeding"></a>Seeding dei dati
 
@@ -32,7 +33,7 @@ Diversamente da EF6, in EF Core, il seeding dei dati può essere associato a un 
 > [!NOTE]
 > Per determinare l'operazione da eseguire per ottenere i dati di inizializzazione nello stato desiderato, le migrazioni considerano solo le modifiche al modello. Pertanto, le eventuali modifiche apportate ai dati eseguiti al di fuori delle migrazioni potrebbero andare perse o causare un errore.
 
-Si configurerà ad esempio i dati di inizializzazione per un `Blog` in `OnModelCreating`:
+Ad esempio, vengono configurati i dati di inizializzazione per un `Blog` in `OnModelCreating` :
 
 [!code-csharp[BlogSeed](../../../samples/core/Modeling/DataSeeding/DataSeedingContext.cs?name=BlogSeed)]
 
@@ -55,7 +56,7 @@ Una volta aggiunti i dati al modello, è necessario utilizzare le [migrazioni](x
 > [!TIP]
 > Se è necessario applicare migrazioni come parte di una distribuzione automatica, è possibile [creare uno script SQL](xref:core/managing-schemas/migrations/index#generate-sql-scripts) che può essere visualizzato in anteprima prima dell'esecuzione.
 
-In alternativa, è possibile utilizzare `context.Database.EnsureCreated()` per creare un nuovo database contenente i dati di inizializzazione, ad esempio per un database di prova o quando si utilizza il provider in memoria o qualsiasi database non relazionale. Si noti che, se il database esiste già, `EnsureCreated()` non aggiornerà lo schema né i dati di inizializzazione nel database. Per i database relazionali non è necessario chiamare `EnsureCreated()` se si prevede di utilizzare le migrazioni.
+In alternativa, è possibile utilizzare `context.Database.EnsureCreated()` per creare un nuovo database contenente i dati di inizializzazione, ad esempio per un database di prova o quando si utilizza il provider in memoria o qualsiasi database non relazionale. Si noti che se il database esiste già, `EnsureCreated()` non aggiornerà lo schema né i dati di inizializzazione nel database. Per i database relazionali non è necessario chiamare `EnsureCreated()` se si prevede di utilizzare le migrazioni.
 
 ### <a name="limitations-of-model-seed-data"></a>Limitazioni dei dati di inizializzazione del modello
 
@@ -76,13 +77,13 @@ Se lo scenario include uno degli elementi seguenti, è consigliabile usare la lo
 
 ## <a name="manual-migration-customization"></a>Personalizzazione manuale della migrazione
 
-Quando viene aggiunta una migrazione, le modifiche apportate ai dati specificati con `HasData` vengono trasformate in chiamate a `InsertData()`, `UpdateData()`e `DeleteData()`. Un modo per aggirare alcune delle limitazioni di `HasData` consiste nell'aggiungere manualmente queste chiamate o [operazioni personalizzate](xref:core/managing-schemas/migrations/operations) alla migrazione.
+Quando viene aggiunta una migrazione, le modifiche apportate ai dati specificati con `HasData` vengono trasformate in chiamate a `InsertData()` , `UpdateData()` e `DeleteData()` . Un modo per aggirare alcune delle limitazioni di `HasData` consiste nell'aggiungere manualmente queste chiamate o [operazioni personalizzate](xref:core/managing-schemas/migrations/operations) alla migrazione.
 
 [!code-csharp[CustomInsert](../../../samples/core/Modeling/DataSeeding/Migrations/20181102235626_Initial.cs?name=CustomInsert)]
 
 ## <a name="custom-initialization-logic"></a>Logica di inizializzazione personalizzata
 
-Un modo semplice e potente per eseguire il seeding dei dati consiste nell'usare [`DbContext.SaveChanges()`](xref:core/saving/index) prima che venga avviata l'esecuzione della logica dell'applicazione principale.
+Un modo semplice e potente per eseguire il seeding dei dati consiste nell'usare prima che venga [`DbContext.SaveChanges()`](xref:core/saving/index) avviata l'esecuzione della logica dell'applicazione principale.
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataSeeding/Program.cs?name=CustomSeeding)]
 

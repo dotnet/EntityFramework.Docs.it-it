@@ -3,14 +3,13 @@ title: Code First a un database esistente-EF6
 description: Code First a un database esistente in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: a7e60b74-973d-4480-868f-500a3899932e
 uid: ef6/modeling/code-first/workflows/existing-database
-ms.openlocfilehash: 7cb58495ea287c59f46e804882cdc089d0f09e7b
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d26c5f2ced6b327615cc78bcb2bb6d188b012c14
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616930"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073990"
 ---
 # <a name="code-first-to-an-existing-database"></a>Code First a un database esistente
 Questo video e la procedura dettagliata forniscono un'introduzione allo sviluppo di Code First destinati a un database esistente. Code First consente di definire il modello utilizzando \# le classi C o VB.NET. Facoltativamente, è possibile eseguire una configurazione aggiuntiva usando gli attributi delle classi e delle proprietà oppure usando un'API Fluent.
@@ -30,7 +29,7 @@ In genere, quando si fa riferimento a un database esistente, questo verrà già 
 
 Procediamo con la generazione del database.
 
--   Aprire Visual Studio.
+-   Aprire Visual Studio
 -   **Visualizza- &gt; Esplora server**
 -   Fare clic con il pulsante destro del mouse su **connessioni dati- &gt; Aggiungi connessione...**
 -   Se non si è connessi a un database da **Esplora server** prima di selezionare **Microsoft SQL Server** come origine dati
@@ -76,7 +75,7 @@ VALUES ('.NET Framework Blog', 'http://blogs.msdn.com/dotnet/')
 
 Per semplificare le operazioni, verrà creata un'applicazione console di base che usa Code First per eseguire l'accesso ai dati:
 
--   Aprire Visual Studio.
+-   Aprire Visual Studio
 -   **File- &gt; nuovo- &gt; progetto...**
 -   Selezionare **Windows** nel menu a sinistra e nell' **applicazione console**
 -   Immettere **CodeFirstExistingDatabaseSample** come nome

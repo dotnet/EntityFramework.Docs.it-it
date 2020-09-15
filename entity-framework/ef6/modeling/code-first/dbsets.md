@@ -3,21 +3,20 @@ title: Definizione di DbSet-EF6
 description: Definizione di DbSet in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 4528a509-ace7-4dfb-8065-1b833f5e03a0
 uid: ef6/modeling/code-first/dbsets
-ms.openlocfilehash: 55742c507e0d6b898a0cac18f34af84e736d771d
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 49ffe3ddb8cd4f7c414d7d45d108405b88a0115e
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617050"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073951"
 ---
 # <a name="defining-dbsets"></a>Definizione di DbSet
 Quando si sviluppa con il flusso di lavoro Code First si definisce un DbContext derivato che rappresenta la sessione con il database ed espone un DbSet per ogni tipo nel modello. In questo argomento vengono illustrati i vari modi in cui è possibile definire le proprietà DbSet.  
 
 ## <a name="dbcontext-with-dbset-properties"></a>DbContext con proprietà DbSet  
 
-Il caso comune illustrato in Code First esempi è avere un DbContext con proprietà DbSet automatiche pubbliche per i tipi di entità del modello. Ad esempio:  
+Il caso comune illustrato in Code First esempi è avere un DbContext con proprietà DbSet automatiche pubbliche per i tipi di entità del modello. Esempio:  
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -31,7 +30,7 @@ Se usato in modalità Code First, in questo modo vengono configurati i Blog e i 
 
 ## <a name="dbcontext-with-idbset-properties"></a>DbContext con proprietà IDbSet  
 
-In alcune situazioni, ad esempio durante la creazione di simulazioni o fake, è più utile dichiarare le proprietà del set usando un'interfaccia. In questi casi è possibile usare l'interfaccia IDbSet al posto di DbSet. Ad esempio:  
+In alcune situazioni, ad esempio durante la creazione di simulazioni o fake, è più utile dichiarare le proprietà del set usando un'interfaccia. In questi casi è possibile usare l'interfaccia IDbSet al posto di DbSet. Esempio:  
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -45,7 +44,7 @@ Questo contesto funziona esattamente allo stesso modo del contesto che usa la cl
 
 ## <a name="dbcontext-with-read-only-set-properties"></a>DbContext con proprietà set di sola lettura  
 
-Se non si vuole esporre Setter pubblici per le proprietà DbSet o IDbSet, è possibile creare le proprietà di sola lettura e creare le istanze del set manualmente. Ad esempio:  
+Se non si vuole esporre Setter pubblici per le proprietà DbSet o IDbSet, è possibile creare le proprietà di sola lettura e creare le istanze del set manualmente. Esempio:  
 
 ``` csharp
 public class BloggingContext : DbContext

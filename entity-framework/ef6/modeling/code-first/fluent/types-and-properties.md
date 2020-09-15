@@ -3,14 +3,13 @@ title: API Fluent-configurazione e mapping di proprietà e tipi-EF6
 description: API Fluent-configurazione e mapping di proprietà e tipi in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 648ed274-c501-4630-88e0-d728ab5c4057
 uid: ef6/modeling/code-first/fluent/types-and-properties
-ms.openlocfilehash: d49da416b2df5828fce5618cc196e22dfbc2bd34
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: ddd56ff280b72adbfd2247a4f1a85e37bf2f4879
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618052"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072590"
 ---
 # <a name="fluent-api---configuring-and-mapping-properties-and-types"></a>API Fluent-configurazione e mapping di proprietà e tipi
 Quando si lavora con Entity Framework Code First il comportamento predefinito consiste nel eseguire il mapping delle classi POCO alle tabelle usando un set di convenzioni di cui è stato eseguito il bake in EF. In alcuni casi, tuttavia, non è possibile o non si desidera seguire tali convenzioni ed è necessario eseguire il mapping delle entità a un valore diverso da quello che le convenzioni dettano.  

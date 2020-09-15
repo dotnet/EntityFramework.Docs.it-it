@@ -3,14 +3,13 @@ title: Database First-EF6
 description: Database First in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: cc6ffdb3-388d-4e79-a201-01ec2577c949
 uid: ef6/modeling/designer/workflows/database-first
-ms.openlocfilehash: 095fc6d6882df306816e65995ff314f1a0e7178a
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 412d83b37ed5f3e2b863dca0913746e61ecdef76
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620444"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073175"
 ---
 # <a name="database-first"></a>Database First
 Questo video e la procedura dettagliata forniscono un'introduzione allo sviluppo Database First con Entity Framework. Database First consente di decompilare un modello da un database esistente. Il modello viene archiviato in un file EDMX (estensione edmx) e può essere visualizzato e modificato nella Entity Framework Designer. Le classi con cui si interagisce nell'applicazione vengono generate automaticamente dal file EDMX.
@@ -43,7 +42,7 @@ Il server di database installato con Visual Studio è diverso a seconda della ve
 
 Procediamo con la generazione del database.
 
--   Aprire Visual Studio.
+-   Aprire Visual Studio
 -   **Visualizza- &gt; Esplora server**
 -   Fare clic con il pulsante destro del mouse su **connessioni dati- &gt; Aggiungi connessione...**
 -   Se non si è connessi a un database da Esplora server prima di selezionare Microsoft SQL Server come origine dati
@@ -85,7 +84,7 @@ CREATE TABLE [dbo].[Posts] (
 
 Per semplificare le operazioni, verrà compilata un'applicazione console di base che usa il Database First per eseguire l'accesso ai dati:
 
--   Aprire Visual Studio.
+-   Aprire Visual Studio
 -   **File- &gt; nuovo- &gt; progetto...**
 -   Selezionare **Windows** nel menu a sinistra e nell' **applicazione console**
 -   Immettere **DatabaseFirstSample** come nome

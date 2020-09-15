@@ -3,14 +3,13 @@ title: Utilizzo degli Stati dell'entità-EF6
 description: Utilizzo degli Stati dell'entità in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: acb27f46-3f3a-4179-874a-d6bea5d7120c
 uid: ef6/saving/change-tracking/entity-state
-ms.openlocfilehash: 981bdbca982403338f3f65a41f601641d59d74d8
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 88c1b67b3eda02e79f7d10d5e46fdd3566361634
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619977"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073769"
 ---
 # <a name="working-with-entity-states"></a>Utilizzo degli Stati dell'entità
 In questo argomento viene illustrato come aggiungere e alleghire entità a un contesto e come Entity Framework li elabora durante SaveChanges.
@@ -40,7 +39,7 @@ Negli esempi seguenti vengono illustrati i modi in cui è possibile modificare l
 
 È possibile aggiungere una nuova entità al contesto chiamando il metodo Add su DbSet.
 In questo modo l'entità viene inserita nello stato aggiunto, ovvero viene inserita nel database alla successiva chiamata a SaveChanges.
-Ad esempio:  
+Esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -51,7 +50,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Un altro modo per aggiungere una nuova entità al contesto consiste nel modificarne lo stato in added. Ad esempio:  
+Un altro modo per aggiungere una nuova entità al contesto consiste nel modificarne lo stato in added. Esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -63,7 +62,7 @@ using (var context = new BloggingContext())
 ```  
 
 Infine, è possibile aggiungere una nuova entità al contesto mediante l'associazione a un'altra entità già rilevata.
-È possibile aggiungere la nuova entità alla proprietà di navigazione della raccolta di un'altra entità o impostando una proprietà di navigazione di riferimento di un'altra entità in modo che punti alla nuova entità. Ad esempio:  
+È possibile aggiungere la nuova entità alla proprietà di navigazione della raccolta di un'altra entità o impostando una proprietà di navigazione di riferimento di un'altra entità in modo che punti alla nuova entità. Esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -83,7 +82,7 @@ Si noti che per tutti questi esempi, se l'entità aggiunta presenta riferimenti 
 
 ## <a name="attaching-an-existing-entity-to-the-context"></a>Associazione di un'entità esistente al contesto  
 
-Se si dispone di un'entità che è già presente nel database ma che attualmente non è stata rilevata dal contesto, è possibile indicare al contesto di tenere traccia dell'entità utilizzando il metodo di connessione su DbSet. L'entità si troverà nello stato non modificato nel contesto. Ad esempio:  
+Se si dispone di un'entità che è già presente nel database ma che attualmente non è stata rilevata dal contesto, è possibile indicare al contesto di tenere traccia dell'entità utilizzando il metodo di connessione su DbSet. L'entità si troverà nello stato non modificato nel contesto. Esempio:  
 
 ``` csharp
 var existingBlog = new Blog { BlogId = 1, Name = "ADO.NET Blog" };
@@ -100,7 +99,7 @@ using (var context = new BloggingContext())
 
 Si noti che non verrà apportata alcuna modifica al database se SaveChanges viene chiamato senza eseguire altre modifiche dell'entità associata. Questo è dovuto al fatto che l'entità si trova nello stato non modificato.  
 
-Un altro modo per alleghire un'entità esistente al contesto consiste nel modificarne lo stato su Unchanged. Ad esempio:  
+Un altro modo per alleghire un'entità esistente al contesto consiste nel modificarne lo stato su Unchanged. Esempio:  
 
 ``` csharp
 var existingBlog = new Blog { BlogId = 1, Name = "ADO.NET Blog" };
@@ -120,7 +119,7 @@ Si noti che per entrambi questi esempi, se l'entità da collegare presenta rifer
 ## <a name="attaching-an-existing-but-modified-entity-to-the-context"></a>Associazione di un'entità esistente ma modificata al contesto  
 
 Se si dispone di un'entità che è già presente nel database, ma in cui è possibile che siano state apportate modifiche, è possibile indicare al contesto di alleghire l'entità e impostarne lo stato su Modified.
-Ad esempio:  
+Esempio:  
 
 ``` csharp
 var existingBlog = new Blog { BlogId = 1, Name = "ADO.NET Blog" };
@@ -142,7 +141,7 @@ Se sono presenti più entità che devono essere contrassegnate come modificate, 
 
 ## <a name="changing-the-state-of-a-tracked-entity"></a>Modifica dello stato di un'entità rilevata  
 
-È possibile modificare lo stato di un'entità già rilevata impostando la proprietà state sulla relativa voce. Ad esempio:  
+È possibile modificare lo stato di un'entità già rilevata impostando la proprietà state sulla relativa voce. Esempio:  
 
 ``` csharp
 var existingBlog = new Blog { BlogId = 1, Name = "ADO.NET Blog" };
@@ -164,7 +163,7 @@ Si noti che per modificare lo stato dell'entità è inoltre possibile utilizzare
 
 Un modello comune per alcune applicazioni consiste nell'aggiungere un'entità come nuova (con conseguente inserimento di un database) o nel collegare un'entità come esistente e contrassegnarla come modificata (causando un aggiornamento del database), a seconda del valore della chiave primaria.
 Ad esempio, quando si usano chiavi primarie Integer generate dal database, è comune considerare un'entità con una chiave zero come nuova e un'entità con una chiave diversa da zero come esistente.
-Questo modello può essere effettuato impostando lo stato dell'entità in base a un controllo del valore della chiave primaria. Ad esempio:  
+Questo modello può essere effettuato impostando lo stato dell'entità in base a un controllo del valore della chiave primaria. Esempio:  
 
 ``` csharp
 public void InsertOrUpdate(Blog blog)

@@ -3,14 +3,13 @@ title: Convenzioni Code First personalizzate-EF6
 description: Convenzioni di Code First personalizzate in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: dd2bdbd9-ae9e-470a-aeb8-d0ba160499b7
 uid: ef6/modeling/code-first/conventions/custom
-ms.openlocfilehash: 69e4b0111394e83195f5c0a81624c7b9e45bda52
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 19f22d311438b8c7d3ac9d270017f3ea4907efda
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617265"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90074029"
 ---
 # <a name="custom-code-first-conventions"></a>Convenzioni di Code First personalizzate
 > [!NOTE]

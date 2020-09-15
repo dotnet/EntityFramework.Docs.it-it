@@ -3,14 +3,13 @@ title: Uso delle transazioni-EF6
 description: Utilizzo delle transazioni in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 0d0f1824-d781-4cb3-8fda-b7eaefced1cd
 uid: ef6/saving/transactions
-ms.openlocfilehash: 65eebd82d4f9c583885af72d5b3cffd79fedf623
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 15cc2171338defe482767114c58afe16cc1ffe21
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619856"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073717"
 ---
 # <a name="working-with-transactions"></a>Utilizzo delle transazioni
 > [!NOTE]
@@ -113,7 +112,7 @@ using (var conn = new SqlConnection("..."))
 
 Inoltre, è necessario avviare la transazione manualmente, incluso il valore IsolationLevel se si desidera evitare l'impostazione predefinita, e consentire Entity Framework sapere che è già stata avviata una transazione nella connessione (vedere la riga 33 di seguito).  
 
-È quindi possibile eseguire le operazioni di database direttamente in SqlConnection o in DbContext. Tutte queste operazioni vengono eseguite all'interno di una transazione. Si assume la responsabilità di eseguire il commit o il rollback della transazione e di chiamare Dispose () su di essa, nonché di chiudere ed eliminare la connessione al database. Ad esempio:  
+È quindi possibile eseguire le operazioni di database direttamente in SqlConnection o in DbContext. Tutte queste operazioni vengono eseguite all'interno di una transazione. Si assume la responsabilità di eseguire il commit o il rollback della transazione e di chiamare Dispose () su di essa, nonché di chiudere ed eliminare la connessione al database. Esempio:  
 
 ``` csharp
 using System;
@@ -180,7 +179,7 @@ Si noterà un'eccezione da database. UseTransaction () se si passa una transazio
 
 Questa sezione illustra in dettaglio il modo in cui le transazioni precedenti interagiscono con:  
 
-- Resilienza delle connessioni  
+- Resilienza della connessione  
 - Metodi asincroni  
 - Transazioni TransactionScope  
 

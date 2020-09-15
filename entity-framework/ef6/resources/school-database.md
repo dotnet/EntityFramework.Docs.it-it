@@ -3,14 +3,13 @@ title: Database di esempio School-EF6
 description: Database di esempio School per Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: e83a6a06-e63b-4530-8656-614bf609b12b
 uid: ef6/resources/school-database
-ms.openlocfilehash: c1576bdeaa3247c7c5c8fd5547c8402b4e301402
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 38dfbf074200617f11d70ef1d8cead69223135b3
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620001"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073808"
 ---
 # <a name="school-sample-database"></a>Database di esempio School
 Questo argomento contiene lo schema e i dati per il database School. Il database School di esempio viene usato in vari punti dell'intera documentazione di Entity Framework.  
@@ -20,7 +19,7 @@ Questo argomento contiene lo schema e i dati per il database School. Il database
 
 Ecco i passaggi per creare il database:
 
-- Aprire Visual Studio.  
+- Aprire Visual Studio  
 - **Visualizza**  ->  **Esplora server**  
 - Fare clic con il pulsante destro del mouse su **connessioni dati**  ->  **Aggiungi connessione...**  
 - Se non si è connessi a un database da Esplora server prima di selezionare **Microsoft SQL Server** come origine dati  

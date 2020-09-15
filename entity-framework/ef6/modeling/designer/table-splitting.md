@@ -3,14 +3,13 @@ title: Suddivisione di tabelle della finestra di progettazione-EF6
 description: Suddivisione di tabelle della finestra di progettazione in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 452f17c3-9f26-4de4-9894-8bc036e23b0f
 uid: ef6/modeling/designer/table-splitting
-ms.openlocfilehash: 55642d7c3b4efc7467e8a40e68b4144728df270f
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 6fdb5050ab4d3860184f19ea056a0f2257e20a3c
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620378"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073110"
 ---
 # <a name="designer-table-splitting"></a>Suddivisione di tabelle della finestra di progettazione
 In questa procedura dettagliata viene illustrato come eseguire il mapping di più tipi di entità a una singola tabella modificando un modello con il Entity Framework Designer (EF designer).

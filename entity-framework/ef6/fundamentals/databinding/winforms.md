@@ -3,14 +3,13 @@ title: DataBinding con WinForms-EF6
 description: DataBinding con WinForms in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 80fc5062-2f1c-4dbd-ab6e-b99496784b36
 uid: ef6/fundamentals/databinding/winforms
-ms.openlocfilehash: 934ea2ae488a7df128746a0607037d85e9b23771
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: b316aea0a36edc8586a81427825ed4ee11fc9ef3
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616346"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073227"
 ---
 # <a name="databinding-with-winforms"></a>Data binding con WinForms
 Questa procedura dettagliata illustra come associare tipi POCO a controlli Windows Form (WinForms) in un modulo "Master-Detail". L'applicazione utilizza Entity Framework per popolare gli oggetti con i dati del database, rilevare le modifiche e salvare in modo permanente i dati nel database.
@@ -27,7 +26,7 @@ Se si usa Visual Studio 2010, è anche necessario installare NuGet. Per altre in
 
 ## <a name="create-the-application"></a>Creare l'applicazione
 
--   Aprire Visual Studio.
+-   Aprire Visual Studio
 -   **File- &gt; nuovo- &gt; progetto...**
 -   Selezionare **Windows** nel riquadro sinistro e **Windows FormsApplication** nel riquadro a destra.
 -   Immettere **WinFormswithEFSample** come nome

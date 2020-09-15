@@ -3,13 +3,12 @@ title: Tasti di scelta rapida Entity Framework Designer-EF6
 description: Tasti di scelta rapida Entity Framework Designer Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 3c76cdd5-17c5-4c54-a6a5-cf21b974636b
-ms.openlocfilehash: 8b93581e68e3a5d83685794f034c50cfe74eee9f
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 3552f2b9bfc499654bc1dce4a81d37cacc8b7996
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620464"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073383"
 ---
 # <a name="entity-framework-designer-keyboard-shortcuts"></a>Tasti di scelta rapida Entity Framework Designer
 Questa pagina fornisce un elenco di shorcuts di tastiera disponibili nelle varie schermate del Entity Framework Tools per Visual Studio.
@@ -97,8 +96,8 @@ Questa pagina fornisce un elenco di shorcuts di tastiera disponibili nelle varie
 | **CTRL + &lt;**                                                                         | Ascend (stato attivo)              | Uguale al comando Ascend, ma sposta lo stato attivo senza selezione.                                                                                                                                                                          |
 | **CTRL + &gt;**                                                                         | Descendi (stato attivo)             | Uguale al comando scend, ma sposta lo stato attivo senza selezione.                                                                                                                                                                         |
 | **MAIUSC + fine**                                                                         | Segui alla connessione         | Da un'entità passa a un'entità a cui è connessa questa entità.                                                                                                                                                               |
-| **CANC**                                                                                 | Elimina                      | Eliminare un oggetto o un connettore dal diagramma.                                                                                                                                                                                     |
-| **In**                                                                                 | INS                      | Aggiunge una nuova proprietà a un'entità quando si seleziona l'intestazione di raggruppamento "proprietà scalari" o una proprietà stessa.                                                                                                           |
+| **CANC**                                                                                 | Delete                      | Eliminare un oggetto o un connettore dal diagramma.                                                                                                                                                                                     |
+| **In**                                                                                 | Insert                      | Aggiunge una nuova proprietà a un'entità quando si seleziona l'intestazione di raggruppamento "proprietà scalari" o una proprietà stessa.                                                                                                           |
 | **PG su**                                                                               | Scorri diagramma su           | Scorre l'area di progettazione verso l'alto, in incrementi pari al 75% dell'altezza dell'area di progettazione attualmente visibile.                                                                                                                    |
 | **Pag giù**                                                                             | Scorri diagramma verso il basso         | Scorre l'area di progettazione verso il basso.                                                                                                                                                                                                    |
 | **MAIUSC + PG in basso**                                                                     | Scorri diagramma a destra        | Scorre l'area di progettazione a destra.                                                                                                                                                                                            |

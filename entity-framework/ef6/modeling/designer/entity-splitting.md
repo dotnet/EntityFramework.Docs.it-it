@@ -3,14 +3,13 @@ title: Suddivisione delle entità della finestra di progettazione-EF6
 description: Suddivisione delle entità della finestra di progettazione in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: aa2dd48a-1f0e-49dd-863d-d6b4f5834832
 uid: ef6/modeling/designer/entity-splitting
-ms.openlocfilehash: d3be4e54d4bcd3ca253d8970c612acddf48dbaf4
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: fa25629bae1a35b2d792e2b890e87db6c99c37ab
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620522"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073136"
 ---
 # <a name="designer-entity-splitting"></a>Suddivisione delle entità della finestra di progettazione
 Questa procedura dettagliata illustra come eseguire il mapping di un tipo di entità a due tabelle modificando un modello con il Entity Framework Designer (EF designer). È possibile eseguire il mapping di un'entità a più tabelle quando le tabelle in questione condividono una chiave comune. I concetti relativi all'esecuzione del mapping di un tipo di entità a due tabelle possono essere facilmente estesi anche all'esecuzione del mapping a più di due tabelle.
@@ -32,7 +31,7 @@ Il server di database installato con Visual Studio è diverso a seconda della ve
 
 Verrà innanzitutto creato un database con due tabelle che verranno combinate in una singola entità.
 
--   Aprire Visual Studio.
+-   Aprire Visual Studio
 -   **Visualizza- &gt; Esplora server**
 -   Fare clic con il pulsante destro del mouse su **connessioni dati- &gt; Aggiungi connessione...**
 -   Se non si è connessi a un database da Esplora server prima di selezionare **Microsoft SQL Server** come origine dati

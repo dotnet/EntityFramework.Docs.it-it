@@ -3,14 +3,13 @@ title: Caricamento di entità correlate-EF6
 description: Caricamento di entità correlate in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: c8417e18-a2ee-499c-9ce9-2a48cc5b468a
 uid: ef6/querying/related-data
-ms.openlocfilehash: 9b4e8ecda618e11e87cd595502210234b1f3e27d
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d1bf04f9d9017291ef3f5ec0809095df856329cd
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620262"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073873"
 ---
 # <a name="loading-related-entities"></a>Caricamento di entità correlate
 
@@ -126,7 +125,7 @@ Il caricamento della raccolta dei post può ancora essere eseguito usando il car
 
 ### <a name="turn-off-lazy-loading-for-all-entities"></a>Disattiva caricamento lazy per tutte le entità
 
-Il caricamento lazy può essere disattivato per tutte le entità nel contesto impostando un flag sulla proprietà di configurazione. Ad esempio:
+Il caricamento lazy può essere disattivato per tutte le entità nel contesto impostando un flag sulla proprietà di configurazione. Esempio:
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -142,7 +141,7 @@ Il caricamento di entità correlate può comunque essere eseguito usando il cari
 
 ## <a name="explicitly-loading"></a>Caricamento esplicito
 
-Anche con il caricamento lazy disabilitato, è comunque possibile caricare in modo differito le entità correlate, ma è necessario eseguire una chiamata esplicita. A tale scopo, utilizzare il metodo Load sulla voce dell'entità correlata. Ad esempio:
+Anche con il caricamento lazy disabilitato, è comunque possibile caricare in modo differito le entità correlate, ma è necessario eseguire una chiamata esplicita. A tale scopo, utilizzare il metodo Load sulla voce dell'entità correlata. Esempio:
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -171,7 +170,7 @@ using (var context = new BloggingContext())
 
 ### <a name="applying-filters-when-explicitly-loading-related-entities"></a>Applicazione di filtri quando si caricano in modo esplicito le entità correlate
 
-Il metodo di query consente di accedere alla query sottostante che Entity Framework utilizzerà per il caricamento di entità correlate. È quindi possibile usare LINQ per applicare filtri alla query prima di eseguirla con una chiamata a un metodo di estensione LINQ, ad esempio ToList, Load e così via. Il metodo di query può essere utilizzato sia con proprietà di navigazione di riferimento che di raccolta, ma è particolarmente utile per le raccolte in cui può essere utilizzato per caricare solo parte della raccolta. Ad esempio:
+Il metodo di query consente di accedere alla query sottostante che Entity Framework utilizzerà per il caricamento di entità correlate. È quindi possibile usare LINQ per applicare filtri alla query prima di eseguirla con una chiamata a un metodo di estensione LINQ, ad esempio ToList, Load e così via. Il metodo di query può essere utilizzato sia con proprietà di navigazione di riferimento che di raccolta, ma è particolarmente utile per le raccolte in cui può essere utilizzato per caricare solo parte della raccolta. Esempio:
 
 ``` csharp
 using (var context = new BloggingContext())

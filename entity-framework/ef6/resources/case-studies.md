@@ -3,13 +3,12 @@ title: Case Study per Entity Framework-EF6
 description: Case Study per Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: cd5d3ae3-717d-4095-a2ef-0e8fd72b1a2f
-ms.openlocfilehash: f6cabe34cfbdc5f15758678f458b2c0898198137
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 342929f70aa09704c934bd1d89e177f6953bfc43
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620239"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073821"
 ---
 # <a name="microsoft-case-studies-for-entity-framework"></a>Case Study Microsoft per Entity Framework
 Il case study in questa pagina evidenzia alcuni progetti di produzione reali che hanno usato Entity Framework.

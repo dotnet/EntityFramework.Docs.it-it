@@ -3,14 +3,13 @@ title: Introduzione a EF Core
 description: Esercitazione introduttiva a Entity Framework Core
 author: rick-anderson
 ms.date: 09/17/2019
-ms.assetid: 3c88427c-20c6-42ec-a736-22d3eccd5071
 uid: core/get-started/index
-ms.openlocfilehash: e33a18c8d3d72078eaaeba9c8cf0a1afca0cb66c
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 9f0bb1eb99cb7f4cb7542c444ad86480917bdd0f
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618004"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071979"
 ---
 # <a name="getting-started-with-ef-core"></a>Introduzione a EF Core
 

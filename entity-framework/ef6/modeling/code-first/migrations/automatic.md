@@ -3,14 +3,13 @@ title: Migrazioni Code First automatico-EF6
 description: Migrazioni Code First automatico in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 0eb86787-2161-4cb4-9cb8-67c5d6e95650
 uid: ef6/modeling/code-first/migrations/automatic
-ms.openlocfilehash: 541adf5aed517685b54d675730996c12ff0c824a
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: e7bd9ff7d9dcecb7fecf213306047a53fc04135c
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618087"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072564"
 ---
 # <a name="automatic-code-first-migrations"></a>Migrazioni Code First automatico
 Le migrazioni automatiche consentono di usare Migrazioni Code First senza avere un file di codice nel progetto per ogni modifica apportata. Non tutte le modifiche possono essere applicate automaticamente. ad esempio, per rinominare le colonne è necessario utilizzare una migrazione basata su codice.
@@ -99,7 +98,7 @@ Per iniziare a usare le migrazioni sono necessari un progetto e un modello Code 
     public string Url { get; set; }
 ```
 
-Se è necessario eseguire di nuovo l'applicazione, si otterrebbe un'eccezione InvalidOperationException che indica che il modello che supporta *il contesto ' BlogContext ' è stato modificato dopo la creazione del database. Si consiglia di utilizzare Migrazioni Code First per aggiornare il database (* [*http://go.microsoft.com/fwlink/?LinkId=238269*](https://go.microsoft.com/fwlink/?LinkId=238269) *).*
+Se si esegue di nuovo l'applicazione, viene generata un'eccezione InvalidOperationException con il messaggio *The model backing the 'BlogContext' context has changed since the database was created. Valutare la possibilità di usare migrazioni Code First per aggiornare il database (* [ *http://go.microsoft.com/fwlink/?LinkId=238269* ](https://go.microsoft.com/fwlink/?LinkId=238269) *).*
 
 Come suggerisce l'eccezione, è ora possibile iniziare a usare Migrazioni Code First. Poiché si vogliono usare le migrazioni automatiche, si specifica l'opzione **-EnableAutomaticMigrations** .
 

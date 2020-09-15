@@ -3,14 +3,13 @@ title: Associazione dati con WPF-EF6
 description: Associazione dati con WPF in Entity Framework 6
 author: divega
 ms.date: 05/19/2020
-ms.assetid: e90d48e6-bea7785-47ef-b756-7b89cce4daf0
 uid: ef6/fundamentals/databinding/wpf
-ms.openlocfilehash: d6f9695215c57a288dbd1c7b8f653416dc270760
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 85aea308d89241f1da9633ef60f4bc8c3997561d
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616277"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072980"
 ---
 # <a name="databinding-with-wpf"></a>Data binding con WPF
 
@@ -43,7 +42,7 @@ Se si usa Visual Studio 2010, è anche necessario installare NuGet. Per altre in
 
 ## <a name="create-the-application"></a>Creare l'applicazione
 
-- Aprire Visual Studio.
+- Aprire Visual Studio
 - **File- &gt; nuovo- &gt; progetto...**
 - Selezionare **Windows**   nel riquadro a sinistra e **WPFApplication** nel riquadro a destra.
 - Immettere **WPFwithEFSample**   come nome

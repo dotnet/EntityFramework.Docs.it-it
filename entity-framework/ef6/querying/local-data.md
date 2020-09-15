@@ -3,21 +3,20 @@ title: Dati locali-EF6
 description: Dati locali in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 2eda668b-1e5d-487d-9a8c-0e3beef03fcb
 uid: ef6/querying/local-data
-ms.openlocfilehash: f7c4c8904a2985901491e423f655d4aea79f666d
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 5763424ab295ed6ceec655368fe3565a10c911d3
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620302"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073912"
 ---
 # <a name="local-data"></a>Dati locali
 L'esecuzione di una query LINQ direttamente su un DbSet invierà sempre una query al database, ma è possibile accedere ai dati attualmente in memoria usando la proprietà DbSet. local. È anche possibile accedere alle informazioni aggiuntive EF tenendo traccia delle entità usando i metodi DbContext. entry e DbContext. ChangeTracker. entrys. Le tecniche illustrate in questo argomento si applicano in modo analogo ai modelli creati con Code First ed EF Designer.  
 
 ## <a name="using-local-to-look-at-local-data"></a>Uso locale per esaminare i dati locali  
 
-La proprietà locale di DbSet consente di accedere in modo semplice alle entità del set attualmente rilevate dal contesto e non sono state contrassegnate come eliminate. L'accesso alla proprietà locale non determina mai l'invio di una query al database. Ciò significa che viene in genere usato dopo che una query è già stata eseguita. Il metodo di estensione Load può essere utilizzato per eseguire una query in modo che il contesto rilevi i risultati. Ad esempio:  
+La proprietà locale di DbSet consente di accedere in modo semplice alle entità del set attualmente rilevate dal contesto e non sono state contrassegnate come eliminate. L'accesso alla proprietà locale non determina mai l'invio di una query al database. Ciò significa che viene in genere usato dopo che una query è già stata eseguita. Il metodo di estensione Load può essere utilizzato per eseguire una query in modo che il contesto rilevi i risultati. Esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -75,7 +74,7 @@ Vengono illustrati tre punti:
 
 ## <a name="using-local-to-add-and-remove-entities-from-the-context"></a>Uso di local per aggiungere e rimuovere entità dal contesto  
 
-La proprietà locale in DbSet restituisce un oggetto [ObservableCollection](https://msdn.microsoft.com/library/ms668604.aspx) con eventi collegati in modo che rimanga sincronizzato con il contenuto del contesto. Questo significa che le entità possono essere aggiunte o rimosse dalla raccolta locale o da DbSet. Significa anche che le query che portano nuove entità nel contesto comporteranno l'aggiornamento della raccolta locale con tali entità. Ad esempio:  
+La proprietà locale in DbSet restituisce un oggetto [ObservableCollection](https://msdn.microsoft.com/library/ms668604.aspx) con eventi collegati in modo che rimanga sincronizzato con il contenuto del contesto. Questo significa che le entità possono essere aggiunte o rimosse dalla raccolta locale o da DbSet. Significa anche che le query che portano nuove entità nel contesto comporteranno l'aggiornamento della raccolta locale con tali entità. Esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -157,7 +156,7 @@ Non si tratta di una posizione appropriata per un esempio di data binding WPF co
 
 ## <a name="wpf-binding-to-navigation-properties"></a>Associazione WPF alle proprietà di navigazione  
 
-Se si sta eseguendo data binding Master/Detail, è possibile associare la visualizzazione dettagli a una proprietà di navigazione di una delle entità. Un modo semplice per eseguire questa operazione consiste nell'usare un oggetto ObservableCollection per la proprietà di navigazione. Ad esempio:  
+Se si sta eseguendo data binding Master/Detail, è possibile associare la visualizzazione dettagli a una proprietà di navigazione di una delle entità. Un modo semplice per eseguire questa operazione consiste nell'usare un oggetto ObservableCollection per la proprietà di navigazione. Esempio:  
 
 ``` csharp
 public class Blog
@@ -177,7 +176,7 @@ public class Blog
 
 ## <a name="using-local-to-clean-up-entities-in-savechanges"></a>Uso di local per la pulizia delle entità in SaveChanges  
 
-Nella maggior parte dei casi le entità rimosse da una proprietà di navigazione non verranno contrassegnate automaticamente come eliminate nel contesto. Se ad esempio si rimuove un oggetto post dalla raccolta Blog. Posts, il post non verrà eliminato automaticamente quando viene chiamato SaveChanges. Se è necessario eliminarlo, potrebbe essere necessario trovare queste entità penzoloni e contrassegnarle come eliminate prima di chiamare SaveChanges o come parte di un oggetto SaveChanges sottoposto a override. Ad esempio:  
+Nella maggior parte dei casi le entità rimosse da una proprietà di navigazione non verranno contrassegnate automaticamente come eliminate nel contesto. Se ad esempio si rimuove un oggetto post dalla raccolta Blog. Posts, il post non verrà eliminato automaticamente quando viene chiamato SaveChanges. Se è necessario eliminarlo, potrebbe essere necessario trovare queste entità penzoloni e contrassegnarle come eliminate prima di chiamare SaveChanges o come parte di un oggetto SaveChanges sottoposto a override. Esempio:  
 
 ``` csharp
 public override int SaveChanges()
@@ -210,7 +209,7 @@ Non si tratta di una posizione appropriata per un Windows Forms completo data bi
 
 Molti degli esempi di questa serie usano il metodo entry per restituire un'istanza di DbEntityEntry per un'entità. Questo oggetto entry funge quindi da punto di partenza per la raccolta di informazioni sull'entità, ad esempio lo stato corrente, nonché per l'esecuzione di operazioni sull'entità, ad esempio il caricamento esplicito di un'entità correlata.  
 
-I metodi delle voci restituiscono oggetti DbEntityEntry per molte o tutte le entità rilevate dal contesto. In questo modo è possibile raccogliere informazioni o eseguire operazioni su molte entità anziché su una sola voce. Ad esempio:  
+I metodi delle voci restituiscono oggetti DbEntityEntry per molte o tutte le entità rilevate dal contesto. In questo modo è possibile raccogliere informazioni o eseguire operazioni su molte entità anziché su una sola voce. Esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())

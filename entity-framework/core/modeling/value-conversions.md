@@ -3,14 +3,13 @@ title: Conversioni di valori-EF Core
 description: Configurazione di convertitori di valori in un modello di Entity Framework Core
 author: ajcvickers
 ms.date: 02/19/2018
-ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/value-conversions
-ms.openlocfilehash: 79e54392bf5503b4b651f25ce6e5fc63d418df90
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 1d347eb6a7fcdcb55239e1fa854f6c38ab081b21
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616660"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072551"
 ---
 # <a name="value-conversions"></a>Conversioni di valori
 
@@ -19,7 +18,7 @@ ms.locfileid: "89616660"
 
 I convertitori di valori consentono di convertire i valori delle proprietà durante la lettura o la scrittura nel database. Questa conversione può provenire da un valore a un altro dello stesso tipo (ad esempio, la crittografia di stringhe) o da un valore di un tipo a un valore di un altro tipo, ad esempio la conversione di valori enum da e verso stringhe nel database.
 
-## <a name="fundamentals"></a>Fundamentals
+## <a name="fundamentals"></a>Concetti fondamentali
 
 I convertitori di valori vengono specificati in termini di `ModelClrType` e `ProviderClrType` . Il tipo di modello è il tipo .NET della proprietà nel tipo di entità. Il tipo di provider è il tipo .NET riconosciuto dal provider di database. Ad esempio, per salvare le enumerazioni come stringhe nel database, il tipo di modello è il tipo dell'enumerazione e il tipo di provider è `String` . Questi due tipi possono essere gli stessi.
 
@@ -64,7 +63,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ## <a name="the-valueconverter-class"></a>Classe ValueConverter
 
-La chiamata a `HasConversion` come illustrato in precedenza creerà un' `ValueConverter` istanza e la imposterà sulla proprietà. L'oggetto `ValueConverter` può invece essere creato in modo esplicito. Ad esempio:
+La chiamata a `HasConversion` come illustrato in precedenza creerà un' `ValueConverter` istanza e la imposterà sulla proprietà. L'oggetto `ValueConverter` può invece essere creato in modo esplicito. Esempio:
 
 ``` csharp
 var converter = new ValueConverter<EquineBeast, string>(

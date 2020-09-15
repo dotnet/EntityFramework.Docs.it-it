@@ -3,14 +3,13 @@ title: Query SQL non elaborate-EF6
 description: Query SQL non elaborate in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 9e1ee76e-2499-408c-81e8-9b6c5d1945a0
 uid: ef6/querying/raw-sql
-ms.openlocfilehash: 0db5069b23ff9aa65ced2dbe48694e4f20c98e51
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 30fab3029d71fb560493af279231e46828aa43d4
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620276"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073886"
 ---
 # <a name="raw-sql-queries-ef6"></a>Query SQL non elaborate (EF6)
 
@@ -18,7 +17,7 @@ Entity Framework consente di eseguire una query utilizzando LINQ con le classi d
 
 ## <a name="writing-sql-queries-for-entities"></a>Scrittura di query SQL per le entità  
 
-Il metodo sqlQuery su DbSet consente di scrivere una query SQL non elaborata che restituirà istanze di entità. Gli oggetti restituiti verranno rilevati dal contesto esattamente come se fossero restituiti da una query LINQ. Ad esempio:  
+Il metodo sqlQuery su DbSet consente di scrivere una query SQL non elaborata che restituirà istanze di entità. Gli oggetti restituiti verranno rilevati dal contesto esattamente come se fossero restituiti da una query LINQ. Esempio:  
 
 ``` csharp  
 using (var context = new BloggingContext())
@@ -57,7 +56,7 @@ using (var context = new BloggingContext())
 
 ## <a name="writing-sql-queries-for-non-entity-types"></a>Scrittura di query SQL per tipi non di entità  
 
-Una query SQL che restituisce istanze di qualsiasi tipo, inclusi i tipi primitivi, può essere creata usando il metodo sqlQuery sulla classe database. Ad esempio:  
+Una query SQL che restituisce istanze di qualsiasi tipo, inclusi i tipi primitivi, può essere creata usando il metodo sqlQuery sulla classe database. Esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -71,7 +70,7 @@ I risultati restituiti da sqlQuery sul database non verranno mai rilevati dal co
 
 ## <a name="sending-raw-commands-to-the-database"></a>Invio di comandi non elaborati al database  
 
-I comandi non di query possono essere inviati al database usando il metodo ExecuteSqlCommand nel database. Ad esempio:  
+I comandi non di query possono essere inviati al database usando il metodo ExecuteSqlCommand nel database. Esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())

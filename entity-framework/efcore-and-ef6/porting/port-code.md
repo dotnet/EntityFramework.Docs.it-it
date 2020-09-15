@@ -3,14 +3,13 @@ title: Porting da EF6 a EF Core-porting di un modello basato sul codice-EF
 description: Informazioni specifiche sul porting di un'applicazione modello basata su codice Entity Framework 6 per Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
-ms.assetid: 2dce1a50-7d84-4856-abf6-2763dd9be99d
 uid: efcore-and-ef6/porting/port-code
-ms.openlocfilehash: d3920e6132576e3a93dd0ffb9dac1412b6e511aa
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: a5bbdc2ee95ea6bea96e24bee4588b524e0ffc58
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619619"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073578"
 ---
 # <a name="porting-an-ef6-code-based-model-to-ef-core"></a>Porting di un modello basato su codice EF6 per EF Core
 

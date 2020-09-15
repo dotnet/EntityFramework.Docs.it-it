@@ -125,7 +125,7 @@ Il caricamento della raccolta dei post può ancora essere eseguito usando il car
 
 ### <a name="turn-off-lazy-loading-for-all-entities"></a>Disattiva caricamento lazy per tutte le entità
 
-Il caricamento lazy può essere disattivato per tutte le entità nel contesto impostando un flag sulla proprietà di configurazione. Esempio:
+Il caricamento lazy può essere disattivato per tutte le entità nel contesto impostando un flag sulla proprietà di configurazione. Ad esempio:
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -141,7 +141,7 @@ Il caricamento di entità correlate può comunque essere eseguito usando il cari
 
 ## <a name="explicitly-loading"></a>Caricamento esplicito
 
-Anche con il caricamento lazy disabilitato, è comunque possibile caricare in modo differito le entità correlate, ma è necessario eseguire una chiamata esplicita. A tale scopo, utilizzare il metodo Load sulla voce dell'entità correlata. Esempio:
+Anche con il caricamento lazy disabilitato, è comunque possibile caricare in modo differito le entità correlate, ma è necessario eseguire una chiamata esplicita. A tale scopo, utilizzare il metodo Load sulla voce dell'entità correlata. Ad esempio:
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -170,7 +170,7 @@ using (var context = new BloggingContext())
 
 ### <a name="applying-filters-when-explicitly-loading-related-entities"></a>Applicazione di filtri quando si caricano in modo esplicito le entità correlate
 
-Il metodo di query consente di accedere alla query sottostante che Entity Framework utilizzerà per il caricamento di entità correlate. È quindi possibile usare LINQ per applicare filtri alla query prima di eseguirla con una chiamata a un metodo di estensione LINQ, ad esempio ToList, Load e così via. Il metodo di query può essere utilizzato sia con proprietà di navigazione di riferimento che di raccolta, ma è particolarmente utile per le raccolte in cui può essere utilizzato per caricare solo parte della raccolta. Esempio:
+Il metodo di query consente di accedere alla query sottostante che Entity Framework utilizzerà per il caricamento di entità correlate. È quindi possibile usare LINQ per applicare filtri alla query prima di eseguirla con una chiamata a un metodo di estensione LINQ, ad esempio ToList, Load e così via. Il metodo di query può essere utilizzato sia con proprietà di navigazione di riferimento che di raccolta, ma è particolarmente utile per le raccolte in cui può essere utilizzato per caricare solo parte della raccolta. Ad esempio:
 
 ``` csharp
 using (var context = new BloggingContext())

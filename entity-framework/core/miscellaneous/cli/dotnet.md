@@ -3,14 +3,14 @@ title: Guida di riferimento agli strumenti di EF Core (.NET CLI)-EF Core
 description: Guida di riferimento per gli strumenti di interfaccia della riga di comando di .NET Core Entity Framework Core
 author: bricelam
 ms.author: bricelam
-ms.date: 07/11/2019
+ms.date: 09/09/2020
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: b5f4941b1a1cf5674d9cc998dd0aed0c0469ff27
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: a3fa73bf7f9173cbd49dffdabeacc98d5c35ac14
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619432"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071836"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Guida di riferimento agli strumenti di Entity Framework Core-interfaccia della riga di comando di .NET Core
 
@@ -25,12 +25,12 @@ Se si usa Visual Studio, è consigliabile usare invece gli [strumenti della cons
 
 La procedura di installazione dipende dal tipo di progetto e dalla versione:
 
-* EF Core 3. x
+* EF Core 3.x
 * ASP.NET Core versione 2,1 e successive
 * EF Core 2. x
 * EF Core 1. x
 
-### <a name="ef-core-3x"></a>EF Core 3. x
+### <a name="ef-core-3x"></a>EF Core 3.x
 
 * `dotnet ef` deve essere installato come strumento globale o locale. La maggior parte degli sviluppatori verrà installata `dotnet ef` come strumento globale con il comando seguente:
 
@@ -38,7 +38,7 @@ La procedura di installazione dipende dal tipo di progetto e dalla versione:
   dotnet tool install --global dotnet-ef
   ```
 
-  È anche possibile usare `dotnet ef` come strumento locale. Per usarlo come strumento locale, ripristinare le dipendenze di un progetto che lo dichiara come dipendenza degli strumenti usando un [file manifesto dello strumento](https://github.com/dotnet/cli/issues/10288).
+  È anche possibile usare `dotnet ef` come strumento locale. Per usarlo come strumento locale, ripristinare le dipendenze di un progetto che lo dichiara come dipendenza degli strumenti usando un [file manifesto dello strumento](/dotnet/core/tools/global-tools#install-a-local-tool).
 
 * Installare [.NET Core SDK](https://www.microsoft.com/net/download/core).
 
@@ -171,10 +171,13 @@ Per specificare l'ambiente per i progetti ASP.NET Core, impostare la variabile d
 | `--framework <FRAMEWORK>`                      |                   | [Moniker del Framework](/dotnet/standard/frameworks#supported-target-framework-versions) di destinazione per il [Framework di destinazione](/dotnet/standard/frameworks).  Usare quando il file di progetto specifica più framework di destinazione e si vuole selezionarne uno. |
 | <nobr>`--configuration <CONFIGURATION>`</nobr> |                   | Configurazione della build, ad esempio: `Debug` o `Release` .                                                                                                                                                                                                   |
 | `--runtime <IDENTIFIER>`                       |                   | Identificatore del runtime di destinazione per cui ripristinare i pacchetti. Per un elenco degli identificatori di runtime (RID, Runtime Identifier), vedere il [catalogo RID](/dotnet/core/rid-catalog).                                                                                                      |
+| `--no-build`                                   |                   | Non compilare il progetto. Progettato per essere utilizzato quando la compilazione è aggiornata.                                                                                                                                                                                    |
 | `--help`                                       | `-h`              | Visualizzare le informazioni della guida.                                                                                                                                                                                                                                        |
 | `--verbose`                                    | `-v`              | Mostra output dettagliato.                                                                                                                                                                                                                                          |
 | `--no-color`                                   |                   | Non colora l'output.                                                                                                                                                                                                                                        |
 | `--prefix-output`                              |                   | Prefisso output con livello.                                                                                                                                                                                                                                     |
+
+A partire da EF Core 5,0, eventuali argomenti aggiuntivi vengono passati all'applicazione.
 
 ## <a name="dotnet-ef-database-drop"></a>eliminazione database DotNet EF
 
@@ -186,6 +189,8 @@ Opzioni:
 |:-------------------------|:------------------|:---------------------------------------------------------|
 | `--force`                | <nobr>`-f`</nobr> | Non confermare.                                           |
 | <nobr>`--dry-run`</nobr> |                   | Indica il database da eliminare, ma non eliminarlo. |
+
+Le [Opzioni comuni](#common-options) sono elencate in precedenza.
 
 ## <a name="dotnet-ef-database-update"></a>aggiornamento database DotNet EF
 
@@ -199,9 +204,11 @@ Argomenti:
 
 Opzioni:
 
-| Opzione                                    | Descrizione                                                                                                                                        |
-|:------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|
-|  <nobr>`--connection <CONNECTION>`</nobr> | Stringa di connessione al database. Il valore predefinito è quello specificato in `AddDbContext` o `OnConfiguring` . (Disponibile da EF Core 5.0.0 in poi). |
+| Opzione                                    | Descrizione                                                                                                                      |
+|:------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------|
+|  <nobr>`--connection <CONNECTION>`</nobr> | Stringa di connessione al database. Il valore predefinito è quello specificato in `AddDbContext` o `OnConfiguring` . Aggiunto in EF Core 5,0. |
+
+Le [Opzioni comuni](#common-options) sono elencate in precedenza.
 
 Gli esempi seguenti aggiornano il database a una migrazione specificata. Il primo usa il nome della migrazione e il secondo usa l'ID migrazione e una connessione specificata:
 
@@ -214,9 +221,13 @@ dotnet ef database update 20180904195021_InitialCreate --connection your_connect
 
 Ottiene informazioni su un `DbContext` tipo.
 
+Le [Opzioni comuni](#common-options) sono elencate in precedenza.
+
 ## <a name="dotnet-ef-dbcontext-list"></a>elenco DbContext di DotNet EF
 
 Elenca i `DbContext` tipi disponibili.
+
+Le [Opzioni comuni](#common-options) sono elencate in precedenza.
 
 ## <a name="dotnet-ef-dbcontext-scaffold"></a>impalcatura DbContext DotNet EF
 
@@ -236,14 +247,17 @@ Opzioni:
 | `--data-annotations`                     | <nobr>`-d`</nobr> | Utilizzare gli attributi per configurare il modello (laddove possibile). Se questa opzione viene omessa, viene usata solo l'API Fluent.                                                                |
 | `--context <NAME>`                       | `-c`              | Nome della `DbContext` classe da generare.                                                                                                                                 |
 | `--context-dir <PATH>`                   |                   | Directory in cui inserire il `DbContext` file di classe. I percorsi sono relativi alla directory del progetto. Gli spazi dei nomi sono derivati dai nomi delle cartelle.                                 |
-| `--context-namespace <NAMESPACE>`        |                   | Spazio dei nomi da utilizzare per la `DbContext` classe generata. Nota: esegue l'override di `--namespace` . (Disponibile da EFCore 5.0.0 in poi).                                                |
+| `--context-namespace <NAMESPACE>`        |                   | Spazio dei nomi da utilizzare per la `DbContext` classe generata. Nota: esegue l'override di `--namespace` . Aggiunto in EF Core 5,0.                                                                 |
 | `--force`                                | `-f`              | Sovrascrivere i file esistenti.                                                                                                                                                      |
 | `--output-dir <PATH>`                    | `-o`              | Directory in cui inserire i file della classe di entità. I percorsi sono relativi alla directory del progetto.                                                                                       |
-| `--namespace <NAMESPACE>`                | `-n`              | Spazio dei nomi da utilizzare per tutte le classi generate. Il valore predefinito è generato dallo spazio dei nomi radice e dalla directory di output. (Disponibile da EFCore 5.0.0 in poi).                 |
+| `--namespace <NAMESPACE>`                | `-n`              | Spazio dei nomi da utilizzare per tutte le classi generate. Il valore predefinito è generato dallo spazio dei nomi radice e dalla directory di output. Aggiunto in EF Core 5,0.                                  |
 | <nobr>`--schema <SCHEMA_NAME>...`</nobr> |                   | Schemi delle tabelle per cui generare i tipi di entità. Per specificare più schemi, ripetere `--schema` per ognuno di essi. Se questa opzione viene omessa, vengono inclusi tutti gli schemi.          |
 | `--table <TABLE_NAME>`...                | `-t`              | Tabelle per cui generare i tipi di entità. Per specificare più tabelle, ripetere `-t` o `--table` per ciascuna di esse. Se questa opzione viene omessa, vengono incluse tutte le tabelle.                |
 | `--use-database-names`                   |                   | Utilizzare i nomi di tabella e colonna esattamente come vengono visualizzati nel database. Se questa opzione viene omessa, i nomi di database vengono modificati in modo da essere conformi alle convenzioni di stile del nome C#. |
-| `--no-onconfiguring`                     |                   | Evita la generazione del `OnConfiguring` metodo nella `DbContext` classe generata. (Disponibile da EFCore 5.0.0 in poi).                                                 |
+| `--no-onconfiguring`                     |                   | Evita la generazione del `OnConfiguring` metodo nella `DbContext` classe generata. Aggiunto in EF Core 5,0.                                                                  |
+| `--no-pluralize`                         |                   | Non usare pluralizer. Aggiunto in EF Core 5,0                                                                                                                                 |
+
+Le [Opzioni comuni](#common-options) sono elencate in precedenza.
 
 Nell'esempio seguente vengono assemblati tutti gli schemi e le tabelle e vengono inseriti i nuovi file nella cartella *Models* .
 
@@ -257,6 +271,18 @@ Nell'esempio seguente vengono create le impalcature solo per le tabelle selezion
 dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models -t Blog -t Post --context-dir Context -c BlogContext --context-namespace New.Namespace
 ```
 
+## <a name="dotnet-ef-dbcontext-script"></a>script DotNet EF DbContext
+
+Genera uno script SQL da DbContext. Ignora le migrazioni. Aggiunto in EF Core 3,0.
+
+Opzioni:
+
+| Opzione                         | Short             | Descrizione                      |
+| ------------------------------ | ----------------- | -------------------------------- |
+| <nobr>`--output <FILE>`</nobr> | <nobr>`-o`</nobr> | File in cui scrivere il risultato. |
+
+Le [Opzioni comuni](#common-options) sono elencate in precedenza.
+
 ## <a name="dotnet-ef-migrations-add"></a>Aggiunta di migrazioni DotNet EF
 
 Aggiunge una nuova migrazione.
@@ -269,14 +295,25 @@ Argomenti:
 
 Opzioni:
 
-| Opzione                                 | Short             | Descrizione                                                                                                                             |
-|:---------------------------------------|:------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
-| `--output-dir <PATH>`                  | <nobr>`-o`</nobr> | Directory usata per l'output dei file. I percorsi sono relativi alla directory del progetto di destinazione. Il valore predefinito è "Migrations".                    |
-| <nobr>`--namespace <NAMESPACE>`</nobr> | `-n`              | Spazio dei nomi da utilizzare per le classi generate. Il valore predefinito è generato dalla directory di output. (Disponibile da EFCore 5.0.0 in poi). |
+| Opzione                                 | Short             | Descrizione                                                                                                            |
+|:---------------------------------------|:------------------|:-----------------------------------------------------------------------------------------------------------------------|
+| `--output-dir <PATH>`                  | <nobr>`-o`</nobr> | Directory usata per l'output dei file. I percorsi sono relativi alla directory del progetto di destinazione. Il valore predefinito è "Migrations".   |
+| <nobr>`--namespace <NAMESPACE>`</nobr> | `-n`              | Spazio dei nomi da utilizzare per le classi generate. Il valore predefinito è generato dalla directory di output. Aggiunto in EF Core 5,0. |
+
+Le [Opzioni comuni](#common-options) sono elencate in precedenza.
 
 ## <a name="dotnet-ef-migrations-list"></a>elenco migrazioni di DotNet EF
 
 Elenca le migrazioni disponibili.
+
+Opzioni:
+
+| Opzione                                   | Descrizione                                                                                                                  |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| <nobr>`--connection <CONNECTION>`</nobr> | Stringa di connessione al database. Il valore predefinito è quello specificato in AddDbContext o Configuring. Aggiunto in EF Core 5,0. |
+| `--no-connect`                           | Non connettersi al database. Aggiunto in EF Core 5,0.                                                                         |
+
+Le [Opzioni comuni](#common-options) sono elencate in precedenza.
 
 ## <a name="dotnet-ef-migrations-remove"></a>Rimuovi migrazioni di DotNet EF
 
@@ -287,6 +324,8 @@ Opzioni:
 | Opzione                 | Short             | Descrizione                                                                     |
 |:-----------------------|:------------------|:--------------------------------------------------------------------------------|
 | <nobr>`--force`</nobr> | <nobr>`-f`</nobr> | Ripristinare la migrazione, ovvero eseguire il rollback delle modifiche applicate al database. |
+
+Le [Opzioni comuni](#common-options) sono elencate in precedenza.
 
 ## <a name="dotnet-ef-migrations-script"></a>script migrazioni DotNet EF
 
@@ -301,10 +340,13 @@ Argomenti:
 
 Opzioni:
 
-| Opzione                         | Short             | Descrizione                                                        |
-|:-------------------------------|:------------------|:-------------------------------------------------------------------|
-| <nobr>`--output <FILE>`</nobr> | <nobr>`-o`</nobr> | File in cui scrivere lo script.                                   |
-| `--idempotent`                 | `-i`              | Genera uno script che può essere utilizzato in un database in qualsiasi migrazione. |
+| Opzione                           | Short             | Descrizione                                                        |
+|:---------------------------------|:------------------|:-------------------------------------------------------------------|
+| `--output <FILE>`                | <nobr>`-o`</nobr> | File in cui scrivere lo script.                                   |
+| `--idempotent`                   | `-i`              | Genera uno script che può essere utilizzato in un database in qualsiasi migrazione. |
+| <nobr>`--no-transactions`</nobr> |                   | Non generare istruzioni SQL Transaction. Aggiunto in EF Core 5,0.   |
+
+Le [Opzioni comuni](#common-options) sono elencate in precedenza.
 
 Nell'esempio seguente viene creato uno script per la migrazione di InitialCreate:
 

@@ -3,14 +3,13 @@ title: Aggiornamento da versioni precedenti a EF Core 2-EF Core
 description: Istruzioni e note per l'aggiornamento a Entity Framework Core 2,0
 author: divega
 ms.date: 08/13/2017
-ms.assetid: 8BD43C8C-63D9-4F3A-B954-7BC518A1B7DB
 uid: core/what-is-new/ef-core-2.0/upgrade
-ms.openlocfilehash: 2bd88c0c52bcef8d5a9777f2cbd546a2787d67a9
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: bdc0cfe8c0be4a83f8c78ba2ac66bb1e18cea0f7
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620772"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072343"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>Aggiornamento di applicazioni da versioni precedenti a EF Core 2,0
 
@@ -119,7 +118,7 @@ Dovrebbe ora essere scritto come segue:
 var tableName = context.Model.FindEntityType(typeof(User)).Relational().TableName;
 ```
 
-Anziché usare metodi come `ForSqlServerToTable` , i metodi di estensione sono ora disponibili per scrivere codice condizionale basato sul provider corrente in uso. Ad esempio:
+Anziché usare metodi come `ForSqlServerToTable` , i metodi di estensione sono ora disponibili per scrivere codice condizionale basato sul provider corrente in uso. Esempio:
 
 ```csharp
 modelBuilder.Entity<User>().ToTable(
@@ -136,7 +135,7 @@ EF Core usa un `IServiceProvider` contenitore interno (un contenitore di inserim
 
 ## <a name="in-memory-databases-must-be-named"></a>I database in memoria devono essere denominati
 
-Il database in memoria globale senza nome è stato rimosso, ma è necessario assegnare un nome a tutti i database in memoria. Ad esempio:
+Il database in memoria globale senza nome è stato rimosso, ma è necessario assegnare un nome a tutti i database in memoria. Esempio:
 
 ``` csharp
 optionsBuilder.UseInMemoryDatabase("MyDatabase");

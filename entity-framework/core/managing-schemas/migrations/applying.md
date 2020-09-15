@@ -5,12 +5,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: c83194057d58f8278bfbb5264623858e6c022d8f
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 50937f96e63f9bda2ffcf5e94dabf688ee2ba1f3
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619457"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071889"
 ---
 # <a name="applying-migrations"></a>Applicazione di migrazioni
 
@@ -117,7 +117,7 @@ Script-Migration -Idempotent
 
 Gli strumenti da riga di comando EF possono essere usati per applicare le migrazioni a un database. Sebbene sia produttivo per lo sviluppo e il test locali delle migrazioni, questo approccio non è ideale per la gestione dei database di produzione:
 
-* I comandi SQL vengono applicati direttamente dallo strumento, senza concedere allo sviluppatore una modifica da ispezionare o modificare. Questa situazione può essere pericolosa in un ambiente di produzione.
+* I comandi SQL vengono applicati direttamente dallo strumento, senza concedere allo sviluppatore la possibilità di ispezionarli o modificarli. Questa situazione può essere pericolosa in un ambiente di produzione.
 * .NET SDK e lo strumento EF devono essere installati nei server di produzione.
 
 ### <a name="net-core-cli"></a>[Interfaccia della riga di comando di .NET Core](#tab/dotnet-core-cli)
@@ -170,7 +170,7 @@ Per ulteriori informazioni sull'applicazione delle migrazioni tramite gli strume
 * Analogamente, se un'applicazione accede al database mentre viene eseguita da un'altra applicazione, ciò può causare gravi problemi.
 * Per modificare lo schema del database, l'applicazione deve disporre di accesso con privilegi elevati. È in genere consigliabile limitare le autorizzazioni per il database dell'applicazione in produzione.
 * È importante essere in grado di eseguire il rollback di una migrazione applicata in caso di problemi. Le altre strategie forniscono questa operazione in modo semplice e rapido.
-* I comandi SQL vengono applicati direttamente dal programma, senza concedere allo sviluppatore una modifica da ispezionare o modificare. Questa situazione può essere pericolosa in un ambiente di produzione.
+* I comandi SQL vengono applicati direttamente dal programma, senza concedere allo sviluppatore la possibilità di ispezionarli o modificarli. Questa situazione può essere pericolosa in un ambiente di produzione.
 
 Per applicare le migrazioni a livello di codice, chiamare `context.Database.Migrate()` . Ad esempio, un'applicazione ASP.NET tipica può eseguire le operazioni seguenti:
 

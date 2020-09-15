@@ -3,14 +3,13 @@ title: Specifica MSL-EF6
 description: Specifica MSL in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 13ae7bc1-74b4-4ee4-8d73-c337be841467
 uid: ef6/modeling/designer/advanced/edmx/msl-spec
-ms.openlocfilehash: 4ec43f48f82b83bd85b47fe234be143d0e4d2560
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 36527b9827a7576f73c9ef476462d9392b601984
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620623"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070112"
 ---
 # <a name="msl-specification"></a>Specifica MSL
 MSL (Mapping Specification Language) è un linguaggio basato su XML che descrive il mapping tra il modello concettuale e il modello di archiviazione di un'applicazione Entity Framework.
@@ -41,7 +40,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 
 | Nome attributo | Obbligatorio | Valore                                                                     |
 |:---------------|:------------|:--------------------------------------------------------------------------|
-| **Chiave**        | Sì         | Alias per lo spazio dei nomi specificato dall'attributo **value** . |
+| **Chiave**        | Yes         | Alias per lo spazio dei nomi specificato dall'attributo **value** . |
 | **Valore**      | Sì         | Spazio dei nomi per il quale il valore dell'elemento **chiave** è un alias.     |
 
 ### <a name="example"></a>Esempio
@@ -95,7 +94,7 @@ Nella tabella seguente vengono descritti gli attributi applicabili all'elemento 
 
 | Nome attributo     | Obbligatorio | Valore                                                                                                                                                                             |
 |:-------------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **AssociationSet** | Sì         | Nome dell'associazione di cui è in corso il mapping.                                                                                                                                 |
+| **AssociationSet** | Yes         | Nome dell'associazione di cui è in corso il mapping.                                                                                                                                 |
 | **From**           | Sì         | Valore dell'attributo **FromRole** della proprietà di navigazione che corrisponde all'associazione di cui viene eseguito il mapping. Per ulteriori informazioni, vedere elemento NavigationProperty (CSDL). |
 | **To**             | Sì         | Valore dell'attributo **ToRole** della proprietà di navigazione che corrisponde all'associazione di cui viene eseguito il mapping. Per ulteriori informazioni, vedere elemento NavigationProperty (CSDL).   |
 
@@ -310,7 +309,7 @@ Nella tabella seguente vengono descritti gli attributi applicabili all'elemento 
 
 | Nome attributo | Obbligatorio | Valore                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------|
-| **TypeName**   | Sì         | Nome completo dello spazio dei nomi del tipo complesso di cui è in corso il mapping. |
+| **TypeName**   | Yes         | Nome completo dello spazio dei nomi del tipo complesso di cui è in corso il mapping. |
 
 ### <a name="example"></a>Esempio
 
@@ -506,7 +505,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 
 | Nome attributo            | Obbligatorio | Valore                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **FunctionName**          | Sì         | Nome completo dello spazio dei nomi della stored procedure a cui la funzione di eliminazione viene mappata. La stored procedure deve essere dichiarata nel modello di archiviazione. |
+| **FunctionName**          | Yes         | Nome completo dello spazio dei nomi della stored procedure a cui la funzione di eliminazione viene mappata. La stored procedure deve essere dichiarata nel modello di archiviazione. |
 | **RowsAffectedParameter** | No          | Nome del parametro di output che restituisce il numero di righe interessate.                                                                               |
 
 #### <a name="example"></a>Esempio
@@ -630,8 +629,8 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 
 | Nome attributo            | Obbligatorio | Valore                                                                                                                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **StorageModelContainer** | Sì         | Nome del contenitore di entità del modello di archiviazione di cui è in corso il mapping.                                                                                                                                                                                     |
-| **CdmEntityContainer**    | Sì         | Nome del contenitore di entità del modello concettuale di cui è in corso il mapping.                                                                                                                                                                                  |
+| **StorageModelContainer** | Yes         | Nome del contenitore di entità del modello di archiviazione di cui è in corso il mapping.                                                                                                                                                                                     |
+| **CdmEntityContainer**    | Yes         | Nome del contenitore di entità del modello concettuale di cui è in corso il mapping.                                                                                                                                                                                  |
 | **GenerateUpdateViews**   | No          | **True** o **false**. Se **false**, non viene generata alcuna vista aggiornamento. Questo attributo deve essere impostato su **false** quando si dispone di un mapping di sola lettura che non sarebbe valido perché i dati non possono essere completati correttamente. <br/> Il valore predefinito è **True**. |
 
 ### <a name="example"></a>Esempio
@@ -747,7 +746,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 
 | Nome attributo | Obbligatorio | Valore                                                                                                                                                                                                |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **TypeName**   | Sì         | Nome completo dello spazio dei nomi del tipo di entità del modello concettuale di cui è in corso il mapping. <br/> Se il tipo è astratto o un tipo derivato, il valore deve essere `IsOfType(Namespace-qualified_type_name)`. |
+| **TypeName**   | Yes         | Nome completo dello spazio dei nomi del tipo di entità del modello concettuale di cui è in corso il mapping. <br/> Se il tipo è astratto o un tipo derivato, il valore deve essere `IsOfType(Namespace-qualified_type_name)`. |
 
 ### <a name="example"></a>Esempio
 
@@ -833,7 +832,7 @@ Nella tabella seguente vengono descritti gli attributi applicabili all'elemento 
 
 | Nome attributo         | Obbligatorio | Valore                                                                                   |
 |:-----------------------|:------------|:----------------------------------------------------------------------------------------|
-| **FunctionImportName** | Sì         | Nome dell'importazione di funzioni nel modello concettuale di cui è in corso il mapping.           |
+| **FunctionImportName** | Yes         | Nome dell'importazione di funzioni nel modello concettuale di cui è in corso il mapping.           |
 | **FunctionName**       | Sì         | Nome completo dello spazio dei nomi della funzione nel modello di archiviazione di cui è in corso il mapping. |
 
 ### <a name="example"></a>Esempio
@@ -999,7 +998,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 
 | Nome attributo | Obbligatorio | Valore                                                 |
 |:---------------|:------------|:------------------------------------------------------|
-| **Spazio**      | Sì         | **C-S**. Si tratta di un valore fisso e non può essere modificato. |
+| **Spazio**      | Yes         | **C-S**. Si tratta di un valore fisso e non può essere modificato. |
 
 ### <a name="example"></a>Esempio
 
@@ -1052,7 +1051,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 
 | Nome attributo          | Obbligatorio | Valore                                                                                                                                                                                                                         |
 |:------------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **StoreEntitySet**      | Sì         | Nome della tabella o visualizzazione di cui è in corso il mapping.                                                                                                                                                                           |
+| **StoreEntitySet**      | Yes         | Nome della tabella o visualizzazione di cui è in corso il mapping.                                                                                                                                                                           |
 | **Makecolumnsdistinct impostato** | No          | **True** o **false** , a seconda che vengano restituite solo righe distinte. <br/> Se questo attributo è impostato su **true**, l'attributo **GenerateUpdateViews** dell'elemento EntityContainerMapping deve essere impostato su **false**. |
 
 ### <a name="example"></a>Esempio
@@ -1330,7 +1329,7 @@ Nella tabella seguente vengono descritti gli attributi applicabili all'elemento 
 | Nome attributo | Obbligatorio | Valore                                                                         |
 |:---------------|:------------|:------------------------------------------------------------------------------|
 | **Nome**       | Sì         | Nome della proprietà di entità nel modello concettuale di cui è in corso il mapping. |
-| **ColumnName** | Sì         | Nome della colonna di cui viene eseguito il mapping.                                          |
+| **ColumnName** | Yes         | Nome della colonna di cui viene eseguito il mapping.                                          |
 
 ### <a name="example"></a>Esempio
 
@@ -1490,7 +1489,7 @@ Nella tabella seguente vengono descritti gli attributi applicabili all'elemento 
 |:------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nome**          | Sì         | Nome della proprietà del modello concettuale di cui è in corso il mapping.                                                                                 |
 | **ParameterName** | Sì         | Nome del parametro di cui è in corso il mapping.                                                                                                 |
-| **Versione**       | No          | **Corrente** o **originale** a seconda che il valore corrente o il valore originale della proprietà debba essere usato per i controlli di concorrenza. |
+| **Version**       | No          | **Corrente** o **originale** a seconda che il valore corrente o il valore originale della proprietà debba essere usato per i controlli di concorrenza. |
 
 ### <a name="example"></a>Esempio
 
@@ -1599,7 +1598,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 
 | Nome attributo            | Obbligatorio | Valore                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **FunctionName**          | Sì         | Nome completo dello spazio dei nomi della stored procedure a cui la funzione di aggiornamento viene mappata. La stored procedure deve essere dichiarata nel modello di archiviazione. |
+| **FunctionName**          | Yes         | Nome completo dello spazio dei nomi della stored procedure a cui la funzione di aggiornamento viene mappata. La stored procedure deve essere dichiarata nel modello di archiviazione. |
 | **RowsAffectedParameter** | No          | Nome del parametro di output che restituisce il numero di righe interessate.                                                                               |
 
 ### <a name="example"></a>Esempio

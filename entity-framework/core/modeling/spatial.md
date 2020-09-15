@@ -4,14 +4,13 @@ description: Utilizzo di dati spaziali in un modello di Entity Framework Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/01/2018
-ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
-ms.openlocfilehash: 42386fb132f135d725a2068d91dc49c7f613e277
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 8c08835f2d6211e6be5852b58b35f003f823bded
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616687"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071433"
 ---
 # <a name="spatial-data"></a>Dati spaziali
 
@@ -268,7 +267,7 @@ modelBuilder.Entity<City>().Property(c => c.Location)
     .ForSqliteHasSrid(4326);
 ```
 
-### <a name="dimension"></a>Dimension
+### <a name="dimension"></a>Dimensione
 
 Analogamente a SRID, viene specificata anche una dimensione (o ordinata) di una colonna come parte della colonna. Le ordinate predefinite sono X e Y. abilitare le coordinate aggiuntive (Z e M) usando il metodo ForSqliteHasDimension.
 

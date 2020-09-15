@@ -1,14 +1,16 @@
 ---
 title: Creazione di un modello - EF6
+description: Creazione di un modello in Entity Framework 6
 author: divega
 ms.date: 07/05/2018
 ms.assetid: 4890228E-CEA1-4595-B8AD-CA81253F8767
-ms.openlocfilehash: bd9843a93121f53518a307c9d2d43b68ae03369c
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+uid: ef6/modeling/index
+ms.openlocfilehash: 417671d5313bb95bb97d5de85b25b09d687c5c3d
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413466"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620339"
 ---
 # <a name="creating-a-model"></a>Creazione di un modello
 
@@ -25,8 +27,8 @@ Per definire la destinazione di un database esistente o creare un nuovo database
 
 |                                           | Se si vuole scrivere codice                                                                                                                   | Se si vuole usare una finestra di progettazione                                                                                                                        |
 |:------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Creazione di un nuovo database**          | [Usare **Code First** per definire il modello tramite codice e quindi generare un database.](~/ef6/modeling/code-first/workflows/new-database.md)           | [Usare **Model First** per definire il modello tramite caselle e linee e quindi generare un database.](~/ef6/modeling/designer/workflows/model-first.md)   |
-| **Accesso a un database esistente** | [Usare **Code First** per creare un modello basato su codice con mapping a un database esistente.](~/ef6/modeling/code-first/workflows/existing-database.md) | [Usare **Database First** per creare un modello basato su caselle e linee con mapping a un database esistente.](~/ef6/modeling/designer/workflows/database-first.md) |
+| **Creazione di un nuovo database**          | [Usare **Code First** per definire il modello tramite codice e quindi generare un database.](xref:ef6/modeling/code-first/workflows/new-database)           | [Usare **Model First** per definire il modello tramite caselle e linee e quindi generare un database.](xref:ef6/modeling/designer/workflows/model-first)   |
+| **Accesso a un database esistente** | [Usare **Code First** per creare un modello basato su codice con mapping a un database esistente.](xref:ef6/modeling/code-first/workflows/existing-database) | [Usare **Database First** per creare un modello basato su caselle e linee con mapping a un database esistente.](xref:ef6/modeling/designer/workflows/database-first) |
 
 ### <a name="watch-the-video-what-ef-workflow-should-i-use"></a>Video: Quale flusso di lavoro EF usare?
 
@@ -44,7 +46,7 @@ Indipendentemente dal fatto che si usi Code First o EF Designer, un modello EF h
 
 - Gli oggetti del dominio o i tipi di entità dell'applicazione. Questi vengono spesso chiamati livello oggetti
 
-- Un modello concettuale costituito da tipi di entità e relazioni specifici del dominio. Questo modello viene descritto tramite [Entity Data Model](~/ef6/resources/glossary.md#entity-data-model). A questo livello si fa spesso riferimento con la lettera "C", per _concettuale_.
+- Un modello concettuale costituito da tipi di entità e relazioni specifici del dominio. Questo modello viene descritto tramite [Entity Data Model](xref:ef6/resources/glossary#entity-data-model). A questo livello si fa spesso riferimento con la lettera "C", per _concettuale_.
 
 - Un modello di archiviazione che rappresenta le tabelle, le colonne e le relazioni definite nel database. A questo livello si fa spesso riferimento con la lettera "S", per _storage_ (archiviazione).  
 

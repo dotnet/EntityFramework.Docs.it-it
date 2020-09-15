@@ -3,14 +3,13 @@ title: Definizione di query-EF designer-EF6
 description: Definizione di query-EF designer in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: e52a297e-85aa-42f6-a922-ba960f8a4b22
 uid: ef6/modeling/designer/advanced/defining-query
-ms.openlocfilehash: e1962a80c3a94fb17bacf28969629ce949b117a0
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: b5d24b9f6c047eb8681a0343c768d1ffa70ca6b8
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616830"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070341"
 ---
 # <a name="defining-query---ef-designer"></a>Definizione di query-EF designer
 Questa procedura dettagliata illustra come aggiungere una query di definizione e un tipo di entità corrispondente a un modello usando la finestra di progettazione EF. Una query di definizione viene in genere utilizzata per fornire funzionalità simili a quelle fornite da una vista di database, ma la vista è definita nel modello e non nel database. Una query di definizione consente di eseguire un'istruzione SQL specificata nell'elemento **DefiningQuery**   di un file con estensione edmx. Per ulteriori informazioni, vedere **DefiningQuery** nella [specifica SSDL](xref:ef6/modeling/designer/advanced/edmx/ssdl-spec).

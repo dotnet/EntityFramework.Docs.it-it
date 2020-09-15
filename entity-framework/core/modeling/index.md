@@ -1,21 +1,22 @@
 ---
 title: Creazione e configurazione di un modello - EF Core
+description: Panoramica della creazione e configurazione di un modello con Entity Framework Core
 author: rowanmiller
 ms.date: 11/05/2019
 ms.assetid: 88253ff3-174e-485c-b3f8-768243d01ee1
 uid: core/modeling/index
-ms.openlocfilehash: 0f44d9684ca5c8435d83085f9038860309bd82a2
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+ms.openlocfilehash: e980f11b08bee7b07156a80c6bead829e7a8b654
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78412776"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616752"
 ---
 # <a name="creating-and-configuring-a-model"></a>Creazione e configurazione di un modello
 
 Entity Framework usa un insieme di convenzioni per compilare un modello in base alla forma delle classi di entità. È possibile specificare una configurazione aggiuntiva per integrare e/o sostituire gli elementi individuati dalla convenzione.
 
-Questo articolo descrive la configurazione che può essere applicata a un modello destinato a qualsiasi archivio dati e che può essere applicata per qualsiasi database relazionale. I provider possono anche abilitare una configurazione specifica di un archivio dati. Per informazioni sulla configurazione specifica del provider, vedere la sezione  [Provider di database](../providers/index.md) .
+Questo articolo descrive la configurazione che può essere applicata a un modello destinato a qualsiasi archivio dati e che può essere applicata per qualsiasi database relazionale. I provider possono anche abilitare una configurazione specifica di un archivio dati. Per informazioni sulla configurazione specifica del provider, vedere la sezione  [Provider di database](xref:core/providers/index) .
 
 > [!TIP]  
 > È possibile visualizzare l' [esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples)  di questo articolo in GitHub.

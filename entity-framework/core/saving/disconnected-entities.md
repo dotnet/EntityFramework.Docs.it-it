@@ -4,14 +4,13 @@ description: Utilizzo di entità disconnesse e non registrate tra più istanze d
 author: ajcvickers
 ms.author: avickers
 ms.date: 10/27/2016
-ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 52ba838c4d54771c51737c3940e5a88659f94144
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d9b6d2d2c0761dd6f670ba51f935c866e10460b7
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617277"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070887"
 ---
 # <a name="disconnected-entities"></a>Entità disconnesse
 
@@ -132,7 +131,7 @@ Come prima, se non si usano chiavi generate automaticamente, è possibile usare 
 
 L'eliminazione può essere difficile da gestire, dato che l'assenza di un'entità indica spesso che deve essere eliminata. Un modo per risolvere questo problema consiste nell'usare "eliminazioni temporanee" in modo che l'entità venga contrassegnata come eliminata anziché essere effettivamente eliminata. Le eliminazioni diventano quindi uguali agli aggiornamenti. Le eliminazioni temporanee possono essere implementate usando [filtri di query](xref:core/querying/filters).
 
-Per le vere eliminazioni, un modello comune consiste nell'usare un'estensione del modello di query per eseguire essenzialmente un confronto delle differenze del grafo. Ad esempio:
+Per le vere eliminazioni, un modello comune consiste nell'usare un'estensione del modello di query per eseguire essenzialmente un confronto delle differenze del grafo. Esempio:
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 

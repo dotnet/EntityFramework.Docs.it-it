@@ -3,14 +3,13 @@ title: Relazioni, proprietà di navigazione e chiavi esterne-EF6
 description: Relazioni, proprietà di navigazione e chiavi esterne in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
 uid: ef6/fundamentals/relationships
-ms.openlocfilehash: 63349d9a81065ea4e15a5f97ef5298cb3dc67339
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 65caacfbd860b5b896695c208b55b9c66d11255d
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618393"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072252"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>Relazioni, proprietà di navigazione e chiavi esterne
 
@@ -96,7 +95,7 @@ Negli esempi seguenti viene illustrato come utilizzare le proprietà di chiave e
   course.Department = department;
   ```
 
-- Per eliminare la relazione, impostare la proprietà di navigazione su `null` . Se si lavora con Entity Framework basata su .NET 4,0, è necessario caricare l'entità finale correlata prima di impostarla su null. Ad esempio:   
+- Per eliminare la relazione, impostare la proprietà di navigazione su `null` . Se si lavora con Entity Framework basata su .NET 4,0, è necessario caricare l'entità finale correlata prima di impostarla su null. Esempio:   
   ``` csharp
   context.Entry(course).Reference(c => c.Department).Load();
   course.Department = null;

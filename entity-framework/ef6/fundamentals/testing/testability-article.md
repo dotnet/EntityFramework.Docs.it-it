@@ -3,13 +3,12 @@ title: Testabilità e Entity Framework 4,0-EF6
 description: Testabilità e Entity Framework 4,0
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 9430e2ab-261c-4e8e-8545-2ebc52d7a247
-ms.openlocfilehash: e1ded772bfee4f1870a891eaa525b33da8e9d3bc
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 439e2af6b0c851a2ab70d6d9ed1004deb83b1a0e
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618351"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070510"
 ---
 # <a name="testability-and-entity-framework-40"></a>Testabilità e Entity Framework 4,0
 Scott Allen
@@ -918,7 +917,7 @@ Esistono diverse tecniche che è possibile utilizzare per testare il software co
 -   Verificare che il modello contenga un elenco di tutti i dipendenti dopo l'esecuzione dell'indice.
 -   Verificare che il repository non contenga un determinato dipendente dopo l'esecuzione dell'operazione Delete.
 
-Un altro approccio che verrà visualizzato con oggetti fittizi consiste nel verificare le *interazioni*. Mentre il test basato sullo stato esegue asserzioni sullo stato degli oggetti, il test basato sull'interazione esegue asserzioni sulla modalità di interazione degli oggetti. Ad esempio:
+Un altro approccio che verrà visualizzato con oggetti fittizi consiste nel verificare le *interazioni*. Mentre il test basato sullo stato esegue asserzioni sullo stato degli oggetti, il test basato sull'interazione esegue asserzioni sulla modalità di interazione degli oggetti. Esempio:
 
 -   Verificare che il controller richiami il metodo Add del repository quando viene eseguita l'istruzione create.
 -   Verificare che il controller richiami il metodo FindAll del repository quando l'indice viene eseguito.

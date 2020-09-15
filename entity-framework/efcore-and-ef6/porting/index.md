@@ -1,15 +1,16 @@
 ---
 title: Conversione da EF6 a EF Core - EF
+description: Informazioni generali sul trasferimento di un'applicazione da Entity Framework 6 a Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 826b58bd-77b0-4bbc-bfcd-24d1ed3a8f38
 uid: efcore-and-ef6/porting/index
-ms.openlocfilehash: 77096b9bffba6b8c2a3d7bfb0c2e41e2d170a7db
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+ms.openlocfilehash: 132934df2ef7929372c4a092635c5c97227983f9
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78412926"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619675"
 ---
 # <a name="porting-from-ef6-to-ef-core"></a>Conversione da EF6 a EF Core
 
@@ -23,7 +24,7 @@ Il trasferimento da EF6 a EF Core deve essere visto come una conversione più ch
 
 Verificare che EF Core disponga di tutte le funzionalità necessarie per l'uso nell'applicazione. Vedere [Confronto delle funzionalità](xref:efcore-and-ef6/index) per un confronto dettagliato tra il set di funzionalità di EF Core e il set di EF6. Se mancano alcune funzionalità necessarie, assicurarsi che sia possibile compensare la mancanza di queste funzionalità prima di eseguire il trasferimento a EF Core.
 
-## <a name="behavior-changes"></a>Modifiche funzionali
+## <a name="behavior-changes"></a>Modifiche del comportamento
 
 Questo è un elenco non esaustivo delle modifiche del comportamento tra EF6 ed EF Core. È importante tenere presenti queste considerazioni quando si trasferisce l'applicazione, in quanto possono cambiare il comportamento dell'applicazione, ma non vengono visualizzate come errori di compilazione dopo il passaggio a EF Core.
 

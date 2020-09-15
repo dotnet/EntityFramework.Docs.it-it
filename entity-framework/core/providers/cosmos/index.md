@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 0d88e0a4876755656626621fd9a4ca01d18b5b64
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
-ms.translationtype: HT
+ms.openlocfilehash: 188c5b10aefa784715c0bbf2d50337d65c21fd62
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619323"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071368"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>Provider di Azure Cosmos DB per EF Core
 
@@ -60,7 +60,7 @@ In questo esempio `Order` è un'entità semplice con un riferimento al [tipo di 
 
 [!code-csharp[StreetAddress](../../../../samples/core/Cosmos/ModelBuilding/StreetAddress.cs?name=StreetAddress)]
 
-Per il salvataggio e l'esecuzione di query sui dati si segue il modello EF normale:
+Il salvataggio e l'esecuzione di query sui dati seguono il modello EF normale:
 
 [!code-csharp[HelloCosmos](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=HelloCosmos)]
 

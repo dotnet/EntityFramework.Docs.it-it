@@ -1,19 +1,20 @@
 ---
 title: Installazione di Entity Framework Core - EF Core
+description: Istruzioni di installazione per Entity Framework Core
 author: divega
 ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
-ms.openlocfilehash: 6575b1ac028f8b67b49ca7f4e49d6f19500be98f
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+ms.openlocfilehash: 1cc6f8f73739e61adefb375ee37a830933903470
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80136177"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617989"
 ---
 # <a name="installing-entity-framework-core"></a>Installazione di Entity Framework Core
 
-## <a name="prerequisites"></a>Prerequisites
+## <a name="prerequisites"></a>Prerequisiti
 
 * EF Core è una libreria [.NET Standard 2.0](/dotnet/standard/net-standard). Pertanto, EF Core richiede un'implementazione di .NET che supporta .NET Standard 2.0 per l'esecuzione. EF Core può anche essere indicato come riferimento da altre librerie .NET Standard 2.0.
 

@@ -1,19 +1,21 @@
 ---
 title: Entità con rilevamento automatico - EF6
+description: Entità con rilevamento automatico in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 5e60f5be-7bbb-4bf8-835e-0ac808d6c84a
-ms.openlocfilehash: 3bb9759d89fbd0c10b911625aa7d0afd7747de14
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+uid: ef6/fundamentals/disconnected-entities/self-tracking-entities/index
+ms.openlocfilehash: 0e771c0f147589112779359ab8c06344eb05b8fc
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413356"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616179"
 ---
 # <a name="self-tracking-entities"></a>Entità con rilevamento automatico
 
 > [!IMPORTANT]
-> Non è più consigliabile usare il modello di entità con rilevamento automatico. Continuerà a essere disponibile solo per supportare le applicazioni esistenti. Se l'applicazione richiede l'uso con grafici di entità disconnesse, prendere in considerazione altre alternative, come ad esempio [Trackable Entities](https://trackableentities.github.io/), che è una tecnologia simile alle entità con rilevamento automatico ma viene sviluppata in modo più attivo dalla community, oppure la scrittura di codice personalizzato usando le API di rilevamento delle modifiche di basso livello.
+> L'uso del modello di entità con rilevamento automatico non è più consigliabile. Continuerà a essere disponibile solo per supportare le applicazioni esistenti. Se l'applicazione richiede l'uso con grafici di entità disconnesse, prendere in considerazione altre alternative, come ad esempio [Trackable Entities](https://trackableentities.github.io/), che è una tecnologia simile alle entità con rilevamento automatico ma viene sviluppata in modo più attivo dalla community, oppure la scrittura di codice personalizzato usando le API di rilevamento delle modifiche di basso livello.
 
 In un'applicazione basata su Entity Framework il rilevamento delle modifiche negli oggetti viene controllato da un contesto. Viene quindi usato il metodo SaveChanges per rendere permanenti le modifiche al database. Quando si usano le applicazioni a più livelli, gli oggetti entità vengono in genere disconnessi dal contesto ed è necessario decidere come tenere traccia delle modifiche e segnalarle al contesto. Le entità con rilevamento automatico consentono di tenere traccia delle modifiche in qualsiasi livello e di riprodurle quindi in un contesto per essere salvate.  
 
@@ -21,16 +23,16 @@ Usare le entità con rilevamento automatico solo se il contesto non è disponibi
 
 Questo elemento di modello genera due file con estensione tt (modello di testo):  
 
-- Il file **\<nome modello\>.tt** genera i tipi di entità e una classe helper contenente la logica di rilevamento delle modifiche usata dalle entità con rilevamento automatico, nonché i metodi di estensione che consentono l'impostazione dello stato sulle entità con rilevamento automatico.  
-- Il file **\<nome modello\>.Context.tt** genera un contesto derivato e una classe di estensione contenente i metodi **ApplyChanges** per le classi **ObjectContext** e **ObjectSet**. Tali metodi consentono di esaminare le informazioni sul rilevamento delle modifiche contenute nel grafico delle entità con rilevamento automatico per dedurre il set di operazioni che è necessario eseguire per salvare le modifiche nel database.  
+- Il file **\<model name\>.tt** genera i tipi di entità e una classe helper contenente la logica di rilevamento delle modifiche usata dalle entità con rilevamento automatico, nonché i metodi di estensione che consentono l'impostazione dello stato sulle entità con rilevamento automatico.  
+- Il file **\<model name\>.Context.tt** genera un contesto derivato e una classe di estensione contenente i metodi **ApplyChanges** per le classi **ObjectContext** e **ObjectSet**. Tali metodi consentono di esaminare le informazioni sul rilevamento delle modifiche contenute nel grafico delle entità con rilevamento automatico per dedurre il set di operazioni che è necessario eseguire per salvare le modifiche nel database.  
 
 ## <a name="get-started"></a>Introduzione  
 
-Per iniziare, visitare la pagina [Self-Tracking Entities Walkthrough](walkthrough.md) (Entità con rilevamento automatico - Procedura dettagliata).  
+Per iniziare, visitare la pagina [Self-Tracking Entities Walkthrough](xref:ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough) (Entità con rilevamento automatico - Procedura dettagliata).  
 
 ## <a name="functional-considerations-when-working-with-self-tracking-entities"></a>Considerazioni funzionali per l'uso delle entità con rilevamento automatico  
 > [!IMPORTANT]
-> Non è più consigliabile usare il modello di entità con rilevamento automatico. Continuerà a essere disponibile solo per supportare le applicazioni esistenti. Se l'applicazione richiede l'uso con grafici di entità disconnesse, prendere in considerazione altre alternative, come ad esempio [Trackable Entities](https://trackableentities.github.io/), che è una tecnologia simile alle entità con rilevamento automatico ma viene sviluppata in modo più attivo dalla community, oppure la scrittura di codice personalizzato usando le API di rilevamento delle modifiche di basso livello.
+> L'uso del modello di entità con rilevamento automatico non è più consigliabile. Continuerà a essere disponibile solo per supportare le applicazioni esistenti. Se l'applicazione richiede l'uso con grafici di entità disconnesse, prendere in considerazione altre alternative, come ad esempio [Trackable Entities](https://trackableentities.github.io/), che è una tecnologia simile alle entità con rilevamento automatico ma viene sviluppata in modo più attivo dalla community, oppure la scrittura di codice personalizzato usando le API di rilevamento delle modifiche di basso livello.
 
 Quando si utilizzano le entità con rilevamento automatico, tenere presenti le considerazioni seguenti.  
 
@@ -46,7 +48,7 @@ Quando si utilizzano le entità con rilevamento automatico, tenere presenti le c
 - Le entità con rilevamento automatico non sono abilitate per eseguire il caricamento lazy.  
 - La serializzazione binaria e la serializzazione agli oggetti della gestione dello stato di ASP.NET non sono supportate dalle entità con rilevamento automatico. Tuttavia, è possibile personalizzare il modello in modo da aggiungere il supporto per la serializzazione binaria. Per altre informazioni, vedere [Using Binary Serialization and ViewState with Self-Tracking Entities](https://go.microsoft.com/fwlink/?LinkId=199208) (Uso della serializzazione binaria e di ViewState con le entità con rilevamento automatico).  
 
-## <a name="security-considerations"></a>Considerazioni relative alla sicurezza  
+## <a name="security-considerations"></a>Considerazioni sulla sicurezza  
 
 Quando si usano le entità con rilevamento automatico tenere a mente di queste considerazioni sulla sicurezza:  
 

@@ -3,14 +3,13 @@ title: Tipi di entità-EF Core
 description: Come configurare ed eseguire il mapping di tipi di entità usando Entity Framework Core
 author: roji
 ms.date: 12/03/2019
-ms.assetid: cbe6935e-2679-4b77-8914-a8d772240cf1
 uid: core/modeling/entity-types
-ms.openlocfilehash: b3d9ad753637d021d9aa52965da38091ae690f77
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: fead7f9e37efb7f674f429acbfd16c2ca78480d4
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417233"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071511"
 ---
 # <a name="entity-types"></a>Tipi di entità
 
@@ -18,13 +17,13 @@ L'inclusione di un DbSet di un tipo nel contesto indica che è incluso nel model
 
 ## <a name="including-types-in-the-model"></a>Inclusione di tipi nel modello
 
-Per convenzione, i tipi esposti nelle proprietà DbSet nel contesto sono inclusi nel modello come entità. Sono inclusi anche i tipi di entità specificati nel metodo `OnModelCreating`, così come tutti i tipi individuati in modo ricorsivo per esplorare le proprietà di navigazione di altri tipi di entità individuati.
+Per convenzione, i tipi esposti nelle proprietà DbSet nel contesto sono inclusi nel modello come entità. Sono inclusi anche i tipi di entità specificati nel `OnModelCreating` metodo, così come tutti i tipi individuati in modo ricorsivo per esplorare le proprietà di navigazione di altri tipi di entità individuati.
 
 Nell'esempio di codice riportato di seguito vengono inclusi tutti i tipi:
 
 * `Blog` è incluso perché è esposto in una proprietà DbSet nel contesto.
-* `Post` è incluso perché viene individuato tramite la proprietà di navigazione `Blog.Posts`.
-* `AuditEntry` perché è specificato nel `OnModelCreating`.
+* `Post` è incluso perché viene individuato tramite la `Blog.Posts` proprietà di navigazione.
+* `AuditEntry` Poiché è specificato in `OnModelCreating` .
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/EntityTypes.cs?name=EntityTypes&highlight=3,7,16)]
 
@@ -60,7 +59,7 @@ Per convenzione, ogni tipo di entità verrà configurato per eseguire il mapping
 
 ## <a name="table-schema"></a>Schema della tabella
 
-Quando si utilizza un database relazionale, le tabelle vengono create per convenzione nello schema predefinito del database. Ad esempio, Microsoft SQL Server utilizzerà lo schema `dbo` (SQLite non supporta gli schemi).
+Quando si utilizza un database relazionale, le tabelle vengono create per convenzione nello schema predefinito del database. Ad esempio, Microsoft SQL Server utilizzerà lo `dbo` schema (SQLite non supporta gli schemi).
 
 È possibile configurare le tabelle da creare in uno schema specifico, come indicato di seguito:
 

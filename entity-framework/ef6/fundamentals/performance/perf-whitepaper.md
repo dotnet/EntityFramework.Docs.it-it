@@ -3,14 +3,13 @@ title: Considerazioni sulle prestazioni per EF4, EF5 e EF6-EF6
 description: Considerazioni sulle prestazioni per Entity Framework 4, 5 e 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: d6d5a465-6434-45fa-855d-5eb48c61a2ea
 uid: ef6/fundamentals/performance/perf-whitepaper
-ms.openlocfilehash: 9d70eab61caace02f59f3c555ef416c45d4f8f45
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 65584382df3d510f314a576f41c5dee3d2e718e7
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616170"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070536"
 ---
 # <a name="performance-considerations-for-ef-4-5-and-6"></a>Considerazioni sulle prestazioni per EF 4, 5 e 6
 Di David Obando, Eric Dettinger e altri
@@ -211,7 +210,7 @@ La cache dei piani di query è condivisa tra le istanze di ObjectContext nello s
 
 -   La cache dei piani di query è condivisa per tutti i tipi di query: oggetti Entity SQL, LINQ to Entities e CompiledQuery.
 -   Per impostazione predefinita, la memorizzazione nella cache dei piani di query è abilitata per Entity SQL query, eseguite tramite un oggetto EntityCommand o un oggetto ObjectQuery. È anche abilitata per impostazione predefinita per LINQ to Entities query in Entity Framework su .NET 4,5 e in Entity Framework 6
-    -   La memorizzazione nella cache del piano di query può essere disabilitata impostando la proprietà EnablePlanCaching (su EntityCommand o ObjectQuery) su false. Ad esempio:
+    -   La memorizzazione nella cache del piano di query può essere disabilitata impostando la proprietà EnablePlanCaching (su EntityCommand o ObjectQuery) su false. Esempio:
 ``` csharp
                     var query = from customer in context.Customer
                                 where customer.CustomerId == id
@@ -456,7 +455,7 @@ Entity Framework 6 contiene le ottimizzazioni per il modo in cui IEnumerable &lt
 
 ### <a name="42-using-functions-that-produce-queries-with-constants"></a>4,2 uso di funzioni che producono query con costanti
 
-Gli operatori LINQ (), Take (), Contains () e DefautIfEmpty () LINQ non producono query SQL con parametri, ma inseriscono invece i valori passati come costanti. Per questo motivo, le query che potrebbero altrimenti risultare identiche a causa dell'inquinamento della cache dei piani di query, sia nello stack EF che nel server di database, non vengono riutilizzate a meno che non si utilizzino le stesse costanti in un'esecuzione di query successiva. Ad esempio:
+Gli operatori LINQ (), Take (), Contains () e DefautIfEmpty () LINQ non producono query SQL con parametri, ma inseriscono invece i valori passati come costanti. Per questo motivo, le query che potrebbero altrimenti risultare identiche a causa dell'inquinamento della cache dei piani di query, sia nello stack EF che nel server di database, non vengono riutilizzate a meno che non si utilizzino le stesse costanti in un'esecuzione di query successiva. Esempio:
 
 ``` csharp
 var id = 10;
@@ -510,7 +509,7 @@ for (; i < count; ++i)
 
 ### <a name="43-using-the-properties-of-a-non-mapped-object"></a>4,3 utilizzo delle proprietà di un oggetto non mappato
 
-Quando una query usa le proprietà di un tipo di oggetto non mappato come parametro, la query non viene memorizzata nella cache. Ad esempio:
+Quando una query usa le proprietà di un tipo di oggetto non mappato come parametro, la query non viene memorizzata nella cache. Esempio:
 
 ``` csharp
 using (var context = new MyContext())
@@ -691,7 +690,7 @@ var q = context.Products.AsNoTracking()
     -   I modelli che utilizzano DefaultIfEmpty per le query OUTER JOIN generano query più complesse rispetto alle semplici istruzioni OUTER JOIN in Entity SQL.
     -   Non è ancora possibile utilizzare LIKE con criteri di ricerca generali.
 
-Si noti che le query che proiettano le proprietà scalari non vengono rilevate anche se il NoTracking non è specificato. Ad esempio:
+Si noti che le query che proiettano le proprietà scalari non vengono rilevate anche se il NoTracking non è specificato. Esempio:
 
 ``` csharp
 var q = context.Products.Where(p => p.Category.CategoryName == "Beverages").Select(p => new { p.ProductName });

@@ -1,15 +1,16 @@
 ---
 title: Introduzione a EF Core
+description: Esercitazione introduttiva a Entity Framework Core
 author: rick-anderson
 ms.date: 09/17/2019
 ms.assetid: 3c88427c-20c6-42ec-a736-22d3eccd5071
 uid: core/get-started/index
-ms.openlocfilehash: 7181df6ee73b09f196940178ffed38d96b075258
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: e33a18c8d3d72078eaaeba9c8cf0a1afca0cb66c
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370318"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618004"
 ---
 # <a name="getting-started-with-ef-core"></a>Introduzione a EF Core
 
@@ -54,7 +55,7 @@ cd EFGetStarted
 
 ## <a name="install-entity-framework-core"></a>Installare Entity Framework Core
 
-Per installare EF Core, installare il pacchetto per i provider di database di EF Core che si vuole usare come destinazione. Questa esercitazione usa SQLite in quanto viene eseguita su tutte le piattaforme supportate da .NET Core. Per un elenco dei provider disponibili, vedere [Provider di database](../providers/index.md).
+Per installare EF Core, installare il pacchetto per i provider di database di EF Core che si vuole usare come destinazione. Questa esercitazione usa SQLite in quanto viene eseguita su tutte le piattaforme supportate da .NET Core. Per un elenco dei provider disponibili, vedere [Provider di database](xref:core/providers/index).
 
 ### <a name="net-core-cli"></a>[Interfaccia della riga di comando di .NET Core](#tab/netcore-cli)
 
@@ -93,9 +94,9 @@ Definire una classe di contesto e le classi di entità che costituiscono il mode
 
 [!code-csharp[Main](../../../samples/core/GetStarted/Model.cs)]
 
-EF Core supporta anche il [reverse engineering](../managing-schemas/scaffolding.md) di un modello da un database esistente.
+EF Core supporta anche il [reverse engineering](xref:core/managing-schemas/scaffolding) di un modello da un database esistente.
 
-Suggerimento: questa applicazione mantiene intenzionalmente le cose semplici per maggiore chiarezza. Le [stringhe di connessione](../miscellaneous/connection-strings.md) non devono essere archiviate nel codice per le applicazioni di produzione. Potrebbe anche essere necessario suddividere ogni classe C# nel relativo file.
+Suggerimento: questa applicazione mantiene intenzionalmente le cose semplici per maggiore chiarezza. Le [stringhe di connessione](xref:core/miscellaneous/connection-strings) non devono essere archiviate nel codice per le applicazioni di produzione. Potrebbe anche essere preferibile suddividere ogni classe C# in un file separato.
 
 ## <a name="create-the-database"></a>Creare il database
 
@@ -112,11 +113,11 @@ La procedura seguente usa le [migrazioni](xref:core/managing-schemas/migrations/
   dotnet ef database update
   ```
 
-  Vengono installati [dotnet ef](../miscellaneous/cli/dotnet.md) e il pacchetto di progettazione necessario per eseguire il comando in un progetto. Il comando `migrations` esegue lo scaffolding di una migrazione per creare il set iniziale di tabelle per il modello. Il comando `database update` crea il database e ne applica la nuova migrazione.
+  Vengono installati [dotnet ef](xref:core/miscellaneous/cli/dotnet) e il pacchetto di progettazione necessario per eseguire il comando in un progetto. Il comando `migrations` esegue lo scaffolding di una migrazione per creare il set iniziale di tabelle per il modello. Il comando `database update` crea il database e ne applica la nuova migrazione.
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Eseguire i comandi seguenti nella **console di gestione pacchetti (PMC)**
+* Eseguire i comandi seguenti nella **Console di Gestione pacchetti (PMC)**
 
   ``` PowerShell
   Install-Package Microsoft.EntityFrameworkCore.Tools
@@ -124,7 +125,7 @@ La procedura seguente usa le [migrazioni](xref:core/managing-schemas/migrations/
   Update-Database
   ```
 
-  Verranno installati gli [strumenti di PMC per EF Core](../miscellaneous/cli/powershell.md). Il comando `Add-Migration` esegue lo scaffolding di una migrazione per creare il set iniziale di tabelle per il modello. Il comando `Update-Database` crea il database e ne applica la nuova migrazione.
+  Verranno installati gli [strumenti di PMC per EF Core](xref:core/miscellaneous/cli/powershell). Il comando `Add-Migration` esegue lo scaffolding di una migrazione per creare il set iniziale di tabelle per il modello. Il comando `Update-Database` crea il database e ne applica la nuova migrazione.
 
 ---
 

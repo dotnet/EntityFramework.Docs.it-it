@@ -3,14 +3,13 @@ title: Tag delle query - EF Core
 description: Uso dei tag di query per identificare query specifiche nei messaggi di log emessi da Entity Framework Core
 author: divega
 ms.date: 11/14/2018
-ms.assetid: 73C7A627-C8E9-452D-9CD5-AFCC8FEFE395
 uid: core/querying/tags
-ms.openlocfilehash: bf80057d29160bd5ef6ae26ee6d447fc3c3f0fec
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 27f757f4159a36bec324cce56d74b7860e1c3741
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617490"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070991"
 ---
 # <a name="query-tags"></a>Tag delle query
 
@@ -70,7 +69,7 @@ ORDER BY [f].[Location].STDistance(@__myLocation_0) DESC
 ```
 
 È anche possibile usare stringhe con più righe come tag di query.
-Ad esempio:
+Esempio:
 
 ``` csharp
 var results = Limit(GetNearestFriends(myLocation), 25).TagWith(

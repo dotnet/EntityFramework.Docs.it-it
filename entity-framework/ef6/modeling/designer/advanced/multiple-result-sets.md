@@ -3,21 +3,20 @@ title: Stored procedure con più set di risultati-EF6
 description: Stored procedure con più set di risultati in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 1b3797f9-cd3d-4752-a55e-47b84b399dc1
 uid: ef6/modeling/designer/advanced/multiple-result-sets
-ms.openlocfilehash: 39b8ae171b7cee263554b6ff94bed6bd8f1e0c39
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 6b213b944ca06a7ca141746d86f1127be2fd7d87
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620575"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070224"
 ---
 # <a name="stored-procedures-with-multiple-result-sets"></a>Stored procedure con più set di risultati
 In alcuni casi, quando si utilizzano stored procedure è necessario restituire più di un set di risultati. Questo scenario viene in genere usato per ridurre il numero di round trip del database necessari per comporre una singola schermata.Prima di EF5, Entity Framework avrebbe consentito la chiamata al stored procedure ma restituirebbe solo il primo set di risultati al codice chiamante.
 
 In questo articolo vengono illustrati due modi per accedere a più di un set di risultati da un stored procedure in Entity Framework. Uno che usa solo il codice e funziona sia con Code First sia con la finestra di progettazione di Entity Framework e uno che funziona solo con la finestra di progettazione EF. Il supporto per gli strumenti e le API per questa operazione dovrebbe migliorare nelle future versioni di Entity Framework.
 
-## <a name="model"></a>Modello
+## <a name="model"></a>Modellare
 
 Gli esempi in questo articolo usano un modello di Blog e post di base in cui un Blog contiene molti post e un post appartiene a un singolo Blog. Si utilizzerà un stored procedure nel database che restituisce tutti i Blog e i post, come indicato di seguito:
 

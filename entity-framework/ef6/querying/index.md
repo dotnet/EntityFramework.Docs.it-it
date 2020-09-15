@@ -1,14 +1,16 @@
 ---
 title: Query e ricerca di entità - EF6
+description: Esecuzione di query e ricerca di entità in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 65bb3db2-2226-44af-8864-caa575cf1b46
-ms.openlocfilehash: 29a86817e250a2f53ecaa73e8fa4bf93452f0497
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+uid: ef6/querying/index
+ms.openlocfilehash: 4bfdc59527ab75e7a2e08dc743a1974246643aa3
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78412976"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620335"
 ---
 # <a name="querying-and-finding-entities"></a>Query e ricerca di entità
 Questo argomento illustra i vari modi che è possibile usare per la ricerca di dati tramite Entity Framework, inclusi LINQ e il metodo Find. Le tecniche illustrate in questo argomento si applicano in modo analogo ai modelli creati con Code First ed EF Designer.  
@@ -41,7 +43,7 @@ Si noti che DbSet e IDbSet creano sempre query sul database e determineranno sem
 
 Quando vengono restituiti i risultati dal database, gli oggetti che non esistono nel contesto vengono collegati al contesto. Se un oggetto è già presente nel contesto, viene restituito l'oggetto esistente (i valori corrente e originale delle relative proprietà nella voce **non** vengono sovrascritti con i valore del database).  
 
-Quando si esegue una query, le entità aggiunte al contesto ma non ancora salvate nel database non vengono restituite nel set di risultati. Per ottenere i dati presenti nel contesto, vedere [Local Data](~/ef6/querying/local-data.md) (Dati locali).  
+Quando si esegue una query, le entità aggiunte al contesto ma non ancora salvate nel database non vengono restituite nel set di risultati. Per ottenere i dati presenti nel contesto, vedere [Local Data](xref:ef6/querying/local-data) (Dati locali).  
 
 Se una query non restituisce righe dal database, il risultato sarà una raccolta vuota, anziché **Null**.  
 

@@ -3,14 +3,13 @@ title: Funzioni con valori di tabella (funzioni con valori)-EF6
 description: Funzioni con valori di tabella (funzioni con valori) in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: f019c97b-87b0-4e93-98f4-2c539f77b2dc
 uid: ef6/modeling/designer/advanced/tvfs
-ms.openlocfilehash: 1575526fb46f9ddd3ad43c7c4ac0304aefa1d5d3
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 727c6c7ff5947e78bf8eb489194e355e2fd157c9
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620550"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070161"
 ---
 # <a name="table-valued-functions-tvfs"></a>Funzioni con valori di tabella (funzioni con valori)
 > [!NOTE]
@@ -40,7 +39,7 @@ Per completare questa procedura dettagliata, è necessario:
 
 ## <a name="set-up-the-project"></a>Configurare il progetto
 
-1.  Aprire Visual Studio.
+1.  Aprire Visual Studio
 2.  Scegliere **nuovo**dal menu **file** , quindi fare clic su **progetto** .
 3.  Nel riquadro sinistro fare clic su **Visual C \# **e quindi selezionare il modello **console** .
 4.  Immettere **TVF** come nome del progetto e fare clic su **OK** .

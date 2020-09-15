@@ -3,14 +3,13 @@ title: Tipi di entità con costruttori-EF Core
 description: Utilizzo di costruttori per associare dati a Entity Framework Core modello
 author: ajcvickers
 ms.date: 02/23/2018
-ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 uid: core/modeling/constructors
-ms.openlocfilehash: 58529a3a68e69a31249460d402027274404dce45
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 06d18f173275599ad1e547193363e13c48fc8dcf
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617540"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071589"
 ---
 # <a name="entity-types-with-constructors"></a>Tipi di entità con costruttori
 
@@ -49,7 +48,7 @@ public class Post
 }
 ```
 
-Quando EF Core crea istanze di questi tipi, ad esempio per i risultati di una query, chiamerà prima di tutto il costruttore senza parametri predefinito e quindi imposterà ogni proprietà sul valore del database. Tuttavia, se EF Core trova un costruttore con parametri con i nomi di parametro e i tipi che corrispondono a quelli delle proprietà mappate, chiamerà invece il costruttore con parametri con i valori per tali proprietà e non imposterà in modo esplicito ogni proprietà. Ad esempio:
+Quando EF Core crea istanze di questi tipi, ad esempio per i risultati di una query, chiamerà prima di tutto il costruttore senza parametri predefinito e quindi imposterà ogni proprietà sul valore del database. Tuttavia, se EF Core trova un costruttore con parametri con i nomi di parametro e i tipi che corrispondono a quelli delle proprietà mappate, chiamerà invece il costruttore con parametri con i valori per tali proprietà e non imposterà in modo esplicito ogni proprietà. Esempio:
 
 ``` csharp
 public class Blog
@@ -102,7 +101,7 @@ Quando le proprietà vengono impostate tramite il costruttore, può essere utile
 * Non è stato eseguito il mapping delle proprietà senza Setter per convenzione. Questa operazione tende a eseguire il mapping delle proprietà che non devono essere mappate, ad esempio le proprietà calcolate.
 * L'uso di valori di chiave generati automaticamente richiede una proprietà chiave che sia di lettura/scrittura, perché il valore della chiave deve essere impostato dal generatore di chiavi quando si inseriscono nuove entità.
 
-Un modo semplice per evitare questi problemi consiste nell'usare Setter privati. Ad esempio:
+Un modo semplice per evitare questi problemi consiste nell'usare Setter privati. Esempio:
 
 ``` csharp
 public class Blog

@@ -1,21 +1,22 @@
 ---
 title: Novità - EF6
+description: Novità di Entity Framework 6
 author: divega
 ms.date: 09/12/2019
 ms.assetid: 41d1f86b-ce66-4bf2-8963-48514406fb4c
 uid: ef6/what-is-new/index
-ms.openlocfilehash: e0367aeefd682434bf520301776bcff4f0e72e06
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+ms.openlocfilehash: 71854e0a7009b35742a70724210708a284f50a3d
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80136132"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619763"
 ---
 # <a name="whats-new-in-ef6"></a>Novità di EF6
 
 Per ottenere le funzionalità più recenti e il livello di stabilità più elevato è consigliabile usare l'ultima versione rilasciata di Entity Framework.
 È possibile, tuttavia, usare una versione precedente o provare i miglioramenti resi disponibili nella versione provvisoria più recente.
-Per installare versioni specifiche di Entity Framework, vedere [Get Entity Framework](~/ef6/fundamentals/install.md) (Ottenere Entity Framework).
+Per installare versioni specifiche di Entity Framework, vedere [Get Entity Framework](xref:ef6/fundamentals/install) (Ottenere Entity Framework).
 
 ## <a name="ef-640"></a>EF 6.4.0
 
@@ -56,4 +57,4 @@ Avviso: assicurarsi che il progetto .NET Framework vecchio stile (ovvero non in 
 
 ## <a name="past-releases"></a>Versioni precedenti
 
-La pagina [Versioni precedenti](past-releases.md) contiene un archivio di tutte le versioni precedenti di Entity Framework e delle funzionalità principali introdotte in ogni versione.
+La pagina [Versioni precedenti](xref:ef6/what-is-new/past-releases) contiene un archivio di tutte le versioni precedenti di Entity Framework e delle funzionalità principali introdotte in ogni versione.

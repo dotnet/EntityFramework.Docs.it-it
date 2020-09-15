@@ -3,14 +3,13 @@ title: Rilevamento e query senza rilevamento-EF Core
 description: Informazioni sulle query di rilevamento e senza rilevamento in Entity Framework Core
 author: smitpatel
 ms.date: 10/10/2019
-ms.assetid: e17e060c-929f-4180-8883-40c438fbcc01
 uid: core/querying/tracking
-ms.openlocfilehash: f49c6a3e1dc84dff72d80e3ef0f9bbe149d58a72
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: a01446d7aec4d47eda23d4ac056e1c8286d2a281
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617417"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070965"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>Rilevamento e query senza rilevamento
 

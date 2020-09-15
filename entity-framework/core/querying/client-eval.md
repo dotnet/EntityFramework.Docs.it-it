@@ -3,14 +3,13 @@ title: Valutazione client e server-EF Core
 description: Valutazione del client e del server delle query con Entity Framework Core
 author: smitpatel
 ms.date: 10/03/2019
-ms.assetid: 8b6697cc-7067-4dc2-8007-85d80503d123
 uid: core/querying/client-eval
-ms.openlocfilehash: 61a9f4d69b78f6cb42f4d367948f93230370d7f2
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 41be7da26423f50017f57a7686f65bd8baf69ef5
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616470"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071173"
 ---
 # <a name="client-vs-server-evaluation"></a>Valutazione client e server
 

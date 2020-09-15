@@ -3,14 +3,13 @@ title: Provider di database SQLite-limitazioni-EF Core
 description: Limitazioni del provider di database Entity Framework Core SQLite rispetto ad altri provider
 author: bricelam
 ms.date: 07/16/2020
-ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
 uid: core/providers/sqlite/limitations
-ms.openlocfilehash: 2657bf03bc5cd0d5fb45c57e7f7605824deb44d2
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 546910afb9c97a93a7cc471bb813be0b9874a4bd
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616531"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071225"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>Limitazioni del provider di database SQLite per EF Core
 
@@ -51,28 +50,28 @@ Per eseguire determinate operazioni verrà tentata una ricompilazione. Le ricomp
 | Operazione            | Supportato?  | Richiede la versione |
 |:---------------------|:------------|:-----------------|
 | AddCheckConstraint   | ✔ (ricompila) | 5,0              |
-| AddColumn            | ✔           | 1.0              |
+| AddColumn            | ✔           | 1,0              |
 | AddForeignKey        | ✔ (ricompila) | 5,0              |
 | AddPrimaryKey        | ✔ (ricompila) | 5,0              |
 | AddUniqueConstraint  | ✔ (ricompila) | 5,0              |
 | AlterColumn          | ✔ (ricompila) | 5,0              |
-| CreateIndex          | ✔           | 1.0              |
-| CreateTable          | ✔           | 1.0              |
+| CreateIndex          | ✔           | 1,0              |
+| CreateTable          | ✔           | 1,0              |
 | DropCheckConstraint  | ✔ (ricompila) | 5,0              |
 | DropColumn           | ✔ (ricompila) | 5,0              |
 | DropForeignKey       | ✔ (ricompila) | 5,0              |
-| DropIndex            | ✔           | 1.0              |
+| DropIndex            | ✔           | 1,0              |
 | DropPrimaryKey       | ✔ (ricompila) | 5,0              |
-| DropTable            | ✔           | 1.0              |
+| DropTable            | ✔           | 1,0              |
 | DropUniqueConstraint | ✔ (ricompila) | 5,0              |
 | RenameColumn         | ✔           | 2.2.2            |
 | RenameIndex          | ✔ (ricompila) | 2.1              |
-| RenameTable          | ✔           | 1.0              |
-| EnsureSchema         | ✔ (no-op)   | 2,0              |
-| DropSchema           | ✔ (no-op)   | 2,0              |
-| INS               | ✔           | 2,0              |
-| Aggiornamento               | ✔           | 2,0              |
-| Elimina               | ✔           | 2,0              |
+| RenameTable          | ✔           | 1,0              |
+| EnsureSchema         | ✔ (no-op)   | 2.0              |
+| DropSchema           | ✔ (no-op)   | 2.0              |
+| Insert               | ✔           | 2.0              |
+| Aggiorna               | ✔           | 2.0              |
+| Delete               | ✔           | 2.0              |
 
 ## <a name="migrations-limitations-workaround"></a>Soluzione alternativa alle migrazioni
 

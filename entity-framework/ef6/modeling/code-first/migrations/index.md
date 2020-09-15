@@ -1,14 +1,16 @@
 ---
 title: Migrazioni Code First - EF6
+description: Migrazioni Code First in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 36591d8f-36e1-4835-8a51-90f34f633d1e
-ms.openlocfilehash: e5a91af73bab9d45b0f1f4242ce503c6b6f407f6
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+uid: ef6/modeling/code-first/migrations/index
+ms.openlocfilehash: b2200a91b087cf6f2dff0803b710e2518193af40
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413306"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616960"
 ---
 # <a name="code-first-migrations"></a>Migrazioni Code First
 Migrazioni Code First rappresenta il metodo più adatto per far evolvere lo schema del database dell'applicazione quando si usa il flusso di lavoro Code First. Le migrazioni offrono un set di strumenti che consentono di:
@@ -17,7 +19,7 @@ Migrazioni Code First rappresenta il metodo più adatto per far evolvere lo sche
 2. Generare migrazioni per tenere traccia delle modifiche apportate al modello di Entity Framework
 2. Mantenere aggiornato il database con le modifiche
 
-La seguente procedura dettagliata offre una panoramica di Migrazioni Code First in Entity Framework. È possibile eseguire l'intera procedura dettagliata o passare all'argomento desiderato. Sono discussi i seguenti argomenti:
+La seguente procedura dettagliata offre una panoramica di Migrazioni Code First in Entity Framework. È possibile eseguire l'intera procedura dettagliata o passare all'argomento desiderato. Vengono trattati i seguenti argomenti:
 
 ## <a name="building-an-initial-model--database"></a>Creazione del modello iniziale e del database
 
@@ -288,7 +290,7 @@ Sebbene fino ad ora sia sempre stato eseguito l'aggiornamento alla migrazione pi
 
 Si supponga di volere eseguire la migrazione del database allo stato in cui si trovava dopo l'esecuzione della migrazione **AddBlogUrl**. È possibile usare l'opzione **-TargetMigration** per eseguire il downgrade alla migrazione specifica.
 
--   Eseguire il comando **Update-Database –TargetMigration: AddBlogUrl** nella console di Gestione pacchetti.
+-   Eseguire il comando **Update-Database -TargetMigration: AddBlogUrl** nella console di Gestione pacchetti.
 
 Il comando esegue lo script di downgrade per le migrazioni **AddBlogAbstract** e **AddPostClass**.
 
@@ -298,7 +300,7 @@ Se si vuole eseguire il rollback a un database vuoto, è possibile usare il coma
 
 Dopo aver controllato le modifiche nel controllo del codice sorgente, se un altro sviluppatore vuole apportare le modifiche nel proprio computer è sufficiente che esegua la sincronizzazione. Dopo aver ottenuto le nuove migrazioni, sarà sufficiente eseguire il comando Update-Database per applicare le modifiche in locale. Tuttavia, se si vuole eseguire il push delle modifiche in un server di test, ed eventualmente in produzione, può essere necessario uno script SQL da inviare al DBA.
 
--   Eseguire il comando **Update-Database** e specificare il flag **-Script** in modo che le modifiche vengano scritte in uno script anziché essere applicate. Vengono anche specificate una migrazione di origine e una migrazione di destinazione per cui generare lo script. Si vuole che lo script passi da un database vuoto ( **$InitialDatabase**) alla versione più recente (migrazione **AddPostAbstract**).
+-   Eseguire il comando **Update-Database** e specificare il flag **-Script** in modo che le modifiche vengano scritte in uno script anziché essere applicate. Vengono anche specificate una migrazione di origine e una migrazione di destinazione per cui generare lo script. Si vuole che lo script passi da un database vuoto (**$InitialDatabase**) alla versione più recente (migrazione **AddPostAbstract**).
     *Se non si specifica una migrazione di destinazione, Migrazioni userà la migrazione di più recente come destinazione. Se non si specifica una migrazione di origine, Migrazioni userà lo stato corrente del database.*
 -   Eseguire il comando **Update-Database -Script -SourceMigration: $InitialDatabase -TargetMigration: AddPostAbstract** nella console di Gestione pacchetti
 

@@ -1,15 +1,16 @@
 ---
 title: Provider di Entity Framework - EF6
+description: Provider di Entity Framework in Entity Framework 6
 author: divega
 ms.date: 06/27/2018
 ms.assetid: 7BFB7763-CD6C-4520-93A2-7B265F5FA586
 uid: ef6/fundamentals/providers/index
-ms.openlocfilehash: 661398e7d6037875ce0cdb15c221a729d1f0c7d8
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+ms.openlocfilehash: 5140fefeb118b6e70ac27ab010d813d03ec7000c
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413336"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89615876"
 ---
 # <a name="entity-framework-6-providers"></a>Provider di Entity Framework 6
 > [!NOTE]
@@ -69,7 +70,7 @@ Il "tipo" in questa registrazione è il nome qualificato dall'assembly del tipo 
 
 ### <a name="code-based-registration"></a>Registrazione basata su codice
 
-A partire da Entity Framework 6, la configurazione a livello di applicazione per Entity Framework può essere specificata nel codice. Per i dettagli completi, vedere _[Entity Framework - configurazione basata su codice](https://msdn.microsoft.com/data/jj680699)_ . La normale modalità di registrazione di un provider di Entity Framework tramite la configurazione basata su codice consiste nel creare una nuova classe che deriva da System.Data.Entity.DbConfiguration e inserirla nello stesso assembly della classe DbContext. La classe DbConfiguration registrerà quindi il provider nel proprio costruttore. Ad esempio, per la registrazione del provider SQL Compact, la classe DbConfiguration ha questo aspetto:
+A partire da Entity Framework 6, la configurazione a livello di applicazione per Entity Framework può essere specificata nel codice. Per i dettagli completi, vedere _[Entity Framework - configurazione basata su codice](https://msdn.microsoft.com/data/jj680699)_. La normale modalità di registrazione di un provider di Entity Framework tramite la configurazione basata su codice consiste nel creare una nuova classe che deriva da System.Data.Entity.DbConfiguration e inserirla nello stesso assembly della classe DbContext. La classe DbConfiguration registrerà quindi il provider nel proprio costruttore. Ad esempio, per la registrazione del provider SQL Compact, la classe DbConfiguration ha questo aspetto:
 
 ``` csharp
     public class MyConfiguration : DbConfiguration
@@ -87,7 +88,7 @@ In questo codice "SqlCeProviderServices.ProviderInvariantName" è un elemento ut
 
 ## <a name="what-if-the-provider-i-need-isnt-available"></a>Cosa si può fare se si ha necessità di un provider che non è disponibile?
 
-Se il provider è disponibile per le versioni precedenti di Entity Framework, contattare il proprietario del provider e chiedere di creare una versione per Entity Framework 6. Includere un riferimento alla [documentazione del modello di provider di Entity Framework 6](~/ef6/fundamentals/providers/provider-model.md).
+Se il provider è disponibile per le versioni precedenti di Entity Framework, contattare il proprietario del provider e chiedere di creare una versione per Entity Framework 6. Includere un riferimento alla [documentazione del modello di provider di Entity Framework 6](xref:ef6/fundamentals/providers/provider-model).
 
 ## <a name="can-i-write-a-provider-myself"></a>Si può scrivere autonomamente un provider?
 

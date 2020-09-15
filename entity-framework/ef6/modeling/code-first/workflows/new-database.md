@@ -3,14 +3,13 @@ title: Code First a un nuovo database-EF6
 description: Code First a un nuovo database in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 2df6cb0a-7d8b-4e28-9d05-e2b9a90125af
 uid: ef6/modeling/code-first/workflows/new-database
-ms.openlocfilehash: 4e927bab07ae7a9719c46655e10685b59d0b65dc
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 96d76162383149c045178954196e1294331918a8
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616884"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070367"
 ---
 # <a name="code-first-to-a-new-database"></a>Code First to a New Database (Code First per un nuovo database)
 Questo video e una procedura dettagliata forniscono un'introduzione allo sviluppo di Code First destinati a un nuovo database. Questo scenario include la destinazione di un database che non esiste e Code First creerà oppure un database vuoto a cui Code First aggiungeranno nuove tabelle. Code First consente di definire il modello utilizzando \# le classi C o VB.NET. Facoltativamente, è possibile eseguire una configurazione aggiuntiva usando gli attributi delle classi e delle proprietà o usando un'API Fluent.
@@ -32,7 +31,7 @@ Se si usa Visual Studio 2010, sarà anche necessario che [NuGet](https://visuals
 
 Per semplificare le operazioni, verrà compilata un'applicazione console di base che usa Code First per eseguire l'accesso ai dati.
 
--   Aprire Visual Studio.
+-   Aprire Visual Studio
 -   **File- &gt; nuovo- &gt; progetto...**
 -   Selezionare **Windows** nel menu a sinistra e nell' **applicazione console**
 -   Immettere **CodeFirstNewDatabaseSample** come nome

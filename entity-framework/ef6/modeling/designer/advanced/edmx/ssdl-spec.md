@@ -3,14 +3,13 @@ title: Specifica SSDL-EF6
 description: Specifica SSDL in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: a4af4b1a-40f4-48cc-b2e0-fa8f5d9d5419
 uid: ef6/modeling/designer/advanced/edmx/ssdl-spec
-ms.openlocfilehash: ab50579649c2e1b19d113cd127e52be995516e27
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: dbcd4c771e8ca1324a0520f9c8ca13ba4661487b
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620594"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070211"
 ---
 # <a name="ssdl-specification"></a>Specifica SSDL
 Store Schema Definition Language (SSDL) è un linguaggio basato su XML che descrive il modello di archiviazione di un'applicazione Entity Framework.
@@ -91,7 +90,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 | Nome attributo  | Obbligatorio | Valore                                                                                                |
 |:----------------|:------------|:-----------------------------------------------------------------------------------------------------|
 | **Nome**        | Sì         | Nome del vincolo di chiave esterna rappresentato dal set di associazioni.                          |
-| **Associazione** | Sì         | Nome dell'associazione che definisce le colonne che fanno parte del vincolo di chiave esterna. |
+| **Associazione** | Yes         | Nome dell'associazione che definisce le colonne che fanno parte del vincolo di chiave esterna. |
 
 > [!NOTE]
 > Qualsiasi numero di attributi di annotazione (attributi XML personalizzati) può essere applicato all'elemento di **associazione** . Tuttavia, gli attributi personalizzati non possono appartenere ad alcuno spazio dei nomi XML riservato a SSDL. I nomi completi per due attributi personalizzati qualsiasi non possono essere uguali.
@@ -282,7 +281,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 |:-----------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Tipo**         | Sì         | Il nome completo del set di entità SSDL che si trova in corrispondenza dell'entità finale del vincolo di chiave esterna.                                                                                                                                                                                                                                                                                          |
 | **Ruolo**         | No          | Valore dell'attributo **Role** nell'elemento Principal o dipendente dell'elemento ReferentialConstraint corrispondente (se usato).                                                                                                                                                                                                                                             |
-| **Molteplicità** | Sì         | **1**, **0.. 1**o a **\*** seconda del numero di righe che possono trovarsi alla fine del vincolo FOREIGN KEY. <br/> **1** indica che esiste esattamente una riga nell'entità finale del vincolo di chiave esterna. <br/> **0.. 1** indica che l'entità finale del vincolo di chiave esterna è pari a zero o a una riga. <br/> **\*** indica che nell'entità finale del vincolo di chiave esterna sono presenti zero, una o più righe. |
+| **Molteplicità** | Yes         | **1**, **0.. 1**o a **\*** seconda del numero di righe che possono trovarsi alla fine del vincolo FOREIGN KEY. <br/> **1** indica che esiste esattamente una riga nell'entità finale del vincolo di chiave esterna. <br/> **0.. 1** indica che l'entità finale del vincolo di chiave esterna è pari a zero o a una riga. <br/> **\*** indica che nell'entità finale del vincolo di chiave esterna sono presenti zero, una o più righe. |
 
 > [!NOTE]
 > Qualsiasi numero di attributi di annotazione (attributi XML personalizzati) può essere applicato all'elemento **finale** . Tuttavia, gli attributi personalizzati non possono appartenere ad alcuno spazio dei nomi XML riservato a CSDL. I nomi completi per due attributi personalizzati qualsiasi non possono essere uguali.
@@ -325,7 +324,7 @@ Nella tabella seguente vengono descritti gli attributi che possono essere applic
 
 | Nome attributo | Obbligatorio | Valore                                                                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------|
-| **EntitySet**  | Sì         | Il nome del set di entità SSDL in corrispondenza dell'entità finale del vincolo di chiave esterna.                                      |
+| **EntitySet**  | Yes         | Il nome del set di entità SSDL in corrispondenza dell'entità finale del vincolo di chiave esterna.                                      |
 | **Ruolo**       | No          | Valore di uno degli attributi **Role** specificati in un elemento **end** dell'elemento Association corrispondente. |
 
 > [!NOTE]
@@ -414,7 +413,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 | Nome attributo | Obbligatorio | Valore                                                                                    |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------|
 | **Nome**       | Sì         | Nome del set di entità.                                                              |
-| **EntityType** | Sì         | Nome completo del tipo di entità per il quale il set di entità contiene delle istanze. |
+| **EntityType** | Yes         | Nome completo del tipo di entità per il quale il set di entità contiene delle istanze. |
 | **Schema**     | No          | Schema del database.                                                                     |
 | **Tabella**      | No          | Tabella del database.                                                                      |
 
@@ -585,7 +584,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 
 | Nome attributo | Obbligatorio | Valore                                                                                               |
 |:---------------|:------------|:----------------------------------------------------------------------------------------------------|
-| **Azione**     | Sì         | **Cascade** o **None**. (Il valore con **restrizioni** è valido ma ha lo stesso comportamento di **None**). |
+| **Azione**     | Yes         | **Cascade** o **None**. (Il valore con **restrizioni** è valido ma ha lo stesso comportamento di **None**). |
 
 > [!NOTE]
 > Qualsiasi numero di attributi di annotazione (attributi XML personalizzati) può essere applicato all'elemento **OnDelete** . Tuttavia, gli attributi personalizzati non possono appartenere ad alcuno spazio dei nomi XML riservato a SSDL. I nomi completi per due attributi personalizzati qualsiasi non possono essere uguali.
@@ -633,7 +632,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 | **Modalità**       | No          | **In**, **out**o **InOut** a seconda che il parametro sia un parametro di input, di output o di input/output.                                                                                                                |
 | **MaxLength**  | No          | Lunghezza massima del parametro.                                                                                                                                                                                            |
 | **Precisione**  | No          | Precisione del parametro                                                                                                                                                                                                 |
-| **Ridimensionare**      | No          | Scalabilità del parametro                                                                                                                                                                                                     |
+| **Ridimensionamento**      | No          | Scalabilità del parametro                                                                                                                                                                                                     |
 | **SRID**       | No          | Identificatore di riferimento del sistema spaziale. Valido solo per i parametri dei tipi spaziali. Per ulteriori informazioni, vedere [SRID](https://en.wikipedia.org/wiki/SRID) e [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
 
 > [!NOTE]
@@ -718,7 +717,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 | **MaxLength**             | No          | Lunghezza massima della colonna corrispondente.                                                                                                                                                                                 |
 | **FixedLength**           | No          | **True** o **false** a seconda che il valore della colonna corrispondente venga archiviato come stringa a lunghezza fissa.                                                                                                              |
 | **Precisione**             | No          | Precisione della colonna corrispondente.                                                                                                                                                                                      |
-| **Ridimensionare**                 | No          | Scala della colonna corrispondente.                                                                                                                                                                                          |
+| **Ridimensionamento**                 | No          | Scala della colonna corrispondente.                                                                                                                                                                                          |
 | **Unicode**               | No          | **True** o **false** a seconda che il valore della colonna corrispondente venga archiviato come stringa Unicode.                                                                                                                   |
 | **Regole di confronto**             | No          | Stringa che specifica la sequenza di collazione da utilizzare nell'origine dati.                                                                                                                                                   |
 | **SRID**                  | No          | Identificatore di riferimento del sistema spaziale. Valido solo per le proprietà dei tipi spaziali. Per ulteriori informazioni, vedere [SRID](https://en.wikipedia.org/wiki/SRID) e [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
@@ -900,7 +899,7 @@ L'elemento **schema** può contenere zero o più degli elementi figlio seguenti:
 -   Association Rules
 -   EntityType
 -   EntityContainer
--   Function
+-   Funzione
 
 L'elemento **schema** utilizza l'attributo **namespace** per definire lo spazio dei nomi per il tipo di entità e gli oggetti di associazione in un modello di archiviazione. All'interno di uno spazio dei nomi due oggetti non possono avere lo stesso nome.
 
@@ -912,10 +911,10 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 
 | Nome attributo            | Obbligatorio | Valore                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Namespace**             | Sì         | Spazio dei nomi del modello di archiviazione. Il valore dell'attributo **namespace** viene utilizzato per formare il nome completo di un tipo. Se, ad esempio, un elemento **EntityType** denominato *Customer* si trova nello spazio dei nomi ExampleModel. Store, il nome completo di **EntityType** sarà ExampleModel. Store. Customer. <br/> Non è possibile utilizzare le seguenti stringhe come valore per l'attributo **namespace** : **System**, **Transient**o **EDM**. Il valore dell'attributo **namespace** non può corrispondere al valore dell'attributo **namespace** nell'elemento schema CSDL. |
+| **Namespace**             | Yes         | Spazio dei nomi del modello di archiviazione. Il valore dell'attributo **namespace** viene utilizzato per formare il nome completo di un tipo. Se, ad esempio, un elemento **EntityType** denominato *Customer* si trova nello spazio dei nomi ExampleModel. Store, il nome completo di **EntityType** sarà ExampleModel. Store. Customer. <br/> Non è possibile utilizzare le seguenti stringhe come valore per l'attributo **namespace** : **System**, **Transient**o **EDM**. Il valore dell'attributo **namespace** non può corrispondere al valore dell'attributo **namespace** nell'elemento schema CSDL. |
 | **Alias**                 | No          | Identificatore utilizzato al posto del nome dello spazio dei nomi. Se, ad esempio, un elemento **EntityType** denominato *Customer* si trova nello spazio dei nomi ExampleModel. Store e il valore dell'attributo **alias** è *StorageModel*, è possibile utilizzare StorageModel. Customer come nome completo dell'elemento **EntityType.**                                                                                                                                                                                                                                                                                    |
-| **Provider**              | Sì         | Provider di dati.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| **ProviderManifestToken** | Sì         | Token che indica al provider quale manifesto del provider restituire. Non è definito alcun formato per il token. I valori per il token sono definiti dal provider. Per informazioni sui token del manifesto del provider SQL Server, vedere SqlClient per Entity Framework.                                                                                                                                                                                                                                                                                                                        |
+| **Provider**              | Yes         | Provider di dati.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **ProviderManifestToken** | Yes         | Token che indica al provider quale manifesto del provider restituire. Non è definito alcun formato per il token. I valori per il token sono definiti dal provider. Per informazioni sui token del manifesto del provider SQL Server, vedere SqlClient per Entity Framework.                                                                                                                                                                                                                                                                                                                        |
 
 ### <a name="example"></a>Esempio
 
@@ -1076,5 +1075,5 @@ Nella tabella seguente vengono descritti i facet supportati in SSDL:
 | **FixedLength** | Specifica se la lunghezza del valore della colonna può variare.                                                                                                                                                                                                  |
 | **MaxLength**   | Specifica la lunghezza massima del valore della colonna.                                                                                                                                                                                                           |
 | **Precisione**   | Per le proprietà di tipo **Decimal**, specifica il numero di cifre che un valore della proprietà può avere. Per le proprietà di tipo **Time**, **DateTime**e **DateTimeOffset**, specifica il numero di cifre per la parte frazionaria dei secondi del valore della colonna. |
-| **Ridimensionare**       | Specifica il numero di cifre a destra del separatore decimale per il valore della colonna.                                                                                                                                                                      |
+| **Ridimensionamento**       | Specifica il numero di cifre a destra del separatore decimale per il valore della colonna.                                                                                                                                                                      |
 | **Unicode**     | Indica se il valore della colonna viene archiviato come Unicode.                                                                                                                                                                                                    |

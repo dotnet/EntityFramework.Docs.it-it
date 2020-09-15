@@ -3,14 +3,13 @@ title: Impostazioni del file di configurazione-EF6
 description: Impostazioni del file di configurazione in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 000044c6-1d32-4cf7-ae1f-ea21d86ebf8f
 uid: ef6/fundamentals/configuring/config-file
-ms.openlocfilehash: ac257c0da8da4dff852ec24f7de91c62c68f92d8
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: b407ae7d64df18f6a8d80aa13703a8c243c6f3a2
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618491"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070718"
 ---
 # <a name="configuration-file-settings"></a>Impostazioni del file di configurazione
 Entity Framework consente di specificare alcune impostazioni dal file di configurazione. In generale EF segue un principio di "Convenzione sulla configurazione": tutte le impostazioni descritte in questo post hanno un comportamento predefinito, è necessario preoccuparsi solo di modificare l'impostazione quando il valore predefinito non soddisfa più i requisiti.  
@@ -42,7 +41,7 @@ In [Questa pagina](xref:ef6/fundamentals/configuring/connection-strings) vengono
 
 Le stringhe di connessione vengono inserite nell'elemento standard **connectionStrings** e non richiedono la sezione **EntityFramework** .  
 
-I modelli basati su Code First usano le normali stringhe di connessione di ADO.NET. Ad esempio:  
+I modelli basati su Code First usano le normali stringhe di connessione di ADO.NET. Esempio:  
 
 ``` xml
 <connectionStrings>
@@ -52,7 +51,7 @@ I modelli basati su Code First usano le normali stringhe di connessione di ADO.N
 </connectionStrings>
 ```  
 
-I modelli basati su EF designer usano stringhe di connessione EF speciali. Ad esempio:  
+I modelli basati su EF designer usano stringhe di connessione EF speciali. Esempio:  
 
 ``` xml  
 <connectionStrings>

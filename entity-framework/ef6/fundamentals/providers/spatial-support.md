@@ -3,14 +3,13 @@ title: Supporto del provider per i tipi spaziali-EF6
 description: Supporto del provider per i tipi spaziali in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 1097cb00-15f5-453d-90ed-bff9403d23e3
 uid: ef6/fundamentals/providers/spatial-support
-ms.openlocfilehash: 060d662aa8f03ea3510bd6b1fb7bdf904585efab
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d6214ec503af8ea02b586cfddfd958ec7b47e42f
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89615788"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070445"
 ---
 # <a name="provider-support-for-spatial-types"></a>Supporto del provider per i tipi spaziali
 Entity Framework supporta l'utilizzo di dati spaziali tramite le classi DbGeography o DbGeometry. Queste classi si basano sulle funzionalità specifiche del database offerte dal provider Entity Framework. Non tutti i provider supportano i dati spaziali e quelli che possono avere prerequisiti aggiuntivi, ad esempio l'installazione di assembly di tipo spaziale. Altre informazioni sul supporto dei provider per i tipi spaziali sono disponibili di seguito.  

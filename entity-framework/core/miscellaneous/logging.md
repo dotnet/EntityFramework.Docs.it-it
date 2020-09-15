@@ -3,14 +3,13 @@ title: EF Core di registrazione
 description: Configurazione della registrazione con Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
-ms.assetid: f6e35c6d-45b7-4258-be1d-87c1bb67438d
 uid: core/miscellaneous/logging
-ms.openlocfilehash: 56d0e3f8c5ecf56ee6bd6ddf0c9668bb8e3ac12f
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 0fd1c83f01989095a813727390179db2327b610d
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617749"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071667"
 ---
 # <a name="logging"></a>Registrazione
 
@@ -50,7 +49,7 @@ public static readonly LoggerFactory MyLoggerFactory
 
 ***
 
-Questa istanza singleton/globale deve quindi essere registrata con EF Core su `DbContextOptionsBuilder` . Ad esempio:
+Questa istanza singleton/globale deve quindi essere registrata con EF Core su `DbContextOptionsBuilder` . Esempio:
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContext.cs#RegisterLoggerFactory)]
 
@@ -59,7 +58,7 @@ Questa istanza singleton/globale deve quindi essere registrata con EF Core su `D
 
 ## <a name="filtering-what-is-logged"></a>Filtraggio degli elementi registrati
 
-L'applicazione può controllare ciò che viene registrato configurando un filtro in ILoggerProvider. Ad esempio:
+L'applicazione può controllare ciò che viene registrato configurando un filtro in ILoggerProvider. Esempio:
 
 ### <a name="version-3x"></a>[Versione 3. x](#tab/v3)
 

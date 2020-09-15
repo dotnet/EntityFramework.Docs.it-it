@@ -1,13 +1,15 @@
 ---
 title: Gestione di schemi di database - EF Core
+description: Panoramica delle strategie di gestione degli schemi di database con Entity Framework Core
 author: bricelam
 ms.date: 10/30/2017
-ms.openlocfilehash: 2da17865cb0192fb3e6e3396e4ca5f31fde9c52a
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+uid: core/managing-schemas/index
+ms.openlocfilehash: e4f8c82125534e9e7e0c2de552bce336a544a2aa
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78412736"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619499"
 ---
 # <a name="managing-database-schemas"></a>Gestione di schemi di database
 
@@ -20,7 +22,6 @@ Usare il [reverse engineering][2] se si vuole usare lo schema del database come 
 > [!NOTE]
 > Anche le [API di creazione ed eliminazione][3] sono in grado di creare lo schema del database dal modello di EF Core. Tuttavia, sono destinate principalmente ai test e ad altri scenari in cui l'eliminazione del database è accettabile.
 
-
-  [1]: migrations/index.md
-  [2]: scaffolding.md
-  [3]: ensure-created.md
+  [1]: xref:core/managing-schemas/migrations/index
+  [2]: xref:core/managing-schemas/scaffolding
+  [3]: xref:core/managing-schemas/ensure-created

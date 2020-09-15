@@ -3,14 +3,13 @@ title: Migrazioni Code First con un database esistente-EF6
 description: Migrazioni Code First con un database esistente in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: f0cc4f93-67dd-4664-9753-0a9f913814db
 uid: ef6/modeling/code-first/migrations/existing-database
-ms.openlocfilehash: f7638cac17bf9152c829ae415fc941aa0a0c6cab
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 5dd38f3fb9a59805a9b23b7da5e770995866f715
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616943"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072109"
 ---
 # <a name="code-first-migrations-with-an-existing-database"></a>Migrazioni Code First con un database esistente
 > [!NOTE]

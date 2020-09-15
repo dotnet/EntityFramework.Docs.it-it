@@ -1,15 +1,16 @@
 ---
 title: Esecuzione di query su dati - EF Core
+description: Panoramica delle informazioni sull'esecuzione di query in Entity Framework Core
 author: smitpatel
 ms.date: 10/03/2019
 ms.assetid: 7c65ec3e-46c8-48f8-8232-9e31f96c277b
 uid: core/querying/index
-ms.openlocfilehash: 82f8a2e8e78e9d82f46f2fc6ced6dd9141329a22
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 028c640a17c4946158c86bdf1a663a4050f55921
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370340"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616331"
 ---
 # <a name="querying-data"></a>Esecuzione di query su dati
 
@@ -35,4 +36,4 @@ I frammenti seguenti illustrano alcuni esempi di come eseguire attività comuni 
 ## <a name="further-readings"></a>Altre informazioni
 
 - Vedere altre informazioni sulle [espressioni di query LINQ](/dotnet/csharp/programming-guide/concepts/linq/basic-linq-query-operations)
-- Per informazioni più dettagliate sul modo in cui una query viene elaborata in EF Core, vedere funzionamento delle [query](xref:core/querying/how-query-works).
+- Per altre informazioni sulla modalità di elaborazione di una query in EF Core, vedere [Funzionamento delle query](xref:core/querying/how-query-works).

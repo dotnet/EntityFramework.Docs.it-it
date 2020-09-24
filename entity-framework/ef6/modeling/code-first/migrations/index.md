@@ -4,12 +4,12 @@ description: Migrazioni Code First in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/migrations/index
-ms.openlocfilehash: aec3a53816e41bf7ead696fd9edc30618d58b07a
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7233789c277d87d0fda420cdbdf669c8fd56cd22
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072161"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210480"
 ---
 # <a name="code-first-migrations"></a>Migrazioni Code First
 Migrazioni Code First rappresenta il metodo più adatto per far evolvere lo schema del database dell'applicazione quando si usa il flusso di lavoro Code First. Le migrazioni offrono un set di strumenti che consentono di:
@@ -18,7 +18,7 @@ Migrazioni Code First rappresenta il metodo più adatto per far evolvere lo sche
 2. Generare migrazioni per tenere traccia delle modifiche apportate al modello di Entity Framework
 2. Mantenere aggiornato il database con le modifiche
 
-La seguente procedura dettagliata offre una panoramica di Migrazioni Code First in Entity Framework. È possibile eseguire l'intera procedura dettagliata o passare all'argomento desiderato. Vengono trattati i seguenti argomenti:
+Nella procedura dettagliata seguente viene fornita una panoramica delle Migrazioni Code First in Entity Framework. È possibile eseguire l'intera procedura dettagliata o passare all'argomento desiderato. Vengono trattati i seguenti argomenti:
 
 ## <a name="building-an-initial-model--database"></a>Creazione del modello iniziale e del database
 

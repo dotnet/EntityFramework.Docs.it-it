@@ -2,15 +2,14 @@
 title: Provider di Azure Cosmos DB - EF Core
 description: Documentazione per il provider di database che consente l'uso di Entity Framework Core con l'API SQL di Azure Cosmos DB
 author: AndriySvyryd
-ms.author: ansvyryd
-ms.date: 11/05/2019
+ms.date: 09/14/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 188c5b10aefa784715c0bbf2d50337d65c21fd62
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 94ba29f3f2643e8f563a460e17dce9d15cb7c2df
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071368"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210341"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>Provider di Azure Cosmos DB per EF Core
 
@@ -66,6 +65,18 @@ Il salvataggio e l'esecuzione di query sui dati seguono il modello EF normale:
 
 > [!IMPORTANT]
 > La chiamata di [EnsureCreatedAsync](/dotnet/api/Microsoft.EntityFrameworkCore.Storage.IDatabaseCreator.EnsureCreatedAsync) è necessaria per creare i contenitori richiesti e inserire i [dati di inizializzazione](xref:core/modeling/data-seeding) se presenti nel modello. Tuttavia, `EnsureCreatedAsync` deve essere chiamato solo durante la distribuzione, e non durante il normale funzionamento, perché potrebbe causare problemi di prestazioni.
+
+## <a name="cosmos-options"></a>Opzioni di Cosmos
+
+È anche possibile configurare il provider di Cosmos DB con una singola stringa di connessione e specificare altre opzioni per personalizzare la connessione:
+
+[!code-csharp[Configuration](../../../../samples/core/Cosmos/ModelBuilding/OptionsContext.cs?name=Configuration)]
+
+> [!NOTE]
+> La maggior parte di queste opzioni è una novità di EF Core Cosmos 5,0.
+
+> [!TIP]
+> Per una descrizione dettagliata dell'effetto di ogni opzione indicata in precedenza, vedere la [documentazione relativa alle opzioni di Azure Cosmos DB](/dotnet/api/microsoft.azure.cosmos.cosmosclientoptions) .
 
 ## <a name="cosmos-specific-model-customization"></a>Personalizzazione del modello specifico di Cosmos
 

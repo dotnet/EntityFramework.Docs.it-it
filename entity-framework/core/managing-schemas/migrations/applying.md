@@ -5,12 +5,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: 50937f96e63f9bda2ffcf5e94dabf688ee2ba1f3
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: cde83a944e1e698a7f8a00c4692c0ce08a87b5ab
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071889"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210406"
 ---
 # <a name="applying-migrations"></a>Applicazione di migrazioni
 
@@ -193,5 +193,5 @@ Si noti che si `Migrate()` basa sul `IMigrator` servizio, che può essere usato 
 
 > [!WARNING]
 >
-> * Valutare attentamente prima di usare questo approccio nell'ambiente di produzione. L'esperienza ha dimostrato che la semplicità di questa strategia di distribuzione è stata superata dai problemi che crea. In alternativa, è consigliabile usare gli script SQL.
+> * Valutare attentamente prima di usare questo approccio nell'ambiente di produzione. L'esperienza ha dimostrato che la semplicità di questa strategia di distribuzione è stata superata dai problemi che crea. Si consiglia di generare script SQL dalle migrazioni.
 > * Non chiamare `EnsureCreated()` prima di `Migrate()`. `EnsureCreated()` ignora la cartella Migrations per creare lo schema, causando un errore di `Migrate()`.

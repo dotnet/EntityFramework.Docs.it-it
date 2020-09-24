@@ -10,19 +10,19 @@ I problemi relativi alla documentazione per EF Core e EF6 devono essere archivia
 
 Si consiglia di inviare una richiesta pull invece di presentare un problema. Questa operazione può essere eseguita interamente dal Web:
 
-* Trovare il file da aggiornare in questo repository e fare clic su di esso per aprirlo
+* Nell'angolo superiore destro del documento selezionare l'icona della penna: ![ immagine](https://user-images.githubusercontent.com/3605364/93646907-e75ef680-f9a2-11ea-847a-c5c3839f3aa8.png)
 
-![image](https://user-images.githubusercontent.com/1430078/64454137-10199400-d09f-11e9-9d1a-b7fdca2c518e.png)
+  Nota: potrebbe essere necessario rendere più ampia la finestra del browser per visualizzare l'icona della penna.
 
 * Fare clic sul pulsante modifica (✏️) per modificare nel Web browser
 
 ![image](https://user-images.githubusercontent.com/1430078/64454321-85856480-d09f-11e9-85a6-1c93bc6611e2.png)
 
-* Al termine, aggiungere un titolo e una descrizione, quindi usare il "creare un nuovo ramo e avviare una richiesta pull". opzione.
+* Al termine, aggiungere un titolo e una descrizione, quindi usare la **creazione di un nuovo ramo e avviare una richiesta pull.** opzione.
 
 ![image](https://user-images.githubusercontent.com/1430078/64454455-dac17600-d09f-11e9-922b-0346117011f5.png)
 
-Si noti che è anche possibile clonare il repository ed eseguire una richiesta pull in GitHub in modo normale.
+Si noti che è anche possibile clonare il repository ed eseguire una richiesta pull di GitHub in modo normale.
 
 ## <a name="making-more-substantial-changes"></a>Apportare modifiche più sostanziali
 

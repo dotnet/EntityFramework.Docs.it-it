@@ -4,12 +4,12 @@ description: Caricamento eager di dati correlati con Entity Framework Core
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/eager
-ms.openlocfilehash: f7e33895293e1d7b8b32a135d60b58dd1f050621
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 5ac15a85b28f21588639f34cbaa9ef76f366f7b5
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90078947"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210467"
 ---
 # <a name="eager-loading-of-related-data"></a>Caricamento eager di dati correlati
 
@@ -92,7 +92,7 @@ ORDER BY [b].[BlogId]
 
 Quando le query suddivise sono configurate come predefinite, è comunque possibile configurare query specifiche da eseguire come query singole:
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs?name=AsSplitQuery&highlight=5)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs?name=AsSingleQuery&highlight=5)]
 
 Se la modalità di suddivisione delle query non è specificata in modo esplicito, né globalmente né nella query, né EF Core rileva che una singola query carica più inclusioni di raccolta, viene generato un avviso per attirare l'attenzione sui potenziali problemi di prestazioni. Se si imposta la modalità di query su SingleQuery, l'avviso non verrà generato.
 

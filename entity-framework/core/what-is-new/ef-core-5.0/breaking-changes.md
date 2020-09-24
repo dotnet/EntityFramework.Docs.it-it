@@ -4,12 +4,12 @@ description: Elenco completo delle modifiche di rilievo introdotte in Entity Fra
 author: bricelam
 ms.date: 09/09/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: 63fd1d1a01b7a72fd34bb9a0130191131306426c
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 8e9df4e2ff81e20cf5a36855247c5aff89ea2394
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070796"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210367"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>Modifiche di rilievo nella EF Core 5,0
 
@@ -21,14 +21,15 @@ Le modifiche alle API e al comportamento seguenti hanno il rischio di interrompe
 |:--------------------------------------------------------------------------------------------------------------------------------------|------------|
 | [Obbligatorio per la navigazione da principale a dipendente con semantica diversa](#required-dependent)                                 | Media     |
 | [La definizione della query viene sostituita con metodi specifici del provider](#defining-query)                                                          | Media     |
-| [Metodo HasGeometricDimension rimosso dall'estensione SQLite NTS](#geometric-sqlite)                                                   | Basso        |
-| [Cosmos: la chiave di partizione è stata aggiunta alla chiave primaria](#cosmos-partition-key)                                                        | Basso        |
-| [Cosmos: `id` proprietà rinominata in `__id`](#cosmos-id)                                                                                 | Basso        |
-| [Cosmos: byte [] è ora archiviato come stringa Base64 anziché come matrice di numeri](#cosmos-byte)                                             | Basso        |
-| [Cosmos: GetPropertyName e SetPropertyName sono stati rinominati](#cosmos-metadata)                                                          | Basso        |
-| [I generatori di valori vengono chiamati quando lo stato dell'entità viene modificato da scollegato a non modificato, aggiornato o eliminato](#non-added-generation) | Basso        |
-| [IMigrationsModelDiffer USA ora IRelationalModel](#relational-model)                                                                 | Basso        |
-| [I discriminatori sono di sola lettura](#read-only-discriminators)                                                                             | Basso        |
+| [Metodo HasGeometricDimension rimosso dall'estensione SQLite NTS](#geometric-sqlite)                                                   | Bassa        |
+| [Cosmos: la chiave di partizione è stata aggiunta alla chiave primaria](#cosmos-partition-key)                                                        | Bassa        |
+| [Cosmos: `id` proprietà rinominata in `__id`](#cosmos-id)                                                                                 | Bassa        |
+| [Cosmos: byte [] è ora archiviato come stringa Base64 anziché come matrice di numeri](#cosmos-byte)                                             | Bassa        |
+| [Cosmos: GetPropertyName e SetPropertyName sono stati rinominati](#cosmos-metadata)                                                          | Bassa        |
+| [I generatori di valori vengono chiamati quando lo stato dell'entità viene modificato da scollegato a non modificato, aggiornato o eliminato](#non-added-generation) | Bassa        |
+| [IMigrationsModelDiffer USA ora IRelationalModel](#relational-model)                                                                 | Bassa        |
+| [I discriminatori sono di sola lettura](#read-only-discriminators)                                                                             | Bassa        |
+| [EF specifico del provider. Metodi di funzioni generate per il provider InMemory](#no-client-methods)                                              | Bassa        |
 
 <a name="geometric-sqlite"></a>
 
@@ -193,7 +194,7 @@ In precedenza venivano chiamati i metodi `GetPropertyName` di estensione e `SetP
 
 **Nuovo comportamento**
 
-L'API precedente è obsoleta e sono stati aggiunti nuovi metodi: `GetJsonPropertyName` , `SetJsonPropertyName`
+L'API precedente è stata rimossa e sono stati aggiunti nuovi metodi: `GetJsonPropertyName` , `SetJsonPropertyName`
 
 **Perché**
 
@@ -201,7 +202,7 @@ Questa modifica rimuove l'ambiguità relativa alla configurazione di questi meto
 
 **Soluzioni di prevenzione**
 
-Usare la nuova API o sospendere temporaneamente gli avvisi obsoleti.
+Usare la nuova API.
 
 <a name="non-added-generation"></a>
 
@@ -320,3 +321,25 @@ Inizialmente la definizione di query è stata introdotta come visualizzazioni la
 
 Per i provider relazionali, utilizzare `ToSqlQuery` il metodo in `OnModelCreating` e passare una stringa SQL da utilizzare per il tipo di entità.
 Per il provider in memoria, usare il `ToInMemoryQuery` metodo in `OnModelCreating` e passare una query LINQ da usare per il tipo di entità.
+
+<a name="no-client-methods"></a>
+
+### <a name="provider-specific-effunctions-methods-throw-for-inmemory-provider"></a>EF specifico del provider. Metodi di funzioni generate per il provider InMemory
+
+[Rilevamento del problema #20294](https://github.com/dotnet/efcore/issues/20294)
+
+**Comportamento precedente**
+
+EF specifico del provider. I metodi di funzioni contenevano l'implementazione per l'esecuzione del client, che ne consentiva l'esecuzione nel provider InMemory. Ad esempio, `EF.Functions.DateDiffDay` è un metodo specifico di SQL Server, che ha utilizzato il provider InMemory.
+
+**Nuovo comportamento**
+
+I metodi specifici del provider sono stati aggiornati per generare un'eccezione nel corpo del metodo per bloccare la valutazione sul lato client.
+
+**Perché**
+
+I metodi specifici del provider vengono mappati a una funzione di database. Il calcolo eseguito dalla funzione di database di cui è stato eseguito il mapping non può essere sempre replicato sul lato client in LINQ. È possibile che il risultato del server risulti diverso quando si esegue lo stesso metodo nel client. Poiché questi metodi vengono usati in LINQ per la conversione in funzioni di database specifiche, non devono essere valutati sul lato client. Poiché il provider InMemory è un *database*diverso, questi metodi non sono disponibili per questo provider. Il tentativo di eseguirli per il provider InMemory o qualsiasi altro provider che non traduce questi metodi genera un'eccezione.
+
+**Soluzioni di prevenzione**
+
+Poiché non esiste alcun modo per simulare in modo accurato il comportamento delle funzioni di database, è consigliabile testare le query che li contengono sullo stesso tipo di database in produzione.

@@ -4,12 +4,12 @@ description: Uso della resilienza della connessione per ritentare automaticament
 author: rowanmiller
 ms.date: 11/15/2016
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: f4077672a9234bf66dc488d7450f437452e542b6
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 25b754334edd15532780cb4e40682bc211620c76
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071706"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210293"
 ---
 # <a name="connection-resiliency"></a>Resilienza della connessione
 
@@ -107,3 +107,7 @@ Se è necessario usare chiavi generate dall'archivio o è necessario un metodo g
 
 > [!NOTE]
 > Verificare che il contesto utilizzato per la verifica disponga di una strategia di esecuzione definita poiché è probabile che la connessione non riesca di nuovo durante la verifica in caso di errore durante il commit della transazione.
+
+## <a name="additional-resources"></a>Risorse aggiuntive
+
+* [Risolvere gli errori di connessione temporanei nel database SQL di Azure e in SQL Istanza gestita](/azure/azure-sql/database/troubleshoot-common-connectivity-issues)

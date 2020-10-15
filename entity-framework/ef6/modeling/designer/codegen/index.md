@@ -1,15 +1,15 @@
 ---
 title: Modelli di generazione codice di Designer - Entity Framework 6
 description: Modelli di generazione codice di Designer in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/codegen/index
-ms.openlocfilehash: 4a8225d0186174ea2e2effbc1241389afcbe3921
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 9eb0a930d7b283e449f6b08c090c8483453de452
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070198"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066486"
 ---
 # <a name="designer-code-generation-templates"></a>Modelli di generazione codice di Designer
 Quando si crea un modello usando Entity Framework Designer, le classi e il contesto derivato vengono generati automaticamente. Oltre alla generazione codice predefinita, sono anche disponibili diversi modelli che possono essere usati per personalizzare il codice generato. Si tratta di modelli di testo T4, che consentono di personalizzare i modelli, se necessario.

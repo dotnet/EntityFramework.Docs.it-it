@@ -1,15 +1,15 @@
 ---
 title: Migrazioni Code First automatico-EF6
 description: Migrazioni Code First automatico in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/migrations/automatic
-ms.openlocfilehash: e7bd9ff7d9dcecb7fecf213306047a53fc04135c
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 8152cdf642258a30d98f3750bf1ca4ccd2859978
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072564"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066408"
 ---
 # <a name="automatic-code-first-migrations"></a>Migrazioni Code First automatico
 Le migrazioni automatiche consentono di usare Migrazioni Code First senza avere un file di codice nel progetto per ogni modifica apportata. Non tutte le modifiche possono essere applicate automaticamente. ad esempio, per rinominare le colonne è necessario utilizzare una migrazione basata su codice.
@@ -116,7 +116,7 @@ Migrazioni Code First include due comandi principali.
 -   **Add-Migration** esegue lo scaffolding della migrazione successiva in base alle modifiche apportate al modello dalla creazione dell'ultima migrazione
 -   **Update-Database** applica tutte le migrazioni in sospeso al database
 
-Si eviterà di usare l'aggiunta della migrazione (a meno che non sia effettivamente necessario) e si concentrerà su come consentire a Migrazioni Code First di calcolare e applicare automaticamente le modifiche. Usare **Update-database** per ottenere migrazioni Code First per eseguire il push delle modifiche al modello (la nuova proprietà **Blog. ur**l) nel database.
+Si eviterà di usare Add-Migration (a meno che non sia effettivamente necessario) e si concentrerà su come consentire a Migrazioni Code First di calcolare e applicare automaticamente le modifiche. Usare **Update-database** per ottenere migrazioni Code First per eseguire il push delle modifiche al modello (la nuova proprietà **Blog. ur**l) nel database.
 
 -   Eseguire il comando **Update-database** nella console di gestione pacchetti.
 

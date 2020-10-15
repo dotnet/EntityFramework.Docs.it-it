@@ -1,15 +1,15 @@
 ---
 title: Annotazioni dei dati Code First-EF6
 description: Annotazioni dei dati Code First in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/data-annotations
-ms.openlocfilehash: dd91ddf674f2235190e50beb847e569a898ad59b
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f6bf063ab99c5b7ef01993aec8fd6bdd06dd8f7d
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90074064"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066473"
 ---
 # <a name="code-first-data-annotations"></a>Annotazioni dei dati per Code First
 > [!NOTE]
@@ -370,7 +370,7 @@ Per impostazione predefinita, gli indici non sono univoci, ma è possibile usare
     }
 ```
 
-### <a name="multiple-column-indexes"></a>Indici a più colonne
+### <a name="multiple-column-indexes"></a>Indici Multiple-Column
 
 Gli indici che si estendono su più colonne vengono specificati utilizzando lo stesso nome in più annotazioni di indice per una tabella specificata. Quando si creano indici a più colonne, è necessario specificare un ordine per le colonne nell'indice. Il codice seguente, ad esempio, consente di creare un indice a più colonne in `Rating` e `BlogId` denominato **IX \_ BlogIdAndRating**. `BlogId` è la prima colonna nell'indice e `Rating` è il secondo.
 

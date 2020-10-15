@@ -1,15 +1,15 @@
 ---
 title: Code First a un database esistente-EF6
 description: Code First a un database esistente in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/workflows/existing-database
-ms.openlocfilehash: d26c5f2ced6b327615cc78bcb2bb6d188b012c14
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 2305236f68cfdc9f6e1582cca1163abf380b4075
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073990"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066421"
 ---
 # <a name="code-first-to-an-existing-database"></a>Code First a un database esistente
 Questo video e la procedura dettagliata forniscono un'introduzione allo sviluppo di Code First destinati a un database esistente. Code First consente di definire il modello utilizzando \# le classi C o VB.NET. Facoltativamente, è possibile eseguire una configurazione aggiuntiva usando gli attributi delle classi e delle proprietà oppure usando un'API Fluent.

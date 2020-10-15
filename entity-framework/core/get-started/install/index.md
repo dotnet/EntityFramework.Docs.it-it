@@ -1,15 +1,15 @@
 ---
 title: Installazione di Entity Framework Core - EF Core
 description: Istruzioni di installazione per Entity Framework Core
-author: divega
+author: bricelam
 ms.date: 08/06/2017
 uid: core/get-started/install/index
-ms.openlocfilehash: 9cf264ea5c6b45a374c16fa6eac7f4f4bca9c825
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 3aae80998768d8d1bfbad7a872abc3648b792ad5
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071940"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062100"
 ---
 # <a name="installing-entity-framework-core"></a>Installazione di Entity Framework Core
 
@@ -29,7 +29,7 @@ ms.locfileid: "90071940"
 
 Per aggiungere EF Core a un'applicazione, installare il pacchetto NuGet del provider di database da usare.
 
-Se si sta creando un'applicazione ASP.NET Core, non è necessario installare i provider interni alla memoria e quelli di SQL Server. Tali provider sono inclusi nelle versioni correnti di ASP.NET Core, insieme al runtime di EF Core.  
+Se si sta creando un'applicazione ASP.NET Core, non è necessario installare i provider interni alla memoria e quelli di SQL Server. Tali provider sono inclusi nelle versioni correnti di ASP.NET Core, insieme al runtime di EF Core.
 
 Per installare o aggiornare i pacchetti NuGet, è possibile usare l'interfaccia della riga di comando di .NET Core, la finestra di dialogo Gestione pacchetti di Visual Studio o la console di Gestione pacchetti di Visual Studio.
 
@@ -61,7 +61,7 @@ Per altre informazioni, vedere [Finestra di dialogo Gestione pacchetti NuGet](/n
 
 * Per installare il provider SQL Server eseguire il comando seguente nella console di Gestione pacchetti:
 
-  ``` PowerShell  
+  ```powershell
   Install-Package Microsoft.EntityFrameworkCore.SqlServer
   ```
 
@@ -83,7 +83,7 @@ Sono disponibili due set di strumenti:
 
 Sebbene sia possibile usare anche i comandi `dotnet ef` della console di Gestione pacchetti, quando si usa Visual Studio è consigliabile usare gli strumenti della console di Gestione pacchetti:
 
-* i comandi funzionano automaticamente con il progetto corrente selezionato nella Console di Gestione pacchetti in Visual Studio, senza richiedere il passaggio manuale da una directory all'altra.  
+* i comandi funzionano automaticamente con il progetto corrente selezionato nella Console di Gestione pacchetti in Visual Studio, senza richiedere il passaggio manuale da una directory all'altra.
 
 * Dopo il completamento del comando, i file generati vengono aperti automaticamente in Visual Studio.
 
@@ -93,11 +93,21 @@ Sebbene sia possibile usare anche i comandi `dotnet ef` della console di Gestion
 
 Gli strumenti CLI di .NET core richiedono .NET Core SDK, indicato in precedenza nei [Prerequisiti](#prerequisites).
 
-I comandi `dotnet ef` sono inclusi nelle versioni correnti di .NET Core SDK, ma per abilitarli su un progetto specifico è necessario installare il pacchetto `Microsoft.EntityFrameworkCore.Design`:
+* `dotnet ef` deve essere installato come strumento globale o locale. La maggior parte degli sviluppatori preferisce installare `dotnet ef` come strumento globale usando il comando seguente:
 
-```dotnetcli
-dotnet add package Microsoft.EntityFrameworkCore.Design
-```
+  ```dotnetcli
+  dotnet tool install --global dotnet-ef
+  ```
+
+  `dotnet ef` può essere usato anche come strumento locale. Per usarlo come strumento locale, ripristinare le dipendenze di un progetto che lo dichiara come dipendenza degli strumenti usando un [file manifesto dello strumento](/dotnet/core/tools/global-tools#install-a-local-tool).
+
+* Per aggiornare gli strumenti, utilizzare il `dotnet tool update` comando.
+
+* Installare il pacchetto più recente `Microsoft.EntityFrameworkCore.Design` .
+
+  ```dotnetcli
+  dotnet add package Microsoft.EntityFrameworkCore.Design
+  ```
 
 > [!IMPORTANT]
 > Usare sempre le versioni dei pacchetti degli strumenti corrispondenti alla versione principale dei pacchetti di runtime.
@@ -106,7 +116,7 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
 
 Per ottenere gli strumenti della console di Gestione pacchetti per EF Core, installare il pacchetto `Microsoft.EntityFrameworkCore.Tools`. Ad esempio, in Visual Studio:
 
-``` PowerShell
+```powershell
 Install-Package Microsoft.EntityFrameworkCore.Tools
 ```
 
@@ -118,16 +128,6 @@ Per le app ASP.NET Core, questo pacchetto è incluso automaticamente.
 
 * EF Core, insieme a SQL Server e ai provider interni alla memoria sono inclusi nelle versioni correnti di ASP.NET Core. Per aggiornare un'applicazione ASP.NET Core esistente a una versione più recente di EF Core, eseguire sempre l'aggiornamento della versione di ASP.NET Core.
 
-* Se si deve aggiornare un'applicazione che usa un provider di database di terze parti, verificare sempre se è disponibile un aggiornamento del provider compatibile con la versione di Entity Framework Core che si vuole usare. Ad esempio, i provider di database per le versioni precedenti non sono compatibili con la versione 2.0 del runtime di Entity Framework Core.
+* Se si deve aggiornare un'applicazione che usa un provider di database di terze parti, verificare sempre se è disponibile un aggiornamento del provider compatibile con la versione di Entity Framework Core che si vuole usare. I provider di database per la versione 1,0, ad esempio, non sono compatibili con la versione 2,0 del runtime EF Core.
 
 * I provider di terze parti per EF Core in genere non rilasciano versioni di patch insieme al runtime di EF Core. Per aggiornare un'applicazione che usa un provider di terze parti a una versione patch di EF Core, potrebbe essere necessario aggiungere un riferimento diretto ai singoli componenti di runtime di EF Core, quali Microsoft.EntityFrameworkCore, e Microsoft.EntityFrameworkCore.Relational.
-
-* Se si aggiorna un'applicazione esistente alla versione più recente di EF Core, potrebbe essere necessario rimuovere manualmente alcuni riferimenti a pacchetti EF Core meno recenti:
-
-  * I pacchetti della fase di progettazione per provider di database quali `Microsoft.EntityFrameworkCore.SqlServer.Design` non sono più necessari né supportati da EF Core 2.0 e versioni successive, ma non vengono rimossi automaticamente quando si aggiornano gli altri pacchetti.
-
-  * Gli strumenti dell'interfaccia della riga di comando di .NET sono inclusi in .NET SDK a partire dalla versione 2.1, in modo che il riferimento a tale pacchetto possa essere rimosso dal file del progetto:
-
-    ``` xml
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
-    ```

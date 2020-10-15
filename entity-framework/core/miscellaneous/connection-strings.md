@@ -1,15 +1,15 @@
 ---
 title: Stringhe di connessione-EF Core
 description: Gestione delle stringhe di connessione in ambienti diversi con Entity Framework Core
-author: rowanmiller
+author: bricelam
 ms.date: 10/27/2016
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: e4283ada88a557e4f1e3eeea3de2634a7d0dce61
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f657d39f66e6a757380ca25436a638b47c11cd12
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071680"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062321"
 ---
 # <a name="connection-strings"></a>Stringhe di connessione
 
@@ -19,7 +19,7 @@ La maggior parte dei provider di database richiede una forma di stringa di conne
 
 Le applicazioni WinForms, WPF e ASP.NET 4 hanno un modello di stringa di connessione provato e testato. La stringa di connessione deve essere aggiunta al file di App.config dell'applicazione (Web.config se si usa ASP.NET). Se la stringa di connessione contiene informazioni riservate, ad esempio nome utente e password, è possibile proteggere il contenuto del file di configurazione utilizzando lo [strumento Gestione segreta](/aspnet/core/security/app-secrets#secret-manager).
 
-``` xml
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
 
@@ -30,12 +30,12 @@ Le applicazioni WinForms, WPF e ASP.NET 4 hanno un modello di stringa di conness
 </configuration>
 ```
 
-> [!TIP]  
+> [!TIP]
 > L' `providerName` impostazione non è necessaria per EF Core stringhe di connessione archiviate nel App.config perché il provider di database è configurato tramite codice.
 
 È quindi possibile leggere la stringa di connessione usando l' `ConfigurationManager` API nel metodo del `OnConfiguring` contesto. Per poter usare questa API, potrebbe essere necessario aggiungere un riferimento all' `System.Configuration` assembly del Framework.
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     public DbSet<Blog> Blogs { get; set; }
@@ -52,7 +52,7 @@ public class BloggingContext : DbContext
 
 Le stringhe di connessione in un'applicazione UWP sono in genere una connessione SQLite che specifica solo un nome file locale. In genere non contengono informazioni riservate e non devono essere modificate durante la distribuzione di un'applicazione. Di conseguenza, queste stringhe di connessione sono in genere più belle da rimanere nel codice, come illustrato di seguito. Se si vuole spostarli fuori dal codice, UWP supporta il concetto di impostazioni. per informazioni dettagliate, vedere la [sezione Impostazioni app della documentazione di UWP](/windows/uwp/app-settings/store-and-retrieve-app-data) .
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     public DbSet<Blog> Blogs { get; set; }
@@ -78,7 +78,7 @@ dotnet ef dbcontext scaffold Name=ConnectionStrings.YourDatabaseAlias Microsoft.
 
 Oppure nell'esempio seguente viene illustrata la stringa di connessione archiviata in `appsettings.json` .
 
-``` json
+```json
 {
   "ConnectionStrings": {
     "BloggingDatabase": "Server=(localdb)\\mssqllocaldb;Database=EFGetStarted.ConsoleApp.NewDb;Trusted_Connection=True;"
@@ -88,7 +88,7 @@ Oppure nell'esempio seguente viene illustrata la stringa di connessione archivia
 
 Il contesto viene in genere configurato in `Startup.cs` con la stringa di connessione letta dalla configurazione. Si noti che il `GetConnectionString()` metodo cerca un valore di configurazione la cui chiave è `ConnectionStrings:<connection string name>` . È necessario importare lo spazio dei nomi [Microsoft.Extensions.Configuration](/dotnet/api/microsoft.extensions.configuration) per usare questo metodo di estensione.
 
-``` csharp
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddDbContext<BloggingContext>(options =>

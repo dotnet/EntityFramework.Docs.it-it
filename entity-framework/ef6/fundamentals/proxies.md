@@ -1,22 +1,22 @@
 ---
 title: Uso dei proxy-EF6
 description: Uso dei proxy in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/proxies
-ms.openlocfilehash: e626a7dff67497a2fbb3dcd169704814ea4cf2cf
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 741fd72ee66b98ab132fb85f71c3101712e433fa
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070497"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063205"
 ---
 # <a name="working-with-proxies"></a>Uso dei proxy
 Quando si creano istanze di tipi di entità POCO, Entity Framework spesso crea istanze di un tipo derivato generato in modo dinamico che funge da proxy per l'entità. Questo proxy esegue l'override di alcune proprietà virtuali dell'entità per inserire hook per eseguire automaticamente le azioni quando si accede alla proprietà. Questo meccanismo, ad esempio, viene utilizzato per supportare il caricamento lazy delle relazioni. Le tecniche illustrate in questo argomento si applicano in modo analogo ai modelli creati con Code First ed EF Designer.  
 
 ## <a name="disabling-proxy-creation"></a>Disabilitazione della creazione del proxy  
 
-A volte è utile impedire a Entity Framework di creare istanze proxy. Ad esempio, la serializzazione di istanze non proxy è molto più semplice rispetto alla serializzazione delle istanze proxy. La creazione del proxy può essere disattivata cancellando il flag ProxyCreationEnabled. Questa operazione può essere eseguita nel costruttore del contesto. Esempio:  
+A volte è utile impedire a Entity Framework di creare istanze proxy. Ad esempio, la serializzazione di istanze non proxy è molto più semplice rispetto alla serializzazione delle istanze proxy. La creazione del proxy può essere disattivata cancellando il flag ProxyCreationEnabled. Questa operazione può essere eseguita nel costruttore del contesto. Ad esempio:  
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -35,7 +35,7 @@ Si noti che Entity Framework non creerà proxy per i tipi in cui non è presente
 
 ## <a name="explicitly-creating-an-instance-of-a-proxy"></a>Creazione esplicita di un'istanza di un proxy  
 
-Se si crea un'istanza di un'entità usando l'operatore New, non verrà creata un'istanza del proxy. Questo potrebbe non essere un problema, ma se è necessario creare un'istanza proxy (ad esempio, in modo che il caricamento lazy o il rilevamento delle modifiche del proxy funzioni), è possibile usare il metodo create di DbSet. Esempio:  
+Se si crea un'istanza di un'entità usando l'operatore New, non verrà creata un'istanza del proxy. Questo potrebbe non essere un problema, ma se è necessario creare un'istanza proxy (ad esempio, in modo che il caricamento lazy o il rilevamento delle modifiche del proxy funzioni), è possibile usare il metodo create di DbSet. Ad esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -44,7 +44,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-La versione generica di create può essere utilizzata se si desidera creare un'istanza di un tipo di entità derivato. Esempio:  
+La versione generica di create può essere utilizzata se si desidera creare un'istanza di un tipo di entità derivato. Ad esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -61,9 +61,9 @@ Si noti che il metodo Create creerà solo un'istanza del tipo di entità se la c
 
 I nomi dei tipi proxy hanno un aspetto simile al seguente:  
 
-System. Data. Entity. DynamicProxies. Blog_5E43C6C196972BF0754973E48C9C941092D86818CD94005E9A759B70BF6E48E6  
+System.Data.Entity.DynamicProxies.Blog_5E43C6C196972BF0754973E48C9C941092D86818CD94005E9A759B70BF6E48E6  
 
-È possibile trovare il tipo di entità per questo tipo di proxy usando il metodo GetObjectType di ObjectContext. Esempio:  
+È possibile trovare il tipo di entità per questo tipo di proxy usando il metodo GetObjectType di ObjectContext. Ad esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())

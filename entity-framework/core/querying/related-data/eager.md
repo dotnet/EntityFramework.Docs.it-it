@@ -4,12 +4,12 @@ description: Caricamento eager di dati correlati con Entity Framework Core
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/eager
-ms.openlocfilehash: 5ac15a85b28f21588639f34cbaa9ef76f366f7b5
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: 97ec45a0f8bfecce4d4a59e5d1c36c0268d96052
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210467"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062576"
 ---
 # <a name="eager-loading-of-related-data"></a>Caricamento eager di dati correlati
 
@@ -17,32 +17,32 @@ ms.locfileid: "91210467"
 
 È possibile usare il metodo `Include` per specificare i dati correlati da includere nei risultati della query. Nell'esempio seguente la proprietà `Posts` dei blog restituiti nei risultati verrà popolata con i post correlati.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#SingleInclude)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#SingleInclude)]
 
 > [!TIP]
 > Entity Framework Core correggerà automaticamente le proprietà di navigazione per qualsiasi altra entità caricata in precedenza nell'istanza di contesto. Anche se i dati per una proprietà di navigazione non vengono inclusi in modo esplicito, la proprietà può comunque essere popolata se alcune o tutte le entità correlate sono state caricate in precedenza.
 
 È possibile includere dati correlati da più relazioni in una singola query.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#MultipleIncludes)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleIncludes)]
 
 ## <a name="including-multiple-levels"></a>Inclusione di più livelli
 
 È possibile eseguire il drill-down delle relazioni per includere più livelli di dati correlati tramite il metodo `ThenInclude`. L'esempio seguente carica tutti i blog, i post correlati e l'autore di ogni post.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#SingleThenInclude)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#SingleThenInclude)]
 
 È possibile concatenare più chiamate a `ThenInclude` per continuare a includere ulteriori livelli di dati correlati.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#MultipleThenIncludes)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleThenIncludes)]
 
 È possibile combinare tutte le chiamate per includere dati correlati da più livelli e più radici nella stessa query.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#IncludeTree)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#IncludeTree)]
 
 È possibile che si vogliano includere più entità correlate per una delle entità incluse. Quando ad esempio si eseguono query per `Blogs`, è necessario includere `Posts` e poi si può anche decidere di includere `Author` e `Tags` per `Posts`. Per includere entrambi, è necessario specificare ogni percorso di inclusione a partire dalla radice. Ad esempio, `Blog -> Posts -> Author` e `Blog -> Posts -> Tags`. Non significa che si otterranno join ridondanti; nella maggior parte dei casi, EF combinerà i join durante la generazione di SQL.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleLeafIncludes)]
 
 ## <a name="single-and-split-queries"></a>Query single e Split
 
@@ -66,7 +66,7 @@ Se in un Blog tipico sono presenti più post correlati, le righe per questi post
 
 EF consente di specificare che una query LINQ specificata deve essere *suddivisa* in più query SQL. Anziché JOIN, le query suddivise eseguono una query SQL aggiuntiva per ogni spostamento uno-a-molti incluso:
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs?name=AsSplitQuery&highlight=5)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs?name=AsSplitQuery&highlight=5)]
 
 Verrà generato il codice SQL seguente:
 
@@ -92,7 +92,7 @@ ORDER BY [b].[BlogId]
 
 Quando le query suddivise sono configurate come predefinite, è comunque possibile configurare query specifiche da eseguire come query singole:
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs?name=AsSingleQuery&highlight=5)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs?name=AsSingleQuery&highlight=5)]
 
 Se la modalità di suddivisione delle query non è specificata in modo esplicito, né globalmente né nella query, né EF Core rileva che una singola query carica più inclusioni di raccolta, viene generato un avviso per attirare l'attenzione sui potenziali problemi di prestazioni. Se si imposta la modalità di query su SingleQuery, l'avviso non verrà generato.
 
@@ -117,15 +117,15 @@ Le operazioni supportate sono:,,, `Where` `OrderBy` `OrderByDescending` `ThenBy`
 
 Tali operazioni devono essere applicate alla navigazione della raccolta nell'espressione lambda passata al metodo include, come illustrato nell'esempio seguente:
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#FilteredInclude)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#FilteredInclude)]
 
 Ogni navigazione inclusa consente solo un set univoco di operazioni di filtro. Nei casi in cui vengono applicate più operazioni di inclusione per una determinata navigazione della raccolta ( `blog.Posts` negli esempi seguenti), le operazioni di filtro possono essere specificate solo in uno di essi:
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludesFiltered1)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleLeafIncludesFiltered1)]
 
 Al contrario, è possibile applicare operazioni identiche per ogni navigazione inclusa più volte:
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludesFiltered2)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleLeafIncludesFiltered2)]
 
 > [!CAUTION]
 > Nel caso di query di rilevamento, i risultati dell'inclusione filtrata possono essere imprevisti a causa della [correzione della navigazione](xref:core/querying/tracking). Tutte le entità rilevanti su cui sono state eseguite query in precedenza e che sono state archiviate in change tracker saranno presenti nei risultati della query di inclusione filtrata, anche se non soddisfano i requisiti del filtro. Si consiglia `NoTracking` di utilizzare le query o di ricreare DbContext quando si utilizza l'inclusione filtrata in tali situazioni.
@@ -196,4 +196,3 @@ Il contenuto della navigazione `School` di tutte le entità People che sono Stud
   ```csharp
   context.People.Include("School").ToList()
   ```
-  

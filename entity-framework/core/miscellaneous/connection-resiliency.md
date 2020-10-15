@@ -1,15 +1,15 @@
 ---
 title: Resilienza della connessione-EF Core
 description: Uso della resilienza della connessione per ritentare automaticamente i comandi non riusciti con Entity Framework Core
-author: rowanmiller
+author: AndriySvyryd
 ms.date: 11/15/2016
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: 25b754334edd15532780cb4e40682bc211620c76
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: db0666a49cbd41ef3eacf447eaeed1fb54ffcbf4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210293"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92061918"
 ---
 # <a name="connection-resiliency"></a>Resilienza della connessione
 
@@ -23,7 +23,7 @@ Quando si configurano le opzioni per il contesto, viene specificata una strategi
 
 o in `Startup.cs` per un'applicazione ASP.NET Core:
 
-``` csharp
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddDbContext<PicnicContext>(
@@ -37,7 +37,7 @@ public void ConfigureServices(IServiceCollection services)
 
 È disponibile un meccanismo per registrare una strategia di esecuzione personalizzata personalizzata se si desidera modificare le impostazioni predefinite.
 
-``` csharp
+```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 {
     optionsBuilder
@@ -65,7 +65,7 @@ Questo approccio può essere utilizzato anche con le transazioni di ambiente.
 
 ## <a name="transaction-commit-failure-and-the-idempotency-issue"></a>Errore di commit delle transazioni e problema idempotenza
 
-In generale, quando si verifica un errore di connessione, viene eseguito il rollback della transazione corrente. Tuttavia, se la connessione viene eliminata mentre viene eseguito il commit della transazione, lo stato risultante della transazione è sconosciuto. 
+In generale, quando si verifica un errore di connessione, viene eseguito il rollback della transazione corrente. Tuttavia, se la connessione viene eliminata mentre viene eseguito il commit della transazione, lo stato risultante della transazione è sconosciuto.
 
 Per impostazione predefinita, la strategia di esecuzione tenterà di ritentare l'operazione come se fosse stato eseguito il rollback della transazione. in caso contrario, si verificherà un'eccezione se il nuovo stato del database è incompatibile o potrebbe causare un **danneggiamento dei dati** se l'operazione non si basa su un determinato stato, ad esempio quando si inserisce una nuova riga con valori di chiave generati automaticamente.
 

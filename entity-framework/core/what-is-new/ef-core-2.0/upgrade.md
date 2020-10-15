@@ -1,15 +1,15 @@
 ---
 title: Aggiornamento da versioni precedenti a EF Core 2-EF Core
 description: Istruzioni e note per l'aggiornamento a Entity Framework Core 2,0
-author: divega
+author: ajcvickers
 ms.date: 08/13/2017
 uid: core/what-is-new/ef-core-2.0/upgrade
-ms.openlocfilehash: bdc0cfe8c0be4a83f8c78ba2ac66bb1e18cea0f7
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: c7c736629209da99f191ceb0d4000d19f40414b9
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072343"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063439"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>Aggiornamento di applicazioni da versioni precedenti a EF Core 2,0
 
@@ -37,7 +37,7 @@ Il modello consigliato per le applicazioni Web ASP.NET Core è stato aggiornato 
 
 Nel modello predefinito di ASP.NET Core 2.0 è stato aggiunto un nuovo hook della fase di progettazione. Il `Program.BuildWebHost` metodo statico consente EF Core di accedere al provider di servizi dell'applicazione in fase di progettazione. Se si sta aggiornando un'applicazione ASP.NET Core 1. x, sarà necessario aggiornare la `Program` classe in modo che sia simile alla seguente.
 
-``` csharp
+```csharp
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
@@ -108,17 +108,17 @@ Gli ID sono stati spostati anche da Microsoft. EntityFrameworkCore. Infrastructu
 
 EF Core 2.0 ora compila un elemento [IModel](/dotnet/api/microsoft.entityframeworkcore.metadata.imodel) diverso per ogni provider in uso. L'operazione è in genere trasparente per l'applicazione. Questa operazione ha semplificato la semplificazione delle API dei metadati di basso livello, in modo che qualsiasi accesso ai _concetti comuni relativi ai metadati relazionali_ venga sempre effettuato tramite una chiamata a `.Relational` anziché `.SqlServer` , `.Sqlite` e così via. Ad esempio, il codice 1.1. x è simile al seguente:
 
-``` csharp
+```csharp
 var tableName = context.Model.FindEntityType(typeof(User)).SqlServer().TableName;
 ```
 
 Dovrebbe ora essere scritto come segue:
 
-``` csharp
+```csharp
 var tableName = context.Model.FindEntityType(typeof(User)).Relational().TableName;
 ```
 
-Anziché usare metodi come `ForSqlServerToTable` , i metodi di estensione sono ora disponibili per scrivere codice condizionale basato sul provider corrente in uso. Esempio:
+Anziché usare metodi come `ForSqlServerToTable` , i metodi di estensione sono ora disponibili per scrivere codice condizionale basato sul provider corrente in uso. Ad esempio:
 
 ```csharp
 modelBuilder.Entity<User>().ToTable(
@@ -135,9 +135,9 @@ EF Core usa un `IServiceProvider` contenitore interno (un contenitore di inserim
 
 ## <a name="in-memory-databases-must-be-named"></a>I database in memoria devono essere denominati
 
-Il database in memoria globale senza nome è stato rimosso, ma è necessario assegnare un nome a tutti i database in memoria. Esempio:
+Il database in memoria globale senza nome è stato rimosso, ma è necessario assegnare un nome a tutti i database in memoria. Ad esempio:
 
-``` csharp
+```csharp
 optionsBuilder.UseInMemoryDatabase("MyDatabase");
 ```
 
@@ -161,7 +161,7 @@ Questa operazione viene propagata nei pacchetti della fase di progettazione del 
 
 Per abilitare `Scaffold-DbContext` o `dotnet ef dbcontext scaffold` in EF Core 2,0, è sufficiente fare riferimento al pacchetto del singolo provider:
 
-``` xml
+```xml
 <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer"
     Version="2.0.0" />
 <PackageReference Include="Microsoft.EntityFrameworkCore.Tools"

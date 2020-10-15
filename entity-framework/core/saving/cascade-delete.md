@@ -1,15 +1,15 @@
 ---
 title: Eliminazione a catena - EF Core
 description: Configurazione dei comportamenti di eliminazione per entità correlate quando viene eliminata un'entità principale
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 197d52758f969bcdb69c0a7a230001737596b821
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 037b018c669da76a70f134e3991ad22b36917920
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070913"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063608"
 ---
 # <a name="cascade-delete"></a>Eliminazione a catena
 
@@ -27,7 +27,7 @@ Esistono tre azioni che EF può eseguire quando viene eliminata un'entità princ
 * I valori di chiave esterna dell'entità figlio possono essere impostati su Null
 * L'entità figlio rimane invariata
 
-> [!NOTE]  
+> [!NOTE]
 > Il comportamento di eliminazione configurato nel modello di EF Core viene applicato solo quando l'entità principale viene eliminata usando EF Core e le entità dipendenti vengono caricate in memoria (come nel caso delle entità dipendenti con rilevamento delle modifiche). È necessario configurare un comportamento a catena corrispondente nel database per garantire l'applicazione dell'azione necessaria ai dati non sottoposti a rilevamento delle modifiche dal contesto. Se si usa EF Core per creare il database, questo comportamento a catena verrà configurato automaticamente.
 
 Per la seconda azione indicata in precedenza, l'impostazione di un valore di chiave esterna su Null non è valida se la chiave esterna non ammette valori Null. Una chiave esterna che non ammette i valori null equivale a una relazione obbligatoria. In questi casi, EF Core rileva che la proprietà della chiave esterna è stata contrassegnata come null finché non viene chiamato SaveChanges, a quel punto viene generata un'eccezione in quanto la modifica non può essere resa permanente nel database. La situazione è simile alla segnalazione di una violazione di vincolo dal database.
@@ -70,9 +70,6 @@ In generale:
 > [!NOTE]
 > In EF Core, a differenza di EF6, gli effetti a catena non vengono eseguiti immediatamente, ma solo quando viene chiamato SaveChanges.
 
-> [!NOTE]  
-> **Modifiche in EF Core 2.0:** nelle versioni precedenti *Restrict* causerebbe l'impostazione su Null delle proprietà di chiave esterna facoltative nelle entità dipendenti sottoposte a rilevamento delle modifiche e questo era il comportamento di eliminazione predefinito per le relazioni facoltative. In EF Core 2.0 è stato introdotto il valore *ClientSetNull* per rappresentare tale comportamento ed è diventato il valore predefinito per le relazioni facoltative. Il comportamento di *Restrict* è stato modificato in modo da non produrre mai effetti collaterali sulle entità dipendenti.
-
 ## <a name="entity-deletion-examples"></a>Esempi di eliminazione di entità
 
 Il codice seguente fa parte di un [esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/CascadeDelete/) che può essere scaricato ed eseguito. L'esempio mostra cosa accade per ogni comportamento di eliminazione sia per le relazioni obbligatorie che facoltative, quando viene eliminata un'entità padre.
@@ -83,26 +80,26 @@ Ogni variazione verrà analizzata per capire il funzionamento.
 
 ### <a name="deletebehaviorcascade-with-required-or-optional-relationship"></a>DeleteBehavior.Cascade con relazione obbligatoria o facoltativa
 
-```console
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After deleting blog '1':
-    Blog '1' is in state Deleted with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+After deleting blog '1':
+  Blog '1' is in state Deleted with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  Saving changes:
-    DELETE FROM [Posts] WHERE [PostId] = 1
-    DELETE FROM [Posts] WHERE [PostId] = 2
-    DELETE FROM [Blogs] WHERE [BlogId] = 1
+Saving changes:
+  DELETE FROM [Posts] WHERE [PostId] = 1
+  DELETE FROM [Posts] WHERE [PostId] = 2
+  DELETE FROM [Blogs] WHERE [BlogId] = 1
 
-  After SaveChanges:
-    Blog '1' is in state Detached with 2 posts referenced.
-      Post '1' is in state Detached with FK '1' and no reference to a blog.
-      Post '2' is in state Detached with FK '1' and no reference to a blog.
+After SaveChanges:
+  Blog '1' is in state Detached with 2 posts referenced.
+    Post '1' is in state Detached with FK '1' and no reference to a blog.
+    Post '2' is in state Detached with FK '1' and no reference to a blog.
 ```
 
 * Il blog viene contrassegnato come eliminato (Deleted)
@@ -112,21 +109,21 @@ Ogni variazione verrà analizzata per capire il funzionamento.
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-required-relationship"></a>DeleteBehavior.ClientSetNull o DeleteBehavior.SetNull con relazione obbligatoria
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After deleting blog '1':
-    Blog '1' is in state Deleted with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+After deleting blog '1':
+  Blog '1' is in state Deleted with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  Saving changes:
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
+Saving changes:
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
 
-  SaveChanges threw DbUpdateException: Cannot insert the value NULL into column 'BlogId', table 'EFSaving.CascadeDelete.dbo.Posts'; column does not allow nulls. UPDATE fails. The statement has been terminated.
+SaveChanges threw DbUpdateException: Cannot insert the value NULL into column 'BlogId', table 'EFSaving.CascadeDelete.dbo.Posts'; column does not allow nulls. UPDATE fails. The statement has been terminated.
 ```
 
 * Il blog viene contrassegnato come eliminato (Deleted)
@@ -135,26 +132,26 @@ Ogni variazione verrà analizzata per capire il funzionamento.
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-optional-relationship"></a>DeleteBehavior.ClientSetNull o DeleteBehavior.SetNull con relazione facoltativa
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After deleting blog '1':
-    Blog '1' is in state Deleted with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+After deleting blog '1':
+  Blog '1' is in state Deleted with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  Saving changes:
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 2
-    DELETE FROM [Blogs] WHERE [BlogId] = 1
+Saving changes:
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 2
+  DELETE FROM [Blogs] WHERE [BlogId] = 1
 
-  After SaveChanges:
-    Blog '1' is in state Detached with 2 posts referenced.
-      Post '1' is in state Unchanged with FK 'null' and no reference to a blog.
-      Post '2' is in state Unchanged with FK 'null' and no reference to a blog.
+After SaveChanges:
+  Blog '1' is in state Detached with 2 posts referenced.
+    Post '1' is in state Unchanged with FK 'null' and no reference to a blog.
+    Post '2' is in state Unchanged with FK 'null' and no reference to a blog.
 ```
 
 * Il blog viene contrassegnato come eliminato (Deleted)
@@ -165,19 +162,19 @@ Ogni variazione verrà analizzata per capire il funzionamento.
 
 ### <a name="deletebehaviorrestrict-with-required-or-optional-relationship"></a>DeleteBehavior.Restrict con relazione obbligatoria o facoltativa
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After deleting blog '1':
-    Blog '1' is in state Deleted with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+After deleting blog '1':
+  Blog '1' is in state Deleted with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  Saving changes:
-  SaveChanges threw InvalidOperationException: The association between entity types 'Blog' and 'Post' has been severed but the foreign key for this relationship cannot be set to null. If the dependent entity should be deleted, then setup the relationship to use cascade deletes.
+Saving changes:
+SaveChanges threw InvalidOperationException: The association between entity types 'Blog' and 'Post' has been severed but the foreign key for this relationship cannot be set to null. If the dependent entity should be deleted, then setup the relationship to use cascade deletes.
 ```
 
 * Il blog viene contrassegnato come eliminato (Deleted)
@@ -194,25 +191,25 @@ Ogni variazione verrà analizzata per capire il funzionamento.
 
 ### <a name="deletebehaviorcascade-with-required-or-optional-relationship"></a>DeleteBehavior.Cascade con relazione obbligatoria o facoltativa
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After making posts orphans:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Modified with FK '1' and no reference to a blog.
-      Post '2' is in state Modified with FK '1' and no reference to a blog.
+After making posts orphans:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Modified with FK '1' and no reference to a blog.
+    Post '2' is in state Modified with FK '1' and no reference to a blog.
 
-  Saving changes:
-    DELETE FROM [Posts] WHERE [PostId] = 1
-    DELETE FROM [Posts] WHERE [PostId] = 2
+Saving changes:
+  DELETE FROM [Posts] WHERE [PostId] = 1
+  DELETE FROM [Posts] WHERE [PostId] = 2
 
-  After SaveChanges:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Detached with FK '1' and no reference to a blog.
-      Post '2' is in state Detached with FK '1' and no reference to a blog.
+After SaveChanges:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Detached with FK '1' and no reference to a blog.
+    Post '2' is in state Detached with FK '1' and no reference to a blog.
 ```
 
 * I post vengono contrassegnati come modificati perché, a causa dell'interruzione della relazione, la chiave esterna è stata contrassegnata come Null
@@ -222,21 +219,21 @@ Ogni variazione verrà analizzata per capire il funzionamento.
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-required-relationship"></a>DeleteBehavior.ClientSetNull o DeleteBehavior.SetNull con relazione obbligatoria
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After making posts orphans:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Modified with FK 'null' and no reference to a blog.
-      Post '2' is in state Modified with FK 'null' and no reference to a blog.
+After making posts orphans:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Modified with FK 'null' and no reference to a blog.
+    Post '2' is in state Modified with FK 'null' and no reference to a blog.
 
-  Saving changes:
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
+Saving changes:
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
 
-  SaveChanges threw DbUpdateException: Cannot insert the value NULL into column 'BlogId', table 'EFSaving.CascadeDelete.dbo.Posts'; column does not allow nulls. UPDATE fails. The statement has been terminated.
+SaveChanges threw DbUpdateException: Cannot insert the value NULL into column 'BlogId', table 'EFSaving.CascadeDelete.dbo.Posts'; column does not allow nulls. UPDATE fails. The statement has been terminated.
 ```
 
 * I post vengono contrassegnati come modificati perché, a causa dell'interruzione della relazione, la chiave esterna è stata contrassegnata come Null
@@ -245,25 +242,25 @@ Ogni variazione verrà analizzata per capire il funzionamento.
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-optional-relationship"></a>DeleteBehavior.ClientSetNull o DeleteBehavior.SetNull con relazione facoltativa
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After making posts orphans:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Modified with FK 'null' and no reference to a blog.
-      Post '2' is in state Modified with FK 'null' and no reference to a blog.
+After making posts orphans:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Modified with FK 'null' and no reference to a blog.
+    Post '2' is in state Modified with FK 'null' and no reference to a blog.
 
-  Saving changes:
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 2
+Saving changes:
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 2
 
-  After SaveChanges:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK 'null' and no reference to a blog.
-      Post '2' is in state Unchanged with FK 'null' and no reference to a blog.
+After SaveChanges:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK 'null' and no reference to a blog.
+    Post '2' is in state Unchanged with FK 'null' and no reference to a blog.
 ```
 
 * I post vengono contrassegnati come modificati perché, a causa dell'interruzione della relazione, la chiave esterna è stata contrassegnata come Null
@@ -273,19 +270,19 @@ Ogni variazione verrà analizzata per capire il funzionamento.
 
 ### <a name="deletebehaviorrestrict-with-required-or-optional-relationship"></a>DeleteBehavior.Restrict con relazione obbligatoria o facoltativa
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After making posts orphans:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Modified with FK '1' and no reference to a blog.
-      Post '2' is in state Modified with FK '1' and no reference to a blog.
+After making posts orphans:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Modified with FK '1' and no reference to a blog.
+    Post '2' is in state Modified with FK '1' and no reference to a blog.
 
-  Saving changes:
-  SaveChanges threw InvalidOperationException: The association between entity types 'Blog' and 'Post' has been severed but the foreign key for this relationship cannot be set to null. If the dependent entity should be deleted, then setup the relationship to use cascade deletes.
+Saving changes:
+SaveChanges threw InvalidOperationException: The association between entity types 'Blog' and 'Post' has been severed but the foreign key for this relationship cannot be set to null. If the dependent entity should be deleted, then setup the relationship to use cascade deletes.
 ```
 
 * I post vengono contrassegnati come modificati perché, a causa dell'interruzione della relazione, la chiave esterna è stata contrassegnata come Null
@@ -297,15 +294,15 @@ Ogni variazione verrà analizzata per capire il funzionamento.
 Quando si chiama *SaveChanges*, le regole di eliminazione a catena verranno applicate a tutte le entità incluse nel rilevamento delle modifiche dal contesto. Si tratta della situazione esistente in tutti gli esempi illustrati in precedenza, che è il motivo per cui vengono generate istruzioni SQL per eliminare sia l'entità principale/padre (blog) che tutte le entità dipendenti/figlio (post):
 
 ```sql
-    DELETE FROM [Posts] WHERE [PostId] = 1
-    DELETE FROM [Posts] WHERE [PostId] = 2
-    DELETE FROM [Blogs] WHERE [BlogId] = 1
+DELETE FROM [Posts] WHERE [PostId] = 1
+DELETE FROM [Posts] WHERE [PostId] = 2
+DELETE FROM [Blogs] WHERE [BlogId] = 1
 ```
 
 Se viene caricata solo l'entità principale, ad esempio, quando viene eseguita una query per un blog senza `Include(b => b.Posts)` per includere anche i post, SaveChanges genererà solo le istruzioni SQL per eliminare l'entità principale/padre:
 
 ```sql
-    DELETE FROM [Blogs] WHERE [BlogId] = 1
+DELETE FROM [Blogs] WHERE [BlogId] = 1
 ```
 
 Le entità dipendenti/figlio (post) verranno eliminate solo se per il database è configurato un comportamento a catena corrispondente. Se si usa EF per creare il database, questo comportamento a catena verrà configurato automaticamente.

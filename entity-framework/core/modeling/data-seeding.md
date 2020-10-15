@@ -2,15 +2,14 @@
 title: Seeding dei dati-EF Core
 description: Uso del seeding dei dati per popolare un database con un set di dati iniziale usando Entity Framework Core
 author: AndriySvyryd
-ms.author: ansvyryd
 ms.date: 11/02/2018
 uid: core/modeling/data-seeding
-ms.openlocfilehash: 1d7adbe45c4cbc64a39485c76d8f516e32ffeba5
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f8284d7473c6fbcafde25d01ec0709c2d50b666f
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071602"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063699"
 ---
 # <a name="data-seeding"></a>Seeding dei dati
 
@@ -23,9 +22,6 @@ Questa operazione può essere eseguita in diversi modi EF Core:
 * Logica di inizializzazione personalizzata
 
 ## <a name="model-seed-data"></a>Dati di inizializzazione del modello
-
-> [!NOTE]
-> Questa funzionalità è stata introdotta in EF Core 2.1.
 
 Diversamente da EF6, in EF Core, il seeding dei dati può essere associato a un tipo di entità come parte della configurazione del modello. Le [migrazioni](xref:core/managing-schemas/migrations/index) EF core possono quindi calcolare automaticamente le operazioni di inserimento, aggiornamento o eliminazione da applicare durante l'aggiornamento del database a una nuova versione del modello.
 

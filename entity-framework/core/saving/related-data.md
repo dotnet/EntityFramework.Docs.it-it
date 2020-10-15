@@ -1,15 +1,15 @@
 ---
 title: Salvataggio di dati correlati - EF Core
 description: Informazioni sul salvataggio di grafici di entità correlate e sulla gestione delle relazioni in Entity Framework Core
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/related-data
-ms.openlocfilehash: 0ae6477032109787e63cae498bda7148dcaa5abe
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 25b4e265f19e658097be7332f9cba6fec3b560db
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070978"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062945"
 ---
 # <a name="saving-related-data"></a>Salvataggio di dati correlati
 
@@ -27,7 +27,7 @@ Nell'esempio seguente il blog e i tre post correlati vengono tutti inseriti nel 
 [!code-csharp[Main](../../../samples/core/Saving/RelatedData/Sample.cs#AddingGraphOfEntities)]
 
 > [!TIP]  
-> Usare la proprietà EntityEntry.State per impostare lo stato di una singola entità. Ad esempio: `context.Entry(blog).State = EntityState.Modified`.
+> Usare la proprietà EntityEntry.State per impostare lo stato di una singola entità. Ad esempio, `context.Entry(blog).State = EntityState.Modified`
 
 ## <a name="adding-a-related-entity"></a>Aggiunta di un'entità correlata
 

@@ -1,17 +1,17 @@
 ---
-title: Proprietà Shadow-EF Core
-description: Configurazione delle proprietà shadow in un modello di Entity Framework Core
+title: Proprietà Shadow e Indexer-EF Core
+description: Configurazione delle proprietà shadow e indexer in un modello di Entity Framework Core
 author: AndriySvyryd
-ms.date: 01/03/2020
+ms.date: 10/09/2020
 uid: core/modeling/shadow-properties
-ms.openlocfilehash: 735659a1a8523e63afa908d4fe3904e62f46cbd0
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 417ab57a4a77ecf626e54eeca900744d84e3fe08
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071381"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063894"
 ---
-# <a name="shadow-properties"></a>Proprietà shadow
+# <a name="shadow-and-indexer-properties"></a>Proprietà Shadow e Indexer
 
 Le proprietà shadow sono proprietà che non sono definite nella classe di entità .NET, ma sono definite per il tipo di entità nel modello di EF Core. Il valore e lo stato di queste proprietà vengono mantenuti esclusivamente nello strumento di rilevamento delle modifiche. Le proprietà shadow sono utili quando nel database sono presenti dati che non devono essere esposti sui tipi di entità mappati.
 
@@ -37,15 +37,24 @@ Se il nome fornito al `Property` metodo corrisponde al nome di una proprietà es
 
 I valori delle proprietà shadow possono essere ottenuti e modificati tramite l' `ChangeTracker` API:
 
-``` csharp
+```csharp
 context.Entry(myBlog).Property("LastUpdated").CurrentValue = DateTime.Now;
 ```
 
 È possibile fare riferimento alle proprietà shadow nelle query LINQ tramite il `EF.Property` metodo statico:
 
-``` csharp
+```csharp
 var blogs = context.Blogs
     .OrderBy(b => EF.Property<DateTime>(b, "LastUpdated"));
 ```
 
 Non è possibile accedere alle proprietà shadow dopo una query senza rilevamento poiché le entità restituite non vengono rilevate dallo strumento di rilevamento delle modifiche.
+
+## <a name="property-bag-entity-types"></a>Tipi di entità contenitore delle proprietà
+
+> [!NOTE]
+> Il supporto per i tipi di entità contenitore delle proprietà è stato aggiunto in EF Core 5,0.
+
+I tipi di entità che contengono solo proprietà dell'indicizzatore sono noti come tipi di entità del contenitore delle proprietà. Questi tipi di entità non dispongono di proprietà shadow. Attualmente `Dictionary<string, object>` è supportato solo come tipo di entità contenitore delle proprietà. Questo significa che deve essere configurato come tipo di entità condiviso con un nome univoco e la proprietà corrispondente `DbSet` deve essere implementata tramite una `Set` chiamata a.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/SharedType.cs?name=SharedType&highlight=3,7)]

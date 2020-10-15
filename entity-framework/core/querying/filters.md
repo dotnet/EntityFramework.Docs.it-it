@@ -1,50 +1,47 @@
 ---
 title: Filtri di query globali - EF Core
 description: Uso di filtri di query globali per filtrare i risultati con Entity Framework Core
-author: anpete
+author: maumar
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: d5793760ea2e61111416284db8d5a8102dd51a41
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 8a9eabd7e86864c9ebb4b1dc4a06bf7fc207d496
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616394"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062607"
 ---
 # <a name="global-query-filters"></a>Filtri di query globali
 
-> [!NOTE]
-> Questa funzionalità è stata introdotta in EF Core 2.0.
+I filtri di query globali sono predicati di query LINQ applicati ai tipi di entità nel modello di metadati (in genere in `OnModelCreating` ). Un predicato di query è un'espressione booleana che in genere viene passata all' `Where` operatore di query LINQ.  EF Core applica automaticamente tali filtri alle query LINQ che coinvolgono tali tipi di entità.  EF Core li applica anche ai tipi di entità, a cui viene fatto riferimento indirettamente tramite l'utilizzo della proprietà di navigazione o di inclusione. Alcune applicazioni comuni di questa funzionalità sono:
 
-I filtri di query globali sono predicati di query LINQ applicati ai tipi di entità nel modello di metadati (in genere in *OnModelCreating*). Un predicato di query è un'espressione booleana che in genere viene passata all'operatore di query *where* di LINQ.  EF Core applica automaticamente tali filtri alle query LINQ che coinvolgono tali tipi di entità.  EF Core li applica anche ai tipi di entità, a cui viene fatto riferimento indirettamente tramite l'utilizzo della proprietà di navigazione o di inclusione. Alcune applicazioni comuni di questa funzionalità sono:
-
-* **Eliminazione temporanea**, un tipo di entità definisce una proprietà *IsDeleted*.
-* **Multi-tenant** : un tipo di entità definisce una proprietà *TenantId* .
+* **Soft delete** : un tipo di entità definisce una `IsDeleted` Proprietà.
+* **Multi-tenant** : un tipo di entità definisce una `TenantId` Proprietà.
 
 ## <a name="example"></a>Esempio
 
 Nell'esempio seguente viene illustrato come utilizzare i filtri di query globali per implementare comportamenti di query di multi-tenant e di eliminazione temporanea in un semplice modello di Blog.
 
 > [!TIP]
-> È possibile visualizzare un [esempio di multi-tenant](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/QueryFilters) ed [esempi usando le navigazioni](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/QueryFiltersNavigations) su GitHub.
+> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/QueryFilters) di questo articolo in GitHub.
 
 Prima di tutto, definire le entità:
 
-[!code-csharp[Main](../../../samples/core/QueryFilters/Program.cs#Entities)]
+[!code-csharp[Main](../../../samples/core/Querying/QueryFilters/Entities.cs#Entities)]
 
-Si noti la dichiarazione di un campo _tenantId_ per l'entità _Blog_. Questo campo verrà usato per associare ogni istanza di Blog a un tenant specifico. Viene anche definita una proprietà _IsDeleted_ per il tipo di entità _Post_. Questa proprietà viene usata per tenere traccia del fatto che un'istanza _post_ è stata "eliminata temporaneamente". L'istanza è contrassegnata come eliminata senza rimuovere fisicamente i dati sottostanti.
+Si noti la dichiarazione di un `_tenantId` campo nell' `Blog` entità. Questo campo verrà usato per associare ogni istanza di Blog a un tenant specifico. Definito anche come `IsDeleted` proprietà nel tipo di `Post` entità. Questa proprietà viene usata per tenere traccia del fatto che un'istanza post è stata "eliminata temporaneamente". L'istanza è contrassegnata come eliminata senza rimuovere fisicamente i dati sottostanti.
 
-A questo punto, configurare i filtri di query in _OnModelCreating_ usando l'API `HasQueryFilter`.
+Configurare quindi i filtri query in `OnModelCreating` usando l' `HasQueryFilter` API.
 
-[!code-csharp[Main](../../../samples/core/QueryFilters/Program.cs#Configuration)]
+[!code-csharp[Main](../../../samples/core/Querying/QueryFilters/BloggingContext.cs#FilterConfiguration)]
 
-Le espressioni del predicato passate alle chiamate di _HasQueryFilter_ verranno ora applicate automaticamente a tutte le query LINQ per tali tipi.
+Le espressioni del predicato passate alle `HasQueryFilter` chiamate verranno ora applicate automaticamente a qualsiasi query LINQ per tali tipi.
 
 > [!TIP]
 > Si noti l'uso del campo a livello di istanza di DbContext `_tenantId`, usato per impostare il tenant corrente. I filtri a livello di modello useranno il valore dell'istanza del contesto corretta, ovvero l'istanza che esegue la query.
 
 > [!NOTE]
-> Attualmente non è possibile definire più filtri query sulla stessa entità. verrà applicato solo l'ultimo. Tuttavia, è possibile definire un singolo filtro con più condizioni usando l'operatore _and_ logico ([ `&&` in C#](/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-and-operator-)).
+> Attualmente non è possibile definire più filtri query sulla stessa entità. verrà applicato solo l'ultimo. Tuttavia, è possibile definire un singolo filtro con più condizioni usando l' `AND` operatore logico ([ `&&` in C#](/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-and-operator-)).
 
 ## <a name="use-of-navigations"></a>Uso delle navigazioni
 
@@ -60,33 +57,27 @@ Le espressioni del predicato passate alle chiamate di _HasQueryFilter_ verranno 
 
 Per la navigazione obbligatoria si prevede che l'entità correlata sia sempre presente. Se l'entità correlata necessaria viene esclusa dal filtro di query, l'entità padre non sarà nel risultato. Quindi, è possibile ottenere meno elementi del previsto.
 
-Per illustrare il problema, è possibile usare le `Blog` `Post` entità e specificate in precedenza e il metodo _OnModelCreating_ seguente:
+Per illustrare il problema, è possibile usare le `Blog` `Post` entità e specificate in precedenza e il `OnModelCreating` metodo seguente:
 
-```csharp
-protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
-    modelBuilder.Entity<Blog>().HasMany(b => b.Posts).WithOne(p => p.Blog).IsRequired();
-    modelBuilder.Entity<Blog>().HasQueryFilter(b => b.Url.Contains("fish"));
-}
-```
+[!code-csharp[Main](../../../samples/core/Querying/QueryFilters/FilteredBloggingContextRequired.cs#IncorrectFilter)]
 
 È possibile effettuare il seeding del modello con i dati seguenti:
 
-[!code-csharp[Main](../../../samples/core/QueryFiltersNavigations/Program.cs#SeedData)]
+[!code-csharp[Main](../../../samples/core/Querying/QueryFilters/Program.cs#SeedData)]
 
 Il problema può essere rilevato durante l'esecuzione di due query:
 
-[!code-csharp[Main](../../../samples/core/QueryFiltersNavigations/Program.cs#Queries)]
+[!code-csharp[Main](../../../samples/core/Querying/QueryFilters/Program.cs#Queries)]
 
-Con l'installazione precedente, la prima query restituisce tutti i 6 `Post` , tuttavia la seconda query restituisce solo 3. Questa mancata corrispondenza si verifica perché il metodo di _inclusione_ nella seconda query carica le `Blog` entità correlate. Poiché la navigazione tra `Blog` e `Post` è obbligatoria, EF core utilizza `INNER JOIN` quando si costruisce la query:
+Con l'installazione precedente, la prima query restituisce tutti i 6 `Post` , tuttavia la seconda query restituisce solo 3. Questa mancata corrispondenza si verifica perché `Include` il metodo nella seconda query carica le `Blog` entità correlate. Poiché la navigazione tra `Blog` e `Post` è obbligatoria, EF core utilizza `INNER JOIN` quando si costruisce la query:
 
-```SQL
+```sql
 SELECT [p].[PostId], [p].[BlogId], [p].[Content], [p].[IsDeleted], [p].[Title], [t].[BlogId], [t].[Name], [t].[Url]
-FROM [Post] AS [p]
+FROM [Posts] AS [p]
 INNER JOIN (
     SELECT [b].[BlogId], [b].[Name], [b].[Url]
     FROM [Blogs] AS [b]
-    WHERE CHARINDEX(N'fish', [b].[Url]) > 0
+    WHERE [b].[Url] LIKE N'%fish%'
 ) AS [t] ON [p].[BlogId] = [t].[BlogId]
 ```
 
@@ -95,31 +86,18 @@ L'uso di `INNER JOIN` Filtra tutti i i `Post` cui oggetti correlati `Blog` sono 
 Può essere risolto usando la navigazione facoltativa anziché obbligatoria.
 In questo modo la prima query rimane invariata, ma la seconda query genera ora `LEFT JOIN` e restituisce 6 risultati.
 
-```csharp
-protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
-    modelBuilder.Entity<Blog>().HasMany(b => b.Posts).WithOne(p => p.Blog).IsRequired(false);
-    modelBuilder.Entity<Blog>().HasQueryFilter(b => b.Url.Contains("fish"));
-}
-```
+[!code-csharp[Main](../../../samples/core/Querying/QueryFilters/FilteredBloggingContextRequired.cs#OptionalNavigation)]
 
 Un approccio alternativo consiste nello specificare filtri coerenti in entrambe `Blog` le `Post` entità e.
 In questo modo, i filtri corrispondenti vengono applicati sia a `Blog` che a `Post` . `Post`gli oggetti che potrebbero finire nello stato imprevisto vengono rimossi ed entrambe le query restituiscono 3 risultati.
 
-```csharp
-protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
-    modelBuilder.Entity<Blog>().HasMany(b => b.Posts).WithOne(p => p.Blog).IsRequired();
-    modelBuilder.Entity<Blog>().HasQueryFilter(b => b.Url.Contains("fish"));
-    modelBuilder.Entity<Post>().HasQueryFilter(p => p.Blog.Url.Contains("fish"));
-}
-```
+[!code-csharp[Main](../../../samples/core/Querying/QueryFilters/FilteredBloggingContextRequired.cs#MatchingFilters)]
 
 ## <a name="disabling-filters"></a>Disabilitazione dei filtri
 
-È possibile disabilitare i filtri per singole query LINQ usando l'operatore `IgnoreQueryFilters()`.
+È possibile disabilitare i filtri per singole query LINQ usando l'operatore <xref:Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.IgnoreQueryFilters%2A>.
 
-[!code-csharp[Main](../../../samples/core/QueryFilters/Program.cs#IgnoreFilters)]
+[!code-csharp[Main](../../../samples/core/Querying/QueryFilters/Program.cs#IgnoreFilters)]
 
 ## <a name="limitations"></a>Limitazioni
 

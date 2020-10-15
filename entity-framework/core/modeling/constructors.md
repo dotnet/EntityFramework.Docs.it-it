@@ -4,28 +4,25 @@ description: Utilizzo di costruttori per associare dati a Entity Framework Core 
 author: ajcvickers
 ms.date: 02/23/2018
 uid: core/modeling/constructors
-ms.openlocfilehash: 06d18f173275599ad1e547193363e13c48fc8dcf
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 9502d75072eebb80c37cf1805e21f7d112269ba1
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071589"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063712"
 ---
 # <a name="entity-types-with-constructors"></a>Tipi di entità con costruttori
 
-> [!NOTE]  
-> Questa funzionalità è stata introdotta in EF Core 2.1.
+È possibile definire un costruttore con parametri e EF Core chiamare questo costruttore quando si crea un'istanza dell'entità. I parametri del costruttore possono essere associati a proprietà mappate o a vari tipi di servizi per semplificare i comportamenti come il caricamento lazy.
 
-A partire da EF Core 2,1, è ora possibile definire un costruttore con parametri e EF Core chiamare questo costruttore quando si crea un'istanza dell'entità. I parametri del costruttore possono essere associati a proprietà mappate o a vari tipi di servizi per semplificare i comportamenti come il caricamento lazy.
-
-> [!NOTE]  
-> A partire da EF Core 2,1, l'associazione di tutti i costruttori è per convenzione. La configurazione di costruttori specifici da usare è prevista per una versione futura.
+> [!NOTE]
+> Attualmente, l'associazione di tutti i costruttori è per convenzione. La configurazione di costruttori specifici da usare è prevista per una versione futura.
 
 ## <a name="binding-to-mapped-properties"></a>Associazione alle proprietà mappate
 
 Si consideri un modello di Blog/post tipico:
 
-``` csharp
+```csharp
 public class Blog
 {
     public int Id { get; set; }
@@ -48,9 +45,9 @@ public class Post
 }
 ```
 
-Quando EF Core crea istanze di questi tipi, ad esempio per i risultati di una query, chiamerà prima di tutto il costruttore senza parametri predefinito e quindi imposterà ogni proprietà sul valore del database. Tuttavia, se EF Core trova un costruttore con parametri con i nomi di parametro e i tipi che corrispondono a quelli delle proprietà mappate, chiamerà invece il costruttore con parametri con i valori per tali proprietà e non imposterà in modo esplicito ogni proprietà. Esempio:
+Quando EF Core crea istanze di questi tipi, ad esempio per i risultati di una query, chiamerà prima di tutto il costruttore senza parametri predefinito e quindi imposterà ogni proprietà sul valore del database. Tuttavia, se EF Core trova un costruttore con parametri con i nomi di parametro e i tipi che corrispondono a quelli delle proprietà mappate, chiamerà invece il costruttore con parametri con i valori per tali proprietà e non imposterà in modo esplicito ogni proprietà. Ad esempio:
 
-``` csharp
+```csharp
 public class Blog
 {
     public Blog(int id, string name, string author)
@@ -101,9 +98,9 @@ Quando le proprietà vengono impostate tramite il costruttore, può essere utile
 * Non è stato eseguito il mapping delle proprietà senza Setter per convenzione. Questa operazione tende a eseguire il mapping delle proprietà che non devono essere mappate, ad esempio le proprietà calcolate.
 * L'uso di valori di chiave generati automaticamente richiede una proprietà chiave che sia di lettura/scrittura, perché il valore della chiave deve essere impostato dal generatore di chiavi quando si inseriscono nuove entità.
 
-Un modo semplice per evitare questi problemi consiste nell'usare Setter privati. Esempio:
+Un modo semplice per evitare questi problemi consiste nell'usare Setter privati. Ad esempio:
 
-``` csharp
+```csharp
 public class Blog
 {
     public Blog(int id, string name, string author)
@@ -144,7 +141,7 @@ EF Core Visualizza una proprietà con un setter privato come lettura/scrittura, 
 
 Un'alternativa all'uso di Setter privati consiste nel rendere le proprietà di sola lettura e aggiungere più mapping espliciti in OnModelCreating. Analogamente, alcune proprietà possono essere rimosse completamente e sostituite solo con i campi. Si considerino, ad esempio, i tipi di entità seguenti:
 
-``` csharp
+```csharp
 public class Blog
 {
     private int _id;
@@ -181,7 +178,7 @@ public class Post
 
 E questa configurazione in OnModelCreating:
 
-``` csharp
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<Blog>(
@@ -208,7 +205,7 @@ Aspetti da considerare:
 * Le altre proprietà sono proprietà di sola lettura impostate solo nel costruttore.
 * Se il valore della chiave primaria viene impostato solo da EF o letto dal database, non è necessario includerlo nel costruttore. In questo modo, la chiave "Property" viene lasciata come un campo semplice e si rende chiaro che non deve essere impostata in modo esplicito durante la creazione di nuovi blog o post.
 
-> [!NOTE]  
+> [!NOTE]
 > Questo codice genererà l'avviso del compilatore ' 169' indicante che il campo non viene mai usato. Questo può essere ignorato perché in realtà EF Core usa il campo in modo linguistico.
 
 ## <a name="injecting-services"></a>Inserimento di servizi
@@ -220,12 +217,12 @@ EF Core inoltre possibile inserire i "servizi" nel costruttore di un tipo di ent
 * `Action<object, string>` -un delegato di caricamento lazy. per ulteriori informazioni, vedere la [documentazione relativa al caricamento lazy](xref:core/querying/related-data) .
 * `IEntityType` -i metadati di EF Core associati a questo tipo di entità
 
-> [!NOTE]  
-> A partire da EF Core 2,1, è possibile inserire solo i servizi noti da EF Core. Il supporto per l'inserimento di servizi applicativi viene preso in considerazione per una versione futura.
+> [!NOTE]
+> Attualmente, è possibile inserire solo i servizi noti da EF Core. Il supporto per l'inserimento di servizi applicativi viene preso in considerazione per una versione futura.
 
 Ad esempio, è possibile usare un DbContext inserito per accedere in modo selettivo al database per ottenere informazioni sulle entità correlate senza caricarle tutte. Nell'esempio seguente viene usato per ottenere il numero di post in un blog senza caricare i post:
 
-``` csharp
+```csharp
 public class Blog
 {
     public Blog()
@@ -268,5 +265,5 @@ Ecco alcuni aspetti da tenere presente:
 * Il codice che usa il servizio inserito (ovvero il contesto) è difensivo rispetto `null` alla gestione dei casi in cui EF Core non crea l'istanza.
 * Poiché il servizio viene archiviato in una proprietà di lettura/scrittura, verrà reimpostato quando l'entità è associata a una nuova istanza del contesto.
 
-> [!WARNING]  
+> [!WARNING]
 > L'inserimento di DbContext come questo è spesso considerato un anti-pattern, perché abbina i tipi di entità direttamente a EF Core. Valutare attentamente tutte le opzioni prima di usare l'inserimento di un servizio come questo.

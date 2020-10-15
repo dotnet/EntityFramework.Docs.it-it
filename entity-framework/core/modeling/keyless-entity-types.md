@@ -2,20 +2,19 @@
 title: Tipi di entità autofirmati-EF Core
 description: Come configurare i tipi di entità autochiave utilizzando Entity Framework Core
 author: AndriySvyryd
-ms.author: ansvyryd
 ms.date: 9/13/2019
 uid: core/modeling/keyless-entity-types
-ms.openlocfilehash: 00e8f17c88fd51e39df3c1e45c648c203bbbe324
-ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
+ms.openlocfilehash: cb4ce44526ada77e37eb4dceb9986a670ea3656b
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82103126"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063803"
 ---
 # <a name="keyless-entity-types"></a>Tipi di entità senza chiave
 
 > [!NOTE]
-> Questa funzionalità è stata aggiunta in EF Core 2,1 sotto il nome dei tipi di query. In EF Core 3,0 il concetto è stato rinominato in tipi di entità senza chiave. L' `[Keyless]` annotazione dei dati è diventata disponibile in EFCore 5,0.
+> Questa funzionalità è stata aggiunta con il nome dei tipi di query. In EF Core 3,0 il concetto è stato rinominato in tipi di entità senza chiave. L' `[Keyless]` annotazione dei dati è diventata disponibile in EFCore 5,0.
 
 Oltre ai normali tipi di entità, un modello di EF Core può contenere _tipi di entità_senza chiave, che possono essere usati per eseguire query di database su dati che non contengono valori di chiave.
 
@@ -47,7 +46,7 @@ Tuttavia, sono diversi dai normali tipi di entità in quanto:
   - Potrebbero non avere spostamenti sulle entità di proprietà
   - Possono contenere solo proprietà di navigazione di riferimento che puntano a entità regolari.
   - Le entità non possono contenere proprietà di navigazione per i tipi di entità autochiave.
-- Deve essere configurato con un' `[Keyless]` annotazione dati o `.HasNoKey()` una chiamata al metodo.
+- Deve essere configurato con un' `[Keyless]` annotazione dati o una `.HasNoKey()` chiamata al metodo.
 - Può essere mappato a una _query di definizione_. Una query di definizione è una query dichiarata nel modello che funge da origine dati per un tipo di entità autonome.
 
 ## <a name="usage-scenarios"></a>Scenari di utilizzo
@@ -61,10 +60,10 @@ Di seguito sono riportati alcuni degli scenari di utilizzo principali per i tipi
 
 ## <a name="mapping-to-database-objects"></a>Mapping a oggetti di database
 
-Il mapping di un tipo di entità autochiave a un oggetto di `ToTable` database `ToView` viene eseguito tramite l'API o Fluent. Dal punto di vista del EF Core, l'oggetto di database specificato in questo metodo è una _vista_, ovvero viene considerato come un'origine di query di sola lettura e non può essere la destinazione di operazioni di aggiornamento, inserimento o eliminazione. Tuttavia, ciò non significa che l'oggetto di database debba essere effettivamente una vista di database. In alternativa, può essere una tabella di database che verrà considerata di sola lettura. Viceversa, per i tipi di entità regolari, EF Core presuppone che un oggetto di database specificato nel `ToTable` metodo possa essere considerato come una _tabella_, ovvero può essere utilizzato come origine della query, ma anche come destinazione da operazioni di aggiornamento, eliminazione e inserimento. In realtà, è possibile specificare il nome di una vista di database `ToTable` in e tutto dovrebbe funzionare correttamente purché la vista sia configurata per essere aggiornabile nel database.
+Il mapping di un tipo di entità autochiave a un oggetto di database viene eseguito tramite l' `ToTable` `ToView` API o Fluent. Dal punto di vista del EF Core, l'oggetto di database specificato in questo metodo è una _vista_, ovvero viene considerato come un'origine di query di sola lettura e non può essere la destinazione di operazioni di aggiornamento, inserimento o eliminazione. Tuttavia, ciò non significa che l'oggetto di database debba essere effettivamente una vista di database. In alternativa, può essere una tabella di database che verrà considerata di sola lettura. Viceversa, per i tipi di entità regolari, EF Core presuppone che un oggetto di database specificato nel `ToTable` metodo possa essere considerato come una _tabella_, ovvero può essere utilizzato come origine della query, ma anche come destinazione da operazioni di aggiornamento, eliminazione e inserimento. In realtà, è possibile specificare il nome di una vista di database in `ToTable` e tutto dovrebbe funzionare correttamente purché la vista sia configurata per essere aggiornabile nel database.
 
 > [!NOTE]
-> `ToView`presuppone che l'oggetto sia già presente nel database e non venga creato dalle migrazioni.
+> `ToView` presuppone che l'oggetto sia già presente nel database e non venga creato dalle migrazioni.
 
 ## <a name="example"></a>Esempio
 
@@ -90,7 +89,7 @@ Si usa l'API di configurazione Fluent per configurare il mapping per il tipo di 
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#Configuration)]
 
-Successivamente, viene configurato `DbContext` per includere: `DbSet<T>`
+Successivamente, viene configurato `DbContext` per includere `DbSet<T>` :
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#DbSet)]
 

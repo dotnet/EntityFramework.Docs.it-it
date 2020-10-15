@@ -1,20 +1,37 @@
 ---
 title: EF Core di registrazione
 description: Configurazione della registrazione con Entity Framework Core
-author: rowanmiller
-ms.date: 10/27/2016
+author: ajcvickers
+ms.date: 10/06/2020
 uid: core/miscellaneous/logging
-ms.openlocfilehash: 0fd1c83f01989095a813727390179db2327b610d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 389834b3822aeeaefb8c085538bc6359ccfa7094
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071667"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063010"
 ---
 # <a name="logging"></a>Registrazione
 
-> [!TIP]  
+> [!TIP]
 > È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging) di questo articolo in GitHub.
+
+## <a name="simple-logging"></a>Registrazione semplice
+
+> [!NOTE]
+> Questa funzionalità è stata aggiunta in EF Core 5,0.
+
+Entity Framework Core (EF Core) genera messaggi di log per operazioni quali l'esecuzione di una query o il salvataggio di modifiche nel database. È possibile accedervi da qualsiasi tipo di applicazione tramite l'uso di [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> Quando si [configura un'istanza di DbContext](xref:core/miscellaneous/configuring-dbcontext). Questa configurazione viene in genere eseguita in un override di <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Ad esempio:
+
+<!--
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        => optionsBuilder.LogTo(Console.WriteLine);
+-->
+[!code-csharp[LogToConsole](../../../samples/core/Miscellaneous/Logging/SimpleLogging/Program.cs?name=LogToConsole)]
+
+Questo concetto è simile a <xref:System.Data.Entity.Database.Log?displayProperty=nameWithType> in EF6.
+
+Per ulteriori informazioni, vedere [registrazione semplice](xref:core/miscellaneous/events/simple-logging) .
 
 ## <a name="aspnet-core-applications"></a>Applicazioni ASP.NET Core
 
@@ -42,14 +59,14 @@ Dopo l'installazione dei pacchetti appropriati, l'applicazione deve creare un'is
 > [!NOTE]
 > Nell'esempio di codice seguente viene usato un `ConsoleLoggerProvider` Costruttore obsoleto nella versione 2,2 e sostituito in 3,0. È possibile ignorare ed escludere gli avvisi quando si usa 2,2.
 
-``` csharp
+```csharp
 public static readonly LoggerFactory MyLoggerFactory
     = new LoggerFactory(new[] { new ConsoleLoggerProvider((_, __) => true, true) });
 ```
 
 ***
 
-Questa istanza singleton/globale deve quindi essere registrata con EF Core su `DbContextOptionsBuilder` . Esempio:
+Questa istanza singleton/globale deve quindi essere registrata con EF Core su `DbContextOptionsBuilder` . Ad esempio:
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContext.cs#RegisterLoggerFactory)]
 
@@ -58,7 +75,7 @@ Questa istanza singleton/globale deve quindi essere registrata con EF Core su `D
 
 ## <a name="filtering-what-is-logged"></a>Filtraggio degli elementi registrati
 
-L'applicazione può controllare ciò che viene registrato configurando un filtro in ILoggerProvider. Esempio:
+L'applicazione può controllare ciò che viene registrato configurando un filtro in ILoggerProvider. Ad esempio:
 
 ### <a name="version-3x"></a>[Versione 3. x](#tab/v3)
 
@@ -69,7 +86,7 @@ L'applicazione può controllare ciò che viene registrato configurando un filtro
 > [!NOTE]
 > Nell'esempio di codice seguente viene usato un `ConsoleLoggerProvider` Costruttore obsoleto nella versione 2,2 e sostituito in 3,0. È possibile ignorare ed escludere gli avvisi quando si usa 2,2.
 
-``` csharp
+```csharp
 public static readonly LoggerFactory MyLoggerFactory
     = new LoggerFactory(new[]
     {

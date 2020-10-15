@@ -1,15 +1,15 @@
 ---
 title: Scrittura di un provider di database-EF Core
 description: Informazioni sulla scrittura di un nuovo provider di Entity Framework Core
-author: anmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/providers/writing-a-provider
-ms.openlocfilehash: b6054696711eb4bf865841428f58ca41791676f9
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: db02402c6651401aacaca9c3538c29f526c6720a
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071212"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062698"
 ---
 # <a name="writing-a-database-provider"></a>Scrittura di un provider di database
 

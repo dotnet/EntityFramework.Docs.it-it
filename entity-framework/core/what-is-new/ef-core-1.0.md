@@ -1,15 +1,15 @@
 ---
 title: Novità di EF Core 1.0 - EF Core
 description: Modifiche e miglioramenti in Entity Framework Core 1,0
-author: divega
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/what-is-new/ef-core-1.0
-ms.openlocfilehash: 898f243bace7f38ffb6b216af0bd9249d73f2fe4
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 4066dced67a54770664b9b1348adb6ac2622ce1a
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072460"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062932"
 ---
 # <a name="features-included-in-ef-core-10"></a>Funzionalità incluse in EF Core 1.0
 
@@ -81,7 +81,7 @@ Consente di salvare le entità di una gerarchia di ereditarietà in una singola 
 
 Rileva i criteri non validi nel modello e visualizza utili messaggi di errore.
 
-## <a name="change-tracking"></a>Change tracking
+## <a name="change-tracking"></a>Rilevamento modifiche
 
 ### <a name="snapshot-change-tracking"></a>Rilevamento modifiche basato su snapshot
 

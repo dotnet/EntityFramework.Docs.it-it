@@ -4,12 +4,12 @@ description: Esercitazione introduttiva a Entity Framework Core
 author: rick-anderson
 ms.date: 09/17/2019
 uid: core/get-started/index
-ms.openlocfilehash: 9f0bb1eb99cb7f4cb7542c444ad86480917bdd0f
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 132586aa41916d94ebef156330cc553a789ed5a7
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071979"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062113"
 ---
 # <a name="getting-started-with-ef-core"></a>Introduzione a EF Core
 
@@ -67,7 +67,7 @@ dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 * **Strumenti > Gestione pacchetti NuGet > Console di Gestione pacchetti**
 * Eseguire i comandi seguenti:
 
-  ``` PowerShell
+  ```powershell
   Install-Package Microsoft.EntityFrameworkCore.Sqlite
   ```
 
@@ -118,7 +118,7 @@ La procedura seguente usa le [migrazioni](xref:core/managing-schemas/migrations/
 
 * Eseguire i comandi seguenti nella **Console di Gestione pacchetti (PMC)**
 
-  ``` PowerShell
+  ```powershell
   Install-Package Microsoft.EntityFrameworkCore.Tools
   Add-Migration InitialCreate
   Update-Database
@@ -149,7 +149,7 @@ Visual Studio usa una directory di lavoro incoerente quando si eseguono app cons
 * Fare clic con il pulsante destro del mouse sul progetto e scegliere **Modifica file di progetto**
 * Subito dopo la proprietà *TargetFramework* aggiungere quanto segue:
 
-  ``` XML
+  ```xml
   <StartWorkingDirectory>$(MSBuildProjectDirectory)</StartWorkingDirectory>
   ```
 

@@ -1,15 +1,15 @@
 ---
 title: Modello di provider Entity Framework 6-EF6
 description: Il modello di provider Entity Framework 6 in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 06/27/2018
 uid: ef6/fundamentals/providers/provider-model
-ms.openlocfilehash: 4fc45ba5fe916253be348182196be236729d685d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 15b5443ff05b5c8704f80d4f2f83b4ed20edd1c0
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90074016"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063192"
 ---
 # <a name="the-entity-framework-6-provider-model"></a>Modello di provider Entity Framework 6
 
@@ -75,7 +75,7 @@ L'implementazione di DbProviderServices da usare può essere registrata nel file
 
 ### <a name="config-file-registration"></a>Registrazione nel file di configurazione
 
-Il tipo di DbProviderServices da usare è registrato come elemento provider nell'elenco provider della sezione entityFramework del file di configurazione dell'applicazione. Esempio:
+Il tipo di DbProviderServices da usare è registrato come elemento provider nell'elenco provider della sezione entityFramework del file di configurazione dell'applicazione. Ad esempio:
 
 ``` xml
 <entityFramework>
@@ -89,7 +89,7 @@ La stringa di _tipo_ deve corrispondere al nome di tipo completo dell'assembly d
 
 ### <a name="code-based-registration"></a>Registrazione basata su codice
 
-A partire da i provider EF6 possono essere registrati anche usando il codice. Questo consente l'uso di un provider EF senza alcuna modifica al file di configurazione dell'applicazione. Per usare la configurazione basata su codice, un'applicazione deve creare una classe DbConfiguration come descritto nella [documentazione sulla configurazione basata su codice](https://msdn.com/data/jj680699). Il costruttore della classe DbConfiguration deve quindi chiamare SetProviderServices per registrare il provider EF. Esempio:
+A partire da i provider EF6 possono essere registrati anche usando il codice. Questo consente l'uso di un provider EF senza alcuna modifica al file di configurazione dell'applicazione. Per usare la configurazione basata su codice, un'applicazione deve creare una classe DbConfiguration come descritto nella [documentazione sulla configurazione basata su codice](https://msdn.com/data/jj680699). Il costruttore della classe DbConfiguration deve quindi chiamare SetProviderServices per registrare il provider EF. Ad esempio:
 
 ``` csharp
 public class MyConfiguration : DbConfiguration
@@ -162,7 +162,7 @@ Questo ordinamento in genere non è rilevante perché la maggior parte dei servi
 
 A partire da EF5 il pacchetto NuGet EntityFramework ha registrato automaticamente la factory di connessione SQL Express o la factory di connessione del database locale nel file di configurazione.
 
-Esempio:
+Ad esempio:
 
 ``` xml
 <entityFramework>

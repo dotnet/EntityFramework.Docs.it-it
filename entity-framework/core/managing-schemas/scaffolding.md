@@ -2,15 +2,14 @@
 title: Reverse Engineering-EF Core
 description: Reverse Engineering di un modello da un database esistente usando Entity Framework Core
 author: bricelam
-ms.author: bricelam
 ms.date: 11/13/2018
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: 86aa6d22ebe8e5c1d654c83d4c292a1ed5842ddd
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: e1b4ed8d5209688fbe5c89ae60cf0d981136305f
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071914"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92061970"
 ---
 # <a name="reverse-engineering"></a> Reverse Engineering
 
@@ -36,7 +35,7 @@ dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Scaffold-DbContext 'Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook' Microsoft.EntityFrameworkCore.SqlServer
 ```
 
@@ -77,7 +76,7 @@ L' `-Schemas` opzione può essere utilizzata per includere ogni tabella all'inte
 
 Per includere più tabelle, usare una matrice:
 
-``` powershell
+```powershell
 Scaffold-DbContext ... -Tables Artist, Album
 ```
 
@@ -93,7 +92,7 @@ Per impostazione predefinita, i tipi di entità vengono configurati tramite l'AP
 
 Se ad esempio si usa l'API Fluent, l'impalcatura è la seguente:
 
-``` csharp
+```csharp
 entity.Property(e => e.Title)
     .IsRequired()
     .HasMaxLength(160);
@@ -101,7 +100,7 @@ entity.Property(e => e.Title)
 
 Quando si usano le annotazioni dei dati, questo è l'impalcatura:
 
-``` csharp
+```csharp
 [Required]
 [StringLength(160)]
 public string Title { get; set; }
@@ -133,19 +132,19 @@ dotnet ef dbcontext scaffold ... --namespace Your.Namespace --context-namespace 
 
 È possibile specificare la directory in cui le classi sono con impalcature usando `-OutputDir` e `-ContextDir` possono essere usate per eseguire il patibolo della classe DbContext in una directory separata dalle classi del tipo di entità:
 
-``` powershell
+```powershell
 Scaffold-DbContext ... -ContextDir Data -OutputDir Models
 ```
 
 Per impostazione predefinita, lo spazio dei nomi sarà lo spazio dei nomi radice più i nomi di tutte le sottodirectory nella directory radice del progetto. Tuttavia, a partire da EFCore 5,0, è possibile eseguire l'override dello spazio dei nomi per tutte le classi di output usando `-Namespace` . È anche possibile eseguire l'override dello spazio dei nomi solo per la classe DbContext usando `-ContextNamespace` .
 
-``` powershell
+```powershell
 Scaffold-DbContext ... -Namespace Your.Namespace -ContextNamespace Your.DbContext.Namespace
 ```
 
 ***
 
-## <a name="how-it-works"></a>Come funziona
+## <a name="how-it-works"></a>Funzionamento
 
 Il reverse engineering inizia con la lettura dello schema del database. Legge le informazioni su tabelle, colonne, vincoli e indici.
 

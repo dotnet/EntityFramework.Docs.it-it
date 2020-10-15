@@ -1,15 +1,15 @@
 ---
 title: Considerazioni sulle prestazioni per EF4, EF5 e EF6-EF6
 description: Considerazioni sulle prestazioni per Entity Framework 4, 5 e 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/performance/perf-whitepaper
-ms.openlocfilehash: 65584382df3d510f314a576f41c5dee3d2e718e7
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ae9374401b66f0493f7318ffcbfd9c4d6a24ada5
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070536"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063426"
 ---
 # <a name="performance-considerations-for-ef-4-5-and-6"></a>Considerazioni sulle prestazioni per EF 4, 5 e 6
 Di David Obando, Eric Dettinger e altri
@@ -22,7 +22,7 @@ Ultimo aggiornamento: maggio 2014
 
 ## <a name="1-introduction"></a>1. Introduzione
 
-I Framework di mapping relazionale a oggetti costituiscono un modo pratico per fornire un'astrazione per l'accesso ai dati in un'applicazione orientata a oggetti. Per le applicazioni .NET, il O/RM consigliato da Microsoft è Entity Framework. Con qualsiasi astrazione, tuttavia, le prestazioni possono diventare un problema.
+Object-Relational Framework di mapping costituiscono un modo pratico per fornire un'astrazione per l'accesso ai dati in un'applicazione orientata a oggetti. Per le applicazioni .NET, il O/RM consigliato da Microsoft è Entity Framework. Con qualsiasi astrazione, tuttavia, le prestazioni possono diventare un problema.
 
 Questo white paper è stato scritto per illustrare le considerazioni sulle prestazioni durante lo sviluppo di applicazioni con Entity Framework, per offrire agli sviluppatori un'idea degli algoritmi interni Entity Framework che possono influire sulle prestazioni e fornire suggerimenti per l'analisi e il miglioramento delle prestazioni nelle applicazioni che utilizzano Entity Framework. Sono disponibili numerosi argomenti utili sulle prestazioni già disponibili sul Web e si è tentato di puntare a queste risorse laddove possibile.
 
@@ -210,7 +210,7 @@ La cache dei piani di query è condivisa tra le istanze di ObjectContext nello s
 
 -   La cache dei piani di query è condivisa per tutti i tipi di query: oggetti Entity SQL, LINQ to Entities e CompiledQuery.
 -   Per impostazione predefinita, la memorizzazione nella cache dei piani di query è abilitata per Entity SQL query, eseguite tramite un oggetto EntityCommand o un oggetto ObjectQuery. È anche abilitata per impostazione predefinita per LINQ to Entities query in Entity Framework su .NET 4,5 e in Entity Framework 6
-    -   La memorizzazione nella cache del piano di query può essere disabilitata impostando la proprietà EnablePlanCaching (su EntityCommand o ObjectQuery) su false. Esempio:
+    -   La memorizzazione nella cache del piano di query può essere disabilitata impostando la proprietà EnablePlanCaching (su EntityCommand o ObjectQuery) su false. Ad esempio:
 ``` csharp
                     var query = from customer in context.Customer
                                 where customer.CustomerId == id
@@ -249,7 +249,7 @@ Per illustrare l'effetto della memorizzazione nella cache del piano di query sul
 |:-----------------------------------------------------------------------|:-------------|:-----------|:-------------|:-----------|
 | Enumerazione di tutte le query 18723                                          | 124          | 125,4      | 124,3        | 125,3      |
 | Evitare lo sweep (solo le prime 800 query, indipendentemente dalla complessità)  | 41,7         | 5.5        | 40.5         | 5.4        |
-| Solo le query AggregatingSubtotals (178 Total, che evita lo sweep) | 39,5         | 4.5        | 38,1         | 4,6        |
+| Solo le query AggregatingSubtotals (178 Total, che evita lo sweep) | 39,5         | 4.5        | 38,1         | 4.6        |
 
 *Tutti gli orari in secondi.*
 
@@ -455,7 +455,7 @@ Entity Framework 6 contiene le ottimizzazioni per il modo in cui IEnumerable &lt
 
 ### <a name="42-using-functions-that-produce-queries-with-constants"></a>4,2 uso di funzioni che producono query con costanti
 
-Gli operatori LINQ (), Take (), Contains () e DefautIfEmpty () LINQ non producono query SQL con parametri, ma inseriscono invece i valori passati come costanti. Per questo motivo, le query che potrebbero altrimenti risultare identiche a causa dell'inquinamento della cache dei piani di query, sia nello stack EF che nel server di database, non vengono riutilizzate a meno che non si utilizzino le stesse costanti in un'esecuzione di query successiva. Esempio:
+Gli operatori LINQ (), Take (), Contains () e DefautIfEmpty () LINQ non producono query SQL con parametri, ma inseriscono invece i valori passati come costanti. Per questo motivo, le query che potrebbero altrimenti risultare identiche a causa dell'inquinamento della cache dei piani di query, sia nello stack EF che nel server di database, non vengono riutilizzate a meno che non si utilizzino le stesse costanti in un'esecuzione di query successiva. Ad esempio:
 
 ``` csharp
 var id = 10;
@@ -509,7 +509,7 @@ for (; i < count; ++i)
 
 ### <a name="43-using-the-properties-of-a-non-mapped-object"></a>4,3 utilizzo delle proprietà di un oggetto non mappato
 
-Quando una query usa le proprietà di un tipo di oggetto non mappato come parametro, la query non viene memorizzata nella cache. Esempio:
+Quando una query usa le proprietà di un tipo di oggetto non mappato come parametro, la query non viene memorizzata nella cache. Ad esempio:
 
 ``` csharp
 using (var context = new MyContext())
@@ -690,7 +690,7 @@ var q = context.Products.AsNoTracking()
     -   I modelli che utilizzano DefaultIfEmpty per le query OUTER JOIN generano query più complesse rispetto alle semplici istruzioni OUTER JOIN in Entity SQL.
     -   Non è ancora possibile utilizzare LIKE con criteri di ricerca generali.
 
-Si noti che le query che proiettano le proprietà scalari non vengono rilevate anche se il NoTracking non è specificato. Esempio:
+Si noti che le query che proiettano le proprietà scalari non vengono rilevate anche se il NoTracking non è specificato. Ad esempio:
 
 ``` csharp
 var q = context.Products.Where(p => p.Category.CategoryName == "Beverages").Select(p => new { p.ProductName });

@@ -1,20 +1,20 @@
 ---
 title: Impostazioni del file di configurazione-EF6
 description: Impostazioni del file di configurazione in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/configuring/config-file
-ms.openlocfilehash: b407ae7d64df18f6a8d80aa13703a8c243c6f3a2
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: fc991810e93840c27e6631dfb5bc1796c1328d37
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070718"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063322"
 ---
 # <a name="configuration-file-settings"></a>Impostazioni del file di configurazione
 Entity Framework consente di specificare alcune impostazioni dal file di configurazione. In generale EF segue un principio di "Convenzione sulla configurazione": tutte le impostazioni descritte in questo post hanno un comportamento predefinito, è necessario preoccuparsi solo di modificare l'impostazione quando il valore predefinito non soddisfa più i requisiti.  
 
-## <a name="a-code-based-alternative"></a>Un'alternativa basata sul codice  
+## <a name="a-code-based-alternative"></a>Alternativa Code-Based  
 
 Tutte queste impostazioni possono essere applicate anche usando il codice. A partire da EF6 è stata introdotta la [configurazione basata sul codice](xref:ef6/fundamentals/configuring/code-based), che fornisce un metodo centrale per applicare la configurazione dal codice. Prima di EF6, la configurazione può comunque essere applicata dal codice, ma è necessario usare varie API per configurare aree diverse. L'opzione file di configurazione consente di modificare facilmente queste impostazioni durante la distribuzione senza aggiornare il codice.
 
@@ -41,7 +41,7 @@ In [Questa pagina](xref:ef6/fundamentals/configuring/connection-strings) vengono
 
 Le stringhe di connessione vengono inserite nell'elemento standard **connectionStrings** e non richiedono la sezione **EntityFramework** .  
 
-I modelli basati su Code First usano le normali stringhe di connessione di ADO.NET. Esempio:  
+I modelli basati su Code First usano le normali stringhe di connessione di ADO.NET. Ad esempio:  
 
 ``` xml
 <connectionStrings>
@@ -51,7 +51,7 @@ I modelli basati su Code First usano le normali stringhe di connessione di ADO.N
 </connectionStrings>
 ```  
 
-I modelli basati su EF designer usano stringhe di connessione EF speciali. Esempio:  
+I modelli basati su EF designer usano stringhe di connessione EF speciali. Ad esempio:  
 
 ``` xml  
 <connectionStrings>
@@ -71,7 +71,7 @@ I modelli basati su EF designer usano stringhe di connessione EF speciali. Esemp
 </connectionStrings>
 ```
 
-## <a name="code-based-configuration-type-ef6-onwards"></a>Tipo di configurazione basata su codice (EF6 e versioni successive)  
+## <a name="code-based-configuration-type-ef6-onwards"></a>Tipo di configurazione Code-Based (EF6 e versioni successive)  
 
 A partire da EF6, è possibile specificare DbConfiguration per EF da usare per la [configurazione basata su codice](xref:ef6/fundamentals/configuring/code-based) nell'applicazione. Nella maggior parte dei casi non è necessario specificare questa impostazione perché EF individuerà automaticamente i DbConfiguration. Per informazioni dettagliate su quando potrebbe essere necessario specificare DbConfiguration nel file di configurazione, vedere la sezione relativa allo stato di **DbConfiguration** in [fase di configurazione basata su codice](xref:ef6/fundamentals/configuring/code-based).  
 

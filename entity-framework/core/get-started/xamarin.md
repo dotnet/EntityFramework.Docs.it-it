@@ -5,12 +5,12 @@ author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: b4a7e2260337d74329d309e9db32fe97a2131d73
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 0552038d471e294834bed9e3bf1f05fd74c39192
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619286"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062542"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>Introduzione con EF Core e Novell
 
@@ -19,7 +19,7 @@ In questa esercitazione si creerà un'applicazione [Novell. Forms](/xamarin/get-
 È possibile seguire l'esercitazione con Visual Studio in Windows o Visual Studio per Mac.
 
 > [!TIP]
-> È possibile visualizzare l'esempio di questo articolo [in GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Xamarin).
+> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Xamarin) di questo articolo in GitHub.
 
 ## <a name="prerequisites"></a>Prerequisiti
 
@@ -72,6 +72,14 @@ Tornare alla pagina dell'elenco dei Blog. E fare clic su **Elimina tutto** nella
 Le sezioni seguenti illustrano il codice nel progetto di esempio che legge, crea, aggiorna ed Elimina i dati da un database SQLite usando EF Core con Novell. Forms.
 
 Si presuppone che l'utente abbia familiarità con gli argomenti di Novell. Forms relativi alla [visualizzazione dei dati](/xamarin/xamarin-forms/app-fundamentals/data-binding/) e all' [esplorazione tra le pagine](/xamarin/xamarin-forms/app-fundamentals/navigation/).
+
+> [!IMPORTANT]
+> Entity Framework Core usa la reflection per richiamare le funzioni che il linker Novell. iOS può rimuovere durante le configurazioni della modalità di **rilascio** . È possibile evitare questo in uno dei due modi.
+> 
+> * Il primo consiste nell'aggiungere `--linkskip System.Core` agli **argomenti mTouch aggiuntivi** nelle opzioni di **compilazione iOS** .
+> * In alternativa, impostare il comportamento del **linker** Novell. iOS su `Don't Link` nelle opzioni di **compilazione iOS** .
+> [Questo articolo illustra altre informazioni sul linker Novell. iOS](/xamarin/ios/deploy-test/linker) , che include come impostare il comportamento in Novell. iOS.
+> 
 
 ## <a name="entity-framework-core-nuget-packages"></a>Pacchetti NuGet di Entity Framework Core
 
@@ -137,7 +145,7 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-### <a name="create"></a>Crea
+### <a name="create"></a>Create
 
 * Inserire un nuovo record.
   * La `Save_Clicked` funzione di `AddBlogPage.xaml.cs` inserisce un nuovo `Blog` oggetto nel database SQLite.
@@ -178,7 +186,7 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-### <a name="delete"></a>Elimina
+### <a name="delete"></a>Delete
 
 * Eliminare tutti i record con Cascade ai record figlio.
   * La `DeleteAll_Clicked` funzione di `BlogsPage.xaml.cs` Elimina tutti i `Blog` record nel database SQLite e sovrappone le eliminazioni a tutti i `Blog` `Post` record figlio.

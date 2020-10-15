@@ -1,19 +1,19 @@
 ---
 title: Provider di database InMemory - EF Core
 description: Informazioni sul provider di database Entity Framework Core InMemory
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/providers/in-memory/index
-ms.openlocfilehash: 9d0a5d14cdb047b80788fbe4d9d34deccdbd4ce1
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 1857ebbfa0eded1572220825a5b0d75961bcf3dd
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071355"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064011"
 ---
 # <a name="ef-core-in-memory-database-provider"></a>Provider di database InMemory per Entity Framework Core
 
-Questo provider di database consente l'uso di Entity Framework Core con un database in memoria. Ciò può essere utile per il testing, anche se il provider SQLite in modalità in memoria può essere un sostituto per i test più appropriato per i database relazionali. Il provider viene gestito nell'ambito del [progetto Entity Framework Core](https://github.com/aspnet/EntityFrameworkCore).
+Questo provider di database consente l'uso di Entity Framework Core con un database in memoria. Il database in memoria può essere utile per il testing, anche se il provider SQLite in modalità in memoria può essere una sostituzione dei test più appropriata per i database relazionali. Il database in memoria è progettato solo per i test. Il provider viene gestito nell'ambito del [progetto Entity Framework Core](https://github.com/aspnet/EntityFrameworkCore).
 
 ## <a name="install"></a>Installazione
 
@@ -27,7 +27,7 @@ dotnet add package Microsoft.EntityFrameworkCore.InMemory
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Install-Package Microsoft.EntityFrameworkCore.InMemory
 ```
 
@@ -42,4 +42,4 @@ Per acquisire familiarità con il provider, usare le risorse seguenti.
 
 ## <a name="supported-database-engines"></a>Motori di database supportati
 
-Database con memoria In-Process (progettato solo a scopo di test)
+Database di memoria in-process, progettato solo a scopo di test.

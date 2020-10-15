@@ -1,15 +1,15 @@
 ---
 title: Novità di EF Core 2.0 - EF Core
 description: Modifiche e miglioramenti di Entity Framework Core 2.0
-author: divega
+author: ajcvickers
 ms.date: 02/20/2018
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: f553e620c088a65eda64c0761aaab49313041727
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7438d8ad1a5ade971af71186a20ec57fd83713de
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072356"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063452"
 ---
 # <a name="new-features-in-ef-core-20"></a>Nuove funzionalità di EF Core 2.0
 
@@ -26,7 +26,7 @@ Vedere [Implementazioni di .NET supportate](xref:core/platforms/index) per altri
 
 Per usare la suddivisione di tabelle è necessario configurare una relazione di identificazione (in cui le proprietà di chiave esterna formano la chiave primaria) tra tutti i tipi di entità che condividono la tabella:
 
-``` csharp
+```csharp
 modelBuilder.Entity<Product>()
     .HasOne(e => e.Details).WithOne(e => e.Product)
     .HasForeignKey<ProductDetails>(e => e.Id);
@@ -42,7 +42,7 @@ Un tipo di entità di proprietà può condividere lo stesso tipo .NET con un alt
 
 Per convenzione viene creata una chiave primaria shadow per il tipo di proprietà e ne viene eseguito il mapping alla stessa tabella del proprietario usando la suddivisione di tabelle. Ciò consente di usare i tipi di proprietà in modo simile ai tipi complessi in EF6:
 
-``` csharp
+```csharp
 modelBuilder.Entity<Order>().OwnsOne(p => p.OrderDetails, cb =>
     {
         cb.OwnsOne(c => c.BillingAddress);
@@ -79,7 +79,7 @@ EF Core 2.0 include una nuova funzionalità denominata filtri di query a livello
 
 Di seguito è riportato un semplice esempio che illustra la funzionalità per questi due scenari:
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     public DbSet<Blog> Blogs { get; set; }
@@ -113,7 +113,7 @@ Di seguito è riportata una breve descrizione di come usare la funzionalità:
 
 Dichiarare un metodo statico in `DbContext` e annotarlo con `DbFunctionAttribute`:
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     [DbFunction]
@@ -126,7 +126,7 @@ public class BloggingContext : DbContext
 
 I metodi come questo vengono registrati automaticamente. Dopo la registrazione, le chiamate al metodo in una query LINQ possono essere convertite in chiamate a funzioni in SQL:
 
-``` csharp
+```csharp
 var query =
     from p in context.Posts
     where BloggingContext.PostReadCount(p.Id) > 5
@@ -143,7 +143,7 @@ Alcuni punti di cui tenere conto:
 
 In EF6 è possibile incapsulare la configurazione Code First di un tipo di entità specifico derivandola da *EntityTypeConfiguration*. In EF Core 2.0 questo modello viene di nuovo reso disponibile:
 
-``` csharp
+```csharp
 class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {
     public void Configure(EntityTypeBuilder<Customer> builder)
@@ -166,7 +166,7 @@ Il modello di base per l'uso di EF Core in un'applicazione ASP.NET Core in gener
 
 La versione 2.0 presenta un nuovo modo di registrare i tipi DbContext personalizzati nell'inserimento delle dipendenze che introduce in modo trasparente un pool di istanze DbContext riutilizzabili. Per usare il pooling DbContext, usare `AddDbContextPool` anziché `AddDbContext` durante la registrazione del servizio:
 
-``` csharp
+```csharp
 services.AddDbContextPool<BloggingContext>(
     options => options.UseSqlServer(connectionString));
 ```
@@ -179,7 +179,7 @@ Questo metodo è concettualmente simile al funzionamento del pool di connessioni
 
 Il nuovo metodo introduce alcune limitazioni nelle operazioni possibili nel metodo `OnConfiguring()` di DbContext.
 
-> [!WARNING]  
+> [!WARNING]
 > Evitare di usare il pooling DbContext se nella classe DbContext derivata si mantiene uno stato (ad esempio, campi privati) che non deve essere condiviso tra le richieste. Prima di aggiungere un'istanza di DbContext al pool, EF Core reimposterà solo lo stato di cui è a conoscenza.
 
 ### <a name="explicitly-compiled-queries"></a>Query compilate esplicite
@@ -190,7 +190,7 @@ Le API per le query manuali o compilate in modo esplicito sono disponibili nelle
 
 Sebbene in genere EF Core sia in grado di compilare le query e memorizzarle automaticamente nella cache in base a una rappresentazione con hash delle espressioni di query, questo meccanismo può essere utile per ottenere un lieve miglioramento delle prestazioni in quanto evita il calcolo dell'hash e la ricerca nella cache consentendo all'applicazione di usare una query già compilata tramite la chiamata di un delegato.
 
-``` csharp
+```csharp
 // Create an explicitly compiled query
 private static Func<CustomerContext, int, Customer> _customerById =
     EF.CompileQuery((CustomerContext db, int id) =>
@@ -227,7 +227,7 @@ C# 6 ha introdotto l'interpolazione di stringhe, una funzionalità che consente 
 
 Ecco un esempio:
 
-``` csharp
+```csharp
 var city = "London";
 var contactTitle = "Sales Representative";
 
@@ -259,7 +259,7 @@ WHERE ""City"" = @p0
 
 È stata aggiunta la proprietà EF.Functions che può essere usata da EF Core o dai provider per definire metodi che eseguono il mapping alle funzioni o agli operatori del database in modo che sia possibile chiamarli nelle query LINQ. Il primo esempio di questo metodo è Like():
 
-``` csharp
+```csharp
 var aCustomers =
     from c in context.Customers
     where EF.Functions.Like(c.Name, "a%")
@@ -276,7 +276,7 @@ EF Core 2.0 introduce un nuovo servizio *IPluralizer* usato per rendere singolar
 
 Per uno sviluppatore che desideri collegarlo al proprio pluralizer, il servizio ha l'aspetto seguente:
 
-``` csharp
+```csharp
 public class MyDesignTimeServices : IDesignTimeServices
 {
     public void ConfigureDesignTimeServices(IServiceCollection services)

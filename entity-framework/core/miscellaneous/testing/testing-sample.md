@@ -11,12 +11,12 @@ no-loc:
 - Tags
 - items
 - tags
-ms.openlocfilehash: 839f932f48e1cc6cb1b4c86d5e1405e888d5227a
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 07cde296f07a883ba6abf45f94a31e072fb6d6cb
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617648"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063049"
 ---
 # <a name="ef-core-testing-sample"></a>Esempio di test di EF Core
 
@@ -183,7 +183,7 @@ Due test leggermente più necessari coprono la logica di business per l'aggiunta
 ## <a name="issues-using-different-database-providers"></a>Problemi relativi all'utilizzo di provider di database diversi
 
 Il test con un sistema di database diverso da quello usato nell'applicazione di produzione può causare problemi.
-Questi sono trattati a livello concettuale nel [codice di test che usa EF Core](xref:core/miscellaneous/testing/index).  
+Questi sono trattati a livello concettuale nel [codice di test che usa EF Core](xref:core/miscellaneous/testing/index).
 Le sezioni seguenti illustrano due esempi di problemi che si verificano nei test di questo esempio.
 
 ### <a name="test-passes-when-the-application-is-broken"></a>Test superato quando l'applicazione è interruppe
@@ -197,7 +197,7 @@ L'esecuzione di questo test nel database in memoria EF indica che tutto funziona
 Tutto sembra corretto quando si usa SQLite.
 Tuttavia, il test ha esito negativo quando viene eseguito su SQL Server.
 
-```console
+```output
 System.InvalidOperationException : Sequence contains more than one element
    at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()
    at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
@@ -224,7 +224,7 @@ Anche in questo caso, è facile da testare:
 
 Questo test viene superato SQL Server e SQLite, ma ha esito negativo con il database in memoria EF.
 
-```console
+```output
 Assert.False() Failure
 Expected: False
 Actual:   True

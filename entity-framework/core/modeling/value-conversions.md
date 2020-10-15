@@ -4,21 +4,18 @@ description: Configurazione di convertitori di valori in un modello di Entity Fr
 author: ajcvickers
 ms.date: 02/19/2018
 uid: core/modeling/value-conversions
-ms.openlocfilehash: 1d347eb6a7fcdcb55239e1fa854f6c38ab081b21
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 221560a145fe25c2b7bf094839dd37791bc25955
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072551"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063959"
 ---
 # <a name="value-conversions"></a>Conversioni di valori
 
-> [!NOTE]  
-> Questa funzionalità è stata introdotta in EF Core 2.1.
-
 I convertitori di valori consentono di convertire i valori delle proprietà durante la lettura o la scrittura nel database. Questa conversione può provenire da un valore a un altro dello stesso tipo (ad esempio, la crittografia di stringhe) o da un valore di un tipo a un valore di un altro tipo, ad esempio la conversione di valori enum da e verso stringhe nel database.
 
-## <a name="fundamentals"></a>Concetti fondamentali
+## <a name="fundamentals"></a>Nozioni di base
 
 I convertitori di valori vengono specificati in termini di `ModelClrType` e `ProviderClrType` . Il tipo di modello è il tipo .NET della proprietà nel tipo di entità. Il tipo di provider è il tipo .NET riconosciuto dal provider di database. Ad esempio, per salvare le enumerazioni come stringhe nel database, il tipo di modello è il tipo dell'enumerazione e il tipo di provider è `String` . Questi due tipi possono essere gli stessi.
 
@@ -28,7 +25,7 @@ Le conversioni vengono definite utilizzando due `Func` alberi delle espressioni:
 
 Le conversioni di valori sono definite nelle proprietà `OnModelCreating` del del `DbContext` . Si consideri, ad esempio, un'enumerazione e un tipo di entità definiti come segue:
 
-``` csharp
+```csharp
 public class Rider
 {
     public int Id { get; set; }
@@ -46,7 +43,7 @@ public enum EquineBeast
 
 È quindi possibile definire le conversioni in `OnModelCreating` per archiviare i valori enum come stringhe (ad esempio, "Donkey", "Mule",...) nel database:
 
-``` csharp
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder
@@ -58,14 +55,14 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-> [!NOTE]  
+> [!NOTE]
 > Un `null` valore non verrà mai passato a un convertitore di valori. In questo modo l'implementazione delle conversioni risulta più semplice e consente di condividerle tra proprietà Nullable e non nullable.
 
 ## <a name="the-valueconverter-class"></a>Classe ValueConverter
 
-La chiamata a `HasConversion` come illustrato in precedenza creerà un' `ValueConverter` istanza e la imposterà sulla proprietà. L'oggetto `ValueConverter` può invece essere creato in modo esplicito. Esempio:
+La chiamata a `HasConversion` come illustrato in precedenza creerà un' `ValueConverter` istanza e la imposterà sulla proprietà. L'oggetto `ValueConverter` può invece essere creato in modo esplicito. Ad esempio:
 
-``` csharp
+```csharp
 var converter = new ValueConverter<EquineBeast, string>(
     v => v.ToString(),
     v => (EquineBeast)Enum.Parse(typeof(EquineBeast), v));
@@ -78,7 +75,7 @@ modelBuilder
 
 Questa operazione può essere utile quando più proprietà utilizzano la stessa conversione.
 
-> [!NOTE]  
+> [!NOTE]
 > Attualmente non è possibile specificare in un'unica posizione che ogni proprietà di un determinato tipo deve usare lo stesso convertitore di valori. Questa funzionalità verrà considerata per una versione futura.
 
 ## <a name="built-in-converters"></a>Convertitori predefiniti
@@ -109,7 +106,7 @@ EF Core viene fornito con un set di classi predefinite `ValueConverter` , dispon
 
 Si noti che `EnumToStringConverter` è incluso nell'elenco. Ciò significa che non è necessario specificare la conversione in modo esplicito, come illustrato in precedenza. Usare invece il convertitore predefinito:
 
-``` csharp
+```csharp
 var converter = new EnumToStringConverter<EquineBeast>();
 
 modelBuilder
@@ -124,7 +121,7 @@ Si noti che tutti i convertitori incorporati sono senza stato e pertanto una sin
 
 Per le conversioni comuni per le quali esiste un convertitore incorporato, non è necessario specificare il convertitore in modo esplicito. Al contrario, è sufficiente configurare il tipo di provider da usare e EF userà automaticamente il convertitore predefinito appropriato. Le conversioni da enum a stringa vengono usate come esempio sopra, ma EF eseguirà questa operazione automaticamente se il tipo di provider è configurato:
 
-``` csharp
+```csharp
 modelBuilder
     .Entity<Rider>()
     .Property(e => e.Mount)
@@ -133,7 +130,7 @@ modelBuilder
 
 La stessa operazione può essere eseguita specificando in modo esplicito il tipo di colonna. Ad esempio, se il tipo di entità è definito come segue:
 
-``` csharp
+```csharp
 public class Rider
 {
     public int Id { get; set; }

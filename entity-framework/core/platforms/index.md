@@ -4,12 +4,12 @@ description: Informazioni sulle piattaforme supportate nelle versioni Entity Fra
 author: bricelam
 ms.date: 06/26/2020
 uid: core/platforms/index
-ms.openlocfilehash: f57002af869c16eeedf931085f5e5ff9e72e2984
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 3efec5fda2aecf44306a9d41386de1e9b9612850
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616652"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063972"
 ---
 # <a name="net-implementations-supported-by-ef-core"></a>Implementazioni di .NET supportate da Entity Framework Core
 
@@ -45,13 +45,13 @@ Le applicazioni che hanno .NET Framework come destinazione potrebbero richiedere
 
 Modificare il file di progetto e assicurarsi che la voce seguente sia visualizzata nel gruppo di proprietà iniziale:
 
-``` xml
+```xml
 <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 ```
 
 Per i progetti di test, assicurarsi anche che sia presente la voce seguente:
 
-``` xml
+```xml
 <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
 ```
 
@@ -59,7 +59,7 @@ Se si vuole usare una versione precedente di Visual Studio, assicurarsi di [aggi
 
 Si consiglia anche di eseguire la migrazione da packages.config NuGet a PackageReference, se possibile. Aggiungere la proprietà seguente al file di progetto:
 
-``` xml
+```xml
 <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 ```
 

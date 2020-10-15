@@ -1,38 +1,46 @@
 ---
 title: Transazioni - EF Core
 description: Gestione delle transazioni per l'atomicità quando si salvano i dati con Entity Framework Core
-author: rowanmiller
-ms.date: 10/27/2016
+author: roji
+ms.date: 9/26/2020
 uid: core/saving/transactions
-ms.openlocfilehash: d824db6a4d6e1fc0fc385f007ccfc2c6cbbcae79
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 2cefe23068a40122b7a37c21536213456eef7b66
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070835"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063621"
 ---
 # <a name="using-transactions"></a>Utilizzo di transazioni
 
 Le transazioni consentono di elaborare varie operazioni di database in modo atomico. Se viene eseguito il commit della transazione, tutte le operazioni vengono applicate correttamente nel database. Se viene eseguito il rollback della transazione, nessuna delle operazioni viene applicata nel database.
 
-> [!TIP]  
+> [!TIP]
 > È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Transactions/) di questo articolo in GitHub.
 
 ## <a name="default-transaction-behavior"></a>Comportamento delle transazioni predefinito
 
-Per impostazione predefinita, se il provider di database supporta le transazioni, tutte le modifiche in una singola chiamata a `SaveChanges()` vengono applicate in una transazione. Se le modifiche hanno esito negativo, viene eseguito il rollback della transazione e nessuna delle modifiche viene applicata al database. Ciò significa che è garantito che l'operazione `SaveChanges()` venga completata correttamente oppure che lasci il database non modificato se si verifica un errore.
+Per impostazione predefinita, se il provider di database supporta le transazioni, tutte le modifiche in una singola chiamata a `SaveChanges` vengono applicate in una transazione. Se le modifiche hanno esito negativo, viene eseguito il rollback della transazione e nessuna delle modifiche viene applicata al database. Ciò significa che è garantito che l'operazione `SaveChanges` venga completata correttamente oppure che lasci il database non modificato se si verifica un errore.
 
 Per la maggior parte delle applicazioni, questo comportamento predefinito è sufficiente. È consigliabile controllare le transazioni manualmente solo se i requisiti dell'applicazione lo rendono necessario.
 
 ## <a name="controlling-transactions"></a>Controllo delle transazioni
 
-È possibile usare l'API `DbContext.Database` per avviare le transazioni, eseguirne il commit ed eseguirne il rollback. L'esempio seguente mostra due operazioni `SaveChanges()` e una query LINQ in esecuzione in una singola transazione.
+È possibile usare l'API `DbContext.Database` per avviare le transazioni, eseguirne il commit ed eseguirne il rollback. Nell'esempio seguente vengono illustrate due `SaveChanges` operazioni e una query LINQ eseguita in un'unica transazione:
 
-Non tutti i provider di database supportano le transazioni. Alcuni provider possono generare eccezioni o non eseguire alcuna operazione quando vengono chiamate API per le transazioni.
+[!code-csharp[Main](../../../samples/core/Saving/Transactions/ControllingTransaction.cs?name=Transaction&highlight=2,16-18)]
 
-[!code-csharp[Main](../../../samples/core/Saving/Transactions/ControllingTransaction/Sample.cs?name=Transaction&highlight=3,17,18,19)]
+Mentre tutti i provider di database relazionali supportano le transazioni, altri tipi di provider possono generare o no-op quando vengono chiamate le API di transazione.
 
-## <a name="cross-context-transaction-relational-databases-only"></a>Transazione tra contesti diversi (solo database relazionali)
+## <a name="savepoints"></a>Salvataggio
+
+Quando `SaveChanges` viene richiamato ed è già in corso una transazione nel contesto, EF crea automaticamente un *salvataggio* prima di salvare i dati. Salvataggio sono punti all'interno di una transazione di database di cui è possibile eseguire il rollback in un secondo momento, se si verifica un errore o per qualsiasi altro motivo. Se `SaveChanges` si verifica un errore, viene automaticamente eseguito il rollback della transazione a salvataggio, lasciando la transazione nello stesso stato di se non è mai stata avviata. Ciò consente di risolvere eventuali problemi e di ritentare il salvataggio, in particolare quando si verificano problemi di [concorrenza ottimistica](xref:core/saving/concurrency) .
+
+È anche possibile gestire manualmente salvataggio, così come avviene con le transazioni. Nell'esempio seguente viene creato un salvataggio all'interno di una transazione e viene eseguito il rollback in caso di errore:
+
+[!code-csharp[Main](../../../samples/core/Saving/Transactions/ManagingSavepoints.cs?name=Savepoints&highlight=9,19-20)]
+
+## <a name="cross-context-transaction"></a>Transazione tra più contesti
 
 È anche possibile condividere una transazione tra più istanze di contesto. Questa funzionalità è disponibile solo quando si usa un provider di database relazionale, perché richiede l'uso di `DbTransaction` e `DbConnection`, specifici per i database relazionali.
 
@@ -44,14 +52,14 @@ La condivisione di `DbConnection` richiede la possibilità di passare una connes
 
 Il modo più semplice per consentire `DbConnection` dall'esterno consiste nell'interrompere l'uso del metodo `DbContext.OnConfiguring` per configurare il contesto e nel creare esternamente `DbContextOptions` e passare tale opzioni al costruttore del contesto.
 
-> [!TIP]  
+> [!TIP]
 > `DbContextOptionsBuilder` è l'API usata in `DbContext.OnConfiguring` per configurare il contesto. In questo caso viene usata esternamente per creare `DbContextOptions`.
 
-[!code-csharp[Main](../../../samples/core/Saving/Transactions/SharingTransaction/Sample.cs?name=Context&highlight=3,4,5)]
+[!code-csharp[Main](../../../samples/core/Saving/Transactions/SharingTransaction.cs?name=Context&highlight=3,4,5)]
 
 In alternativa è possibile continuare a usare `DbContext.OnConfiguring`, accettando però una `DbConnection` che viene salvata e quindi usata in `DbContext.OnConfiguring`.
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     private DbConnection _connection;
@@ -74,7 +82,7 @@ public class BloggingContext : DbContext
 
 È ora possibile creare più istanze di contesto che condividono la stessa connessione. Usare quindi l'API `DbContext.Database.UseTransaction(DbTransaction)` per includere entrambi i contesti nella stessa transazione.
 
-[!code-csharp[Main](../../../samples/core/Saving/Transactions/SharingTransaction/Sample.cs?name=Transaction&highlight=1,2,3,7,16,23,24,25)]
+[!code-csharp[Main](../../../samples/core/Saving/Transactions/SharingTransaction.cs?name=Transaction&highlight=1-3,6,14,21-23)]
 
 ## <a name="using-external-dbtransactions-relational-databases-only"></a>Uso di DbTransaction esterne (solo database relazionali)
 
@@ -82,26 +90,23 @@ Se si usano più tecnologie di accesso ai dati per accedere a un database relazi
 
 L'esempio seguente mostra come eseguire un'operazione ADO.NET SqlClient e un'operazione di Entity Framework Core nella stessa transazione.
 
-[!code-csharp[Main](../../../samples/core/Saving/Transactions/ExternalDbTransaction/Sample.cs?name=Transaction&highlight=4,10,21,26,27,28)]
+[!code-csharp[Main](../../../samples/core/Saving/Transactions/ExternalDbTransaction.cs?name=Transaction&highlight=4,9,20,25-27)]
 
 ## <a name="using-systemtransactions"></a>Utilizzo di System.Transactions
 
-> [!NOTE]  
-> Questa funzionalità è stata introdotta in EF Core 2.1.
-
 È possibile usare le transazioni di ambiente, se è necessario coordinarle in un ambito più ampio.
 
-[!code-csharp[Main](../../../samples/core/Saving/Transactions/AmbientTransaction/Sample.cs?name=Transaction&highlight=1,2,3,26,27,28)]
+[!code-csharp[Main](../../../samples/core/Saving/Transactions/AmbientTransaction.cs?name=Transaction&highlight=1,2,3,26-28)]
 
 È anche supportato l'inserimento in una transazione esplicita.
 
-[!code-csharp[Main](../../../samples/core/Saving/Transactions/CommitableTransaction/Sample.cs?name=Transaction&highlight=1,15,28,29,30)]
+[!code-csharp[Main](../../../samples/core/Saving/Transactions/CommitableTransaction.cs?name=Transaction&highlight=1-2,15,28-30)]
 
-### <a name="limitations-of-systemtransactions"></a>Limitazioni di System.Transactions  
+### <a name="limitations-of-systemtransactions"></a>Limitazioni di System.Transactions
 
-1. EF Core si basa sui provider di database per implementare il supporto per System.Transactions. Anche se il supporto è piuttosto comune tra i provider ADO.NET per .NET Framework, l'API è stata aggiunta solo di recente a .NET Core e il supporto di conseguenza non è ancora molto diffuso. Se un provider non implementa il supporto per System.Transactions, è possibile che le chiamate a queste API vengano ignorate completamente. SqlClient per .NET Core offre questo supporto dalla versione 2.1 in poi. SqlClient per .NET Core 2.0 genererà un'eccezione se si tenta di usare la funzionalità.
+1. EF Core si basa sui provider di database per implementare il supporto per System.Transactions. Se un provider non implementa il supporto per System.Transactions, è possibile che le chiamate a queste API vengano ignorate completamente. SqlClient lo supporta.
 
-   > [!IMPORTANT]  
+   > [!IMPORTANT]
    > È consigliabile verificare che il comportamento dell'API con il provider sia corretto prima di basarsi su di essa per la gestione delle transazioni. In caso contrario, è consigliabile contattare il gestore del provider del database.
 
-2. A partire dalla versione 2.1, l'implementazione di System.Transactions in .NET Core non include il supporto per le transazioni distribuite, quindi non è possibile usare `TransactionScope` o `CommittableTransaction` per coordinare le transazioni tra più gestori di risorse.
+2. A partire da .NET Core 2,1, l'implementazione System. Transactions non include il supporto per le transazioni distribuite, pertanto non è possibile usare `TransactionScope` o `CommittableTransaction` per coordinare le transazioni tra più gestori di risorse.

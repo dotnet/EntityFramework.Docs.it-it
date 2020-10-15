@@ -2,15 +2,14 @@
 title: Creare ed eliminare API-EF Core
 description: API per la creazione e l'eliminazione di database con Entity Framework Core
 author: bricelam
-ms.author: bricelam
 ms.date: 11/07/2018
 uid: core/managing-schemas/ensure-created
-ms.openlocfilehash: 25e7352269531e881e83e44ea90108f12d4dcbea
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: c23311fbb8254ba183a6fd1661bba915aedc9a97
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619220"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062334"
 ---
 # <a name="create-and-drop-apis"></a>API di creazione ed eliminazione
 
@@ -27,7 +26,7 @@ La transizione da EnsureCreated a migrazioni non è un'esperienza senza problemi
 
 Se esistente, il metodo EnsureDeleted eliminerà il database. Se non si dispone delle autorizzazioni appropriate, viene generata un'eccezione.
 
-``` csharp
+```csharp
 // Drop the database if it exists
 dbContext.Database.EnsureDeleted();
 ```
@@ -36,7 +35,7 @@ dbContext.Database.EnsureDeleted();
 
 EnsureCreated creerà il database se non esiste e inizializza lo schema del database. Se sono presenti tabelle (incluse le tabelle per un'altra classe DbContext), lo schema non verrà inizializzato.
 
-``` csharp
+```csharp
 // Create the database if it doesn't exist
 dbContext.Database.EnsureCreated();
 ```
@@ -48,7 +47,7 @@ dbContext.Database.EnsureCreated();
 
 Per ottenere l'oggetto SQL usato da EnsureCreated, è possibile usare il Metodo GenerateCreateScript.
 
-``` csharp
+```csharp
 var sql = dbContext.Database.GenerateCreateScript();
 ```
 
@@ -56,7 +55,7 @@ var sql = dbContext.Database.GenerateCreateScript();
 
 EnsureCreated funziona solo quando nel database non è presente alcuna tabella. Se necessario, è possibile scrivere un controllo personalizzato per verificare se lo schema deve essere inizializzato e usare il servizio IRelationalDatabaseCreator sottostante per inizializzare lo schema.
 
-``` csharp
+```csharp
 // TODO: Check whether the schema needs to be initialized
 
 // Initialize the schema for this DbContext

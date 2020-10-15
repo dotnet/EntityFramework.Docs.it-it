@@ -2,15 +2,14 @@
 title: Guida di riferimento agli strumenti di EF Core (console di gestione pacchetti)-EF Core
 description: Guida di riferimento per la console di gestione pacchetti Entity Framework Core Visual Studio
 author: bricelam
-ms.author: bricelam
-ms.date: 09/09/2020
+ms.date: 10/13/2020
 uid: core/miscellaneous/cli/powershell
-ms.openlocfilehash: 5dca397978c60c12610d9080caba972a66b079b6
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 3a9599288d74013bf4da910c64bc858539c0c32c
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071862"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062386"
 ---
 # <a name="entity-framework-core-tools-reference---package-manager-console-in-visual-studio"></a>Guida di riferimento agli strumenti di Entity Framework Core-Console di gestione pacchetti in Visual Studio
 
@@ -20,50 +19,15 @@ Se non si usa Visual Studio, è consigliabile usare gli [strumenti da riga di co
 
 ## <a name="installing-the-tools"></a>Installazione degli strumenti
 
-Le procedure per l'installazione e l'aggiornamento degli strumenti sono diverse tra ASP.NET Core 2.1 + e le versioni precedenti o altri tipi di progetto.
-
-### <a name="aspnet-core-version-21-and-later"></a>ASP.NET Core versione 2,1 e successive
-
-Gli strumenti vengono inclusi automaticamente in un progetto ASP.NET Core 2.1 + perché il `Microsoft.EntityFrameworkCore.Tools` pacchetto è incluso nel [metapacchetto Microsoft. AspNetCore. app](/aspnet/core/fundamentals/metapackage-app).
-
-Pertanto, non è necessario eseguire alcuna operazione per installare gli strumenti, ma è necessario:
-
-* Ripristinare i pacchetti prima di utilizzare gli strumenti in un nuovo progetto.
-* Installare un pacchetto per aggiornare gli strumenti a una versione più recente.
-
-Per assicurarsi che si stia ricevendo la versione più recente degli strumenti, è consigliabile eseguire anche il passaggio seguente:
-
-* Modificare il file con *estensione csproj* e aggiungere una riga che specifichi la versione più recente del pacchetto [Microsoft. EntityFrameworkCore. Tools](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/) . Ad esempio, il file con *estensione csproj* potrebbe includere un oggetto `ItemGroup` simile al seguente:
-
-  ```xml
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
-  </ItemGroup>
-  ```
-
-Aggiornare gli strumenti quando si riceve un messaggio simile all'esempio seguente:
-
-> La versione di EF Core Tools ' 2.1.1-RTM-30846' è antecedente a quella del runtime ' 2.1.3-RTM-32065'. Aggiornare gli strumenti per le funzionalità e le correzioni di bug più recenti.
-
-Per aggiornare gli strumenti:
-
-* installare la versione più recente di .NET Core SDK.
-* Aggiornare Visual Studio alla versione più recente.
-* Modificare il file con *estensione csproj* in modo da includere un riferimento al pacchetto degli strumenti più recenti, come illustrato in precedenza.
-
-### <a name="other-versions-and-project-types"></a>Altre versioni e tipi di progetto
-
 Installare gli strumenti della console di gestione pacchetti eseguendo il comando seguente nella **console di gestione pacchetti**:
 
-``` powershell
+```powershell
 Install-Package Microsoft.EntityFrameworkCore.Tools
 ```
 
 Aggiornare gli strumenti eseguendo il comando seguente nella **console di gestione pacchetti**.
 
-``` powershell
+```powershell
 Update-Package Microsoft.EntityFrameworkCore.Tools
 ```
 
@@ -71,13 +35,13 @@ Update-Package Microsoft.EntityFrameworkCore.Tools
 
 Verificare che gli strumenti siano installati eseguendo questo comando:
 
-``` powershell
+```powershell
 Get-Help about_EntityFrameworkCore
 ```
 
 L'output ha un aspetto simile al seguente (non indica la versione degli strumenti in uso):
 
-```console
+```output
 
                      _/\__
                ---==/    \\
@@ -132,7 +96,7 @@ Per specificare l'ambiente per i progetti ASP.NET Core, impostare **env: ASPNETC
 
 La tabella seguente illustra i parametri comuni a tutti i comandi EF Core:
 
-| Parametro                 | Descrizione                                                                                                                                                                                                          |
+| Parametro                 | Description                                                                                                                                                                                                          |
 |:--------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | -Contesto \<String>        | Classe `DbContext` da usare. Solo il nome della classe o completo con gli spazi dei nomi.  Se questo parametro viene omesso, EF Core trova la classe del contesto. Se sono presenti più classi di contesto, questo parametro è obbligatorio. |
 | -Progetto \<String>        | Progetto di destinazione. Se questo parametro viene omesso, come progetto di destinazione viene utilizzato il **progetto predefinito** per la **console di gestione pacchetti** .                                                                             |
@@ -145,13 +109,13 @@ Per visualizzare le informazioni della guida relative a un comando, usare il com
 > [!TIP]
 > Il contesto, il progetto e i parametri progetto supportano la scheda-espansione.
 
-## <a name="add-migration"></a>Aggiungi-migrazione
+## <a name="add-migration"></a>Add-Migration
 
 Aggiunge una nuova migrazione.
 
 Parametri
 
-| Parametro                         | Descrizione                                                                                                             |
+| Parametro                         | Description                                                                                                             |
 |:----------------------------------|:------------------------------------------------------------------------------------------------------------------------|
 | <nobr>-Name \<String><nobr>       | Nome della migrazione. Si tratta di un parametro posizionale ed è obbligatorio.                                              |
 | <nobr>-OutputDir \<String></nobr> | Directory usata per l'output dei file. I percorsi sono relativi alla directory del progetto di destinazione. Il valore predefinito è "Migrations". |
@@ -159,13 +123,13 @@ Parametri
 
 I [parametri comuni](#common-parameters) sono elencati in precedenza.
 
-## <a name="drop-database"></a>Drop-database
+## <a name="drop-database"></a>Drop-Database
 
 Elimina il database.
 
 Parametri
 
-| Parametro | Descrizione                                              |
+| Parametro | Description                                              |
 |:----------|:---------------------------------------------------------|
 | -WhatIf   | Indica il database da eliminare, ma non eliminarlo. |
 
@@ -183,7 +147,7 @@ Elenca le migrazioni disponibili. Aggiunto in EF Core 5,0.
 
 Parametri
 
-| Parametro                          | Descrizione                                                                                            |
+| Parametro                          | Description                                                                                            |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | <nobr>-Connessione \<String></nobr> | Stringa di connessione al database. Il valore predefinito è quello specificato in AddDbContext o Configuring. |
 | -Noconnect                         | Non connettersi al database.                                                                         |
@@ -196,19 +160,19 @@ Rimuove l'ultima migrazione (esegue il rollback delle modifiche del codice esegu
 
 Parametri
 
-| Parametro | Descrizione                                                                     |
+| Parametro | Description                                                                     |
 |:----------|:--------------------------------------------------------------------------------|
 | -Force    | Ripristinare la migrazione, ovvero eseguire il rollback delle modifiche applicate al database. |
 
 I [parametri comuni](#common-parameters) sono elencati in precedenza.
 
-## <a name="scaffold-dbcontext"></a>Impalcature-DbContext
+## <a name="scaffold-dbcontext"></a>Scaffold-DbContext
 
 Genera il codice per un `DbContext` tipo di entità e per un database. Per `Scaffold-DbContext` poter generare un tipo di entità, è necessario che la tabella di database disponga di una chiave primaria.
 
 Parametri
 
-| Parametro                          | Descrizione                                                                                                                                                                                                                                                             |
+| Parametro                          | Description                                                                                                                                                                                                                                                             |
 |:-----------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>-Connessione \<String></nobr> | Stringa di connessione al database. Per i progetti ASP.NET Core 2. x, il valore può essere *Name \<name of connection string> =*. In tal caso, il nome deriva dalle origini di configurazione configurate per il progetto. Si tratta di un parametro posizionale ed è obbligatorio. |
 | <nobr>-Provider \<String></nobr>   | Provider da usare. Si tratta in genere del nome del pacchetto NuGet, ad esempio: `Microsoft.EntityFrameworkCore.SqlServer` . Si tratta di un parametro posizionale ed è obbligatorio.                                                                                           |
@@ -245,19 +209,19 @@ Genera uno script SQL da DbContext. Ignora le migrazioni. Aggiunto in EF Core 3,
 
 Parametri
 
-| Parametro                      | Descrizione                      |
+| Parametro                      | Description                      |
 | ------------------------------ | -------------------------------- |
 | <nobr>-Output \<String></nobr> | File in cui scrivere il risultato. |
 
 I [parametri comuni](#common-parameters) sono elencati in precedenza.
 
-## <a name="script-migration"></a>Script-migrazione
+## <a name="script-migration"></a>Script-Migration
 
 Genera uno script SQL che applica tutte le modifiche a una migrazione selezionata a un'altra.
 
 Parametri
 
-| Parametro                    | Descrizione                                                                                                                                                                                                                |
+| Parametro                    | Description                                                                                                                                                                                                                |
 |:---------------------------- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | *-Da*\<String>            | Migrazione iniziale. Le migrazioni possono essere identificate in base al nome o all'ID. Il numero 0 è un caso speciale che indica *prima della prima migrazione*. Il valore predefinito è 0.                                                              |
 | *Da a*\<String>              | Migrazione finale. L'impostazione predefinita è l'ultima migrazione.                                                                                                                                                                      |
@@ -282,11 +246,11 @@ Nell'esempio seguente viene creato uno script per tutte le migrazioni dopo la mi
 Script-Migration -From 20180904195021_InitialCreate
 ```
 
-## <a name="update-database"></a>Update-database
+## <a name="update-database"></a>Update-Database
 
 Aggiorna il database all'ultima migrazione o a una migrazione specificata.
 
-| Parametro                           | Descrizione                                                                                                                                                                                                                                                     |
+| Parametro                           | Description                                                                                                                                                                                                                                                     |
 |:------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>*-Migrazione*\<String></nobr> | Migrazione di destinazione. Le migrazioni possono essere identificate in base al nome o all'ID. Il numero 0 è un caso speciale che indica *prima della prima migrazione* e comporta il ripristino di tutte le migrazioni. Se non viene specificata alcuna migrazione, l'impostazione predefinita del comando è l'ultima migrazione. |
 | <nobr>-Connessione \<String></nobr>  | Stringa di connessione al database. Il valore predefinito è quello specificato in `AddDbContext` o `OnConfiguring` . Aggiunto in EF Core 5,0.                                                                                                                                |

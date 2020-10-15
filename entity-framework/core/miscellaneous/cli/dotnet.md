@@ -2,15 +2,14 @@
 title: Guida di riferimento agli strumenti di EF Core (.NET CLI)-EF Core
 description: Guida di riferimento per gli strumenti di interfaccia della riga di comando di .NET Core Entity Framework Core
 author: bricelam
-ms.author: bricelam
-ms.date: 09/17/2020
+ms.date: 10/13/2020
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: ee1caebcda93f627d285878f8594688a0f08c194
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: 4056fb99659ee3390d16b18eca9b12cfc8a2dd03
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210393"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062516"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Guida di riferimento agli strumenti di Entity Framework Core-interfaccia della riga di comando di .NET Core
 
@@ -24,59 +23,37 @@ Quando si usa Visual Studio, è consigliabile usare gli [strumenti della console
 
 ## <a name="installing-the-tools"></a>Installazione degli strumenti
 
-La procedura di installazione dipende dal tipo di progetto e dalla versione:
+`dotnet ef` può essere installato come strumento globale o locale. La maggior parte degli sviluppatori preferisce installare `dotnet ef` come strumento globale usando il comando seguente:
 
-* EF Core 3. x e 5. x
-* ASP.NET Core versione 2,1 e successive
-* EF Core 2. x
+```dotnetcli
+dotnet tool install --global dotnet-ef
+```
 
-### <a name="ef-core-3x-and-5x"></a>EF Core 3. x e 5. x
+Per usarlo come strumento locale, ripristinare le dipendenze di un progetto che lo dichiara come dipendenza degli strumenti usando un [file manifesto dello strumento](/dotnet/core/tools/global-tools#install-a-local-tool).
 
-* `dotnet ef` deve essere installato come strumento globale o locale. La maggior parte degli sviluppatori preferisce installare `dotnet ef` come strumento globale usando il comando seguente:
+Aggiornare lo strumento usando il comando seguente:
 
-  ```dotnetcli
-  dotnet tool install --global dotnet-ef
-  ```
+```dotnetcli
+dotnet tool update --global dotnet-ef
+```
 
-  `dotnet ef` può essere usato anche come strumento locale. Per usarlo come strumento locale, ripristinare le dipendenze di un progetto che lo dichiara come dipendenza degli strumenti usando un [file manifesto dello strumento](/dotnet/core/tools/global-tools#install-a-local-tool).
+Prima di poter usare gli strumenti in un progetto specifico, è necessario aggiungervi il `Microsoft.EntityFrameworkCore.Design` pacchetto.
 
-* Installare [.NET Core SDK](https://www.microsoft.com/net/download/core).
-* Installare il pacchetto più recente `Microsoft.EntityFrameworkCore.Design` .
-
-  ```dotnetcli
-  dotnet add package Microsoft.EntityFrameworkCore.Design
-  ```
-
-### <a name="aspnet-core-21"></a>ASP.NET Core 2.1 +
-
-* Installare la [.NET Core SDK](https://www.microsoft.com/net/download/core)corrente. L'SDK deve essere installato anche se si dispone della versione più recente di Visual Studio.
-
-  Questo è tutto ciò che è necessario per ASP.NET Core 2.1 + perché il `Microsoft.EntityFrameworkCore.Design` pacchetto è incluso nel [metapacchetto Microsoft. AspNetCore. app](/aspnet/core/fundamentals/metapackage-app).
-
-### <a name="ef-core-2x-not-aspnet-core"></a>EF Core 2. x (non ASP.NET Core)
-
-I `dotnet ef` comandi sono inclusi nel .NET Core SDK, ma per abilitare i comandi è necessario installare il `Microsoft.EntityFrameworkCore.Design` pacchetto.
-
-* Installare la [.NET Core SDK](https://www.microsoft.com/net/download/core)corrente. L'SDK deve essere installato anche se si dispone della versione più recente di Visual Studio.
-
-* Installare il pacchetto stabile più recente `Microsoft.EntityFrameworkCore.Design` .
-
-  ```dotnetcli
-  dotnet add package Microsoft.EntityFrameworkCore.Design
-  ```
+```dotnetcli
+dotnet add package Microsoft.EntityFrameworkCore.Design
+```
 
 ### <a name="verify-installation"></a>Verificare l'installazione
 
 Eseguire i comandi seguenti per verificare che EF Core gli strumenti dell'interfaccia della riga di comando siano installati correttamente:
 
   ```dotnetcli
-  dotnet restore
   dotnet ef
   ```
 
 L'output del comando identifica la versione degli strumenti in uso:
 
-```console
+```output
 
                      _/\__
                ---==/    \\
@@ -125,7 +102,7 @@ Per specificare l'ambiente per i progetti ASP.NET Core, impostare la variabile d
 
 ## <a name="common-options"></a>Opzioni comuni
 
-| Opzione                                         | Short             | Descrizione                                                                                                                                                                                                                                                   |
+| Opzione                                         | Short             | Description                                                                                                                                                                                                                                                   |
 |:-----------------------------------------------|:------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--json`                                       |                   | Mostra l'output JSON.                                                                                                                                                                                                                                             |
 | `--context <DBCONTEXT>`                        | <nobr>`-c`</nobr> | Classe `DbContext` da usare. Solo il nome della classe o completo con gli spazi dei nomi.  Se questa opzione viene omessa, EF Core troverà la classe Context. Se sono presenti più classi di contesto, questa opzione è obbligatoria.                                            |
@@ -148,7 +125,7 @@ Elimina il database.
 
 Opzioni:
 
-| Opzione                   | Short             | Descrizione                                              |
+| Opzione                   | Short             | Description                                              |
 |:-------------------------|:------------------|:---------------------------------------------------------|
 | `--force`                | <nobr>`-f`</nobr> | Non confermare.                                           |
 | <nobr>`--dry-run`</nobr> |                   | Indica il database da eliminare, ma non eliminarlo. |
@@ -161,13 +138,13 @@ Aggiorna il database all'ultima migrazione o a una migrazione specificata.
 
 Argomenti:
 
-| Argomento                   | Descrizione                                                                                                                                                                                                                                                     |
+| Argomento                   | Description                                                                                                                                                                                                                                                     |
 |:---------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>`<MIGRATION>`</nobr> | Migrazione di destinazione. Le migrazioni possono essere identificate in base al nome o all'ID. Il numero 0 è un caso speciale che indica *prima della prima migrazione* e comporta il ripristino di tutte le migrazioni. Se non viene specificata alcuna migrazione, l'impostazione predefinita del comando è l'ultima migrazione. |
 
 Opzioni:
 
-| Opzione                                    | Descrizione                                                                                                                      |
+| Opzione                                    | Description                                                                                                                      |
 |:------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------|
 |  <nobr>`--connection <CONNECTION>`</nobr> | Stringa di connessione al database. Il valore predefinito è quello specificato in `AddDbContext` o `OnConfiguring` . Aggiunto in EF Core 5,0. |
 
@@ -198,14 +175,14 @@ Genera il codice per un `DbContext` tipo di entità e per un database. Affinché
 
 Argomenti:
 
-| Argomento                    | Descrizione                                                                                                                                                                                                             |
+| Argomento                    | Description                                                                                                                                                                                                             |
 |:----------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>`<CONNECTION>`</nobr> | Stringa di connessione al database. Per i progetti ASP.NET Core 2. x, il valore può essere *Name \<name of connection string> =*. In tal caso, il nome deriva dalle origini di configurazione configurate per il progetto. |
 | `<PROVIDER>`                | Provider da usare. Si tratta in genere del nome del pacchetto NuGet, ad esempio: `Microsoft.EntityFrameworkCore.SqlServer` .                                                                                           |
 
 Opzioni:
 
-| Opzione                                   | Short             | Descrizione                                                                                                                                                                    |
+| Opzione                                   | Short             | Description                                                                                                                                                                    |
 |:-----------------------------------------|:------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--data-annotations`                     | <nobr>`-d`</nobr> | Utilizzare gli attributi per configurare il modello (laddove possibile). Se questa opzione viene omessa, viene usata solo l'API Fluent.                                                                |
 | `--context <NAME>`                       | `-c`              | Nome della `DbContext` classe da generare.                                                                                                                                 |
@@ -240,7 +217,7 @@ Genera uno script SQL da DbContext. Ignora le migrazioni. Aggiunto in EF Core 3,
 
 Opzioni:
 
-| Opzione                         | Short             | Descrizione                      |
+| Opzione                         | Short             | Description                      |
 | ------------------------------ | ----------------- | -------------------------------- |
 | <nobr>`--output <FILE>`</nobr> | <nobr>`-o`</nobr> | File in cui scrivere il risultato. |
 
@@ -252,13 +229,13 @@ Aggiunge una nuova migrazione.
 
 Argomenti:
 
-| Argomento              | Descrizione                |
+| Argomento              | Description                |
 |:----------------------|:---------------------------|
 | <nobr>`<NAME>`</nobr> | Nome della migrazione. |
 
 Opzioni:
 
-| Opzione                                 | Short             | Descrizione                                                                                                            |
+| Opzione                                 | Short             | Description                                                                                                            |
 |:---------------------------------------|:------------------|:-----------------------------------------------------------------------------------------------------------------------|
 | `--output-dir <PATH>`                  | <nobr>`-o`</nobr> | Directory usata per l'output dei file. I percorsi sono relativi alla directory del progetto di destinazione. Il valore predefinito è "Migrations".   |
 | <nobr>`--namespace <NAMESPACE>`</nobr> | `-n`              | Spazio dei nomi da utilizzare per le classi generate. Il valore predefinito è generato dalla directory di output. Aggiunto in EF Core 5,0. |
@@ -271,7 +248,7 @@ Elenca le migrazioni disponibili.
 
 Opzioni:
 
-| Opzione                                   | Descrizione                                                                                                                  |
+| Opzione                                   | Description                                                                                                                  |
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | <nobr>`--connection <CONNECTION>`</nobr> | Stringa di connessione al database. Il valore predefinito è quello specificato in AddDbContext o Configuring. Aggiunto in EF Core 5,0. |
 | `--no-connect`                           | Non connettersi al database. Aggiunto in EF Core 5,0.                                                                         |
@@ -284,7 +261,7 @@ Rimuove l'ultima migrazione (esegue il rollback delle modifiche del codice esegu
 
 Opzioni:
 
-| Opzione                 | Short             | Descrizione                                                                     |
+| Opzione                 | Short             | Description                                                                     |
 |:-----------------------|:------------------|:--------------------------------------------------------------------------------|
 | <nobr>`--force`</nobr> | <nobr>`-f`</nobr> | Ripristinare la migrazione, ovvero eseguire il rollback delle modifiche applicate al database. |
 
@@ -296,14 +273,14 @@ Genera uno script SQL dalle migrazioni.
 
 Argomenti:
 
-| Argomento              | Descrizione                                                                                                                                                   |
+| Argomento              | Description                                                                                                                                                   |
 |:----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>`<FROM>`</nobr> | Migrazione iniziale. Le migrazioni possono essere identificate in base al nome o all'ID. Il numero 0 è un caso speciale che indica *prima della prima migrazione*. Il valore predefinito è 0. |
 | `<TO>`                | Migrazione finale. L'impostazione predefinita è l'ultima migrazione.                                                                                                         |
 
 Opzioni:
 
-| Opzione                           | Short             | Descrizione                                                        |
+| Opzione                           | Short             | Description                                                        |
 |:---------------------------------|:------------------|:-------------------------------------------------------------------|
 | `--output <FILE>`                | <nobr>`-o`</nobr> | File in cui scrivere lo script.                                   |
 | `--idempotent`                   | `-i`              | Genera uno script che può essere utilizzato in un database in qualsiasi migrazione. |

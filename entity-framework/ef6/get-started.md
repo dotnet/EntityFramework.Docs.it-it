@@ -1,21 +1,21 @@
 ---
 title: Introduzione a Entity Framework 6 - EF6
 description: Introduzione a Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/get-started
-ms.openlocfilehash: 825fe3716ade947f1660c8131100a1c3acba5a1d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: b518b8ec70045066ffce6ac2a32136df97e14e99
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072135"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062789"
 ---
 # <a name="get-started-with-entity-framework-6"></a>Introduzione a Entity Framework 6
 
 Questa guida contiene una raccolta di collegamenti ad articoli della documentazione, procedure dettagliate e video selezionati per iniziare a usare rapidamente il prodotto.
 
-## <a name="fundamentals"></a>Concetti fondamentali
+## <a name="fundamentals"></a>Nozioni di base
 
 * [Ottenere Entity Framework](xref:ef6/fundamentals/install)
 
@@ -36,7 +36,7 @@ Seguire la discussione e guardare il video che illustra le differenze.
 
   È possibile ricevere assistenza dagli esperti e contribuire con le proprie risposte alla community.
 
-* [Collaborazione](https://github.com/aspnet/EntityFramework6/)
+* [Collabora](https://github.com/aspnet/EntityFramework6/)
 
   Entity Framework 6 usa un modello di sviluppo aperto. Nel repository GitHub sono disponibili informazioni su come migliorare ulteriormente Entity Framework.
 

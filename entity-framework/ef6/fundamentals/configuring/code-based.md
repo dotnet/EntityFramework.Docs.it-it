@@ -1,15 +1,15 @@
 ---
 title: Configurazione basata su codice-EF6
 description: Configurazione basata su codice in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/configuring/code-based
-ms.openlocfilehash: 67bb7ebd620c90ebe80983cc5baa6cab032907f8
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ff86b542dead260190bbb0b0788a231f720fbeaf
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070731"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063281"
 ---
 # <a name="code-based-configuration"></a>Configurazione basata su codice
 > [!NOTE]
@@ -58,7 +58,7 @@ Questa classe configura EF per l'uso della strategia di esecuzione SQL Azure: pe
 
 In alcuni casi non è possibile inserire la classe DbConfiguration nello stesso assembly della classe DbContext. Ad esempio, è possibile avere due classi DbContext in assembly diversi. Sono disponibili due opzioni per la gestione di questo.  
 
-La prima opzione consiste nell'usare il file di configurazione per specificare l'istanza di DbConfiguration da usare. A tale scopo, impostare l'attributo codeConfigurationType della sezione entityFramework. Esempio:  
+La prima opzione consiste nell'usare il file di configurazione per specificare l'istanza di DbConfiguration da usare. A tale scopo, impostare l'attributo codeConfigurationType della sezione entityFramework. Ad esempio:  
 
 ``` xml
 <entityFramework codeConfigurationType="MyNamespace.MyDbConfiguration, MyAssembly">
@@ -68,7 +68,7 @@ La prima opzione consiste nell'usare il file di configurazione per specificare l
 
 Il valore di codeConfigurationType deve essere il nome completo dell'assembly e dello spazio dei nomi della classe DbConfiguration.  
 
-La seconda opzione consiste nell'inserire DbConfigurationTypeAttribute nella classe del contesto. Esempio:  
+La seconda opzione consiste nell'inserire DbConfigurationTypeAttribute nella classe del contesto. Ad esempio:  
 
 ``` csharp  
 [DbConfigurationType(typeof(MyDbConfiguration))]
@@ -77,7 +77,7 @@ public class MyContextContext : DbContext
 }
 ```  
 
-Il valore passato all'attributo può essere il tipo DbConfiguration, come illustrato sopra, oppure la stringa del nome del tipo completo di assembly e spazio dei nomi. Esempio:  
+Il valore passato all'attributo può essere il tipo DbConfiguration, come illustrato sopra, oppure la stringa del nome del tipo completo di assembly e spazio dei nomi. Ad esempio:  
 
 ``` csharp
 [DbConfigurationType("MyNamespace.MyDbConfiguration, MyAssembly")]

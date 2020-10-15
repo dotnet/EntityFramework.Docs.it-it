@@ -2,15 +2,14 @@
 title: Gestione delle migrazioni-EF Core
 description: Aggiunta, rimozione e gestione delle migrazioni dello schema di database con Entity Framework Core
 author: bricelam
-ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: 366824cecab57a0f1744fa58cc12e5d3f6675723
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: fdfda6f3dea306fbbc343c1be3f4d5754d1f65c4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617966"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062061"
 ---
 # <a name="managing-migrations"></a>Gestione delle migrazioni
 
@@ -31,7 +30,7 @@ dotnet ef migrations add AddBlogCreatedTimestamp
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Add-Migration AddBlogCreatedTimestamp
 ```
 
@@ -59,7 +58,7 @@ dotnet ef migrations add InitialCreate --namespace Your.Namespace
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Add-Migration InitialCreate -Namespace Your.Namespace
 ```
 
@@ -73,7 +72,7 @@ Sebbene EF Core in genere crei migrazioni accurate, è sempre necessario esamina
 
 Un esempio importante in cui è necessario personalizzare le migrazioni è quando si rinomina una proprietà. Se ad esempio si rinomina una proprietà da `Name` a `FullName` , EF Core genererà la seguente migrazione:
 
-```c#
+```csharp
 migrationBuilder.DropColumn(
     name: "Name",
     table: "Customers");
@@ -86,7 +85,7 @@ migrationBuilder.AddColumn<string>(
 
 EF Core in genere non è in grado di stabilire quando si intende eliminare una colonna e crearne una nuova (due modifiche separate) e quando una colonna deve essere rinominata. Se la migrazione precedente viene applicata così come sono, tutti i nomi dei clienti andranno persi. Per rinominare una colonna, sostituire la migrazione generata in precedenza con la seguente:
 
-```c#
+```csharp
 migrationBuilder.RenameColumn(
     name: "Name",
     table: "Customers",
@@ -100,7 +99,7 @@ migrationBuilder.RenameColumn(
 
 Sebbene la ridenominazione di una colonna possa essere eseguita tramite un'API incorporata, in molti casi ciò non è possibile. È ad esempio possibile che si desideri sostituire le `FirstName` proprietà e esistenti `LastName` con una singola `FullName` Proprietà nuova. La migrazione generata da EF Core sarà la seguente:
 
-``` csharp
+```csharp
 migrationBuilder.DropColumn(
     name: "FirstName",
     table: "Customer");
@@ -117,7 +116,7 @@ migrationBuilder.AddColumn<string>(
 
 Come in precedenza, questo potrebbe causare una perdita di dati indesiderata. Per trasferire i dati dalle colonne precedenti, è necessario ridisporre le migrazioni e introdurre un'operazione SQL non elaborata come indicato di seguito:
 
-``` csharp
+```csharp
 migrationBuilder.AddColumn<string>(
     name: "FullName",
     table: "Customer",
@@ -144,7 +143,7 @@ SQL non elaborato può essere utilizzato anche per gestire gli oggetti di databa
 
 Ad esempio, la seguente migrazione crea una SQL Server stored procedure:
 
-```c#
+```csharp
 migrationBuilder.Sql(
 @"
     EXEC ('CREATE PROCEDURE getFullName
@@ -178,7 +177,7 @@ dotnet ef migrations remove
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Remove-Migration
 ```
 
@@ -206,4 +205,7 @@ In alcuni casi estremi, potrebbe essere necessario rimuovere tutte le migrazioni
 * Elimina la cartella **migrazioni**
 * Creazione di una nuova migrazione e generazione di uno script SQL
 * Nel database eliminare tutte le righe dalla tabella di cronologia migrazioni
-* Inserire una singola riga nella cronologia delle migrazioni per registrare che la prima migrazione è già stata applicata, perché le tabelle sono già presenti. Insert SEQL è l'ultima operazione nello script SQL generato in precedenza.
+* Inserire una singola riga nella cronologia delle migrazioni per registrare che la prima migrazione è già stata applicata, perché le tabelle sono già presenti. L'istruzione INSERT SQL è l'ultima operazione nello script SQL generato in precedenza.
+
+> [!WARNING]
+> Quando la cartella **Migrations** viene eliminata, eventuali [codici di migrazione personalizzati](#customize-migration-code) andranno perduti.  Tutte le personalizzazioni devono essere applicate manualmente alla nuova migrazione iniziale per poter essere mantenute.

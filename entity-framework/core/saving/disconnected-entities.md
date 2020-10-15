@@ -2,15 +2,14 @@
 title: Entità disconnesse - EF Core
 description: Utilizzo di entità disconnesse e non registrate tra più istanze di contesto in Entity Framework Core
 author: ajcvickers
-ms.author: avickers
 ms.date: 10/27/2016
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: d9b6d2d2c0761dd6f670ba51f935c866e10460b7
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f21cc71ef11ee4ef37618a68d5a5219e8174bf8b
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070887"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063569"
 ---
 # <a name="disconnected-entities"></a>Entità disconnesse
 
@@ -74,9 +73,6 @@ Tuttavia, se l'entità usa valori di chiave generati automaticamente, è possibi
 
 Il metodo Update contrassegna in genere l'entità per l'aggiornamento e non per l'inserimento. Tuttavia, se l'entità ha una chiave generata automaticamente e non è stato impostato alcun valore per la chiave, l'entità viene invece contrassegnata automaticamente per l'inserimento.
 
-> [!TIP]  
-> Questo comportamento è stato introdotto in EF Core 2.0. Per le versioni precedenti è sempre necessario scegliere in modo esplicito Add o Update.
-
 Se l'entità non usa chiavi generate automaticamente, l'applicazione deve quindi decidere se l'entità deve essere inserita o aggiornata. Ad esempio:
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntityWithFind)]
@@ -131,7 +127,7 @@ Come prima, se non si usano chiavi generate automaticamente, è possibile usare 
 
 L'eliminazione può essere difficile da gestire, dato che l'assenza di un'entità indica spesso che deve essere eliminata. Un modo per risolvere questo problema consiste nell'usare "eliminazioni temporanee" in modo che l'entità venga contrassegnata come eliminata anziché essere effettivamente eliminata. Le eliminazioni diventano quindi uguali agli aggiornamenti. Le eliminazioni temporanee possono essere implementate usando [filtri di query](xref:core/querying/filters).
 
-Per le vere eliminazioni, un modello comune consiste nell'usare un'estensione del modello di query per eseguire essenzialmente un confronto delle differenze del grafo. Esempio:
+Per le vere eliminazioni, un modello comune consiste nell'usare un'estensione del modello di query per eseguire essenzialmente un confronto delle differenze del grafo. Ad esempio:
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 

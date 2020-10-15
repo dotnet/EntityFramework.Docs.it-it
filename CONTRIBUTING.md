@@ -11,7 +11,7 @@ Gli articoli sono archiviati come file markdown in questo repository. Per apport
 Sono necessarie delle conoscenze di base di [Git e GitHub.com](https://guides.github.com/activities/hello-world/).
 
 * Aprire un [problema](https://github.com/dotnet/EntityFramework.Docs/issues/new) che descriva ciò che si vuole fare, ad esempio modificare un articolo esistente o crearne uno nuovo. Attendere l'approvazione dal team EF prima di investire molto tempo.
-* Creare un fork del repository [DotNet/EntityFramework. docs](https://github.com/dotnet/EntityFramework.Docs/) e creare un ramo per le modifiche.
+* Creare un fork del repository [DotNet/EntityFramework.Doc](https://github.com/dotnet/EntityFramework.Docs/) e creare un ramo per le modifiche.
 * Inviare una richiesta pull (PR) al master con le modifiche.
 * Rispondere ai commenti e suggerimenti per la richiesta pull.
 
@@ -33,13 +33,13 @@ Di seguito sono riportati alcuni esempi di [sintassi di frammenti di codice DFM]
 
 Per eseguire il rendering di un intero file di codice come un frammento:
 
-``` none
+```none
 [!code-csharp[Main](../../../samples/core/saving/Program.cs)]
 ```
 
 Per eseguire il rendering di una parte di un file come un frammento usando i numeri di riga:
 
-``` none
+```none
 [!code-csharp[Main](../../../samples/core/saving/Program.cs?range=1-10]
 ```
 
@@ -47,13 +47,13 @@ Per i frammenti di codice C#, è possibile fare riferimento a un'[area C#](https
 
 Per eseguire il rendering di un'area C# denominata "snippet_Example":
 
-``` none
+```none
 [!code-csharp[Main](../../../samples/core/saving/Program.cs?name=snippet_Example)]
 ```
 
 Per evidenziare le righe selezionate in un frammento di codice sottoposto a rendering (in genere il rendering viene eseguito con un colore di sfondo giallo):
 
-``` none
+```none
 [!code-csharp[Main](../../../samples/core/saving/Program.cs?name=snippet_Example&highlight=1-3,10,20-25)]
 ```
 
@@ -69,7 +69,7 @@ DocFX richiede .NET Framework in Windows o Mono (per Linux o macOS).
 * Aggiungere DocFX a PATH.
 * In una finestra della riga di comando, passare al repository clonato (che contiene il file *docfx.json*) ed eseguire il comando seguente:
 
-   ``` console
+   ```console
    docfx -t default --serve
    ```
 
@@ -82,7 +82,7 @@ DocFX richiede .NET Framework in Windows o Mono (per Linux o macOS).
 * Estrarre in `\bin\docfx`.
 * Creare un alias per **docfx**:
 
-  ``` console
+  ```console
   function docfx {
     mono $HOME/bin/docfx/docfx.exe
   }

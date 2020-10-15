@@ -2,15 +2,14 @@
 title: Tipi di entità di proprietà-EF Core
 description: Come configurare i tipi di entità o le aggregazioni di proprietà quando si usa Entity Framework Core
 author: AndriySvyryd
-ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: f65c07c79daf38e733c76f328843c90466c657f5
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: a49d9aab735232dfd5a3db456410d527f94f3c18
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619325"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063777"
 ---
 # <a name="owned-entity-types"></a>Tipi di entità di proprietà
 
@@ -20,7 +19,7 @@ Le entità di proprietà sono essenzialmente parte del proprietario e non posson
 
 ## <a name="explicit-configuration"></a>Configurazione esplicita
 
-I tipi di entità di proprietà non vengono mai inclusi da EF Core nel modello per convenzione. È possibile usare il `OwnsOne` metodo in `OnModelCreating` o annotare il tipo con `OwnedAttribute` (nuovo nella EF Core 2,1) per configurare il tipo come tipo di proprietà.
+I tipi di entità di proprietà non vengono mai inclusi da EF Core nel modello per convenzione. È possibile usare il `OwnsOne` metodo in `OnModelCreating` o annotare il tipo con `OwnedAttribute` per configurare il tipo come tipo di proprietà.
 
 In questo esempio `StreetAddress` è un tipo senza proprietà Identity. Viene usato come proprietà del tipo Order per specificare l'indirizzo di spedizione per uno specifico ordine.
 
@@ -40,6 +39,9 @@ Se la `ShippingAddress` proprietà è privata nel `Order` tipo, è possibile usa
 
 Per ulteriori informazioni sul contesto, vedere il [progetto di esempio completo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/OwnedEntities) .
 
+> [!TIP]
+> Il tipo di entità di proprietà può essere contrassegnato come obbligatorio. per ulteriori informazioni, vedere [dipendenti uno-a-uno richiesti](xref:core/modeling/relationships#one-to-one) .
+
 ## <a name="implicit-keys"></a>Chiavi implicite
 
 I tipi di proprietà configurati con `OwnsOne` o individuati tramite un'esplorazione dei riferimenti hanno sempre una relazione uno-a-uno con il proprietario, pertanto non necessitano di valori di chiave personalizzati perché i valori di chiave esterna sono univoci. Nell'esempio precedente, non è `StreetAddress` necessario che il tipo definisca una proprietà chiave.  
@@ -47,9 +49,6 @@ I tipi di proprietà configurati con `OwnsOne` o individuati tramite un'esploraz
 Per comprendere il modo in cui EF Core tiene traccia di questi oggetti, è utile sapere che una chiave primaria viene creata come [proprietà shadow](xref:core/modeling/shadow-properties) per il tipo di proprietà. Il valore della chiave di un'istanza del tipo di proprietà sarà uguale al valore della chiave dell'istanza del proprietario.
 
 ## <a name="collections-of-owned-types"></a>Raccolte di tipi di proprietà
-
-> [!NOTE]
-> Questa funzionalità è stata introdotta in EF Core 2.2.
 
 Per configurare una raccolta di tipi di proprietà `OwnsMany` , utilizzare in `OnModelCreating` .
 
@@ -60,18 +59,15 @@ Le due soluzioni più semplici sono:
 - Definizione di una chiave primaria surrogata in una nuova proprietà indipendente dalla chiave esterna che punta al proprietario. I valori contenuti devono essere univoci in tutti i proprietari (ad esempio, se il padre {1} ha {1} un figlio, l'elemento padre {2} non può avere un elemento figlio {1} ), quindi il valore non ha un significato intrinseco. Poiché la chiave esterna non fa parte della chiave primaria, i relativi valori possono essere modificati, quindi è possibile spostare un elemento figlio da un elemento padre a un altro, ma in genere viene eseguita la semantica di aggregazione.
 - Uso della chiave esterna e di una proprietà aggiuntiva come chiave composta. Il valore aggiuntivo della proprietà deve ora essere univoco solo per un determinato elemento padre (pertanto, se il padre {1} ha un figlio {1,1} , l'elemento padre {2} può ancora avere figlio {2,1} ). Rendendo la parte chiave esterna della chiave primaria, la relazione tra il proprietario e l'entità di proprietà diventa non modificabile e riflette meglio la semantica di aggregazione. Per impostazione predefinita, EF Core esegue questa operazione.
 
-In questo esempio verrà usata la `Distributor` classe:
+In questo esempio verrà usata la `Distributor` classe.
 
 [!code-csharp[Distributor](../../../samples/core/Modeling/OwnedEntities/Distributor.cs?name=Distributor)]
 
 Per impostazione predefinita, la chiave primaria utilizzata per il tipo di proprietà a cui viene fatto riferimento tramite la `ShippingCenters` proprietà di navigazione sarà `("DistributorId", "Id")` dove `"DistributorId"` è l'FK ed `"Id"` è un `int` valore univoco.
 
-Per configurare un'altra chiamata a PK `HasKey` :
+Per configurare una chiamata di chiave primaria diversa `HasKey` .
 
 [!code-csharp[OwnsMany](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsMany)]
-
-> [!NOTE]
-> Prima che EF Core `WithOwner()` metodo 3,0 non esistesse, questa chiamata deve essere rimossa. Inoltre, la chiave primaria non è stata individuata automaticamente, quindi è sempre necessario specificarla.
 
 ## <a name="mapping-owned-types-with-table-splitting"></a>Mapping dei tipi di proprietà con suddivisione della tabella
 
@@ -79,7 +75,7 @@ Quando si usano database relazionali, per impostazione predefinita i tipi di pro
 
 Per impostazione predefinita, EF Core assegna un nome alle colonne del database per le proprietà del tipo di entità di proprietà che segue il modello _Navigation_OwnedEntityProperty_. Pertanto, le `StreetAddress` proprietà verranno visualizzate nella tabella ' Orders ' con i nomi ' ShippingAddress_Street ' è ShippingAddress_City '.
 
-È possibile usare il `HasColumnName` metodo per rinominare le colonne:
+È possibile utilizzare il `HasColumnName` metodo per rinominare le colonne.
 
 [!code-csharp[ColumnNames](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=ColumnNames)]
 
@@ -92,7 +88,7 @@ Un tipo di entità di proprietà può essere dello stesso tipo .NET di un altro 
 
 In questi casi, la proprietà che punta dal proprietario all'entità di proprietà diventa la _navigazione che definisce_ il tipo di entità di proprietà. Dal punto di vista del EF Core, la navigazione di definizione fa parte dell'identità del tipo insieme al tipo .NET.
 
-Ad esempio, nella classe seguente `ShippingAddress` e `BillingAddress` sono entrambi dello stesso tipo .NET `StreetAddress` :
+Ad esempio, nella classe seguente `ShippingAddress` e `BillingAddress` sono entrambi dello stesso tipo .NET, `StreetAddress` .
 
 [!code-csharp[OrderDetails](../../../samples/core/Modeling/OwnedEntities/OrderDetails.cs?name=OrderDetails)]
 
@@ -144,16 +140,15 @@ Alcune di queste limitazioni sono fondamentali per il funzionamento dei tipi di 
 
 ### <a name="by-design-restrictions"></a>Limitazioni di progettazione
 
-- Non è possibile creare un oggetto `DbSet<T>` per un tipo di proprietà
-- Non è possibile chiamare `Entity<T>()` con un tipo di proprietà in `ModelBuilder`
+- Non è possibile creare un oggetto `DbSet<T>` per un tipo di proprietà.
+- Non è possibile chiamare `Entity<T>()` con un tipo di proprietà in `ModelBuilder` .
+- Le istanze dei tipi di entità di proprietà non possono essere condivise da più proprietari (si tratta di uno scenario noto per gli oggetti valore che non possono essere implementati con i tipi di entità di proprietà).
 
 ### <a name="current-shortcomings"></a>Carenze correnti
 
 - I tipi di entità di proprietà non possono avere gerarchie di ereditarietà
-- Le esplorazioni dei riferimenti ai tipi di entità di proprietà non possono essere null a meno che non ne venga eseguito il mapping esplicito a una tabella separata dal proprietario
-- Le istanze dei tipi di entità di proprietà non possono essere condivise da più proprietari (si tratta di uno scenario noto per gli oggetti valore che non possono essere implementati con i tipi di entità di proprietà)
 
 ### <a name="shortcomings-in-previous-versions"></a>Difetti nelle versioni precedenti
 
-- In EF Core 2,0, le navigazioni nei tipi di entità di proprietà non possono essere dichiarate in tipi di entità derivate, a meno che non sia stato eseguito il mapping esplicito delle entità di proprietà a una tabella separata dalla gerarchia Questa limitazione è stata rimossa in EF Core 2,1
-- In EF Core 2,0 e 2,1 sono supportati solo gli spostamenti di riferimento ai tipi di proprietà. Questa limitazione è stata rimossa in EF Core 2,2
+- In EF Core 2. x le esplorazioni dei riferimenti ai tipi di entità di proprietà non possono essere null a meno che non vengano esplicitamente mappate a una tabella separata dal proprietario.
+- In EF Core 3. x le colonne per i tipi di entità di proprietà di cui è stato eseguito il mapping alla stessa tabella del proprietario sono sempre contrassegnate come Nullable.

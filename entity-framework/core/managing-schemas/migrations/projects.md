@@ -2,15 +2,14 @@
 title: Uso di un progetto di migrazioni separate-EF Core
 description: Utilizzo di un progetto di migrazione separato per la gestione degli schemi di database con Entity Framework Core
 author: bricelam
-ms.author: bricelam
 ms.date: 10/30/2017
 uid: core/managing-schemas/migrations/projects
-ms.openlocfilehash: a3f0ed96c6a8e3e8629d9a4bb1610fcbfe6ca043
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 6f28027c320f0d1c13d13bef7d8227b2bb68df91
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617907"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062490"
 ---
 # <a name="using-a-separate-migrations-project"></a>Uso di un progetto di migrazioni separate
 
@@ -29,7 +28,7 @@ Per
 
 4. Configurare l'assembly delle migrazioni:
 
-   ``` csharp
+   ```csharp
    options.UseSqlServer(
        connectionString,
        x => x.MigrationsAssembly("MyApp.Migrations"));
@@ -38,7 +37,7 @@ Per
 5. Aggiungere un riferimento all'assembly Migrations dall'assembly di avvio.
    * Se causa una dipendenza circolare, aggiornare il percorso di output della libreria di classi:
 
-     ``` xml
+     ```xml
      <PropertyGroup>
        <OutputPath>..\MyStartupProject\bin\$(Configuration)\</OutputPath>
      </PropertyGroup>
@@ -54,7 +53,7 @@ dotnet ef migrations add NewMigration --project MyApp.Migrations
 
 ## <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Add-Migration NewMigration -Project MyApp.Migrations
 ```
 

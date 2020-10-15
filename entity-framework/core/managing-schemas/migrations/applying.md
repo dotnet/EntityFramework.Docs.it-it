@@ -2,15 +2,14 @@
 title: Applicazione delle migrazioni-EF Core
 description: Strategie per l'applicazione delle migrazioni dello schema ai database di produzione e di sviluppo con Entity Framework Core
 author: bricelam
-ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: cde83a944e1e698a7f8a00c4692c0ce08a87b5ab
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: 68d482a34e5f5c7acf968acdfd8825e1d21ecb13
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210406"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062347"
 ---
 # <a name="applying-migrations"></a>Applicazione di migrazioni
 
@@ -65,7 +64,7 @@ dotnet ef migrations script AddNewTables AddAuditTable
 
 Il codice seguente genera uno script SQL da un database vuoto alla migrazione più recente:
 
-``` powershell
+```powershell
 Script-Migration
 ```
 
@@ -107,7 +106,7 @@ dotnet ef migrations script --idempotent
 
 #### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Script-Migration -Idempotent
 ```
 
@@ -143,13 +142,13 @@ Si noti che questa operazione può essere usata anche per eseguire il rollback a
 
 Il codice seguente consente di aggiornare il database alla migrazione più recente:
 
-``` powershell
+```powershell
 Update-Database
 ```
 
 Il codice seguente consente di aggiornare il database a una determinata migrazione:
 
-``` powershell
+```powershell
 Update-Database AddNewTables
 ```
 
@@ -174,7 +173,7 @@ Per ulteriori informazioni sull'applicazione delle migrazioni tramite gli strume
 
 Per applicare le migrazioni a livello di codice, chiamare `context.Database.Migrate()` . Ad esempio, un'applicazione ASP.NET tipica può eseguire le operazioni seguenti:
 
-```c#
+```csharp
 public static void Main(string[] args)
 {
     var host = CreateHostBuilder(args).Build();

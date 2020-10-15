@@ -4,12 +4,12 @@ description: Valutazione del client e del server delle query con Entity Framewor
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/client-eval
-ms.openlocfilehash: 41be7da26423f50017f57a7686f65bd8baf69ef5
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f2e80541439de8cc824c182e52400f730dd2af48
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071173"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062711"
 ---
 # <a name="client-vs-server-evaluation"></a>Valutazione client e server
 
@@ -19,21 +19,21 @@ Come regola generale, Entity Framework Core tenta di valutare il più possibile 
 > Prima della versione 3,0, Entity Framework Core la valutazione client supportata in qualsiasi punto della query. Per ulteriori informazioni, vedere la [sezione versioni precedenti](#previous-versions).
 
 > [!TIP]
-> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) di questo articolo in GitHub.
+> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/ClientEvaluation) di questo articolo in GitHub.
 
 ## <a name="client-evaluation-in-the-top-level-projection"></a>Valutazione client nella proiezione di primo livello
 
 Nell'esempio seguente viene usato un metodo helper per standardizzare gli URL per i Blog restituiti da un database SQL Server. Poiché il provider di SQL Server non ha informazioni dettagliate sul modo in cui viene implementato questo metodo, non è possibile convertirlo in SQL. Tutti gli altri aspetti della query vengono valutati nel database, ma il passaggio dell'oggetto restituito `URL` tramite questo metodo viene eseguito nel client.
 
-[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ClientProjection)]
+[!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ClientProjection)]
 
-[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ClientMethod)]
+[!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ClientMethod)]
 
 ## <a name="unsupported-client-evaluation"></a>Valutazione client non supportata
 
 Sebbene la valutazione del client sia utile, può comportare una riduzione delle prestazioni a volte. Si consideri la query seguente, in cui il metodo helper viene ora usato in un filtro WHERE. Poiché il filtro non può essere applicato nel database, è necessario eseguire il pull di tutti i dati in memoria per applicare il filtro nel client. In base al filtro e alla quantità di dati sul server, la valutazione client può comportare una riduzione delle prestazioni. Quindi Entity Framework Core blocca la valutazione del client e genera un'eccezione in fase di esecuzione.
 
-[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ClientWhere)]
+[!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ClientWhere)]
 
 ## <a name="explicit-client-evaluation"></a>Valutazione esplicita del client
 
@@ -44,7 +44,7 @@ Potrebbe essere necessario forzare la valutazione del client in modo esplicito i
 
 In questi casi, è possibile acconsentire esplicitamente alla valutazione del client chiamando metodi come `AsEnumerable` o `ToList` ( `AsAsyncEnumerable` o `ToListAsync` per Async). `AsEnumerable`Se si usa, i risultati vengono trasmessi in streaming, ma l'uso `ToList` di causerebbe la memorizzazione nel buffer creando un elenco, che richiede anche memoria aggiuntiva. Tuttavia, se l'enumerazione viene eseguita più volte, l'archiviazione dei risultati in un elenco contribuisce maggiormente perché esiste solo una query al database. A seconda dell'utilizzo specifico, è consigliabile valutare quale metodo è più utile per il caso.
 
-[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ExplicitClientEval)]
+[!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ExplicitClientEvaluation)]
 
 ## <a name="potential-memory-leak-in-client-evaluation"></a>Potenziale perdita di memoria nella valutazione client
 

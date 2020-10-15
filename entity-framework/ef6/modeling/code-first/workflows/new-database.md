@@ -1,15 +1,15 @@
 ---
 title: Code First a un nuovo database-EF6
 description: Code First a un nuovo database in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/workflows/new-database
-ms.openlocfilehash: 96d76162383149c045178954196e1294331918a8
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 9d0082ac5226fff066d3e18c9164e2230c84b285
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070367"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065019"
 ---
 # <a name="code-first-to-a-new-database"></a>Code First to a New Database (Code First per un nuovo database)
 Questo video e una procedura dettagliata forniscono un'introduzione allo sviluppo di Code First destinati a un nuovo database. Questo scenario include la destinazione di un database che non esiste e Code First creerà oppure un database vuoto a cui Code First aggiungeranno nuove tabelle. Code First consente di definire il modello utilizzando \# le classi C o VB.NET. Facoltativamente, è possibile eseguire una configurazione aggiuntiva usando gli attributi delle classi e delle proprietà o usando un'API Fluent.
@@ -238,7 +238,7 @@ public class Blog
 ```
 
 -   Eseguire il comando **Add-Migration addurl** nella console di gestione pacchetti.
-    Il comando Add-Migration controlla le modifiche apportate dall'ultima migrazione e ponteggi una nuova migrazione con le eventuali modifiche trovate. È possibile assegnare un nome alle migrazioni. in questo caso viene chiamata la migrazione ' AddUrl '.
+    Il comando Add-Migration controlla le modifiche apportate dall'ultima migrazione e ponteggi una nuova migrazione con le eventuali modifiche rilevate. È possibile assegnare un nome alle migrazioni. in questo caso viene chiamata la migrazione ' AddUrl '.
     Il codice con impalcature dice che è necessario aggiungere una colonna URL, che può conservare dati stringa, al dbo. Tabella Blog. Se necessario, è possibile modificare il codice con impalcature, ma ciò non è necessario in questo caso.
 
 ``` csharp
@@ -263,7 +263,7 @@ namespace CodeFirstNewDatabaseSample.Migrations
 ```
 
 -   Eseguire il comando **Update-database** nella console di gestione pacchetti. Questo comando consente di applicare tutte le migrazioni in sospeso al database. La migrazione di InitialCreate è già stata applicata, quindi le migrazioni applicheranno solo la nuova migrazione di AddUrl.
-    Suggerimento: è possibile usare l'opzione **-verbose** quando si chiama Update-database per visualizzare il SQL in esecuzione sul database.
+    Suggerimento: è possibile usare l'opzione **-verbose** quando si chiama Update-Database per visualizzare il SQL che viene eseguito sul database.
 
 La nuova colonna URL verrà ora aggiunta alla tabella Blogs del database:
 

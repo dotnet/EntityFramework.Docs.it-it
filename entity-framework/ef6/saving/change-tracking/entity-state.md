@@ -1,15 +1,15 @@
 ---
 title: Utilizzo degli Stati dell'entità-EF6
 description: Utilizzo degli Stati dell'entità in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/saving/change-tracking/entity-state
-ms.openlocfilehash: 88c1b67b3eda02e79f7d10d5e46fdd3566361634
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 5373f7157882062e8a73b2bd414c6a8b9accdba4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073769"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064458"
 ---
 # <a name="working-with-entity-states"></a>Utilizzo degli Stati dell'entità
 In questo argomento viene illustrato come aggiungere e alleghire entità a un contesto e come Entity Framework li elabora durante SaveChanges.

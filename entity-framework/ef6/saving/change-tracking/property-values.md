@@ -1,15 +1,15 @@
 ---
 title: Uso dei valori delle proprietà-EF6
 description: Utilizzo dei valori delle proprietà in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/saving/change-tracking/property-values
-ms.openlocfilehash: 30c8e7dbd59f0eb3ec15c0f57f022afd90fd80f8
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: deb110df1dbb2b433b54b98a684bc06e696c4351
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073756"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064445"
 ---
 # <a name="working-with-property-values"></a>Utilizzo dei valori delle proprietà
 Per la maggior parte Entity Framework si occuperà di tenere traccia dello stato, dei valori originali e dei valori correnti delle proprietà delle istanze dell'entità. Tuttavia, potrebbero verificarsi alcuni casi, ad esempio gli scenari disconnessi, in cui si desidera visualizzare o modificare le informazioni di EF sulle proprietà. Le tecniche illustrate in questo argomento si applicano in modo analogo ai modelli creati con Code First ed EF Designer.  
@@ -56,7 +56,7 @@ Quando un valore di proprietà viene impostato in questo modo, la modifica viene
 
 ## <a name="getting-and-setting-the-current-value-of-an-unmapped-property"></a>Recupero e impostazione del valore corrente di una proprietà non mappata  
 
-È anche possibile leggere il valore corrente di una proprietà di cui non è stato eseguito il mapping al database. Un esempio di proprietà di cui non è stato eseguito il mapping può essere una proprietà RssLink nel Blog. Questo valore può essere calcolato in base a BlogId e pertanto non deve essere archiviato nel database. Esempio:  
+È anche possibile leggere il valore corrente di una proprietà di cui non è stato eseguito il mapping al database. Un esempio di proprietà di cui non è stato eseguito il mapping può essere una proprietà RssLink nel Blog. Questo valore può essere calcolato in base a BlogId e pertanto non deve essere archiviato nel database. Ad esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -72,7 +72,7 @@ using (var context = new BloggingContext())
 
 Il valore corrente può essere impostato anche se la proprietà espone un setter.  
 
-La lettura dei valori delle proprietà di cui non è stato eseguito il mapping risulta utile quando si esegue Entity Framework la convalida delle proprietà senza mapping. Per lo stesso motivo è possibile leggere e impostare i valori correnti per le proprietà delle entità che non sono attualmente rilevate dal contesto. Esempio:  
+La lettura dei valori delle proprietà di cui non è stato eseguito il mapping risulta utile quando si esegue Entity Framework la convalida delle proprietà senza mapping. Per lo stesso motivo è possibile leggere e impostare i valori correnti per le proprietà delle entità che non sono attualmente rilevate dal contesto. Ad esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -168,7 +168,7 @@ I valori correnti sono i valori attualmente contenuti nelle proprietà dell'enti
 
 ## <a name="setting-current-or-original-values-from-another-object"></a>Impostazione dei valori correnti o originali da un altro oggetto  
 
-I valori correnti o originali di un'entità rilevata possono essere aggiornati copiando i valori da un altro oggetto. Esempio:  
+I valori correnti o originali di un'entità rilevata possono essere aggiornati copiando i valori da un altro oggetto. Ad esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -215,7 +215,7 @@ Si noti che solo le proprietà impostate su valori diversi quando vengono copiat
 
 ## <a name="setting-current-or-original-values-from-a-dictionary"></a>Impostazione dei valori correnti o originali da un dizionario  
 
-I valori correnti o originali di un'entità rilevata possono essere aggiornati copiando i valori da un dizionario o da un'altra struttura di dati. Esempio:  
+I valori correnti o originali di un'entità rilevata possono essere aggiornati copiando i valori da un dizionario o da un'altra struttura di dati. Ad esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -243,7 +243,7 @@ Usare la proprietà OriginalValues invece della proprietà CurrentValues per imp
 
 ## <a name="setting-current-or-original-values-from-a-dictionary-using-property"></a>Impostazione dei valori correnti o originali da un dizionario usando la proprietà  
 
-Un'alternativa all'uso di CurrentValues o OriginalValues, come illustrato in precedenza, consiste nell'usare il metodo Property per impostare il valore di ogni proprietà. Questa operazione può essere preferibile quando è necessario impostare i valori delle proprietà complesse. Esempio:  
+Un'alternativa all'uso di CurrentValues o OriginalValues, come illustrato in precedenza, consiste nell'usare il metodo Property per impostare il valore di ogni proprietà. Questa operazione può essere preferibile quando è necessario impostare i valori delle proprietà complesse. Ad esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -271,7 +271,7 @@ Nell'esempio precedente viene eseguito l'accesso alle proprietà complesse utili
 
 ## <a name="creating-a-cloned-object-containing-current-original-or-database-values"></a>Creazione di un oggetto clonato contenente i valori correnti, originali o di database  
 
-Per creare un clone dell'entità, è possibile usare l'oggetto elementi dbpropertyvalues restituito da CurrentValues, OriginalValues o GetDatabaseValues. Questo clone conterrà i valori delle proprietà dall'oggetto elementi dbpropertyvalues usato per crearlo. Esempio:  
+Per creare un clone dell'entità, è possibile usare l'oggetto elementi dbpropertyvalues restituito da CurrentValues, OriginalValues o GetDatabaseValues. Questo clone conterrà i valori delle proprietà dall'oggetto elementi dbpropertyvalues usato per crearlo. Ad esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())

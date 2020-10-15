@@ -4,12 +4,12 @@ description: Elenco completo delle modifiche di rilievo introdotte in Entity Fra
 author: ajcvickers
 ms.date: 09/05/2020
 uid: core/what-is-new/ef-core-3.x/breaking-changes
-ms.openlocfilehash: e348cb630d91ebe4536b73b9a7bd9a7b6a46db79
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: a656f3182c57689fea076ed2c7731e37fe1c4a28
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072239"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065667"
 ---
 # <a name="breaking-changes-included-in-ef-core-3x"></a>Modifiche di rilievo incluse in EF Core 3. x
 
@@ -110,7 +110,7 @@ Se una query non può essere convertita completamente, riscrivere la query in un
 
 [Problema n. 15498](https://github.com/aspnet/EntityFrameworkCore/issues/15498)
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
 > EF Core 3,1 di nuovo la destinazione .NET Standard 2,0. Questa operazione riporta il supporto per .NET Framework.
 
 **Comportamento precedente**
@@ -144,7 +144,8 @@ A partire dalla versione 3.0, il framework condiviso di ASP.NET Core non include
 
 **Perché**
 
-Prima di questa modifica, per ottenere EF Core erano necessarie procedure diverse, a seconda che l'applicazione avesse o meno come destinazione ASP.NET Core e SQL Server. Inoltre, l'aggiornamento di ASP.NET Core forzava l'aggiornamento di EF Core e del provider di SQL Server, non sempre auspicabile.
+Prima di questa modifica, per ottenere EF Core erano necessarie procedure diverse, a seconda che l'applicazione avesse o meno come destinazione ASP.NET Core e SQL Server.
+Inoltre, l'aggiornamento di ASP.NET Core forzava l'aggiornamento di EF Core e del provider di SQL Server, non sempre auspicabile.
 
 Con questa modifica, la procedura per ottenere EF Core è la stessa in tutti i provider, le implementazioni .NET supportate e i tipi di applicazioni.
 Gli sviluppatori possono ora controllare anche in modo preciso quando vengono aggiornati EF Core e i provider di dati di EF Core.
@@ -160,11 +161,11 @@ Per usare EF Core in un'applicazione ASP.NET Core 3.0 o in un'altra applicazione
 
 **Comportamento precedente**
 
-Prima della versione 3.0, lo strumento `dotnet ef` era incluso in .NET Core SDK ed era immediatamente disponibile dalla riga di comando di qualsiasi progetto senza richiedere passaggi aggiuntivi. 
+Prima della versione 3.0, lo strumento `dotnet ef` era incluso in .NET Core SDK ed era immediatamente disponibile dalla riga di comando di qualsiasi progetto senza richiedere passaggi aggiuntivi.
 
 **Nuovo comportamento**
 
-A partire dalla versione 3.0, .NET SDK non include lo strumento `dotnet ef` pertanto, prima di poterlo usare, è necessario installarlo in modo esplicito come strumento locale o globale. 
+A partire dalla versione 3.0, .NET SDK non include lo strumento `dotnet ef` pertanto, prima di poterlo usare, è necessario installarlo in modo esplicito come strumento locale o globale.
 
 **Perché**
 
@@ -174,8 +175,8 @@ Questa modifica consente di distribuire e aggiornare `dotnet ef` come uno strume
 
 Per essere in grado di gestire le migrazioni o eseguire lo scaffolding di `DbContext`, installare `dotnet-ef` come strumento globale:
 
-  ``` console
-    $ dotnet tool install --global dotnet-ef
+  ```dotnetcli
+  dotnet tool install --global dotnet-ef
   ```
 
 È inoltre possibile ottenerlo come strumento locale quando si ripristinano le dipendenze di un progetto che lo dichiara come dipendenza di strumenti utilizzando un [file manifesto dello strumento](/dotnet/core/tools/global-tools#install-a-local-tool).
@@ -192,7 +193,7 @@ Prima di EF Core 3.0, erano disponibili overload per questi nomi di metodo per s
 **Nuovo comportamento**
 
 A partire da EF Core 3.0, usare `FromSqlRaw`, `ExecuteSqlRaw` e `ExecuteSqlRawAsync` per creare una query con parametri in cui i parametri vengono passati separatamente dalla stringa di query.
-Esempio:
+Ad esempio:
 
 ```csharp
 context.Products.FromSqlRaw(
@@ -201,7 +202,7 @@ context.Products.FromSqlRaw(
 ```
 
 Usare `FromSqlInterpolated`, `ExecuteSqlInterpolated`, e `ExecuteSqlInterpolatedAsync` per creare una query con parametri in cui i parametri vengono passati come parte di una stringa di query interpolata.
-Esempio:
+Ad esempio:
 
 ```csharp
 context.Products.FromSqlInterpolated(
@@ -327,7 +328,7 @@ A partire dalla versione 3.0, EF Core archivia il valore di chiave temporaneo co
 
 **Perché**
 
-Questa modifica è stata apportata per impedire che i valori di chiave temporanei diventino erroneamente permanenti quando un'entità rilevata in precedenza da un'istanza `DbContext` viene spostata in un'altra istanza `DbContext`. 
+Questa modifica è stata apportata per impedire che i valori di chiave temporanei diventino erroneamente permanenti quando un'entità rilevata in precedenza da un'istanza `DbContext` viene spostata in un'altra istanza `DbContext`.
 
 **Soluzioni di prevenzione**
 
@@ -398,7 +399,7 @@ Questa modifica è stata apportata per migliorare l'esperienza di associazione d
 **Soluzioni di prevenzione**
 
 Il comportamento precedente può essere ripristinato tramite le impostazioni in `context.ChangeTracker`.
-Esempio:
+Ad esempio:
 
 ```csharp
 context.ChangeTracker.CascadeDeleteTiming = CascadeTiming.OnSaveChanges;
@@ -491,12 +492,12 @@ Non ne viene eseguita la configurazione per convenzione per evitare una configur
 
 **Comportamento precedente**
 
-Nelle versioni precedenti a EF Core 3.0 la configurazione della relazione di proprietà veniva eseguita direttamente dopo la chiamata a `OwnsOne` o `OwnsMany`. 
+Nelle versioni precedenti a EF Core 3.0 la configurazione della relazione di proprietà veniva eseguita direttamente dopo la chiamata a `OwnsOne` o `OwnsMany`.
 
 **Nuovo comportamento**
 
 A partire da EF Core 3.0, è disponibile l'API Fluent per configurare una proprietà di navigazione per il proprietario usando `WithOwner()`.
-Esempio:
+Ad esempio:
 
 ```csharp
 modelBuilder.Entity<Order>.OwnsOne(e => e.Details).WithOwner(e => e.Order);
@@ -504,7 +505,7 @@ modelBuilder.Entity<Order>.OwnsOne(e => e.Details).WithOwner(e => e.Order);
 
 La configurazione correlata alla relazione tra proprietario e elemento di proprietà deve essere ora concatenata dopo `WithOwner()` in modo analogo a come vengono configurate altre relazioni.
 La configurazione per il tipo di proprietà viene comunque concatenata dopo `OwnsOne()/OwnsMany()`.
-Esempio:
+Ad esempio:
 
 ```csharp
 modelBuilder.Entity<Order>.OwnsOne(e => e.Details, eb =>
@@ -512,7 +513,7 @@ modelBuilder.Entity<Order>.OwnsOne(e => e.Details, eb =>
         eb.WithOwner()
             .HasForeignKey(e => e.AlternateId)
             .HasConstraintName("FK_OrderDetails");
-            
+
         eb.ToTable("OrderDetails");
         eb.HasKey(e => e.AlternateId);
         eb.HasIndex(e => e.Id);
@@ -750,7 +751,7 @@ Tuttavia, se `Order` è un tipo di proprietà, `CustomerId` sarebbe la chiave pr
 
 A partire da 3.0, EF Core non tenta di usare le proprietà per le chiavi esterne per convenzione se hanno lo stesso nome della proprietà dell'entità di sicurezza.
 Viene ancora eseguita la corrispondenza tra i criteri del nome del tipo dell'entità di sicurezza concatenato al nome della proprietà dell'entità di sicurezza e il nome di navigazione concatenato al nome della proprietà dell'entità di sicurezza.
-Esempio:
+Ad esempio:
 
 ```csharp
 public class Customer
@@ -886,7 +887,7 @@ Questa modifica è stata apportata per impedire a EF Core di attivare per errore
 **Soluzioni di prevenzione**
 
 È possibile ripristinare il comportamento delle versioni precedenti alla versione 3.0 tramite la configurazione della modalità di accesso delle proprietà in `ModelBuilder`.
-Esempio:
+Ad esempio:
 
 ```csharp
 modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruction);
@@ -1136,7 +1137,7 @@ Nelle versioni precedenti a EF Core 3.0 veniva registrato un avviso per le appli
 
 **Nuovo comportamento**
 
-A partire da EF Core 3.0, l'avviso viene considerato un errore e viene generata un'eccezione. 
+A partire da EF Core 3.0, l'avviso viene considerato un errore e viene generata un'eccezione.
 
 **Perché**
 
@@ -1146,7 +1147,7 @@ Questa modifica è stata apportata per gestire meglio il codice dell'applicazion
 
 L'azione più appropriata quando si verifica questo errore consiste nell'individuare la causa radice e nell'interrompere la creazione di numerosi provider di servizi interni.
 È possibile tuttavia convertire nuovamente l'errore in avviso o ignorarlo tramite una configurazione in `DbContextOptionsBuilder`.
-Esempio:
+Ad esempio:
 
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -1165,7 +1166,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 **Comportamento precedente**
 
 Prima di EF Core 3.0, il codice che chiama `HasOne` o `HasMany` con una singola stringa era interpretato in modo poco chiaro.
-Esempio:
+Ad esempio:
 ```csharp
 modelBuilder.Entity<Samurai>().HasOne("Entrance").WithOne();
 ```
@@ -1187,7 +1188,7 @@ Il comportamento precedente era molto poco chiaro, soprattutto durante la lettur
 Questa modifica causerà problemi solo nelle applicazioni che configurano relazioni in modo esplicito usando stringhe per i nomi dei tipi e senza specificare in modo esplicito la proprietà di navigazione.
 Non è uno scenario comune.
 Il comportamento precedente può essere ottenuto passando esplicitamente `null` per il nome della proprietà di navigazione.
-Esempio:
+Ad esempio:
 
 ```csharp
 modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
@@ -1246,13 +1247,13 @@ Il mapping dei tipi non viene più usato solo per i provider di database relazio
 Ciò causa un'interruzione solo nelle applicazioni che accedono al mapping dei tipi direttamente come annotazione. Questa situazione non è comune.
 L'azione più appropriata per risolvere il problema consiste nell'usare la superficie dell'API per accedere al mapping dei tipi anziché l'annotazione.
 
-### <a name="totable-on-a-derived-type-throws-an-exception"></a>ToTable in un tipo derivato genera un'eccezione 
+### <a name="totable-on-a-derived-type-throws-an-exception"></a>ToTable in un tipo derivato genera un'eccezione
 
 [Problema n. 11811](https://github.com/aspnet/EntityFrameworkCore/issues/11811)
 
 **Comportamento precedente**
 
-Nelle versioni precedenti a EF Core 3.0, la chiamata a `ToTable()` in un tipo derivato veniva ignorata poiché soltanto la strategia di mapping dell'ereditarietà era una tabella per gerarchia dove la chiamata non era valida. 
+Nelle versioni precedenti a EF Core 3.0, la chiamata a `ToTable()` in un tipo derivato veniva ignorata poiché soltanto la strategia di mapping dell'ereditarietà era una tabella per gerarchia dove la chiamata non era valida.
 
 **Nuovo comportamento**
 
@@ -1267,7 +1268,7 @@ Questa modifica consente di evitare interruzioni future quando l'operazione dive
 
 Rimuovere qualsiasi tentativo di mapping di tipi derivati in altre tabelle.
 
-### <a name="forsqlserverhasindex-replaced-with-hasindex"></a>ForSqlServerHasIndex sostituito con HasIndex 
+### <a name="forsqlserverhasindex-replaced-with-hasindex"></a>ForSqlServerHasIndex sostituito con HasIndex
 
 [Problema n. 12366](https://github.com/aspnet/EntityFrameworkCore/issues/12366)
 
@@ -1397,7 +1398,7 @@ Il formato binario dei valori Guid non è standardizzato. L'archiviazione dei va
 
 È possibile eseguire la migrazione dei database esistenti al nuovo formato eseguendo SQL nel modo seguente.
 
-``` sql
+```sql
 UPDATE MyTable
 SET GuidColumn = hex(substr(GuidColumn, 4, 1)) ||
                  hex(substr(GuidColumn, 3, 1)) ||
@@ -1414,7 +1415,7 @@ WHERE typeof(GuidColumn) == 'blob';
 
 In EF Core è anche possibile continuare a usare il comportamento precedente configurando un convertitore di valori per queste proprietà.
 
-``` csharp
+```csharp
 modelBuilder
     .Entity<MyEntity>()
     .Property(e => e.GuidProperty)
@@ -1447,7 +1448,7 @@ L'archiviazione dei valori come testo è un'operazione più naturale e rende il 
 
 È possibile eseguire la migrazione dei database esistenti al nuovo formato eseguendo SQL nel modo seguente.
 
-``` sql
+```sql
 UPDATE MyTable
 SET CharColumn = char(CharColumn)
 WHERE typeof(CharColumn) = 'integer';
@@ -1455,7 +1456,7 @@ WHERE typeof(CharColumn) = 'integer';
 
 In EF Core è anche possibile continuare a usare il comportamento precedente configurando un convertitore di valori per queste proprietà.
 
-``` csharp
+```csharp
 modelBuilder
     .Entity<MyEntity>()
     .Property(e => e.CharProperty)
@@ -1490,7 +1491,7 @@ Questa modifica interessa gli utenti che usano un calendario non gregoriano in c
 
 L'ID di migrazione è disponibile nell'attributo di migrazione presente nei file di progettazione delle migrazioni.
 
-``` diff
+```diff
  [DbContext(typeof(MyDbContext))]
 -[Migration("25620318122820_MyMigration")]
 +[Migration("20190318122820_MyMigration")]
@@ -1500,7 +1501,7 @@ L'ID di migrazione è disponibile nell'attributo di migrazione presente nei file
 
 È necessario aggiornare anche la tabella della cronologia delle migrazioni.
 
-``` sql
+```sql
 UPDATE __EFMigrationsHistory
 SET MigrationId = CONCAT(LEFT(MigrationId, 4)  - 543, SUBSTRING(MigrationId, 4, 150))
 ```
@@ -1517,7 +1518,7 @@ Prima di EF Core 3.0 si poteva usare `UseRowNumberForPaging` per generare codice
 
 **Nuovo comportamento**
 
-A partire da EF Core 3.0, EF genererà solo codice SQL per la suddivisione in pagine compatibile solo con versioni successive di SQL Server. 
+A partire da EF Core 3.0, EF genererà solo codice SQL per la suddivisione in pagine compatibile solo con versioni successive di SQL Server.
 
 **Perché**
 
@@ -1577,7 +1578,7 @@ Usare il nuovo nome. (Si noti che il numero di ID evento non è stato modificato
 
 **Comportamento precedente**
 
-Prima di EF Core 3.0, si faceva riferimento ai nomi di vincolo di chiave esterna semplicemente con "Name". Esempio:
+Prima di EF Core 3.0, si faceva riferimento ai nomi di vincolo di chiave esterna semplicemente con "Name". Ad esempio:
 
 ```csharp
 var constraintName = myForeignKey.Name;
@@ -1585,7 +1586,7 @@ var constraintName = myForeignKey.Name;
 
 **Nuovo comportamento**
 
-A partire da EF Core 3.0, si fa ora riferimento ai nomi di vincolo di chiave esterna con "ConstraintName". Esempio:
+A partire da EF Core 3.0, si fa ora riferimento ai nomi di vincolo di chiave esterna con "ConstraintName". Ad esempio:
 
 ```csharp
 var constraintName = myForeignKey.ConstraintName;
@@ -1643,7 +1644,7 @@ Questo pacchetto è destinato solo all'uso in fase di progettazione. Le applicaz
 
 Se è necessario fare riferimento a questo pacchetto per eseguire l'override del comportamento della fase di progettazione di EF Core, è possibile aggiornare i metadati dell'elemento PackageReference nel progetto.
 
-``` xml
+```xml
 <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0">
   <PrivateAssets>all</PrivateAssets>
   <!-- Remove IncludeAssets to allow compiling against the assembly -->
@@ -1722,16 +1723,16 @@ Se il codice prende una dipendenza diretta da System. Data. SqlClient, è necess
 
 <a name="mersa"></a>
 
-### <a name="multiple-ambiguous-self-referencing-relationships-must-be-configured"></a>Devono essere configurare più relazioni ambigue che fanno riferimento a se stesse 
+### <a name="multiple-ambiguous-self-referencing-relationships-must-be-configured"></a>Devono essere configurare più relazioni ambigue che fanno riferimento a se stesse
 
 [Problema n. 13573](https://github.com/aspnet/EntityFrameworkCore/issues/13573)
 
 **Comportamento precedente**
 
-Un tipo di entità con più proprietà di navigazione unidirezionale che fanno riferimento a se stesse e più chiavi esterne corrispondenti è stato erroneamente configurato come relazione singola. Esempio:
+Un tipo di entità con più proprietà di navigazione unidirezionale che fanno riferimento a se stesse e più chiavi esterne corrispondenti è stato erroneamente configurato come relazione singola. Ad esempio:
 
 ```csharp
-public class User 
+public class User
 {
         public Guid Id { get; set; }
         public User CreatedBy { get; set; }
@@ -1751,14 +1752,14 @@ Il modello risultante era ambiguo e sarà probabilmente errato in questo caso.
 
 **Soluzioni di prevenzione**
 
-Usare la configurazione completa della relazione. Esempio:
+Usare la configurazione completa della relazione. Ad esempio:
 
 ```csharp
 modelBuilder
      .Entity<User>()
      .HasOne(e => e.CreatedBy)
      .WithMany();
- 
+
  modelBuilder
      .Entity<User>()
      .HasOne(e => e.UpdatedBy)

@@ -1,15 +1,15 @@
 ---
 title: Ereditarietà TPT della finestra di progettazione-EF6
 description: Ereditarietà TPT della finestra di progettazione in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/inheritance/tpt
-ms.openlocfilehash: e60965550db3f140dfebf4c1952b3901b9b00aab
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f8e4198278fb44309916d57b44fb9af41d572108
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073370"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066174"
 ---
 # <a name="designer-tpt-inheritance"></a>Ereditarietà TPT della finestra di progettazione
 Questa procedura dettagliata illustra come implementare l'ereditarietà tabella per tipo (TPT) nel modello usando il Entity Framework Designer (EF designer). L'ereditarietà tabella per tipo prevede l'utilizzo di una tabella separata nel database per la gestione dei dati relativi alle proprietà non ereditate e alle proprietà chiave di ogni tipo della gerarchia di ereditarietà.

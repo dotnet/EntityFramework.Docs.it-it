@@ -1,15 +1,15 @@
 ---
 title: Nuove funzionalità di EF Core 2.2 - EF Core
 description: Modifiche e miglioramenti in Entity Framework Core 2,2
-author: divega
+author: ajcvickers
 ms.date: 11/14/2018
 uid: core/what-is-new/ef-core-2.2
-ms.openlocfilehash: 68e3cbd5c7345330a47f1457c9b096fee5dd49e9
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ca71c7479254b25fe932e6abf43fe0fd8f1781b3
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072329"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065693"
 ---
 # <a name="new-features-in-ef-core-22"></a>Nuove funzionalità di EF Core 2.2
 
@@ -25,9 +25,9 @@ Ognuno di questi pacchetti fornisce i mapping per tipi e i metodi NTS, nonché i
 Queste estensioni del provider sono ora disponibili per [SQL Server](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite/), [SQLite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite/) e [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite/) (dal [progetto Npgsql](https://www.npgsql.org/)).
 I tipi spaziali possono essere usati direttamente con il [provider in memoria EF Core](xref:core/providers/in-memory/index) senza estensioni aggiuntive.
 
-Dopo aver installato l'estensione del provider, è possibile aggiungere proprietà dei tipi supportati alle entità. Esempio:
+Dopo aver installato l'estensione del provider, è possibile aggiungere proprietà dei tipi supportati alle entità. Ad esempio:
 
-``` csharp
+```csharp
 using NetTopologySuite.Geometries;
 
 namespace MyApp
@@ -36,7 +36,7 @@ namespace MyApp
   {
     [Key]
     public string Name { get; set; }
-  
+
     [Required]
     public Point Location { get; set; }
   }
@@ -45,7 +45,7 @@ namespace MyApp
 
 È quindi possibile rendere persistenti le entità con dati spaziali:
 
-``` csharp
+```csharp
 using (var context = new MyDbContext())
 {
     context.Add(
@@ -60,11 +60,11 @@ using (var context = new MyDbContext())
 
 Ed è possibile eseguire query di database basate su operazioni e dati spaziali:
 
-``` csharp
-  var nearestFriends =
-      (from f in context.Friends
-      orderby f.Location.Distance(myLocation) descending
-      select f).Take(5).ToList();
+```csharp
+var nearestFriends =
+    (from f in context.Friends
+    orderby f.Location.Distance(myLocation) descending
+    select f).Take(5).ToList();
 ```
 
 Per altre informazioni su questa funzionalità, vedere la [documentazione sui tipi spaziali](xref:core/modeling/spatial).
@@ -85,7 +85,7 @@ Tuttavia, nei database orientati ai documenti è previsto l'annidamento delle en
 
 È possibile usare la funzionalità chiamando la nuova API OwnsMany():
 
-``` csharp
+```csharp
 modelBuilder.Entity<Customer>().OwnsMany(c => c.Addresses);
 ```
 
@@ -98,16 +98,16 @@ Questa funzionalità semplifica la correlazione di query LINQ nel codice con que
 Per sfruttare i vantaggi dei tag delle query, è possibile annotare una query LINQ con il nuovo metodo TagWith().
 Se si usa la query spaziale da un esempio precedente:
 
-``` csharp
-  var nearestFriends =
-      (from f in context.Friends.TagWith(@"This is my spatial query!")
-      orderby f.Location.Distance(myLocation) descending
-      select f).Take(5).ToList();
+```csharp
+var nearestFriends =
+    (from f in context.Friends.TagWith(@"This is my spatial query!")
+    orderby f.Location.Distance(myLocation) descending
+    select f).Take(5).ToList();
 ```
 
 Questa query LINQ produrrà l'output SQL seguente:
 
-``` sql
+```sql
 -- This is my spatial query!
 
 SELECT TOP(@__p_1) [f].[Name], [f].[Location]

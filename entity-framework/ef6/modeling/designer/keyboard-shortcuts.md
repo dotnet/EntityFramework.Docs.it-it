@@ -1,14 +1,14 @@
 ---
 title: Tasti di scelta rapida Entity Framework Designer-EF6
 description: Tasti di scelta rapida Entity Framework Designer Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
-ms.openlocfilehash: 3552f2b9bfc499654bc1dce4a81d37cacc8b7996
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 90589419a52a198747eadee740775e2761bc757c
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073383"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064887"
 ---
 # <a name="entity-framework-designer-keyboard-shortcuts"></a>Tasti di scelta rapida Entity Framework Designer
 Questa pagina fornisce un elenco di shorcuts di tastiera disponibili nelle varie schermate del Entity Framework Tools per Visual Studio.
@@ -118,7 +118,7 @@ Questa pagina fornisce un elenco di shorcuts di tastiera disponibili nelle varie
 | Tasto di scelta rapida                  | Azione         | Note                                                                                                                                 |
 |:--------------------------|:---------------|:--------------------------------------------------------------------------------------------------------------------------------------|
 | **Scheda**                   | Cambia contesto | Passa tra l'area della finestra principale e la barra degli strumenti a sinistra                                                                     |
-| **Tasti di direzione**            | Spostamento     | Spostare le righe verso l'alto e verso il basso o a destra e a sinistra tra le colonne nell'area della finestra principale. Spostarsi tra i pulsanti sulla barra degli strumenti a sinistra. |
+| **Tasti di direzione**            | Navigazione     | Spostare le righe verso l'alto e verso il basso o a destra e a sinistra tra le colonne nell'area della finestra principale. Spostarsi tra i pulsanti sulla barra degli strumenti a sinistra. |
 | **Entrare** <br/> **Spazio** | Select         | Seleziona un pulsante sulla barra degli strumenti a sinistra.                                                                                          |
 | **ALT + freccia giù**      | Apri elenco      | Elenco a discesa se è selezionata una cella con un elenco a discesa.                                                                     |
 | **Entrare**                 | Selezione elenco    | Seleziona un elemento in un elenco a discesa.                                                                                               |

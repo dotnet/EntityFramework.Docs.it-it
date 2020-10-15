@@ -1,17 +1,17 @@
 ---
-title: Porting da EF6 a EF Core-porting di un modello basato su EDMX-EF
+title: Porting da EF6 a EF Core-porting di un modello di EDMX-Based-EF
 description: Informazioni specifiche sul porting di un'applicazione modello basata su EDMX Entity Framework 6 per Entity Framework Core
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: efcore-and-ef6/porting/port-edmx
-ms.openlocfilehash: 7bd832f459ae3893e6a90e8483c95a41ca13f9ab
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 27b37ad1c2e3436ae96a71bc97e953763c48ee50
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070003"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064263"
 ---
-# <a name="porting-an-ef6-edmx-based-model-to-ef-core"></a>Porting di un modello basato su EDMX EF6 per EF Core
+# <a name="porting-an-ef6-edmx-based-model-to-ef-core"></a>Porting di un modello di EDMX-Based EF6 per EF Core
 
 EF Core non supporta il formato di file EDMX per i modelli. L'opzione migliore per trasferire questi modelli consiste nel generare un nuovo modello basato sul codice dal database per l'applicazione.
 
@@ -25,13 +25,13 @@ Installare il pacchetto NuGet `Microsoft.EntityFrameworkCore.Tools`.
 
 Eseguire il comando seguente nella console di gestione pacchetti (strumenti-> gestione pacchetti NuGet-> console di gestione pacchetti). Vedere [console di gestione pacchetti (Visual Studio)](xref:core/miscellaneous/cli/powershell) per le opzioni di comando per l'impalcatura di un subset di tabelle e così via.
 
-``` powershell
+```powershell
 Scaffold-DbContext "<connection string>" <database provider name>
 ```
 
 Ad esempio, di seguito è riportato il comando per eseguire l'impalcatura di un modello dal database blogging nell'istanza di SQL Server database locale.
 
-``` powershell
+```powershell
 Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer
 ```
 

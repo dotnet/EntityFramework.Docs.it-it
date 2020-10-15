@@ -1,15 +1,15 @@
 ---
 title: Model First-EF6
 description: Model First in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/workflows/model-first
-ms.openlocfilehash: 13c5e173182ad0781a674ce3d10f7374c4443bf9
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: b47c5805a63a1ea94baad4fb5eb137b633f6be1d
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073162"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066031"
 ---
 # <a name="model-first"></a>Model First
 Questo video e la procedura dettagliata forniscono un'introduzione allo sviluppo Model First con Entity Framework. Model First consente di creare un nuovo modello usando il Entity Framework Designer e quindi di generare uno schema del database dal modello. Il modello viene archiviato in un file EDMX (estensione edmx) e può essere visualizzato e modificato nella Entity Framework Designer. Le classi con cui si interagisce nell'applicazione vengono generate automaticamente dal file EDMX.

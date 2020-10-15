@@ -1,15 +1,15 @@
 ---
 title: Migrazioni Code First in ambienti Team-EF6
 description: Migrazioni Code First in ambienti team in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/migrations/teams
-ms.openlocfilehash: c3f12788f2aba85f54dc062bdb6a7919be47b56d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: c617dc3c34e829585b21766c7738bd622890b286
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072226"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065082"
 ---
 # <a name="code-first-migrations-in-team-environments"></a>Migrazioni Code First in ambienti team
 > [!NOTE]
@@ -141,7 +141,7 @@ Il processo seguente può essere usato per questo approccio, a partire dal momen
 1.  Verificare che le modifiche al modello in sospeso nella codebase locale siano state scritte in una migrazione. Questo passaggio assicura che non si verifichino modifiche legittime al momento di generare la migrazione vuota.
 2.  Sincronizzare con il controllo del codice sorgente.
 3.  Eseguire **Update-database** per applicare le nuove migrazioni che altri sviluppatori hanno archiviato.
-    **_Nota:_** *se non vengono visualizzati avvisi dal comando Update-database, non ci sono nuove migrazioni da altri sviluppatori e non è necessario eseguire altre operazioni di merge.*
+    **_Nota:_** *se non vengono visualizzati avvisi dal comando Update-Database, non ci sono nuove migrazioni da altri sviluppatori e non è necessario eseguire ulteriori operazioni di merge.*
 4.  Eseguire **Add-Migration &lt; pick \_ a \_ Name &gt; – IgnoreChanges** (ad esempio, **Add-migrate merge – IgnoreChanges**). In questo modo viene generata una migrazione con tutti i metadati (incluso uno snapshot del modello corrente), ma verranno ignorate tutte le modifiche rilevate durante il confronto tra il modello corrente e lo snapshot nelle ultime migrazioni (ovvero si ottiene **un metodo vuoto** e **attivo** ).
 5.  Eseguire **Update-database** per applicare nuovamente la migrazione più recente con i metadati aggiornati.
 6.  Continuare a sviluppare o inviare al controllo del codice sorgente (dopo l'esecuzione degli unit test di corso).
@@ -163,7 +163,7 @@ Il processo seguente può essere usato per questo approccio, a partire dal momen
 1.  Verificare che le modifiche al modello in sospeso nella codebase locale siano state scritte in una migrazione. Questo passaggio assicura che non si verifichino modifiche legittime al momento di generare la migrazione vuota.
 2.  Sincronizzare con il controllo del codice sorgente.
 3.  Eseguire **Update-database** per applicare le nuove migrazioni che altri sviluppatori hanno archiviato.
-    **_Nota:_** *se non vengono visualizzati avvisi dal comando Update-database, non ci sono nuove migrazioni da altri sviluppatori e non è necessario eseguire altre operazioni di merge.*
+    **_Nota:_** *se non vengono visualizzati avvisi dal comando Update-Database, non ci sono nuove migrazioni da altri sviluppatori e non è necessario eseguire ulteriori operazioni di merge.*
 4.  Eseguire **Update-database – TargetMigration &lt; seconda \_ Ultima \_ migrazione &gt; ** (nell'esempio seguente si tratta di **Update-database – TargetMigration AddRating**). In questo modo viene eseguito il rollback del database allo stato della seconda ultima migrazione, ovvero l'annullamento dell'applicazione dell'ultima migrazione dal database.
     **_Nota:_** *questo passaggio è necessario per rendere sicuro la modifica dei metadati della migrazione poiché i metadati vengono archiviati anche in \_ \_ MigrationsHistoryTable del database. Questo è il motivo per cui è consigliabile usare questa opzione solo se l'ultima migrazione è solo nella codebase locale. Se per altri database era stata applicata l'ultima migrazione, sarebbe necessario eseguirne il rollback e riapplicare l'ultima migrazione per aggiornare i metadati.* 
 5.  Eseguire l'operazione **di aggiunta-migrazione &lt; nome completo, \_ incluso il \_ \_ timestamp \_ dell' \_ Ultima \_ migrazione** &gt; (nell'esempio seguente si tratta di una procedura simile a **Add-Migration 201311062215252 \_ AddReaders**).

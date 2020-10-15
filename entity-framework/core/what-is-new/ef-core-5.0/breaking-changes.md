@@ -2,14 +2,14 @@
 title: Modifiche di rilievo in EF Core 5,0-EF Core
 description: Elenco completo delle modifiche di rilievo introdotte in Entity Framework Core 5,0
 author: bricelam
-ms.date: 09/09/2020
+ms.date: 09/24/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: 8e9df4e2ff81e20cf5a36855247c5aff89ea2394
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: e64f2b387d236e96d0451f3d55b3241daaba32d8
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210367"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065641"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>Modifiche di rilievo nella EF Core 5,0
 
@@ -21,15 +21,17 @@ Le modifiche alle API e al comportamento seguenti hanno il rischio di interrompe
 |:--------------------------------------------------------------------------------------------------------------------------------------|------------|
 | [Obbligatorio per la navigazione da principale a dipendente con semantica diversa](#required-dependent)                                 | Media     |
 | [La definizione della query viene sostituita con metodi specifici del provider](#defining-query)                                                          | Media     |
-| [Metodo HasGeometricDimension rimosso dall'estensione SQLite NTS](#geometric-sqlite)                                                   | Bassa        |
-| [Cosmos: la chiave di partizione è stata aggiunta alla chiave primaria](#cosmos-partition-key)                                                        | Bassa        |
-| [Cosmos: `id` proprietà rinominata in `__id`](#cosmos-id)                                                                                 | Bassa        |
-| [Cosmos: byte [] è ora archiviato come stringa Base64 anziché come matrice di numeri](#cosmos-byte)                                             | Bassa        |
-| [Cosmos: GetPropertyName e SetPropertyName sono stati rinominati](#cosmos-metadata)                                                          | Bassa        |
-| [I generatori di valori vengono chiamati quando lo stato dell'entità viene modificato da scollegato a non modificato, aggiornato o eliminato](#non-added-generation) | Bassa        |
-| [IMigrationsModelDiffer USA ora IRelationalModel](#relational-model)                                                                 | Bassa        |
-| [I discriminatori sono di sola lettura](#read-only-discriminators)                                                                             | Bassa        |
-| [EF specifico del provider. Metodi di funzioni generate per il provider InMemory](#no-client-methods)                                              | Bassa        |
+| [Metodo HasGeometricDimension rimosso dall'estensione SQLite NTS](#geometric-sqlite)                                                   | Basso        |
+| [Cosmos: la chiave di partizione è stata aggiunta alla chiave primaria](#cosmos-partition-key)                                                        | Basso        |
+| [Cosmos: `id` proprietà rinominata in `__id`](#cosmos-id)                                                                                 | Basso        |
+| [Cosmos: byte [] è ora archiviato come stringa Base64 anziché come matrice di numeri](#cosmos-byte)                                             | Basso        |
+| [Cosmos: GetPropertyName e SetPropertyName sono stati rinominati](#cosmos-metadata)                                                          | Basso        |
+| [I generatori di valori vengono chiamati quando lo stato dell'entità viene modificato da scollegato a non modificato, aggiornato o eliminato](#non-added-generation) | Basso        |
+| [IMigrationsModelDiffer USA ora IRelationalModel](#relational-model)                                                                 | Basso        |
+| [I discriminatori sono di sola lettura](#read-only-discriminators)                                                                             | Basso        |
+| [EF specifico del provider. Metodi di funzioni generate per il provider InMemory](#no-client-methods)                                              | Basso        |
+| [IndexBuilder. HasName è ora obsoleto](#index-obsolete)                                                                               | Basso        |
+| [Un pluarlizer è ora incluso per i modelli di impalcatura decodificati](#pluralizer)                                                 | Basso        |
 
 <a name="geometric-sqlite"></a>
 
@@ -53,7 +55,7 @@ L'utilizzo di HasGeometricDimension dopo aver specificato la dimensione nel tipo
 
 Utilizzare `HasColumnType` per specificare la dimensione:
 
-```cs
+```csharp
 modelBuilder.Entity<GeoEntity>(
     x =>
     {
@@ -81,7 +83,7 @@ Con il supporto aggiunto per i dipendenti obbligatori, è ora possibile contrass
 
 `IsRequired`La chiamata prima di specificare l'entità finale dipendente è ora ambigua:
 
-```cs
+```csharp
 modelBuilder.Entity<Blog>()
     .HasOne(b => b.BlogImage)
     .WithOne(i => i.Blog)
@@ -97,7 +99,7 @@ Il nuovo comportamento è necessario per abilitare il supporto per i dipendenti 
 
 Rimuovere `RequiredAttribute` da spostamento a dipendente e posizionarlo invece nella navigazione verso l'entità o configurare la relazione in `OnModelCreating` :
 
-```cs
+```csharp
 modelBuilder.Entity<Blog>()
     .HasOne(b => b.BlogImage)
     .WithOne(i => i.Blog)
@@ -127,7 +129,7 @@ Questa modifica rende il modello più allineato con Azure Cosmos DB semantica e 
 
 Per impedire l'aggiunta della proprietà della chiave di partizione alla chiave primaria, configurarla in `OnModelCreating` .
 
-```cs
+```csharp
 modelBuilder.Entity<Blog>()
     .HasKey(b => b.Id);
 ```
@@ -154,7 +156,7 @@ Questa modifica rende meno probabile che la `id` proprietà si scontri con una p
 
 Per tornare al comportamento 3. x, configurare la `id` Proprietà in `OnModelCreating` .
 
-```cs
+```csharp
 modelBuilder.Entity<Blog>()
     .Property<string>("id")
     .ToJsonProperty("id");
@@ -248,7 +250,7 @@ Per evitare che venga chiamato il generatore di valori, assegnare un valore non 
 
 Usare il codice seguente per confrontare il modello da `snapshot` con il modello da `context` :
 
-```cs
+```csharp
 var dependencies = context.GetService<ProviderConventionSetBuilderDependencies>();
 var relationalDependencies = context.GetService<RelationalConventionSetBuilderDependencies>();
 
@@ -288,7 +290,7 @@ EF non prevede che il tipo di entità cambi mentre è ancora in fase di rilevame
 
 Se è necessario modificare il valore del discriminatore e il contesto verrà eliminato immediatamente dopo la chiamata a `SaveChanges` , il discriminatore può essere reso modificabile:
 
-```cs
+```csharp
 modelBuilder.Entity<BaseEntity>()
     .Property<string>("Discriminator")
     .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
@@ -315,12 +317,12 @@ Durante la definizione delle query sono state implementate come query di sostitu
 - Se la definizione della query è la proiezione del tipo di entità mediante `new { ... }` `Select` il metodo in, l'identificazione di come un'entità richiede un lavoro aggiuntivo e renderla incoerente con il modo in cui EF Core considera i tipi nominali nella query.
 - Per i provider relazionali `FromSql` è ancora necessario passare la stringa SQL in formato di espressione LINQ.
 
-Inizialmente la definizione di query è stata introdotta come visualizzazioni lato client da usare con il provider in memoria per entità senza chiave (analogamente alle viste di database nei database relazionali). Questa definizione consente di testare facilmente l'applicazione in base al database in memoria. In seguito, sono diventati ampiamente applicabili, che era utile, ma ha reso incoerente e difficile comprendere il comportamento. Quindi abbiamo deciso di semplificare il concetto. È stata creata una query di definizione basata su LINQ esclusiva per il provider in memoria e gestita in modo diverso. Per ulteriori informazioni, [vedere questo problema](https://github.com/dotnet/efcore/issues/20023).
+Inizialmente la definizione di query è stata introdotta come visualizzazioni lato client da usare con il provider In-Memory per le entità senza chiave (analogamente alle viste di database nei database relazionali). Questa definizione consente di testare facilmente l'applicazione in base al database in memoria. In seguito, sono diventati ampiamente applicabili, che era utile, ma ha reso incoerente e difficile comprendere il comportamento. Quindi abbiamo deciso di semplificare il concetto. È stata creata una query di definizione basata su LINQ esclusiva per In-Memory provider e gestirli in modo diverso. Per ulteriori informazioni, [vedere questo problema](https://github.com/dotnet/efcore/issues/20023).
 
 **Soluzioni di prevenzione**
 
 Per i provider relazionali, utilizzare `ToSqlQuery` il metodo in `OnModelCreating` e passare una stringa SQL da utilizzare per il tipo di entità.
-Per il provider in memoria, usare il `ToInMemoryQuery` metodo in `OnModelCreating` e passare una query LINQ da usare per il tipo di entità.
+Per il provider di In-Memory, usare il `ToInMemoryQuery` metodo in `OnModelCreating` e passare una query LINQ da usare per il tipo di entità.
 
 <a name="no-client-methods"></a>
 
@@ -343,3 +345,49 @@ I metodi specifici del provider vengono mappati a una funzione di database. Il c
 **Soluzioni di prevenzione**
 
 Poiché non esiste alcun modo per simulare in modo accurato il comportamento delle funzioni di database, è consigliabile testare le query che li contengono sullo stesso tipo di database in produzione.
+
+<a name="index-obsolete"></a>
+
+### <a name="indexbuilderhasname-is-now-obsolete"></a>IndexBuilder. HasName è ora obsoleto
+
+[Rilevamento del problema #21089](https://github.com/dotnet/efcore/issues/21089)
+
+**Comportamento precedente**
+
+In precedenza era possibile definire un solo indice su un determinato set di proprietà. Il nome del database di un indice è stato configurato con IndexBuilder. HasName.
+
+**Nuovo comportamento**
+
+Sono ora consentiti più indici nello stesso set o proprietà. Questi indici sono ora distinti da un nome nel modello. Per convenzione, il nome del modello viene utilizzato come nome del database. Tuttavia, può anche essere configurato in modo indipendente utilizzando HasDatabaseName.
+
+**Perché**
+
+In futuro, vorremmo consentire l'abilitazione di indici sia ascendenti che decrescenti con regole di confronto diverse nello stesso set di proprietà. Questa modifica consente di spostarsi in un altro passaggio della direzione.
+
+**Soluzioni di prevenzione**
+
+Il codice precedentemente chiamato IndexBuilder. HasName deve essere aggiornato in modo da chiamare HasDatabaseName.
+
+Se il progetto include migrazioni generate prima della versione 2.0.0 di EF Core, è possibile ignorare l'avviso in tali file ed eliminarlo aggiungendo `#pragma warning disable 612, 618` .
+
+<a name="pluralizer"></a>
+
+### <a name="a-pluarlizer-is-now-included-for-scaffolding-reverse-engineered-models"></a>Un pluarlizer è ora incluso per i modelli di impalcatura decodificati
+
+[Rilevamento del problema #11160](https://github.com/dotnet/efcore/issues/11160)
+
+**Comportamento precedente**
+
+In precedenza era necessario installare un pacchetto pluralizer separato per plurali DbSet e i nomi di navigazione della raccolta e i nomi di tabella singolari quando scaffoding un DbContext e i tipi di entità reverse engineering uno schema di database.
+
+**Nuovo comportamento**
+
+EF Core ora include un pluralizer che usa la libreria [umanizzator](https://github.com/Humanizr/Humanizer) . Si tratta della stessa libreria utilizzata da Visual Studio per consigliare i nomi delle variabili.
+
+**Perché**
+
+L'uso di forme plurali di parole per le proprietà della raccolta e i moduli singolari per i tipi e le proprietà di riferimento è idiomatiche in .NET.
+
+**Soluzioni di prevenzione**
+
+Per disabilitare pluralizer, utilizzare l' `--no-pluralize` opzione on `dotnet ef dbcontext scaffold` o l'opzione `-NoPluralize` on `Scaffold-DbContext` .

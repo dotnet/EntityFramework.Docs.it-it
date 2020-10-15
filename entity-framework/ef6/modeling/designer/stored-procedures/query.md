@@ -1,20 +1,20 @@
 ---
 title: Stored procedure per query della finestra di progettazione-EF6
 description: Stored procedure di query della finestra di progettazione in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/stored-procedures/query
-ms.openlocfilehash: 4976c7d4f788e6e9524055a508f9c906b47c9ebb
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: d88bf70e232f5245023ab6683290503822d07463
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073201"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066018"
 ---
 # <a name="designer-query-stored-procedures"></a>Stored procedure di query della finestra di progettazione
 In questa procedura dettagliata viene illustrato come utilizzare il Entity Framework Designer (Entity Designer) per importare stored procedure in un modello e quindi chiamare le stored procedure importate per recuperare i risultati. 
 
-Si noti che Code First non supporta il mapping a stored procedure o funzioni. Tuttavia, è possibile chiamare stored procedure o funzioni utilizzando il metodo System. Data. Entity. DbSet. sqlQuery. Esempio:
+Si noti che Code First non supporta il mapping a stored procedure o funzioni. Tuttavia, è possibile chiamare stored procedure o funzioni utilizzando il metodo System. Data. Entity. DbSet. sqlQuery. Ad esempio:
 ``` csharp
 var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]")`;
 ```

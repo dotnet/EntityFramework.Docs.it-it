@@ -1,15 +1,15 @@
 ---
 title: Query e ricerca di entità - EF6
 description: Esecuzione di query e ricerca di entità in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/querying/index
-ms.openlocfilehash: d55c88280bcf164457da89ec58c180e9aa1ad12d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ec0239ed54099226d009031af79388f5ae00cdc4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072993"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065895"
 ---
 # <a name="querying-and-finding-entities"></a>Query e ricerca di entità
 Questo argomento illustra i vari modi che è possibile usare per la ricerca di dati tramite Entity Framework, inclusi LINQ e il metodo Find. Le tecniche illustrate in questo argomento si applicano in modo analogo ai modelli creati con Code First ed EF Designer.  

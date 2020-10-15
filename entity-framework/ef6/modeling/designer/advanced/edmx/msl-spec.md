@@ -1,15 +1,15 @@
 ---
 title: Specifica MSL-EF6
 description: Specifica MSL in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/advanced/edmx/msl-spec
-ms.openlocfilehash: 36527b9827a7576f73c9ef476462d9392b601984
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 0780a549d4cbb60bf84bbed927d52588e99148e1
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070112"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066343"
 ---
 # <a name="msl-specification"></a>Specifica MSL
 MSL (Mapping Specification Language) è un linguaggio basato su XML che descrive il mapping tra il modello concettuale e il modello di archiviazione di un'applicazione Entity Framework.
@@ -40,7 +40,7 @@ Nella tabella seguente vengono descritti gli attributi che è possibile applicar
 
 | Nome attributo | Obbligatorio | Valore                                                                     |
 |:---------------|:------------|:--------------------------------------------------------------------------|
-| **Chiave**        | Yes         | Alias per lo spazio dei nomi specificato dall'attributo **value** . |
+| **Chiave**        | Sì         | Alias per lo spazio dei nomi specificato dall'attributo **value** . |
 | **Valore**      | Sì         | Spazio dei nomi per il quale il valore dell'elemento **chiave** è un alias.     |
 
 ### <a name="example"></a>Esempio
@@ -92,9 +92,9 @@ L'elemento **AssociationEnd** può avere gli elementi figlio seguenti:
 
 Nella tabella seguente vengono descritti gli attributi applicabili all'elemento **AssociationEnd** .
 
-| Nome attributo     | Obbligatorio | Valore                                                                                                                                                                             |
+| Nome attributo     | Obbligatorio | valore                                                                                                                                                                             |
 |:-------------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **AssociationSet** | Yes         | Nome dell'associazione di cui è in corso il mapping.                                                                                                                                 |
+| **AssociationSet** | Sì         | Nome dell'associazione di cui è in corso il mapping.                                                                                                                                 |
 | **From**           | Sì         | Valore dell'attributo **FromRole** della proprietà di navigazione che corrisponde all'associazione di cui viene eseguito il mapping. Per ulteriori informazioni, vedere elemento NavigationProperty (CSDL). |
 | **To**             | Sì         | Valore dell'attributo **ToRole** della proprietà di navigazione che corrisponde all'associazione di cui viene eseguito il mapping. Per ulteriori informazioni, vedere elemento NavigationProperty (CSDL).   |
 
@@ -199,7 +199,7 @@ L'elemento **AssociationSetMapping** può avere gli elementi figlio seguenti
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **AssociationSetMapping** .
 
-| Nome attributo     | Obbligatorio | Valore                                                                                       |
+| Nome attributo     | Obbligatorio | valore                                                                                       |
 |:-------------------|:------------|:--------------------------------------------------------------------------------------------|
 | **Nome**           | Sì         | Nome del set di associazioni del modello concettuale di cui è in corso il mapping.                      |
 | **TypeName**       | No          | Nome completo dello spazio dei nomi del tipo di associazione del modello concettuale di cui è in corso il mapping. |
@@ -237,7 +237,7 @@ L'elemento della proprietà **complexType** può presentare gli elementi figlio 
 
 Nella tabella seguente vengono descritti gli attributi applicabili all'elemento **ComplexProperty** :
 
-| Nome attributo | Obbligatorio | Valore                                                                                            |
+| Nome attributo | Obbligatorio | valore                                                                                            |
 |:---------------|:------------|:-------------------------------------------------------------------------------------------------|
 | **Nome**       | Sì         | Nome della proprietà complessa di un tipo di entità nel modello concettuale di cui è in corso il mapping. |
 | **TypeName**   | No          | Nome qualificato di spazio dei nomi del tipo di proprietà del modello concettuale.                              |
@@ -307,9 +307,9 @@ L'elemento **ComplexTypeMapping** può avere gli elementi figlio seguenti:
 
 Nella tabella seguente vengono descritti gli attributi applicabili all'elemento **ComplexTypeMapping** .
 
-| Nome attributo | Obbligatorio | Valore                                                                  |
+| Nome attributo | Obbligatorio | valore                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------|
-| **TypeName**   | Yes         | Nome completo dello spazio dei nomi del tipo complesso di cui è in corso il mapping. |
+| **TypeName**   | Sì         | Nome completo dello spazio dei nomi del tipo complesso di cui è in corso il mapping. |
 
 ### <a name="example"></a>Esempio
 
@@ -378,7 +378,7 @@ L'elemento **Condition** non può avere elementi figlio.
 
 Nella tabella seguente vengono descritti gli attributi applicabili all'elemento **Condition** :
 
-| Nome attributo | Obbligatorio | Valore                                                                                                                                                                                                                                                                                         |
+| Nome attributo | Obbligatorio | valore                                                                                                                                                                                                                                                                                         |
 |:---------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **ColumnName** | No          | Nome della colonna della tabella il cui valore viene utilizzato per valutare la condizione.                                                                                                                                                                                                                   |
 | **IsNull**     | No          | **True** o **false**. Se il valore è **true** e il valore della colonna è **null**o se il valore è **false** e il valore della colonna non è **null**, la condizione è true. In caso contrario, la condizione è false. <br/> Impossibile utilizzare contemporaneamente gli attributi **IsNull** e **value** . |
@@ -439,7 +439,7 @@ Quando viene applicato a un elemento **EntityTypeMapping** , l'elemento **Delete
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **DeleteFunction** quando viene applicato a un elemento **EntityTypeMapping** .
 
-| Nome attributo            | Obbligatorio | Valore                                                                                                                                                    |
+| Nome attributo            | Obbligatorio | valore                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Sì         | Nome completo dello spazio dei nomi della stored procedure a cui la funzione di eliminazione viene mappata. La stored procedure deve essere dichiarata nel modello di archiviazione. |
 | **RowsAffectedParameter** | No          | Nome del parametro di output che restituisce il numero di righe interessate.                                                                               |
@@ -503,9 +503,9 @@ L'elemento **DeleteFunction** può avere gli elementi figlio seguenti quando vie
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **DeleteFunction** quando viene applicato all'elemento **AssociationSetMapping** .
 
-| Nome attributo            | Obbligatorio | Valore                                                                                                                                                    |
+| Nome attributo            | Obbligatorio | valore                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **FunctionName**          | Yes         | Nome completo dello spazio dei nomi della stored procedure a cui la funzione di eliminazione viene mappata. La stored procedure deve essere dichiarata nel modello di archiviazione. |
+| **FunctionName**          | Sì         | Nome completo dello spazio dei nomi della stored procedure a cui la funzione di eliminazione viene mappata. La stored procedure deve essere dichiarata nel modello di archiviazione. |
 | **RowsAffectedParameter** | No          | Nome del parametro di output che restituisce il numero di righe interessate.                                                                               |
 
 #### <a name="example"></a>Esempio
@@ -557,7 +557,7 @@ L'elemento **EndProperty** può avere gli elementi figlio seguenti:
 
 Nella tabella seguente vengono descritti gli attributi applicabili all'elemento **EndProperty** :
 
-| Nome attributo | Obbligatorio | Valore                                                 |
+| Nome attributo | Obbligatorio | valore                                                 |
 |:---------------|:------------|:------------------------------------------------------|
 | Nome           | Sì         | Nome dell'entità finale dell'associazione di cui è in corso il mapping. |
 
@@ -627,10 +627,10 @@ L'elemento **EntityContainerMapping** può includere i seguenti elementi figlio 
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **EntityContainerMapping** .
 
-| Nome attributo            | Obbligatorio | Valore                                                                                                                                                                                                                                                    |
+| Nome attributo            | Obbligatorio | valore                                                                                                                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **StorageModelContainer** | Yes         | Nome del contenitore di entità del modello di archiviazione di cui è in corso il mapping.                                                                                                                                                                                     |
-| **CdmEntityContainer**    | Yes         | Nome del contenitore di entità del modello concettuale di cui è in corso il mapping.                                                                                                                                                                                  |
+| **StorageModelContainer** | Sì         | Nome del contenitore di entità del modello di archiviazione di cui è in corso il mapping.                                                                                                                                                                                     |
+| **CdmEntityContainer**    | Sì         | Nome del contenitore di entità del modello concettuale di cui è in corso il mapping.                                                                                                                                                                                  |
 | **GenerateUpdateViews**   | No          | **True** o **false**. Se **false**, non viene generata alcuna vista aggiornamento. Questo attributo deve essere impostato su **false** quando si dispone di un mapping di sola lettura che non sarebbe valido perché i dati non possono essere completati correttamente. <br/> Il valore predefinito è **True**. |
 
 ### <a name="example"></a>Esempio
@@ -678,7 +678,7 @@ L'elemento **EntitySetMapping** può avere gli elementi figlio seguenti:
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **EntitySetMapping** .
 
-| Nome attributo           | Obbligatorio | Valore                                                                                                                                                                                                                         |
+| Nome attributo           | Obbligatorio | valore                                                                                                                                                                                                                         |
 |:-------------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nome**                 | Sì         | Nome del set di entità del modello concettuale di cui è in corso il mapping.                                                                                                                                                             |
 | **TypeName** **1**       | No          | Nome del tipo di entità del modello concettuale di cui è in corso il mapping.                                                                                                                                                            |
@@ -744,9 +744,9 @@ L'elemento **EntityTypeMapping** può avere gli elementi figlio seguenti:
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **EntityTypeMapping** .
 
-| Nome attributo | Obbligatorio | Valore                                                                                                                                                                                                |
+| Nome attributo | Obbligatorio | valore                                                                                                                                                                                                |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **TypeName**   | Yes         | Nome completo dello spazio dei nomi del tipo di entità del modello concettuale di cui è in corso il mapping. <br/> Se il tipo è astratto o un tipo derivato, il valore deve essere `IsOfType(Namespace-qualified_type_name)`. |
+| **TypeName**   | Sì         | Nome completo dello spazio dei nomi del tipo di entità del modello concettuale di cui è in corso il mapping. <br/> Se il tipo è astratto o un tipo derivato, il valore deve essere `IsOfType(Namespace-qualified_type_name)`. |
 
 ### <a name="example"></a>Esempio
 
@@ -830,9 +830,9 @@ L'elemento **FunctionImportMapping** può avere gli elementi figlio seguenti:
 
 Nella tabella seguente vengono descritti gli attributi applicabili all'elemento **FunctionImportMapping** :
 
-| Nome attributo         | Obbligatorio | Valore                                                                                   |
+| Nome attributo         | Obbligatorio | valore                                                                                   |
 |:-----------------------|:------------|:----------------------------------------------------------------------------------------|
-| **FunctionImportName** | Yes         | Nome dell'importazione di funzioni nel modello concettuale di cui è in corso il mapping.           |
+| **FunctionImportName** | Sì         | Nome dell'importazione di funzioni nel modello concettuale di cui è in corso il mapping.           |
 | **FunctionName**       | Sì         | Nome completo dello spazio dei nomi della funzione nel modello di archiviazione di cui è in corso il mapping. |
 
 ### <a name="example"></a>Esempio
@@ -888,7 +888,7 @@ Quando viene applicato a un elemento **EntityTypeMapping** , l'elemento **Insert
 
 Nella tabella seguente vengono descritti gli attributi che possono essere applicati all'elemento **InsertFunction** quando vengono applicati a un elemento **EntityTypeMapping** .
 
-| Nome attributo            | Obbligatorio | Valore                                                                                                                                                    |
+| Nome attributo            | Obbligatorio | valore                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Sì         | Nome completo dello spazio dei nomi della stored procedure a cui la funzione di inserimento viene mappata. La stored procedure deve essere dichiarata nel modello di archiviazione. |
 | **RowsAffectedParameter** | No          | Nome del parametro di output che restituisce il numero di righe interessate.                                                                               |
@@ -939,7 +939,7 @@ L'elemento **InsertFunction** può avere gli elementi figlio seguenti quando vie
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **InsertFunction** quando viene applicato all'elemento **AssociationSetMapping** .
 
-| Nome attributo            | Obbligatorio | Valore                                                                                                                                                    |
+| Nome attributo            | Obbligatorio | valore                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Sì         | Nome completo dello spazio dei nomi della stored procedure a cui la funzione di inserimento viene mappata. La stored procedure deve essere dichiarata nel modello di archiviazione. |
 | **RowsAffectedParameter** | No          | Nome del parametro di output che restituisce il numero di righe interessate.                                                                               |
@@ -996,9 +996,9 @@ I nomi di tipi di modelli concettuale e di archiviazione a cui viene fatto rifer
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento di **mapping** .
 
-| Nome attributo | Obbligatorio | Valore                                                 |
+| Nome attributo | Obbligatorio | valore                                                 |
 |:---------------|:------------|:------------------------------------------------------|
-| **Spazio**      | Yes         | **C-S**. Si tratta di un valore fisso e non può essere modificato. |
+| **Spazio**      | Sì         | **C-S**. Si tratta di un valore fisso e non può essere modificato. |
 
 ### <a name="example"></a>Esempio
 
@@ -1049,9 +1049,9 @@ L'elemento **MappingFragment** può avere gli elementi figlio seguenti:
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **MappingFragment** .
 
-| Nome attributo          | Obbligatorio | Valore                                                                                                                                                                                                                         |
+| Nome attributo          | Obbligatorio | valore                                                                                                                                                                                                                         |
 |:------------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **StoreEntitySet**      | Yes         | Nome della tabella o visualizzazione di cui è in corso il mapping.                                                                                                                                                                           |
+| **StoreEntitySet**      | Sì         | Nome della tabella o visualizzazione di cui è in corso il mapping.                                                                                                                                                                           |
 | **Makecolumnsdistinct impostato** | No          | **True** o **false** , a seconda che vengano restituite solo righe distinte. <br/> Se questo attributo è impostato su **true**, l'attributo **GenerateUpdateViews** dell'elemento EntityContainerMapping deve essere impostato su **false**. |
 
 ### <a name="example"></a>Esempio
@@ -1212,7 +1212,7 @@ L'elemento **QueryView** non può contenere elementi figlio.
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **QueryView** .
 
-| Nome attributo | Obbligatorio | Valore                                                                         |
+| Nome attributo | Obbligatorio | valore                                                                         |
 |:---------------|:------------|:------------------------------------------------------------------------------|
 | **TypeName**   | No          | Nome del tipo di modello concettuale mappato dalla visualizzazione di query. |
 
@@ -1326,10 +1326,10 @@ L'elemento **risultante** non può contenere elementi figlio.
 
 Nella tabella seguente vengono descritti gli attributi applicabili all'elemento **risultante** :
 
-| Nome attributo | Obbligatorio | Valore                                                                         |
+| Nome attributo | Obbligatorio | valore                                                                         |
 |:---------------|:------------|:------------------------------------------------------------------------------|
 | **Nome**       | Sì         | Nome della proprietà di entità nel modello concettuale di cui è in corso il mapping. |
-| **ColumnName** | Yes         | Nome della colonna di cui viene eseguito il mapping.                                          |
+| **ColumnName** | Sì         | Nome della colonna di cui viene eseguito il mapping.                                          |
 
 ### <a name="example"></a>Esempio
 
@@ -1478,14 +1478,14 @@ Gli attributi che si applicano all'elemento **ScalarProperty** variano a seconda
 
 Nella tabella seguente vengono descritti gli attributi applicabili quando si utilizza l'elemento **ScalarProperty** per eseguire il mapping di una proprietà del modello concettuale a una colonna nel database:
 
-| Nome attributo | Obbligatorio | Valore                                                           |
+| Nome attributo | Obbligatorio | valore                                                           |
 |:---------------|:------------|:----------------------------------------------------------------|
 | **Nome**       | Sì         | Nome della proprietà del modello concettuale di cui è in corso il mapping. |
 | **ColumnName** | Sì         | Nome della colonna della tabella di cui è in corso il mapping.              |
 
 Nella tabella seguente vengono descritti gli attributi applicabili all'elemento **ScalarProperty** quando viene utilizzato per eseguire il mapping di una proprietà del modello concettuale a un parametro stored procedure:
 
-| Nome attributo    | Obbligatorio | Valore                                                                                                                                           |
+| Nome attributo    | Obbligatorio | valore                                                                                                                                           |
 |:------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nome**          | Sì         | Nome della proprietà del modello concettuale di cui è in corso il mapping.                                                                                 |
 | **ParameterName** | Sì         | Nome del parametro di cui è in corso il mapping.                                                                                                 |
@@ -1596,9 +1596,9 @@ L'elemento **UpdateFunction** può avere gli elementi figlio seguenti:
 
 Nella tabella seguente vengono descritti gli attributi che è possibile applicare all'elemento **UpdateFunction** .
 
-| Nome attributo            | Obbligatorio | Valore                                                                                                                                                    |
+| Nome attributo            | Obbligatorio | valore                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **FunctionName**          | Yes         | Nome completo dello spazio dei nomi della stored procedure a cui la funzione di aggiornamento viene mappata. La stored procedure deve essere dichiarata nel modello di archiviazione. |
+| **FunctionName**          | Sì         | Nome completo dello spazio dei nomi della stored procedure a cui la funzione di aggiornamento viene mappata. La stored procedure deve essere dichiarata nel modello di archiviazione. |
 | **RowsAffectedParameter** | No          | Nome del parametro di output che restituisce il numero di righe interessate.                                                                               |
 
 ### <a name="example"></a>Esempio

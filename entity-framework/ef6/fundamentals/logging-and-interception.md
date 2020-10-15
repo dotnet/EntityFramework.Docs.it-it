@@ -1,15 +1,15 @@
 ---
 title: Registrazione e intercettazione delle operazioni di database-EF6
 description: Registrazione e intercettazione delle operazioni di database in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/logging-and-interception
-ms.openlocfilehash: 858e96a781933da52725efa56087bc27db06257d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 97248af9953de4372503aa7340712f3eff19b6b8
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072668"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065433"
 ---
 # <a name="logging-and-intercepting-database-operations"></a>Registrazione e intercettazione delle operazioni di database
 > [!NOTE]
@@ -101,7 +101,7 @@ Si noti che si tratta dell'output presumendo che sia già stata eseguita l'inizi
 
 Quando viene impostata la proprietà log, verranno registrate tutte le operazioni seguenti:  
 
-- SQL per tutti i diversi tipi di comandi. Esempio:  
+- SQL per tutti i diversi tipi di comandi. Ad esempio:  
     - Query, incluse le query LINQ normali, le query eSQL e le query non elaborate da metodi come SQLQuery  
     - Inserimenti, aggiornamenti ed eliminazioni generate come parte di SaveChanges  
     - Relazione che carica query come quelle generate dal caricamento lazy  
@@ -228,7 +228,7 @@ Si noti che questo codice consente di rimuovere semplicisticamente le interruzio
 
 ### <a name="setting-the-databaselogformatter"></a>Impostazione di DatabaseLogFormatter  
 
-Una volta creata una nuova classe DatabaseLogFormatter, è necessario registrarla con EF. Questa operazione viene eseguita usando la configurazione basata su codice. In breve, ciò significa creare una nuova classe che deriva da DbConfiguration nello stesso assembly della classe DbContext e quindi chiamare SetDatabaseLogFormatter nel costruttore di questa nuova classe. Esempio:  
+Una volta creata una nuova classe DatabaseLogFormatter, è necessario registrarla con EF. Questa operazione viene eseguita usando la configurazione basata su codice. In breve, ciò significa creare una nuova classe che deriva da DbConfiguration nello stesso assembly della classe DbContext e quindi chiamare SetDatabaseLogFormatter nel costruttore di questa nuova classe. Ad esempio:  
 
 ``` csharp
 public class MyDbConfiguration : DbConfiguration
@@ -290,7 +290,7 @@ Le proprietà OriginalResult e originalException sono di sola lettura e vengono 
 
 ### <a name="registering-interceptors"></a>Registrazione degli intercettori  
 
-Quando una classe che implementa una o più interfacce di intercettazione è stata creata, può essere registrata con EF usando la classe DbInterception. Esempio:  
+Quando una classe che implementa una o più interfacce di intercettazione è stata creata, può essere registrata con EF usando la classe DbInterception. Ad esempio:  
 
 ``` csharp
 DbInterception.Add(new NLogCommandInterceptor());

@@ -1,21 +1,21 @@
 ---
 title: Stored procedure CUD della finestra di progettazione-EF6
 description: Stored procedure CUD della finestra di progettazione in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/stored-procedures/cud
-ms.openlocfilehash: fae795922980452cf062a62e3cbb47de49b49c74
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 167504d3abbd156f426c481c410a1953bc047de4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073214"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066122"
 ---
 # <a name="designer-cud-stored-procedures"></a>Stored procedure CUD della finestra di progettazione
 
 Questa procedura dettagliata illustra come eseguire il mapping delle \\ operazioni di creazione di istruzioni INSERT, Update e Delete (CUD) di un tipo di entità alle stored procedure usando il Entity Framework Designer (Entity Framework Designer). Per impostazione predefinita, il Entity Framework genera automaticamente le istruzioni SQL per le operazioni CUD, ma è anche possibile eseguire il mapping delle stored procedure a queste operazioni.  
 
-Si noti che Code First non supporta il mapping a stored procedure o funzioni. Tuttavia, è possibile chiamare stored procedure o funzioni utilizzando il metodo System. Data. Entity. DbSet. sqlQuery. Esempio:
+Si noti che Code First non supporta il mapping a stored procedure o funzioni. Tuttavia, è possibile chiamare stored procedure o funzioni utilizzando il metodo System. Data. Entity. DbSet. sqlQuery. Ad esempio:
 
 ``` csharp
 var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]");

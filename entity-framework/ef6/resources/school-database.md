@@ -1,15 +1,15 @@
 ---
 title: Database di esempio School-EF6
 description: Database di esempio School per Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/resources/school-database
-ms.openlocfilehash: 38dfbf074200617f11d70ef1d8cead69223135b3
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f65ca9003bf818cd333c742201e1aeb1577c405f
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073808"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064484"
 ---
 # <a name="school-sample-database"></a>Database di esempio School
 Questo argomento contiene lo schema e i dati per il database School. Il database School di esempio viene usato in vari punti dell'intera documentazione di Entity Framework.  

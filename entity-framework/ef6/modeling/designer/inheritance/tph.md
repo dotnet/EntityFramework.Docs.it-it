@@ -1,15 +1,15 @@
 ---
 title: Ereditarietà TPH della finestra di progettazione-EF6
 description: Ereditarietà TPH della finestra di progettazione in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/inheritance/tph
-ms.openlocfilehash: 39675f9533dfef0ddad1867e3b70cd13b30708ea
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: bf689e02a76e46e5eee5a64cb9825e667c8cd65c
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073396"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064848"
 ---
 # <a name="designer-tph-inheritance"></a>Ereditarietà TPH della finestra di progettazione
 Questa procedura dettagliata illustra come implementare l'ereditarietà tabella per gerarchia (TPH) nel modello concettuale con il Entity Framework Designer (EF designer). L'ereditarietà TPH utilizza una tabella di database per gestire i dati per tutti i tipi di entità in una gerarchia di ereditarietà.

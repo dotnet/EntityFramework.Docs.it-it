@@ -1,15 +1,15 @@
 ---
 title: Versioni precedenti di Entity Framework-EF6
 description: Versioni precedenti di Entity Framework
-author: divega
+author: ajcvickers
 ms.date: 09/12/2019
 uid: ef6/what-is-new/past-releases
-ms.openlocfilehash: 97ad8015f5302adbe98a63132f1b34009aa68468
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 990b543b2baff0a70e32bf3d5ce624b419c925b8
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073643"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064315"
 ---
 # <a name="past-releases-of-entity-framework"></a>Versioni precedenti di Entity Framework
 
@@ -228,7 +228,7 @@ Questa versione include la nuova funzionalità Migrazioni Code First che consent
 
 Di seguito è riportato un elenco di contenuti che sono stati riuniti in modo specifico per la versione EF 4,3, la maggior parte dei contenuti disponibili per EF 4,1 è ancora applicabile a EF 4,3:
 -   [Post di rilascio di EF 4,3](https://blogs.msdn.com/b/adonet/archive/2012/02/09/ef-4-3-released.aspx)
--   [Procedura dettagliata sulle migrazioni basate su codice EF 4,3](https://blogs.msdn.com/b/adonet/archive/2012/02/09/ef-4-3-code-based-migrations-walkthrough.aspx)
+-   [Procedura dettagliata sulle migrazioni di EF 4,3 Code-Based](https://blogs.msdn.com/b/adonet/archive/2012/02/09/ef-4-3-code-based-migrations-walkthrough.aspx)
 -   [Procedura dettagliata per le migrazioni automatiche EF 4,3](https://blogs.msdn.com/b/adonet/archive/2012/02/09/ef-4-3-automatic-migrations-walkthrough.aspx)
 
 ## <a name="ef-42"></a>EF 4,2

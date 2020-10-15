@@ -1,15 +1,15 @@
 ---
 title: Glossario Entity Framework-EF6
 description: Glossario di Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/resources/glossary
-ms.openlocfilehash: 819bdda133b427fa6f8fc1915cde07560e6ca568
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 6c11b45978ad8efaf70bb640567c79b60ff7a708
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072889"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064653"
 ---
 # <a name="entity-framework-glossary"></a>Glossario Entity Framework
 ## <a name="code-first"></a>Code First
@@ -61,7 +61,7 @@ Creazione di un modello di Entity Framework, usando la finestra di progettazione
 Proprietà di un'entità che fa riferimento a un'altra entità. Il prodotto, ad esempio, contiene una proprietà di navigazione di categoria e la categoria contiene una proprietà di navigazione Products.
 
 ## <a name="poco"></a>POCO
-Acronimo dell'oggetto CLR normale. Una semplice classe utente che non ha dipendenze con alcun Framework. Nel contesto di EF, una classe di entità che non deriva da EntityObject, implementa qualsiasi interfaccia o contiene attributi definiti in EF. Anche le classi di entità separate dal framework di persistenza sono definite "persistenza ignorata".  
+Acronimo di Plain-Old oggetto CLR. Una semplice classe utente che non ha dipendenze con alcun Framework. Nel contesto di EF, una classe di entità che non deriva da EntityObject, implementa qualsiasi interfaccia o contiene attributi definiti in EF. Anche le classi di entità separate dal framework di persistenza sono definite "persistenza ignorata".  
 
 ## <a name="relationship-inverse"></a>Relazione inversa
 Estremità opposta di una relazione, ad esempio Product. Categoria e categoria. Prodotto.

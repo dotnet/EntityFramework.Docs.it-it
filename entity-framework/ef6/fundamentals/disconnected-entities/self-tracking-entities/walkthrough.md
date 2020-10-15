@@ -1,17 +1,17 @@
 ---
-title: Procedure dettagliate per le entità con rilevamento automatico-EF6
+title: Procedura dettagliata per entità Self-Tracking-EF6
 description: Procedura dettagliata per entità con rilevamento automatico per Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough
-ms.openlocfilehash: 398be11d330f5a7413f5a84424217ea3eda446ef
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7c50bbc9fad10a474728b03e79b685c549cf675d
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072798"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065602"
 ---
-# <a name="self-tracking-entities-walkthrough"></a>Procedura dettagliata sulle entità con rilevamento automatico
+# <a name="self-tracking-entities-walkthrough"></a>Procedura dettagliata per entità Self-Tracking
 > [!IMPORTANT]
 > L'uso del modello di entità con rilevamento automatico non è più consigliabile. Continuerà a essere disponibile solo per supportare le applicazioni esistenti. Se l'applicazione richiede l'uso con grafici di entità disconnesse, prendere in considerazione altre alternative, come ad esempio [Trackable Entities](https://trackableentities.github.io/), che è una tecnologia simile alle entità con rilevamento automatico ma viene sviluppata in modo più attivo dalla community, oppure la scrittura di codice personalizzato usando le API di rilevamento delle modifiche di basso livello.
 
@@ -23,7 +23,7 @@ In questa procedura dettagliata verranno completate le seguenti azioni:
 
 -   Crea un database a cui accedere.
 -   Crea una libreria di classi che contiene il modello.
--   Scambia il modello generatore di entità con rilevamento automatico.
+-   Scambia il modello generatore di entità Self-Tracking.
 -   Sposta le classi di entità in un progetto separato.
 -   Crea un servizio WCF che espone operazioni per eseguire query e salvare entità.
 -   Crea applicazioni client (console e WPF) che utilizzano il servizio.
@@ -104,7 +104,7 @@ Verrà ora creato un modello semplice in EF designer per accedere al database:
 
 ## <a name="swap-to-ste-code-generation"></a>Scambia alla generazione del codice STE
 
-A questo punto è necessario disabilitare la generazione di codice predefinita e scambiare le entità con rilevamento automatico.
+A questo punto è necessario disabilitare la generazione di codice predefinita e scambiare le entità Self-Tracking.
 
 ### <a name="if-you-are-using-visual-studio-2012"></a>Se si usa Visual Studio 2012
 
@@ -118,13 +118,13 @@ A questo punto è necessario disabilitare la generazione di codice predefinita e
 ### <a name="if-you-are-using-visual-studio-2010"></a>Se si usa Visual Studio 2010
 
 -   Fare clic con il pulsante destro del mouse su un'area vuota nell'area di progettazione EF e scegliere **Aggiungi elemento di generazione codice...**
--   Selezionare il **codice** nel riquadro a sinistra e quindi **ADO.NET generatore di entità con rilevamento automatico**
+-   Selezionare il **codice** nel riquadro a sinistra e quindi **ADO.NET Self-Tracking generatore di entità**
 -   Immettere **STETemplate** come nome e fare clic su **Aggiungi**
 -   I file **STETemplate.TT** e **STETemplate.Context.TT** vengono aggiunti direttamente al progetto
 
 ## <a name="move-entity-types-into-separate-project"></a>Spostare i tipi di entità in un progetto separato
 
-Per usare le entità con rilevamento automatico, l'applicazione client deve accedere alle classi di entità generate dal modello. Poiché non si vuole esporre l'intero modello all'applicazione client, le classi di entità verranno spostate in un progetto distinto.
+Per usare Self-Tracking entità, l'applicazione client deve accedere alle classi di entità generate dal modello. Poiché non si vuole esporre l'intero modello all'applicazione client, le classi di entità verranno spostate in un progetto distinto.
 
 Il primo passaggio consiste nell'arrestare la generazione delle classi di entità nel progetto esistente:
 

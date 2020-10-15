@@ -1,14 +1,14 @@
 ---
 title: Case Study per Entity Framework-EF6
 description: Case Study per Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
-ms.openlocfilehash: 342929f70aa09704c934bd1d89e177f6953bfc43
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ca2315ac8aad8d28240f4bef6c962de0f63ac0df
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073821"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064666"
 ---
 # <a name="microsoft-case-studies-for-entity-framework"></a>Case Study Microsoft per Entity Framework
 Il case study in questa pagina evidenzia alcuni progetti di produzione reali che hanno usato Entity Framework.
@@ -17,7 +17,7 @@ Il case study in questa pagina evidenzia alcuni progetti di produzione reali che
 
 ## <a name="epicor"></a>Epicor
 Epicor è una grande società di software globale, con oltre 400 sviluppatori, che sviluppa soluzioni ERP (Enterprise Resource Planning) per le aziende in oltre 150 paesi.
-Il prodotto principale, Epicor 9, si basa su un'architettura orientata ai servizi (SOA) che usa la .NET Framework.
+Il prodotto principale, Epicor 9, si basa su un'architettura Service-Oriented (SOA) che usa il .NET Framework.
 Con numerose richieste dei clienti per fornire supporto per LINQ (Language Integrated Query) e per ridurre il carico sui server SQL back-end, il team ha deciso di eseguire l'aggiornamento a Visual Studio 2010 e a .NET Framework 4,0.
 Utilizzando la Entity Framework 4,0, sono riusciti a raggiungere questi obiettivi e a semplificare notevolmente lo sviluppo e la manutenzione.
 In particolare, il supporto T4 completo del Entity Framework consentiva di assumere il controllo completo del codice generato e di compilare automaticamente le funzionalità di salvataggio delle prestazioni, ad esempio le query precompilate e la memorizzazione nella cache.

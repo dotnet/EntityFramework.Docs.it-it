@@ -4,12 +4,12 @@ description: Caricamento esplicito di dati correlati con Entity Framework Core
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/explicit
-ms.openlocfilehash: def1c8c2736c64bc6f39af0d344fd1330f8a06f5
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: 0cfc4b5304d81d5a58497857474804946d3f85d7
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210454"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065719"
 ---
 # <a name="explicit-loading-of-related-data"></a>Caricamento esplicito di dati correlati
 
@@ -17,7 +17,7 @@ ms.locfileid: "91210454"
 
 È possibile caricare in modo esplicito una proprietà di navigazione tramite l'API `DbContext.Entry(...)`.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#Eager)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#Eager)]
 
 È anche possibile caricare in modo esplicito una proprietà di navigazione eseguendo una query separata che restituisce le entità correlate. Se il rilevamento delle modifiche è abilitato, quando la query materializza un'entità, EF Core imposterà automaticamente le proprietà di navigazione dell'entità appena caricata in modo da fare riferimento alle entità già caricate e impostare le proprietà di navigazione delle entità già caricate in modo che facciano riferimento all'entità appena caricata.
 
@@ -27,8 +27,8 @@ ms.locfileid: "91210454"
 
 Consente di applicare operatori aggiuntivi alla query. Ad esempio applicando un operatore di aggregazione sulle entità correlate senza caricarle in memoria.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#NavQueryAggregate)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#NavQueryAggregate)]
 
 È anche possibile filtrare le entità correlate che vengono caricate in memoria.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#NavQueryFiltered)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#NavQueryFiltered)]

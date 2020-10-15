@@ -2,16 +2,14 @@
 title: Log delle modifiche che influiscano sul provider-EF Core
 description: Log delle modifiche apportate a Entity Framework Core che incidono sui provider
 author: ajcvickers
-ms.author: avickers
 ms.date: 08/08/2018
-ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: 52e4e2c2929cb50585572e4057e88a25c137ad2a
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: e701bac32c39f13be039d093931510a99070abbf
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071290"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065381"
 ---
 # <a name="provider-impacting-changes"></a>Modifiche che influiscono sul provider
 

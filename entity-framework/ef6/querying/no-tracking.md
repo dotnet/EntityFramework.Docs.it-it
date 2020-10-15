@@ -1,15 +1,15 @@
 ---
-title: Query senza rilevamento-EF6
-description: Query senza rilevamento in Entity Framework 6
-author: divega
+title: Query No-Tracking-EF6
+description: Query di No-Tracking in Entity Framework 6
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/querying/no-tracking
-ms.openlocfilehash: ea4f05eb7a9b95fba55f70f249876bc9c5630f18
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 74826d3052cf6a249796db2845fa6b96e5ecb8f9
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073899"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065862"
 ---
 # <a name="no-tracking-queries"></a>senza rilevamento delle modifiche
 In alcuni casi può essere necessario recuperare le entità da una query, ma queste entità non vengono rilevate dal contesto. Ciò può comportare prestazioni migliori quando si eseguono query su un numero elevato di entità in scenari di sola lettura. Le tecniche illustrate in questo argomento si applicano in modo analogo ai modelli creati con Code First ed EF Designer.  

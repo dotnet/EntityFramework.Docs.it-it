@@ -1,15 +1,15 @@
 ---
 title: Aggiornamento a Entity Framework 6-EF6
 description: Aggiornamento a Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/what-is-new/upgrading-to-ef6
-ms.openlocfilehash: 118853ad9b53fe2157f50b329bddc31d3135d75a
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 14cd0e259832377332f77a199502699d75982bb4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90074042"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064250"
 ---
 # <a name="upgrading-to-entity-framework-6"></a>Aggiornamento a Entity Framework 6
 
@@ -65,7 +65,7 @@ Gli spazi dei nomi per i tipi DbContext e Code First non sono stati modificati. 
 
 I tipi come ObjectContext precedentemente in System.Data.Entity.dll sono stati spostati in nuovi spazi dei nomi. Ciò significa che potrebbe essere necessario aggiornare le direttive *using* o *Import* per la compilazione con EF6.
 
-La regola generale per le modifiche dello spazio dei nomi è che qualsiasi tipo in System. Data. * viene spostato in System. Data. Entity. Core. *. In altre parole, è sufficiente inserire **Entity. Core.** Dopo System. Data. Esempio:
+La regola generale per le modifiche dello spazio dei nomi è che qualsiasi tipo in System. Data. * viene spostato in System. Data. Entity. Core. *. In altre parole, è sufficiente inserire **Entity. Core.** Dopo System. Data. Ad esempio:
 
 - System. Data. EntityException => System. Data. **Entity. Core**. EntityException  
 - System. Data. Objects. ObjectContext => System. Data. **Entity. Core**. Objects. ObjectContext  

@@ -1,17 +1,17 @@
 ---
-title: Funzioni con valori di tabella (funzioni con valori)-EF6
-description: Funzioni con valori di tabella (funzioni con valori) in Entity Framework 6
-author: divega
+title: Funzioni Table-Valued (funzioni con valori)-EF6
+description: Funzioni Table-Valued (funzioni con valori) in Entity Framework 6
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/advanced/tvfs
-ms.openlocfilehash: 727c6c7ff5947e78bf8eb489194e355e2fd157c9
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 2c699cad3ace253842d17aca4eca4df2318c4795
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070161"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066200"
 ---
-# <a name="table-valued-functions-tvfs"></a>Funzioni con valori di tabella (funzioni con valori)
+# <a name="table-valued-functions-tvfs"></a>Funzioni Table-Valued (funzioni con valori)
 > [!NOTE]
 > **EF5 solo** le funzionalità, le API e così via descritte in questa pagina sono state introdotte in Entity Framework 5. Se si usa una versione precedente, le informazioni qui riportate, o parte di esse, non sono applicabili.
 

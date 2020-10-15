@@ -1,15 +1,15 @@
 ---
 title: Gestione dei conflitti di concorrenza-EF6
 description: Gestione dei conflitti di concorrenza in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/saving/concurrency
-ms.openlocfilehash: b6b1b3b9f593d437ed7da1873a878fcbdb3c3548
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 0cec285ab6071120e162567506d397a23c299177
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073730"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064510"
 ---
 # <a name="handling-concurrency-conflicts-ef6"></a>Gestione dei conflitti di concorrenza (EF6)
 
@@ -25,7 +25,7 @@ Un DbUpdateConcurrencyException viene generato da SaveChanges quando viene rilev
 
 ## <a name="resolving-optimistic-concurrency-exceptions-with-reload-database-wins"></a>Risoluzione delle eccezioni di concorrenza ottimistica con ricarica (database WINS)  
 
-Il metodo Reload può essere utilizzato per sovrascrivere i valori correnti dell'entità con i valori ora presenti nel database. L'entità viene quindi nuovamente restituita all'utente in un certo formato ed è necessario riprovare a apportare nuovamente le modifiche e salvarle nuovamente. Esempio:  
+Il metodo Reload può essere utilizzato per sovrascrivere i valori correnti dell'entità con i valori ora presenti nel database. L'entità viene quindi nuovamente restituita all'utente in un certo formato ed è necessario riprovare a apportare nuovamente le modifiche e salvarle nuovamente. Ad esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -54,7 +54,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Per simulare un'eccezione di concorrenza, è consigliabile impostare un punto di interruzione nella chiamata a SaveChanges, quindi modificare un'entità salvata nel database utilizzando un altro strumento, ad esempio SQL Server Management Studio. È anche possibile inserire una riga prima di SaveChanges per aggiornare direttamente il database usando SqlCommand. Esempio:  
+Per simulare un'eccezione di concorrenza, è consigliabile impostare un punto di interruzione nella chiamata a SaveChanges, quindi modificare un'entità salvata nel database utilizzando un altro strumento, ad esempio SQL Server Management Studio. È anche possibile inserire una riga prima di SaveChanges per aggiornare direttamente il database usando SqlCommand. Ad esempio:  
 
 ``` csharp
 context.Database.SqlCommand(
@@ -96,7 +96,7 @@ using (var context = new BloggingContext())
 
 ## <a name="custom-resolution-of-optimistic-concurrency-exceptions"></a>Risoluzione personalizzata delle eccezioni di concorrenza ottimistica  
 
-In alcuni casi può essere necessario combinare i valori attualmente presenti nel database con i valori attualmente presenti nell'entità. Questa operazione richiede in genere un'interazione utente o logica personalizzata. È possibile, ad esempio, presentare un modulo all'utente che contiene i valori correnti, i valori nel database e un set predefinito di valori risolti. L'utente dovrà quindi modificare i valori risolti in base alle esigenze e questi valori risolti verranno salvati nel database. Questa operazione può essere eseguita usando gli oggetti elementi dbpropertyvalues restituiti da CurrentValues e GetDatabaseValues sulla voce dell'entità. Esempio:  
+In alcuni casi può essere necessario combinare i valori attualmente presenti nel database con i valori attualmente presenti nell'entità. Questa operazione richiede in genere un'interazione utente o logica personalizzata. È possibile, ad esempio, presentare un modulo all'utente che contiene i valori correnti, i valori nel database e un set predefinito di valori risolti. L'utente dovrà quindi modificare i valori risolti in base alle esigenze e questi valori risolti verranno salvati nel database. Questa operazione può essere eseguita usando gli oggetti elementi dbpropertyvalues restituiti da CurrentValues e GetDatabaseValues sulla voce dell'entità. Ad esempio:  
 
 ``` csharp
 using (var context = new BloggingContext())

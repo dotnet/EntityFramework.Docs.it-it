@@ -2,15 +2,14 @@
 title: Provider di database Microsoft SQL Server - EF Core
 description: Documentazione per il provider di database che consente l'uso di Entity Framework Core con Microsoft SQL Server
 author: AndriySvyryd
-ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/sql-server/index
-ms.openlocfilehash: baae668a7ec255e35ab0e23e5c5ddfa47bda917e
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+ms.openlocfilehash: 344bf243577d39d2d5a03cf321f8d84c275d10d3
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413146"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065329"
 ---
 # <a name="microsoft-sql-server-ef-core-database-provider"></a>Provider di database Microsoft SQL Server per EF Core
 
@@ -28,7 +27,7 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Install-Package Microsoft.EntityFrameworkCore.SqlServer
 ```
 

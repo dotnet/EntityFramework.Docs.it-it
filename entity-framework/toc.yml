@@ -77,6 +77,8 @@
               href: core/miscellaneous/async.md
             - name: Registrazione
               href: core/miscellaneous/logging.md
+            - name: Pooling di contesto
+              href: core/miscellaneous/context-pooling.md
             - name: Resilienza della connessione
               href: core/miscellaneous/connection-resiliency.md
             - name: Test
@@ -111,7 +113,7 @@
               href: core/modeling/generated-properties.md
             - name: Token di concorrenza
               href: core/modeling/concurrency.md
-            - name: Proprietà shadow
+            - name: Proprietà shadow e dell'indicizzatore
               href: core/modeling/shadow-properties.md
             - name: Relazioni
               href: core/modeling/relationships.md
@@ -172,14 +174,24 @@
           items:
             - name: Panoramica
               href: core/querying/index.md
+            - name: Caricare dati correlati
+              items:
+                - name: Panoramica
+                  href: core/querying/related-data/index.md
+                - name: Caricamento eager
+                  href: core/querying/related-data/eager.md
+                - name: Caricamento esplicito
+                  href: core/querying/related-data/explicit.md
+                - name: Caricamento lazy
+                  href: core/querying/related-data/lazy.md
+                - name: Dati correlati e serializzazione
+                  href: core/querying/related-data/serialization.md
             - name: Valutazione client e server
               href: core/querying/client-eval.md
             - name: Rilevamento e senza rilevamento
               href: core/querying/tracking.md
             - name: Operatori di query complessi
               href: core/querying/complex-query-operators.md
-            - name: Caricare dati correlati
-              href: core/querying/related-data.md
             - name: Query SQL non elaborate
               href: core/querying/raw-sql.md
             - name: Filtri di query globali
@@ -216,10 +228,15 @@
               items:
                 - name: Panoramica
                   href: core/providers/sql-server/index.md
+                - name: Mapping delle funzioni
+                  href: core/providers/sql-server/functions.md
                 - name: Indici
                   href: core/providers/sql-server/indexes.md
                 - name: Tabelle ottimizzate per la memoria
                   href: core/providers/sql-server/memory-optimized-tables.md
+                - name: Dati spaziali
+                  displayName: GIS
+                  href: core/providers/sql-server/spatial.md
                 - name: Impostare le opzioni del database SQL di Azure
                   href: core/providers/sql-server/azure-sql-database.md
             - name: SQLite
@@ -228,6 +245,13 @@
                   href: core/providers/sqlite/index.md
                 - name: Limitazioni di SQLite
                   href: core/providers/sqlite/limitations.md
+                - name: Mapping delle funzioni
+                  href: core/providers/sqlite/functions.md
+                - name: Dati spaziali
+                  displayName: GIS
+                  href: core/providers/sqlite/spatial.md
+                - name: Microsoft.Data.Sqlite >>
+                  href: /dotnet/standard/data/sqlite/
             - name: Cosmos
               items:
                 - name: Panoramica
@@ -236,6 +260,8 @@
                   href: core/providers/cosmos/unstructured-data.md
                 - name: Limitazioni di Cosmos
                   href: core/providers/cosmos/limitations.md
+                - name: Mapping delle funzioni
+                  href: core/providers/cosmos/functions.md
             - name: InMemory (per test)
               href: core/providers/in-memory/index.md
             - name: Scrivere un provider di database

@@ -4,12 +4,12 @@ description: Informazioni sul modo in cui viene eseguita la pianificazione e il 
 author: ajcvickers
 ms.date: 01/28/2020
 uid: core/what-is-new/release-planning
-ms.openlocfilehash: 91a130b4ddae66f626bcff8e70283a7e03192542
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: f84b8cef40a74245575df6013d94fcda5738e229
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618562"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429143"
 ---
 # <a name="release-planning-process"></a>Processo di pianificazione delle versioni
 
@@ -36,14 +36,16 @@ Questo perché è fondamentale che le versioni di patch non introducano nuovi bu
 Pertanto, il processo decisionale enfatizza un valore elevato e un rischio basso.
 
 È più probabile che venga applicata una patch a un problema se:
-  * Che ha un effetto su più clienti
-  * Si tratta di una regressione da una versione precedente
-  * L'errore causa il danneggiamento dei dati
+
+* Che ha un effetto su più clienti
+* Si tratta di una regressione da una versione precedente
+* L'errore causa il danneggiamento dei dati
 
 È meno probabile che venga applicata una patch a un problema se:
-  * Esistono soluzioni alternative ragionevoli
-  * La correzione ha un rischio elevato di interruzioni di altro
-  * Il bug è in un caso d'angolo
+
+* Esistono soluzioni alternative ragionevoli
+* La correzione ha un rischio elevato di interruzioni di altro
+* Il bug è in un caso d'angolo
 
 Questa barra passa gradualmente attraverso la durata di una versione [LTS (Long-Term Support)](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) . Questo è dovuto al fatto che le versioni LTS enfatizzano la stabilità.
 
@@ -55,6 +57,7 @@ Le versioni secondarie cambiano solo la parte "secondaria" della versione.
 Ad esempio, EF Core 3. **1**. 0 è una versione che migliora EF Core 3. **0**. 0.
 
 Versioni secondarie:
+
 * Sono progettate per migliorare la qualità e le funzionalità della versione precedente
 * Contengono in genere correzioni di bug e nuove funzionalità
 * Non includere modifiche di rilievo intenzionali
@@ -66,6 +69,7 @@ Le versioni principali modificano il numero di versione "principale" di EF.
 Ad esempio, EF Core **3**. 0,0 è una versione principale che fa un grande passo avanti rispetto EF Core 2.2. x.
 
 Versioni principali:
+
 * Sono progettate per migliorare la qualità e le funzionalità della versione precedente
 * Contengono in genere correzioni di bug e nuove funzionalità
   * Alcune delle nuove funzionalità possono essere modifiche fondamentali al modo in cui EF Core funziona

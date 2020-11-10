@@ -2,21 +2,21 @@
 title: Gestione delle migrazioni-EF Core
 description: Aggiunta, rimozione e gestione delle migrazioni dello schema di database con Entity Framework Core
 author: bricelam
-ms.date: 05/06/2020
+ms.date: 10/27/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: fdfda6f3dea306fbbc343c1be3f4d5754d1f65c4
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 81f7cec54510d95b1e2432d56ff95110224fd9bf
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062061"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429852"
 ---
 # <a name="managing-migrations"></a>Gestione delle migrazioni
 
-Quando il modello viene modificato, le migrazioni vengono aggiunte e rimosse come parte dello sviluppo normale e i file di migrazione vengono archiviati nel controllo del codice sorgente del progetto. Per gestire le migrazioni, è necessario innanzitutto installare gli [strumenti da riga di comando EF Core](xref:core/miscellaneous/cli/index).
+Quando il modello viene modificato, le migrazioni vengono aggiunte e rimosse come parte dello sviluppo normale e i file di migrazione vengono archiviati nel controllo del codice sorgente del progetto. Per gestire le migrazioni, è necessario innanzitutto installare gli [strumenti da riga di comando EF Core](xref:core/cli/index).
 
 > [!TIP]
-> Se `DbContext` si trova in un assembly diverso da quello del progetto di avvio, è possibile specificare in modo esplicito i progetti di destinazione e di avvio negli [strumenti della console di Gestione pacchetti](xref:core/miscellaneous/cli/powershell#target-and-startup-project) o negli [strumenti dell'interfaccia della riga di comando di .NET Core](xref:core/miscellaneous/cli/dotnet#target-project-and-startup-project).
+> Se `DbContext` si trova in un assembly diverso da quello del progetto di avvio, è possibile specificare in modo esplicito i progetti di destinazione e di avvio negli [strumenti della console di Gestione pacchetti](xref:core/cli/powershell#target-and-startup-project) o negli [strumenti dell'interfaccia della riga di comando di .NET Core](xref:core/cli/dotnet#target-project-and-startup-project).
 
 ## <a name="add-a-migration"></a>Aggiungere una migrazione
 
@@ -40,29 +40,35 @@ Il nome della migrazione può essere usato come messaggio di commit in un sistem
 
 Nella directory **Migrations** del progetto vengono aggiunti tre file:
 
-* **XXXXXXXXXXXXXX_AddCreatedTimestamp. cs**: il file principale delle migrazioni. Contiene le operazioni necessarie per applicare la migrazione (in `Up`) e per ripristinarla (in `Down`).
-* **XXXXXXXXXXXXXX_AddCreatedTimestamp. designer. cs**, il file di metadati delle migrazioni. Contiene informazioni usate da Entity Framework.
-* **MyContextModelSnapshot.cs**: snapshot del modello corrente. Usato per determinare cosa è stato modificato durante l'aggiunta della migrazione successiva.
+* **XXXXXXXXXXXXXX_AddCreatedTimestamp. cs** : il file principale delle migrazioni. Contiene le operazioni necessarie per applicare la migrazione (in `Up`) e per ripristinarla (in `Down`).
+* **XXXXXXXXXXXXXX_AddCreatedTimestamp. designer. cs** , il file di metadati delle migrazioni. Contiene informazioni usate da Entity Framework.
+* **MyContextModelSnapshot.cs** : snapshot del modello corrente. Usato per determinare cosa è stato modificato durante l'aggiunta della migrazione successiva.
 
 Il timestamp nel nome file consente di mantenerne l'ordine cronologico e di visualizzare quindi la successione delle modifiche.
 
 ### <a name="namespaces"></a>Spazi dei nomi
 
-È consentito spostare i file della cartella Migrations e modificarne lo spazio dei nomi manualmente. Le nuove migrazioni vengono create come migrazioni di pari livello rispetto all'ultima. In alternativa, è possibile specificare lo spazio dei nomi in fase di generazione come indicato di seguito:
+È consentito spostare i file della cartella Migrations e modificarne lo spazio dei nomi manualmente. Le nuove migrazioni vengono create come migrazioni di pari livello rispetto all'ultima. In alternativa, è possibile specificare la directory in fase di generazione come indicato di seguito:
 
-### <a name="net-core-cli"></a>[Interfaccia della riga di comando di .NET Core](#tab/dotnet-core-cli)
+#### <a name="net-core-cli"></a>[Interfaccia della riga di comando di .NET Core](#tab/dotnet-core-cli)
 
 ```dotnetcli
-dotnet ef migrations add InitialCreate --namespace Your.Namespace
+dotnet ef migrations add InitialCreate --output-dir Your/Directory
 ```
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+> [!NOTE]
+> In EF Core 5,0, è anche possibile modificare lo spazio dei nomi indipendentemente dalla directory usando `--namespace` .
+
+#### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ```powershell
-Add-Migration InitialCreate -Namespace Your.Namespace
+Add-Migration InitialCreate -OutputDir Your\Directory
 ```
 
-***
+> [!NOTE]
+> In EF Core 5,0, è anche possibile modificare lo spazio dei nomi indipendentemente dalla directory usando `-Namespace` .
+
+**_
 
 ## <a name="customize-migration-code"></a>Personalizzare il codice di migrazione
 
@@ -153,9 +159,12 @@ migrationBuilder.Sql(
         RETURN @LastName + @FirstName;')");
 ```
 
+> [!TIP]
+> `EXEC` viene utilizzato quando un'istruzione deve essere la prima o una sola in un batch SQL. Può anche essere usato per aggirare gli errori del parser negli script di migrazione idempotente che possono verificarsi quando le colonne a cui si fa riferimento non esistono attualmente in una tabella.
+
 Questa operazione può essere utilizzata per gestire qualsiasi aspetto del database, tra cui:
 
-* Stored procedure
+_ Stored procedure
 * Ricerca full-text
 * Funzioni
 * Trigger
@@ -163,7 +172,7 @@ Questa operazione può essere utilizzata per gestire qualsiasi aspetto del datab
 
 Nella maggior parte dei casi, EF Core effettuerà automaticamente il wrapping di ogni migrazione nella propria transazione durante l'applicazione delle migrazioni. Sfortunatamente, alcune operazioni di migrazione non possono essere eseguite all'interno di una transazione in alcuni database. in questi casi, è possibile rifiutare esplicitamente la transazione passando `suppressTransaction: true` a `migrationBuilder.Sql` .
 
-Se `DbContext` si trova in un assembly diverso da quello del progetto di avvio, è possibile specificare in modo esplicito i progetti di destinazione e di avvio negli [strumenti della console di Gestione pacchetti](xref:core/miscellaneous/cli/powershell#target-and-startup-project) o negli [strumenti dell'interfaccia della riga di comando di .NET Core](xref:core/miscellaneous/cli/dotnet#target-project-and-startup-project).
+Se `DbContext` si trova in un assembly diverso da quello del progetto di avvio, è possibile specificare in modo esplicito i progetti di destinazione e di avvio negli [strumenti della console di Gestione pacchetti](xref:core/cli/powershell#target-and-startup-project) o negli [strumenti dell'interfaccia della riga di comando di .NET Core](xref:core/cli/dotnet#target-project-and-startup-project).
 
 ## <a name="remove-a-migration"></a>Rimuovere una migrazione
 
@@ -192,13 +201,26 @@ Dopo la rimozione della migrazione, è possibile apportare le modifiche aggiunti
 
 È possibile elencare tutte le migrazioni esistenti nel modo seguente:
 
+### <a name="net-core-cli"></a>[Interfaccia della riga di comando di .NET Core](#tab/dotnet-core-cli)
+
 ```dotnetcli
 dotnet ef migrations list
 ```
 
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+
+> [!NOTE]
+> Questo comando è stato aggiunto in EF Core 5,0.
+
+```powershell
+Get-Migration
+```
+
+**_
+
 ## <a name="resetting-all-migrations"></a>Reimpostazione di tutte le migrazioni
 
-In alcuni casi estremi, potrebbe essere necessario rimuovere tutte le migrazioni e ricominciare. Questa operazione può essere eseguita facilmente eliminando la cartella **migrazioni** ed eliminando il database. a questo punto è possibile creare una nuova migrazione iniziale, che conterrà l'intero schema corrente.
+In alcuni casi estremi, potrebbe essere necessario rimuovere tutte le migrazioni e ricominciare. Questa operazione può essere eseguita facilmente eliminando la cartella _ *Migrations* * ed eliminando il database. a questo punto è possibile creare una nuova migrazione iniziale, che conterrà l'intero schema corrente.
 
 È anche possibile reimpostare tutte le migrazioni e crearne una singola senza perdere i dati. Questa operazione viene a volte definita "squashing" e implica alcune operazioni manuali:
 

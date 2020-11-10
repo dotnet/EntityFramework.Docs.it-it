@@ -4,12 +4,12 @@ description: Reverse Engineering di un modello da un database esistente usando E
 author: bricelam
 ms.date: 11/13/2018
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: e1b4ed8d5209688fbe5c89ae60cf0d981136305f
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 11ffa2e62136e47959ebbfd54ccb55c2b9e23e04
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92061970"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429767"
 ---
 # <a name="reverse-engineering"></a> Reverse Engineering
 
@@ -17,7 +17,7 @@ Il Reverse Engineering è il processo di impalcature di classi di tipi di entit�
 
 ## <a name="installing"></a>Installazione
 
-Prima di reverse engineering, è necessario installare gli strumenti di [PMC](xref:core/miscellaneous/cli/powershell) (solo Visual Studio) o gli [strumenti dell'interfaccia](xref:core/miscellaneous/cli/dotnet)della riga di comando. Per informazioni dettagliate, vedere i collegamenti.
+Prima di reverse engineering, è necessario installare gli strumenti di [PMC](xref:core/cli/powershell) (solo Visual Studio) o gli [strumenti dell'interfaccia](xref:core/cli/dotnet)della riga di comando. Per informazioni dettagliate, vedere i collegamenti.
 
 Sarà inoltre necessario installare un [provider di database](xref:core/providers/index) appropriato per lo schema del database che si desidera decodificare.
 
@@ -80,7 +80,7 @@ Per includere più tabelle, usare una matrice:
 Scaffold-DbContext ... -Tables Artist, Album
 ```
 
-***
+**_
 
 ## <a name="preserving-names"></a>Conservazione dei nomi
 
@@ -108,7 +108,7 @@ public string Title { get; set; }
 
 ## <a name="dbcontext-name"></a>Nome DbContext
 
-Il nome della classe DbContext con impalcature sarà il nome del database con suffisso *per impostazione predefinita* . Per specificarne uno diverso, usare `-Context` in PMC e `--context` nel interfaccia della riga di comando di .NET Core.
+Il nome della classe DbContext con impalcature sarà il nome del database con suffisso _Context * per impostazione predefinita. Per specificarne uno diverso, usare `-Context` in PMC e `--context` nel interfaccia della riga di comando di .NET Core.
 
 ## <a name="directories-and-namespaces"></a>Directory e spazi dei nomi
 
@@ -157,7 +157,7 @@ Infine, il modello viene utilizzato per generare il codice. Le classi del tipo d
 * Non tutti gli elementi di un modello possono essere rappresentati utilizzando uno schema di database. Ad esempio, le informazioni sulle [**gerarchie di ereditarietà**](xref:core/modeling/inheritance), i [**tipi di proprietà**](xref:core/modeling/owned-entities)e la suddivisione delle [**tabelle**](xref:core/modeling/table-splitting) non sono presenti nello schema del database. Per questo motivo, questi costrutti non verranno mai decodificati.
 * Inoltre, **alcuni tipi di colonna** potrebbero non essere supportati dal provider EF core. Queste colonne non verranno incluse nel modello.
 * È possibile definire i [**token di concorrenza**](xref:core/modeling/concurrency)in un modello di EF core per impedire a due utenti di aggiornare la stessa entità nello stesso momento. Alcuni database hanno un tipo speciale per rappresentare questo tipo di colonna (ad esempio, rowversion in SQL Server), nel qual caso è possibile decompilare queste informazioni; Tuttavia, altri token di concorrenza non verranno decodificati.
-* [La funzionalità del tipo di riferimento Nullable di C# 8](/dotnet/csharp/tutorials/nullable-reference-types) non è attualmente supportata in reverse engineering: EF core genera sempre il codice c# che presuppone che la funzionalità sia disabilitata. Ad esempio, le colonne di testo Nullable verranno sottoposto a impalcatura come proprietà con tipo `string` , non `string?` con l'API Fluent o le annotazioni dei dati utilizzate per configurare se una proprietà è obbligatoria o meno. È possibile modificare il codice con impalcature e sostituirle con annotazioni di supporto per i valori null C#. Il supporto dell'impalcatura per i tipi di riferimento nullable viene rilevato da Issue [#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520).
+* [La funzionalità del tipo di riferimento Nullable di C# 8](/dotnet/csharp/tutorials/nullable-reference-types) non è attualmente supportata in reverse engineering: EF core genera sempre il codice c# che presuppone che la funzionalità sia disabilitata. Ad esempio, le colonne di testo Nullable verranno sottoposto a impalcatura come proprietà con tipo `string` , non `string?` con l'API Fluent o le annotazioni dei dati utilizzate per configurare se una proprietà è obbligatoria o meno. È possibile modificare il codice con impalcature e sostituirle con annotazioni di supporto per i valori null C#. Il supporto dell'impalcatura per i tipi di riferimento nullable viene rilevato da Issue [#15520](https://github.com/dotnet/efcore/issues/15520).
 
 ## <a name="customizing-the-model"></a>Personalizzazione del modello
 
@@ -173,7 +173,7 @@ Dopo aver apportato modifiche al database, potrebbe essere necessario aggiornare
 
 Le modifiche più significative, tuttavia, non sono semplici da creare manualmente. Un flusso di lavoro comune è quello di decodificare il modello dal database usando `-Force` (PMC) o `--force` (CLI) per sovrascrivere il modello esistente con uno aggiornato.
 
-Un'altra funzionalità comunemente richiesta è la possibilità di aggiornare il modello dal database mantenendo la personalizzazione, ad esempio le rinominazioni, le gerarchie dei tipi e così via. Utilizzare Issue [#831](https://github.com/aspnet/EntityFrameworkCore/issues/831) per tenere traccia dello stato di avanzamento di questa funzionalità.
+Un'altra funzionalità comunemente richiesta è la possibilità di aggiornare il modello dal database mantenendo la personalizzazione, ad esempio le rinominazioni, le gerarchie dei tipi e così via. Utilizzare Issue [#831](https://github.com/dotnet/efcore/issues/831) per tenere traccia dello stato di avanzamento di questa funzionalità.
 
 > [!WARNING]
 > Se si esegue di nuovo la decompilazione del modello dal database, tutte le modifiche apportate ai file andranno perse.

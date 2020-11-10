@@ -4,12 +4,12 @@ description: Utilizzo di dati spaziali in un modello di Entity Framework Core
 author: bricelam
 ms.date: 10/02/2020
 uid: core/modeling/spatial
-ms.openlocfilehash: 2c0cd7a8acf7e4b58eadf8805afa1fe4a1d6e949
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: fa9cf30ddb4291d96486934544b568b67b126846
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063933"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430521"
 ---
 # <a name="spatial-data"></a>Dati spaziali
 
@@ -47,7 +47,7 @@ Esistono diversi tipi di dati spaziali. Il tipo da utilizzare dipende dai tipi d
 * Geometria
   * Point
   * LineString
-  * Poligono
+  * Polygon
   * GeometryCollection
     * MultiPoint
     * MultiLineString
@@ -78,7 +78,7 @@ In LINQ, i metodi e le proprietà NTS disponibili come funzioni di database verr
 
 ## <a name="reverse-engineering"></a>Reverse Engineering
 
-I pacchetti NuGet spaziali abilitano anche [Reverse Engineering](xref:core/managing-schemas/scaffolding) modelli con proprietà spaziali, ma è necessario installare il pacchetto ***prima*** di eseguire `Scaffold-DbContext` o `dotnet ef dbcontext scaffold` . In caso contrario, si riceveranno avvisi relativi alla mancata individuazione dei mapping dei tipi per le colonne e le colonne verranno ignorate.
+I pacchetti NuGet spaziali abilitano anche [Reverse Engineering](xref:core/managing-schemas/scaffolding) modelli con proprietà spaziali, ma è necessario installare il pacchetto * *_prima_* di _ che esegue `Scaffold-DbContext` o `dotnet ef dbcontext scaffold` . In caso contrario, si riceveranno avvisi relativi alla mancata individuazione dei mapping dei tipi per le colonne e le colonne verranno ignorate.
 
 ## <a name="srid-ignored-during-client-operations"></a>SRID ignorato durante le operazioni client
 
@@ -97,9 +97,15 @@ Di seguito è riportato un esempio di utilizzo di ProjNet4GeoAPI per calcolare l
 
 ## <a name="additional-resources"></a>Risorse aggiuntive
 
+### <a name="database-specific-information"></a>Informazioni specifiche del database
+
 Assicurarsi di leggere la documentazione del provider per informazioni aggiuntive sull'utilizzo dei dati spaziali.
 
-* [Dati spaziali nel provider di SQL Server](xref:core/providers/sql-server/spatial)
+_ [Dati spaziali nel provider di SQL Server](xref:core/providers/sql-server/spatial)
 * [Dati spaziali nel provider SQLite](xref:core/providers/sqlite/spatial)
 * [Dati spaziali nel provider npgsql](https://www.npgsql.org/efcore/mapping/nts.html)
+
+### <a name="other-resources"></a>Altre risorse
+
 * [Documentazione di NetTopologySuite](https://nettopologysuite.github.io/NetTopologySuite/)
+* [EF Core sessione standup della community](https://www.youtube.com/watch?v=IHslY5rrxD0&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=15), con particolare attenzione ai dati spaziali e a NetTopologySuite.

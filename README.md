@@ -1,6 +1,6 @@
-## <a name="entity-framework-docs"></a>Entity Framework Docs
+# <a name="entity-framework-docs"></a>Entity Framework Docs
 
-Questo progetto contiene il codice sorgente per EF Core e la documentazione di EF6 disponibile in [docs.Microsoft.com/EF](https://docs.microsoft.com/ef/). 
+Questo progetto contiene il codice sorgente per EF Core e la documentazione di EF6 disponibile in [docs.Microsoft.com/EF](https://docs.microsoft.com/ef/).
 
 I problemi relativi alla documentazione per EF Core e EF6 devono essere archiviati in questo repository. I problemi del prodotto (bug) devono essere archiviati nel [repository EF Core](https://github.com/dotnet/efcore) o nel [repository EF6](https://github.com/dotnet/ef6) , a seconda dei casi.
 

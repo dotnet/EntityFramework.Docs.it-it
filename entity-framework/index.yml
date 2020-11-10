@@ -10,17 +10,17 @@ metadata:
   author: WadePickett
   ms.author: wpickett
   ms.date: 04/15/2020
-  ms.openlocfilehash: a97ca698d4fcd2cf26066e6088a0f88ebc5cf187
-  ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+  ms.openlocfilehash: 6d10d0c8487114548ed70d5ad9b152010ccfbf69
+  ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
   ms.translationtype: MT
   ms.contentlocale: it-IT
-  ms.lasthandoff: 09/14/2020
-  ms.locfileid: "90070354"
+  ms.lasthandoff: 11/10/2020
+  ms.locfileid: "94429195"
 highlightedContent:
   items:
   - title: Entity Framework Core
     itemType: get-started
-    url: core/get-started/index.md
+    url: core/get-started/overview/first-app.md
   - title: Salvare in modo permanente e recuperare dati relazionali con Entity Framework Core
     itemType: learn
     url: /learn/modules/persist-data-ef-core/
@@ -36,13 +36,16 @@ highlightedContent:
   - title: Browser delle informazioni di riferimento sulle API
     itemType: reference
     url: /dotnet/api/?view=efcore-3.1
+  - title: Segui il sondaggio EF Core 6
+    itemType: reference
+    url: https://www.surveymonkey.com/r/XRL3JBL
 additionalContent:
   sections:
   - title: Sviluppare con Entity Framework Core
     items:
     - title: Sviluppare la prima app
       links:
-      - url: core/get-started/index.md
+      - url: core/get-started/overview/first-app.md
         text: App console .NET Core che accede a SQLite con EF Core
       - url: /aspnet/core/data/ef-rp/
         text: App Web Razor Pages ASP.NET Core che accede a LocalDB di SQL Server o a SQLite con EF Core
@@ -70,7 +73,7 @@ additionalContent:
         text: Tutti i provider di database correnti
     - title: Piattaforme
       links:
-      - url: core/platforms/index.md
+      - url: core/miscellaneous/platforms.md
         text: Tutte le piattaforme supportate
       - url: /aspnet/core/data/ef-rp/intro
         text: ASP.NET Core Razor Pages
@@ -88,13 +91,13 @@ additionalContent:
       links:
       - url: core/miscellaneous/connection-strings.md
         text: Stringhe di connessione
-      - url: core/miscellaneous/logging.md
+      - url: core/logging-events-diagnostics/index.md
         text: Registrazione
       - url: core/miscellaneous/connection-resiliency.md
         text: Resilienza della connessione
-      - url: core/miscellaneous/testing/index.md
+      - url: core/testing/index.md
         text: Test
-      - url: core/miscellaneous/configuring-dbcontext.md
+      - url: core/dbcontext-configuration/index.md
         text: Configurare un DbContext
       - url: core/miscellaneous/nullable-reference-types.md
         text: Tipi riferimento nullable
@@ -178,15 +181,15 @@ additionalContent:
         text: Entità disconnesse
     - title: Riferimenti alla riga di comando
       links:
-      - url: core/miscellaneous/cli/index.md
+      - url: core/cli/index.md
         text: Panoramica
-      - url: core/miscellaneous/cli/powershell.md
+      - url: core/cli/powershell.md
         text: Console di Gestione pacchetti (Visual Studio)
-      - url: core/miscellaneous/cli/dotnet.md
+      - url: core/cli/dotnet.md
         text: Interfaccia della riga di comando di .NET Core
-      - url: core/miscellaneous/cli/dbcontext-creation.md
+      - url: core/cli/dbcontext-creation.md
         text: Creazione di DbContext in fase di progettazione
-      - url: core/miscellaneous/cli/services.md
+      - url: core/cli/services.md
         text: Servizi in fase di progettazione
     - title: Versioni precedenti
       links:

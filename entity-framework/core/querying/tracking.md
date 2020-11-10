@@ -2,14 +2,14 @@
 title: Confronto tra query di rilevamento e No-Tracking-EF Core
 description: Informazioni sulle query di rilevamento e senza rilevamento in Entity Framework Core
 author: smitpatel
-ms.date: 10/10/2019
+ms.date: 11/09/2020
 uid: core/querying/tracking
-ms.openlocfilehash: dff6c14edcd69e7d16be8bab5fa3088c2c1288e1
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: b4c059f9a9b726697009589271e007bd1d2afd56
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063660"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430443"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>Rilevamento e query No-Tracking
 
@@ -27,9 +27,11 @@ Per impostazione predefinita, le query che restituiscono tipi di entità sono co
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#Tracking)]
 
+Quando i risultati vengono restituiti in una query di rilevamento, EF Core verificherà se l'entità è già presente nel contesto. Se EF Core trova un'entità esistente, viene restituita la stessa istanza. EF Core non sovrascrive i valori correnti e originali delle proprietà dell'entità nella voce con i valori del database. Se l'entità non viene trovata nel contesto, EF Core creerà una nuova istanza dell'entità e la collegherà al contesto. I risultati della query non contengono alcuna entità, che viene aggiunta al contesto ma non ancora salvata nel database.
+
 ## <a name="no-tracking-queries"></a>Query senza registrazione
 
-Le query senza rilevamento delle modifiche sono utili quando i risultati vengono usati in uno scenario di sola lettura. Sono più veloci da eseguire perché non è necessario impostare le informazioni sul rilevamento delle modifiche. Se non è necessario aggiornare le entità recuperate dal database, è necessario utilizzare una query senza rilevamento. È possibile scambiare una singola query senza tracciare.
+Le query senza rilevamento delle modifiche sono utili quando i risultati vengono usati in uno scenario di sola lettura. Sono più veloci da eseguire perché non è necessario impostare le informazioni sul rilevamento delle modifiche. Se non è necessario aggiornare le entità recuperate dal database, è necessario utilizzare una query senza rilevamento. È possibile scambiare una singola query senza tracciare. Nessuna query di rilevamento fornirà inoltre i risultati in base a ciò che si trova nel database, a causa delle modifiche locali o delle entità aggiunte.
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#NoTracking)]
 
@@ -40,6 +42,10 @@ Le query senza rilevamento delle modifiche sono utili quando i risultati vengono
 ## <a name="identity-resolution"></a>Risoluzione di identità
 
 Poiché una query di rilevamento USA change tracker, EF Core eseguirà la risoluzione delle identità in una query di rilevamento. Quando si materializzazione un'entità, EF Core restituirà la stessa istanza dell'entità dallo strumento di rilevamento delle modifiche, se è già stata rilevata. Se il risultato contiene la stessa entità più volte, viene restituita la stessa istanza per ogni occorrenza. Le query senza rilevamento non usano change tracker e non eseguono la risoluzione delle identità. Quindi, si ottiene una nuova istanza dell'entità anche quando la stessa entità è contenuta nel risultato più volte. Questo comportamento è diverso nelle versioni precedenti EF Core 3,0, vedere [versioni precedenti](#previous-versions).
+
+A partire da EF Core 5,0, è possibile combinare entrambi i comportamenti precedenti nella stessa query. Ovvero, è possibile avere una query senza rilevamento, che eseguirà la risoluzione delle identità nei risultati. Analogamente all' `AsNoTracking()` operatore Queryable, è stato aggiunto un altro operatore `AsNoTrackingWithIdentityResolution()` . In Enum è stata aggiunta anche la voce associata <xref:Microsoft.EntityFrameworkCore.QueryTrackingBehavior> . Quando si configura la query in modo che utilizzi la risoluzione delle identità senza rilevamento, viene utilizzato uno strumento di rilevamento delle modifiche autonomo in background durante la generazione dei risultati della query in modo che ogni istanza venga materializzata una sola volta. Poiché questo strumento di rilevamento delle modifiche è diverso da quello nel contesto, i risultati non vengono rilevati dal contesto. Dopo che la query è stata enumerata completamente, lo strumento di rilevamento delle modifiche esce dall'ambito e sottoposto a Garbage Collection come richiesto.
+
+[!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#NoTrackingWithIdentityResolution)]
 
 ## <a name="tracking-and-custom-projections"></a>Rilevamento e proiezioni personalizzate
 

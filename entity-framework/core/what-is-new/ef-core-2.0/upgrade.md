@@ -4,12 +4,12 @@ description: Istruzioni e note per l'aggiornamento a Entity Framework Core 2,0
 author: ajcvickers
 ms.date: 08/13/2017
 uid: core/what-is-new/ef-core-2.0/upgrade
-ms.openlocfilehash: c7c736629209da99f191ceb0d4000d19f40414b9
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 5054661d308e7ea6acd433981dfb2af6026b7765
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063439"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430092"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>Aggiornamento di applicazioni da versioni precedenti a EF Core 2,0
 
@@ -17,11 +17,11 @@ Abbiamo avuto la possibilità di affinare in modo significativo le API e i compo
 
 L'aggiornamento di un'applicazione esistente a EF Core 2,0 potrebbe richiedere:
 
-1. Aggiornamento dell'implementazione .NET di destinazione dell'applicazione a una che supporta .NET Standard 2,0. Per informazioni dettagliate, vedere [implementazioni di .NET supportate](xref:core/platforms/index) .
+1. Aggiornamento dell'implementazione .NET di destinazione dell'applicazione a una che supporta .NET Standard 2,0. Per informazioni dettagliate, vedere [implementazioni di .NET supportate](xref:core/miscellaneous/platforms) .
 
 2. Identificare un provider per il database di destinazione compatibile con EF Core 2,0. Vedere [EF Core 2,0 richiede un provider di database 2,0 di](#ef-core-20-requires-a-20-database-provider) seguito.
 
-3. Aggiornamento di tutti i pacchetti di EF Core (Runtime e strumenti) a 2,0. Per altri dettagli, vedere [installazione di EF Core](xref:core/get-started/install/index) .
+3. Aggiornamento di tutti i pacchetti di EF Core (Runtime e strumenti) a 2,0. Per altri dettagli, vedere [installazione di EF Core](xref:core/get-started/overview/install) .
 
 4. Apportare le modifiche necessarie al codice per compensare le modifiche di rilievo descritte nel resto di questo documento.
 
@@ -58,7 +58,7 @@ namespace AspNetCoreDotNetCore2._0App
 }
 ```
 
-L'adozione di questo nuovo modello quando si aggiornano le applicazioni a 2,0 è altamente consigliata ed è necessaria per le funzionalità del prodotto, ad esempio Entity Framework Core le migrazioni funzionano. L'altra alternativa comune consiste nell' [implementare *IDesignTimeDbContextFactory \<TContext> *](xref:core/miscellaneous/cli/dbcontext-creation#from-a-design-time-factory).
+L'adozione di questo nuovo modello quando si aggiornano le applicazioni a 2,0 è altamente consigliata ed è necessaria per le funzionalità del prodotto, ad esempio Entity Framework Core le migrazioni funzionano. L'altra alternativa comune consiste nell' [implementare *IDesignTimeDbContextFactory \<TContext>*](xref:core/cli/dbcontext-creation#from-a-design-time-factory).
 
 ## <a name="idbcontextfactory-renamed"></a>IDbContextFactory rinominato
 
@@ -96,7 +96,7 @@ Nota: queste modifiche non dovrebbero avere un effetto sulla maggior parte del c
 
 Gli ID evento per i messaggi inviati a un [ILogger](/dotnet/api/microsoft.extensions.logging.ilogger) sono stati modificati in 2,0. Gli ID evento sono ora univoci nel codice EF Core. Questi messaggi ora seguono inoltre il modello standard per la registrazione strutturata usato, ad esempio, da MVC.
 
-Anche le categorie del logger sono state modificate. È ora disponibile un set di categorie ben noto accessibile tramite [DbLoggerCategory](https://github.com/aspnet/EntityFrameworkCore/blob/rel/2.0.0/src/EFCore/DbLoggerCategory.cs).
+Anche le categorie del logger sono state modificate. È ora disponibile un set di categorie ben noto accessibile tramite [DbLoggerCategory](https://github.com/dotnet/efcore/blob/rel/2.0.0/src/EFCore/DbLoggerCategory.cs).
 
 Gli eventi [DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) ora utilizzano gli stessi nomi di ID evento dei `ILogger` messaggi corrispondenti. I payload dell'evento sono tutti tipi nominali derivati da [EventData](/dotnet/api/microsoft.entityframeworkcore.diagnostics.eventdata).
 
@@ -118,7 +118,7 @@ Dovrebbe ora essere scritto come segue:
 var tableName = context.Model.FindEntityType(typeof(User)).Relational().TableName;
 ```
 
-Anziché usare metodi come `ForSqlServerToTable` , i metodi di estensione sono ora disponibili per scrivere codice condizionale basato sul provider corrente in uso. Ad esempio:
+Anziché usare metodi come `ForSqlServerToTable` , i metodi di estensione sono ora disponibili per scrivere codice condizionale basato sul provider corrente in uso. Esempio:
 
 ```csharp
 modelBuilder.Entity<User>().ToTable(
@@ -135,7 +135,7 @@ EF Core usa un `IServiceProvider` contenitore interno (un contenitore di inserim
 
 ## <a name="in-memory-databases-must-be-named"></a>I database in memoria devono essere denominati
 
-Il database in memoria globale senza nome è stato rimosso, ma è necessario assegnare un nome a tutti i database in memoria. Ad esempio:
+Il database in memoria globale senza nome è stato rimosso, ma è necessario assegnare un nome a tutti i database in memoria. Esempio:
 
 ```csharp
 optionsBuilder.UseInMemoryDatabase("MyDatabase");

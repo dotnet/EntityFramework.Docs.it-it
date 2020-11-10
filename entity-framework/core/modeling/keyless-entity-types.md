@@ -4,19 +4,19 @@ description: Come configurare i tipi di entità autochiave utilizzando Entity Fr
 author: AndriySvyryd
 ms.date: 9/13/2019
 uid: core/modeling/keyless-entity-types
-ms.openlocfilehash: cb4ce44526ada77e37eb4dceb9986a670ea3656b
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: d1a60e0504b22623b97c1a4963d2e3f70faa365c
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063803"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429507"
 ---
 # <a name="keyless-entity-types"></a>Tipi di entità senza chiave
 
 > [!NOTE]
 > Questa funzionalità è stata aggiunta con il nome dei tipi di query. In EF Core 3,0 il concetto è stato rinominato in tipi di entità senza chiave. L' `[Keyless]` annotazione dei dati è diventata disponibile in EFCore 5,0.
 
-Oltre ai normali tipi di entità, un modello di EF Core può contenere _tipi di entità_senza chiave, che possono essere usati per eseguire query di database su dati che non contengono valori di chiave.
+Oltre ai normali tipi di entità, un modello di EF Core può contenere _tipi di entità_ senza chiave, che possono essere usati per eseguire query di database su dati che non contengono valori di chiave.
 
 ## <a name="defining-keyless-entity-types"></a>Definizione di tipi di entità autochiave
 
@@ -60,7 +60,7 @@ Di seguito sono riportati alcuni degli scenari di utilizzo principali per i tipi
 
 ## <a name="mapping-to-database-objects"></a>Mapping a oggetti di database
 
-Il mapping di un tipo di entità autochiave a un oggetto di database viene eseguito tramite l' `ToTable` `ToView` API o Fluent. Dal punto di vista del EF Core, l'oggetto di database specificato in questo metodo è una _vista_, ovvero viene considerato come un'origine di query di sola lettura e non può essere la destinazione di operazioni di aggiornamento, inserimento o eliminazione. Tuttavia, ciò non significa che l'oggetto di database debba essere effettivamente una vista di database. In alternativa, può essere una tabella di database che verrà considerata di sola lettura. Viceversa, per i tipi di entità regolari, EF Core presuppone che un oggetto di database specificato nel `ToTable` metodo possa essere considerato come una _tabella_, ovvero può essere utilizzato come origine della query, ma anche come destinazione da operazioni di aggiornamento, eliminazione e inserimento. In realtà, è possibile specificare il nome di una vista di database in `ToTable` e tutto dovrebbe funzionare correttamente purché la vista sia configurata per essere aggiornabile nel database.
+Il mapping di un tipo di entità autochiave a un oggetto di database viene eseguito tramite l' `ToTable` `ToView` API o Fluent. Dal punto di vista del EF Core, l'oggetto di database specificato in questo metodo è una _vista_ , ovvero viene considerato come un'origine di query di sola lettura e non può essere la destinazione di operazioni di aggiornamento, inserimento o eliminazione. Tuttavia, ciò non significa che l'oggetto di database debba essere effettivamente una vista di database. In alternativa, può essere una tabella di database che verrà considerata di sola lettura. Viceversa, per i tipi di entità regolari, EF Core presuppone che un oggetto di database specificato nel `ToTable` metodo possa essere considerato come una _tabella_ , ovvero può essere utilizzato come origine della query, ma anche come destinazione da operazioni di aggiornamento, eliminazione e inserimento. In realtà, è possibile specificare il nome di una vista di database in `ToTable` e tutto dovrebbe funzionare correttamente purché la vista sia configurata per essere aggiornabile nel database.
 
 > [!NOTE]
 > `ToView` presuppone che l'oggetto sia già presente nel database e non venga creato dalle migrazioni.
@@ -99,3 +99,6 @@ Infine, è possibile eseguire una query sulla vista di database nel modo standar
 
 > [!TIP]
 > Si noti che è stata definita anche una proprietà di query a livello di contesto (DbSet) che funge da radice per le query su questo tipo.
+
+> [!TIP]
+> Per testare i tipi di entità senza chiave mappati alle viste usando il provider in memoria, eseguirne il mapping a una query tramite `ToInMemoryQuery` . Per altri dettagli, vedere un [esempio eseguibile](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) usando questa tecnica.

@@ -4,12 +4,12 @@ description: Uso del seeding dei dati per popolare un database con un set di dat
 author: AndriySvyryd
 ms.date: 11/02/2018
 uid: core/modeling/data-seeding
-ms.openlocfilehash: f8284d7473c6fbcafde25d01ec0709c2d50b666f
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: fefa6232496cd250d52a436971251f59af09f5c6
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063699"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429676"
 ---
 # <a name="data-seeding"></a>Seeding dei dati
 
@@ -66,6 +66,7 @@ Se lo scenario include uno degli elementi seguenti, è consigliabile usare la lo
 
 * Dati temporanei per il test
 * Dati che dipendono dallo stato del database
+* I dati di grandi dimensioni (ovvero il seeding dei dati vengono acquisiti negli snapshot della migrazione e i dati di grandi dimensioni possono rapidamente causare grandi file e prestazioni ridotte).
 * Dati che richiedono la generazione di valori di chiave da parte del database, incluse le entità che utilizzano chiavi alternative come identità
 * Dati che richiedono una trasformazione personalizzata (non gestita da [conversioni di valori](xref:core/modeling/value-conversions)), ad esempio un hash delle password
 * Dati che richiedono chiamate a un'API esterna, ad esempio ASP.NET Core ruoli di identità e creazione di utenti

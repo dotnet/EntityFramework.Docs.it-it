@@ -4,12 +4,12 @@ description: Modifiche e miglioramenti in Entity Framework Core 2,1
 author: ajcvickers
 ms.date: 02/20/2018
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: c98a44f9bc06447bb41f0278c59b412f770c5bd4
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: f235c310cbd336da65cd05d25e1338d87534eb2a
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92065706"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429338"
 ---
 # <a name="new-features-in-ef-core-21"></a>Nuove funzionalità di EF Core 2.1
 
@@ -154,7 +154,7 @@ public class Order
 
 I comandi _dotnet-ef_ sono ora inclusi in .NET Core SDK, pertanto non sarà più necessario usare DotNetCliToolReference nel progetto per essere in grado di usare le migrazioni o eseguire lo scaffolding di un elemento DbContext da un database esistente.
 
-Vedere la sezione sull'[installazione degli strumenti](xref:core/miscellaneous/cli/dotnet#installing-the-tools) per maggiori dettagli su come abilitare gli strumenti da riga di comando per versioni diverse di .NET Core SDK ed EF Core.
+Vedere la sezione sull'[installazione degli strumenti](xref:core/cli/dotnet#installing-the-tools) per maggiori dettagli su come abilitare gli strumenti da riga di comando per versioni diverse di .NET Core SDK ed EF Core.
 
 ## <a name="microsoftentityframeworkcoreabstractions-package"></a>Pacchetto Microsoft.EntityFrameworkCore.Abstractions
 
@@ -178,4 +178,4 @@ var query = context.People.FromSql(sql);
 È consigliabile usare EF Core 2.1 con provider che siano stati aggiornati o almeno testati per essere usati con EF Core 2.1.
 
 > [!TIP]
-> Se si rilevano incompatibilità impreviste o qualsiasi problema per le nuove funzionalità o se si desidera inviare commenti o suggerimenti, usare lo [strumento per la registrazione dei problemi](https://github.com/aspnet/EntityFrameworkCore/issues/new).
+> Se si rilevano incompatibilità impreviste o qualsiasi problema per le nuove funzionalità o se si desidera inviare commenti o suggerimenti, usare lo [strumento per la registrazione dei problemi](https://github.com/dotnet/efcore/issues/new).

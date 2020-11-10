@@ -5,12 +5,12 @@ author: jeremylikness
 ms.author: jeliknes
 ms.date: 07/24/2020
 uid: core/get-started/wpf
-ms.openlocfilehash: 1198da5c9564663ca26392b33462c727275a432d
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: f183064fafbe2d0e7b8dbdafa921169afc9ffe78
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619310"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429923"
 ---
 # <a name="getting-started-with-wpf"></a>Introduzione a WPF
 
@@ -21,20 +21,18 @@ Il modello definisce due tipi che fanno parte di una relazione uno-a-molti: **ca
 Le schermate e gli elenchi di codice in questa procedura dettagliata sono ricavati da Visual Studio 2019 16.6.5.
 
 > [!TIP]
-> È possibile visualizzare l'esempio di questo articolo [in GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/WPF).
+> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/WPF) di questo articolo in GitHub.
 
 ## <a name="pre-requisites"></a>Prerequisiti
 
-* Per completare questa procedura dettagliata, è necessario aver installato Visual Studio 2019 16,3 o versione successiva con il **carico di lavoro di .NET desktop** selezionato.
-    
-    Per ulteriori informazioni sull'installazione della versione più recente di Visual Studio, vedere [Install Visual Studio](/visualstudio/install/install-visual-studio).
+Per completare questa procedura dettagliata, è necessario aver installato Visual Studio 2019 16,3 o versione successiva con il **carico di lavoro di .NET desktop** selezionato. Per ulteriori informazioni sull'installazione della versione più recente di Visual Studio, vedere [Install Visual Studio](/visualstudio/install/install-visual-studio).
 
 ## <a name="create-the-application"></a>Creare l'applicazione
 
 1. Aprire Visual Studio.
 2. Nella finestra iniziale scegliere **Crea nuovo progetto**.
 3. Cercare "WPF", scegliere **app WPF (.NET Core)** , quindi fare clic su **Avanti**.
-4. Nella schermata successiva assegnare un nome al progetto, ad esempio **GetStartedWPF**, e scegliere **Crea.**
+4. Nella schermata successiva assegnare un nome al progetto, ad esempio **GetStartedWPF** , e scegliere **Crea.**
 
 ## <a name="install-the-entity-framework-nuget-packages"></a>Installare i pacchetti NuGet di Entity Framework
 
@@ -51,7 +49,7 @@ Le schermate e gli elenchi di codice in questa procedura dettagliata sono ricava
 1. Ripetere i passaggi per cercare `entityframeworkcore.proxies` e installare **Microsoft. EntityFrameworkCore. proxy**.
 
 > [!NOTE]
-> Quando è stato installato il pacchetto SQLite, viene automaticamente eseguito il pull del pacchetto di base **Microsoft. EntityFrameworkCore** correlato. Il pacchetto **Microsoft. EntityFrameworkCore. proxy** fornisce supporto per i dati di caricamento lazy. Ciò significa che quando si hanno entità con entità figlio, solo gli elementi padre vengono recuperati al caricamento iniziale. I proxy rilevano quando viene eseguito un tentativo di accesso alle entità figlio e li carica automaticamente su richiesta. 
+> Quando è stato installato il pacchetto SQLite, viene automaticamente eseguito il pull del pacchetto di base **Microsoft. EntityFrameworkCore** correlato. Il pacchetto **Microsoft. EntityFrameworkCore. proxy** fornisce supporto per i dati di caricamento lazy. Ciò significa che quando si hanno entità con entità figlio, solo gli elementi padre vengono recuperati al caricamento iniziale. I proxy rilevano quando viene eseguito un tentativo di accesso alle entità figlio e li carica automaticamente su richiesta.
 
 ## <a name="define-a-model"></a>Definire un modello
 
@@ -82,7 +80,7 @@ Aggiungere una nuova `ProductContext.cs` classe al progetto con la definizione s
 [!code-csharp[](../../../samples/core/WPF/GetStartedWPF/GetStartedWPF/ProductContext.cs)]
 
 * `DbSet`Informa EF Core quali entità C# devono essere mappate al database.
-* Esistono diversi modi per configurare la EF Core `DbContext` . È possibile leggere le informazioni in: [configurazione di un DbContext](xref:core/miscellaneous/configuring-dbcontext).
+* Esistono diversi modi per configurare la EF Core `DbContext` . È possibile leggere le informazioni in: [configurazione di un DbContext](xref:core/dbcontext-configuration/index).
 * Questo esempio usa l' `OnConfiguring` override per specificare un file di dati SQLite.
 * La `UseLazyLoadingProxies` chiamata indica EF Core di implementare il caricamento lazy, in modo che le entità figlio vengano caricate automaticamente al momento dell'accesso dall'elemento padre.
 
@@ -97,7 +95,7 @@ La proprietà **Products** della classe **Category** e della proprietà **Catego
 
 EF Core offre la possibilità di caricare automaticamente le entità correlate dal database al primo accesso alla proprietà di navigazione. Con questo tipo di caricamento (denominato caricamento lazy), tenere presente che la prima volta che si accede a ogni proprietà di navigazione viene eseguita una query separata sul database se il contenuto non è già presente nel contesto.
 
-Quando si usano tipi di entità POCO (Plain Old C# Object), EF Core ottiene il caricamento lazy creando istanze di tipi proxy derivati durante il runtime e quindi eseguendo l'override delle proprietà virtuali nelle classi per aggiungere l'hook di caricamento. Per ottenere il caricamento lazy di oggetti correlati, è necessario dichiarare i getter della proprietà di navigazione come **public** e **Virtual** (**sottoponibile a override** in Visual Basic) e la classe non deve essere **sealed** (**NotOverridable** in Visual Basic). Quando si usa Database First, le proprietà di navigazione vengono rese automaticamente virtuali per consentire il caricamento lazy. 
+Quando si usano tipi di entità POCO (Plain Old C# Object), EF Core ottiene il caricamento lazy creando istanze di tipi proxy derivati durante il runtime e quindi eseguendo l'override delle proprietà virtuali nelle classi per aggiungere l'hook di caricamento. Per ottenere il caricamento lazy di oggetti correlati, è necessario dichiarare i getter della proprietà di navigazione come **public** e **Virtual** ( **sottoponibile a override** in Visual Basic) e la classe non deve essere **sealed** ( **NotOverridable** in Visual Basic). Quando si usa Database First, le proprietà di navigazione vengono rese automaticamente virtuali per consentire il caricamento lazy.
 
 ## <a name="bind-object-to-controls"></a>Associa oggetto a controlli
 
@@ -136,14 +134,14 @@ La visualizzazione progettazione dovrebbe essere simile alla seguente:
 
 È il momento di aggiungere alcuni gestori di eventi alla finestra principale.
 
-1. Nella finestra XAML fare clic sull'elemento ** &lt; Window ( &gt; finestra** ) per selezionare la finestra principale.
+1. Nella finestra XAML fare clic sull'elemento **&lt; Window ( &gt; finestra** ) per selezionare la finestra principale.
 1. Nella finestra **Proprietà** scegliere **eventi** in alto a destra, quindi fare doppio clic sulla casella di testo a destra dell'etichetta **caricata** .
 
     ![Proprietà della finestra principale](_static/wpf-tutorial-loaded.jpg)
 
 In questo modo viene riportato il codice sottostante per il modulo. verrà ora modificato il codice per usare `ProductContext` per eseguire l'accesso ai dati. Aggiornare il codice come illustrato di seguito.
 
-Il codice dichiara un'istanza con esecuzione prolungata di `ProductContext` . L' `ProductContext` oggetto viene utilizzato per eseguire query e salvare i dati nel database. Il `Dispose()` metodo sull' `ProductContext` istanza viene quindi chiamato dal metodo sottoposto a override `OnClosing` .I commenti del codice spiegano cosa accade in ogni passaggio.
+Il codice dichiara un'istanza con esecuzione prolungata di `ProductContext` . L' `ProductContext` oggetto viene utilizzato per eseguire query e salvare i dati nel database. Il `Dispose()` metodo sull' `ProductContext` istanza viene quindi chiamato dal metodo sottoposto a override `OnClosing` . I commenti del codice spiegano cosa accade in ogni passaggio.
 
 **`MainWindow.xaml.cs`**
 
@@ -174,4 +172,4 @@ Questa operazione è valida per l'esempio introduttivo, ma potrebbe essere neces
 
 ## <a name="next-steps"></a>Passaggi successivi
 
-Altre informazioni sulla [configurazione di un DbContext](xref:core/miscellaneous/configuring-dbcontext).
+Altre informazioni sulla [configurazione di un DbContext](xref:core/dbcontext-configuration/index).

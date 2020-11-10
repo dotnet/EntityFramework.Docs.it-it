@@ -4,16 +4,16 @@ description: Informazioni sul provider di database Entity Framework Core InMemor
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/providers/in-memory/index
-ms.openlocfilehash: 1857ebbfa0eded1572220825a5b0d75961bcf3dd
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 1af75088ae892e3b428caf6bdb31dd2b750a05fe
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92064011"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430170"
 ---
 # <a name="ef-core-in-memory-database-provider"></a>Provider di database InMemory per Entity Framework Core
 
-Questo provider di database consente l'uso di Entity Framework Core con un database in memoria. Il database in memoria può essere utile per il testing, anche se il provider SQLite in modalità in memoria può essere una sostituzione dei test più appropriata per i database relazionali. Il database in memoria è progettato solo per i test. Il provider viene gestito nell'ambito del [progetto Entity Framework Core](https://github.com/aspnet/EntityFrameworkCore).
+Questo provider di database consente l'uso di Entity Framework Core con un database in memoria. Il database in memoria può essere utile per il testing, anche se il provider SQLite in modalità in memoria può essere una sostituzione dei test più appropriata per i database relazionali. Il database in memoria è progettato solo per i test. Il provider viene gestito nell'ambito del [progetto Entity Framework Core](https://github.com/dotnet/efcore).
 
 ## <a name="install"></a>Installazione
 
@@ -37,7 +37,7 @@ Install-Package Microsoft.EntityFrameworkCore.InMemory
 
 Per acquisire familiarità con il provider, usare le risorse seguenti.
 
-* [Testing with InMemory](xref:core/miscellaneous/testing/in-memory) (Test con InMemory)
+* [Testing with InMemory](xref:core/testing/in-memory) (Test con InMemory)
 * [UnicornStore Sample Application Tests](https://github.com/rowanmiller/UnicornStore/blob/master/UnicornStore/src/UnicornStore.Tests/Controllers/ShippingControllerTests.cs) (Test dell'applicazione di esempio UnicornStore)
 
 ## <a name="supported-database-engines"></a>Motori di database supportati

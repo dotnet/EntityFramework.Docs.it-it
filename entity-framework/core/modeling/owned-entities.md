@@ -4,12 +4,12 @@ description: Come configurare i tipi di entità o le aggregazioni di proprietà 
 author: AndriySvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: a49d9aab735232dfd5a3db456410d527f94f3c18
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 36f756b70c9ad1727c48b5c789fd324c9dc6cd29
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063777"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429437"
 ---
 # <a name="owned-entity-types"></a>Tipi di entità di proprietà
 
@@ -36,6 +36,10 @@ In questo esempio `StreetAddress` è un tipo senza proprietà Identity. Viene us
 Se la `ShippingAddress` proprietà è privata nel `Order` tipo, è possibile usare la versione in formato stringa del `OwnsOne` Metodo:
 
 [!code-csharp[OwnsOneString](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsOneString)]
+
+Il modello precedente è mappato allo schema di database seguente:
+
+![Sceenshot del modello di database per l'entità che contiene il riferimento di proprietà](_static/owned-entities-ownsone.png)
 
 Per ulteriori informazioni sul contesto, vedere il [progetto di esempio completo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/OwnedEntities) .
 
@@ -68,6 +72,10 @@ Per impostazione predefinita, la chiave primaria utilizzata per il tipo di propr
 Per configurare una chiamata di chiave primaria diversa `HasKey` .
 
 [!code-csharp[OwnsMany](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsMany)]
+
+Il modello precedente è mappato allo schema di database seguente:
+
+![Sceenshot del modello di database per l'entità che contiene la raccolta di proprietà](_static/owned-entities-ownsmany.png)
 
 ## <a name="mapping-owned-types-with-table-splitting"></a>Mapping dei tipi di proprietà con suddivisione della tabella
 
@@ -119,6 +127,10 @@ Si noti la `WithOwner` chiamata utilizzata per definire la proprietà di navigaz
 È anche possibile ottenere questo risultato usando `OwnedAttribute` sia in che in `OrderDetails` `StreetAddress` .
 
 Si noti inoltre la `Navigation` chiamata a. In EFCore 5,0, le proprietà di navigazione ai tipi di proprietà possono essere configurate ulteriormente [come per le proprietà di navigazione non di proprietà](xref:core/modeling/relationships#configuring-navigation-properties).
+
+Il modello precedente è mappato allo schema di database seguente:
+
+![Sceenshot del modello di database per l'entità che contiene riferimenti di proprietà annidati](_static/owned-entities-nested.png)
 
 ## <a name="storing-owned-types-in-separate-tables"></a>Archiviazione di tipi di proprietà in tabelle separate
 

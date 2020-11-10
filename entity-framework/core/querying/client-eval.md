@@ -2,14 +2,14 @@
 title: Valutazione client e server-EF Core
 description: Valutazione del client e del server delle query con Entity Framework Core
 author: smitpatel
-ms.date: 10/03/2019
+ms.date: 11/09/2020
 uid: core/querying/client-eval
-ms.openlocfilehash: f2e80541439de8cc824c182e52400f730dd2af48
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: a1ddfb625be36cb05f01da08eb3be29512c54ab5
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062711"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430144"
 ---
 # <a name="client-vs-server-evaluation"></a>Valutazione client e server
 
@@ -46,19 +46,22 @@ In questi casi, è possibile acconsentire esplicitamente alla valutazione del cl
 
 [!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ExplicitClientEvaluation)]
 
+> [!TIP]
+> Se si usa `AsAsyncEnumerable` e si vuole comporre ulteriormente la query sul lato client, è possibile usare la libreria [System. Interactive. Async](https://www.nuget.org/packages/System.Interactive.Async/) che definisce gli operatori per gli Enumerable asincroni. Per ulteriori informazioni, vedere [operatori LINQ sul lato client](xref:core/miscellaneous/async#client-side-async-linq-operators).
+
 ## <a name="potential-memory-leak-in-client-evaluation"></a>Potenziale perdita di memoria nella valutazione client
 
 Poiché la conversione e la compilazione di query sono costose, EF Core memorizza nella cache il piano di query compilato. Il delegato memorizzato nella cache può usare il codice client durante la valutazione client della proiezione di primo livello. EF Core genera parametri per le parti valutate dal client dell'albero di e riutilizza il piano di query sostituendo i valori dei parametri. Tuttavia, alcune costanti nell'albero delle espressioni non possono essere convertite in parametri. Se il delegato memorizzato nella cache contiene tali costanti, tali oggetti non possono essere sottoposti a Garbage Collection perché sono ancora a cui viene fatto riferimento. Se un oggetto di questo tipo contiene un DbContext o altri servizi, può causare un aumento dell'utilizzo della memoria dell'app nel tempo. Questo comportamento è in genere un segno di una perdita di memoria. EF Core genera un'eccezione ogni volta che viene rilevata una costante di un tipo che non può essere mappato utilizzando il provider di database corrente. Di seguito sono riportate le cause più comuni e le relative soluzioni:
 
-- **Uso di un metodo di istanza**: quando si usano i metodi di istanza in una proiezione client, l'albero delle espressioni contiene una costante dell'istanza. Se il metodo non utilizza dati provenienti dall'istanza, provare a rendere statico il metodo. Se sono necessari dati dell'istanza nel corpo del metodo, passare i dati specifici come argomento al metodo.
-- **Passaggio di argomenti costanti al metodo**: questo caso si verifica generalmente usando `this` in un argomento del metodo client. Provare a suddividere l'argomento in in più argomenti scalari, che possono essere mappati dal provider di database.
-- **Altre costanti**: se una costante si trova in un altro caso, è possibile valutare se la costante è necessaria nell'elaborazione. Se è necessario disporre della costante o se non è possibile usare una soluzione nei casi precedenti, creare una variabile locale per archiviare il valore e usare la variabile locale nella query. EF Core convertirà la variabile locale in un parametro.
+- **Uso di un metodo di istanza** : quando si usano i metodi di istanza in una proiezione client, l'albero delle espressioni contiene una costante dell'istanza. Se il metodo non utilizza dati provenienti dall'istanza, provare a rendere statico il metodo. Se sono necessari dati dell'istanza nel corpo del metodo, passare i dati specifici come argomento al metodo.
+- **Passaggio di argomenti costanti al metodo** : questo caso si verifica generalmente usando `this` in un argomento del metodo client. Provare a suddividere l'argomento in in più argomenti scalari, che possono essere mappati dal provider di database.
+- **Altre costanti** : se una costante si trova in un altro caso, è possibile valutare se la costante è necessaria nell'elaborazione. Se è necessario disporre della costante o se non è possibile usare una soluzione nei casi precedenti, creare una variabile locale per archiviare il valore e usare la variabile locale nella query. EF Core convertirà la variabile locale in un parametro.
 
 ## <a name="previous-versions"></a>Versioni precedenti
 
 La sezione seguente si applica alle versioni EF Core precedenti 3,0.
 
-Le versioni precedenti di EF Core supportano la valutazione client in qualsiasi parte della query, non solo la proiezione di primo livello. Per questo motivo, le query simili a quelle pubblicate sotto la sezione di [valutazione client non supportata](#unsupported-client-evaluation) hanno funzionato correttamente. Poiché questo comportamento potrebbe causare problemi di prestazioni inosservati, EF Core registrato un avviso di valutazione del client. Per ulteriori informazioni sulla visualizzazione dell'output di registrazione, vedere [registrazione](xref:core/miscellaneous/logging).
+Le versioni precedenti di EF Core supportano la valutazione client in qualsiasi parte della query, non solo la proiezione di primo livello. Per questo motivo, le query simili a quelle pubblicate sotto la sezione di [valutazione client non supportata](#unsupported-client-evaluation) hanno funzionato correttamente. Poiché questo comportamento potrebbe causare problemi di prestazioni inosservati, EF Core registrato un avviso di valutazione del client. Per ulteriori informazioni sulla visualizzazione dell'output di registrazione, vedere [registrazione](xref:core/logging-events-diagnostics/index).
 
 Facoltativamente EF Core consentito modificare il comportamento predefinito in modo da generare un'eccezione o non eseguire alcuna operazione durante la valutazione del client (ad eccezione di nella proiezione). Il comportamento di generazione delle eccezioni lo renderebbe simile al comportamento in 3,0. Per modificare il comportamento, è necessario configurare gli avvisi durante la configurazione delle opzioni per il contesto, in genere in `DbContext.OnConfiguring` o in `Startup.cs` se si usa ASP.NET Core.
 

@@ -4,12 +4,12 @@ description: Uso di filtri di query globali per filtrare i risultati con Entity 
 author: maumar
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: 8a9eabd7e86864c9ebb4b1dc4a06bf7fc207d496
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 6436f9f8e2e09d44ef9528fd2022720d40095fe0
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062607"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430131"
 ---
 # <a name="global-query-filters"></a>Filtri di query globali
 
@@ -46,6 +46,21 @@ Le espressioni del predicato passate alle `HasQueryFilter` chiamate verranno ora
 ## <a name="use-of-navigations"></a>Uso delle navigazioni
 
 È inoltre possibile utilizzare le navigazioni nella definizione dei filtri di query globali. Se si utilizzano le navigazioni in filtro query, i filtri query verranno applicati in modo ricorsivo. Quando EF Core espande le navigazioni utilizzate nei filtri di query, verranno applicati anche i filtri di query definiti sulle entità a cui si fa riferimento.
+
+Per illustrare questa configurazione, configurare i filtri query in `OnModelCreating` nel modo seguente: [!code-csharp[Main](../../../samples/core/Querying/QueryFilters/FilteredBloggingContextRequired.cs#NavigationInFilter)]
+
+Eseguire quindi una query per tutte le `Blog` entità: [!code-csharp[Main](../../../samples/core/Querying/QueryFilters/FilteredBloggingContextRequired.cs#QueriesNavigation)]
+
+Questa query produce il codice SQL seguente che applica i filtri di query definiti per le `Blog` `Post` entità e:
+
+```sql
+SELECT [b].[BlogId], [b].[Name], [b].[Url]
+FROM [Blogs] AS [b]
+WHERE (
+    SELECT COUNT(*)
+    FROM [Posts] AS [p]
+    WHERE ([p].[Title] LIKE N'%fish%') AND ([b].[BlogId] = [p].[BlogId])) > 0
+```
 
 > [!NOTE]
 > Attualmente EF Core non rileva i cicli nelle definizioni di filtro delle query globali, quindi è necessario prestare attenzione durante la definizione. Se specificato in modo non corretto, i cicli potrebbero causare cicli infiniti durante la conversione delle query.

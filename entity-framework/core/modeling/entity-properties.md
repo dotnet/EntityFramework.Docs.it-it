@@ -4,12 +4,12 @@ description: Come configurare e mappare le proprietà di un'entità usando Entit
 author: roji
 ms.date: 05/27/2020
 uid: core/modeling/entity-properties
-ms.openlocfilehash: 99b0a9ee1e11714e98ebea8b2e6ac53bd2dc6e55
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 55c6f31543d4ce3257cf203eaf9fd2191301ea7e
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062295"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429596"
 ---
 # <a name="entity-properties"></a>Proprietà delle entità
 
@@ -45,7 +45,7 @@ Se si preferisce configurare le colonne con nomi diversi, è possibile eseguire 
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnName.cs?Name=ColumnName&highlight=3-5)]
 
-***
+**_
 
 ## <a name="column-data-types"></a>Tipi di dati delle colonne
 
@@ -63,7 +63,7 @@ Ad esempio, SQL Server esegue `DateTime` il mapping delle proprietà alle `datet
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnDataType.cs?name=ColumnDataType&highlight=5-6)]
 
-***
+_*_
 
 ### <a name="maximum-length"></a>Lunghezza massima
 
@@ -82,7 +82,7 @@ Nell'esempio seguente, la configurazione di una lunghezza massima di 500 causer�
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/MaxLength.cs?name=MaxLength&highlight=3-5)]
 
-***
+_*_
 
 ### <a name="precision-and-scale"></a>Precisione e scala
 
@@ -97,7 +97,7 @@ Nell'esempio seguente, se si configura la `Score` Proprietà in modo che la prec
 
 #### <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
 
-Attualmente non è possibile usare le annotazioni dei dati per la configurazione.
+Non è attualmente possibile configurare la precisione e la scala tramite le annotazioni dei dati.
 
 #### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
@@ -106,7 +106,7 @@ Attualmente non è possibile usare le annotazioni dei dati per la configurazione
 > [!NOTE]
 > La scala non viene mai definita senza prima definire la precisione, quindi l'API Fluent per la definizione della scala è `HasPrecision(precision, scale)` .
 
-***
+_*_
 
 ## <a name="required-and-optional-properties"></a>Proprietà obbligatorie e facoltative
 
@@ -116,18 +116,18 @@ Una proprietà è considerata facoltativa se è valida per contenerla `null` . S
 
 Per convenzione, una proprietà il cui tipo .NET può contenere null verrà configurato come facoltativo, mentre le proprietà il cui tipo .NET non può contenere valori null verranno configurate in base alle esigenze. Tutte le proprietà con tipi di valore .NET ( `int` , `decimal` , e così via), ad esempio, `bool` sono configurate come obbligatorie e tutte le proprietà con tipi di valore .NET Nullable ( `int?` , `decimal?` , `bool?` e così via) sono configurate come facoltative.
 
-In C# 8 è stata introdotta una nuova funzionalità denominata [tipi di riferimento Nullable](/dotnet/csharp/tutorials/nullable-reference-types), che consente di aggiungere annotazioni ai tipi di riferimento, indicando se è possibile che contengano null o meno. Questa funzionalità è disabilitata per impostazione predefinita e, se abilitata, modifica il comportamento del EF Core nel modo seguente:
+In C# 8 è stata introdotta una nuova funzionalità denominata [tipi di riferimento Nullable (NRT)](/dotnet/csharp/tutorials/nullable-reference-types), che consente di aggiungere annotazioni ai tipi di riferimento, indicando se è valido per consentirne la presenza di valori null. Questa funzionalità è disabilitata per impostazione predefinita e influiscono sul comportamento di EF Core nel modo seguente:
 
-* Se i tipi di riferimento nullable sono disabilitati (impostazione predefinita), tutte le proprietà con i tipi di riferimento .NET vengono configurate come facoltative per convenzione, ad esempio `string` .
+_ Se i tipi di riferimento nullable sono disabilitati (impostazione predefinita), tutte le proprietà con i tipi di riferimento .NET sono configurate come facoltative per convenzione (ad esempio, `string` ).
 * Se sono abilitati i tipi di riferimento Nullable, le proprietà verranno configurate in base al supporto di valori null C# del tipo .NET: `string?` verranno configurate come facoltative, ma `string` verranno configurate in base alle esigenze.
 
 Nell'esempio seguente viene illustrato un tipo di entità con proprietà obbligatorie e facoltative, con la funzionalità di riferimento Nullable disabilitata (impostazione predefinita) e abilitata:
 
-#### <a name="without-nullable-reference-types-default"></a>[Senza tipi di riferimento Nullable (impostazione predefinita)](#tab/without-nrt)
+#### <a name="without-nrt-default"></a>[Senza NRT (impostazione predefinita)](#tab/without-nrt)
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithoutNullableReferenceTypes.cs?name=Customer&highlight=4-8)]
 
-#### <a name="with-nullable-reference-types"></a>[Con tipi di riferimento Nullable](#tab/with-nrt)
+#### <a name="with-nrt"></a>[Con NRT](#tab/with-nrt)
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Customer.cs?name=Customer&highlight=4-6)]
 

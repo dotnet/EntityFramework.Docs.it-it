@@ -4,12 +4,12 @@ description: Funzionalità pianificate per Entity Framework Core 5,0
 author: ajcvickers
 ms.date: 08/22/2020
 uid: core/what-is-new/ef-core-5.0/plan
-ms.openlocfilehash: 5ac7a48a70959b625b7c602ee48dc08a360bee73
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: f2639e41499f3bfca5942d613922fd97212fc2b9
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618673"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429234"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>Pianificare Entity Framework Core 5,0
 
@@ -44,18 +44,18 @@ Sono state estratte alcune aree o temi principali che costituiranno la base per 
 
 Sviluppatori leader: @smitpatel , @AndriySvyryd e @lajones
 
-Rilevato da [#10508](https://github.com/aspnet/EntityFrameworkCore/issues/10508)
+Rilevato da [#10508](https://github.com/dotnet/efcore/issues/10508)
 
 Dimensioni della maglietta: L
 
 Stato: completato
 
-Many-to-many è la [funzionalità più richiesta](https://github.com/aspnet/EntityFrameworkCore/issues/1368) (~ 506 voti) nel backlog di GitHub.
+Many-to-many è la [funzionalità più richiesta](https://github.com/dotnet/efcore/issues/1368) (~ 506 voti) nel backlog di GitHub.
 
 Il supporto per le relazioni molti-a-molti può essere suddiviso in tre aree principali:
 
 * Ignorare le proprietà di navigazione: coperte dal tema successivo.
-* Tipi di entità del contenitore delle proprietà. Questi consentono un tipo CLR standard (ad esempio `Dictionary` ) da usare per le istanze di entità in modo che un tipo CLR esplicito non sia necessario per ogni tipo di entità. Rilevato da [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914).
+* Tipi di entità del contenitore delle proprietà. Questi consentono un tipo CLR standard (ad esempio `Dictionary` ) da usare per le istanze di entità in modo che un tipo CLR esplicito non sia necessario per ogni tipo di entità. Rilevato da [#9914](https://github.com/dotnet/efcore/issues/9914).
 * Sugar per semplificare la configurazione di relazioni molti-a-molti.
 
 Oltre al supporto per l'esplorazione, è ora possibile effettuare il pull di queste altre aree di molti-a-molti in EF Core 5,0 per offrire un'esperienza completa.
@@ -64,7 +64,7 @@ Oltre al supporto per l'esplorazione, è ora possibile effettuare il pull di que
 
 Sviluppatori leader: @smitpatel e @AndriySvyryd
 
-Rilevato da [#19003](https://github.com/aspnet/EntityFrameworkCore/issues/19003)
+Rilevato da [#19003](https://github.com/dotnet/efcore/issues/19003)
 
 Dimensioni della maglietta: L
 
@@ -79,7 +79,7 @@ Il tipo di entità tabella di join può ancora esistere, ma non dovrebbe essere 
 
 Sviluppatore principale: @AndriySvyryd e @smitpatel
 
-Rilevato da [#2266](https://github.com/aspnet/EntityFrameworkCore/issues/2266)
+Rilevato da [#2266](https://github.com/dotnet/efcore/issues/2266)
 
 Dimensioni della maglietta: XL
 
@@ -91,7 +91,7 @@ Stiamo eseguendo TPT perché si tratta di una funzionalità estremamente richies
 
 Sviluppatore principale: @maumar
 
-Rilevato da [#1833](https://github.com/aspnet/EntityFrameworkCore/issues/1833)
+Rilevato da [#1833](https://github.com/dotnet/efcore/issues/1833)
 
 Dimensioni T-Shirt: M
 
@@ -131,7 +131,7 @@ In EF Core 3,0 tutti i dipendenti, inclusi i tipi di proprietà, sono facoltativ
 
 Sviluppatori leader: @AndriySvyryd e @smitpatel
 
-Rilevato da [#17270](https://github.com/aspnet/EntityFrameworkCore/issues/17270)
+Rilevato da [#17270](https://github.com/dotnet/efcore/issues/17270)
 
 Dimensioni della maglietta: L
 
@@ -302,7 +302,7 @@ Oltre alle funzionalità più importanti descritte in precedenza, sono stati rip
 
 ## <a name="below-the-line"></a>Sotto la riga
 
-Rilevato da [problemi con `consider-for-next-release` etichetta](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+label%3Aconsider-for-next-release)
+Rilevato da [problemi con `consider-for-next-release` etichetta](https://github.com/dotnet/efcore/issues?q=is%3Aopen+is%3Aissue+label%3Aconsider-for-next-release)
 
 Si tratta di correzioni di bug e miglioramenti che **non** sono attualmente pianificati per la versione 5,0, ma verranno esaminati come obiettivi di estensione a seconda dello stato di avanzamento del lavoro precedente.
 

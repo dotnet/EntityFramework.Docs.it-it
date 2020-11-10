@@ -4,12 +4,12 @@ description: Strategie per l'applicazione delle migrazioni dello schema ai datab
 author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: 68d482a34e5f5c7acf968acdfd8825e1d21ecb13
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 7ff84636fb0999941b832c6a2d65d77b0ad368c5
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062347"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429851"
 ---
 # <a name="applying-migrations"></a>Applicazione di migrazioni
 
@@ -83,6 +83,7 @@ Il codice seguente genera uno script SQL dalla `from` migrazione specificata all
 ```powershell
 Script-Migration AddNewTables AddAuditTable
 ```
+
 È possibile usare un `from` più recente rispetto a `to` per generare uno script di rollback. *Tenere conto degli scenari con potenziale perdita di dati.*
 
 ***
@@ -98,25 +99,25 @@ Gli script SQL generati in precedenza possono essere applicati solo per modifica
 
 Il codice seguente genera migrazioni idempotente:
 
-#### <a name="net-core-cli"></a>[Interfaccia della riga di comando di .NET Core](#tab/dotnet-core-cli)
+### <a name="net-core-cli"></a>[Interfaccia della riga di comando di .NET Core](#tab/dotnet-core-cli)
 
 ```dotnetcli
 dotnet ef migrations script --idempotent
 ```
 
-#### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ```powershell
 Script-Migration -Idempotent
 ```
 
-***
+**_
 
 ## <a name="command-line-tools"></a>Strumenti da riga di comando
 
 Gli strumenti da riga di comando EF possono essere usati per applicare le migrazioni a un database. Sebbene sia produttivo per lo sviluppo e il test locali delle migrazioni, questo approccio non è ideale per la gestione dei database di produzione:
 
-* I comandi SQL vengono applicati direttamente dallo strumento, senza concedere allo sviluppatore la possibilità di ispezionarli o modificarli. Questa situazione può essere pericolosa in un ambiente di produzione.
+_ I comandi SQL vengono applicati direttamente dallo strumento, senza concedere allo sviluppatore la possibilità di ispezionarli o modificarli. Questa situazione può essere pericolosa in un ambiente di produzione.
 * .NET SDK e lo strumento EF devono essere installati nei server di produzione.
 
 ### <a name="net-core-cli"></a>[Interfaccia della riga di comando di .NET Core](#tab/dotnet-core-cli)
@@ -159,7 +160,7 @@ Si noti che questa operazione può essere usata anche per eseguire il rollback a
 
 ***
 
-Per ulteriori informazioni sull'applicazione delle migrazioni tramite gli strumenti da riga di comando, vedere la Guida di [riferimento agli strumenti EF Core](xref:core/miscellaneous/cli/index).
+Per ulteriori informazioni sull'applicazione delle migrazioni tramite gli strumenti da riga di comando, vedere la Guida di [riferimento agli strumenti EF Core](xref:core/cli/index).
 
 ## <a name="apply-migrations-at-runtime"></a>Applicare migrazioni al runtime
 

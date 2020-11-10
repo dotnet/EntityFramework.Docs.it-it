@@ -4,12 +4,12 @@ description: Informazioni generali sul trasferimento di un'applicazione da Entit
 author: ajcvickers
 ms.date: 10/27/2016
 uid: efcore-and-ef6/porting/index
-ms.openlocfilehash: 0dfb4cc5f7c65aa081d0175708a0db95b0688e50
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: d50def47e65455c8cf5242cad4386f157148c0bc
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92064211"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429208"
 ---
 # <a name="porting-from-ef6-to-ef-core"></a>Conversione da EF6 a EF Core
 
@@ -33,17 +33,12 @@ Quando in EF6 si chiama `DbSet.Add()` su un'entità viene eseguita una ricerca r
 
 **EF Core esegue una ricerca ricorsiva simile, ma con alcune regole leggermente diverse.**
 
-*  L'entità radice è sempre nello stato richiesto (aggiunto per `DbSet.Add` e non modificato per `DbSet.Attach`).
-
-*  **Per le entità rilevate durante la ricerca ricorsiva delle proprietà di navigazione:**
-
-    *  **Se la chiave primaria dell'entità è generata dall'archivio**
-
-        * Se la chiave primaria non è impostata su un valore, lo stato viene impostato su aggiunto. Il valore della chiave primaria viene considerato come "non impostato" se riceve il valore CLR predefinito per il tipo di proprietà, ad esempio `0` per `int`, `null` per `string` e così via.
-
-        * Se la chiave primaria è impostata su un valore, lo stato è impostato su non modificato.
-
-    *  Se la chiave primaria non è generata dal database, l'entità viene impostata con lo stesso stato della radice.
+* L'entità radice è sempre nello stato richiesto (aggiunto per `DbSet.Add` e non modificato per `DbSet.Attach`).
+* **Per le entità rilevate durante la ricerca ricorsiva delle proprietà di navigazione:**
+  * **Se la chiave primaria dell'entità è generata dall'archivio**
+    * Se la chiave primaria non è impostata su un valore, lo stato viene impostato su aggiunto. Il valore della chiave primaria viene considerato come "non impostato" se riceve il valore CLR predefinito per il tipo di proprietà, ad esempio `0` per `int`, `null` per `string` e così via.
+    * Se la chiave primaria è impostata su un valore, lo stato è impostato su non modificato.
+  * Se la chiave primaria non è generata dal database, l'entità viene impostata con lo stesso stato della radice.
 
 ### <a name="code-first-database-initialization"></a>Inizializzazione del database Code First
 

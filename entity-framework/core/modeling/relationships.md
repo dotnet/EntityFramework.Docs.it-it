@@ -4,12 +4,12 @@ description: Come configurare le relazioni tra i tipi di entità quando si usa E
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 71d960a15dfb938af1dcc7035dc2587df7ad4677
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 567d212ddf41f33ee32443d85d2a17234fbc026b
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063842"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430183"
 ---
 # <a name="relationships"></a>Relazioni
 
@@ -85,7 +85,7 @@ In questo esempio le proprietà evidenziate verranno usate per configurare la re
 > Se la proprietà è la chiave primaria o è di un tipo non compatibile con la chiave principale, non verrà configurata come chiave esterna.
 
 > [!NOTE]
-> Prima di EF Core 3,0, anche la proprietà denominata esattamente come la proprietà della chiave principale [è stata trovata come chiave esterna](https://github.com/aspnet/EntityFrameworkCore/issues/13274)
+> Prima di EF Core 3,0, anche la proprietà denominata esattamente come la proprietà della chiave principale [è stata trovata come chiave esterna](https://github.com/dotnet/efcore/issues/13274)
 
 ### <a name="no-foreign-key-property"></a>Nessuna proprietà di chiave esterna
 
@@ -194,7 +194,7 @@ Dopo la creazione della proprietà di navigazione, potrebbe essere necessario co
 
 #### <a name="foreign-key-constraint-name"></a>Nome vincolo di chiave esterna
 
-Per convenzione, quando la destinazione è un database relazionale, i vincoli di chiave esterna vengono denominati FK_ <dependent type name> _<principal type name>_ <foreign key property name> . Per le chiavi esterne composite <foreign key property name> diventa un elenco delimitato da caratteri di sottolineatura dei nomi delle proprietà di chiave esterna.
+Per convenzione, quando la destinazione è un database relazionale, i vincoli di chiave esterna sono denominati FK \_ \<dependent type name> \_ \<principal type name> \_ \<foreign key property name> . Per le chiavi esterne composite, \<foreign key property name> diventa un elenco delimitato da caratteri di sottolineatura dei nomi delle proprietà di chiave esterna.
 
 È anche possibile configurare il nome del vincolo come indicato di seguito:
 
@@ -325,3 +325,10 @@ Le navigazioni many-to-many sono denominate Skip Navigations, perché ignorano e
 È anche possibile rappresentare una relazione molti-a-molti aggiungendo semplicemente il tipo di entità join ed eseguendo il mapping di due relazioni uno-a-molti separate.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=11-14,16-19,39-46)]
+
+> [!NOTE]
+> Il supporto per l'impalcatura di relazioni molti-a-molti dal database non è ancora stato aggiunto. Vedere la pagina relativa al [rilevamento del problema](https://github.com/dotnet/efcore/issues/22475).
+
+## <a name="additional-resources"></a>Risorse aggiuntive
+
+* [EF Core sessione standup della community](https://www.youtube.com/watch?v=W1sxepfIMRM&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=32), con un'analisi approfondita di molti-a-molti e dell'infrastruttura sottostanti.

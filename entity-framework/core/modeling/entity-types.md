@@ -4,12 +4,12 @@ description: Come configurare ed eseguire il mapping di tipi di entità usando E
 author: roji
 ms.date: 10/06/2020
 uid: core/modeling/entity-types
-ms.openlocfilehash: bfefa29c08679a1524c00769b3495d75a301e2d3
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 9094193640e7cab6db3fed7ae0ab818a455156ca
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062230"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429585"
 ---
 # <a name="entity-types"></a>Tipi di entità
 
@@ -50,9 +50,9 @@ A volte è utile avere lo stesso tipo di entità mappato in più `DbContext` tip
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableExcludeFromMigrations.cs?name=TableExcludeFromMigrations&highlight=4)]
 
-Con queste migrazioni di configurazione la tabella non viene creata `blogs` , ma `Blog` è ancora inclusa nel modello e può essere utilizzata normalmente.
+Con queste migrazioni di configurazione la tabella non viene creata `AspNetUsers` , ma `IdentityUser` è ancora inclusa nel modello e può essere utilizzata normalmente.
 
-Se è necessario iniziare a gestire la tabella usando di nuovo le migrazioni, è necessario creare una nuova migrazione in cui `blogs` non è escluso. La prossima migrazione conterrà ora le modifiche apportate alla tabella.
+Se è necessario iniziare a gestire la tabella usando di nuovo le migrazioni, è necessario creare una nuova migrazione in cui `AspNetUsers` non è escluso. La prossima migrazione conterrà ora le modifiche apportate alla tabella.
 
 ## <a name="table-name"></a>Nome tabella
 
@@ -68,7 +68,7 @@ Per convenzione, ogni tipo di entità verrà configurato per eseguire il mapping
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableName.cs?Name=TableName&highlight=3-4)]
 
-***
+**_
 
 ## <a name="table-schema"></a>Schema della tabella
 
@@ -84,7 +84,7 @@ Quando si utilizza un database relazionale, le tabelle vengono create per conven
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableNameAndSchema.cs?name=TableNameAndSchema&highlight=3-4)]
 
-***
+_**
 
 Anziché specificare lo schema per ogni tabella, è anche possibile definire lo schema predefinito a livello di modello con l'API Fluent:
 
@@ -101,4 +101,7 @@ Si noti che l'impostazione dello schema predefinito influirà anche su altri ogg
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ViewNameAndSchema.cs?name=ViewNameAndSchema&highlight=1)]
 
- Il mapping a una vista consente di rimuovere il mapping di tabella predefinito, ma è anche possibile eseguire il mapping del tipo di entità a una tabella in modo esplicito. In questo caso, il mapping delle query verrà usato per le query e il mapping delle tabelle verrà usato per gli aggiornamenti.
+ Il mapping a una vista consente di rimuovere il mapping predefinito della tabella, ma a partire da EF 5,0 il tipo di entità può anche essere mappato in modo esplicito a una tabella. In questo caso, il mapping delle query verrà usato per le query e il mapping delle tabelle verrà usato per gli aggiornamenti.
+
+> [!TIP]
+> Per testare i tipi di entità di cui è stato eseguito il mapping alle viste usando il provider in memoria, eseguirne il mapping a una query tramite `ToInMemoryQuery` . Per altri dettagli, vedere un [esempio eseguibile](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) usando questa tecnica.

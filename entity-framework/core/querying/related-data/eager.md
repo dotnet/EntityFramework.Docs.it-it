@@ -4,12 +4,12 @@ description: Caricamento eager di dati correlati con Entity Framework Core
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/eager
-ms.openlocfilehash: 97ec45a0f8bfecce4d4a59e5d1c36c0268d96052
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: bd9c9045c1c2707d69ee4070bea59ad8066789f3
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062576"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430105"
 ---
 # <a name="eager-loading-of-related-data"></a>Caricamento eager di dati correlati
 
@@ -25,6 +25,9 @@ ms.locfileid: "92062576"
 È possibile includere dati correlati da più relazioni in una singola query.
 
 [!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleIncludes)]
+
+> [!CAUTION]
+> Il caricamento eager di un'esplorazione della raccolta in una singola query può causare problemi di prestazioni. Per altre informazioni, vedere [confronto tra query singole e Split](xref:core/querying/single-split-queries).
 
 ## <a name="including-multiple-levels"></a>Inclusione di più livelli
 
@@ -44,74 +47,12 @@ ms.locfileid: "92062576"
 
 [!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleLeafIncludes)]
 
-## <a name="single-and-split-queries"></a>Query single e Split
-
-### <a name="single-queries"></a>Query singole
-
-Nei database relazionali, per impostazione predefinita, tutte le entità correlate vengono caricate introducendo i JOIN:
-
-```sql
-SELECT [b].[BlogId], [b].[OwnerId], [b].[Rating], [b].[Url], [p].[PostId], [p].[AuthorId], [p].[BlogId], [p].[Content], [p].[Rating], [p].[Title]
-FROM [Blogs] AS [b]
-LEFT JOIN [Post] AS [p] ON [b].[BlogId] = [p].[BlogId]
-ORDER BY [b].[BlogId], [p].[PostId]
-```
-
-Se in un Blog tipico sono presenti più post correlati, le righe per questi post duplicano le informazioni del Blog, causando il cosiddetto problema "esplosione cartesiana". Man mano che vengono caricate più relazioni uno-a-molti, la quantità di dati duplicati può aumentare e influire negativamente sulle prestazioni dell'applicazione. Per impostazione predefinita, EF Core genera un avviso se rileva le query che caricano la raccolta, incluse le quali possono causare problemi di prestazioni.
-
-### <a name="split-queries"></a>Suddividere query
-
-> [!NOTE]
-> Questa funzionalità è stata introdotta in EF Core 5,0.
-
-EF consente di specificare che una query LINQ specificata deve essere *suddivisa* in più query SQL. Anziché JOIN, le query suddivise eseguono una query SQL aggiuntiva per ogni spostamento uno-a-molti incluso:
-
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs?name=AsSplitQuery&highlight=5)]
-
-Verrà generato il codice SQL seguente:
-
-```sql
-SELECT [b].[BlogId], [b].[OwnerId], [b].[Rating], [b].[Url]
-FROM [Blogs] AS [b]
-ORDER BY [b].[BlogId]
-
-SELECT [p].[PostId], [p].[AuthorId], [p].[BlogId], [p].[Content], [p].[Rating], [p].[Title], [b].[BlogId]
-FROM [Blogs] AS [b]
-INNER JOIN [Post] AS [p] ON [b].[BlogId] = [p].[BlogId]
-ORDER BY [b].[BlogId]
-```
-
-> [!NOTE]
-> Le entità correlate uno-a-uno vengono sempre caricate tramite JOIN nella stessa query, in quanto non ha alcun effetto sulle prestazioni.
-
-### <a name="enabling-split-queries-globally"></a>Abilitazione di query Split a livello globale
-
-È anche possibile configurare le query Split come predefinite per il contesto dell'applicazione:
-
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/SplitQueriesBloggingContext.cs?name=QuerySplittingBehaviorSplitQuery&highlight=6)]
-
-Quando le query suddivise sono configurate come predefinite, è comunque possibile configurare query specifiche da eseguire come query singole:
-
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs?name=AsSingleQuery&highlight=5)]
-
-Se la modalità di suddivisione delle query non è specificata in modo esplicito, né globalmente né nella query, né EF Core rileva che una singola query carica più inclusioni di raccolta, viene generato un avviso per attirare l'attenzione sui potenziali problemi di prestazioni. Se si imposta la modalità di query su SingleQuery, l'avviso non verrà generato.
-
-### <a name="characteristics-of-split-queries"></a>Caratteristiche delle query suddivise
-
-Mentre Split query evita i problemi di prestazioni associati a JOIN e l'esplosione cartesiana, presenta anche alcuni svantaggi:
-
-* Anche se la maggior parte dei database garantisce la coerenza dei dati per le singole query, non esistono garanzie di questo tipo per più query. Se il database viene aggiornato simultaneamente durante l'esecuzione delle query, i dati risultanti potrebbero non essere coerenti. È possibile mitigarlo eseguendo il wrapping delle query in una transazione serializzabile o snapshot, anche se in questo modo è possibile creare problemi di prestazioni propri. Per ulteriori informazioni, vedere la documentazione del database.
-* Ogni query implica attualmente un round trip di rete aggiuntivo al database. Il round trip della rete può compromettere le prestazioni, soprattutto se la latenza del database è elevata, ad esempio servizi cloud.
-* Sebbene alcuni database consentano di usare contemporaneamente i risultati di più query (SQL Server con MARS, SQLite), la maggior parte consente di rendere attiva una sola query in un determinato punto. Tutti i risultati delle query precedenti devono quindi essere memorizzati nel buffer nella memoria dell'applicazione prima di eseguire query successive, il che comporta un aumento dei requisiti di memoria.
-
-Sfortunatamente, non esiste una strategia per il caricamento di entità correlate che soddisfino tutti gli scenari. Valutare con attenzione i vantaggi e gli svantaggi delle query singole e divise e selezionare quello che soddisfa le proprie esigenze.
-
 ## <a name="filtered-include"></a>Inclusione filtrato
 
 > [!NOTE]
 > Questa funzionalità è stata introdotta in EF Core 5,0.
 
-Quando si applica l'inclusione per caricare dati correlati, è possibile applicare determinate operazioni enumerabili sulla navigazione della raccolta inclusa, che consente di filtrare e ordinare i risultati.
+Quando si applica l'inclusione per caricare dati correlati, è possibile aggiungere determinate operazioni enumerabili alla navigazione della raccolta inclusa, che consente di filtrare e ordinare i risultati.
 
 Le operazioni supportate sono:,,, `Where` `OrderBy` `OrderByDescending` `ThenBy` , `ThenByDescending` , `Skip` e `Take` .
 
@@ -138,6 +79,9 @@ var orders = context.Orders.Where(o => o.Id > 1000).ToList();
 // customer entities will have references to all orders where Id > 1000, rather than > 5000
 var filtered = context.Customers.Include(c => c.Orders.Where(o => o.Id > 5000)).ToList();
 ```
+
+> [!NOTE]
+> In caso di rilevamento di query, viene considerata caricata la navigazione su cui è stato applicato l'inclusione filtrato. Ciò significa che EF Core non tenterà di ricaricare i valori usando il caricamento [esplicito](xref:core/querying/related-data/explicit) o il [caricamento lazy](xref:core/querying/related-data/lazy), anche se alcuni elementi potrebbero ancora essere mancanti.
 
 ## <a name="include-on-derived-types"></a>Inclusione per i tipi derivati
 

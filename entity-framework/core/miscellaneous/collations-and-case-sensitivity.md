@@ -4,12 +4,12 @@ description: Configurazione delle regole di confronto e distinzione tra maiuscol
 author: roji
 ms.date: 04/27/2020
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: e327df8adf777bfa5603a71eca8297a051f5bd56
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: cced7e11f7bf02223d3f181677ad1707c1da4051
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071719"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429741"
 ---
 # <a name="collations-and-case-sensitivity"></a>Regole di confronto e distinzione tra maiuscole e minuscole
 
@@ -20,7 +20,7 @@ L'elaborazione del testo nei database può essere complessa e richiede un maggio
 
 ## <a name="introduction-to-collations"></a>Introduzione alle regole di confronto
 
-Un concetto fondamentale nell'elaborazione del testo sono le regole di *confronto*, ovvero un set di regole che determinano il modo in cui i valori di testo vengono ordinati e confrontati per verificare l'uguaglianza. Se, ad esempio, le regole di confronto senza distinzione tra maiuscole e minuscole ignorano le differenze tra lettere maiuscole e minuscole ai fini del confronto di uguaglianza, non vengono applicate regole di confronto con distinzione tra maiuscole e minuscole. Tuttavia, poiché la distinzione tra maiuscole e minuscole è dipendente dalle impostazioni cultura (ad esempio `i` e `I` rappresenta una lettera diversa in turco), esistono più regole di confronto senza distinzione tra maiuscole e minuscole, ognuna con un proprio set di regole. L'ambito delle regole di confronto si estende anche oltre la distinzione tra maiuscole e minuscole e altri aspetti dei dati di tipo carattere. in tedesco, ad esempio, è a volte, ma non sempre, auspicabile da trattare `ä` e `ae` come identico. Infine, le regole di confronto definiscono anche il modo in cui vengono *ordinati*i valori di testo: mentre `ä` il tedesco si trova dopo `a` , lo svedese lo inserisce alla fine dell'alfabeto.
+Un concetto fondamentale nell'elaborazione del testo sono le regole di *confronto* , ovvero un set di regole che determinano il modo in cui i valori di testo vengono ordinati e confrontati per verificare l'uguaglianza. Se, ad esempio, le regole di confronto senza distinzione tra maiuscole e minuscole ignorano le differenze tra lettere maiuscole e minuscole ai fini del confronto di uguaglianza, non vengono applicate regole di confronto con distinzione tra maiuscole e minuscole. Tuttavia, poiché la distinzione tra maiuscole e minuscole è dipendente dalle impostazioni cultura (ad esempio `i` e `I` rappresenta una lettera diversa in turco), esistono più regole di confronto senza distinzione tra maiuscole e minuscole, ognuna con un proprio set di regole. L'ambito delle regole di confronto si estende anche oltre la distinzione tra maiuscole e minuscole e altri aspetti dei dati di tipo carattere. in tedesco, ad esempio, è a volte, ma non sempre, auspicabile da trattare `ä` e `ae` come identico. Infine, le regole di confronto definiscono anche il modo in cui vengono *ordinati* i valori di testo: mentre `ä` il tedesco si trova dopo `a` , lo svedese lo inserisce alla fine dell'alfabeto.
 
 Tutte le operazioni di testo in un database utilizzano regole di confronto, in modo esplicito o implicito, per determinare il modo in cui l'operazione Confronta e ordina le stringhe. L'elenco effettivo delle regole di confronto disponibili e i relativi schemi di denominazione sono specifici del database. consultare [la sezione seguente](#database-specific-information) per collegamenti a pagine di documentazione rilevanti di diversi database. Fortunatamente, il database in genere consente di definire regole di confronto predefinite a livello di database o di colonna e di specificare in modo esplicito le regole di confronto da utilizzare per operazioni specifiche in una query.
 
@@ -69,9 +69,15 @@ Per impostazione predefinita, in .NET l'uguaglianza di stringhe fa distinzione t
 
 Inoltre, .NET fornisce overload di [`string.Equals`](/dotnet/api/system.string.equals#System_String_Equals_System_String_System_StringComparison_) accettazione di un' [`StringComparison`](/dotnet/api/system.stringcomparison) enumerazione, che consente di specificare la distinzione tra maiuscole e minuscole e le impostazioni cultura per il confronto. Per impostazione predefinita, EF Core si evita di tradurre questi overload in SQL e il tentativo di usarli comporta un'eccezione. Per una cosa, EF Core non conosce quali regole di confronto con distinzione tra maiuscole e minuscole o senza distinzione tra maiuscole e minuscole. Ancora più importante, l'applicazione di regole di confronto nella maggior parte dei casi impedisce l'utilizzo di indici, influire significativamente sulle prestazioni per un costrutto .NET molto semplice e di uso comune. Per forzare una query a usare il confronto tra maiuscole e minuscole o senza distinzione tra maiuscole e minuscole, specificare le regole di confronto in modo esplicito tramite, `EF.Functions.Collate` come [descritto](#explicit-collations-and-indexes)
 
-## <a name="database-specific-information"></a>Informazioni specifiche del database
+## <a name="additional-resources"></a>Risorse aggiuntive
+
+### <a name="database-specific-information"></a>Informazioni specifiche del database
 
 * [SQL Server documentazione sulle regole di confronto](/sql/relational-databases/collations/collation-and-unicode-support).
 * [Documentazione di Microsoft. Data. sqlite sulle regole di confronto](/dotnet/standard/data/sqlite/collation).
 * [Documentazione di PostgreSQL sulle regole di confronto](https://www.postgresql.org/docs/current/collation.html).
 * [Documentazione di MySQL sulle regole di confronto](https://dev.mysql.com/doc/refman/en/charset-general.html).
+
+### <a name="other-resources"></a>Altre risorse
+
+* [EF Core sessione della community standup](https://www.youtube.com/watch?v=OgMhLVa_VfA&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=1), introducendo regole di confronto ed esplorando gli aspetti delle prestazioni e dell'indicizzazione.

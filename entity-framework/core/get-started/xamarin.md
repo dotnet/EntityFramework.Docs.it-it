@@ -5,12 +5,12 @@ author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: 0552038d471e294834bed9e3bf1f05fd74c39192
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: a08c5582b063f4a7748a43811c2bf28e8f3e5c14
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062542"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429910"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>Introduzione con EF Core e Novell
 
@@ -75,11 +75,11 @@ Si presuppone che l'utente abbia familiarità con gli argomenti di Novell. Forms
 
 > [!IMPORTANT]
 > Entity Framework Core usa la reflection per richiamare le funzioni che il linker Novell. iOS può rimuovere durante le configurazioni della modalità di **rilascio** . È possibile evitare questo in uno dei due modi.
-> 
+>
 > * Il primo consiste nell'aggiungere `--linkskip System.Core` agli **argomenti mTouch aggiuntivi** nelle opzioni di **compilazione iOS** .
 > * In alternativa, impostare il comportamento del **linker** Novell. iOS su `Don't Link` nelle opzioni di **compilazione iOS** .
 > [Questo articolo illustra altre informazioni sul linker Novell. iOS](/xamarin/ios/deploy-test/linker) , che include come impostare il comportamento in Novell. iOS.
-> 
+>
 
 ## <a name="entity-framework-core-nuget-packages"></a>Pacchetti NuGet di Entity Framework Core
 
@@ -145,7 +145,7 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-### <a name="create"></a>Create
+### <a name="create"></a>Crea
 
 * Inserire un nuovo record.
   * La `Save_Clicked` funzione di `AddBlogPage.xaml.cs` inserisce un nuovo `Blog` oggetto nel database SQLite.
@@ -186,7 +186,7 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-### <a name="delete"></a>Delete
+### <a name="delete"></a>Elimina
 
 * Eliminare tutti i record con Cascade ai record figlio.
   * La `DeleteAll_Clicked` funzione di `BlogsPage.xaml.cs` Elimina tutti i `Blog` record nel database SQLite e sovrappone le eliminazioni a tutti i `Blog` `Post` record figlio.
@@ -206,6 +206,6 @@ In questa Guida introduttiva si è appreso come usare un'applicazione Novell. Fo
 
 Altri argomenti Entity Framework Core di interesse per gli sviluppatori Novell:
 
-* [Configurazione di un `DbContext`](xref:core/miscellaneous/configuring-dbcontext)
+* [Configurazione di un `DbContext`](xref:core/dbcontext-configuration/index)
 * Vedere altre informazioni sulle [espressioni di query LINQ](/dotnet/csharp/programming-guide/concepts/linq/basic-linq-query-operations)
 * [Configurare il modello](xref:core/modeling/index) per specificare elementi come la [lunghezza obbligatoria](xref:core/modeling/entity-properties#required-and-optional-properties) e [massima](xref:core/modeling/entity-properties#maximum-length)

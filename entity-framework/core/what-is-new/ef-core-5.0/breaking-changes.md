@@ -4,12 +4,12 @@ description: Elenco completo delle modifiche di rilievo introdotte in Entity Fra
 author: bricelam
 ms.date: 11/07/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: 3a00c2fdce51ff8b7d76b34f7003dc8ec0618830
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: e2537dbc1d5dba48450bd0fea7712054ba2fa622
+ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429286"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94503176"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>Modifiche di rilievo nella EF Core 5,0
 
@@ -125,7 +125,7 @@ Si noti che l'inizializzazione eager di una _raccolta_ di spostamento in una rac
 
 #### <a name="why"></a>Perché
 
-L'inizializzazione di una proprietà di navigazione di riferimento su un'istanza di entità "vuota" restituisce uno stato ambiguo. Esempio:
+L'inizializzazione di una proprietà di navigazione di riferimento su un'istanza di entità "vuota" restituisce uno stato ambiguo. Ad esempio:
 
 ```csharp
 public class Blog
@@ -490,7 +490,7 @@ Queste query potrebbero restituire risultati non corretti se la raccolta interna
 
 **Nuovo comportamento**
 
-Queste query non sono suppored di Loger. Viene generata un'eccezione che indica che non sono disponibili informazioni sufficienti per compilare correttamente i risultati.
+Queste query non sono più supportate. Viene generata un'eccezione che indica che non sono disponibili informazioni sufficienti per compilare correttamente i risultati.
 
 **Perché**
 
@@ -531,7 +531,7 @@ context.Blogs
 
 **Nuovo comportamento**
 
-Queste query non sono suppored di Loger. Viene generata un'eccezione che indica che non è possibile creare un oggetto di tipo Queryable e suggerire come risolvere il problema.
+Queste query non sono più supportate. Viene generata un'eccezione che indica che non è possibile creare un oggetto di tipo Queryable e suggerire come risolvere il problema.
 
 **Perché**
 

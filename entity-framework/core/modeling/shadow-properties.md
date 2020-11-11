@@ -4,16 +4,18 @@ description: Configurazione delle proprietà shadow e indexer in un modello di E
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/modeling/shadow-properties
-ms.openlocfilehash: f03dc000bb111253ae74c05a668703f2e6237a57
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 180478212b683a271d2519cc1a4c79be5d3f11b9
+ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430417"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94503189"
 ---
 # <a name="shadow-and-indexer-properties"></a>Proprietà Shadow e Indexer
 
 Le proprietà shadow sono proprietà che non sono definite nella classe di entità .NET, ma sono definite per il tipo di entità nel modello di EF Core. Il valore e lo stato di queste proprietà vengono mantenuti esclusivamente nello strumento di rilevamento delle modifiche. Le proprietà shadow sono utili quando nel database sono presenti dati che non devono essere esposti sui tipi di entità mappati.
+
+Le proprietà dell'indicizzatore sono proprietà del tipo di entità, supportate da un [indicizzatore](/dotnet/csharp/programming-guide/indexers/) nella classe di entità .NET. È possibile accedervi usando l'indicizzatore nelle istanze della classe .NET. Consente inoltre di aggiungere ulteriori proprietà al tipo di entità senza modificare la classe CLR.
 
 ## <a name="foreign-key-shadow-properties"></a>Proprietà Shadow chiave esterna
 
@@ -50,11 +52,19 @@ var blogs = context.Blogs
 
 Non è possibile accedere alle proprietà shadow dopo una query senza rilevamento poiché le entità restituite non vengono rilevate dallo strumento di rilevamento delle modifiche.
 
+## <a name="configuring-indexer-properties"></a>Configurazione delle proprietà dell'indicizzatore
+
+È possibile usare l'API Fluent per configurare le proprietà dell'indicizzatore. Una volta chiamato il metodo `IndexerProperty` , è possibile concatenare qualsiasi chiamata di configurazione per le altre proprietà. Nell'esempio seguente viene `Blog` definito un indicizzatore che verrà usato per creare una proprietà dell'indicizzatore.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexerProperty.cs?name=ShadowProperty&highlight=3)]
+
+Se il nome fornito al `IndexerProperty` metodo corrisponde al nome di una proprietà dell'indicizzatore esistente, il codice configurerà la proprietà esistente. Se il tipo di entità dispone di una proprietà, supportata da una proprietà nella classe di entità, viene generata un'eccezione perché le proprietà dell'indicizzatore devono essere accessibili solo tramite l'indicizzatore.
+
 ## <a name="property-bag-entity-types"></a>Tipi di entità contenitore delle proprietà
 
 > [!NOTE]
 > Il supporto per i tipi di entità contenitore delle proprietà è stato aggiunto in EF Core 5,0.
 
-I tipi di entità che contengono solo proprietà dell'indicizzatore sono noti come tipi di entità del contenitore delle proprietà. Questi tipi di entità non dispongono di proprietà shadow. Attualmente `Dictionary<string, object>` è supportato solo come tipo di entità contenitore delle proprietà. Questo significa che deve essere configurato come tipo di entità condiviso con un nome univoco e la proprietà corrispondente `DbSet` deve essere implementata tramite una `Set` chiamata a.
+I tipi di entità che contengono solo proprietà dell'indicizzatore sono noti come tipi di entità del contenitore delle proprietà. Questi tipi di entità non hanno proprietà shadow, ma EF creerà le proprietà dell'indicizzatore. Attualmente `Dictionary<string, object>` è supportato solo come tipo di entità contenitore delle proprietà. Deve essere configurata come tipo di entità condivisa con un nome univoco e la `DbSet` proprietà corrispondente deve essere implementata tramite una `Set` chiamata a.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/SharedType.cs?name=SharedType&highlight=3,7)]

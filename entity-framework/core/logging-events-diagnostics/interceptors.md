@@ -4,12 +4,12 @@ description: Intercettazione per operazioni di database e altri eventi
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: 6ee54c0bd45c55de1fae3e1949bfa2d5b3b2566e
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 61ec6968344798af8ecffb878a1e47a6a8e031cd
+ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431526"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94503202"
 ---
 # <a name="interceptors"></a>Intercettori
 
@@ -21,7 +21,7 @@ Gli intercettori vengono registrati per ogni istanza di DbContext al momento del
 
 ## <a name="registering-interceptors"></a>Registrazione degli intercettori
 
-Gli intercettori vengono registrati utilizzando <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.AddInterceptors%2A> quando si [configura un'istanza di DbContext](xref:core/dbcontext-configuration/index). Questa operazione viene in genere eseguita in un override di <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Esempio:
+Gli intercettori vengono registrati utilizzando <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.AddInterceptors%2A> quando si [configura un'istanza di DbContext](xref:core/dbcontext-configuration/index). Questa operazione viene in genere eseguita in un override di <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Ad esempio:
 
 <!--
 public class ExampleContext : BlogsContext
@@ -37,7 +37,7 @@ In alternativa, `AddInterceptors` è possibile chiamare come parte di <xref:Micr
 > [!TIP]
 > Quando si usa AddDbContext o viene passata un'istanza di DbContextOptions al costruttore DbContext, viene comunque chiamato Configuring. Questo lo rende la posizione ideale per applicare la configurazione del contesto indipendentemente dalla costruzione del DbContext.
 
-Gli intercettori spesso sono senza stato, il che significa che è possibile usare una singola istanza dell'intercettore per tutte le istanze di DbContext. Esempio:
+Gli intercettori spesso sono senza stato, il che significa che è possibile usare una singola istanza dell'intercettore per tutte le istanze di DbContext. Ad esempio:
 
 <!--
 public class TaggedQueryCommandInterceptorContext : BlogsContext
@@ -80,7 +80,7 @@ Ogni coppia di metodi ha sia la sincronizzazione che le variazioni asincrone. Ci
 
 Un oggetto <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbCommandInterceptor> può essere utilizzato per modificare SQL prima di essere inviato al database. Questo esempio illustra come modificare SQL per includere un hint per la query.
 
-Spesso la parte trickiest dell'intercettazione sta determinando quando il comando corrisponde alla query che deve essere modificata. L'analisi di SQL è un'opzione, ma tende a essere fragile. Un'altra opzione consiste nell'usare [EF Core tag di query](xref:core/querying/tags) per contrassegnare ogni query che deve essere modificata. Esempio:
+Spesso la parte trickiest dell'intercettazione sta determinando quando il comando corrisponde alla query che deve essere modificata. L'analisi di SQL è un'opzione, ma tende a essere fragile. Un'altra opzione consiste nell'usare [EF Core tag di query](xref:core/querying/tags) per contrassegnare ogni query che deve essere modificata. Ad esempio:
 
 <!--
             var blogs1 = context.Blogs.TagWith("Use hint: robust plan").ToList();
@@ -151,7 +151,7 @@ FROM [Blogs] AS [b]
 > [!TIP]  
 > È possibile [scaricare l'esempio Connection Interceptor](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/ConnectionInterception) da GitHub.
 
-Un oggetto <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbConnectionInterceptor> può essere utilizzato per modificare l'oggetto <xref:System.Data.Common.DbConnection> prima che venga utilizzato per connettersi al database. Questa operazione può essere usata per ottenere un token di accesso Azure Active Directory (AAD). Esempio:
+Un oggetto <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbConnectionInterceptor> può essere utilizzato per modificare l'oggetto <xref:System.Data.Common.DbConnection> prima che venga utilizzato per connettersi al database. Questa operazione può essere usata per ottenere un token di accesso Azure Active Directory (AAD). Ad esempio:
 
 <!--
 public class AadAuthenticationInterceptor : DbConnectionInterceptor
@@ -502,7 +502,7 @@ L'idea generale del controllo con l'intercettore è la seguente:
 * Se SaveChanges ha esito positivo, il messaggio di controllo viene aggiornato per indicare l'esito positivo
 * Se SaveChanges ha esito negativo, il messaggio di controllo viene aggiornato per indicare l'errore
 
-La prima fase viene gestita prima che tutte le modifiche vengano inviate al database usando le sostituzioni di `ISaveChangesInterceptor.SavingChanges` <!-- Issue #2748 -->  e `ISaveChangesInterceptor.SavingChangesAsync`<!-- Issue #2748 -->.
+La prima fase viene gestita prima che tutte le modifiche vengano inviate al database usando le sostituzioni di `ISaveChangesInterceptor.SavingChanges` <!-- Issue #2748 --> e `ISaveChangesInterceptor.SavingChangesAsync`<!-- Issue #2748 -->.
 
 <!--
     public async ValueTask<InterceptionResult<int>> SavingChangesAsync(
@@ -594,7 +594,7 @@ Ogni metodo dell'intercettore dispone di un `eventData` parametro che fornisce i
 Il risultato è un' `SaveChangesAudit` entità con una raccolta di `EntityAudit` entità, una per ogni istruzione INSERT, Update o DELETE. L'intercettore inserisce quindi queste entità nel database di controllo.
 
 > [!TIP]
-> Viene eseguito l'override di ToString in ogni classe di dati di evento EF Core per generare il messaggio di log equivalente per l'evento. Ad esempio, la chiamata di `ContextInitializedEventData.ToString` genera "Entity Framework Core 5.0.0-RC. 2.20475.6 ha inizializzato" BlogsContext "utilizzando il provider" Microsoft. EntityFrameworkCore. sqlite "con options: None".
+> Viene eseguito l'override di ToString in ogni classe di dati di evento EF Core per generare il messaggio di log equivalente per l'evento. Ad esempio, la chiamata di `ContextInitializedEventData.ToString` genera "Entity Framework Core 5.0.0 inizializzato" BlogsContext "utilizzando il provider" Microsoft. EntityFrameworkCore. sqlite "con options: None".
 
 #### <a name="detecting-success"></a>Rilevamento dell'esito positivo
 

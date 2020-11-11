@@ -4,12 +4,12 @@ description: Uso di DiagnosticListener per il consumo globale di EF Core Diagnos
 author: ajcvickers
 ms.date: 10/16/2020
 uid: core/logging-events-diagnostics/diagnostic-listeners
-ms.openlocfilehash: dba82a910e2b551e692f37d721d41968981849cf
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: a2a962ac714cf80c42c269cee3770699aaa4c0c9
+ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431538"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94503228"
 ---
 # <a name="using-diagnostic-listeners-in-ef-core"></a>Uso di listener di diagnostica in EF Core
 
@@ -55,7 +55,7 @@ Questo Observer deve quindi essere registrato a livello globale, ad esempio nel 
 -->
 [!code-csharp[RegisterDiagnosticListener](../../../samples/core/Miscellaneous/DiagnosticListeners/Program.cs?name=RegisterDiagnosticListener)]
 
-In secondo luogo, una volta individuato il EF Core DiagnosticListener, viene creato un nuovo Observer chiave-valore per sottoscrivere gli eventi EF Core effettivi. Esempio:
+In secondo luogo, una volta individuato il EF Core DiagnosticListener, viene creato un nuovo Observer chiave-valore per sottoscrivere gli eventi EF Core effettivi. Ad esempio:
 
 <!--
 public class KeyValueObserver : IObserver<KeyValuePair<string, object>>
@@ -95,7 +95,7 @@ Il valore della coppia chiave/valore è un tipo di payload specifico dell'evento
 Il codice precedente, ad esempio, gestisce gli <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.ContextInitialized> <xref:Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.ConnectionOpening> eventi e. Per la prima di queste, il payload è <xref:Microsoft.EntityFrameworkCore.Diagnostics.ContextInitializedEventData> . Per il secondo, è <xref:Microsoft.EntityFrameworkCore.Diagnostics.ConnectionEventData> .
 
 > [!TIP]
-> Viene eseguito l'override di ToString in ogni classe di dati di evento EF Core per generare il messaggio di log equivalente per l'evento. Ad esempio, la chiamata di `ContextInitializedEventData.ToString` genera "Entity Framework Core 5.0.0-RC. 2.20475.6 ha inizializzato" BlogsContext "utilizzando il provider" Microsoft. EntityFrameworkCore. sqlite "con options: None".
+> Viene eseguito l'override di ToString in ogni classe di dati di evento EF Core per generare il messaggio di log equivalente per l'evento. Ad esempio, la chiamata di `ContextInitializedEventData.ToString` genera "Entity Framework Core 5.0.0 inizializzato" BlogsContext "utilizzando il provider" Microsoft. EntityFrameworkCore. sqlite "con options: None".
 
 L' [esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/DiagnosticListeners) contiene una semplice applicazione console che apporta modifiche al database blogging e stampa gli eventi di diagnostica rilevati.
 

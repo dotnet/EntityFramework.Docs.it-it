@@ -154,6 +154,10 @@
           items:
             - name: Panoramica
               href: core/querying/index.md
+            - name: Valutazione client e server
+              href: core/querying/client-eval.md
+            - name: Rilevamento e senza rilevamento
+              href: core/querying/tracking.md
             - name: Caricare dati correlati
               items:
                 - name: Panoramica
@@ -166,16 +170,14 @@
                   href: core/querying/related-data/lazy.md
                 - name: Dati correlati e serializzazione
                   href: core/querying/related-data/serialization.md
-            - name: Valutazione client e server
-              href: core/querying/client-eval.md
-            - name: Rilevamento e senza rilevamento
-              href: core/querying/tracking.md
             - name: Suddividere le query
               href: core/querying/single-split-queries.md
             - name: Operatori di query complessi
               href: core/querying/complex-query-operators.md
             - name: Query SQL non elaborate
               href: core/querying/raw-sql.md
+            - name: Funzioni di database
+              href: core/querying/database-functions.md
             - name: Filtri di query globali
               href: core/querying/filters.md
             - name: Tag delle query
@@ -208,7 +210,7 @@
               href: core/logging-events-diagnostics/simple-logging.md
             - name: Microsoft.Extensions.Logging
               href: core/logging-events-diagnostics/extensions-logging.md
-            - name: Eventi
+            - name: Events
               href: core/logging-events-diagnostics/events.md
             - name: Intercettori
               href: core/logging-events-diagnostics/interceptors.md

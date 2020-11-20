@@ -4,17 +4,17 @@ description: Documentazione per il provider di database che consente l'uso di En
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 825517e79891378a61f9564c90dbf4522459e9d0
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: b167f53515799efdaead232f44ad5eab37fb0b14
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430315"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003601"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>Provider di Azure Cosmos DB per EF Core
 
 > [!NOTE]
-> Questo provider è una novità di EF Core 3.0.
+> Questo provider è stato introdotto in EF Core 3,0.
 
 Questo provider di database consente l'uso di Entity Framework Core con Azure Cosmos DB. Il provider viene gestito nell'ambito del [progetto Entity Framework Core](https://github.com/dotnet/efcore).
 
@@ -73,7 +73,7 @@ Il salvataggio e l'esecuzione di query sui dati seguono il modello EF normale:
 [!code-csharp[Configuration](../../../../samples/core/Cosmos/ModelBuilding/OptionsContext.cs?name=Configuration)]
 
 > [!NOTE]
-> La maggior parte di queste opzioni è una novità di EF Core Cosmos 5,0.
+> La maggior parte di queste opzioni è stata introdotta in EF Core 5,0.
 
 > [!TIP]
 > Per una descrizione dettagliata dell'effetto di ogni opzione indicata in precedenza, vedere la [documentazione relativa alle opzioni di Azure Cosmos DB](/dotnet/api/microsoft.azure.cosmos.cosmosclientoptions) .
@@ -108,7 +108,7 @@ Una volta configurata, la proprietà della chiave di partizione deve avere sempr
 [!code-csharp[PartitionKey](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=PartitionKey&highlight=15)]
 
 > [!NOTE]
-> `WithPartitionKey` è stato aggiunto in EF Core 5,0.
+> `WithPartitionKey` è stato introdotto in EF Core 5,0.
 
 È in genere consigliabile aggiungere la chiave di partizione alla chiave primaria in modo che rispecchi meglio la semantica del server e consenta alcune ottimizzazioni, ad esempio in `FindAsync` .
 
@@ -210,7 +210,7 @@ Questo è il codice JSON risultante:
 ## <a name="optimistic-concurrency-with-etags"></a>Concorrenza ottimistica con eTag
 
 > [!NOTE]
-> Il supporto per la concorrenza eTag è stato aggiunto in EF Core 5,0.
+> Il supporto per la concorrenza eTag è stato introdotto nel EF Core 5,0.
 
 Per configurare un tipo di entità per l'utilizzo della chiamata di [concorrenza ottimistica](xref:core/modeling/concurrency) `UseETagConcurrency` . Questa chiamata creerà una `_etag` proprietà nello [stato Shadow](xref:core/modeling/shadow-properties) e la imposterà come token di concorrenza.
 

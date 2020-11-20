@@ -4,12 +4,12 @@ description: Configurazione delle proprietà shadow e indexer in un modello di E
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/modeling/shadow-properties
-ms.openlocfilehash: 180478212b683a271d2519cc1a4c79be5d3f11b9
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: d419de2da2a9fc29e675dde76e824217347d2e9c
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503189"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003432"
 ---
 # <a name="shadow-and-indexer-properties"></a>Proprietà Shadow e Indexer
 
@@ -63,7 +63,7 @@ Se il nome fornito al `IndexerProperty` metodo corrisponde al nome di una propri
 ## <a name="property-bag-entity-types"></a>Tipi di entità contenitore delle proprietà
 
 > [!NOTE]
-> Il supporto per i tipi di entità contenitore delle proprietà è stato aggiunto in EF Core 5,0.
+> Il supporto per i tipi di entità contenitore delle proprietà è stato introdotto in EF Core 5,0.
 
 I tipi di entità che contengono solo proprietà dell'indicizzatore sono noti come tipi di entità del contenitore delle proprietà. Questi tipi di entità non hanno proprietà shadow, ma EF creerà le proprietà dell'indicizzatore. Attualmente `Dictionary<string, object>` è supportato solo come tipo di entità contenitore delle proprietà. Deve essere configurata come tipo di entità condivisa con un nome univoco e la `DbSet` proprietà corrispondente deve essere implementata tramite una `Set` chiamata a.
 

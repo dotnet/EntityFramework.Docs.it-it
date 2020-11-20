@@ -4,12 +4,12 @@ description: Come configurare l'ereditarietà del tipo di entità usando Entity 
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/inheritance
-ms.openlocfilehash: 3ec6e7bd98f9c9716c460d69fc707d95e5e47a05
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 33429bbc4a9941ff8ea98a8f99cc652c8ea26455
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429520"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003627"
 ---
 # <a name="inheritance"></a>Ereditarietà
 
@@ -64,7 +64,7 @@ Per impostazione predefinita, quando due tipi di entità di pari livello nella g
 ## <a name="table-per-type-configuration"></a>Configurazione tabella per tipo
 
 > [!NOTE]
-> La tabella per tipo (TPT) è una nuova funzionalità di EF Core 5,0. La tabella per tipo concreto (TPC) è supportata da EF6, ma non è ancora supportata da EF Core.
+> La funzionalità tabella per tipo (TPT) è stata introdotta in EF Core 5,0. La tabella per tipo concreto (TPC) è supportata da EF6, ma non è ancora supportata da EF Core.
 
 Nel modello di mapping di TPT, viene eseguito il mapping di tutti i tipi a singole tabelle. Le proprietà che appartengono esclusivamente a un tipo di base o derivato sono archiviate in una tabella che viene mappata a quel tipo. Le tabelle con mapping ai tipi derivati archiviano anche una chiave esterna che unisce la tabella derivata alla tabella di base.
 

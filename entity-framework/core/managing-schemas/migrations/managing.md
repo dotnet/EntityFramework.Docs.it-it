@@ -4,12 +4,12 @@ description: Aggiunta, rimozione e gestione delle migrazioni dello schema di dat
 author: bricelam
 ms.date: 10/27/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: 81f7cec54510d95b1e2432d56ff95110224fd9bf
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: ef5e1b9bb10d6f1cd428db2fee327ec513c3f528
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429852"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003276"
 ---
 # <a name="managing-migrations"></a>Gestione delle migrazioni
 
@@ -40,9 +40,9 @@ Il nome della migrazione può essere usato come messaggio di commit in un sistem
 
 Nella directory **Migrations** del progetto vengono aggiunti tre file:
 
-* **XXXXXXXXXXXXXX_AddCreatedTimestamp. cs** : il file principale delle migrazioni. Contiene le operazioni necessarie per applicare la migrazione (in `Up`) e per ripristinarla (in `Down`).
-* **XXXXXXXXXXXXXX_AddCreatedTimestamp. designer. cs** , il file di metadati delle migrazioni. Contiene informazioni usate da Entity Framework.
-* **MyContextModelSnapshot.cs** : snapshot del modello corrente. Usato per determinare cosa è stato modificato durante l'aggiunta della migrazione successiva.
+* **XXXXXXXXXXXXXX_AddCreatedTimestamp. cs**: il file principale delle migrazioni. Contiene le operazioni necessarie per applicare la migrazione (in `Up`) e per ripristinarla (in `Down`).
+* **XXXXXXXXXXXXXX_AddCreatedTimestamp. designer. cs**, il file di metadati delle migrazioni. Contiene informazioni usate da Entity Framework.
+* **MyContextModelSnapshot.cs**: snapshot del modello corrente. Usato per determinare cosa è stato modificato durante l'aggiunta della migrazione successiva.
 
 Il timestamp nel nome file consente di mantenerne l'ordine cronologico e di visualizzare quindi la successione delle modifiche.
 
@@ -210,7 +210,7 @@ dotnet ef migrations list
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 > [!NOTE]
-> Questo comando è stato aggiunto in EF Core 5,0.
+> Questo comando è stato introdotto in EF Core 5,0.
 
 ```powershell
 Get-Migration
@@ -220,7 +220,7 @@ Get-Migration
 
 ## <a name="resetting-all-migrations"></a>Reimpostazione di tutte le migrazioni
 
-In alcuni casi estremi, potrebbe essere necessario rimuovere tutte le migrazioni e ricominciare. Questa operazione può essere eseguita facilmente eliminando la cartella _ *Migrations* * ed eliminando il database. a questo punto è possibile creare una nuova migrazione iniziale, che conterrà l'intero schema corrente.
+In alcuni casi estremi, potrebbe essere necessario rimuovere tutte le migrazioni e ricominciare. Questa operazione può essere eseguita facilmente eliminando la cartella _ *Migrations** ed eliminando il database. a questo punto è possibile creare una nuova migrazione iniziale, che conterrà l'intero schema corrente.
 
 È anche possibile reimpostare tutte le migrazioni e crearne una singola senza perdere i dati. Questa operazione viene a volte definita "squashing" e implica alcune operazioni manuali:
 

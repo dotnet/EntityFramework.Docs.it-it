@@ -4,12 +4,12 @@ description: Intercettazione per operazioni di database e altri eventi
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: 61ec6968344798af8ecffb878a1e47a6a8e031cd
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 22d860a083c5ece9be109be630c3ce01dd742bf2
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503202"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003412"
 ---
 # <a name="interceptors"></a>Intercettori
 
@@ -56,8 +56,8 @@ Ogni istanza dell'intercettore deve implementare una o più interfacce derivate 
 ## <a name="database-interception"></a>Intercettazione database
 
 > [!NOTE]
-> L'intercettazione del database è stata aggiunta in EF Core 3,0 ed è disponibile solo per i provider di database relazionali.
-> Il supporto per salvataggio è stato aggiunto in EF Core 5,0.
+> L'intercettazione del database è stata introdotta in EF Core 3,0 ed è disponibile solo per i provider di database relazionali.
+> Il supporto di salvataggio è stato introdotto in EF Core 5,0.
 
 L'intercettazione di database di basso livello è suddivisa nelle tre interfacce illustrate nella tabella seguente.
 
@@ -396,7 +396,7 @@ Si noti che dall'output del log l'applicazione continua a usare il messaggio mem
 ## <a name="savechanges-interception"></a>Intercettazione SaveChanges
 
 > [!NOTE]
-> L'intercettazione SaveChanges è stata aggiunta in EF Core 5,0.
+> L'intercettazione di SaveChanges è stata introdotta in EF Core 5,0.
 
 > [!TIP]  
 > È possibile [scaricare l'esempio di intercettore SaveChanges](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) da GitHub.

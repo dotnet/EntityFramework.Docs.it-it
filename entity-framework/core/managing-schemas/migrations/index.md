@@ -4,12 +4,12 @@ description: Panoramica dell'uso delle migrazioni per gestire gli schemi del dat
 author: bricelam
 ms.date: 10/28/2020
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 9f1c9e266d60b7ed4aed783bb8e01864c93867ea
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: b9547298714af59453aeae6d05742a03c067708b
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429819"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003395"
 ---
 # <a name="migrations-overview"></a>Panoramica delle migrazioni
 
@@ -45,7 +45,7 @@ Per prima cosa, è necessario installare gli [strumenti da riga di comando di EF
 
 ### <a name="create-your-first-migration"></a>Creare la prima migrazione
 
-A questo punto si è pronti per aggiungere la prima migrazione. Chiedere a EF Core di creare una migrazione denominata **InitialCreate** :
+A questo punto si è pronti per aggiungere la prima migrazione. Chiedere a EF Core di creare una migrazione denominata **InitialCreate**:
 
 #### <a name="net-core-cli"></a>[Interfaccia della riga di comando di .NET Core](#tab/dotnet-core-cli)
 
@@ -61,7 +61,7 @@ Add-Migration InitialCreate
 
 **_
 
-EF Core creerà una directory denominata _ *Migrations* * nel progetto e genererà alcuni file. È consigliabile esaminare gli elementi generati da EF Core ed eventualmente modificarli. Per il momento si ignorerà questo passaggio.
+EF Core creerà una directory denominata _ *Migrations** nel progetto e genererà alcuni file. È consigliabile esaminare gli elementi generati da EF Core ed eventualmente modificarli. Per il momento si ignorerà questo passaggio.
 
 ### <a name="create-your-database-and-schema"></a>Creare il database e lo schema
 
@@ -141,7 +141,7 @@ Si noti che questa volta EF rileva che il database esiste già. Quando è stata 
 ### <a name="excluding-parts-of-your-model"></a>Esclusione di parti del modello
 
 > [!NOTE]
-> Questa funzionalità è stata aggiunta in EF Core 5,0.
+> Questa funzionalità è stata introdotta in EF in Core 5,0.
 
 In alcuni casi può essere utile fare riferimento ai tipi da un altro DbContext. Questo può causare conflitti di migrazione. Per evitare questo problema, escludere il tipo dalle migrazioni di uno dei oggetti DbContext.
 

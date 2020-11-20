@@ -4,22 +4,22 @@ description: Utilizzo degli operatori di confronto dei valori per controllare la
 author: ajcvickers
 ms.date: 03/20/2020
 uid: core/modeling/value-comparers
-ms.openlocfilehash: d07aee866a542f55c4e1074c5782e67cb4035a89
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d59ab093c7e9d251aac80420972d3e35edabae0b
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616682"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003614"
 ---
 # <a name="value-comparers"></a>Operatori di confronto del valore
 
 > [!NOTE]  
-> Questa funzionalità è una novità di EF Core 3,0.
+> Questa funzionalità è stata introdotta in EF Core 3,0.
 
 > [!TIP]  
 > Il codice in questo documento è disponibile in GitHub come [esempio eseguibile](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/ValueConversions/).
 
-## <a name="background"></a>Informazioni di base
+## <a name="background"></a>Sfondo
 
 EF Core necessario confrontare i valori delle proprietà nei casi seguenti:
 

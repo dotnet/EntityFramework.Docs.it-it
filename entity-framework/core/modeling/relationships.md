@@ -4,12 +4,12 @@ description: Come configurare le relazioni tra i tipi di entità quando si usa E
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: c92fa1904436ec43ff8918354a99440079e2a96a
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 716c034bd73d831996b727da18c2c1f83dd55290
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503215"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003263"
 ---
 # <a name="relationships"></a>Relazioni
 
@@ -149,7 +149,7 @@ Se è presente una sola proprietà di navigazione, sono presenti overload senza 
 ### <a name="configuring-navigation-properties"></a>Configurazione delle proprietà di navigazione
 
 > [!NOTE]
-> Questa funzionalità è stata aggiunta in EF Core 5,0.
+> Questa funzionalità è stata introdotta in EF Core 5,0.
 
 Dopo la creazione della proprietà di navigazione, potrebbe essere necessario configurarla ulteriormente.
 
@@ -269,7 +269,7 @@ Con questa configurazione le colonne corrispondenti a `ShippingAddress` saranno 
 > Se si usano [tipi di riferimento che non ammettono valori null](/dotnet/csharp/nullable-references) , `IsRequired` non è necessario chiamare.
 
 > [!NOTE]
-> La possibilità di configurare se il dipendente è obbligatorio è stato aggiunto in EF Core 5,0.
+> La possibilità di configurare se il dipendente è necessario è stata introdotta in EF Core 5,0.
 
 ### <a name="many-to-many"></a>Molti-a-molti
 
@@ -320,11 +320,11 @@ Le navigazioni many-to-many sono denominate Skip Navigations, perché ignorano e
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyPayload.cs?name=ManyToManyPayload)]
 
 > [!NOTE]
-> È stata aggiunta la possibilità di configurare relazioni molti-a-molti in EF Core 5,0. per la versione precedente, usare l'approccio seguente.
+> La possibilità di configurare relazioni molti-a-molti è stata introdotta in EF Core 5,0, per la versione precedente usare l'approccio seguente.
 
 È anche possibile rappresentare una relazione molti-a-molti aggiungendo semplicemente il tipo di entità join ed eseguendo il mapping di due relazioni uno-a-molti separate.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=11-14,16-19,39-46)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=16-19,21-24)]
 
 > [!NOTE]
 > Il supporto per l'impalcatura di relazioni molti-a-molti dal database non è ancora stato aggiunto. Vedere la pagina relativa al [rilevamento del problema](https://github.com/dotnet/efcore/issues/22475).

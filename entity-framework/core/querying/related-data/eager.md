@@ -4,12 +4,12 @@ description: Caricamento eager di dati correlati con Entity Framework Core
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/eager
-ms.openlocfilehash: bd9c9045c1c2707d69ee4070bea59ad8066789f3
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 66956fcd85bb21a08c69fa93b93c12382bbfc8eb
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430105"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003575"
 ---
 # <a name="eager-loading-of-related-data"></a>Caricamento eager di dati correlati
 
@@ -46,6 +46,11 @@ ms.locfileid: "94430105"
 È possibile che si vogliano includere più entità correlate per una delle entità incluse. Quando ad esempio si eseguono query per `Blogs`, è necessario includere `Posts` e poi si può anche decidere di includere `Author` e `Tags` per `Posts`. Per includere entrambi, è necessario specificare ogni percorso di inclusione a partire dalla radice. Ad esempio, `Blog -> Posts -> Author` e `Blog -> Posts -> Tags`. Non significa che si otterranno join ridondanti; nella maggior parte dei casi, EF combinerà i join durante la generazione di SQL.
 
 [!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleLeafIncludes)]
+
+> [!TIP]
+> È anche possibile caricare più navigazioni usando un solo `Include` metodo. Questo è possibile per la navigazione "Chains" che sono tutti riferimenti o quando terminano con una singola raccolta.
+
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#IncludeMultipleNavigationsWithSingleInclude)]
 
 ## <a name="filtered-include"></a>Inclusione filtrato
 

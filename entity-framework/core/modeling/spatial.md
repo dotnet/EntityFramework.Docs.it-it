@@ -4,17 +4,17 @@ description: Utilizzo di dati spaziali in un modello di Entity Framework Core
 author: bricelam
 ms.date: 10/02/2020
 uid: core/modeling/spatial
-ms.openlocfilehash: fa9cf30ddb4291d96486934544b568b67b126846
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: a38e75e150b3d3404f2ed7619d05ba478c411117
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430521"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003445"
 ---
 # <a name="spatial-data"></a>Dati spaziali
 
 > [!NOTE]
-> Questa funzionalità è stata aggiunta in EF Core 2,2.
+> Questa funzionalità è stata introdotta in EF Core 2,2.
 
 I dati spaziali rappresentano la posizione fisica e la forma degli oggetti. Molti database forniscono supporto per questo tipo di dati, in modo che possa essere indicizzato e sottoposto a query insieme ad altri dati. Gli scenari comuni includono l'esecuzione di query per gli oggetti all'interno di una distanza specificata da una posizione o la selezione dell'oggetto il cui bordo contiene una determinata posizione. EF Core supporta il mapping ai tipi di dati spaziali mediante la libreria spaziale NetTopologySuite.
 
@@ -78,7 +78,7 @@ In LINQ, i metodi e le proprietà NTS disponibili come funzioni di database verr
 
 ## <a name="reverse-engineering"></a>Reverse Engineering
 
-I pacchetti NuGet spaziali abilitano anche [Reverse Engineering](xref:core/managing-schemas/scaffolding) modelli con proprietà spaziali, ma è necessario installare il pacchetto * *_prima_* di _ che esegue `Scaffold-DbContext` o `dotnet ef dbcontext scaffold` . In caso contrario, si riceveranno avvisi relativi alla mancata individuazione dei mapping dei tipi per le colonne e le colonne verranno ignorate.
+I pacchetti NuGet spaziali abilitano anche [Reverse Engineering](xref:core/managing-schemas/scaffolding) modelli con proprietà spaziali, ma è necessario installare il pacchetto **_prima_* di _ che esegue `Scaffold-DbContext` o `dotnet ef dbcontext scaffold` . In caso contrario, si riceveranno avvisi relativi alla mancata individuazione dei mapping dei tipi per le colonne e le colonne verranno ignorate.
 
 ## <a name="srid-ignored-during-client-operations"></a>SRID ignorato durante le operazioni client
 

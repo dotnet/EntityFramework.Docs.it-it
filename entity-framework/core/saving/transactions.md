@@ -4,12 +4,12 @@ description: Gestione delle transazioni per l'atomicità quando si salvano i dat
 author: roji
 ms.date: 9/26/2020
 uid: core/saving/transactions
-ms.openlocfilehash: 2cefe23068a40122b7a37c21536213456eef7b66
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: b5e1fa2a0bcc466f22f03fee7ecaef9dcea1efaf
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063621"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003549"
 ---
 # <a name="using-transactions"></a>Utilizzo di transazioni
 
@@ -34,7 +34,13 @@ Mentre tutti i provider di database relazionali supportano le transazioni, altri
 
 ## <a name="savepoints"></a>Salvataggio
 
+> [!NOTE]
+> Questa funzionalità è stata introdotta in EF Core 5,0.
+
 Quando `SaveChanges` viene richiamato ed è già in corso una transazione nel contesto, EF crea automaticamente un *salvataggio* prima di salvare i dati. Salvataggio sono punti all'interno di una transazione di database di cui è possibile eseguire il rollback in un secondo momento, se si verifica un errore o per qualsiasi altro motivo. Se `SaveChanges` si verifica un errore, viene automaticamente eseguito il rollback della transazione a salvataggio, lasciando la transazione nello stesso stato di se non è mai stata avviata. Ciò consente di risolvere eventuali problemi e di ritentare il salvataggio, in particolare quando si verificano problemi di [concorrenza ottimistica](xref:core/saving/concurrency) .
+
+> [!WARNING]
+> Salvataggio sono incompatibili con i set di risultati attivi multipli di SQL Server e non vengono usati. Se si verifica un errore durante `SaveChanges` , è possibile che la transazione venga lasciata in uno stato sconosciuto.
 
 È anche possibile gestire manualmente salvataggio, così come avviene con le transazioni. Nell'esempio seguente viene creato un salvataggio all'interno di una transazione e viene eseguito il rollback in caso di errore:
 

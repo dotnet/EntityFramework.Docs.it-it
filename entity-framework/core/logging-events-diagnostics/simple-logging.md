@@ -4,17 +4,17 @@ description: Registrazione da un EF Core DbContext con LogTo
 author: ajcvickers
 ms.date: 10/03/2020
 uid: core/logging-events-diagnostics/simple-logging
-ms.openlocfilehash: 49619cc10ea098e39e71dde347e00bbc3c39b13a
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 274fca39c45c4e2ccfd47f3c4eeb0834e00d18aa
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431523"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003510"
 ---
 # <a name="simple-logging"></a>Registrazione semplice
 
 > [!NOTE]
-> Questa funzionalità è stata aggiunta in EF Core 5,0.
+> Questa funzionalità è stata introdotta in EF Core 5,0.
 
 > [!TIP]  
 > È possibile [scaricare l'esempio di questo articolo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SimpleLogging) da GitHub.
@@ -26,7 +26,7 @@ ms.locfileid: "94431523"
 
 ## <a name="configuration"></a>Configurazione
 
-È possibile accedere ai log di EF Core da qualsiasi tipo di applicazione tramite l'uso di [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> Quando si [configura un'istanza di DbContext](xref:core/dbcontext-configuration/index). Questa configurazione viene in genere eseguita in un override di <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Esempio:
+È possibile accedere ai log di EF Core da qualsiasi tipo di applicazione tramite l'uso di [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> Quando si [configura un'istanza di DbContext](xref:core/dbcontext-configuration/index). Questa configurazione viene in genere eseguita in un override di <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Ad esempio:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -49,7 +49,7 @@ Il <xref:System.Console.WriteLine%2A?displayProperty=nameWithType> metodo viene 
 
 ### <a name="logging-to-the-debug-window"></a>Accesso alla finestra di debug
 
-<xref:System.Diagnostics.Debug.WriteLine%2A?displayProperty=nameWithType> può essere usato per inviare l'output alla finestra di debug in Visual Studio o in altri IDE. In questo caso è necessario usare la [sintassi lambda](/dotnet/csharp/language-reference/operators/lambda-expressions) perché la `Debug` classe è compilata al di fuori delle build di rilascio. Esempio:
+<xref:System.Diagnostics.Debug.WriteLine%2A?displayProperty=nameWithType> può essere usato per inviare l'output alla finestra di debug in Visual Studio o in altri IDE. In questo caso è necessario usare la [sintassi lambda](/dotnet/csharp/language-reference/operators/lambda-expressions) perché la `Debug` classe è compilata al di fuori delle build di rilascio. Ad esempio:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -59,7 +59,7 @@ Il <xref:System.Console.WriteLine%2A?displayProperty=nameWithType> metodo viene 
 
 ### <a name="logging-to-a-file"></a>Registrazione in un file
 
-Per la scrittura in un file è necessario creare un <xref:System.IO.StreamWriter> o simile per il file. Il <xref:System.IO.StreamWriter.WriteLine%2A> metodo può quindi essere usato come negli altri esempi precedenti. Ricordarsi di assicurarsi che il file venga chiuso senza problemi eliminando il writer quando il contesto viene eliminato. Esempio:
+Per la scrittura in un file è necessario creare un <xref:System.IO.StreamWriter> o simile per il file. Il <xref:System.IO.StreamWriter.WriteLine%2A> metodo può quindi essere usato come negli altri esempi precedenti. Ricordarsi di assicurarsi che il file venga chiuso senza problemi eliminando il writer quando il contesto viene eliminato. Ad esempio:
 
 <!--
     private readonly StreamWriter _logStream = new StreamWriter("mylog.txt", append: true); 
@@ -90,7 +90,7 @@ Per la scrittura in un file è necessario creare un <xref:System.IO.StreamWriter
 
 Per impostazione predefinita, EF Core non includerà i valori dei dati nei messaggi di eccezione. Questo è dovuto al fatto che tali dati possono essere riservati e possono essere rivelati nell'uso in produzione se un'eccezione non viene gestita.
 
-Tuttavia, la conoscenza dei valori dei dati, in particolare per le chiavi, può essere molto utile durante il debug. Questa operazione può essere abilitata in EF Core chiamando <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging> . Esempio:
+Tuttavia, la conoscenza dei valori dei dati, in particolare per le chiavi, può essere molto utile durante il debug. Questa operazione può essere abilitata in EF Core chiamando <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging> . Ad esempio:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -104,7 +104,7 @@ Tuttavia, la conoscenza dei valori dei dati, in particolare per le chiavi, può 
 
 Per motivi di prestazioni, EF Core non esegue il wrapping di ogni chiamata per leggere un valore dal provider di database in un blocco try-catch. Tuttavia, ciò comporta a volte eccezioni difficili da diagnosticare, specialmente quando il database restituisce un valore NULL quando non è consentito dal modello.
 
-Se <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableDetailedErrors%2A> si attiva, EF introdurrà i blocchi try-catch e fornirà quindi errori più dettagliati. Esempio:
+Se <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableDetailedErrors%2A> si attiva, EF introdurrà i blocchi try-catch e fornirà quindi errori più dettagliati. Ad esempio:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -214,7 +214,7 @@ Nell'esempio precedente è stato usato un filtro personalizzato per registrare o
 
 ### <a name="suppress-logging-an-event"></a>Annulla la registrazione di un evento
 
-In modo analogo, un singolo evento può essere eliminato dalla registrazione. Questa operazione è particolarmente utile per ignorare un avviso che è stato esaminato e compreso. Esempio:
+In modo analogo, un singolo evento può essere eliminato dalla registrazione. Questa operazione è particolarmente utile per ignorare un avviso che è stato esaminato e compreso. Ad esempio:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -245,7 +245,7 @@ Il contenuto predefinito da `LogTo` viene formattato su più righe. La prima rig
 * Oggetto <xref:Microsoft.Extensions.Logging.EventId> nel formato che può essere copiato/incollato per ottenere il membro da <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId> o una delle altre `EventId` classi, più il valore ID non elaborato
 * Categoria di eventi, come descritto in precedenza.
 
-Esempio:
+Ad esempio:
 
 ```output
 info: 10/6/2020 10:52:45.581 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command)
@@ -267,7 +267,7 @@ Questo contenuto può essere personalizzato passando i valori da [DbContextLogge
 
 ### <a name="using-utc-time"></a>Utilizzo dell'ora UTC
 
-Per impostazione predefinita, timestamnps sono progettati per l'utilizzo locale durante il debug. Usare `DbContextLoggerOptions.DefaultWithUtcTime` invece per usare i timestamp UTC indipendenti dalle impostazioni cultura, ma è possibile conservarne tutti gli altri. Esempio:
+Per impostazione predefinita, timestamnps sono progettati per l'utilizzo locale durante il debug. Usare `DbContextLoggerOptions.DefaultWithUtcTime` invece per usare i timestamp UTC indipendenti dalle impostazioni cultura, ma è possibile conservarne tutti gli altri. Ad esempio:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -295,7 +295,7 @@ dbug: 2020-10-06T17:55:39.0351684Z RelationalEventId.TransactionCommitted[20202]
 
 ### <a name="single-line-logging"></a>Registrazione a riga singola
 
-A volte è utile ottenere esattamente una riga per ogni messaggio di log. Questa operazione può essere abilitata da `DbContextLoggerOptions.SingleLine` . Esempio:
+A volte è utile ottenere esattamente una riga per ogni messaggio di log. Questa operazione può essere abilitata da `DbContextLoggerOptions.SingleLine` . Ad esempio:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -316,7 +316,7 @@ dbug: 10/6/2020 10:52:45.725 RelationalEventId.TransactionCommitted[20202] (Micr
 
 ### <a name="other-content-options"></a>Altre opzioni relative al contenuto
 
-Altri flag in [DbContextLoggerOptions](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/Diagnostics/DbContextLoggerOptions.cs#L15) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> --> può essere utilizzato per rimuovere la quantità di metadati inclusi nel log. Questa operazione può essere utile in combinazione con la registrazione a riga singola. Esempio:
+Altri flag in [DbContextLoggerOptions](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/Diagnostics/DbContextLoggerOptions.cs#L15) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> --> può essere utilizzato per rimuovere la quantità di metadati inclusi nel log. Questa operazione può essere utile in combinazione con la registrazione a riga singola. Ad esempio:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

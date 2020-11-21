@@ -4,12 +4,12 @@ description: Conversione di query in query singole e divise in SQL con Entity Fr
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/single-split-queries
-ms.openlocfilehash: 1c99d931c01b99de199710ffe661e1aac7a37263
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: ba282a0c5242b2eb87d681906571036d4751f6ac
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431627"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003562"
 ---
 # <a name="single-vs-split-queries"></a>Query singole e Split
 
@@ -26,7 +26,7 @@ ORDER BY [b].[BlogId], [p].[PostId]
 
 Se in un Blog tipico sono presenti più post correlati, le righe per questi post duplicano le informazioni del Blog. Questa duplicazione porta al cosiddetto problema "esplosione cartesiana". Man mano che vengono caricate più relazioni uno-a-molti, la quantità di dati duplicati può aumentare e influire negativamente sulle prestazioni dell'applicazione.
 
-## <a name="split-queries"></a>Suddividere query
+## <a name="split-queries"></a>Suddividere le query
 
 > [!NOTE]
 > Questa funzionalità è stata introdotta in EF Core 5,0. Funziona solo quando si usa `Include` . [Questo problema](https://github.com/dotnet/efcore/issues/21234) tiene traccia del supporto per la query Split durante il caricamento dei dati correlati nella proiezione senza `Include` .

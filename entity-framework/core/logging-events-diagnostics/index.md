@@ -4,12 +4,12 @@ description: Panoramica di registrazione, eventi, intercettori e diagnostica per
 author: ajcvickers
 ms.date: 10/01/2020
 uid: core/logging-events-diagnostics/index
-ms.openlocfilehash: fdf536dc6ec15e6e520d574b14527a4e7a7b1d72
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 2c44772b22112645f85cf0bffa680bc510ea5afb
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431529"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003523"
 ---
 # <a name="overview-of-logging-and-interception"></a>Panoramica della registrazione e dell'intercettazione
 
@@ -19,7 +19,7 @@ Entity Framework Core (EF Core) contiene diversi meccanismi per la generazione d
 
 La tabella seguente fornisce un riferimento rapido per le differenze tra i meccanismi descritti qui.
 
-| Mechanism |  Async | Ambito | Registrato | Uso previsto
+| Mechanism |  Async | Scope | Registrato | Uso previsto
 |:----------|--------|-------|------------|-------------
 | Registrazione semplice | No | Per contesto | Configurazione del contesto | Registrazione in fase di sviluppo
 | Microsoft.Extensions.Logging | No | Per contesto * | D.I. o configurazione del contesto | Registrazione di produzione
@@ -32,9 +32,9 @@ La tabella seguente fornisce un riferimento rapido per le differenze tra i mecca
 ## <a name="simple-logging"></a>Registrazione semplice
 
 > [!NOTE]
-> Questa funzionalità è stata aggiunta in EF Core 5,0.
+> Questa funzionalità è stata introdotta in EF Core 5,0.
 
-È possibile accedere ai log di EF Core da qualsiasi tipo di applicazione tramite l'uso di [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> Quando si [configura un'istanza di DbContext](xref:core/dbcontext-configuration/index). Questa configurazione viene in genere eseguita in un override di <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Esempio:
+È possibile accedere ai log di EF Core da qualsiasi tipo di applicazione tramite l'uso di [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> Quando si [configura un'istanza di DbContext](xref:core/dbcontext-configuration/index). Questa configurazione viene in genere eseguita in un override di <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Ad esempio:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -55,7 +55,7 @@ Per ulteriori informazioni, vedere [utilizzo di Microsoft. Extensions. Logging i
 ## <a name="events"></a>Eventi
 
 > [!NOTE]
-> Sono stati aggiunti altri eventi in EF Core 5,0.
+> Altri eventi sono stati introdotti nella EF Core 5,0.
 
 EF Core espone [gli eventi .NET](/dotnet/standard/events/) in modo che fungano da callback quando si verificano determinate operazioni nel codice di EF core. Gli eventi sono più semplici degli intercettori e consentono una registrazione più flessibile. Tuttavia, sono solo sincronizzati e pertanto non possono eseguire operazioni di I/O asincrone non bloccanti.
 
@@ -66,7 +66,7 @@ Per ulteriori informazioni, vedere [eventi .NET in EF Core](xref:core/logging-ev
 ## <a name="interception"></a>Interception
 
 > [!NOTE]
-> Questa funzionalità è stata aggiunta in EF Core 3,0. Sono stati aggiunti intercettori aggiuntivi in EF Core 5,0.
+> Questa funzionalità è stata introdotta in EF Core 3,0. Gli intercettori aggiuntivi sono stati introdotti nella EF Core 5,0.
 
 Gli intercettori di EF Core consentono l'intercettazione, la modifica e/o l'eliminazione di operazioni EF Core. Sono incluse operazioni di database di basso livello, ad esempio l'esecuzione di un comando, nonché operazioni di livello superiore, ad esempio chiamate a SaveChanges.
 
@@ -76,7 +76,7 @@ Gli intercettori vengono registrati per ogni istanza di DbContext al momento del
 
 Per ulteriori informazioni, vedere [intercettazione](xref:core/logging-events-diagnostics/interceptors) .
 
-## <a name="diagnostic-listeners"></a>Listener di diagnostica
+## <a name="diagnostic-listeners"></a>Listener diagnostici
 
 I listener di diagnostica consentono l'ascolto di qualsiasi evento EF Core che si verifica nel processo .NET corrente.
 

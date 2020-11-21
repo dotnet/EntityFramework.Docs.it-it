@@ -4,12 +4,12 @@ description: Come configurare ed eseguire il mapping di tipi di entità usando E
 author: roji
 ms.date: 10/06/2020
 uid: core/modeling/entity-types
-ms.openlocfilehash: 9094193640e7cab6db3fed7ae0ab818a455156ca
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 9d86b959b5e0360df6d782d8d1c1c2f9393fdf8b
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429585"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003497"
 ---
 # <a name="entity-types"></a>Tipi di entità
 
@@ -44,7 +44,7 @@ Se non si desidera che un tipo venga incluso nel modello, è possibile escluderl
 ### <a name="excluding-from-migrations"></a>Esclusione dalle migrazioni
 
 > [!NOTE]
-> La possibilità di escludere tabelle dalle migrazioni è stata aggiunta in EF Core 5,0.
+> La possibilità di escludere tabelle dalle migrazioni è stata introdotta in EF Core 5,0.
 
 A volte è utile avere lo stesso tipo di entità mappato in più `DbContext` tipi. Ciò vale soprattutto quando si usano i [contesti delimitati](https://www.martinfowler.com/bliki/BoundedContext.html), per i quali è comune avere un `DbContext` tipo diverso per ogni contesto delimitato.
 

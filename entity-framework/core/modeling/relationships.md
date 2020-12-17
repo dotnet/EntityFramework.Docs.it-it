@@ -4,12 +4,12 @@ description: Come configurare le relazioni tra i tipi di entità quando si usa E
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 716c034bd73d831996b727da18c2c1f83dd55290
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 9c8fe469c4e0b8714a36624ff5bcf236e5b1652f
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003263"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635744"
 ---
 # <a name="relationships"></a>Relazioni
 
@@ -301,11 +301,13 @@ CREATE TABLE [PostTag] (
 );
 ```
 
-EF crea internamente un tipo di entità per rappresentare la tabella di join a cui viene fatto riferimento come tipo di entità join. Non esiste un tipo CLR specifico che può essere usato per questo, pertanto `Dictionary<string, object>` viene usato. Nel modello possono esistere più relazioni molti-a-molti, pertanto al tipo di entità join deve essere assegnato un nome univoco, in questo caso `PostTag` . La funzionalità che consente questa operazione è denominata tipo di entità di tipo condiviso.
+EF crea internamente un tipo di entità per rappresentare la tabella di join a cui viene fatto riferimento come tipo di entità join. `Dictionary<string, object>` viene utilizzato per gestire qualsiasi combinazione di proprietà di chiave esterna. per ulteriori informazioni, vedere [tipi di entità contenitore delle proprietà](shadow-properties.md#property-bag-entity-types) . Nel modello possono esistere più relazioni molti-a-molti, pertanto al tipo di entità join deve essere assegnato un nome univoco, in questo caso `PostTag` . La funzionalità che consente questa operazione è denominata tipo di entità di tipo condiviso.
 
-Le navigazioni many-to-many sono denominate Skip Navigations, perché ignorano effettivamente il tipo di entità join. Se si sta impiegando la configurazione bulk, è possibile ottenere tutte le navigazioni Skip da `GetSkipNavigations` .
+Le navigazioni many-to-many sono denominate Skip Navigations, perché ignorano effettivamente il tipo di entità join. Se si sta impiegando la configurazione bulk, è possibile ottenere tutte le navigazioni Skip da <xref:Microsoft.EntityFrameworkCore.Metadata.IEntityType.GetSkipNavigations%2A> .
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=Metadata)]
+
+#### <a name="join-entity-type-configuration"></a>Configurazione del tipo di entità join
 
 È normale applicare la configurazione al tipo di entità join. Questa azione può essere eseguita tramite `UsingEntity` .
 
@@ -319,8 +321,16 @@ Le navigazioni many-to-many sono denominate Skip Navigations, perché ignorano e
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyPayload.cs?name=ManyToManyPayload)]
 
+#### <a name="joining-relationships-configuration"></a>Unione della configurazione delle relazioni
+
+EF usa le relazioni 2 1-to-many nel tipo di entità join per rappresentare la relazione molti-a-molti. È possibile configurare queste relazioni negli `UsingEntity` argomenti.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=Components)]
+
 > [!NOTE]
 > La possibilità di configurare relazioni molti-a-molti è stata introdotta in EF Core 5,0, per la versione precedente usare l'approccio seguente.
+
+#### <a name="indirect-many-to-many-relationships"></a>Relazioni molti-a-molti indirette
 
 È anche possibile rappresentare una relazione molti-a-molti aggiungendo semplicemente il tipo di entità join ed eseguendo il mapping di due relazioni uno-a-molti separate.
 

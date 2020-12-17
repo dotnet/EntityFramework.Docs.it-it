@@ -4,12 +4,12 @@ description: Esecuzione di query e salvataggio asincrono dei dati con Entity Fra
 author: roji
 ms.date: 9/2/2020
 uid: core/miscellaneous/async
-ms.openlocfilehash: cefbe32b34a38ed6d749ef3ddfff210d5db12332
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: d887bf898d741070f3f3d64b3baf0311b0ab2b63
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071900"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635796"
 ---
 # <a name="asynchronous-programming"></a>Programmazione asincrona
 
@@ -23,6 +23,9 @@ Per ulteriori informazioni, vedere [la documentazione generale per la programmaz
 
 > [!WARNING]
 > EF Core non supporta l'esecuzione di più operazioni parallele nella stessa istanza del contesto. È sempre necessario attendere il completamento di un'operazione prima di iniziare l'operazione successiva. Questa operazione viene in genere eseguita usando la `await` parola chiave in ogni operazione asincrona.
+
+> [!WARNING]
+> Sfortunatamente, l'implementazione asincrona di [Microsoft. Data. SqlClient](https://github.com/dotnet/SqlClient) presenta alcuni problemi noti (ad esempio [#593](https://github.com/dotnet/SqlClient/issues/593), [#601](https://github.com/dotnet/SqlClient/issues/601)e altri).
 
 > [!NOTE]
 > EF Core passa i token di annullamento al provider di database sottostante in uso (ad esempio, Microsoft. Data. SqlClient). Questi token possono o meno essere rispettati. consultare la documentazione del provider di database.  

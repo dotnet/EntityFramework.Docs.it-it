@@ -4,21 +4,22 @@ description: Limitazioni del provider di Azure Cosmos DB Entity Framework Core r
 author: AndriySvyryd
 ms.date: 11/05/2020
 uid: core/providers/cosmos/limitations
-ms.openlocfilehash: f7517954b854c8ea1020c039e490b4fb0dea7181
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 088f593dddd9b5691d87566d7e31a699ba90d7c5
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430196"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635718"
 ---
 # <a name="ef-core-azure-cosmos-db-provider-limitations"></a>Limitazioni del provider di Azure Cosmos DB EF Core
 
 Il provider Cosmos presenta alcune limitazioni. Molte di queste limitazioni sono dovute a limitazioni nel motore di database di Cosmos sottostante e non sono specifiche di EF. Ma la cosa più semplice [non è stata ancora implementata](https://github.com/dotnet/efcore/issues?page=1&q=is%3Aissue+is%3Aopen+Cosmos+in%3Atitle+label%3Atype-enhancement+sort%3Areactions-%2B1-desc).
 
-## <a name="temporary-limitations"></a>Limitazioni temporanee
+Di seguito sono riportate alcune delle funzionalità comunemente richieste:
 
-- `Include` le chiamate non sono supportate
-- `Join` le chiamate non sono supportate
+- [`Include` supporto](https://github.com/dotnet/efcore/issues/16920)
+- [`Join` supporto](https://github.com/dotnet/efcore/issues/17314)
+- [Raccolte di tipi primitivi supportati](https://github.com/dotnet/efcore/issues/14762)
 
 ## <a name="azure-cosmos-db-sdk-limitations"></a>Limitazioni di Azure Cosmos DB SDK
 

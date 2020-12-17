@@ -4,12 +4,12 @@ description: Verifica EF Core prestazioni e diagnosi delle anomalie con i contat
 author: roji
 ms.date: 11/17/2020
 uid: core/logging-events-diagnostics/event-counters
-ms.openlocfilehash: 46acfe82d8aeb7d16146bae0cc2cd4ff733e2831
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 73d360b266db3d3252defbf4a4035c0eb430e22e
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003705"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635822"
 ---
 # <a name="event-counters"></a>Contatori di eventi
 
@@ -77,7 +77,7 @@ Press p to pause, r to resume, q to quit.
 
 Nome contatore                          | Descrizione
 ------------------------------------- | ----
-Oggetti DbContext attivo                     | Numero di istanze di DbContext attive e non disdisposte attualmente presenti nell'applicazione. Se questo numero cresce continuamente, è possibile che si verifichi una perdita perché le istanze di DbContext non vengono eliminate correttamente. Si noti che se la funzionalità di [pooling del contesto](xref:core/miscellaneous/context-pooling) è abilitata, questo numero include le istanze di DbContext in pool non attualmente in uso.
+Oggetti DbContext attivo                     | Numero di istanze di DbContext attive e non disdisposte attualmente presenti nell'applicazione. Se questo numero cresce continuamente, è possibile che si verifichi una perdita perché le istanze di DbContext non vengono eliminate correttamente. Si noti che se la funzionalità di [pooling del contesto](xref:core/performance/advanced-performance-topics#dbcontext-pooling) è abilitata, questo numero include le istanze di DbContext in pool non attualmente in uso.
 Errori dell'operazione di strategia di esecuzione | Il numero di volte in cui l'esecuzione di un'operazione sul database non è riuscita. Se è abilitata una strategia di esecuzione di ripetizione dei tentativi, questo include ogni singolo errore all'interno di più tentativi nella stessa operazione. Questo può essere usato per rilevare problemi temporanei con l'infrastruttura.
 Errori di concorrenza ottimistica       | Il numero di volte `SaveChanges` che non è riuscito a causa di un errore di concorrenza ottimistica, perché i dati nell'archivio dati sono stati modificati dopo il caricamento del codice. Corrisponde a un oggetto <xref:Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException> generato.
 Query                               | Numero di query eseguite.

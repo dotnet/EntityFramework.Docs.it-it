@@ -4,12 +4,12 @@ description: Modelli per la creazione e la gestione di istanze di DbContext con 
 author: ajcvickers
 ms.date: 11/07/2020
 uid: core/dbcontext-configuration/index
-ms.openlocfilehash: f4d51e10555844b5a14000a464f86d3440d5749e
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 93d5942fbc81ee0ae9aeff0c5c8b9e20b160d512
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003289"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635392"
 ---
 # <a name="dbcontext-lifetime-configuration-and-initialization"></a>Durata, configurazione e inizializzazione di DbContext
 
@@ -42,7 +42,7 @@ Un'unità di lavoro tipica quando si usa Entity Framework Core (EF Core) implica
 
 In molte applicazioni Web ciascuna richiesta HTTP corrisponde a una singola unità di lavoro. In questo modo, la durata del contesto è vincolata a quella della richiesta, un valore predefinito valido per le applicazioni Web.
 
-ASP.NET Core le applicazioni vengono [configurate tramite l'inserimento di dipendenze](/aspnet/core/fundamentals/startup). È possibile aggiungere EF Core a questa configurazione utilizzando <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> nel [`ConfigurureServices`](/aspnet/core/fundamentals/startup#the-configureservices-method) metodo di `Startup.cs` . Ad esempio:
+ASP.NET Core le applicazioni vengono [configurate tramite l'inserimento di dipendenze](/aspnet/core/fundamentals/startup). È possibile aggiungere EF Core a questa configurazione utilizzando <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> nel [`ConfigureServices`](/aspnet/core/fundamentals/startup#the-configureservices-method) metodo di `Startup.cs` . Ad esempio:
 
 <!--
         public void ConfigureServices(IServiceCollection services)

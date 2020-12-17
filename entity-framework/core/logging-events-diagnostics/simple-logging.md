@@ -4,12 +4,12 @@ description: Registrazione da un EF Core DbContext con LogTo
 author: ajcvickers
 ms.date: 10/03/2020
 uid: core/logging-events-diagnostics/simple-logging
-ms.openlocfilehash: 274fca39c45c4e2ccfd47f3c4eeb0834e00d18aa
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 076c4b12aa033b51a2b839686c520a76520ee415
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003510"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635614"
 ---
 # <a name="simple-logging"></a>Registrazione semplice
 
@@ -26,7 +26,7 @@ ms.locfileid: "95003510"
 
 ## <a name="configuration"></a>Configurazione
 
-È possibile accedere ai log di EF Core da qualsiasi tipo di applicazione tramite l'uso di [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> Quando si [configura un'istanza di DbContext](xref:core/dbcontext-configuration/index). Questa configurazione viene in genere eseguita in un override di <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Ad esempio:
+È possibile accedere ai log di EF Core da qualsiasi tipo di applicazione tramite l'utilizzo di <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> quando si [configura un'istanza di DbContext](xref:core/dbcontext-configuration/index). Questa configurazione viene in genere eseguita in un override di <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Ad esempio:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -188,7 +188,7 @@ Poiché le categorie sono gerarchiche, in questo esempio viene utilizzata la `Da
 [!code-csharp[CustomFilter](../../../samples/core/Miscellaneous/Logging/SimpleLogging/Program.cs?name=CustomFilter)]
 
 > [!TIP]
-> Il filtro usando filtri personalizzati o una delle altre opzioni illustrate qui è più efficiente del filtro nel delegato LogTo. Questo perché se il filtro determina che il messaggio non deve essere registrato, il messaggio del log non viene ancora creato.
+> Il filtro usando filtri personalizzati o una delle altre opzioni illustrate qui è più efficiente rispetto al filtro nel `LogTo` delegato. Questo perché se il filtro determina che il messaggio non deve essere registrato, il messaggio del log non viene ancora creato.
 
 ## <a name="configuration-for-specific-messages"></a>Configurazione per messaggi specifici
 
@@ -260,14 +260,14 @@ dbug: 10/6/2020 10:52:45.585 RelationalEventId.TransactionCommitted[20202] (Micr
       Committed transaction.
 ```
 
-Questo contenuto può essere personalizzato passando i valori da [DbContextLoggerOptions](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/Diagnostics/DbContextLoggerOptions.cs#L15) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> -->, come illustrato nelle sezioni riportate di seguito.
+Questo contenuto può essere personalizzato passando i valori da <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> , come illustrato nelle sezioni seguenti.
 
 > [!TIP]
 > Prendere in considerazione l'uso di [Microsoft. Extensions. Logging](/aspnet/core/fundamentals/logging) per un maggiore controllo sulla formattazione dei log.
 
 ### <a name="using-utc-time"></a>Utilizzo dell'ora UTC
 
-Per impostazione predefinita, timestamnps sono progettati per l'utilizzo locale durante il debug. Usare `DbContextLoggerOptions.DefaultWithUtcTime` invece per usare i timestamp UTC indipendenti dalle impostazioni cultura, ma è possibile conservarne tutti gli altri. Ad esempio:
+Per impostazione predefinita, i timestamp sono progettati per l'utilizzo locale durante il debug. Usare <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions.DefaultWithUtcTime?displayProperty=nameWithType> invece per usare i timestamp UTC indipendenti dalle impostazioni cultura, ma è possibile conservarne tutti gli altri. Ad esempio:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -295,7 +295,7 @@ dbug: 2020-10-06T17:55:39.0351684Z RelationalEventId.TransactionCommitted[20202]
 
 ### <a name="single-line-logging"></a>Registrazione a riga singola
 
-A volte è utile ottenere esattamente una riga per ogni messaggio di log. Questa operazione può essere abilitata da `DbContextLoggerOptions.SingleLine` . Ad esempio:
+A volte è utile ottenere esattamente una riga per ogni messaggio di log. Questa operazione può essere abilitata da <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions.SingleLine?displayProperty=nameWithType> . Ad esempio:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -316,7 +316,7 @@ dbug: 10/6/2020 10:52:45.725 RelationalEventId.TransactionCommitted[20202] (Micr
 
 ### <a name="other-content-options"></a>Altre opzioni relative al contenuto
 
-Altri flag in [DbContextLoggerOptions](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/Diagnostics/DbContextLoggerOptions.cs#L15) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> --> può essere utilizzato per rimuovere la quantità di metadati inclusi nel log. Questa operazione può essere utile in combinazione con la registrazione a riga singola. Ad esempio:
+Gli altri flag in <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> possono essere utilizzati per ridurre la quantità di metadati inclusi nel log. Questa operazione può essere utile in combinazione con la registrazione a riga singola. Ad esempio:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

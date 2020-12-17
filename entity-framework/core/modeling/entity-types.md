@@ -4,12 +4,12 @@ description: Come configurare ed eseguire il mapping di tipi di entità usando E
 author: roji
 ms.date: 10/06/2020
 uid: core/modeling/entity-types
-ms.openlocfilehash: 9d86b959b5e0360df6d782d8d1c1c2f9393fdf8b
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: ca8cb8560afe374218e763bc0476839187a40ece
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003497"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635770"
 ---
 # <a name="entity-types"></a>Tipi di entità
 
@@ -84,7 +84,7 @@ Quando si utilizza un database relazionale, le tabelle vengono create per conven
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableNameAndSchema.cs?name=TableNameAndSchema&highlight=3-4)]
 
-_**
+_*_
 
 Anziché specificare lo schema per ogni tabella, è anche possibile definire lo schema predefinito a livello di modello con l'API Fluent:
 
@@ -105,3 +105,63 @@ Si noti che l'impostazione dello schema predefinito influirà anche su altri ogg
 
 > [!TIP]
 > Per testare i tipi di entità di cui è stato eseguito il mapping alle viste usando il provider in memoria, eseguirne il mapping a una query tramite `ToInMemoryQuery` . Per altri dettagli, vedere un [esempio eseguibile](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) usando questa tecnica.
+
+## <a name="table-valued-function-mapping"></a>Mapping di funzioni con valori di tabella
+
+È possibile eseguire il mapping di un tipo di entità a una funzione con valori di tabella (TVF) anziché a una tabella nel database. Per illustrare questo problema, è possibile definire un'altra entità che rappresenta il Blog con più post. Nell'esempio, l'entità è senza [chiave](xref:core/modeling/keyless-entity-types), ma non deve essere.
+
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/EntityTypes.cs#BlogWithMultiplePostsEntity)]
+
+Successivamente, creare la funzione con valori di tabella seguente nel database, che restituisce solo i Blog con più post, oltre al numero di post associati a ognuno di questi Blog:
+
+```sql
+CREATE FUNCTION dbo.BlogsWithMultiplePosts()
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT b.Url, COUNT(p.BlogId) AS PostCount
+    FROM Blogs AS b
+    JOIN Posts AS p ON b.BlogId = p.BlogId
+    GROUP BY b.BlogId, b.Url
+    HAVING COUNT(p.BlogId) > 1
+)
+```
+
+A questo punto, `BlogWithMultiplePost` è possibile eseguire il mapping dell'entità a questa funzione nel modo seguente:
+
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/EntityTypes.cs#QueryableFunctionConfigurationToFunction)]
+
+> [!NOTE]
+> Per eseguire il mapping di un'entità a una funzione con valori di tabella, la funzione deve essere senza parametri.
+
+Convenzionalmente, le proprietà dell'entità verranno mappate alle colonne corrispondenti restituite da TVF. Se le colonne restituite da TVF hanno un nome diverso rispetto alla proprietà dell'entità, è possibile configurarle usando il `HasColumnName` metodo, come nel caso del mapping a una tabella normale.
+
+Quando il tipo di entità viene mappato a una funzione con valori di tabella, la query:
+
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Program.cs#ToFunctionQuery)]
+
+Produce il codice SQL seguente:
+
+```sql
+SELECT [b].[Url], [b].[PostCount]
+FROM [dbo].[BlogsWithMultiplePosts]() AS [b]
+WHERE [b].[PostCount] > 3
+```
+
+## <a name="table-comments"></a>Commenti tabella
+
+È possibile impostare un commento di testo arbitrario che viene impostato nella tabella di database, consentendo di documentare lo schema nel database:
+
+### <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
+
+> [!NOTE]
+> L'impostazione di commenti tramite annotazioni dati è stata introdotta in EF Core 5,0.
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/TableComment.cs?name=TableComment&highlight=1)]
+
+### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableComment.cs?name=TableComment&highlight=4)]
+
+_**

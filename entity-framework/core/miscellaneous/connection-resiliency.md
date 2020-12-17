@@ -4,12 +4,12 @@ description: Uso della resilienza della connessione per ritentare automaticament
 author: AndriySvyryd
 ms.date: 11/15/2016
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: db0666a49cbd41ef3eacf447eaeed1fb54ffcbf4
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: bcafdf5de26ecfd7539d426388154550a39332ab
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92061918"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635783"
 ---
 # <a name="connection-resiliency"></a>Resilienza della connessione
 
@@ -32,6 +32,9 @@ public void ConfigureServices(IServiceCollection services)
             providerOptions => providerOptions.EnableRetryOnFailure()));
 }
 ```
+
+> [!NOTE]
+> Se si Abilita la ripetizione dei tentativi in caso di errore, EF memorizza internamente il set di risultati, che può aumentare significativamente i requisiti di memoria per le query che restituiscono grandi Per altri dettagli, vedere [buffering and streaming](xref:core/performance/efficient-querying#buffering-and-streaming) .
 
 ## <a name="custom-execution-strategy"></a>Strategia di esecuzione personalizzata
 

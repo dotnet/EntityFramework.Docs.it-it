@@ -4,12 +4,12 @@ description: Panoramica di registrazione, eventi, intercettori e diagnostica per
 author: ajcvickers
 ms.date: 10/01/2020
 uid: core/logging-events-diagnostics/index
-ms.openlocfilehash: 2c44772b22112645f85cf0bffa680bc510ea5afb
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: d85a506167661523bf70b62d3a075a6248180d11
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003523"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635679"
 ---
 # <a name="overview-of-logging-and-interception"></a>Panoramica della registrazione e dell'intercettazione
 
@@ -19,7 +19,7 @@ Entity Framework Core (EF Core) contiene diversi meccanismi per la generazione d
 
 La tabella seguente fornisce un riferimento rapido per le differenze tra i meccanismi descritti qui.
 
-| Mechanism |  Async | Scope | Registrato | Uso previsto
+| Mechanism |  Async | Ambito | Registrato | Uso previsto
 |:----------|--------|-------|------------|-------------
 | Registrazione semplice | No | Per contesto | Configurazione del contesto | Registrazione in fase di sviluppo
 | Microsoft.Extensions.Logging | No | Per contesto * | D.I. o configurazione del contesto | Registrazione di produzione
@@ -34,7 +34,7 @@ La tabella seguente fornisce un riferimento rapido per le differenze tra i mecca
 > [!NOTE]
 > Questa funzionalità è stata introdotta in EF Core 5,0.
 
-È possibile accedere ai log di EF Core da qualsiasi tipo di applicazione tramite l'uso di [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> Quando si [configura un'istanza di DbContext](xref:core/dbcontext-configuration/index). Questa configurazione viene in genere eseguita in un override di <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Ad esempio:
+È possibile accedere ai log di EF Core da qualsiasi tipo di applicazione tramite l'utilizzo di <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> quando si [configura un'istanza di DbContext](xref:core/dbcontext-configuration/index). Questa configurazione viene in genere eseguita in un override di <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Ad esempio:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

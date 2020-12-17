@@ -4,12 +4,12 @@ description: Query asincrona e salvataggio in Entity Framework 6
 author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/async
-ms.openlocfilehash: 2b5f6f868cbf2e0699a943cf68c8568550f4ba36
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 77204f56e4dca63322c8ae2e1117318262f16f83
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063400"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635731"
 ---
 # <a name="async-query-and-save"></a>Query asincrona e salvataggio
 > [!NOTE]
@@ -77,7 +77,7 @@ Il flusso di lavoro [Code First](xref:ef6/modeling/code-first/workflows/new-data
     }
 ```
 
- 
+ 
 
 ## <a name="create-a-synchronous-program"></a>Creazione di un programma sincrono
 
@@ -137,32 +137,32 @@ Ora che è disponibile un modello EF, è possibile scrivere il codice che lo usa
     }
 ```
 
-Questo codice chiama il metodo **PerformDatabaseOperations** che salva un nuovo **Blog** nel database e quindi recupera tutti i **Blog** dal database e li stampa nella **console**. Al termine di questa operazione, il programma scrive un'offerta del giorno nella **console**.
+Questo codice chiama il `PerformDatabaseOperations` metodo che salva un nuovo **Blog** nel database e quindi recupera tutti i **Blog** dal database e li stampa nella **console**. Al termine di questa operazione, il programma scrive un'offerta del giorno nella **console**.
 
 Poiché il codice è sincrono, è possibile osservare il flusso di esecuzione seguente quando si esegue il programma:
 
-1.  **SaveChanges** inizia a eseguire il push del nuovo **Blog** nel database
-2.  **SaveChanges** completato
+1.  `SaveChanges` inizia a eseguire il push del nuovo **Blog** nel database
+2.  `SaveChanges` completa
 3.  La query per tutti i **Blog** viene inviata al database
 4.  La query restituisce e i risultati vengono scritti nella **console**
 5.  La citazione del giorno viene scritta nella **console**
 
-![Output di sincronizzazione](~/ef6/media/syncoutput.png) 
+![Output di sincronizzazione](~/ef6/media/syncoutput.png) 
 
- 
+ 
 
 ## <a name="making-it-asynchronous"></a>Esecuzione asincrona
 
 Ora che il programma è in esecuzione, è possibile iniziare a usare le nuove parole chiave async e await. Sono state apportate le modifiche seguenti a Program.cs
 
-1.  Riga 2: l'istruzione using per lo spazio dei nomi **System. Data. Entity** fornisce l'accesso ai metodi di estensione EF Async.
-2.  Riga 4: l'istruzione using per lo spazio dei nomi **System. Threading. Tasks** consente di usare il tipo di **attività** .
-3.  Riga 12 & 18: viene acquisita come attività che monitora lo stato di avanzamento di **PerformSomeDatabaseOperations** (riga 12) e quindi blocca l'esecuzione del programma per completare questa attività una volta che tutto il lavoro per il programma viene eseguito (riga 18).
-4.  Riga 25: è stato aggiornato **PerformSomeDatabaseOperations** per essere contrassegnato come **Async** e viene restituita un' **attività**.
-5.  Riga 35: viene ora chiamata la versione asincrona di SaveChanges e in attesa del completamento.
-6.  Riga 42: viene ora chiamata la versione asincrona di ToList e in attesa del risultato.
+1.  Riga 2: l'istruzione using per lo `System.Data.Entity` spazio dei nomi consente di accedere ai metodi di estensione EF Async.
+2.  Riga 4: l'istruzione using per lo `System.Threading.Tasks` spazio dei nomi consente di usare il `Task` tipo.
+3.  Riga 12 & 18: viene eseguita l'acquisizione come attività che monitora lo stato di avanzamento di `PerformSomeDatabaseOperations` (riga 12) e quindi blocca l'esecuzione del programma per completare questa attività una volta completate tutte le operazioni del programma (riga 18).
+4.  Riga 25: è stato aggiornato `PerformSomeDatabaseOperations` per essere contrassegnato come `async` e viene restituito `Task` .
+5.  Riga 35: viene ora chiamata la versione asincrona di `SaveChanges` e in attesa del completamento.
+6.  Riga 42: viene ora chiamata la versione asincrona di `ToList` e in attesa del risultato.
 
-Per un elenco completo dei metodi di estensione disponibili nello spazio dei nomi System. Data. Entity, vedere la classe QueryableExtensions. *Sarà inoltre necessario aggiungere "using System. Data. Entity" alle istruzioni using.*
+Per un elenco completo dei metodi di estensione disponibili nello `System.Data.Entity` spazio dei nomi, fare riferimento alla `QueryableExtensions` classe. *Sarà inoltre necessario aggiungere `using System.Data.Entity` le istruzioni using.*
 
 ``` csharp
     using System;
@@ -222,18 +222,18 @@ Per un elenco completo dei metodi di estensione disponibili nello spazio dei nom
 
 Ora che il codice è asincrono, è possibile osservare un flusso di esecuzione diverso durante l'esecuzione del programma:
 
-1. **SaveChanges** inizia a eseguire il push del nuovo **Blog** nel database  
-    *Quando il comando viene inviato al database, non è necessario più tempo di calcolo nel thread gestito corrente. Il metodo **PerformDatabaseOperations** restituisce (anche se l'esecuzione non è terminata) e il flusso di programma nel metodo Main continua.*
+1. `SaveChanges` inizia a eseguire il push del nuovo **Blog** nel database  
+    *Quando il comando viene inviato al database, non è necessario più tempo di calcolo nel thread gestito corrente. Il `PerformDatabaseOperations` metodo restituisce (anche se l'esecuzione non è terminata) e il flusso di programma nel metodo Main continua.*
 2. **La citazione del giorno viene scritta nella console**  
-    *Poiché non vi sono altre operazioni da eseguire nel metodo Main, il thread gestito viene bloccato nella chiamata wait fino al completamento dell'operazione del database. Al termine, verrà eseguito il resto del **PerformDatabaseOperations** .*
-3.  **SaveChanges** completato  
+    *Poiché non vi sono altre operazioni da eseguire nel metodo Main, il thread gestito viene bloccato sulla `Wait` chiamata fino al completamento dell'operazione di database. Al termine, il resto del `PerformDatabaseOperations` verrà eseguito.*
+3.  `SaveChanges` completa  
 4.  La query per tutti i **Blog** viene inviata al database  
     *Anche in questo caso, il thread gestito è libero di eseguire altre operazioni mentre la query viene elaborata nel database. Poiché tutte le altre esecuzioni sono state completate, il thread si interromperà solo sulla chiamata di attesa.*
 5.  La query restituisce e i risultati vengono scritti nella **console**  
 
-![Output asincrono](~/ef6/media/asyncoutput.png) 
+![Output asincrono](~/ef6/media/asyncoutput.png) 
 
- 
+ 
 
 ## <a name="the-takeaway"></a>Da asporto
 

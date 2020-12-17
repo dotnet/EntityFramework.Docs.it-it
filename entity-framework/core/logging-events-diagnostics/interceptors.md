@@ -4,12 +4,12 @@ description: Intercettazione per operazioni di database e altri eventi
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: 22d860a083c5ece9be109be630c3ce01dd742bf2
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: fba9f3d02b8cf504c2cadca8eb844cd3e818e915
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003412"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635809"
 ---
 # <a name="interceptors"></a>Intercettori
 
@@ -401,7 +401,7 @@ Si noti che dall'output del log l'applicazione continua a usare il messaggio mem
 > [!TIP]  
 > È possibile [scaricare l'esempio di intercettore SaveChanges](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) da GitHub.
 
-<xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> e <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> i punti di intercettazione sono definiti dal `ISaveChangesInterceptor` <!-- Issue #2748 --> . Come per gli altri intercettori, il `SaveChangesInterceptor` <!-- Issue #2748 --> la classe base con i metodi no-op viene fornita come praticità.
+<xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A><xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>i punti di intercettazione e sono definiti dall' <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor> interfaccia. Come per gli altri intercettori, la <xref:Microsoft.EntityFrameworkCore.Diagnostics.SaveChangesInterceptor> classe base con metodi no-op viene fornita come praticità.
 
 > [!TIP]
 > Gli intercettori sono potenti. In molti casi, tuttavia, potrebbe essere più semplice eseguire l'override del metodo SaveChanges o usare gli [eventi .NET per SaveChanges](xref:core/logging-events-diagnostics/events) esposto in DbContext.
@@ -502,7 +502,7 @@ L'idea generale del controllo con l'intercettore è la seguente:
 * Se SaveChanges ha esito positivo, il messaggio di controllo viene aggiornato per indicare l'esito positivo
 * Se SaveChanges ha esito negativo, il messaggio di controllo viene aggiornato per indicare l'errore
 
-La prima fase viene gestita prima che tutte le modifiche vengano inviate al database usando le sostituzioni di `ISaveChangesInterceptor.SavingChanges` <!-- Issue #2748 --> e `ISaveChangesInterceptor.SavingChangesAsync`<!-- Issue #2748 -->.
+La prima fase viene gestita prima che tutte le modifiche vengano inviate al database usando le sostituzioni di <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavingChanges%2A?displayProperty=nameWithType> e <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavingChangesAsync%2A?displayProperty=nameWithType> .
 
 <!--
     public async ValueTask<InterceptionResult<int>> SavingChangesAsync(
@@ -538,7 +538,7 @@ La prima fase viene gestita prima che tutte le modifiche vengano inviate al data
 -->
 [!code-csharp[SavingChanges](../../../samples/core/Miscellaneous/SaveChangesInterception/AuditingInterceptor.cs?name=SavingChanges)]
 
-L'override di entrambi i metodi Sync e async garantisce che il controllo avvenga indipendentemente dal fatto che venga chiamato SaveChanges o SaveChangesAsync. Si noti inoltre che l'overload asincrono è in grado di eseguire operazioni di I/O asincrone non bloccanti nel database di controllo. Per assicurarsi che tutte le operazioni di I/O del database siano asincrone, è possibile che si desideri generare il metodo di sincronizzazione SavingChanges. Quindi richiede che l'applicazione chiami sempre SaveChangesAsync e mai SaveChanges.
+L'override di entrambi i metodi Sync e async garantisce che il controllo avvenga indipendentemente dal fatto che `SaveChanges` `SaveChangesAsync` venga chiamato o. Si noti inoltre che l'overload asincrono è in grado di eseguire operazioni di I/O asincrone non bloccanti nel database di controllo. È possibile che si desideri generare il `SavingChanges` metodo di sincronizzazione per assicurarsi che tutte le operazioni di i/O del database siano asincrone. Quindi richiede che l'applicazione chiami sempre `SaveChangesAsync` e mai `SaveChanges` .
 
 #### <a name="the-audit-message"></a>Messaggio di controllo
 
@@ -598,7 +598,7 @@ Il risultato è un' `SaveChangesAudit` entità con una raccolta di `EntityAudit`
 
 #### <a name="detecting-success"></a>Rilevamento dell'esito positivo
 
-L'entità di controllo è archiviata nell'intercettore, in modo che sia possibile accedervi nuovamente quando SaveChanges ha esito positivo o negativo. Per l'esito positivo, `ISaveChangesInterceptor.SavedChanges` <!-- Issue #2748 --> o `ISaveChangesInterceptor.SavedChangesAsync` <!-- Issue #2748 --> Chiamata del metodo .
+L'entità di controllo è archiviata nell'intercettore, in modo che sia possibile accedervi nuovamente quando SaveChanges ha esito positivo o negativo. Per l'esito positivo, <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavedChanges%2A?displayProperty=nameWithType> <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavedChangesAsync%2A?displayProperty=nameWithType> viene chiamato o.
 
 <!--
     public int SavedChanges(SaveChangesCompletedEventData eventData, int result)
@@ -638,7 +638,7 @@ L'entità di controllo è collegata al contesto di controllo, poiché esiste gi�
 
 #### <a name="detecting-failure"></a>Rilevamento di errori
 
-L'errore viene gestito in modo analogo all'esito positivo, ma in `ISaveChangesInterceptor.SaveChangesFailed` <!-- Issue #2748 --> o `ISaveChangesInterceptor.SaveChangesFailedAsync` <!-- Issue #2748 --> ProcessOnStatus. I dati dell'evento contengono l'eccezione generata.
+L'errore viene gestito in modo analogo all'esito positivo, ma <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SaveChangesFailed%2A?displayProperty=nameWithType> nel <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SaveChangesFailedAsync%2A?displayProperty=nameWithType> metodo o. I dati dell'evento contengono l'eccezione generata.
 
 <!--
     public void SaveChangesFailed(DbContextErrorEventData eventData)

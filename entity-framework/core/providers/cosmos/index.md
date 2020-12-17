@@ -4,12 +4,12 @@ description: Documentazione per il provider di database che consente l'uso di En
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: b167f53515799efdaead232f44ad5eab37fb0b14
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 8bfce78465e8194544562c3ecac4d3398ca91265
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003601"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635588"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>Provider di Azure Cosmos DB per EF Core
 
@@ -103,12 +103,12 @@ Per impostazione predefinita EF Core creerà contenitori con la chiave di partiz
 > [!NOTE]
 >La proprietà della chiave di partizione può essere di qualsiasi tipo, purché sia [convertita in stringa](xref:core/modeling/value-conversions).
 
-Una volta configurata, la proprietà della chiave di partizione deve avere sempre un valore non Null. Una query può essere creata a partizione singola mediante l'aggiunta di una `WithPartitionKey` chiamata.
+Una volta configurata, la proprietà della chiave di partizione deve avere sempre un valore non Null. Una query può essere creata a partizione singola mediante l'aggiunta di una <xref:Microsoft.EntityFrameworkCore.CosmosQueryableExtensions.WithPartitionKey%2A> chiamata.
 
 [!code-csharp[PartitionKey](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=PartitionKey&highlight=15)]
 
 > [!NOTE]
-> `WithPartitionKey` è stato introdotto in EF Core 5,0.
+> <xref:Microsoft.EntityFrameworkCore.CosmosQueryableExtensions.WithPartitionKey%2A> è stato introdotto in EF Core 5,0.
 
 È in genere consigliabile aggiungere la chiave di partizione alla chiave primaria in modo che rispecchi meglio la semantica del server e consenta alcune ottimizzazioni, ad esempio in `FindAsync` .
 
@@ -212,10 +212,10 @@ Questo è il codice JSON risultante:
 > [!NOTE]
 > Il supporto per la concorrenza eTag è stato introdotto nel EF Core 5,0.
 
-Per configurare un tipo di entità per l'utilizzo della chiamata di [concorrenza ottimistica](xref:core/modeling/concurrency) `UseETagConcurrency` . Questa chiamata creerà una `_etag` proprietà nello [stato Shadow](xref:core/modeling/shadow-properties) e la imposterà come token di concorrenza.
+Per configurare un tipo di entità per l'utilizzo della chiamata di [concorrenza ottimistica](xref:core/modeling/concurrency) <xref:Microsoft.EntityFrameworkCore.CosmosEntityTypeBuilderExtensions.UseETagConcurrency%2A> . Questa chiamata creerà una `_etag` proprietà nello [stato Shadow](xref:core/modeling/shadow-properties) e la imposterà come token di concorrenza.
 
 [!code-csharp[Main](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=ETag)]
 
-Per semplificare la risoluzione degli errori di concorrenza, è possibile eseguire il mapping dell'eTag a una proprietà CLR usando `IsETagConcurrency` .
+Per semplificare la risoluzione degli errori di concorrenza, è possibile eseguire il mapping dell'eTag a una proprietà CLR usando <xref:Microsoft.EntityFrameworkCore.CosmosPropertyBuilderExtensions.IsETagConcurrency%2A> .
 
 [!code-csharp[Main](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=ETagProperty)]

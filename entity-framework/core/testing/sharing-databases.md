@@ -4,12 +4,12 @@ description: Esempio che illustra come condividere un database tra più test
 author: ajcvickers
 ms.date: 04/25/2020
 uid: core/testing/sharing-databases
-ms.openlocfilehash: 95b756c80b983356a07fd836aa1b02f2835e6629
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 7a90a144271d5c34e9d5043aa439f84db805c6af
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431505"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128836"
 ---
 # <a name="sharing-databases-between-tests"></a>Condivisione di database tra test
 
@@ -29,7 +29,7 @@ Questa operazione richiede informazioni:
 
 * Come condividere in modo sicuro gli oggetti tra i test
 * Quando il Framework di test esegue i test in parallelo
-* Come proteggere il database in uno stato pulito per ogni test  
+* Come proteggere il database in uno stato pulito per ogni test
 
 ## <a name="the-fixture"></a>Fixture
 
@@ -65,7 +65,7 @@ In questo modo si garantisce che il database corrisponda al modello EF corrente 
 La connessione al database viene eliminata quando la fixture viene eliminata.
 A questo punto è inoltre possibile prendere in considerazione l'eliminazione del database di prova.
 Tuttavia, questa operazione richiederà un blocco aggiuntivo e un conteggio dei riferimenti se la fixture è condivisa da più classi di test.
-Inoltre, è spesso utile fare in modo che il database di test sia ancora disponibile per il debug di test non superati.  
+Inoltre, è spesso utile fare in modo che il database di test sia ancora disponibile per il debug di test non superati.
 
 ## <a name="using-the-fixture"></a>Uso della fixture
 
@@ -85,7 +85,7 @@ I test hanno spesso la necessità di mutare i dati di test con inserimenti, aggi
 Queste modifiche, tuttavia, influiscano su altri test che prevedono un database pulito e con seeding.
 
 Questa operazione può essere eseguita eseguendo i test di mutazione all'interno di una transazione.
-Esempio:
+Ad esempio:
 
 [!code-csharp[CanAddItem](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/SharedDatabaseTests/SharedDatabaseTest.cs?name=CanAddItem)]
 

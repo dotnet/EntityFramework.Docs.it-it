@@ -4,12 +4,12 @@ description: Come configurare le chiavi per i tipi di entità quando si usa Enti
 author: AndriySvyryd
 ms.date: 11/06/2019
 uid: core/modeling/keys
-ms.openlocfilehash: ea744315514b19465aba9a311055a9b5e49fa3f8
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 805396a13227aa62ed86ac17c742d055d7a22bbf
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063790"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129187"
 ---
 # <a name="keys"></a>Chiavi
 
@@ -34,7 +34,7 @@ Per convenzione, una proprietà denominata `Id` o `<type name>Id` verrà configu
 
 ***
 
-È anche possibile configurare più proprietà come chiave di un'entità. questa operazione è nota come chiave composta. Le chiavi composite possono essere configurate solo usando l'API Fluent; le convenzioni non installeranno mai una chiave composta e non è possibile usare le annotazioni dei dati per configurarne una.
+È anche possibile configurare più proprietà come chiave di un'entità. questa operazione è nota come chiave composta. Le chiavi composite possono essere configurate solo usando l'API Fluent; le convenzioni non configurano mai una chiave composta e non è possibile usare le annotazioni dei dati per configurarne una.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/KeyComposite.cs?name=KeyComposite&highlight=4)]
 

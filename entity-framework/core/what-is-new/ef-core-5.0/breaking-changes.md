@@ -4,43 +4,134 @@ description: Elenco completo delle modifiche di rilievo introdotte in Entity Fra
 author: bricelam
 ms.date: 11/07/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: 7a13c9a6f6bd299991c379ec490480e1fbb4ba46
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 4a463e785edaceaf5dd96164c39e2cc9b5f86de4
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635471"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128745"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>Modifiche di rilievo nella EF Core 5,0
 
 Le modifiche alle API e al comportamento seguenti hanno il rischio di interrompere l'aggiornamento delle applicazioni esistenti per EF Core 5.0.0.
 
-## <a name="summary"></a>Summary
+## <a name="summary"></a>Riepilogo
 
 | **Modifica di rilievo**                                                                                                                   | **Impatto** |
 |:--------------------------------------------------------------------------------------------------------------------------------------|------------|
+| [EF Core 5,0 non supporta .NET Framework](#netstandard21)                                                                         | Media     |
+| [IProperty. getColumnName () è obsoleto](#getcolumnname-obsolete)                                                                  | Media     |
+| [La precisione e la scala sono necessarie per i numeri decimali](#decimals)                                                                            | Media     |
 | [Obbligatorio per la navigazione da principale a dipendente con semantica diversa](#required-dependent)                                 | Media     |
 | [La definizione della query viene sostituita con metodi specifici del provider](#defining-query)                                                          | Media     |
 | [Le esplorazioni di riferimento non null non vengono sovrascritte dalle query](#nonnullreferences)                                                   | Media     |
-| [Metodo HasGeometricDimension rimosso dall'estensione SQLite NTS](#geometric-sqlite)                                                   | Bassa        |
-| [Cosmos: la chiave di partizione è stata aggiunta alla chiave primaria](#cosmos-partition-key)                                                        | Bassa        |
-| [Cosmos: `id` proprietà rinominata in `__id`](#cosmos-id)                                                                                 | Bassa        |
-| [Cosmos: byte [] è ora archiviato come stringa Base64 anziché come matrice di numeri](#cosmos-byte)                                             | Bassa        |
-| [Cosmos: GetPropertyName e SetPropertyName sono stati rinominati](#cosmos-metadata)                                                          | Bassa        |
-| [I generatori di valori vengono chiamati quando lo stato dell'entità viene modificato da scollegato a non modificato, aggiornato o eliminato](#non-added-generation) | Bassa        |
-| [IMigrationsModelDiffer USA ora IRelationalModel](#relational-model)                                                                 | Bassa        |
-| [Toview () viene considerato in modo diverso dalle migrazioni](#toview)                                                                              | Bassa        |
-| [ToTable (null) contrassegna il tipo di entità come non mappato a una tabella](#totable)                                                              | Bassa        |
-| [I discriminatori sono di sola lettura](#read-only-discriminators)                                                                             | Bassa        |
-| [EF specifico del provider. Metodi di funzioni generate per il provider InMemory](#no-client-methods)                                              | Bassa        |
-| [IProperty. getColumnName () è obsoleto](#getcolumnname-obsolete)                                                                  | Bassa        |
-| [IndexBuilder. HasName è ora obsoleto](#index-obsolete)                                                                               | Bassa        |
-| [Un pluralizer è ora incluso per i modelli di impalcatura decodificati](#pluralizer)                                                 | Bassa        |
-| [INavigationBase sostituisce INavigation in alcune API per supportare le navigazioni Skip](#inavigationbase)                                     | Bassa        |
-| [Alcune query con raccolta correlata che usano `Distinct` o `GroupBy` non sono più supportate](#collection-distinct-groupby) | Bassa        |
-| [L'uso di una raccolta di tipi queryable nella proiezione non è supportato](#queryable-projection)                                          | Bassa        |
+| [Toview () viene considerato in modo diverso dalle migrazioni](#toview)                                                                              | Media     |
+| [ToTable (null) contrassegna il tipo di entità come non mappato a una tabella](#totable)                                                              | Media     |
+| [Metodo HasGeometricDimension rimosso dall'estensione SQLite NTS](#geometric-sqlite)                                                   | Basso        |
+| [Cosmos: la chiave di partizione è stata aggiunta alla chiave primaria](#cosmos-partition-key)                                                        | Basso        |
+| [Cosmos: `id` proprietà rinominata in `__id`](#cosmos-id)                                                                                 | Basso        |
+| [Cosmos: byte [] è ora archiviato come stringa Base64 anziché come matrice di numeri](#cosmos-byte)                                             | Basso        |
+| [Cosmos: GetPropertyName e SetPropertyName sono stati rinominati](#cosmos-metadata)                                                          | Basso        |
+| [I generatori di valori vengono chiamati quando lo stato dell'entità viene modificato da scollegato a non modificato, aggiornato o eliminato](#non-added-generation) | Basso        |
+| [IMigrationsModelDiffer USA ora IRelationalModel](#relational-model)                                                                 | Basso        |
+| [I discriminatori sono di sola lettura](#read-only-discriminators)                                                                             | Basso        |
+| [EF specifico del provider. Metodi di funzioni generate per il provider InMemory](#no-client-methods)                                              | Basso        |
+| [IndexBuilder. HasName è ora obsoleto](#index-obsolete)                                                                               | Basso        |
+| [Un pluralizer è ora incluso per i modelli di impalcatura decodificati](#pluralizer)                                                 | Basso        |
+| [INavigationBase sostituisce INavigation in alcune API per supportare le navigazioni Skip](#inavigationbase)                                     | Basso        |
+| [Alcune query con raccolta correlata che usano `Distinct` o `GroupBy` non sono più supportate](#collection-distinct-groupby) | Basso        |
+| [L'uso di una raccolta di tipi queryable nella proiezione non è supportato](#queryable-projection)                                          | Basso        |
 
 ## <a name="medium-impact-changes"></a>Modifiche a media Impact
+
+<a name="netstandard21"></a>
+
+### <a name="ef-core-50-does-not-support-net-framework"></a>EF Core 5,0 non supporta .NET Framework
+
+[Problema n. 15498](https://github.com/dotnet/efcore/issues/15498)
+
+#### <a name="old-behavior"></a>Comportamento precedente
+
+EF Core 3,1 destinazioni .NET Standard 2,0, supportato da .NET Framework.
+
+#### <a name="new-behavior"></a>Nuovo comportamento
+
+EF Core 5,0 destinazioni .NET Standard 2,1, che non è supportato da .NET Framework. Ciò significa EF Core 5,0 non può essere utilizzato con .NET Framework applicazioni.
+
+#### <a name="why"></a>Perché
+
+Questa operazione fa parte dello spostamento più ampio tra i team .NET finalizzati all'unificazione di un singolo Framework di destinazione .NET. Per ulteriori informazioni, vedere [il futuro del .NET standard](https://devblogs.microsoft.com/dotnet/the-future-of-net-standard/).
+
+#### <a name="mitigations"></a>Soluzioni di prevenzione
+
+.NET Framework applicazioni possono continuare a usare EF Core 3,1, che è una [versione di supporto a lungo termine (LTS)](https://dotnet.microsoft.com/platform/support/policy/dotnet-core). In alternativa, è possibile aggiornare le applicazioni per l'uso di .NET Core 2,1, .NET Core 3,1 o .NET 5, che supportano tutti .NET Standard 2,1.
+
+<a name="getcolumnname-obsolete"></a>
+
+### <a name="ipropertygetcolumnname-is-now-obsolete"></a>IProperty. getColumnName () è obsoleto
+
+[Rilevamento del problema #2266](https://github.com/dotnet/efcore/issues/2266)
+
+#### <a name="old-behavior"></a>Comportamento precedente
+
+`GetColumnName()` Restituisce il nome della colonna a cui è stato eseguito il mapping di una proprietà.
+
+#### <a name="new-behavior"></a>Nuovo comportamento
+
+`GetColumnName()` restituisce comunque il nome di una colonna a cui è stato eseguito il mapping di una proprietà, ma questo comportamento è ambiguo perché EF Core 5 supporta TPT e il mapping simultaneo a una vista o a una funzione in cui questi mapping potrebbero utilizzare nomi di colonna diversi per la stessa proprietà.
+
+#### <a name="why"></a>Perché
+
+Questo metodo è stato contrassegnato come obsoleto per guidare gli utenti a un sovraccarico più accurato <xref:Microsoft.EntityFrameworkCore.RelationalPropertyExtensions.GetColumnName(Microsoft.EntityFrameworkCore.Metadata.IProperty,Microsoft.EntityFrameworkCore.Metadata.StoreObjectIdentifier@)> .
+
+#### <a name="mitigations"></a>Soluzioni di prevenzione
+
+Usare il codice seguente per ottenere il nome della colonna per una tabella specifica:
+
+```csharp
+var columnName = property.GetColumnName(StoreObjectIdentifier.Table("Users", null)));
+```
+
+<a name="decimals"></a>
+
+### <a name="precision-and-scale-are-required-for-decimals"></a>La precisione e la scala sono necessarie per i numeri decimali
+
+[Rilevamento del problema #19293](https://github.com/dotnet/efcore/issues/19293)
+
+#### <a name="old-behavior"></a>Comportamento precedente
+
+EF Core in genere non ha impostato la precisione e la scala sugli <xref:Microsoft.Data.SqlClient.SqlParameter> oggetti. Ciò significa che la precisione e la scalabilità completa sono state inviate a SQL Server, a quel punto SQL Server arrotondate in base alla precisione e alla scala della colonna del database.
+
+#### <a name="new-behavior"></a>Nuovo comportamento
+
+EF Core ora imposta la precisione e la scalabilità sui parametri usando i valori configurati per le proprietà nel modello di EF Core. Ciò significa che l'arrotondamento si verifica ora in SqlClient. In modo consequenziale, se la precisione e la scala configurate non corrispondono alla precisione e alla scala del database, l'arrotondamento visualizzato potrebbe cambiare.
+
+#### <a name="why"></a>Perché
+
+Le nuove funzionalità di SQL Server, tra cui Always Encrypted, richiedono che i facet di parametro siano specificati in modo completo. Inoltre, SqlClient ha apportato una modifica a Round anziché troncare i valori decimali, in modo che corrisponda al comportamento del SQL Server. In questo modo è possibile EF Core impostare questi facet senza modificare il comportamento per i numeri decimali configurati correttamente.
+
+#### <a name="mitigations"></a>Soluzioni di prevenzione
+
+Eseguire il mapping delle proprietà Decimal usando un nome di tipo che include precisione e scala. Ad esempio:
+
+```csharp
+public class Blog
+{
+    public int Id { get; set; }
+
+    [Column(TypeName = "decimal(16, 5")]
+    public decimal Score { get; set; }
+}
+```
+
+Oppure usare `HasPrecision` nelle API per la creazione di modelli. Ad esempio:
+
+```csharp
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Blog>().Property(e => e.Score).HasPrecision(16, 5);
+    }
+```
 
 <a name="required-dependent"></a>
 
@@ -140,11 +231,69 @@ public class Blog
 
 In genere, una query per i Blog e gli autori creerà prima di tutto le `Blog` istanze e quindi imposterà le `Author` istanze appropriate in base ai dati restituiti dal database. Tuttavia, in questo caso ogni `Blog.Author` proprietà è già inizializzata su un oggetto vuoto `Author` . Ad eccezione di EF Core non è possibile verificare che l'istanza sia "vuota". Quindi, sovrascrivendo questa istanza potrebbe essere possibile eliminare un valore valido in modo invisibile all'utente `Author` . Pertanto, EF Core 5,0 ora non sovrascrive in modo coerente una navigazione già inizializzata.
 
-Questo nuovo comportamento è anche allineato con il comportamento di EF6 nella maggior parte dei casi, sebbene durante l'analisi sono stati rilevati anche alcuni casi di incoerenza in EF6.  
+Questo nuovo comportamento è anche allineato con il comportamento di EF6 nella maggior parte dei casi, sebbene durante l'analisi sono stati rilevati anche alcuni casi di incoerenza in EF6.
 
 #### <a name="mitigations"></a>Soluzioni di prevenzione
 
 Se viene rilevata questa interruzione, la correzione consiste nell'arrestare l'inizializzazione delle proprietà di navigazione dei riferimenti.
+
+<a name="toview"></a>
+
+### <a name="toview-is-treated-differently-by-migrations"></a>Toview () viene considerato in modo diverso dalle migrazioni
+
+[Rilevamento del problema #2725](https://github.com/dotnet/efcore/issues/2725)
+
+#### <a name="old-behavior"></a>Comportamento precedente
+
+La chiamata a `ToView(string)` ha fatto in modo che le migrazioni ignorino il tipo di entità oltre a eseguire il mapping a una vista.
+
+#### <a name="new-behavior"></a>Nuovo comportamento
+
+Ora `ToView(string)` contrassegna il tipo di entità come non mappato a una tabella, oltre a eseguirne il mapping a una vista. Ciò comporta la prima migrazione dopo l'aggiornamento a EF Core 5 per tentare di eliminare la tabella predefinita per questo tipo di entità perché non viene più ignorata.
+
+#### <a name="why"></a>Perché
+
+EF Core consente ora di eseguire il mapping simultaneo di un tipo di entità a una tabella e a una vista, pertanto `ToView` non è più un indicatore valido che deve essere ignorato dalle migrazioni.
+
+#### <a name="mitigations"></a>Soluzioni di prevenzione
+
+Usare il codice seguente per contrassegnare la tabella mappata come esclusa dalle migrazioni:
+
+```csharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<User>().ToTable("UserView", t => t.ExcludeFromMigrations());
+}
+```
+
+<a name="totable"></a>
+
+### <a name="totablenull-marks-the-entity-type-as-not-mapped-to-a-table"></a>ToTable (null) contrassegna il tipo di entità come non mappato a una tabella
+
+[Rilevamento del problema #21172](https://github.com/dotnet/efcore/issues/21172)
+
+#### <a name="old-behavior"></a>Comportamento precedente
+
+`ToTable(null)` Reimposta il nome della tabella sul valore predefinito.
+
+#### <a name="new-behavior"></a>Nuovo comportamento
+
+`ToTable(null)` ora contrassegna il tipo di entità come non mappato ad alcuna tabella.
+
+#### <a name="why"></a>Perché
+
+EF Core consente ora di eseguire il mapping simultaneo di un tipo di entità a una tabella e a una vista, quindi `ToTable(null)` viene usato per indicare che non è mappato ad alcuna tabella.
+
+#### <a name="mitigations"></a>Soluzioni di prevenzione
+
+Usare il codice seguente per reimpostare il nome della tabella sul valore predefinito se non è mappato a una vista o a un DbFunction:
+
+```csharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<User>().Metadata.RemoveAnnotation(RelationalAnnotationNames.TableName);
+}
+```
 
 ## <a name="low-impact-changes"></a>Modifiche a basso effetto
 
@@ -343,64 +492,6 @@ var hasDifferences = modelDiffer.HasDifferences(
 
 Si prevede di migliorare questa esperienza in 6,0 ([vedere #22031](https://github.com/dotnet/efcore/issues/22031))
 
-<a name="toview"></a>
-
-### <a name="toview-is-treated-differently-by-migrations"></a>Toview () viene considerato in modo diverso dalle migrazioni
-
-[Rilevamento del problema #2725](https://github.com/dotnet/efcore/issues/2725)
-
-#### <a name="old-behavior"></a>Comportamento precedente
-
-La chiamata a `ToView(string)` ha fatto in modo che le migrazioni ignorino il tipo di entità oltre a eseguire il mapping a una vista.
-
-#### <a name="new-behavior"></a>Nuovo comportamento
-
-Ora `ToView(string)` contrassegna il tipo di entità come non mappato a una tabella, oltre a eseguirne il mapping a una vista. Ciò comporta la prima migrazione dopo l'aggiornamento a EF Core 5 per tentare di eliminare la tabella predefinita per questo tipo di entità perché non viene più ignorata.
-
-#### <a name="why"></a>Perché
-
-EF Core consente ora di eseguire il mapping simultaneo di un tipo di entità a una tabella e a una vista, pertanto `ToView` non è più un indicatore valido che deve essere ignorato dalle migrazioni.
-
-#### <a name="mitigations"></a>Soluzioni di prevenzione
-
-Usare il codice seguente per contrassegnare la tabella mappata come esclusa dalle migrazioni:
-
-```csharp
-protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
-    modelBuilder.Entity<User>().ToTable("UserView", t => t.ExcludeFromMigrations());
-}
-```
-
-<a name="totable"></a>
-
-### <a name="totablenull-marks-the-entity-type-as-not-mapped-to-a-table"></a>ToTable (null) contrassegna il tipo di entità come non mappato a una tabella
-
-[Rilevamento del problema #21172](https://github.com/dotnet/efcore/issues/21172)
-
-#### <a name="old-behavior"></a>Comportamento precedente
-
-`ToTable(null)` Reimposta il nome della tabella sul valore predefinito.
-
-#### <a name="new-behavior"></a>Nuovo comportamento
-
-`ToTable(null)` ora contrassegna il tipo di entità come non mappato ad alcuna tabella.
-
-#### <a name="why"></a>Perché
-
-EF Core consente ora di eseguire il mapping simultaneo di un tipo di entità a una tabella e a una vista, quindi `ToTable(null)` viene usato per indicare che non è mappato ad alcuna tabella.
-
-#### <a name="mitigations"></a>Soluzioni di prevenzione
-
-Usare il codice seguente per reimpostare il nome della tabella sul valore predefinito se non è mappato a una vista o a un DbFunction:
-
-```csharp
-protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
-    modelBuilder.Entity<User>().Metadata.RemoveAnnotation(RelationalAnnotationNames.TableName);
-}
-```
-
 <a name="read-only-discriminators"></a>
 
 ### <a name="discriminators-are-read-only"></a>I discriminatori sono di sola lettura
@@ -450,32 +541,6 @@ I metodi specifici del provider vengono mappati a una funzione di database. Il c
 #### <a name="mitigations"></a>Soluzioni di prevenzione
 
 Poiché non esiste alcun modo per simulare in modo accurato il comportamento delle funzioni di database, è consigliabile testare le query che li contengono sullo stesso tipo di database in produzione.
-
-<a name="getcolumnname-obsolete"></a>
-
-### <a name="ipropertygetcolumnname-is-now-obsolete"></a>IProperty. getColumnName () è obsoleto
-
-[Rilevamento del problema #2266](https://github.com/dotnet/efcore/issues/2266)
-
-#### <a name="old-behavior"></a>Comportamento precedente
-
-`GetColumnName()` Restituisce il nome della colonna a cui è stato eseguito il mapping di una proprietà.
-
-#### <a name="new-behavior"></a>Nuovo comportamento
-
-`GetColumnName()` restituisce comunque il nome di una colonna a cui è stato eseguito il mapping di una proprietà, ma questo comportamento è ambiguo perché EF Core 5 supporta TPT e il mapping simultaneo a una vista o a una funzione in cui questi mapping potrebbero utilizzare nomi di colonna diversi per la stessa proprietà.
-
-#### <a name="why"></a>Perché
-
-Questo metodo è stato contrassegnato come obsoleto per guidare gli utenti a un sovraccarico più accurato <xref:Microsoft.EntityFrameworkCore.RelationalPropertyExtensions.GetColumnName(Microsoft.EntityFrameworkCore.Metadata.IProperty,Microsoft.EntityFrameworkCore.Metadata.StoreObjectIdentifier@)> .
-
-#### <a name="mitigations"></a>Soluzioni di prevenzione
-
-Usare il codice seguente per ottenere il nome della colonna per una tabella specifica:
-
-```csharp
-var columnName = property.GetColumnName(StoreObjectIdentifier.Table("Users", null)));
-```
 
 <a name="index-obsolete"></a>
 

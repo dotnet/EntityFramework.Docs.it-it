@@ -2,14 +2,14 @@
 title: Versioni e pianificazione di EF Core
 description: Versioni correnti di EF Core e dettagli sulla pianificazione per le versioni future
 author: ajcvickers
-ms.date: 10/11/2020
+ms.date: 01/12/2021
 uid: core/what-is-new/index
-ms.openlocfilehash: 983a8b21d353481df4f1db232d00761e070d893b
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 18d8055840b5a38dc62d20e7e18c440b7360c9e4
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503141"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128329"
 ---
 # <a name="ef-core-releases-and-planning"></a>Versioni e pianificazione di EF Core
 
@@ -48,9 +48,9 @@ In genere non viene eseguita una pianificazione dettagliata a lungo termine, olt
 
 ## <a name="ef-core-60"></a>EF Core 6,0
 
-La versione stabile successiva pianificata è **EF Core 6,0** , pianificata per il **2021 novembre**.
+La versione stabile successiva pianificata è **EF Core 6,0**, pianificata per il **2021 novembre**.
 
-Attualmente si sta lavorando a un piano di alto livello basato sul [processo di pianificazione della versione](xref:core/what-is-new/release-planning).
+Un [piano di alto livello per EF Core 6,0](xref:core/what-is-new/ef-core-6.0/plan) è stato creato seguendo il processo di [pianificazione della versione](xref:core/what-is-new/release-planning)documentato.
 
 I commenti e i suggerimenti dei clienti sulla pianificazione sono importanti.
 Il modo migliore per indicare l'importanza di un problema consiste nel votare (pollice in su 👍) per tale problema in GitHub.
@@ -61,7 +61,7 @@ Questi dati verranno inclusi nel processo di pianificazione per la versione succ
 I pacchetti EF Core 6,0 sono **ora disponibili** come
 
 * [Build giornaliere](https://github.com/dotnet/aspnetcore/blob/master/docs/DailyBuilds.md)
-  * Tutte le funzionalità e le correzioni di bug più recenti. Generalmente molto stabile. Più di 57000 test eseguiti su ogni build.
+  * Tutte le funzionalità e le correzioni di bug più recenti. Generalmente molto stabile; 75000 + test eseguiti su ogni compilazione.
 
 Inoltre, quando si procede, le anteprime frequenti verranno inviate a NuGet. Si noti che le anteprime sono in ritardo rispetto alle compilazioni quotidiane, ma sono testate per funzionare con le anteprime ASP.NET Core e .NET Core corrispondenti.
 

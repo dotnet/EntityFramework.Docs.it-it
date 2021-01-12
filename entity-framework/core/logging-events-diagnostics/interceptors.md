@@ -4,12 +4,12 @@ description: Intercettazione per operazioni di database e altri eventi
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: fba9f3d02b8cf504c2cadca8eb844cd3e818e915
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: e3b2f1a0f1a97d211bcaba0633955a7fe9c0aa91
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635809"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128589"
 ---
 # <a name="interceptors"></a>Intercettori
 
@@ -26,7 +26,7 @@ Gli intercettori vengono registrati utilizzando <xref:Microsoft.EntityFrameworkC
 <!--
 public class ExampleContext : BlogsContext
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.AddInterceptors(new TaggedQueryCommandInterceptor());
 }
 -->
@@ -42,10 +42,10 @@ Gli intercettori spesso sono senza stato, il che significa che è possibile usar
 <!--
 public class TaggedQueryCommandInterceptorContext : BlogsContext
 {
-    private static readonly TaggedQueryCommandInterceptor _interceptor 
+    private static readonly TaggedQueryCommandInterceptor _interceptor
         = new TaggedQueryCommandInterceptor();
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.AddInterceptors(_interceptor);
 }
 -->
@@ -75,7 +75,7 @@ Ogni coppia di metodi ha sia la sincronizzazione che le variazioni asincrone. Ci
 
 ### <a name="example-command-interception-to-add-query-hints"></a>Esempio: intercettazione di comandi per aggiungere hint per la query
 
-> [!TIP]  
+> [!TIP]
 > È possibile [scaricare l'esempio Command Interceptor](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/CommandInterception) da GitHub.
 
 Un oggetto <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbCommandInterceptor> può essere utilizzato per modificare SQL prima di essere inviato al database. Questo esempio illustra come modificare SQL per includere un hint per la query.
@@ -148,7 +148,7 @@ FROM [Blogs] AS [b]
 
 ### <a name="example-connection-interception-for-sql-azure-authentication-using-add"></a>Esempio: intercettazione della connessione per l'autenticazione SQL Azure usando Aggiungi
 
-> [!TIP]  
+> [!TIP]
 > È possibile [scaricare l'esempio Connection Interceptor](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/ConnectionInterception) da GitHub.
 
 Un oggetto <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbConnectionInterceptor> può essere utilizzato per modificare l'oggetto <xref:System.Data.Common.DbConnection> prima che venga utilizzato per connettersi al database. Questa operazione può essere usata per ottenere un token di accesso Azure Active Directory (AAD). Ad esempio:
@@ -192,7 +192,7 @@ public class AadAuthenticationInterceptor : DbConnectionInterceptor
 
 ### <a name="example-advanced-command-interception-for-caching"></a>Esempio: intercettazione dei comandi avanzati per la memorizzazione nella cache
 
-> [!TIP]  
+> [!TIP]
 > È possibile [scaricare l'esempio Advanced Command Interceptor](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/CachingInterception) da GitHub.
 
 Gli intercettori di EF Core possono:
@@ -343,7 +343,7 @@ L' [esempio di intercettore Caching](https://github.com/dotnet/EntityFramework.D
         {
             Console.WriteLine(await GetDailyMessage(context));
         }
-        
+
         #region GetDailyMessage
         async Task<string> GetDailyMessage(DailyMessageContext context)
             => (await context.DailyMessages.TagWith("Get_Daily_Message").OrderBy(e => e.Id).LastAsync()).Message;
@@ -398,7 +398,7 @@ Si noti che dall'output del log l'applicazione continua a usare il messaggio mem
 > [!NOTE]
 > L'intercettazione di SaveChanges è stata introdotta in EF Core 5,0.
 
-> [!TIP]  
+> [!TIP]
 > È possibile [scaricare l'esempio di intercettore SaveChanges](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) da GitHub.
 
 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A><xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>i punti di intercettazione e sono definiti dall' <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor> interfaccia. Come per gli altri intercettori, la <xref:Microsoft.EntityFrameworkCore.Diagnostics.SaveChangesInterceptor> classe base con metodi no-op viene fornita come praticità.

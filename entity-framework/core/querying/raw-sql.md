@@ -4,18 +4,18 @@ description: Utilizzo di SQL non elaborato per le query in Entity Framework Core
 author: smitpatel
 ms.date: 10/08/2019
 uid: core/querying/raw-sql
-ms.openlocfilehash: 9c480d13c46c7c84554996bcb581627a1df318dd
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 56724f9fddc9126fd4dfe0f348a0c525b43a3478
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062594"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128381"
 ---
 # <a name="raw-sql-queries"></a>Query SQL non elaborate
 
 Entity Framework Core consente di ricorrere a query SQL non elaborate quando si lavora con un database relazionale. Le query SQL non elaborate sono utili se la query desiderata non può essere espressa mediante LINQ. Le query SQL non elaborate vengono usate anche se l'uso di una query LINQ produce una query SQL inefficiente. Le query SQL non elaborate possono restituire tipi di entità regolari o [tipi di entità autochiave](xref:core/modeling/keyless-entity-types) che fanno parte del modello.
 
-> [!TIP]  
+> [!TIP]
 > È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/RawSQL) di questo articolo in GitHub.
 
 ## <a name="basic-raw-sql-queries"></a>Query SQL non elaborate di base

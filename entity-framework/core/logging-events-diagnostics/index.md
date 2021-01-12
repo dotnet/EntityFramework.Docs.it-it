@@ -4,12 +4,12 @@ description: Panoramica di registrazione, eventi, intercettori e diagnostica per
 author: ajcvickers
 ms.date: 10/01/2020
 uid: core/logging-events-diagnostics/index
-ms.openlocfilehash: d85a506167661523bf70b62d3a075a6248180d11
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 5ddbffc8d39e97065f2e06af14443c62b4a9465d
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635679"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129226"
 ---
 # <a name="overview-of-logging-and-interception"></a>Panoramica della registrazione e dell'intercettazione
 
@@ -25,7 +25,7 @@ La tabella seguente fornisce un riferimento rapido per le differenze tra i mecca
 | Microsoft.Extensions.Logging | No | Per contesto * | D.I. o configurazione del contesto | Registrazione di produzione
 | Eventi | No | Per contesto | In qualsiasi momento | Reazione a eventi EF
 | Intercettori | Sì | Per contesto | Configurazione del contesto | Manipolazione di operazioni EF
-| Listener di diagnostica | No | Process | A livello globale | Diagnostica applicazioni
+| Listener di diagnostica | No | Processo | A livello globale | Diagnostica applicazioni
 
 * Viene in genere `Microsoft.Extensions.Logging` configurato per applicazione tramite l'inserimento di dipendenze, tuttavia, a livello di EF, ogni contesto _può_ essere configurato con un logger diverso, se necessario.
 

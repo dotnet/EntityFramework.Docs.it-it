@@ -4,12 +4,12 @@ description: Guida alle prestazioni per eseguire query efficienti tramite Entity
 author: roji
 ms.date: 12/1/2020
 uid: core/performance/efficient-querying
-ms.openlocfilehash: acd5388745e74a42925c8500ce610aef83e75384
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: e945a1e0f734d62ce8948904bcbe819455fcbefa
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97657806"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128485"
 ---
 # <a name="efficient-querying"></a>Esecuzione di query efficienti
 
@@ -136,7 +136,7 @@ info: Microsoft.EntityFrameworkCore.Database.Command[20101]
 
 Che cosa succede qui? Perché tutte queste query vengono inviate per i cicli semplici sopra indicati? Con il caricamento lazy, i post di un blog vengono caricati solo quando viene eseguito l'accesso alla relativa proprietà post; di conseguenza, ogni iterazione nell'oggetto foreach interno attiva una query di database aggiuntiva in un round trip. Di conseguenza, dopo che la query iniziale ha caricato tutti i Blog, abbiamo un'altra query *per ogni Blog*, che carica tutti i post; Questo problema viene talvolta definito problema *N + 1* e può causare problemi di prestazioni molto significativi.
 
-Supponendo che siano necessari tutti i post di Blog, è opportuno usare invece il caricamento eager. È possibile usare l'operatore di [inclusione](xref:core/querying/related-data/eager#eager-loading) per eseguire il caricamento, ma poiché sono necessari solo gli URL dei Blog (ed [è necessario caricare solo gli elementi necessari](xref:core/performance/efficient-updating#project-only-properties-you-need)). Quindi, usiamo una proiezione:
+Supponendo che siano necessari tutti i post di Blog, è opportuno usare invece il caricamento eager. È possibile usare l'operatore di [inclusione](xref:core/querying/related-data/eager#eager-loading) per eseguire il caricamento, ma poiché sono necessari solo gli URL dei Blog (ed [è necessario caricare solo gli elementi necessari](xref:core/performance/efficient-querying#project-only-properties-you-need)). Quindi, usiamo una proiezione:
 
 [!code-csharp[Main](../../../samples/core/Performance/Program.cs#EagerlyLoadRelatedAndProject)]
 
@@ -156,7 +156,7 @@ Il fatto che i flussi o i buffer delle query dipendano da come vengono valutati:
 Se le query restituiscono solo pochi risultati, probabilmente non è necessario preoccuparsi di questa operazione. Tuttavia, se la query potrebbe restituire un numero elevato di righe, è opportuno considerare lo streaming anziché il buffering.
 
 > [!NOTE]
-> Evitare <xref:System.Linq.Enumerable.ToList%2A> di utilizzare o <xref:System.Linq.Enumerable.ToArray%2A> se si desidera utilizzare un altro operatore LINQ nel risultato, in modo da memorizzare nel buffer tutti i risultati in memoria. Usare invece <xref:System.Linq.Enumerable.AsEnumerable%2A>.
+> Evitare <xref:System.Linq.Enumerable.ToList%2A> di utilizzare o <xref:System.Linq.Enumerable.ToArray%2A> se si desidera utilizzare un altro operatore LINQ nel risultato, in modo da memorizzare nel buffer tutti i risultati in memoria. In alternativa, utilizzare <xref:System.Linq.Enumerable.AsEnumerable%2A>.
 
 ### <a name="internal-buffering-by-ef"></a>Buffering interno di EF
 
@@ -185,7 +185,7 @@ Di seguito sono riportati i risultati di un benchmark per il confronto tra rilev
 |       Metodo | NumBlogs | NumPostsPerBlog |       Media |    Errore |   StdDev |     Mediana | Proporzioni | RatioSD |   Generazione 0 |   Generazione 1 | Generazione 2 | Allocato |
 |------------- |--------- |---------------- |-----------:|---------:|---------:|-----------:|------:|--------:|--------:|--------:|------:|----------:|
 |   AsTracking |       10 |              20 | 1.414,7 US | 27,20 US | 45,44 US | 1.405,5 US |  1,00 |    0,00 | 60,5469 | 13,6719 |     - | 380,11 KB |
-| AsNoTracking |       10 |              20 |   993,3 US | 24,04 US | 65,40 US |   966,2 US |  0.71 |    0,05 | 37,1094 |  6,8359 |     - | 232,89 KB |
+| AsNoTracking |       10 |              20 |   993,3 US | 24,04 US | 65,40 US |   966,2 US |  0.71 |    0.05 | 37,1094 |  6,8359 |     - | 232,89 KB |
 
 Infine, è possibile eseguire gli aggiornamenti senza l'overhead del rilevamento delle modifiche, utilizzando una query senza rilevamento e quindi collegando l'istanza restituita al contesto, specificando quali modifiche devono essere apportate. Questa operazione trasferisce il carico del rilevamento delle modifiche da EF all'utente e deve essere tentata solo se il sovraccarico del rilevamento delle modifiche è stato inaccettabile tramite la profilatura o il benchmarking.
 
@@ -208,3 +208,7 @@ Per ulteriori informazioni, vedere la pagina relativa alla [programmazione asinc
 
 > [!WARNING]
 > Evitare di combinare codice sincrono e asincrono nella stessa applicazione: è molto facile attivare inavvertitamente problemi di inedia dei pool di thread.
+
+## <a name="additional-resources"></a>Risorse aggiuntive
+
+Per alcune procedure consigliate per il confronto dei valori nullable, vedere la [sezione prestazioni](xref:core/querying/null-comparisons#writing-performant-queries) della pagina della documentazione di confronto null.

@@ -4,18 +4,18 @@ description: Come configurare le relazioni tra i tipi di entità quando si usa E
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 9c8fe469c4e0b8714a36624ff5bcf236e5b1652f
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 2bc17365adb802f2e813077731ae70c68f8e3be3
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635744"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129174"
 ---
 # <a name="relationships"></a>Relazioni
 
 Una relazione definisce il modo in cui due entità sono correlate tra loro. In un database relazionale, questo è rappresentato da un vincolo FOREIGN KEY.
 
-> [!NOTE]  
+> [!NOTE]
 > La maggior parte degli esempi in questo articolo usa una relazione uno-a-molti per illustrare i concetti. Per esempi di relazioni uno-a-uno e molti-a-molti, vedere la sezione [altri modelli di relazione](#other-relationship-patterns) alla fine dell'articolo.
 
 ## <a name="definition-of-terms"></a>Definizione dei termini
@@ -37,7 +37,7 @@ Esistono diversi termini usati per descrivere le relazioni
   * **Proprietà di navigazione riferimento:** Proprietà di navigazione che include un riferimento a una singola entità correlata.
 
   * **Proprietà di navigazione inversa:** Quando si discute una particolare proprietà di navigazione, questo termine fa riferimento alla proprietà di navigazione nell'altra entità finale della relazione.
-  
+
 * **Relazione autoreferenziale:** Relazione in cui i tipi di entità dipendenti e entità sono uguali.
 
 Nel codice seguente viene illustrata una relazione uno-a-molti tra `Blog` e `Post`
@@ -62,7 +62,7 @@ Nel codice seguente viene illustrata una relazione uno-a-molti tra `Blog` e `Pos
 
 Per impostazione predefinita, viene creata una relazione quando viene individuata una proprietà di navigazione in un tipo. Una proprietà viene considerata una proprietà di navigazione se il tipo a cui punta non può essere mappato come tipo scalare dal provider di database corrente.
 
-> [!NOTE]  
+> [!NOTE]
 > Le relazioni individuate per convenzione saranno sempre destinate alla chiave primaria dell'entità principale. Per fare riferimento a una chiave alternativa, è necessario eseguire una configurazione aggiuntiva usando l'API Fluent.
 
 ### <a name="fully-defined-relationships"></a>Relazioni completamente definite
@@ -178,7 +178,7 @@ Dopo la creazione della proprietà di navigazione, potrebbe essere necessario co
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/ForeignKey.cs?name=ForeignKey&highlight=17)]
 
-> [!TIP]  
+> [!TIP]
 > L' `[ForeignKey]` annotazione può essere posizionata su una proprietà di navigazione nella relazione. Non è necessario che venga eseguita la proprietà di navigazione nella classe di entità dipendente.
 
 > [!NOTE]
@@ -208,7 +208,7 @@ Non è necessario necessariamente fornire una proprietà di navigazione. È poss
 
 ### <a name="principal-key"></a>Chiave principale
 
-Se si desidera che la chiave esterna faccia riferimento a una proprietà diversa dalla chiave primaria, è possibile utilizzare l'API Fluent per configurare la proprietà chiave principale per la relazione. La proprietà configurata come chiave principale verrà automaticamente impostata come [chiave alternativa](xref:core/modeling/keys#alternate-keys).
+Se si desidera che la chiave esterna faccia riferimento a una proprietà diversa dalla chiave primaria, è possibile utilizzare l'API Fluent per configurare la proprietà chiave principale per la relazione. La proprietà configurata come chiave principale verrà automaticamente configurata come [chiave alternativa](xref:core/modeling/keys#alternate-keys).
 
 #### <a name="simple-key"></a>[Chiave semplice](#tab/simple-key)
 
@@ -218,7 +218,7 @@ Se si desidera che la chiave esterna faccia riferimento a una proprietà diversa
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CompositePrincipalKey.cs?name=CompositePrincipalKey&highlight=11)]
 
-> [!WARNING]  
+> [!WARNING]
 > L'ordine in cui si specificano le proprietà della chiave principale deve corrispondere all'ordine in cui sono specificate per la chiave esterna.
 
 ---
@@ -250,7 +250,7 @@ Le relazioni uno-a-uno hanno una proprietà di navigazione di riferimento su ent
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/OneToOne.cs?name=OneToOne&highlight=6,15-16)]
 
-> [!NOTE]  
+> [!NOTE]
 > EF sceglierà una delle entità come dipendente in base alla capacità di rilevare una proprietà di chiave esterna. Se l'entità sbagliata viene scelta come dipendente, è possibile usare l'API Fluent per correggere questa operazione.
 
 Quando si configura la relazione con l'API Fluent, si usano `HasOne` i `WithOne` metodi e.

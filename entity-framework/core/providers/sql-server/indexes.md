@@ -4,12 +4,12 @@ description: Funzionalità di indice specifiche del provider di SQL Server Entit
 author: roji
 ms.date: 9/1/2020
 uid: core/providers/sql-server/indexes
-ms.openlocfilehash: 66b4e3ce5ab1d4da855c106a6a2d2e75c43081f7
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 42411a562b4741ba39b4eb855bb84c66e100456b
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003160"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129161"
 ---
 # <a name="index-features-specific-to-the-entity-framework-core-sql-server-provider"></a>Funzionalità di indice specifiche del provider di SQL Server Entity Framework Core
 
@@ -24,6 +24,9 @@ Per impostazione predefinita, la colonna chiave primaria di una tabella viene su
 È possibile configurare un indice o una chiave da raggruppare come segue:
 
 [!code-csharp[ClusteredIndex](../../../../samples/core/SqlServer/Indexes/ClusteredIndexContext.cs?name=ClusteredIndex)]
+
+> [!NOTE]
+> SQL Server supporta solo un indice cluster per ogni tabella e la chiave primaria è per impostazione predefinita in cluster. Se si desidera disporre di un indice cluster in una colonna non chiave, è necessario impostare in modo esplicito la chiave non in cluster.
 
 ## <a name="fill-factor"></a>Fattore di riempimento
 

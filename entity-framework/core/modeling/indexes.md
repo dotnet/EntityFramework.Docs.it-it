@@ -4,35 +4,66 @@ description: Configurazione di indici in un modello di Entity Framework Core
 author: roji
 ms.date: 12/16/2019
 uid: core/modeling/indexes
-ms.openlocfilehash: 3a89f1ae9727dcd8f086e915e666721572636314
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ab81b108c4ff518cf98b7e835da3553c0c41efed
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071407"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128537"
 ---
 # <a name="indexes"></a>Indici
 
-Gli indici sono un concetto comune in molti archivi dati. Mentre la loro implementazione nell'archivio dati può variare, vengono usati per rendere più efficienti le ricerche basate su una colonna o un set di colonne.
+Gli indici sono un concetto comune in molti archivi dati. Mentre la loro implementazione nell'archivio dati può variare, vengono usati per rendere più efficienti le ricerche basate su una colonna o un set di colonne. Per ulteriori informazioni sull'utilizzo di un indice efficace, vedere la [sezione indici](xref:core/performance/efficient-querying#use-indexes-properly) nella documentazione relativa alle prestazioni.
 
-Non è possibile creare indici utilizzando le annotazioni dei dati. È possibile usare l'API Fluent per specificare un indice in una singola colonna come indicato di seguito:
+È possibile specificare un indice su una colonna come indicato di seguito:
+
+## <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Index.cs?name=Index&highlight=1)]
+
+> [!NOTE]
+> La configurazione degli indici tramite le annotazioni dei dati è stata introdotta in EF Core 5,0.
+
+## <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Index.cs?name=Index&highlight=4)]
 
-È anche possibile specificare un indice su più di una colonna:
-
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexComposite.cs?name=Composite&highlight=4)]
+***
 
 > [!NOTE]
 > Per convenzione, viene creato un indice in ogni proprietà o set di proprietà utilizzate come chiave esterna.
 >
-> EF Core supporta solo un indice per set di proprietà distinti. Se si usa l'API Fluent per configurare un indice in un set di proprietà in cui è già definito un indice, per convenzione o per la configurazione precedente, si modificherà la definizione di tale indice. Questa opzione è utile se si desidera configurare ulteriormente un indice creato per convenzione.
+> EF Core supporta solo un indice per set di proprietà distinti. Se si configura un indice in un set di proprietà in cui è già definito un indice, per convenzione o per una configurazione precedente, si modificherà la definizione di tale indice. Questa opzione è utile se si desidera configurare ulteriormente un indice creato per convenzione.
+
+## <a name="composite-index"></a>Indice composto
+
+Un indice può inoltre estendersi su più di una colonna:
+
+### <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IndexComposite.cs?name=Composite&highlight=1)]
+
+### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexComposite.cs?name=Composite&highlight=4)]
+
+**_
+
+Gli indici su più colonne, noti anche come indici _composite *, velocizzano le query che filtrano le colonne dell'indice, ma anche le query che filtrano solo le *prime* colonne coperte dall'indice. Per ulteriori informazioni, vedere la documentazione relativa alle [prestazioni](xref:core/performance/efficient-querying#use-indexes-properly) .
 
 ## <a name="index-uniqueness"></a>Univocità indice
 
 Per impostazione predefinita, gli indici non sono univoci: più righe possono avere gli stessi valori per il set di colonne dell'indice. È possibile rendere univoco un indice nel modo seguente:
 
+### <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IndexUnique.cs?name=IndexUnique&highlight=1)]
+
+### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
+
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexUnique.cs?name=IndexUnique&highlight=5)]
+
+***
 
 Se si tenta di inserire più di un'entità con gli stessi valori per il set di colonne dell'indice, verrà generata un'eccezione.
 
@@ -40,9 +71,17 @@ Se si tenta di inserire più di un'entità con gli stessi valori per il set di c
 
 Per convenzione, gli indici creati in un database relazionale vengono denominati `IX_<type name>_<property name>` . Per gli indici composti, `<property name>` diventa un elenco di nomi di proprietà separato da un carattere di sottolineatura.
 
-È possibile utilizzare l'API Fluent per impostare il nome dell'indice creato nel database:
+È possibile impostare il nome dell'indice creato nel database:
+
+### <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IndexName.cs?name=IndexName&highlight=1)]
+
+### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexName.cs?name=IndexName&highlight=5)]
+
+***
 
 ## <a name="index-filter"></a>Filtro indice
 

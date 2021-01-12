@@ -4,12 +4,12 @@ description: Elenco completo delle modifiche di rilievo introdotte in Entity Fra
 author: ajcvickers
 ms.date: 09/05/2020
 uid: core/what-is-new/ef-core-3.x/breaking-changes
-ms.openlocfilehash: bfcfb7257091d1b6889f7c0af00ddab10e0e12e3
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 8c0be4193c79e838e40bfc2dc10c9d12b01381cd
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429312"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128771"
 ---
 # <a name="breaking-changes-included-in-ef-core-3x"></a>Modifiche di rilievo incluse in EF Core 3. x
 
@@ -171,6 +171,9 @@ dotnet tool install --global dotnet-ef
 
 [Problema n. 10996](https://github.com/dotnet/efcore/issues/10996)
 
+> [!IMPORTANT]
+> `ExecuteSqlCommand` e `ExecuteSqlCommandAsync` sono deprecati. Usare invece questi metodi.
+
 #### <a name="old-behavior"></a>Comportamento precedente
 
 Prima di EF Core 3.0, erano disponibili overload per questi nomi di metodo per supportare l'uso con una stringa normale o una stringa che deve essere interpolata in SQL e parametri.
@@ -178,7 +181,7 @@ Prima di EF Core 3.0, erano disponibili overload per questi nomi di metodo per s
 #### <a name="new-behavior"></a>Nuovo comportamento
 
 A partire da EF Core 3.0, usare `FromSqlRaw`, `ExecuteSqlRaw` e `ExecuteSqlRawAsync` per creare una query con parametri in cui i parametri vengono passati separatamente dalla stringa di query.
-Esempio:
+Ad esempio:
 
 ```csharp
 context.Products.FromSqlRaw(
@@ -187,7 +190,7 @@ context.Products.FromSqlRaw(
 ```
 
 Usare `FromSqlInterpolated`, `ExecuteSqlInterpolated`, e `ExecuteSqlInterpolatedAsync` per creare una query con parametri in cui i parametri vengono passati come parte di una stringa di query interpolata.
-Esempio:
+Ad esempio:
 
 ```csharp
 context.Products.FromSqlInterpolated(
@@ -376,7 +379,7 @@ Questa modifica è stata apportata per migliorare l'esperienza di associazione d
 #### <a name="mitigations"></a>Soluzioni di prevenzione
 
 Il comportamento precedente può essere ripristinato tramite le impostazioni in `context.ChangeTracker`.
-Esempio:
+Ad esempio:
 
 ```csharp
 context.ChangeTracker.CascadeDeleteTiming = CascadeTiming.OnSaveChanges;
@@ -479,7 +482,7 @@ Nelle versioni precedenti a EF Core 3.0 la configurazione della relazione di pro
 #### <a name="new-behavior"></a>Nuovo comportamento
 
 A partire da EF Core 3.0, è disponibile l'API Fluent per configurare una proprietà di navigazione per il proprietario usando `WithOwner()`.
-Esempio:
+Ad esempio:
 
 ```csharp
 modelBuilder.Entity<Order>.OwnsOne(e => e.Details).WithOwner(e => e.Order);
@@ -487,7 +490,7 @@ modelBuilder.Entity<Order>.OwnsOne(e => e.Details).WithOwner(e => e.Order);
 
 La configurazione correlata alla relazione tra proprietario e elemento di proprietà deve essere ora concatenata dopo `WithOwner()` in modo analogo a come vengono configurate altre relazioni.
 La configurazione per il tipo di proprietà viene comunque concatenata dopo `OwnsOne()/OwnsMany()`.
-Esempio:
+Ad esempio:
 
 ```csharp
 modelBuilder.Entity<Order>.OwnsOne(e => e.Details, eb =>
@@ -739,7 +742,7 @@ Tuttavia, se `Order` è un tipo di proprietà, `CustomerId` sarebbe la chiave pr
 
 A partire da 3.0, EF Core non tenta di usare le proprietà per le chiavi esterne per convenzione se hanno lo stesso nome della proprietà dell'entità di sicurezza.
 Viene ancora eseguita la corrispondenza tra i criteri del nome del tipo dell'entità di sicurezza concatenato al nome della proprietà dell'entità di sicurezza e il nome di navigazione concatenato al nome della proprietà dell'entità di sicurezza.
-Esempio:
+Ad esempio:
 
 ```csharp
 public class Customer
@@ -875,7 +878,7 @@ Questa modifica è stata apportata per impedire a EF Core di attivare per errore
 #### <a name="mitigations"></a>Soluzioni di prevenzione
 
 È possibile ripristinare il comportamento delle versioni precedenti alla versione 3.0 tramite la configurazione della modalità di accesso delle proprietà in `ModelBuilder`.
-Esempio:
+Ad esempio:
 
 ```csharp
 modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruction);
@@ -1135,7 +1138,7 @@ Questa modifica è stata apportata per gestire meglio il codice dell'applicazion
 
 L'azione più appropriata quando si verifica questo errore consiste nell'individuare la causa radice e nell'interrompere la creazione di numerosi provider di servizi interni.
 È possibile tuttavia convertire nuovamente l'errore in avviso o ignorarlo tramite una configurazione in `DbContextOptionsBuilder`.
-Esempio:
+Ad esempio:
 
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -1154,7 +1157,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #### <a name="old-behavior"></a>Comportamento precedente
 
 Prima di EF Core 3.0, il codice che chiama `HasOne` o `HasMany` con una singola stringa era interpretato in modo poco chiaro.
-Esempio:
+Ad esempio:
 
 ```csharp
 modelBuilder.Entity<Samurai>().HasOne("Entrance").WithOne();
@@ -1177,7 +1180,7 @@ Il comportamento precedente era molto poco chiaro, soprattutto durante la lettur
 Questa modifica causerà problemi solo nelle applicazioni che configurano relazioni in modo esplicito usando stringhe per i nomi dei tipi e senza specificare in modo esplicito la proprietà di navigazione.
 Non è uno scenario comune.
 Il comportamento precedente può essere ottenuto passando esplicitamente `null` per il nome della proprietà di navigazione.
-Esempio:
+Ad esempio:
 
 ```csharp
 modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
@@ -1567,7 +1570,7 @@ Usare il nuovo nome. (Si noti che il numero di ID evento non è stato modificato
 
 #### <a name="old-behavior"></a>Comportamento precedente
 
-Prima di EF Core 3.0, si faceva riferimento ai nomi di vincolo di chiave esterna semplicemente con "Name". Esempio:
+Prima di EF Core 3.0, si faceva riferimento ai nomi di vincolo di chiave esterna semplicemente con "Name". Ad esempio:
 
 ```csharp
 var constraintName = myForeignKey.Name;
@@ -1575,7 +1578,7 @@ var constraintName = myForeignKey.Name;
 
 #### <a name="new-behavior"></a>Nuovo comportamento
 
-A partire da EF Core 3.0, si fa ora riferimento ai nomi di vincolo di chiave esterna con "ConstraintName". Esempio:
+A partire da EF Core 3.0, si fa ora riferimento ai nomi di vincolo di chiave esterna con "ConstraintName". Ad esempio:
 
 ```csharp
 var constraintName = myForeignKey.ConstraintName;
@@ -1718,7 +1721,7 @@ Se il codice prende una dipendenza diretta da System. Data. SqlClient, è necess
 
 #### <a name="old-behavior"></a>Comportamento precedente
 
-Un tipo di entità con più proprietà di navigazione unidirezionale che fanno riferimento a se stesse e più chiavi esterne corrispondenti è stato erroneamente configurato come relazione singola. Esempio:
+Un tipo di entità con più proprietà di navigazione unidirezionale che fanno riferimento a se stesse e più chiavi esterne corrispondenti è stato erroneamente configurato come relazione singola. Ad esempio:
 
 ```csharp
 public class User
@@ -1741,7 +1744,7 @@ Il modello risultante era ambiguo e sarà probabilmente errato in questo caso.
 
 #### <a name="mitigations"></a>Soluzioni di prevenzione
 
-Usare la configurazione completa della relazione. Esempio:
+Usare la configurazione completa della relazione. Ad esempio:
 
 ```csharp
 modelBuilder

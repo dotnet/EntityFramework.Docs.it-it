@@ -11,12 +11,12 @@ no-loc:
 - Tags
 - items
 - tags
-ms.openlocfilehash: 9666bbde8ae9608dcebbea3ad37c51883960a942
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 7af516421a6ec3040b636507a6cd7976cabce3a9
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431607"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128797"
 ---
 # <a name="ef-core-testing-sample"></a>Esempio di test di EF Core
 
@@ -149,7 +149,7 @@ Quando ogni test viene eseguito:
 [!code-csharp[Seeding](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=Seeding)]
 
 Ogni classe di test concreta eredita quindi da questa.
-Esempio:
+Ad esempio:
 
 [!code-csharp[SqliteItemsControllerTest](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/SqliteItemsControllerTest.cs?name=SqliteItemsControllerTest)]
 
@@ -160,7 +160,7 @@ Per usare l'inserimento delle dipendenze, tuttavia, il codice aggiuntivo richies
 Viene invece creato un DbContext utilizzando `new` e quindi passato direttamente come dipendenza al controller.
 
 Ogni test esegue quindi il metodo sottoposto a test sul controller e dichiara i risultati come previsto.
-Esempio:
+Ad esempio:
 
 [!code-csharp[CanGetItems](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanGetItems)]
 
@@ -170,7 +170,7 @@ Corrisponde inoltre a ciò che accade in app Web e servizi.
 
 I test che mutano il database creano una seconda istanza di DbContext nel test per motivi analoghi.
 Ovvero creando un nuovo contesto pulito e quindi leggendolo dal database per assicurarsi che le modifiche siano state salvate nel database.
-Esempio:
+Ad esempio:
 
 [!code-csharp[CanAddItem](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanAddItem)]
 

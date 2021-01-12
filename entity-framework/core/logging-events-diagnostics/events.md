@@ -4,16 +4,16 @@ description: Eventi .NET definiti da EF Core
 author: ajcvickers
 ms.date: 10/15/2020
 uid: core/logging-events-diagnostics/events
-ms.openlocfilehash: 51c0bba5cf25e1d9ddd1fd9aebea50b9a03481a3
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 0888009af0bedfb63690e72c4a0e08979a9e9cf3
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635692"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129252"
 ---
 # <a name="net-events-in-ef-core"></a>Eventi .NET in EF Core
 
-> [!TIP]  
+> [!TIP]
 > È possibile [scaricare l'esempio di eventi](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Events) da GitHub.
 
 Entity Framework Core (EF Core) espone [gli eventi .NET](/dotnet/standard/events/) da utilizzare come callback quando si verificano determinate operazioni nel codice EF core. Gli eventi sono più semplici degli [intercettori](xref:core/logging-events-diagnostics/interceptors) e consentono una registrazione più flessibile. Tuttavia, sono solo sincronizzati e pertanto non possono eseguire operazioni di I/O asincrone non bloccanti.
@@ -97,7 +97,7 @@ L' [esempio per questo esempio contiene](https://github.com/dotnet/EntityFramewo
         {
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
-            
+
             context.Add(
                 new Blog
                 {

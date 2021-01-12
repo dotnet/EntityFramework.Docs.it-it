@@ -4,12 +4,12 @@ description: Esecuzione di query e salvataggio asincrono dei dati con Entity Fra
 author: roji
 ms.date: 9/2/2020
 uid: core/miscellaneous/async
-ms.openlocfilehash: d887bf898d741070f3f3d64b3baf0311b0ab2b63
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 52b3ac20a50babbed6937ebe3365ac1947dcaef1
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635796"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128576"
 ---
 # <a name="asynchronous-programming"></a>Programmazione asincrona
 
@@ -28,7 +28,7 @@ Per ulteriori informazioni, vedere [la documentazione generale per la programmaz
 > Sfortunatamente, l'implementazione asincrona di [Microsoft. Data. SqlClient](https://github.com/dotnet/SqlClient) presenta alcuni problemi noti (ad esempio [#593](https://github.com/dotnet/SqlClient/issues/593), [#601](https://github.com/dotnet/SqlClient/issues/601)e altri).
 
 > [!NOTE]
-> EF Core passa i token di annullamento al provider di database sottostante in uso (ad esempio, Microsoft. Data. SqlClient). Questi token possono o meno essere rispettati. consultare la documentazione del provider di database.  
+> EF Core passa i token di annullamento al provider di database sottostante in uso (ad esempio, Microsoft. Data. SqlClient). Questi token possono o meno essere rispettati. consultare la documentazione del provider di database.
 
 ## <a name="async-linq-operators"></a>Operatori LINQ asincroni
 

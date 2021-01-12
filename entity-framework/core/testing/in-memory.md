@@ -4,18 +4,18 @@ description: Uso del database in memoria EF per testare un'applicazione Entity F
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/testing/in-memory
-ms.openlocfilehash: db91570dc9d5a4b95d513df509867e9bca406356
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 78dcac3d0fd69110986c99a097a864104caa1951
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431508"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128810"
 ---
 # <a name="testing-with-the-ef-in-memory-database"></a>Test con il database EF In-Memory
 
 > [!WARNING]
 > Il database in memoria EF si comporta spesso in modo diverso rispetto ai database relazionali.
-> Usare il database in memoria EF solo dopo aver compreso completamente i problemi e i compromessi necessari, come descritto in [test del codice che usa EF Core](xref:core/testing/index).  
+> Usare il database in memoria EF solo dopo aver compreso completamente i problemi e i compromessi necessari, come descritto in [test del codice che usa EF Core](xref:core/testing/index).
 
 > [!TIP]
 > SQLite è un provider relazionale e può anche usare i database in memoria.

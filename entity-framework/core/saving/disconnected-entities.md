@@ -4,12 +4,12 @@ description: Utilizzo di entità disconnesse e non registrate tra più istanze d
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: f21cc71ef11ee4ef37618a68d5a5219e8174bf8b
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 4ddae08b68aa99fb81de77fed8a195c60927e0bb
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063569"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128849"
 ---
 # <a name="disconnected-entities"></a>Entità disconnesse
 
@@ -45,7 +45,7 @@ Tuttavia, EF include anche un modo predefinito per eseguire questa operazione pe
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#IsItNewGeneral)]
 
-> [!TIP]  
+> [!TIP]
 > Le chiavi vengono impostate non appena le entità vengono incluse nel rilevamento delle modifiche dal contesto, anche se l'entità risulta con lo stato Added. Ciò è utile durante l'attraversamento di un grafo di entità e per decidere come procedere con ognuna, ad esempio quando di usa l'API TrackGraph. Il valore della chiave deve essere usato solo nel modo illustrato di seguito _prima_ che venga effettuata qualsiasi chiamata per il rilevamento delle modifiche dell'entità.
 
 ### <a name="with-other-keys"></a>Con altre chiavi
@@ -84,7 +84,7 @@ La procedura è la seguente:
   * È quindi possibile usare SetValues per impostare i valori per tutte le proprietà dell'entità sui valori provenienti dal client.
   * La chiamata di SetValues contrassegnerà l'entità per l'aggiornamento in base alle esigenze.
 
-> [!TIP]  
+> [!TIP]
 > SetValues contrassegnerà come modificate solo le proprietà con valori diversi da quelli nell'entità con rilevamento delle modifiche. Questo significa che quando viene inviato l'aggiornamento, verranno aggiornate solo le colonne effettivamente modificate. (In assenza di modifiche non verrà inviato alcun aggiornamento.)
 
 ## <a name="working-with-graphs"></a>Utilizzo dei grafi

@@ -4,12 +4,12 @@ description: Come configurare i tipi di entità o le aggregazioni di proprietà 
 author: AndriySvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 36f756b70c9ad1727c48b5c789fd324c9dc6cd29
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 0cd6bfd25d4462509a3e6c112b892d652d29e45e
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429437"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128628"
 ---
 # <a name="owned-entity-types"></a>Tipi di entità di proprietà
 
@@ -48,7 +48,7 @@ Per ulteriori informazioni sul contesto, vedere il [progetto di esempio completo
 
 ## <a name="implicit-keys"></a>Chiavi implicite
 
-I tipi di proprietà configurati con `OwnsOne` o individuati tramite un'esplorazione dei riferimenti hanno sempre una relazione uno-a-uno con il proprietario, pertanto non necessitano di valori di chiave personalizzati perché i valori di chiave esterna sono univoci. Nell'esempio precedente, non è `StreetAddress` necessario che il tipo definisca una proprietà chiave.  
+I tipi di proprietà configurati con `OwnsOne` o individuati tramite un'esplorazione dei riferimenti hanno sempre una relazione uno-a-uno con il proprietario, pertanto non necessitano di valori di chiave personalizzati perché i valori di chiave esterna sono univoci. Nell'esempio precedente, non è `StreetAddress` necessario che il tipo definisca una proprietà chiave.
 
 Per comprendere il modo in cui EF Core tiene traccia di questi oggetti, è utile sapere che una chiave primaria viene creata come [proprietà shadow](xref:core/modeling/shadow-properties) per il tipo di proprietà. Il valore della chiave di un'istanza del tipo di proprietà sarà uguale al valore della chiave dell'istanza del proprietario.
 
@@ -130,7 +130,7 @@ Si noti inoltre la `Navigation` chiamata a. In EFCore 5,0, le proprietà di navi
 
 Il modello precedente è mappato allo schema di database seguente:
 
-![Sceenshot del modello di database per l'entità che contiene riferimenti di proprietà annidati](_static/owned-entities-nested.png)
+![Screenshot del modello di database per l'entità che contiene riferimenti di proprietà annidati](_static/owned-entities-nested.png)
 
 ## <a name="storing-owned-types-in-separate-tables"></a>Archiviazione di tipi di proprietà in tabelle separate
 

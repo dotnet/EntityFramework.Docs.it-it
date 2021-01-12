@@ -4,16 +4,16 @@ description: Configurazione di sequenze in un modello di Entity Framework Core
 author: roji
 ms.date: 12/18/2019
 uid: core/modeling/sequences
-ms.openlocfilehash: 8848a7237934091c1253ec61a37eea1c4326d1cb
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: e388bde11b1251564b37227e8884d2b8c34dc02e
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071394"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128524"
 ---
 # <a name="sequences"></a>Sequenze
 
-> [!NOTE]  
+> [!NOTE]
 > Le sequenze sono una funzionalità supportata in genere solo da database relazionali. Se si usa un database non relazionale, ad esempio Cosmos, controllare la documentazione del database per la generazione di valori univoci.
 
 Una sequenza genera valori numerici univoci e sequenziali nel database. Le sequenze non sono associate a una tabella specifica e possono essere impostate più tabelle per creare valori dalla stessa sequenza.

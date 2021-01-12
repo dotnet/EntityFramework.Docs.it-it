@@ -4,14 +4,17 @@ description: Funzionalità pianificate per Entity Framework Core 5,0
 author: ajcvickers
 ms.date: 08/22/2020
 uid: core/what-is-new/ef-core-5.0/plan
-ms.openlocfilehash: f2639e41499f3bfca5942d613922fd97212fc2b9
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: ba56a5f3c79dacc25b3402be114c57067da49433
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429234"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129044"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>Pianificare Entity Framework Core 5,0
+
+> [!IMPORTANT]
+> EF Core 5,0 [ora è stato rilasciato](xref:core/what-is-new/index). Questa pagina rimane come un record cronologico del piano.
 
 Come descritto nel [processo di pianificazione](xref:core/what-is-new/release-planning), l'input è stato raccolto dagli stakeholder in un piano provvisorio per la versione di EF Core 5,0.
 

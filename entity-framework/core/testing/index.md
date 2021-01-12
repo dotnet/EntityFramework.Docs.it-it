@@ -4,12 +4,12 @@ description: Approcci diversi al test delle applicazioni che usano Entity Framew
 author: ajcvickers
 ms.date: 04/22/2020
 uid: core/testing/index
-ms.openlocfilehash: db25a51ec83bff15ff8c8a959a5f1707dbcf7f0f
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: d94c40bdb1082473ee88e7c3c1fbfecee90ba4ff
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431615"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129070"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>Test del codice che usa EF Core
 
@@ -19,7 +19,7 @@ Il test del codice che accede a un database richiede:
 * Esecuzione di query e aggiornamenti su altri sistemi di database più facili da gestire.
 * Usare duplicati di test o un altro meccanismo per evitare del tutto di usare un database.
 
-In questo documento vengono illustrati i pro e contro di ognuna di queste scelte e viene illustrato il modo in cui è possibile usare EF Core con ogni approccio.  
+In questo documento vengono illustrati i pro e contro di ognuna di queste scelte e viene illustrato il modo in cui è possibile usare EF Core con ogni approccio.
 
 > [!TIP]
 > Per esaminare un esempio di codice che illustra i concetti introdotti in questo articolo, vedere [Esempio di test di EF Core](xref:core/testing/testing-sample).
@@ -35,7 +35,7 @@ Fondamentalmente, questo significa che cambiare provider di database cambierà i
 Detto questo, in molti casi questo cambiamento non creerà problemi perché esiste un elevato livello di elementi in comune tra i database relazionali.
 Questo aspetto è sia positivo che negativo.
 Positivo perché spostarsi tra sistemi di database diversi può essere relativamente semplice.
-Negativo perché può dare un falso senso di sicurezza se l'applicazione non è stata completamente testata per il nuovo sistema di database.  
+Negativo perché può dare un falso senso di sicurezza se l'applicazione non è stata completamente testata per il nuovo sistema di database.
 
 ## <a name="approach-1-production-database-system"></a>Approccio 1: Sistema di database di produzione
 
@@ -65,7 +65,7 @@ LocalDB non è privo di problemi:
 Personalmente, non ho mai considerato un problema avere un servizio di database in esecuzione nel computer di sviluppo e in genere consiglio di usare Developer Edition.
 Tuttavia, LocalDB potrebbe non essere appropriato per alcuni utenti, soprattutto con computer di sviluppo meno potenti.
 
-L'[esecuzione di SQL Server](/sql/linux/quickstart-install-connect-docker) (o qualsiasi altro sistema di database) in un contenitore Docker (o un contenitore simile) è un altro modo per evitare di eseguire il sistema di database direttamente nel computer di sviluppo.  
+L'[esecuzione di SQL Server](/sql/linux/quickstart-install-connect-docker) (o qualsiasi altro sistema di database) in un contenitore Docker (o un contenitore simile) è un altro modo per evitare di eseguire il sistema di database direttamente nel computer di sviluppo.
 
 ## <a name="approach-2-sqlite"></a>Approccio 2: SQLite
 

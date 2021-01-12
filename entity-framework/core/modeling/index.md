@@ -4,12 +4,12 @@ description: Panoramica della creazione e configurazione di un modello con Entit
 author: AndriySvyryd
 ms.date: 10/13/2020
 uid: core/modeling/index
-ms.openlocfilehash: b18db0059efd335abe2fc44bbc78e0106717e058
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 709e2bde60c8e2c31f0a39390624c5d31a9cfa08
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429611"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129200"
 ---
 # <a name="creating-and-configuring-a-model"></a>Creazione e configurazione di un modello
 
@@ -17,7 +17,7 @@ Entity Framework usa un insieme di convenzioni per compilare un modello in base 
 
 Questo articolo descrive la configurazione che può essere applicata a un modello destinato a qualsiasi archivio dati e che può essere applicata per qualsiasi database relazionale. I provider possono anche abilitare una configurazione specifica di un archivio dati. Per informazioni sulla configurazione specifica del provider, vedere la sezione [Provider di database](xref:core/providers/index).
 
-> [!TIP]  
+> [!TIP]
 > È possibile visualizzare l' [esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples) di questo articolo in GitHub.
 
 ## <a name="use-fluent-api-to-configure-a-model"></a>Usare l'API Fluent per configurare un modello

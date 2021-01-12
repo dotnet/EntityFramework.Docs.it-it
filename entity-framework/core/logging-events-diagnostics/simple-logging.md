@@ -4,20 +4,20 @@ description: Registrazione da un EF Core DbContext con LogTo
 author: ajcvickers
 ms.date: 10/03/2020
 uid: core/logging-events-diagnostics/simple-logging
-ms.openlocfilehash: 076c4b12aa033b51a2b839686c520a76520ee415
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 5c2dc41122dfa3919d1e6a26b0760883d77ee1a0
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635614"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129213"
 ---
 # <a name="simple-logging"></a>Registrazione semplice
 
 > [!NOTE]
 > Questa funzionalità è stata introdotta in EF Core 5,0.
 
-> [!TIP]  
-> È possibile [scaricare l'esempio di questo articolo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SimpleLogging) da GitHub.
+> [!TIP]
+> È possibile [scaricare l'esempio di questo articolo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging/SimpleLogging) da GitHub.
 
 È possibile utilizzare la registrazione semplice Entity Framework Core (EF Core) per ottenere facilmente i log durante lo sviluppo e il debug di applicazioni. Questa forma di registrazione richiede una configurazione minima e nessun pacchetto NuGet aggiuntivo.
 
@@ -62,7 +62,7 @@ Il <xref:System.Console.WriteLine%2A?displayProperty=nameWithType> metodo viene 
 Per la scrittura in un file è necessario creare un <xref:System.IO.StreamWriter> o simile per il file. Il <xref:System.IO.StreamWriter.WriteLine%2A> metodo può quindi essere usato come negli altri esempi precedenti. Ricordarsi di assicurarsi che il file venga chiuso senza problemi eliminando il writer quando il contesto viene eliminato. Ad esempio:
 
 <!--
-    private readonly StreamWriter _logStream = new StreamWriter("mylog.txt", append: true); 
+    private readonly StreamWriter _logStream = new StreamWriter("mylog.txt", append: true);
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.LogTo(_logStream.WriteLine);
@@ -72,7 +72,7 @@ Per la scrittura in un file è necessario creare un <xref:System.IO.StreamWriter
         base.Dispose();
         _logStream.Dispose();
     }
-    
+
     public override async ValueTask DisposeAsync()
     {
         await base.DisposeAsync();
@@ -130,7 +130,7 @@ Ogni messaggio del log EF Core viene assegnato a un livello definito dall' <xref
 
 A ogni messaggio del log viene assegnato un <xref:Microsoft.Extensions.Logging.EventId> . È possibile accedere a questi ID dalla <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId> classe o dalla <xref:Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId> classe per i messaggi specifici relazionali. Un provider di database può anche avere ID specifici del provider in una classe simile. Ad esempio, <xref:Microsoft.EntityFrameworkCore.Diagnostics.SqlServerEventId> per il provider di SQL Server.
 
-`LogTo` può essere configurato in modo da registrare solo i messaggi associati a uno o più ID evento. Ad esempio, per registrare solo i messaggi per il contesto inizializzato o eliminato:  
+`LogTo` può essere configurato in modo da registrare solo i messaggi associati a uno o più ID evento. Ad esempio, per registrare solo i messaggi per il contesto inizializzato o eliminato:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

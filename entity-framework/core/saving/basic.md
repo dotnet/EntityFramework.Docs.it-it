@@ -4,18 +4,18 @@ description: Informazioni di base sull'aggiunta, l'aggiornamento e la rimozione 
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/basic
-ms.openlocfilehash: c6288fc8ca79b78b6c377f25e3874211b38059b2
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 8c98f95dee85641f11af716290333b47f340bff8
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063634"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129109"
 ---
 # <a name="basic-save"></a>Salvataggio di base
 
 Informazioni su come aggiungere, modificare e rimuovere i dati usando le classi di contesto e di entità.
 
-> [!TIP]  
+> [!TIP]
 > È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Basics/) di questo articolo in GitHub.
 
 ## <a name="adding-data"></a>Aggiunta di dati
@@ -24,8 +24,8 @@ Usare il metodo *DbSet.Add* per aggiungere nuove istanze delle classi di entità
 
 [!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#Add)]
 
-> [!TIP]  
-> I metodi Add, Attach e Update operano tutti sul grafo completo delle entità passato, come descritto nella sezione [Dati correlati](xref:core/saving/related-data). In alternativa, è possibile usare la proprietà EntityEntry.State per impostare lo stato di una singola entità. Ad esempio, `context.Entry(blog).State = EntityState.Modified`
+> [!TIP]
+> I metodi Add, Attach e Update operano tutti sul grafo completo delle entità passato, come descritto nella sezione [Dati correlati](xref:core/saving/related-data). In alternativa, è possibile usare la proprietà EntityEntry.State per impostare lo stato di una singola entità. Ad esempio: `context.Entry(blog).State = EntityState.Modified`.
 
 ## <a name="updating-data"></a>Aggiornamento dei dati
 
@@ -47,7 +47,7 @@ Se l'entità esiste già nel database, verrà eliminata durante *SaveChanges*. S
 
 È possibile combinare più operazioni Add/Update/Remove in una singola chiamata a *SaveChanges*.
 
-> [!NOTE]  
+> [!NOTE]
 > Per la maggior parte dei provider di database, *SaveChanges* è transazionale. Questo significa che tutte le operazioni avranno esito positivo o negativo e le operazioni non verranno mai lasciate in condizione di applicazione parziale.
 
 [!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#MultipleOperations)]

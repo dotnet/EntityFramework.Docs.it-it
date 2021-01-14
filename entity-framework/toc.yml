@@ -19,6 +19,8 @@
       items:
         - name: Benvenuto!
           href: core/index.md
+        - name: Novità di EF Core 5.0
+          href: /ef/core/what-is-new/ef-core-5.0/whatsnew
         - name: Introduzione
           items:
             - name: Panoramica di EF Core
@@ -41,6 +43,14 @@
               href: core/what-is-new/index.md
             - name: Processo di pianificazione delle versioni
               href: core/what-is-new/release-planning.md
+            - name: EF Core 6.0
+              items:
+                - name: Piano generale
+                  href: core/what-is-new/ef-core-6.0/plan.md
+                - name: Novità
+                  href: core/what-is-new/ef-core-6.0/whatsnew.md
+                - name: Modifiche che causano un'interruzione
+                  href: core/what-is-new/ef-core-6.0/breaking-changes.md
             - name: EF Core 5.0
               items:
                 - name: Piano generale
@@ -182,6 +192,8 @@
               href: core/querying/filters.md
             - name: Tag delle query
               href: core/querying/tags.md
+            - name: Confronti con valori null nelle query
+              href: core/querying/null-comparisons.md
             - name: Funzionamento delle query
               href: core/querying/how-query-works.md
         - name: Salvare i dati
@@ -202,6 +214,24 @@
               href: core/saving/disconnected-entities.md
             - name: Valori espliciti per le proprietà generate
               href: core/saving/explicit-values-generated-properties.md
+        - name: Change tracking
+          items:
+            - name: Panoramica
+              href: core/change-tracking/index.md
+            - name: Entità con rilevamento esplicito
+              href: core/change-tracking/explicit-tracking.md
+            - name: Accesso alle entità rilevate
+              href: core/change-tracking/entity-entries.md
+            - name: Modifica di chiavi esterne e navigazioni
+              href: core/change-tracking/relationship-changes.md
+            - name: Rilevamento modifiche e notifiche
+              href: core/change-tracking/change-detection.md
+            - name: Risoluzione di identità
+              href: core/change-tracking/identity-resolution.md
+            - name: Altre funzionalità di rilevamento modifiche
+              href: core/change-tracking/miscellaneous.md
+            - name: Debug del rilevamento modifiche
+              href: core/change-tracking/debug-views.md
         - name: 'Registrazione, eventi e diagnostica'
           items:
             - name: Panoramica

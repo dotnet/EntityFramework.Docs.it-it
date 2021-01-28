@@ -2,75 +2,20 @@
 title: Valori generati-EF Core
 description: Come configurare la generazione di valori per le proprietà quando si usa Entity Framework Core
 author: AndriySvyryd
-ms.date: 11/06/2019
+ms.date: 1/10/2021
 uid: core/modeling/generated-properties
-ms.openlocfilehash: 347cedbf5fdebc985d75c6cad3c28f17d1344993
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 76fa4454c88a5ef7afb9864c2a4b1063ac75e37e
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429624"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983547"
 ---
 # <a name="generated-values"></a>Valori generati
 
-## <a name="value-generation-patterns"></a>Modelli di generazione di valori
+È possibile generare valori per le colonne del database in diversi modi: le colonne chiave primaria sono spesso numeri interi a incremento automatico, altre colonne hanno valori predefiniti o calcolati e così via. In questa pagina vengono illustrati i vari modelli per la generazione di valori di configurazione con EF Core.
 
-Sono disponibili tre modelli di generazione dei valori che possono essere usati per le proprietà:
-
-* Nessuna generazione di valori
-* Valore generato in aggiunta
-* Valore generato durante l'aggiunta o l'aggiornamento
-
-### <a name="no-value-generation"></a>Nessuna generazione di valori
-
-Nessuna generazione di valori indica che verrà sempre fornito un valore valido da salvare nel database. Questo valore valido deve essere assegnato a nuove entità prima che vengano aggiunte al contesto.
-
-### <a name="value-generated-on-add"></a>Valore generato in aggiunta
-
-Il valore generato durante l'aggiunta indica che viene generato un valore per le nuove entità.
-
-A seconda del provider di database in uso, è possibile che i valori vengano generati lato client da EF o nel database. Se il valore viene generato dal database, EF può assegnare un valore temporaneo quando si aggiunge l'entità al contesto. Questo valore temporaneo verrà quindi sostituito dal valore generato dal database durante `SaveChanges()` .
-
-Se si aggiunge un'entità al contesto a cui è assegnato un valore assegnato alla proprietà, EF tenterà di inserire tale valore anziché generarne uno nuovo. A una proprietà viene assegnato un valore se non viene assegnato il valore predefinito CLR (per, per `null` , `string` `0` `int` `Guid.Empty` per `Guid` e così via). Per ulteriori informazioni, vedere [valori espliciti per le proprietà generate](xref:core/saving/explicit-values-generated-properties).
-
-> [!WARNING]
-> Il modo in cui il valore viene generato per le entità aggiunte dipenderà dal provider di database in uso. I provider di database possono impostare automaticamente la generazione di valori per alcuni tipi di proprietà, ma altri potrebbero richiedere di configurare manualmente la modalità di generazione del valore.
->
-> Quando si utilizza SQL Server, ad esempio, i valori vengono generati automaticamente per `GUID` le proprietà (usando l'algoritmo GUID sequenziale SQL Server). Tuttavia, se si specifica che una `DateTime` proprietà viene generata in aggiunta, è necessario configurare una modalità per la generazione dei valori. A tale scopo, è possibile configurare un valore predefinito di `GETDATE()` , vedere [valori predefiniti](#default-values).
-
-### <a name="value-generated-on-add-or-update"></a>Valore generato durante l'aggiunta o l'aggiornamento
-
-Il valore generato durante l'aggiunta o l'aggiornamento indica che viene generato un nuovo valore ogni volta che il record viene salvato (inserimento o aggiornamento).
-
-Analogamente `value generated on add` , se si specifica un valore per la proprietà in un'istanza appena aggiunta di un'entità, tale valore verrà inserito anziché un valore generato. È anche possibile impostare un valore esplicito durante l'aggiornamento. Per ulteriori informazioni, vedere [valori espliciti per le proprietà generate](xref:core/saving/explicit-values-generated-properties).
-
-> [!WARNING]
-> Il modo in cui il valore viene generato per le entità aggiunte e aggiornate dipenderà dal provider di database in uso. I provider di database possono impostare automaticamente la generazione di valori per alcuni tipi di proprietà, mentre altri richiederanno di configurare manualmente la modalità di generazione del valore.
->
-> Quando si utilizza SQL Server, ad esempio, `byte[]` le proprietà impostate come generate in Aggiungi o aggiorna e contrassegnate come token di concorrenza verranno impostate con il tipo di `rowversion` dati, in modo che i valori vengano generati nel database. Tuttavia, se si specifica che una `DateTime` proprietà viene generata durante l'aggiunta o l'aggiornamento, è necessario configurare una modalità per la generazione dei valori. A tale scopo, è possibile configurare un valore predefinito di `GETDATE()` (vedere [valori predefiniti](#default-values)) per generare valori per le nuove righe. È quindi possibile usare un trigger di database per generare valori durante gli aggiornamenti, ad esempio il trigger di esempio seguente.
->
-> [!code-sql[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAddOrUpdate.sql)]
-
-## <a name="value-generated-on-add"></a>Valore generato in aggiunta
-
-Per convenzione, le chiavi primarie non composite di tipo short, int, Long o GUID sono impostate per avere valori generati per le entità inserite, se un valore non è fornito dall'applicazione. Il provider di database gestisce in genere la configurazione necessaria. una chiave primaria numerica in SQL Server, ad esempio, viene configurata automaticamente come colonna IDENTITY.
-
-È possibile configurare qualsiasi proprietà in modo che il relativo valore venga generato per le entità inserite come indicato di seguito:
-
-### <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
-
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAdd.cs?name=ValueGeneratedOnAdd&highlight=5)]
-
-### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
-
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAdd.cs?name=ValueGeneratedOnAdd&highlight=5)]
-
-***
-
-> [!WARNING]
-> In questo modo, EF sa che i valori vengono generati per le entità aggiunte, non garantisce che EF configurerà il meccanismo effettivo per generare valori. Per altri dettagli, vedere [valore generato nella sezione Aggiungi](#value-generated-on-add) .
-
-### <a name="default-values"></a>Valori predefiniti
+## <a name="default-values"></a>Valori predefiniti
 
 Nei database relazionali, una colonna può essere configurata con un valore predefinito. Se viene inserita una riga senza un valore per tale colonna, verrà utilizzato il valore predefinito.
 
@@ -82,9 +27,40 @@ Nei database relazionali, una colonna può essere configurata con un valore pred
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/DefaultValueSql.cs?name=DefaultValueSql&highlight=5)]
 
-Se si specifica un valore predefinito, la proprietà viene configurata in modo implicito come valore generato durante l'aggiunta.
+## <a name="computed-columns"></a>Colonne calcolate
 
-## <a name="value-generated-on-add-or-update"></a>Valore generato durante l'aggiunta o l'aggiornamento
+Nella maggior parte dei database relazionali, una colonna può essere configurata in modo che il relativo valore venga calcolato nel database, in genere con un'espressione che fa riferimento ad altre colonne:
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ComputedColumn.cs?name=DefaultComputedColumn&highlight=3)]
+
+Il precedente crea una colonna calcolata *virtuale* , il cui valore viene calcolato ogni volta che viene recuperato dal database. È inoltre possibile specificare che una colonna calcolata deve essere *archiviata* (talvolta denominata *permanente*), ovvero viene calcolata a ogni aggiornamento della riga e viene archiviata su disco insieme a colonne normali:
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ComputedColumn.cs?name=StoredComputedColumn&highlight=3)]
+
+> [!NOTE]
+> Il supporto per la creazione di colonne calcolate archiviate è stato aggiunto in EF Core 5,0.
+
+## <a name="primary-keys"></a>Chiavi primarie
+
+Per convenzione, le chiavi primarie non composite di tipo short, int, Long o GUID sono impostate in modo da generare valori per le entità inserite se un valore non viene fornito dall'applicazione. Il provider di database gestisce in genere la configurazione necessaria. una chiave primaria numerica in SQL Server, ad esempio, viene configurata automaticamente come colonna IDENTITY.
+
+Per ulteriori informazioni, [vedere la documentazione sulle chiavi](xref:core/modeling/keys).
+
+## <a name="explicitly-configuring-value-generation"></a>Configurazione esplicita della generazione di valori
+
+Abbiamo visto sopra che EF Core imposta automaticamente la generazione di valori per le chiavi primarie, ma è consigliabile eseguire la stessa operazione per le proprietà non chiave. È possibile configurare qualsiasi proprietà in modo che il relativo valore venga generato per le entità inserite come indicato di seguito:
+
+### <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAdd.cs?name=ValueGeneratedOnAdd&highlight=5)]
+
+### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAdd.cs?name=ValueGeneratedOnAdd&highlight=5)]
+
+***
+
+Analogamente, una proprietà può essere configurata in modo da generare il relativo valore in Aggiungi o aggiorna:
 
 ### <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
 
@@ -97,24 +73,71 @@ Se si specifica un valore predefinito, la proprietà viene configurata in modo i
 **_
 
 > [!WARNING]
-> In questo modo EF sa che i valori vengono generati per le entità aggiunte o aggiornate, ma non garantisce che EF configurerà il meccanismo effettivo per generare valori. Per ulteriori informazioni, vedere la sezione [valore generato nella sezione Aggiungi o aggiorna](#value-generated-on-add-or-update) .
+> Diversamente da quanto avviene con i valori predefiniti o le colonne calcolate, non viene specificato _how * i valori da generare. dipende dal provider di database utilizzato. I provider di database possono impostare automaticamente la generazione di valori per alcuni tipi di proprietà, ma altri potrebbero richiedere di configurare manualmente la modalità di generazione del valore.
+>
+> Ad esempio, in SQL Server, quando una proprietà GUID viene configurata come valore generato su Aggiungi, il provider esegue automaticamente il lato client di generazione del valore, usando un algoritmo per generare valori GUID sequenziali ottimali. Tuttavia, `ValueGeneratedOnAdd()` l'impostazione di su una proprietà DateTime non avrà alcun effetto ([vedere la sezione seguente per la generazione di valori DateTime](#datetime-value-generation)).
+>
+> Analogamente, le proprietà byte [] configurate come generate in Aggiungi o aggiorna e contrassegnate come token di concorrenza vengono impostate con il tipo di dati rowversion, in modo che i valori vengano generati automaticamente nel database. Tuttavia, la specifica di `ValueGeneratedOnAddOrUpdate()` non avrà alcun effetto.
+>
+> [!NOTE]
+> A seconda del provider di database in uso, è possibile che i valori vengano generati lato client da EF o nel database. Se il valore viene generato dal database, EF può assegnare un valore temporaneo quando si aggiunge l'entità al contesto; Questo valore temporaneo verrà quindi sostituito dal valore generato dal database durante `SaveChanges()` . Per ulteriori informazioni, [vedere la documentazione relativa ai valori temporanei](xref:core/change-tracking/explicit-tracking#temporary-values).
 
-### <a name="computed-columns"></a>Colonne calcolate
+## <a name="datetime-value-generation"></a>Generazione di valori di data/ora
 
-Nella maggior parte dei database relazionali, una colonna può essere configurata in modo che il relativo valore venga calcolato nel database, in genere con un'espressione che fa riferimento ad altre colonne:
+Una richiesta comune consiste nel disporre di una colonna di database contenente la data e l'ora in cui la colonna è stata inserita per la prima volta (valore generato al momento dell'aggiunta) o per l'ultimo aggiornamento (valore generato durante l'aggiunta o l'aggiornamento). Poiché esistono diverse strategie per eseguire questa operazione, i provider EF Core in genere non configurano automaticamente la generazione di valori per le colonne di data/ora. è necessario configurarlo manualmente.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ComputedColumn.cs?name=DefaultComputedColumn)]
+### <a name="creation-timestamp"></a>Timestamp di creazione
 
-Il precedente crea una colonna calcolata _virtual *, il cui valore viene calcolato ogni volta che viene recuperato dal database. È inoltre possibile specificare che una colonna calcolata deve essere *archiviata* (talvolta denominata *permanente* ), ovvero viene calcolata a ogni aggiornamento della riga e viene archiviata su disco insieme a colonne normali:
+La configurazione di una colonna di data/ora in modo che il timestamp di creazione della riga riporti in genere la configurazione di un valore predefinito con la funzione SQL appropriata. In SQL Server, ad esempio, è possibile utilizzare quanto segue:
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ComputedColumn.cs?name=StoredComputedColumn)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/DefaultValueSql.cs?name=DefaultValueSql&highlight=5)]
+
+Assicurarsi di selezionare la funzione appropriata, in quanto possono esistere diverse (ad esempio, `GETDATE()` vs. `GETUTCDATE()` ).
+
+### <a name="update-timestamp"></a>Aggiorna timestamp
+
+Sebbene le colonne calcolate archiviate sembrino una soluzione efficace per la gestione dei timestamp aggiornati per ultimi, i database in genere non consentono di specificare funzioni come `GETDATE()` in una colonna calcolata. In alternativa, è possibile configurare un trigger di database per ottenere lo stesso effetto:
+
+```sql
+CREATE TRIGGER [dbo].[Blogs_UPDATE] ON [dbo].[Blogs]
+    AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF ((SELECT TRIGGER_NESTLEVEL()) > 1) RETURN;
+
+    DECLARE @Id INT
+
+    SELECT @Id = INSERTED.BlogId
+    FROM INSERTED
+
+    UPDATE dbo.Blogs
+    SET LastUpdated = GETDATE()
+    WHERE BlogId = @Id
+END
+```
+
+Per informazioni sulla creazione di trigger, [vedere la documentazione sull'uso di SQL non elaborato nelle migrazioni](xref:core/managing-schemas/migrations/managing#adding-raw-sql).
+
+## <a name="overriding-value-generation"></a>Override della generazione di valori
+
+Sebbene una proprietà sia configurata per la generazione di valori, in molti casi è comunque possibile specificare in modo esplicito un valore. Il funzionamento di questa funzione dipende dal meccanismo di generazione di valori specifico configurato; Sebbene sia possibile specificare un valore esplicito anziché usare il valore predefinito di una colonna, non è possibile eseguire la stessa operazione con le colonne calcolate.
+
+Per eseguire l'override della generazione di valori con un valore esplicito, è sufficiente impostare la proprietà su un valore diverso da quello predefinito di CLR per il tipo di tale proprietà (per, per, `null` `string` per e `0` `int` `Guid.Empty` `Guid` così via).
 
 > [!NOTE]
-> Il supporto per la creazione di colonne calcolate archiviate è stato aggiunto in EF Core 5,0.
+> Il tentativo di inserire valori espliciti in SQL Server identità ha esito negativo per impostazione predefinita. [vedere questi documenti per una soluzione alternativa](xref:core/providers/sql-server/value-generation#inserting-explicit-values-into-identity-columns).
+
+Per fornire un valore esplicito per le proprietà che sono state configurate come valore generato durante l'aggiunta o l'aggiornamento, è necessario configurare anche la proprietà come indicato di seguito:
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAddOrUpdateWithPropertySaveBehavior.cs?name=ValueGeneratedOnAddOrUpdateWithPropertySaveBehavior&highlight=5)]
 
 ## <a name="no-value-generation"></a>Nessuna generazione di valori
 
-La disabilitazione della generazione di valori in una proprietà è in genere necessaria se una convenzione la configura per la generazione di valori. Se, ad esempio, si dispone di una chiave primaria di tipo int, questa verrà impostata in modo implicito come valore generato durante l'aggiunta; Questa operazione può essere disabilitata tramite quanto segue:
+Oltre a scenari specifici come quelli descritti in precedenza, le proprietà non hanno in genere alcuna generazione di valori configurata. Ciò significa che l'applicazione deve sempre fornire un valore da salvare nel database. Questo valore deve essere assegnato a nuove entità prima che vengano aggiunte al contesto.
+
+In alcuni casi, tuttavia, potrebbe essere necessario disabilitare la generazione di valori configurata per convenzione. Una chiave primaria di tipo int, ad esempio, viene in genere configurata in modo implicito come valore generato in base al valore aggiunto (ad esempio, colonna Identity in SQL Server). Questa operazione può essere disabilitata tramite quanto segue:
 
 ### <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
 

@@ -2,14 +2,14 @@
 title: Operatori di confronto del valore-EF Core
 description: Utilizzo degli operatori di confronto dei valori per controllare la modalità di confronto dei valori delle proprietà EF Core
 author: ajcvickers
-ms.date: 03/20/2020
+ms.date: 01/16/2021
 uid: core/modeling/value-comparers
-ms.openlocfilehash: 618341315de05f6efae8f43384809ed72226e18b
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 5c5e5beee72230a331a8e1c88a2020dc5ad88ecf
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128511"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983482"
 ---
 # <a name="value-comparers"></a>Operatori di confronto del valore
 
@@ -19,11 +19,11 @@ ms.locfileid: "98128511"
 > [!TIP]
 > Il codice in questo documento è disponibile in GitHub come [esempio eseguibile](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/ValueConversions/).
 
-## <a name="background"></a>Background
+## <a name="background"></a>Sfondo
 
-Il rilevamento delle modifiche significa che EF Core determina automaticamente quali modifiche sono state eseguite dall'applicazione in un'istanza di entità caricata, in modo che tali modifiche possano essere salvate nel database quando <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> viene chiamato il metodo. EF Core in genere esegue questa operazione eseguendo uno *snapshot* dell'istanza quando viene caricata dal database e *confrontando* tale snapshot con l'istanza passata all'applicazione.
+Il [rilevamento delle modifiche](xref:core/change-tracking/index) significa che EF Core determina automaticamente quali modifiche sono state eseguite dall'applicazione in un'istanza di entità caricata, in modo che tali modifiche possano essere salvate nel database quando <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> viene chiamato il metodo. EF Core in genere esegue questa operazione eseguendo uno *snapshot* dell'istanza quando viene caricata dal database e *confrontando* tale snapshot con l'istanza passata all'applicazione.
 
-EF Core viene fornita con la logica incorporata per istantanee e confrontando la maggior parte dei tipi standard utilizzati nei database di, in modo che gli utenti non debbano in genere preoccuparsi di questo argomento. Tuttavia, quando viene eseguito il mapping di una proprietà tramite un [convertitore di valori](xref:core/modeling/value-conversions), EF Core necessario eseguire il confronto su tipi di utente arbitrari, che possono essere complessi. Per impostazione predefinita, EF Core utilizza il confronto di uguaglianza predefinito definito dai tipi (ad esempio, il `Equals` metodo). per istantanee, i tipi di valore vengono copiati per produrre lo snapshot, mentre per i tipi di riferimento non viene eseguita la copia e la stessa istanza viene utilizzata come snapshot.
+EF Core viene fornita con la logica incorporata per istantanee e confrontando la maggior parte dei tipi standard utilizzati nei database di, in modo che gli utenti non debbano in genere preoccuparsi di questo argomento. Tuttavia, quando viene eseguito il mapping di una proprietà tramite un [convertitore di valori](xref:core/modeling/value-conversions), EF Core necessario eseguire il confronto su tipi di utente arbitrari, che possono essere complessi. Per impostazione predefinita, EF Core utilizza il confronto di uguaglianza predefinito definito dai tipi (ad esempio, il `Equals` metodo). per istantanee, i [tipi di valore](/dotnet/csharp/language-reference/builtin-types/value-types) vengono copiati per produrre lo snapshot, mentre per i [tipi di riferimento](/dotnet/csharp/language-reference/keywords/reference-types) non viene eseguita la copia e la stessa istanza viene utilizzata come snapshot.
 
 Nei casi in cui il comportamento di confronto predefinito non è appropriato, gli utenti possono fornire un *operatore di confronto del valore*, che contiene la logica per istantanee, il confronto e il calcolo di un codice hash. Il codice seguente, ad esempio, imposta la conversione del valore per la proprietà in modo da `List<int>` essere convertita in una stringa JSON nel database e definisce anche un operatore di confronto del valore appropriato:
 
@@ -42,7 +42,7 @@ Prendere in considerazione le matrici di byte, che possono essere arbitrariament
 * Per riferimento, in modo che venga rilevata una differenza solo se viene utilizzata una nuova matrice di byte
 * In base a un confronto approfondito, tale mutazione dei byte nella matrice viene rilevata
 
-Per impostazione predefinita, EF Core usa il primo di questi approcci per le matrici di byte non chiave. Ovvero, vengono confrontati solo i riferimenti e viene rilevata una modifica solo quando una matrice di byte esistente viene sostituita con una nuova. Si tratta di una decisione pragmatica che evita la copia di intere matrici e il confronto di byte a byte durante <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> l'esecuzione e lo scenario comune di sostituzione, ad dire, di un'immagine con un'altra viene gestita in modo efficiente.
+Per impostazione predefinita, EF Core usa il primo di questi approcci per le matrici di byte non chiave. Ovvero, vengono confrontati solo i riferimenti e viene rilevata una modifica solo quando una matrice di byte esistente viene sostituita con una nuova. Si tratta di una decisione pragmatica che evita la copia di intere matrici e il confronto di byte a byte durante l'esecuzione <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> . Ciò significa che lo scenario comune di sostituzione, ad dire, di un'immagine con un'altra è gestito in modo efficiente.
 
 D'altra parte, l'uguaglianza dei riferimenti non funzionerà quando le matrici di byte vengono usate per rappresentare le chiavi binarie, perché è molto improbabile che una proprietà FK sia impostata sulla _stessa istanza_ di una proprietà PK alla quale deve essere confrontata. EF Core usa quindi confronti profondi per le matrici di byte che fungono da chiavi; è improbabile che si sia verificato un notevole calo delle prestazioni poiché le chiavi binarie sono in genere brevi.
 
@@ -71,18 +71,11 @@ Anche il mapping per gli struct semplici è semplice e non richiede alcun operat
 
 [!code-csharp[ConfigureImmutableStructProperty](../../../samples/core/Modeling/ValueConversions/MappingImmutableStructProperty.cs?name=ConfigureImmutableStructProperty)]
 
-EF Core dispone del supporto incorporato per la generazione di confronti membro per membro compilati delle proprietà dello struct.
-Questo significa che gli struct non devono avere l'override dell'uguaglianza per EF Core, ma è comunque possibile scegliere di eseguire questa operazione per [altri motivi](/dotnet/csharp/programming-guide/statements-expressions-operators/how-to-define-value-equality-for-a-type).
-Inoltre, istantanee speciali non è necessario perché gli struct non sono modificabili e vengono sempre copiati membro per membro comunque.
-Questo vale anche per gli struct modificabili, ma [in generale è consigliabile evitare gli struct modificabili](/dotnet/csharp/write-safe-efficient-code).
+EF Core dispone del supporto incorporato per la generazione di confronti membro per membro compilati delle proprietà dello struct. Questo significa che gli struct non devono avere l'override dell'uguaglianza per EF Core, ma è comunque possibile scegliere di eseguire questa operazione per [altri motivi](/dotnet/csharp/programming-guide/statements-expressions-operators/how-to-define-value-equality-for-a-type). Inoltre, istantanee speciali non è necessario perché gli struct non sono modificabili e vengono sempre copiati membro per membro comunque. Questo vale anche per gli struct modificabili, ma [in generale è consigliabile evitare gli struct modificabili](/dotnet/csharp/write-safe-efficient-code).
 
 ## <a name="mutable-classes"></a>Classi modificabili
 
-Quando possibile, è consigliabile utilizzare tipi non modificabili (classi o struct) con convertitori di valori.
-Questa operazione è in genere più efficiente e presenta una semantica più pulita rispetto all'uso di un tipo modificabile.
-
-Tuttavia, in questo caso, è normale usare le proprietà dei tipi che l'applicazione non può modificare.
-Ad esempio, il mapping di una proprietà contenente un elenco di numeri:
+Quando possibile, è consigliabile utilizzare tipi non modificabili (classi o struct) con convertitori di valori. Questa operazione è in genere più efficiente e presenta una semantica più pulita rispetto all'uso di un tipo modificabile. Tuttavia, in questo caso, è normale usare le proprietà dei tipi che l'applicazione non può modificare. Ad esempio, il mapping di una proprietà contenente un elenco di numeri:
 
 [!code-csharp[ListProperty](../../../samples/core/Modeling/ValueConversions/MappingListProperty.cs?name=ListProperty)]
 
@@ -111,24 +104,16 @@ Il <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ValueComparer%601> costrut
 
 In questo caso, il confronto viene eseguito controllando se le sequenze di numeri sono uguali.
 
-Analogamente, il codice hash viene creato dalla stessa sequenza.
-Si noti che si tratta di un codice hash rispetto ai valori modificabili e che può [causare problemi](https://ericlippert.com/2011/02/28/guidelines-and-rules-for-gethashcode/).
-Se possibile, non è possibile modificarlo.
+Analogamente, il codice hash viene creato dalla stessa sequenza. Si noti che si tratta di un codice hash rispetto ai valori modificabili e che può [causare problemi](https://ericlippert.com/2011/02/28/guidelines-and-rules-for-gethashcode/). Se possibile, non è possibile modificarlo.
 
-Lo snapshot viene creato clonando l'elenco con `ToList` .
-Anche in questo caso, questa operazione è necessaria solo se gli elenchi verranno mutati.
-In alternativa, se possibile, non è possibile modificarlo.
+Lo snapshot viene creato clonando l'elenco con `ToList` . Anche in questo caso, questa operazione è necessaria solo se gli elenchi verranno mutati. In alternativa, se possibile, non è possibile modificarlo.
 
 > [!NOTE]
-> I convertitori di valori e gli operatori di confronto vengono costruiti utilizzando espressioni anziché delegati semplici.
-> Questo perché EF Core inserisce queste espressioni in un albero delle espressioni molto più complesso che viene quindi compilato in un delegato di Entity shaper.
-> Concettualmente, questo è simile all'incorporamento del compilatore.
-> Ad esempio, una conversione semplice può essere solo una compilazione compilata nel cast, anziché una chiamata a un altro metodo per eseguire la conversione.
+> I convertitori di valori e gli operatori di confronto vengono costruiti utilizzando espressioni anziché delegati semplici. Questo perché EF Core inserisce queste espressioni in un albero delle espressioni molto più complesso che viene quindi compilato in un delegato di Entity shaper. Concettualmente, questo è simile all'incorporamento del compilatore. Ad esempio, una conversione semplice può essere solo una compilazione compilata nel cast, anziché una chiamata a un altro metodo per eseguire la conversione.
 
 ## <a name="key-comparers"></a>Operatori di confronto principali
 
-La sezione background illustra il motivo per cui i confronti chiave possono richiedere una semantica speciale.
-Assicurarsi di creare un operatore di confronto appropriato per le chiavi quando lo si imposta su una proprietà primaria, principale o di chiave esterna.
+La sezione background illustra il motivo per cui i confronti chiave possono richiedere una semantica speciale. Assicurarsi di creare un operatore di confronto appropriato per le chiavi quando lo si imposta su una proprietà primaria, principale o di chiave esterna.
 
 Usare <xref:Microsoft.EntityFrameworkCore.MutablePropertyExtensions.SetKeyValueComparer%2A> nei rari casi in cui è richiesta una semantica diversa per la stessa proprietà.
 
@@ -137,9 +122,7 @@ Usare <xref:Microsoft.EntityFrameworkCore.MutablePropertyExtensions.SetKeyValueC
 
 ## <a name="overriding-the-default-comparer"></a>Override dell'operatore di confronto predefinito
 
-In alcuni casi il confronto predefinito usato da EF Core potrebbe non essere appropriato.
-La mutazione di matrici di byte, ad esempio, non è rilevata per impostazione predefinita in EF Core.
-È possibile eseguirne l'override impostando un operatore di confronto diverso per la proprietà:
+In alcuni casi il confronto predefinito usato da EF Core potrebbe non essere appropriato. La mutazione di matrici di byte, ad esempio, non è rilevata per impostazione predefinita in EF Core. È possibile eseguirne l'override impostando un operatore di confronto diverso per la proprietà:
 
 [!code-csharp[OverrideComparer](../../../samples/core/Modeling/ValueConversions/OverridingByteArrayComparisons.cs?name=OverrideComparer)]
 

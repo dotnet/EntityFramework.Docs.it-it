@@ -4,12 +4,12 @@ description: Configurazione dei comportamenti di propagazione attivati quando un
 author: ajcvickers
 ms.date: 01/07/2021
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 7c35de900930cf42da0e534df76124b5fb19ca52
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 27ba84fa5d7e0d72e66ccbd96df9b6a5008791fb
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128862"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983339"
 ---
 # <a name="cascade-delete"></a>Eliminazione a catena
 
@@ -473,11 +473,11 @@ La tabella seguente mostra il risultato di ogni `OnDelete` valore nel vincolo FO
 |:----------------------|--------------------------
 | Cascade               | ON DELETE CASCADE
 | Limitazione              | ON DELETE NO ACTION
-| NoAction              | <database default>
+| NoAction              | impostazione predefinita database
 | SetNull               | ON DELETE SET NULL
 | ClientSetNull         | ON DELETE NO ACTION
 | ClientCascade         | ON DELETE NO ACTION
-| ClientNoAction        | <database default>
+| ClientNoAction        | impostazione predefinita database
 
 > [!NOTE]
 > Questa tabella è confusa e si prevede di rivisitarla in una versione futura. Vedere [#21252 problema di GitHub](https://github.com/dotnet/efcore/issues/21252).

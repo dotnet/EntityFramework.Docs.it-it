@@ -4,12 +4,12 @@ description: Conversione di query in query singole e divise in SQL con Entity Fr
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/single-split-queries
-ms.openlocfilehash: 8615e7ba5247a90a1f980e9f7b1b23c81170971f
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 1857e05d45979c5530a349b9c7470407e7574fdf
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128992"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983430"
 ---
 # <a name="split-queries"></a>Suddividere le query
 
@@ -74,7 +74,7 @@ Per disabilitare l'avviso, configurare la modalità di suddivisione delle query 
 Mentre Split query evita i problemi di prestazioni associati a JOIN e l'esplosione cartesiana, presenta anche alcuni svantaggi:
 
 - Anche se la maggior parte dei database garantisce la coerenza dei dati per le singole query, non esistono garanzie di questo tipo per più query. Se il database viene aggiornato simultaneamente durante l'esecuzione delle query, i dati risultanti potrebbero non essere coerenti. È possibile mitigarlo eseguendo il wrapping delle query in una transazione serializzabile o snapshot, anche se in questo modo è possibile creare problemi di prestazioni propri. Per ulteriori informazioni, vedere la documentazione del database.
-- Ogni query implica attualmente un round trip di rete aggiuntivo al database. Il round trip della rete può compromettere le prestazioni, soprattutto se la latenza del database è elevata, ad esempio servizi cloud.
+- Ogni query implica attualmente un round trip di rete aggiuntivo al database. Più round trip di rete possono peggiorare le prestazioni, soprattutto se la latenza per il database è elevata (ad esempio, servizi cloud).
 - Sebbene alcuni database consentano di usare contemporaneamente i risultati di più query (SQL Server con MARS, SQLite), la maggior parte consente di rendere attiva una sola query in un determinato punto. Tutti i risultati delle query precedenti devono quindi essere memorizzati nel buffer nella memoria dell'applicazione prima di eseguire query successive, il che comporta un aumento dei requisiti di memoria.
 
 Sfortunatamente, non esiste una strategia per il caricamento di entità correlate che soddisfino tutti gli scenari. Valutare con attenzione i vantaggi e gli svantaggi delle query singole e divise per selezionare quello che soddisfa le proprie esigenze.

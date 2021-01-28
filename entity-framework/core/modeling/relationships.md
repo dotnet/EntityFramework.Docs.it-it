@@ -4,12 +4,12 @@ description: Come configurare le relazioni tra i tipi di entità quando si usa E
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 2bc17365adb802f2e813077731ae70c68f8e3be3
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 93d129435a3583ac5f741cc27952fb702f415a01
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129174"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983469"
 ---
 # <a name="relationships"></a>Relazioni
 
@@ -301,7 +301,10 @@ CREATE TABLE [PostTag] (
 );
 ```
 
-EF crea internamente un tipo di entità per rappresentare la tabella di join a cui viene fatto riferimento come tipo di entità join. `Dictionary<string, object>` viene utilizzato per gestire qualsiasi combinazione di proprietà di chiave esterna. per ulteriori informazioni, vedere [tipi di entità contenitore delle proprietà](shadow-properties.md#property-bag-entity-types) . Nel modello possono esistere più relazioni molti-a-molti, pertanto al tipo di entità join deve essere assegnato un nome univoco, in questo caso `PostTag` . La funzionalità che consente questa operazione è denominata tipo di entità di tipo condiviso.
+EF crea internamente un tipo di entità per rappresentare la tabella di join a cui viene fatto riferimento come tipo di entità join. `Dictionary<string, object>` Attualmente viene utilizzato per gestire qualsiasi combinazione di proprietà di chiave esterna. per ulteriori informazioni, vedere [tipi di entità contenitore delle proprietà](shadow-properties.md#property-bag-entity-types) . Nel modello possono esistere più relazioni molti-a-molti, pertanto al tipo di entità join deve essere assegnato un nome univoco, in questo caso `PostTag` . La funzionalità che consente questa operazione è denominata tipo di entità di tipo condiviso.
+
+> [!IMPORTANT]
+> Il tipo CLR utilizzato per i tipi di entità join per convenzione può cambiare nelle versioni future per migliorare le prestazioni. Non dipendono dal tipo di join `Dictionary<string, object>` , a meno che non sia stato configurato in modo esplicito, come descritto nella sezione successiva.
 
 Le navigazioni many-to-many sono denominate Skip Navigations, perché ignorano effettivamente il tipo di entità join. Se si sta impiegando la configurazione bulk, è possibile ottenere tutte le navigazioni Skip da <xref:Microsoft.EntityFrameworkCore.Metadata.IEntityType.GetSkipNavigations%2A> .
 

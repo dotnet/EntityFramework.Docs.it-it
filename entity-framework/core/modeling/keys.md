@@ -2,18 +2,20 @@
 title: Chiavi-EF Core
 description: Come configurare le chiavi per i tipi di entità quando si usa Entity Framework Core
 author: AndriySvyryd
-ms.date: 11/06/2019
+ms.date: 1/10/2021
 uid: core/modeling/keys
-ms.openlocfilehash: 805396a13227aa62ed86ac17c742d055d7a22bbf
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: c79ab0445e80b0b6f4a8b49ef0d4c063bf938851
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129187"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983533"
 ---
 # <a name="keys"></a>Chiavi
 
 Una chiave funge da identificatore univoco per ogni istanza dell'entità. Per la maggior parte delle entità in EF è disponibile un'unica chiave, che esegue il mapping al concetto di *chiave primaria* nei database relazionali (per le entità senza chiavi, vedere [entità](xref:core/modeling/keyless-entity-types)senza chiave). Le entità possono avere chiavi aggiuntive oltre la chiave primaria. per ulteriori informazioni, vedere [chiavi alternative](#alternate-keys) .
+
+## <a name="configuring-a-primary-key"></a>Configurazione di una chiave primaria
 
 Per convenzione, una proprietà denominata `Id` o `<type name>Id` verrà configurata come chiave primaria di un'entità.
 
@@ -24,11 +26,11 @@ Per convenzione, una proprietà denominata `Id` o `<type name>Id` verrà configu
 
 È possibile configurare una singola proprietà come chiave primaria di un'entità come indicato di seguito:
 
-## <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
+### <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/KeySingle.cs?name=KeySingle&highlight=3)]
 
-## <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
+### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/KeySingle.cs?name=KeySingle&highlight=4)]
 
@@ -37,6 +39,10 @@ Per convenzione, una proprietà denominata `Id` o `<type name>Id` verrà configu
 È anche possibile configurare più proprietà come chiave di un'entità. questa operazione è nota come chiave composta. Le chiavi composite possono essere configurate solo usando l'API Fluent; le convenzioni non configurano mai una chiave composta e non è possibile usare le annotazioni dei dati per configurarne una.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/KeyComposite.cs?name=KeyComposite&highlight=4)]
+
+## <a name="value-generation"></a>Generazione di valore
+
+Per le chiavi primarie GUID e numerici non compositi, EF Core imposta la generazione di valori per convenzione. Una chiave primaria numerica in SQL Server, ad esempio, viene configurata automaticamente come colonna IDENTITY. Per ulteriori informazioni, vedere [la documentazione relativa alla generazione dei valori](xref:core/modeling/generated-properties).
 
 ## <a name="primary-key-name"></a>Nome chiave primaria
 
@@ -51,7 +57,7 @@ Mentre EF Core supporta l'utilizzo di proprietà di qualsiasi tipo primitivo com
 Quando si aggiunge una nuova entità al contesto, le proprietà chiave devono sempre avere un valore non predefinito, ma alcuni tipi verranno [generati dal database](xref:core/modeling/generated-properties). In tal caso, EF tenterà di generare un valore temporaneo quando l'entità viene aggiunta per finalità di rilevamento. Dopo la chiamata a [SaveChanges](/dotnet/api/Microsoft.EntityFrameworkCore.DbContext.SaveChanges) , il valore temporaneo verrà sostituito dal valore generato dal database.
 
 > [!Important]
-> Se una proprietà chiave ha il valore generato dal database e viene specificato un valore non predefinito quando viene aggiunta un'entità, Entity Framework presuppone che l'entità esista già nel database e tenterà di aggiornarla invece di inserirne una nuova. Per evitare questo problema, disabilitare la generazione di valori o vedere [come specificare valori espliciti per le proprietà generate](xref:core/saving/explicit-values-generated-properties).
+> Se una proprietà chiave ha il valore generato dal database e viene specificato un valore non predefinito quando viene aggiunta un'entità, Entity Framework presuppone che l'entità esista già nel database e tenterà di aggiornarla invece di inserirne una nuova. Per evitare questo problema, disabilitare la generazione di valori o vedere [come specificare valori espliciti per le proprietà generate](xref:core/modeling/generated-properties#overriding-value-generation).
 
 ## <a name="alternate-keys"></a>Chiavi alternative
 

@@ -4,12 +4,12 @@ description: Informazioni sul modo in cui Entity Framework Core gestisce i confr
 author: maumar
 ms.date: 11/11/2020
 uid: core/querying/null-comparisons
-ms.openlocfilehash: d1235eb8df7fd22c7a930b3661ec38a99f75e5fa
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: fc63d0e0e6aea09e46b1700152312d4b74270219
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129776"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983352"
 ---
 # <a name="query-null-semantics"></a>Semantica null della query
 

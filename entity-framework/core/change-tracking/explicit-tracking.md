@@ -4,12 +4,12 @@ description: Rilevamento esplicito di entità con DbContext mediante aggiunta, a
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/explicit-tracking
-ms.openlocfilehash: 28a6ec3e3c25dad70882b8681f78744a5979efe6
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 1428096b362c8016f7924c72ec9ac3e2f9203ed6
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129744"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983274"
 ---
 # <a name="explicitly-tracking-entities"></a>Rilevamento esplicito di entità
 
@@ -311,7 +311,7 @@ Post {Id: 2} Unchanged
 Si tratta esattamente dello stesso stato finale dell'esempio precedente in cui venivano utilizzati valori di chiave espliciti.
 
 > [!TIP]
-> Un valore di chiave esplicita può comunque essere impostato anche quando si usano valori di chiave generati. EF Core tenterà quindi di inserire usando questo valore di chiave. Alcune configurazioni di database, tra cui SQL Server con colonne Identity, non supportano tali inserimenti e generano.
+> Un valore di chiave esplicita può comunque essere impostato anche quando si usano valori di chiave generati. EF Core tenterà quindi di inserire usando questo valore di chiave. Alcune configurazioni di database, tra cui SQL Server con colonne Identity, non supportano tali inserimenti e generano ([vedere questi documenti per una soluzione alternativa](xref:core/providers/sql-server/value-generation#inserting-explicit-values-into-identity-columns)).
 
 ## <a name="attaching-existing-entities"></a>Associazione di entità esistenti
 
@@ -394,35 +394,6 @@ La chiamata a SaveChanges in questo punto non avrà alcun effetto. Tutte le enti
 ### <a name="generated-key-values"></a>Valori di chiave generati
 
 Come indicato in precedenza, le [proprietà di chiave](xref:core/modeling/keys) Integer e GUID sono configurate per l'utilizzo dei [valori di chiave generati automaticamente](xref:core/modeling/generated-properties) per impostazione predefinita. Questo è un vantaggio importante quando si utilizzano le entità disconnesse: un valore di chiave non impostato indica che l'entità non è ancora stata inserita nel database. Questo consente allo strumento di rilevamento delle modifiche di rilevare automaticamente le nuove entità e inserirle nello `Added` stato. Si consideri ad esempio l'associazione di questo grafico di un blog e post:
-
-```c#
-            context.Attach(
-                new Blog
-                {
-                    Id = 1,
-                    Name = ".NET Blog",
-                    Posts =
-                    {
-                        new Post
-                        {
-                            Id = 1,
-                            Title = "Announcing the Release of EF Core 5.0",
-                            Content = "Announcing the release of EF Core 5.0, a full featured cross-platform..."
-                        },
-                        new Post
-                        {
-                            Id = 2,
-                            Title = "Announcing F# 5",
-                            Content = "F# 5 is the latest version of F#, the functional programming language..."
-                        },
-                        new Post
-                        {
-                            Title = "Announcing .NET 5.0",
-                            Content = ".NET 5.0 includes many enhancements, including single file applications, more..."
-                        },
-                    }
-                });
-```
 
 <!--
             context.Attach(
@@ -922,7 +893,7 @@ Dopo il completamento di SaveChanges, tutte le entità eliminate vengono scolleg
 
 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.TrackGraph%2A?displayProperty=nameWithType> funziona come `Add` `Attach` e, `Update` ad eccezione del fatto che genera un callback per ogni istanza di entità prima di tenerne traccia. In questo modo è possibile usare la logica personalizzata per determinare come tenere traccia delle singole entità in un grafico.
 
-Si consideri, ad esempio, la regola EF Core utilizza per tenere traccia delle entità con valori di chiave generati: se il valore Kye è zero, l'entità è nuova e deve essere inserita. Si estenderà questa regola per indicare se il valore della chiave è negativo, quindi l'entità deve essere eliminata. In questo modo è possibile modificare i valori di chiave primaria nelle entità di un grafo disconnesso per contrassegnare le entità eliminate:
+Si consideri, ad esempio, la regola utilizzata da EF Core per tenere traccia delle entità con valori di chiave generati: se il valore della chiave è zero, l'entità è nuova e deve essere inserita. Si estenderà questa regola per indicare se il valore della chiave è negativo, quindi l'entità deve essere eliminata. In questo modo è possibile modificare i valori di chiave primaria nelle entità di un grafo disconnesso per contrassegnare le entità eliminate:
 
 <!--
             blog.Posts.Add(

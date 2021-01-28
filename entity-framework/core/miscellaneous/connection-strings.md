@@ -4,12 +4,12 @@ description: Gestione delle stringhe di connessione in ambienti diversi con Enti
 author: bricelam
 ms.date: 10/27/2016
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: fee7e8f6de1faa11203cfcdab033b73a0a8ef6ea
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 75e364eddd02087cffdffd1c152d1e988a99817b
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429728"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983560"
 ---
 # <a name="connection-strings"></a>Stringhe di connessione
 
@@ -22,8 +22,8 @@ In ASP.NET Core il sistema di configurazione è molto flessibile e la stringa di
 Ad esempio, è possibile usare lo [strumento di gestione dei segreti](/aspnet/core/security/app-secrets#secret-manager) per archiviare la password del database e quindi, nell'impalcatura, usare una stringa di connessione costituita semplicemente da `Name=<database-alias>` .
 
 ```dotnetcli
-dotnet user-secrets set ConnectionStrings.YourDatabaseAlias "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=YourDatabase"
-dotnet ef dbcontext scaffold Name=ConnectionStrings.YourDatabaseAlias Microsoft.EntityFrameworkCore.SqlServer
+dotnet user-secrets set ConnectionStrings:YourDatabaseAlias "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=YourDatabase"
+dotnet ef dbcontext scaffold Name=ConnectionStrings:YourDatabaseAlias Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 Oppure nell'esempio seguente viene illustrata la stringa di connessione archiviata in `appsettings.json` .

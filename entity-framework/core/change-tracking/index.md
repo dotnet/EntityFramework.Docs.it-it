@@ -4,12 +4,12 @@ description: Panoramica del rilevamento delle modifiche per EF Core
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/index
-ms.openlocfilehash: 52223e5472b09271d19ac9449a3989b4a0e277f7
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 8cfa4590af07ec1715eb48ec0c7acb3426b6a6b4
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129739"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983261"
 ---
 # <a name="change-tracking-in-ef-core"></a>Rilevamento modifiche in EF Core
 
@@ -68,7 +68,7 @@ Nella tabella seguente vengono riepilogati i diversi stati:
 | `Added`          | Sì                  | No                 | -                   | Insert
 | `Unchanged`      | Sì                  | Sì                | No                  | -
 | `Modified`       | Sì                  | Sì                | Sì                 | Aggiornamento
-| `Deleted`        | Sì                  | Sì                | -                   | Delete
+| `Deleted`        | Sì                  | Sì                | -                   | Elimina
 
 > [!NOTE]
 > Questo testo usa termini di database relazionali per maggiore chiarezza. I database NoSQL in genere supportano operazioni simili, ma possibilmente con nomi diversi. Per ulteriori informazioni, consultare la documentazione del provider di database.

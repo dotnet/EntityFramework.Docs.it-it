@@ -4,12 +4,12 @@ description: Informazioni sulle query di rilevamento e senza rilevamento in Enti
 author: smitpatel
 ms.date: 11/09/2020
 uid: core/querying/tracking
-ms.openlocfilehash: 1b3c1db702438390c0de4a2ad5d13e868a522b65
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: cb18125fb3453bb533981afb36480b12727cd6f2
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128901"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983417"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>Rilevamento e query No-Tracking
 
@@ -27,7 +27,7 @@ Per impostazione predefinita, le query che restituiscono tipi di entità sono co
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#Tracking)]
 
-Quando i risultati vengono restituiti in una query di rilevamento, EF Core verificherà se l'entità è già presente nel contesto. Se EF Core trova un'entità esistente, viene restituita la stessa istanza. EF Core non sovrascrive i valori correnti e originali delle proprietà dell'entità nella voce con i valori del database. Se l'entità non viene trovata nel contesto, EF Core creerà una nuova istanza dell'entità e la collegherà al contesto. I risultati della query non contengono alcuna entità, che viene aggiunta al contesto ma non ancora salvata nel database.
+Quando i risultati vengono restituiti in una query di rilevamento, EF Core verificherà se l'entità è già presente nel contesto. Se EF Core trova un'entità esistente, viene restituita la stessa istanza. EF Core non sovrascrive i valori correnti e originali delle proprietà dell'entità nella voce con i valori del database. Se l'entità non viene trovata nel contesto, EF Core creerà una nuova istanza di entità e la collegherà al contesto. I risultati della query non contengono alcuna entità, che viene aggiunta al contesto ma non ancora salvata nel database.
 
 ## <a name="no-tracking-queries"></a>Query senza registrazione
 
@@ -43,7 +43,7 @@ Le query senza rilevamento delle modifiche sono utili quando i risultati vengono
 
 Poiché una query di rilevamento USA change tracker, EF Core eseguirà la risoluzione delle identità in una query di rilevamento. Quando si materializzazione un'entità, EF Core restituirà la stessa istanza dell'entità dallo strumento di rilevamento delle modifiche, se è già stata rilevata. Se il risultato contiene la stessa entità più volte, viene restituita la stessa istanza per ogni occorrenza. Le query senza rilevamento non usano change tracker e non eseguono la risoluzione delle identità. Quindi, si ottiene una nuova istanza dell'entità anche quando la stessa entità è contenuta nel risultato più volte. Questo comportamento è diverso nelle versioni precedenti EF Core 3,0, vedere [versioni precedenti](#previous-versions).
 
-A partire da EF Core 5,0, è possibile combinare entrambi i comportamenti precedenti nella stessa query. Ovvero, è possibile avere una query senza rilevamento, che eseguirà la risoluzione delle identità nei risultati. Analogamente all' `AsNoTracking()` operatore Queryable, è stato aggiunto un altro operatore `AsNoTrackingWithIdentityResolution()` . In Enum è stata aggiunta anche la voce associata <xref:Microsoft.EntityFrameworkCore.QueryTrackingBehavior> . Quando si configura la query in modo che utilizzi la risoluzione delle identità senza rilevamento, viene utilizzato uno strumento di rilevamento delle modifiche autonomo in background durante la generazione dei risultati della query in modo che ogni istanza venga materializzata una sola volta. Poiché questo strumento di rilevamento delle modifiche è diverso da quello nel contesto, i risultati non vengono rilevati dal contesto. Dopo che la query è stata enumerata completamente, lo strumento di rilevamento delle modifiche esce dall'ambito e sottoposto a Garbage Collection come richiesto.
+A partire da EF Core 5,0, è possibile combinare entrambi i comportamenti precedenti nella stessa query. Ovvero, è possibile avere una query senza rilevamento, che eseguirà la risoluzione delle identità nei risultati. Analogamente all' `AsNoTracking()` operatore Queryable, è stato aggiunto un altro operatore `AsNoTrackingWithIdentityResolution()` . Nell'enum è stata aggiunta anche la voce associata <xref:Microsoft.EntityFrameworkCore.QueryTrackingBehavior> . Quando si configura la query in modo che utilizzi la risoluzione delle identità senza rilevamento, viene utilizzato uno strumento di rilevamento delle modifiche autonomo in background durante la generazione dei risultati della query in modo che ogni istanza venga materializzata una sola volta. Poiché questo strumento di rilevamento delle modifiche è diverso da quello nel contesto, i risultati non vengono rilevati dal contesto. Dopo che la query è stata enumerata completamente, lo strumento di rilevamento delle modifiche esce dall'ambito e sottoposto a Garbage Collection come richiesto.
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#NoTrackingWithIdentityResolution)]
 
@@ -67,7 +67,7 @@ Se il set di risultati non contiene tipi di entità, non viene eseguita alcuna v
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#ClientMethod)]
 
-EF Core non tiene traccia delle istanze di entità senza chiave contenute nel risultato. Tuttavia EF Core tiene traccia di tutte le altre istanze dei tipi di entità con chiave in base alle regole precedenti.
+EF Core non tiene traccia delle istanze di entità senza chiave contenute nel risultato. Tuttavia EF Core tiene traccia di tutte le altre istanze dei tipi di entità con una chiave in base alle regole precedenti.
 
 Alcune delle regole precedenti hanno funzionato in modo diverso prima di EF Core 3,0. Per ulteriori informazioni, vedere [versioni precedenti](#previous-versions).
 
@@ -75,7 +75,7 @@ Alcune delle regole precedenti hanno funzionato in modo diverso prima di EF Core
 
 Prima della versione 3,0, EF Core aveva alcune differenze nel modo in cui il rilevamento è stato eseguito. Di seguito sono riportate le differenze rilevanti:
 
-- Come illustrato nella pagina di [valutazione del client rispetto al server](xref:core/querying/client-eval) , EF core la valutazione client supportata in qualsiasi parte della query prima della versione 3,0. La valutazione client ha causato la materializzazione delle entità, che non fanno parte del risultato. Quindi EF Core analizzato il risultato per rilevare gli elementi di cui tenere traccia. Questa progettazione presenta alcune differenze, come indicato di seguito:
+- Come illustrato nella pagina relativa alla [valutazione del client rispetto al server](xref:core/querying/client-eval) , EF core la valutazione client supportata in qualsiasi parte della query prima della versione 3,0. La valutazione client ha causato la materializzazione delle entità, che non fanno parte del risultato. Quindi EF Core analizzato il risultato per rilevare gli elementi di cui tenere traccia. Questa progettazione presenta alcune differenze, come indicato di seguito:
   - Valutazione client nella proiezione, che ha causato la materializzazione ma non ha restituito l'istanza di entità materializzata non è stata rilevata. Nell'esempio seguente non è stata tenuta traccia delle `blog` entità.
     [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#ClientProjection)]
 
@@ -83,4 +83,4 @@ Prima della versione 3,0, EF Core aveva alcune differenze nel modo in cui il ril
     [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#CustomProjection2)]
 
 - Ogni volta che i risultati della query contengono tipi di entità senza chiave, l'intera query è stata eseguita senza rilevamento. Ciò significa che i tipi di entità con chiavi, che non sono presenti nel risultato, non sono stati rilevati.
-- EF Core ha fatto la risoluzione delle identità in una query senza rilevamento. Sono stati usati riferimenti deboli per tenere traccia delle entità che erano già state restituite. Quindi, se un set di risultati contiene la stessa entità più volte, si otterrebbe la stessa istanza per ogni occorrenza. Tuttavia, se un risultato precedente con la stessa identità è uscito dall'ambito e viene sottoposta a Garbage Collection, EF Core ha restituito una nuova istanza.
+- EF Core utilizzata per eseguire la risoluzione delle identità nelle query senza rilevamento. Sono stati usati riferimenti deboli per tenere traccia delle entità che erano già state restituite. Quindi, se un set di risultati contiene la stessa entità più volte, si otterrebbe la stessa istanza per ogni occorrenza. Tuttavia, se un risultato precedente con la stessa identità è uscito dall'ambito e viene sottoposta a Garbage Collection, EF Core ha restituito una nuova istanza.

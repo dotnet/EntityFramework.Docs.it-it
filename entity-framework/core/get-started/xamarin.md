@@ -5,12 +5,12 @@ author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: c19c70903926c2c8ff4b51cca7781859af7e3567
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: e4a26d7a0c6909002be0974ee9fe1c5db7c1046a
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128784"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983599"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>Introduzione con EF Core e Novell
 
@@ -78,8 +78,7 @@ Si presuppone che l'utente abbia familiarità con gli argomenti di Novell. Forms
 >
 > * Il primo consiste nell'aggiungere `--linkskip System.Core` agli **argomenti mTouch aggiuntivi** nelle opzioni di **compilazione iOS** .
 > * In alternativa, impostare il comportamento del **linker** Novell. iOS su `Don't Link` nelle opzioni di **compilazione iOS** .
-> [Questo articolo illustra altre informazioni sul linker Novell. iOS](/xamarin/ios/deploy-test/linker) , che include come impostare il comportamento in Novell. iOS.
->
+> [Questo articolo illustra altre informazioni sul linker Novell. iOS](/xamarin/ios/deploy-test/linker) , che include come impostare il comportamento in Novell. iOS. Questo approccio non è ideale perché può comportare il rifiuto dallo Store.
 
 ## <a name="entity-framework-core-nuget-packages"></a>Pacchetti NuGet di Entity Framework Core
 
@@ -145,7 +144,7 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-### <a name="create"></a>Creazione
+### <a name="create"></a>Crea
 
 * Inserire un nuovo record.
   * La `Save_Clicked` funzione di `AddBlogPage.xaml.cs` inserisce un nuovo `Blog` oggetto nel database SQLite.
@@ -186,7 +185,7 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-### <a name="delete"></a>Delete
+### <a name="delete"></a>Elimina
 
 * Eliminare tutti i record con Cascade ai record figlio.
   * La `DeleteAll_Clicked` funzione di `BlogsPage.xaml.cs` Elimina tutti i `Blog` record nel database SQLite e sovrappone le eliminazioni a tutti i `Blog` `Post` record figlio.

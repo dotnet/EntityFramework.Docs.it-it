@@ -5,10 +5,10 @@ author: bricelam
 ms.date: 10/28/2020
 uid: core/managing-schemas/migrations/index
 ms.openlocfilehash: b9547298714af59453aeae6d05742a03c067708b
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 12/19/2020
+ms.lasthandoff: 02/04/2021
 ms.locfileid: "95003395"
 ---
 # <a name="migrations-overview"></a>Panoramica delle migrazioni
@@ -59,9 +59,9 @@ dotnet ef migrations add InitialCreate
 Add-Migration InitialCreate
 ```
 
-**_
+***
 
-EF Core creerà una directory denominata _ *Migrations** nel progetto e genererà alcuni file. È consigliabile esaminare gli elementi generati da EF Core ed eventualmente modificarli. Per il momento si ignorerà questo passaggio.
+EF Core creerà una directory denominata **Migrazioni** nel progetto e genererà alcuni file. È consigliabile esaminare gli elementi generati da EF Core ed eventualmente modificarli. Per il momento si ignorerà questo passaggio.
 
 ### <a name="create-your-database-and-schema"></a>Creare il database e lo schema
 
@@ -79,7 +79,7 @@ dotnet ef database update
 Update-Database
 ```
 
-**_
+***
 
 Tutto qui. L'applicazione è pronta per essere eseguita nel nuovo database e non è stato necessario scrivere una singola riga di SQL. Si noti che questo modo di applicare le migrazioni è ideale per lo sviluppo locale, ma è meno adatto per gli ambienti di produzione. Per altre informazioni, vedere la pagina [Applicazione delle migrazioni](xref:core/managing-schemas/migrations/applying).
 
@@ -110,7 +110,7 @@ dotnet ef migrations add AddBlogCreatedTimestamp
 Add-Migration AddBlogCreatedTimestamp
 ```
 
-_*_
+***
 
 Si noti che alla migrazione viene assegnato un nome descrittivo in modo da facilitare poi la comprensione della cronologia del progetto.
 
@@ -134,7 +134,7 @@ Update-Database
 
 <!--markdownlint-enable MD024-->
 
-_*_
+***
 
 Si noti che questa volta EF rileva che il database esiste già. Quando è stata applicata la prima migrazione, questa operazione è stata anche registrata in una tabella di cronologia delle migrazioni speciale all'interno del database. Si consente così a EF di applicare automaticamente solo la nuova migrazione.
 
@@ -153,4 +153,4 @@ Sopra è stata riportata solo una breve introduzione alle migrazioni. Leggere le
 
 ## <a name="additional-resources"></a>Risorse aggiuntive
 
-_ [EF Core sessione standup della community](https://www.youtube.com/watch?v=mSsGERmrhnE&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=20) che passa alle nuove funzionalità di migrazione in EF Core 5,0.
+* [EF Core sessione standup della community](https://www.youtube.com/watch?v=mSsGERmrhnE&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=20) passa alle nuove funzionalità di migrazione in EF Core 5,0.

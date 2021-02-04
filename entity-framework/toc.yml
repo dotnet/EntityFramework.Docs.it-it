@@ -95,7 +95,7 @@
               href: core/modeling/entity-types.md
             - name: Proprietà delle entità
               href: core/modeling/entity-properties.md
-            - name: Tasti
+            - name: Chiavi
               href: core/modeling/keys.md
             - name: Valori generati
               href: core/modeling/generated-properties.md

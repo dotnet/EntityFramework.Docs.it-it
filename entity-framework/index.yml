@@ -109,7 +109,7 @@ additionalContent:
       - url: core/modeling/entity-properties.md
         text: Proprietà delle entità
       - url: core/modeling/keys.md
-        text: Tasti
+        text: Chiavi
       - url: core/modeling/generated-properties.md
         text: Valori generati
       - url: core/modeling/relationships.md

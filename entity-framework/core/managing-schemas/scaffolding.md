@@ -8,7 +8,7 @@ ms.openlocfilehash: 4cad43f4b1300e1ef3cb31e60d3e9890826d974d
 ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/28/2021
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "98983573"
 ---
 # <a name="reverse-engineering"></a> Reverse Engineering
@@ -80,7 +80,7 @@ Per includere più tabelle, usare una matrice:
 Scaffold-DbContext ... -Tables Artist, Album
 ```
 
-**_
+***
 
 ## <a name="preserving-names"></a>Conservazione dei nomi
 
@@ -108,7 +108,7 @@ public string Title { get; set; }
 
 ## <a name="dbcontext-name"></a>Nome DbContext
 
-Il nome della classe DbContext con impalcature sarà il nome del database con suffisso _Context * per impostazione predefinita. Per specificarne uno diverso, usare `-Context` in PMC e `--context` nel interfaccia della riga di comando di .NET Core.
+Il nome della classe DbContext con impalcature sarà il nome del database con suffisso *per impostazione predefinita* . Per specificarne uno diverso, usare `-Context` in PMC e `--context` nel interfaccia della riga di comando di .NET Core.
 
 ## <a name="directories-and-namespaces"></a>Directory e spazi dei nomi
 

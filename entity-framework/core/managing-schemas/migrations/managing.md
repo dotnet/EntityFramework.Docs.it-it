@@ -5,10 +5,10 @@ author: bricelam
 ms.date: 10/27/2020
 uid: core/managing-schemas/migrations/managing
 ms.openlocfilehash: ef5e1b9bb10d6f1cd428db2fee327ec513c3f528
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/20/2020
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "95003276"
 ---
 # <a name="managing-migrations"></a>Gestione delle migrazioni
@@ -68,7 +68,7 @@ Add-Migration InitialCreate -OutputDir Your\Directory
 > [!NOTE]
 > In EF Core 5,0, è anche possibile modificare lo spazio dei nomi indipendentemente dalla directory usando `-Namespace` .
 
-**_
+***
 
 ## <a name="customize-migration-code"></a>Personalizzare il codice di migrazione
 
@@ -164,7 +164,7 @@ migrationBuilder.Sql(
 
 Questa operazione può essere utilizzata per gestire qualsiasi aspetto del database, tra cui:
 
-_ Stored procedure
+* Stored procedure
 * Ricerca full-text
 * Funzioni
 * Trigger
@@ -216,11 +216,11 @@ dotnet ef migrations list
 Get-Migration
 ```
 
-**_
+***
 
 ## <a name="resetting-all-migrations"></a>Reimpostazione di tutte le migrazioni
 
-In alcuni casi estremi, potrebbe essere necessario rimuovere tutte le migrazioni e ricominciare. Questa operazione può essere eseguita facilmente eliminando la cartella _ *Migrations** ed eliminando il database. a questo punto è possibile creare una nuova migrazione iniziale, che conterrà l'intero schema corrente.
+In alcuni casi estremi, potrebbe essere necessario rimuovere tutte le migrazioni e ricominciare. Questa operazione può essere eseguita facilmente eliminando la cartella **migrazioni** ed eliminando il database. a questo punto è possibile creare una nuova migrazione iniziale, che conterrà l'intero schema corrente.
 
 È anche possibile reimpostare tutte le migrazioni e crearne una singola senza perdere i dati. Questa operazione viene a volte definita "squashing" e implica alcune operazioni manuali:
 

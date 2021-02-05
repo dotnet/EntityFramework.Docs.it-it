@@ -8,7 +8,7 @@ ms.openlocfilehash: b9547298714af59453aeae6d05742a03c067708b
 ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 02/04/2021
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "95003395"
 ---
 # <a name="migrations-overview"></a>Panoramica delle migrazioni

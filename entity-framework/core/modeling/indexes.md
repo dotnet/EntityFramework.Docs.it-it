@@ -5,10 +5,10 @@ author: roji
 ms.date: 12/16/2019
 uid: core/modeling/indexes
 ms.openlocfilehash: ab81b108c4ff518cf98b7e835da3553c0c41efed
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "98128537"
 ---
 # <a name="indexes"></a>Indici
@@ -47,9 +47,9 @@ Un indice può inoltre estendersi su più di una colonna:
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexComposite.cs?name=Composite&highlight=4)]
 
-**_
+***
 
-Gli indici su più colonne, noti anche come indici _composite *, velocizzano le query che filtrano le colonne dell'indice, ma anche le query che filtrano solo le *prime* colonne coperte dall'indice. Per ulteriori informazioni, vedere la documentazione relativa alle [prestazioni](xref:core/performance/efficient-querying#use-indexes-properly) .
+Gli indici su più colonne, noti anche come *indici compositi*, velocizzano le query che filtrano le colonne dell'indice, ma anche le query che filtrano solo le *prime* colonne analizzate dall'indice. Per ulteriori informazioni, vedere la documentazione relativa alle [prestazioni](xref:core/performance/efficient-querying#use-indexes-properly) .
 
 ## <a name="index-uniqueness"></a>Univocità indice
 

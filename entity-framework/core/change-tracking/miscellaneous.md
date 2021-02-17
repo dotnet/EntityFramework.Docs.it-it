@@ -4,12 +4,12 @@ description: Varie funzionalità e scenari che coinvolgono EF Core rilevamento d
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/miscellaneous
-ms.openlocfilehash: db1e32948b2a60ad1b85e300bbbccd54d49a84e5
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 9eb3186f4eef300e4824dc86700497444ece4a2c
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129740"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543419"
 ---
 # <a name="additional-change-tracking-features"></a>Funzionalità aggiuntive di Rilevamento modifiche
 
@@ -21,7 +21,7 @@ Questo documento illustra le varie funzionalità e gli scenari che coinvolgono i
 > [!TIP]
 > È possibile eseguire ed eseguire il debug in tutto il codice di questo documento [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/AdditionalChangeTrackingFeatures).
 
-## <a name="add-verses-addasync"></a>Aggiungi verse AddAsync
+## <a name="add-versus-addasync"></a>`Add` contro `AddAsync`
 
 Entity Framework Core (EF Core) fornisce metodi asincroni ogni volta che l'utilizzo di tale metodo può comportare un'interazione del database. Vengono inoltre forniti metodi sincroni per evitare overhead quando si utilizzano database che non supportano l'accesso asincrono ad alte prestazioni.
 
@@ -29,16 +29,16 @@ Entity Framework Core (EF Core) fornisce metodi asincroni ogni volta che l'utili
 
 Altri metodi simili, `Update` ad esempio, `Attach` e `Remove` non hanno overload asincroni perché non generano mai nuovi valori di chiave e quindi non devono mai accedere al database.
 
-## <a name="addrange-updaterange-attachrange-and-removerange"></a>AddRange, UpdateRange, AttachRange e RemoveRange
+## <a name="addrange-updaterange-attachrange-and-removerange"></a>`AddRange`, `UpdateRange`, `AttachRange` e `RemoveRange`
 
-<xref:Microsoft.EntityFrameworkCore.DbSet%601> e <xref:Microsoft.EntityFrameworkCore.DbContext> forniscono versioni alternative di `Add` , `Update` , `Attach` e `Remove` che accettano più istanze in un'unica chiamata. Questi metodi vengono chiamati `AddRange` rispettivamente,, `UpdateRange` `AttachRange` e `RemoveRange` .
+<xref:Microsoft.EntityFrameworkCore.DbSet%601> e <xref:Microsoft.EntityFrameworkCore.DbContext> forniscono versioni alternative di `Add` , `Update` , `Attach` e `Remove` che accettano più istanze in un'unica chiamata. Questi metodi sono <xref:Microsoft.EntityFrameworkCore.DbSet%601.AddRange%2A> rispettivamente,, <xref:Microsoft.EntityFrameworkCore.DbSet%601.UpdateRange%2A> <xref:Microsoft.EntityFrameworkCore.DbSet%601.AttachRange%2A> e <xref:Microsoft.EntityFrameworkCore.DbSet%601.RemoveRange%2A> .
 
 Questi metodi vengono forniti come praticità. L'uso di un metodo "range" ha la stessa funzionalità di più chiamate al metodo non di intervallo equivalente. Non esiste alcuna differenza di prestazioni significativa tra i due approcci.
 
 > [!NOTE]
-> Si tratta di un metodo diverso da EF6, in cui AddRange e aggiungono entrambi automaticamente DetectChanges, ma la chiamata di Aggiungi più volte ha causato la chiamata di DetectChanges più volte anziché una volta. Questo rendeva il AddRange più efficiente in EF6. In EF Core, nessuno di questi metodi chiama automaticamente DetectChanges.
+> Si tratta di un metodo diverso da EF6, `AddRange` in cui ed `Add` entrambi chiamati automaticamente `DetectChanges` , ma la chiamata `Add` a più volte ha causato la chiamata di DetectChanges più volte anziché una volta. Questa operazione è stata resa `AddRange` più efficiente in EF6. In EF Core, nessuno di questi metodi chiama automaticamente `DetectChanges` .
 
-## <a name="dbcontext-verses-dbset-methods"></a>Metodi DbSet di DbContext in versi
+## <a name="dbcontext-versus-dbset-methods"></a>DbContext rispetto ai metodi DbSet
 
 Molti metodi, tra cui `Add` , `Update` , `Attach` e `Remove` , hanno implementazioni sia in <xref:Microsoft.EntityFrameworkCore.DbSet%601> che in <xref:Microsoft.EntityFrameworkCore.DbContext> . Questi metodi hanno _esattamente lo stesso comportamento per i_ normali tipi di entità. Questo è dovuto al fatto che il tipo CLR dell'entità è mappato a un solo tipo di entità nel modello di EF Core. Pertanto, il tipo CLR definisce in modo completo il punto in cui l'entità si integra nel modello e quindi il DbSet da utilizzare può essere determinato in modo implicito.
 
@@ -89,14 +89,14 @@ Per impostazione predefinita, i tipi di entità di tipo condiviso vengono utiliz
 
             context.SaveChanges();
 -->
-[!code-csharp[DbContext_verses_DbSet_methods_1](../../../samples/core/ChangeTracking/AdditionalChangeTrackingFeatures/Samples.cs?name=DbContext_verses_DbSet_methods_1)]
+[!code-csharp[DbContext_versus_DbSet_methods_1](../../../samples/core/ChangeTracking/AdditionalChangeTrackingFeatures/Samples.cs?name=DbContext_versus_DbSet_methods_1)]
 
 Si noti che <xref:Microsoft.EntityFrameworkCore.DbContext.Set%60%601(System.String)?displayProperty=nameWithType> viene usato per creare un DbSet per il `PostTag` tipo di entità. Questo DbSet può quindi essere usato per chiamare `Add` con la nuova istanza di entità di join.
 
 > [!IMPORTANT]
 > Il tipo CLR utilizzato per i tipi di entità join per convenzione può cambiare nelle versioni future per migliorare le prestazioni. Non dipendere da un tipo di entità join specifico, a meno che non sia stato configurato in modo esplicito come avviene per `Dictionary<string, int>` nel codice precedente.
 
-## <a name="property-verses-field-access"></a>Accesso al campo delle proprietà verse
+## <a name="property-versus-field-access"></a>Accesso a proprietà e campi
 
 A partire da EF Core 3,0, l'accesso alle proprietà dell'entità utilizza per impostazione predefinita il campo sottostante della proprietà. Questa operazione è efficace ed evita l'attivazione di effetti collaterali dalla chiamata di getter e setter di proprietà. Ad esempio, questo è il modo in cui il caricamento lazy è in grado di evitare l'attivazione di cicli infiniti. Per ulteriori informazioni sulla configurazione dei campi di supporto nel modello, vedere la pagina relativa ai campi sottoposti a [backup](xref:core/modeling/backing-field) .
 

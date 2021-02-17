@@ -4,12 +4,12 @@ description: Come configurare e mappare le proprietà di un'entità usando Entit
 author: roji
 ms.date: 05/27/2020
 uid: core/modeling/entity-properties
-ms.openlocfilehash: fe6dd2c24b8f8ffffa8e0101f69966b7b7c74036
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 3c64f5ac1c86a83b6456df9e29472dc0b22d8524
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "97635549"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543367"
 ---
 # <a name="entity-properties"></a>Proprietà delle entità
 
@@ -57,11 +57,11 @@ Ad esempio, SQL Server esegue `DateTime` il mapping delle proprietà alle `datet
 
 ### <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnDataType.cs?name=ColumnDataType&highlight=4,6)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnDataType.cs?name=ColumnDataType&highlight=5,8)]
 
 ### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnDataType.cs?name=ColumnDataType&highlight=5-6)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnDataType.cs?name=ColumnDataType&highlight=6-7)]
 
 ***
 
@@ -76,7 +76,7 @@ Nell'esempio seguente, la configurazione di una lunghezza massima di 500 causer�
 
 #### <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/MaxLength.cs?name=MaxLength&highlight=4)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/MaxLength.cs?name=MaxLength&highlight=5)]
 
 #### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
@@ -125,7 +125,7 @@ Nell'esempio seguente viene illustrato un tipo di entità con proprietà obbliga
 
 #### <a name="without-nrt-default"></a>[Senza NRT (impostazione predefinita)](#tab/without-nrt)
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithoutNullableReferenceTypes.cs?name=Customer&highlight=4-8)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithoutNullableReferenceTypes.cs?name=Customer&highlight=5,8)]
 
 #### <a name="with-nrt"></a>[Con NRT](#tab/with-nrt)
 
@@ -146,7 +146,7 @@ Una proprietà che sarebbe facoltativa per convenzione può essere configurata i
 
 #### <a name="data-annotations"></a>[Annotazioni dei dati](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Required.cs?name=Required&highlight=4)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Required.cs?name=Required&highlight=5)]
 
 #### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
@@ -161,7 +161,7 @@ Una proprietà che sarebbe facoltativa per convenzione può essere configurata i
 
 È possibile definire regole di confronto nelle colonne di testo, determinando il modo in cui vengono confrontate e ordinate. Nel frammento di codice seguente, ad esempio, viene configurata una colonna SQL Server per non fare distinzione tra maiuscole e minuscole:
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?range=42-43)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?name=ColumnCollation)]
 
 Se tutte le colonne in un database devono utilizzare una determinata regola di confronto, definire le regole di confronto a livello di database.
 
@@ -176,7 +176,7 @@ Informazioni generali sul supporto EF Core per le regole di confronto sono dispo
 > [!NOTE]
 > L'impostazione di commenti tramite annotazioni dati è stata introdotta in EF Core 5,0.
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnComment.cs?name=ColumnComment&highlight=4)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnComment.cs?name=ColumnComment&highlight=5)]
 
 ### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 

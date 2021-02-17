@@ -4,12 +4,12 @@ description: Risoluzione di più istanze di entità in una singola istanza con v
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/identity-resolution
-ms.openlocfilehash: f94b61371dcead27853799719dabc7849500d466
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: d4c8f935c8d0ab92eaecd8fc7a4156bd824713d4
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129770"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543614"
 ---
 # <a name="identity-resolution-in-ef-core"></a>Risoluzione di identità in EF Core
 

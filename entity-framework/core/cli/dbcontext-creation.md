@@ -4,12 +4,12 @@ description: Strategie per la creazione di un DbContext in fase di progettazione
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/dbcontext-creation
-ms.openlocfilehash: 144ed26dcf605dc29d53519ad2ea9cea58fb4e44
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 1a2c0e853047cf4ab54a320d0bef413a114e90bc
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431586"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543406"
 ---
 # <a name="design-time-dbcontext-creation"></a>Creazione di DbContext in fase di progettazione
 
@@ -44,11 +44,11 @@ Se il DbContext non può essere ottenuto dal provider di servizi dell'applicazio
 > Prima di EFCore 5,0 il `args` parametro non è stato usato (vedere [questo problema][8]).
 > Questo problema è stato risolto in EFCore 5,0 e gli eventuali argomenti della fase di progettazione aggiuntivi vengono passati all'applicazione tramite il parametro.
 
-Una factory della fase di progettazione può essere particolarmente utile se è necessario configurare DbContext in modo diverso per la fase di progettazione rispetto al runtime, se il `DbContext` costruttore accetta parametri aggiuntivi non viene registrato in di, se non si usa o se per qualche motivo si preferisce non avere un `CreateHostBuilder` metodo nella classe dell'applicazione ASP.NET Core `Main` .
+Una factory della fase di progettazione può essere particolarmente utile se è necessario configurare in `DbContext` modo diverso per la fase di progettazione rispetto alla fase di esecuzione, se il `DbContext` costruttore accetta parametri aggiuntivi non viene registrato in di, se non si usa o se per qualche motivo si preferisce non avere un `CreateHostBuilder` metodo nella classe dell'applicazione ASP.NET Core `Main` .
 
 ## <a name="args"></a>Args
 
-Sia IDesignTimeDbContextFactory. CreateDbContext che Program. CreateHostBuilder accettano argomenti della riga di comando.
+Sia <xref:Microsoft.EntityFrameworkCore.Design.IDesignTimeDbContextFactory%601.CreateDbContext%2A?displayProperty=nameWithType> che `Program.CreateHostBuilder` accettano argomenti della riga di comando.
 
 A partire da EF Core 5,0, è possibile specificare questi argomenti dagli strumenti:
 

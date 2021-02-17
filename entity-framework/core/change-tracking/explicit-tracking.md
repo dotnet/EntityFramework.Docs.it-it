@@ -4,12 +4,12 @@ description: Rilevamento esplicito di entità con DbContext mediante aggiunta, a
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/explicit-tracking
-ms.openlocfilehash: 1428096b362c8016f7924c72ec9ac3e2f9203ed6
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 3d9142cecf272c635c3a041fe6c5d9c49a26c33d
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983274"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543185"
 ---
 # <a name="explicitly-tracking-entities"></a>Rilevamento esplicito di entità
 
@@ -42,7 +42,7 @@ L'applicazione Web deve ora ricollegare queste entità in modo che vengano rilev
 > [!TIP]
 > Il montaggio delle entità nella _stessa istanza di DbContext_ su cui sono state eseguite query non dovrebbe essere normalmente necessario. Non eseguire periodicamente una query senza rilevamento e quindi alleghi le entità restituite allo stesso contesto. Questa operazione risulterà più lenta rispetto all'utilizzo di una query di rilevamento e potrebbe anche causare problemi quali i valori delle proprietà shadow mancanti, rendendo più difficile ottenere il diritto.
 
-### <a name="generated-verses-explicit-key-values"></a>Valori di chiave espliciti dei verse generati
+### <a name="generated-versus-explicit-key-values"></a>Valori di chiave generati rispetto a quelli espliciti
 
 Per impostazione predefinita, le [proprietà di chiave](xref:core/modeling/keys) Integer e GUID sono configurate per l'utilizzo di [valori di chiave generati automaticamente](xref:core/modeling/generated-properties). Questo è un **vantaggio importante per il rilevamento delle modifiche: un valore di chiave non impostato indica che l'entità è "New"**. Per "New", significa che non è stato ancora inserito nel database.
 

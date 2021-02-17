@@ -4,12 +4,12 @@ description: Reverse Engineering di un modello da un database esistente usando E
 author: bricelam
 ms.date: 11/13/2018
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: 4cad43f4b1300e1ef3cb31e60d3e9890826d974d
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 0f33ee23393819aa86bf1e28ee0eca48110203f6
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "98983573"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543380"
 ---
 # <a name="reverse-engineering"></a> Reverse Engineering
 
@@ -171,7 +171,7 @@ Personalizzare le classi del tipo di entità e la classe DbContext in base alle 
 
 Dopo aver apportato modifiche al database, potrebbe essere necessario aggiornare il modello di EF Core per riflettere tali modifiche. Se le modifiche apportate al database sono semplici, potrebbe essere più semplice apportare manualmente le modifiche al modello di EF Core. Ad esempio, la ridenominazione di una tabella o di una colonna, la rimozione di una colonna o l'aggiornamento del tipo di una colonna sono semplici modifiche da apportare nel codice.
 
-Le modifiche più significative, tuttavia, non sono semplici da creare manualmente. Un flusso di lavoro comune è quello di decodificare il modello dal database usando `-Force` (PMC) o `--force` (CLI) per sovrascrivere il modello esistente con uno aggiornato.
+Le modifiche più significative, tuttavia, non sono facili da eseguire manualmente. Un flusso di lavoro comune è quello di decodificare il modello dal database usando `-Force` (PMC) o `--force` (CLI) per sovrascrivere il modello esistente con uno aggiornato.
 
 Un'altra funzionalità comunemente richiesta è la possibilità di aggiornare il modello dal database mantenendo la personalizzazione, ad esempio le rinominazioni, le gerarchie dei tipi e così via. Utilizzare Issue [#831](https://github.com/dotnet/efcore/issues/831) per tenere traccia dello stato di avanzamento di questa funzionalità.
 

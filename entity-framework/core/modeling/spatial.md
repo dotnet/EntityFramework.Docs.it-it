@@ -4,12 +4,12 @@ description: Utilizzo di dati spaziali in un modello di Entity Framework Core
 author: bricelam
 ms.date: 10/02/2020
 uid: core/modeling/spatial
-ms.openlocfilehash: a38e75e150b3d3404f2ed7619d05ba478c411117
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 721aa2628d17b89b79160f8f658f8ef0dd78d6a6
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003445"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543289"
 ---
 # <a name="spatial-data"></a>Dati spaziali
 
@@ -78,15 +78,18 @@ In LINQ, i metodi e le proprietà NTS disponibili come funzioni di database verr
 
 ## <a name="reverse-engineering"></a>Reverse Engineering
 
-I pacchetti NuGet spaziali abilitano anche [Reverse Engineering](xref:core/managing-schemas/scaffolding) modelli con proprietà spaziali, ma è necessario installare il pacchetto **_prima_* di _ che esegue `Scaffold-DbContext` o `dotnet ef dbcontext scaffold` . In caso contrario, si riceveranno avvisi relativi alla mancata individuazione dei mapping dei tipi per le colonne e le colonne verranno ignorate.
+I pacchetti NuGet spaziali abilitano anche [Reverse Engineering](xref:core/managing-schemas/scaffolding) modelli con proprietà spaziali, ma è necessario installare il pacchetto ***prima*** di eseguire `Scaffold-DbContext` o `dotnet ef dbcontext scaffold` . In caso contrario, si riceveranno avvisi relativi alla mancata individuazione dei mapping dei tipi per le colonne e le colonne verranno ignorate.
 
 ## <a name="srid-ignored-during-client-operations"></a>SRID ignorato durante le operazioni client
 
-NTS ignora i valori SRID durante le operazioni. Si presuppone un sistema di coordinate planare. Ciò significa che se si specificano le coordinate in termini di longitudine e latitudine, alcuni valori valutati dal client, ad esempio distanza, lunghezza e area, saranno in gradi, non in metri. Per valori più significativi, è necessario innanzitutto proiettare le coordinate in un altro sistema di coordinate usando una libreria come [ProjNet4GeoAPI](https://github.com/NetTopologySuite/ProjNet4GeoAPI) prima di calcolare questi valori.
+NTS ignora i valori SRID durante le operazioni. Si presuppone un sistema di coordinate planare. Ciò significa che se si specificano le coordinate in termini di longitudine e latitudine, alcuni valori valutati dal client, ad esempio distanza, lunghezza e area, saranno in gradi, non in metri. Per valori più significativi, è necessario innanzitutto proiettare le coordinate in un altro sistema di coordinate usando una libreria come [ProjNet (per GeoAPI)](https://github.com/NetTopologySuite/ProjNet4GeoAPI).
+
+> [!NOTE]
+> Usare il [pacchetto NuGet ProjNet](https://www.nuget.org/packages/ProjNet/)più recente, **non** quello meno recente denominato ProjNet4GeoAPI.
 
 Se un'operazione viene valutata dal server EF Core tramite SQL, l'unità risultante sarà determinata dal database.
 
-Di seguito è riportato un esempio di utilizzo di ProjNet4GeoAPI per calcolare la distanza tra due città.
+Di seguito è riportato un esempio di utilizzo di ProjNet per calcolare la distanza tra due città.
 
 [!code-csharp[](../../../samples/core/Spatial/Projections/GeometryExtensions.cs?name=snippet_GeometryExtensions)]
 
@@ -101,7 +104,7 @@ Di seguito è riportato un esempio di utilizzo di ProjNet4GeoAPI per calcolare l
 
 Assicurarsi di leggere la documentazione del provider per informazioni aggiuntive sull'utilizzo dei dati spaziali.
 
-_ [Dati spaziali nel provider di SQL Server](xref:core/providers/sql-server/spatial)
+* [Dati spaziali nel provider di SQL Server](xref:core/providers/sql-server/spatial)
 * [Dati spaziali nel provider SQLite](xref:core/providers/sqlite/spatial)
 * [Dati spaziali nel provider npgsql](https://www.npgsql.org/efcore/mapping/nts.html)
 

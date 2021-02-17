@@ -4,12 +4,12 @@ description: Esecuzione di query e salvataggio asincrono dei dati con Entity Fra
 author: roji
 ms.date: 9/2/2020
 uid: core/miscellaneous/async
-ms.openlocfilehash: 52b3ac20a50babbed6937ebe3365ac1947dcaef1
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 78c109e9fd73dbb0451f9e29562799e4d22d66c9
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128576"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543354"
 ---
 # <a name="asynchronous-programming"></a>Programmazione asincrona
 
@@ -43,7 +43,7 @@ Si noti che non sono presenti versioni asincrone di alcuni operatori LINQ, ad es
 
 ## <a name="client-side-async-linq-operators"></a>Operatori LINQ asincroni sul lato client
 
-Gli operatori LINQ asincroni descritti in precedenza possono essere usati solo in query EF. non è possibile usarli con la query LINQ to Objects sul lato client. Per eseguire operazioni LINQ asincrone sul lato client al di fuori di EF, usare il [pacchetto System. Interactive. Async.](https://www.nuget.org/packages/System.Interactive.Async) Questo pacchetto può essere particolarmente utile per l'esecuzione di operazioni sul client che non possono essere convertite per la valutazione nel server.
+Gli operatori LINQ asincroni descritti in precedenza possono essere usati solo in query EF. non è possibile usarli con la query LINQ to Objects sul lato client. Per eseguire operazioni LINQ asincrone sul lato client al di fuori di EF, usare il [pacchetto System. Linq. Async](https://www.nuget.org/packages/System.Linq.Async). Questo pacchetto può essere particolarmente utile per l'esecuzione di operazioni sul client che non possono essere convertite per la valutazione nel server.
 
 Sfortunatamente, il riferimento a System. Interactive. Async causa errori di compilazione ambigui per gli operatori LINQ applicati a DbSet di EF; Ciò rende difficile l'uso di EF e System. Interactive. Async nello stesso progetto. Per risolvere questo problema, aggiungere AsQueryable alla DbSet:
 

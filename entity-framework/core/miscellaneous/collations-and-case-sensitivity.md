@@ -4,12 +4,12 @@ description: Configurazione delle regole di confronto e distinzione tra maiuscol
 author: roji
 ms.date: 04/27/2020
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: eca68af6e658f76e1480b1e1083212f160fa765c
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 48e0a6b316742dc1467134ae81f90086bb93d011
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003458"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543536"
 ---
 # <a name="collations-and-case-sensitivity"></a>Regole di confronto e distinzione tra maiuscole e minuscole
 
@@ -30,7 +30,7 @@ Nella maggior parte dei sistemi di database, le regole di confronto predefinite 
 
 Quando si utilizzano migrazioni di EF Core per gestire lo schema del database, nel metodo del modello viene `OnModelCreating` configurato un database SQL Server per l'utilizzo di regole di confronto con distinzione tra maiuscole e minuscole:
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?range=40)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?name=DatabaseCollation)]
 
 ## <a name="column-collation"></a>Regole di confronto a livello di colonna
 
@@ -38,7 +38,7 @@ Quando si utilizzano migrazioni di EF Core per gestire lo schema del database, n
 
 Quando si utilizzano migrazioni di EF Core per gestire lo schema del database, il codice seguente configura la colonna per la proprietà in modo che non venga fatta distinzione tra maiuscole e minuscole `Name` in un database che altrimenti è configurato per la distinzione tra maiuscole e minuscole:
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?name=OnModelCreating&highlight=6)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?name=ColumnCollation)]
 
 ## <a name="explicit-collation-in-a-query"></a>Regole di confronto esplicite in una query
 

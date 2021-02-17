@@ -4,12 +4,12 @@ description: Guida alle prestazioni per un aggiornamento efficiente con Entity F
 author: roji
 ms.date: 12/1/2020
 uid: core/performance/efficient-updating
-ms.openlocfilehash: 92766d2339fb04ed5ebc3123429171cc9be424b1
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: f8e222991af52cd7cae6089e95ad6634b6b949f8
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97657864"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543133"
 ---
 # <a name="efficient-updating"></a>Aggiornamento efficiente
 
@@ -19,7 +19,7 @@ EF Core aiuta a ridurre al minimo round trip raggruppando automaticamente tutti 
 
 [!code-csharp[Main](../../../samples/core/Performance/Program.cs#SaveChangesBatching)]
 
-Il precedente carica un Blog dal database, ne modifica il nome e quindi aggiunge due nuovi Blog; per applicare questo, due istruzioni SQL INSERT e un'istruzione UPDATE vengono inviate al database. Anziché inviarli uno alla volta, le istanze di Blog sono state aggiunte, EF Core tiene traccia internamente di queste modifiche e le esegue in un singolo round trip quando <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> viene chiamato il metodo.
+Il precedente carica un Blog dal database, ne modifica l'URL e quindi aggiunge due nuovi Blog; per applicare questo, due istruzioni SQL INSERT e un'istruzione UPDATE vengono inviate al database. Anziché inviarli uno alla volta, le istanze di Blog sono state aggiunte, EF Core tiene traccia internamente di queste modifiche e le esegue in un singolo round trip quando <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> viene chiamato il metodo.
 
 Il numero di istruzioni che EF batch in un singolo round trip dipende dal provider di database utilizzato. L'analisi delle prestazioni, ad esempio, ha mostrato che la suddivisione in batch è in genere meno efficiente per SQL Server quando sono presenti meno di 4 istruzioni. Analogamente, i vantaggi derivanti dall'invio in batch delle istruzioni 40 per il SQL Server, quindi EF Core eseguiranno per impostazione predefinita solo 42 istruzioni in un unico batch ed eseguiranno istruzioni aggiuntive in round trip separate.
 

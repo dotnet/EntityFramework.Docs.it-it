@@ -2,14 +2,14 @@
 title: Mapping di funzioni-provider di database SQLite-EF Core
 description: Mapping di funzioni del provider di database EF Core SQLite
 author: bricelam
-ms.date: 10/06/2020
+ms.date: 1/26/2021
 uid: core/providers/sqlite/functions
-ms.openlocfilehash: 0787981a0c6fa401a7ef4b4c3c2b406f78117ad1
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 66fb24219465b8c34407d279450b7d501e7a572d
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92066658"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543211"
 ---
 # <a name="function-mappings-of-the-sqlite-ef-core-provider"></a>Mapping di funzioni del provider di EF Core SQLite
 
@@ -17,11 +17,36 @@ Questa pagina mostra i membri .NET che vengono tradotti in funzioni SQL quando s
 
 ## <a name="binary-functions"></a>Funzioni binarie
 
-.NET                        | SQL                             | Aggiunta in
---------------------------- | ------------------------------- | --------
-byte. Contains (valore)       | InStr ( @bytes , char ( @value )) > 0 | EF Core 5.0
-byte. Lunghezza                | Lunghezza ( @bytes )                  | EF Core 5.0
-byte. SequenceEqual (secondo) | @bytes = @second                | EF Core 5.0
+.NET                                           | SQL                                  | Aggiunta in
+---------------------------------------------- | ------------------------------------ | --------
+byte. Contains (valore)                          | InStr ( @bytes , char ( @value )) > 0      | EF Core 5.0
+byte. Lunghezza                                   | Lunghezza ( @bytes )                       | EF Core 5.0
+byte. SequenceEqual (secondo)                    | @bytes = @second                     | EF Core 5.0
+EF. Functions. Hex (byte)                        | esadecimale ( @bytes )                          | EF Core 6.0
+EF. Functions. substr (byte, startIndex)         | substr ( @bytes , @startIndex )          | EF Core 6.0
+EF. Functions. substr (byte, startIndex, length) | substr ( @bytes , @startIndex , @length ) | EF Core 6.0
+
+## <a name="conversion-functions"></a>Funzioni di conversione
+
+.NET                      | SQL                           | Aggiunta in
+------------------------- | ----------------------------- | --------
+boolValue. ToString ()      | CAST ( @boolValue come testo)      | EF Core 6.0
+byteValue. ToString ()      | CAST ( @byteValue come testo)      | EF Core 6.0
+byte. ToString ()          | CAST ( @bytes come testo)          | EF Core 6.0
+charValue. ToString ()      | CAST ( @charValue come testo)      | EF Core 6.0
+dateTime. ToString ()       | CAST ( @dateTime come testo)       | EF Core 6.0
+dateTimeOffset. ToString () | CAST ( @dateTimeOffset come testo) | EF Core 6.0
+decimalValue. ToString ()   | CAST ( @decimalValue come testo)   | EF Core 6.0
+doubleValue. ToString ()    | CAST ( @doubleValue come testo)    | EF Core 6.0
+floatValue. ToString ()     | CAST ( @floatValue come testo)     | EF Core 6.0
+GUID. ToString ()           | CAST ( @guid come testo)           | EF Core 6.0
+intValue. ToString ()       | CAST ( @intValue come testo)       | EF Core 6.0
+longValue. ToString ()      | CAST ( @longValue come testo)      | EF Core 6.0
+sbyteValue. ToString ()     | CAST ( @sbyteValue come testo)     | EF Core 6.0
+shortValue. ToString ()     | CAST ( @shortValue come testo)     | EF Core 6.0
+timeSpan. ToString ()       | CAST ( @timeSpan come testo)       | EF Core 6.0
+uintValue. ToString ()      | CAST ( @uintValue come testo)      | EF Core 6.0
+ushortValue. ToString ()    | CAST ( @ushortValue come testo)    | EF Core 6.0
 
 ## <a name="date-and-time-functions"></a>Funzioni di data e ora
 
@@ -56,20 +81,21 @@ dateTime. Year                   | strftime ('% Y ', @dateTime )
 
 ## <a name="numeric-functions"></a>Funzioni numeriche
 
-.NET                  | SQL                                  | Aggiunta in
---------------------- | ------------------------------------ | --------
--decimalValue         | ef_negate ( @decimalValue )             | EF Core 5.0
-decimalValue-d      | ef_add ( @decimalValue , ef_negate ( @d )) | EF Core 5.0
-decimalValue * d      | ef_multiply ( @decimalValue , @d )       | EF Core 5.0
-decimalValue/d      | ef_divide ( @decimalValue , @d )         | EF Core 5.0
-decimalValue% d      | ef_mod ( @decimalValue , @d )            | EF Core 5.0
-decimalValue + d      | ef_add ( @decimalValue , @d )            | EF Core 5.0
-decimalValue < d      | ef_compare ( @decimalValue , @d ) < 0    | EF Core 5.0
-decimalValue <= d     | ef_compare ( @decimalValue , @d ) <= 0   | EF Core 5.0
-decimalValue > d      | ef_compare ( @decimalValue , @d ) > 0    | EF Core 5.0
-decimalValue >= d     | ef_compare ( @decimalValue , @d ) >= 0   | EF Core 5.0
-doubleValue% d       | ef_mod ( @doubleValue , @d )             | EF Core 5.0
-floatValue% d        | ef_mod ( @floatValue , @d )              | EF Core 5.0
+.NET                  | SQL                                   | Aggiunta in
+--------------------- | ------------------------------------- | --------
+-decimalValue         | ef_negate ( @decimalValue )              | EF Core 5.0
+decimalValue-d      | ef_add ( @decimalValue , ef_negate ( @d ))  | EF Core 5.0
+decimalValue * d      | ef_multiply ( @decimalValue , @d )        | EF Core 5.0
+decimalValue/d      | ef_divide ( @decimalValue , @d )          | EF Core 5.0
+decimalValue% d      | ef_mod ( @decimalValue , @d )             | EF Core 5.0
+decimalValue + d      | ef_add ( @decimalValue , @d )             | EF Core 5.0
+decimalValue < d      | ef_compare ( @decimalValue , @d ) < 0     | EF Core 5.0
+decimalValue <= d     | ef_compare ( @decimalValue , @d ) <= 0    | EF Core 5.0
+decimalValue > d      | ef_compare ( @decimalValue , @d ) > 0     | EF Core 5.0
+decimalValue >= d     | ef_compare ( @decimalValue , @d ) >= 0    | EF Core 5.0
+doubleValue% d       | ef_mod ( @doubleValue , @d )              | EF Core 5.0
+EF. Functions. Random () | ABS (Random ()/9223372036854780000.0) | EF Core 6.0
+floatValue% d        | ef_mod ( @floatValue , @d )               | EF Core 5.0
 Math. ABS (valore)       | ABS ( @value )
 Math. Max (val1, val2)  | Max ( @val1 , @val2 )
 Math. min (val1, val2)  | min ( @val1 , @val2 )
@@ -83,9 +109,13 @@ Math. Round (d, cifre) | Round ( @d , @digits )
 
 .NET                                                         | SQL                                                    | Aggiunta in
 ------------------------------------------------------------ | ------------------------------------------------------ | --------
+char. ToLower (c)                                              | inferiore ( @c )                                              | EF Core 6.0
+char. ToUpper (c)                                              | Upper ( @c )                                              | EF Core 6.0
 EF. Functions. COLLATE (operando, regole di confronto)                     | @operand COLLATE @collation                            | EF Core 5.0
+EF. Functions. Glob (matchExpression, pattern)                  | Glob ( @pattern , @matchExpression )                       | EF Core 6.0
 EF. Functions. like (matchExpression, pattern)                  | @matchExpression COME @pattern
 EF. Functions. like (matchExpression, pattern, escapeCharacter) | @matchExpression COME @pattern escape @escapeCharacter
+Regex. IsMatch (input, pattern)                                | RegExp ( @pattern , @input )                               | EF Core 6.0
 String. Compare (strA, strB)                                   | CASO in cui @strA = @strB then 0... FINE
 stringa. Concat (str0, str1)                                    | @str0 \|\| @str1
 stringa. IsNullOrEmpty (valore)                                  | @value è NULL o @value =''
@@ -121,6 +151,6 @@ enumValue. HasFlag (flag)                  | @enumValue & @flag = @flag
 Nullable. GetValueOrDefault ()             | COALESCE ( @nullable , 0)
 Nullable. GetValueOrDefault (defaultValue) | COALESCE ( @nullable , @defaultValue )
 
-## <a name="see-also"></a>Vedere anche
+## <a name="see-also"></a>Vedi anche
 
 * [Mapping di funzioni spaziali](xref:core/providers/sqlite/spatial#spatial-function-mappings)

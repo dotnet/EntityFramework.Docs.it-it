@@ -4,12 +4,12 @@ description: Utilizzo di tipi di riferimento Nullable C# quando si utilizza Enti
 author: roji
 ms.date: 09/09/2019
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: 749fef8560c6777dcb2314126b11d2dd6a3562f8
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 0747b1328458fbaddd9e3cca117e378bbad5b365
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128563"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543432"
 ---
 # <a name="working-with-nullable-reference-types"></a>Utilizzo dei tipi di riferimento Nullable
 
@@ -28,7 +28,7 @@ La documentazione principale sulle proprietà obbligatorie e facoltative e la re
 
 Quando sono abilitati i tipi di riferimento Nullable, il compilatore C# genera avvisi per qualsiasi proprietà non nullable non inizializzata, in quanto questi contengono valori null. Di conseguenza, non è possibile usare il modo comune seguente per scrivere i tipi di entità:
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithWarning.cs?name=CustomerWithWarning&highlight=4-5)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithWarning.cs?name=CustomerWithWarning&highlight=5-6)]
 
 Il [binding del costruttore](xref:core/modeling/constructors) è una tecnica utile per garantire che le proprietà non nullable siano inizializzate:
 
@@ -65,11 +65,11 @@ Un'altra strategia consiste nell'usare le proprietà automatiche che non ammetto
 
 Quando si gestiscono relazioni facoltative, è possibile che si verifichino avvisi del compilatore in cui un'eccezione di riferimento null effettiva potrebbe non essere possibile. Quando si traducono ed eseguono le query LINQ, EF Core garantisce che se non esiste un'entità correlata facoltativa, eventuali spostamenti verranno semplicemente ignorati, anziché generare. Tuttavia, il compilatore non è a conoscenza di questo EF Core garanzia e genera avvisi come se la query LINQ venisse eseguita in memoria, con LINQ to Objects. Di conseguenza, è necessario usare l'operatore di perdonazione null (!) per informare il compilatore che non è possibile un valore null effettivo:
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Program.cs?range=46)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Program.cs?name=Navigating)]
 
 Si verifica un problema simile quando si includono più livelli di relazioni tra gli spostamenti facoltativi:
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Program.cs?range=36-39&highlight=2)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Program.cs?name=Including&highlight=2)]
 
 Se questa operazione viene eseguita molto e i tipi di entità in questione sono prevalentemente (o esclusivamente) usati nelle query di EF Core, è consigliabile rendere le proprietà di navigazione non nullable e configurarle come facoltative tramite l'API Fluent o le annotazioni dei dati. Tutti gli avvisi del compilatore vengono rimossi mantenendo la relazione facoltativa. Tuttavia, se le entità vengono attraversate all'esterno di EF Core, è possibile osservare valori null anche se le proprietà sono annotate come non nullable.
 

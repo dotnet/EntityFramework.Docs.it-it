@@ -4,12 +4,12 @@ description: Strategie per l'applicazione delle migrazioni dello schema ai datab
 author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: 7ff84636fb0999941b832c6a2d65d77b0ad368c5
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: cb4e6f719ba5ab4ef70e2e1d06760db1de5658b4
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429851"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543601"
 ---
 # <a name="applying-migrations"></a>Applicazione di migrazioni
 
@@ -88,7 +88,7 @@ Script-Migration AddNewTables AddAuditTable
 
 ***
 
-La generazione di script accetta i due argomenti seguenti in indica l'intervallo di migrazioni da generare:
+La generazione di script accetta i due argomenti seguenti per indicare l'intervallo di migrazioni da generare:
 
 * La migrazione **di origine** deve essere l'ultima migrazione applicata al database prima dell'esecuzione dello script. Se non è stata applicata alcuna migrazione, specificare `0` (valore predefinito).
 * La migrazione **di destinazione** è l'ultima migrazione applicata al database dopo l'esecuzione dello script. L'impostazione predefinita corrisponde all'ultima migrazione nel progetto.
@@ -111,13 +111,13 @@ dotnet ef migrations script --idempotent
 Script-Migration -Idempotent
 ```
 
-**_
+***
 
 ## <a name="command-line-tools"></a>Strumenti da riga di comando
 
 Gli strumenti da riga di comando EF possono essere usati per applicare le migrazioni a un database. Sebbene sia produttivo per lo sviluppo e il test locali delle migrazioni, questo approccio non è ideale per la gestione dei database di produzione:
 
-_ I comandi SQL vengono applicati direttamente dallo strumento, senza concedere allo sviluppatore la possibilità di ispezionarli o modificarli. Questa situazione può essere pericolosa in un ambiente di produzione.
+* I comandi SQL vengono applicati direttamente dallo strumento, senza concedere allo sviluppatore la possibilità di ispezionarli o modificarli. Questa situazione può essere pericolosa in un ambiente di produzione.
 * .NET SDK e lo strumento EF devono essere installati nei server di produzione.
 
 ### <a name="net-core-cli"></a>[Interfaccia della riga di comando di .NET Core](#tab/dotnet-core-cli)

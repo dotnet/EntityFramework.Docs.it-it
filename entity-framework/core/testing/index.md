@@ -4,12 +4,12 @@ description: Approcci diversi al test delle applicazioni che usano Entity Framew
 author: ajcvickers
 ms.date: 04/22/2020
 uid: core/testing/index
-ms.openlocfilehash: d94c40bdb1082473ee88e7c3c1fbfecee90ba4ff
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 5ac7954a87697e43b68845e925e2510c027b7135
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129070"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543575"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>Test del codice che usa EF Core
 
@@ -86,7 +86,7 @@ SQLite è una scelta ottimale perché:
 
 Tuttavia, tenere presente quanto segue:
 
-* SQLite inevitabilmente non supporta tutte le funzionalità del sistema di database di produzione.
+* SQLite non supporta inevitabilmente tutte le operazioni del sistema di database di produzione.
 * SQLite si comporterà in modo diverso rispetto al sistema di database di produzione per alcune query.
 
 Quindi, se si usa SQLite per alcuni test, assicurarsi di eseguire test anche sul sistema di database reale.

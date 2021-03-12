@@ -10,12 +10,12 @@ metadata:
   author: WadePickett
   ms.author: wpickett
   ms.date: 04/15/2020
-  ms.openlocfilehash: 2ef9ee31ef84d779f911ec7c6da1e631889e693a
-  ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+  ms.openlocfilehash: 48983793d1cbf3e0ef7b9cc3f47ab893b6f95e34
+  ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
   ms.translationtype: MT
   ms.contentlocale: it-IT
-  ms.lasthandoff: 01/12/2021
-  ms.locfileid: "98129291"
+  ms.lasthandoff: 03/11/2021
+  ms.locfileid: "103024524"
 highlightedContent:
   items:
   - title: Entity Framework Core
@@ -109,7 +109,7 @@ additionalContent:
       - url: core/modeling/entity-properties.md
         text: Proprietà delle entità
       - url: core/modeling/keys.md
-        text: Tasti
+        text: Chiavi
       - url: core/modeling/generated-properties.md
         text: Valori generati
       - url: core/modeling/relationships.md
@@ -196,4 +196,4 @@ additionalContent:
       links:
       - url: ef6/get-started.md
         text: Entity Framework 6
-  footer: Contribuire alla documentazione di Entity Framework. Leggere la [Guida per i collaboratori](https://github.com/dotnet/EntityFramework.Docs/blob/master/CONTRIBUTING.md).
+  footer: Contribuire alla documentazione di Entity Framework. Leggere la [Guida per i collaboratori](https://github.com/dotnet/EntityFramework.Docs/blob/main/CONTRIBUTING.md).

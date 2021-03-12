@@ -4,12 +4,12 @@ description: Informazioni sulle query di rilevamento e senza rilevamento in Enti
 author: smitpatel
 ms.date: 11/09/2020
 uid: core/querying/tracking
-ms.openlocfilehash: cb18125fb3453bb533981afb36480b12727cd6f2
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: a96ed4ebe12446d5d69fdf58046cade0aec6294d
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983417"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023627"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>Rilevamento e query No-Tracking
 
@@ -19,7 +19,7 @@ Il rilevamento del comportamento Controlla se Entity Framework Core manterrà le
 > I [tipi di entità senza chiave](xref:core/modeling/keyless-entity-types) non vengono mai rilevati. Quando in questo articolo vengono citati i tipi di entità, si riferisce ai tipi di entità con una chiave definita.
 
 > [!TIP]
-> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/Tracking) di questo articolo in GitHub.
+> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Querying/Tracking) di questo articolo in GitHub.
 
 ## <a name="tracking-queries"></a>Query con rilevamento delle modifiche
 

@@ -4,12 +4,12 @@ description: Gestione dei conflitti quando gli stessi dati vengono aggiornati co
 author: ajcvickers
 ms.date: 03/03/2018
 uid: core/saving/concurrency
-ms.openlocfilehash: b596a99db431331bb12a28fc6ddc06f1c941b67c
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 290fc3f68e71e4112891a4963f361506e95db17c
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063023"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023549"
 ---
 # <a name="handling-concurrency-conflicts"></a>Gestione dei conflitti di concorrenza
 
@@ -17,7 +17,7 @@ ms.locfileid: "92063023"
 > Questa pagina illustra il funzionamento della concorrenza in EF Core e come gestire i conflitti di concorrenza nell'applicazione. Vedere [Token di concorrenza](xref:core/modeling/concurrency) per informazioni dettagliate su come configurare i token di concorrenza nel modello.
 
 > [!TIP]
-> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Concurrency/) di questo articolo in GitHub.
+> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Saving/Concurrency/) di questo articolo in GitHub.
 
 Con _concorrenza del database_ si fa riferimento alle situazioni in cui più processi o utenti accedono agli stessi dati in un database o li modificano nello stesso momento. Con _controllo della concorrenza_ si fa riferimento ai meccanismi specifici usati per garantire la coerenza dei dati in presenza di modifiche simultanee.
 

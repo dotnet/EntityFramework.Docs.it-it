@@ -4,19 +4,19 @@ description: Gestione delle transazioni per l'atomicità quando si salvano i dat
 author: roji
 ms.date: 9/26/2020
 uid: core/saving/transactions
-ms.openlocfilehash: b5e1fa2a0bcc466f22f03fee7ecaef9dcea1efaf
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 25bf615cffa36384de9fe04fe2b84d4a6bca98d0
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003549"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023536"
 ---
 # <a name="using-transactions"></a>Utilizzo di transazioni
 
 Le transazioni consentono di elaborare varie operazioni di database in modo atomico. Se viene eseguito il commit della transazione, tutte le operazioni vengono applicate correttamente nel database. Se viene eseguito il rollback della transazione, nessuna delle operazioni viene applicata nel database.
 
 > [!TIP]
-> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Transactions/) di questo articolo in GitHub.
+> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Saving/Transactions/) di questo articolo in GitHub.
 
 ## <a name="default-transaction-behavior"></a>Comportamento delle transazioni predefinito
 

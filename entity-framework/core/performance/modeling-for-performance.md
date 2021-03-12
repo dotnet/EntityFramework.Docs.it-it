@@ -4,12 +4,12 @@ description: Modellazione efficiente quando si usa Entity Framework Core
 author: roji
 ms.date: 12/1/2020
 uid: core/performance/modeling-for-performance
-ms.openlocfilehash: fc16ec67c3865aa7b7a95519463ca7493a2709b0
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 882398189cc828798c1682f849fac524d90d317f
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97657858"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023861"
 ---
 # <a name="modeling-for-performance"></a>Modellazione per le prestazioni
 
@@ -56,7 +56,7 @@ Talvolta le persone scelgono TPT perché sembra essere la tecnica "più pulita";
 
 Tuttavia, la misurazione Mostra che TPT è nella maggior parte dei casi la tecnica di mapping inferiore dal punto di vista delle prestazioni. Quando tutti i dati in TPH provengono da una singola tabella, le query TPT devono essere unite in join a più tabelle e i join rappresentano una delle principali fonti di problemi di prestazioni nei database relazionali. Inoltre, in genere i database tendono a gestire correttamente le colonne vuote e le funzionalità come [SQL Server colonne di tipo sparse](/sql/relational-databases/tables/use-sparse-columns) possono ridurre ulteriormente questo overhead.
 
-Per un esempio concreto, [vedere questo benchmark](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Benchmarks/Inheritance.cs) che configura un modello semplice con una gerarchia di 7 tipi. 5000 righe vengono sottoposte a seeding per ogni tipo, per un totale di 35000 righe. il benchmark caricherà semplicemente tutte le righe dal database:
+Per un esempio concreto, [vedere questo benchmark](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Benchmarks/Inheritance.cs) che configura un modello semplice con una gerarchia di 7 tipi. 5000 righe vengono sottoposte a seeding per ogni tipo, per un totale di 35000 righe. il benchmark caricherà semplicemente tutte le righe dal database:
 
 | Metodo |     Media |   Errore |  StdDev |     Generazione 0 |     Generazione 1 |     Generazione 2 | Allocato |
 |------- |---------:|--------:|--------:|----------:|----------:|----------:|----------:|

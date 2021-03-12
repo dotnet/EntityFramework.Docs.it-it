@@ -4,21 +4,21 @@ description: Panoramica della creazione e configurazione di un modello con Entit
 author: AndriySvyryd
 ms.date: 10/13/2020
 uid: core/modeling/index
-ms.openlocfilehash: 709e2bde60c8e2c31f0a39390624c5d31a9cfa08
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: f8ab985b8f17617ca30e7a528ebaac773e789f27
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129200"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023978"
 ---
 # <a name="creating-and-configuring-a-model"></a>Creazione e configurazione di un modello
 
-Entity Framework usa un insieme di convenzioni per compilare un modello in base alla forma delle classi di entità. È possibile specificare una configurazione aggiuntiva per integrare e/o sostituire gli elementi individuati dalla convenzione.
+Entity Framework Core utilizza un set di convenzioni per compilare un modello in base alla forma delle classi di entità. È possibile specificare una configurazione aggiuntiva per integrare e/o sostituire gli elementi individuati dalla convenzione.
 
 Questo articolo descrive la configurazione che può essere applicata a un modello destinato a qualsiasi archivio dati e che può essere applicata per qualsiasi database relazionale. I provider possono anche abilitare una configurazione specifica di un archivio dati. Per informazioni sulla configurazione specifica del provider, vedere la sezione [Provider di database](xref:core/providers/index).
 
 > [!TIP]
-> È possibile visualizzare l' [esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples) di questo articolo in GitHub.
+> È possibile visualizzare l' [esempio](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples) di questo articolo in GitHub.
 
 ## <a name="use-fluent-api-to-configure-a-model"></a>Usare l'API Fluent per configurare un modello
 
@@ -28,7 +28,7 @@ Questo articolo descrive la configurazione che può essere applicata a un modell
 
 ### <a name="grouping-configuration"></a>Raggruppamento di configurazione
 
-Per ridurre le dimensioni del <xref:System.Data.Entity.DbContext.OnModelCreating%2A> metodo, è possibile estrarre tutte le configurazioni per un tipo di entità in una classe separata che implementa <xref:Microsoft.EntityFrameworkCore.IEntityTypeConfiguration%601> .
+Per ridurre le dimensioni del <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating%2A> metodo, è possibile estrarre tutte le configurazioni per un tipo di entità in una classe separata che implementa <xref:Microsoft.EntityFrameworkCore.IEntityTypeConfiguration%601> .
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/EntityTypeConfiguration.cs?Name=IEntityTypeConfiguration)]
 

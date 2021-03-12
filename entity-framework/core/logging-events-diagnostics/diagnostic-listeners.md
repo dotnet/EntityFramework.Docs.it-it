@@ -4,17 +4,17 @@ description: Uso di DiagnosticListener per il consumo globale di EF Core Diagnos
 author: ajcvickers
 ms.date: 10/16/2020
 uid: core/logging-events-diagnostics/diagnostic-listeners
-ms.openlocfilehash: afb80aa8f05f70761e423f58653f681938079858
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 7035acaa6d306e73a0a2c071532ece0d8e9a0a1d
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129265"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024251"
 ---
 # <a name="using-diagnostic-listeners-in-ef-core"></a>Uso di listener di diagnostica in EF Core
 
 > [!TIP]
-> È possibile [scaricare l'esempio di questo articolo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/DiagnosticListeners) da GitHub.
+> È possibile [scaricare l'esempio di questo articolo](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/DiagnosticListeners) da GitHub.
 
 I listener di diagnostica consentono l'ascolto di qualsiasi evento EF Core che si verifica nel processo .NET corrente. La <xref:System.Diagnostics.DiagnosticListener> classe fa parte di un [meccanismo comune in .NET](https://github.com/dotnet/runtime/blob/master/src/libraries/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) per ottenere informazioni di diagnostica dalle applicazioni in esecuzione.
 
@@ -97,7 +97,7 @@ Il codice precedente, ad esempio, gestisce gli <xref:Microsoft.EntityFrameworkCo
 > [!TIP]
 > Viene eseguito l'override di ToString in ogni classe di dati di evento EF Core per generare il messaggio di log equivalente per l'evento. Ad esempio, la chiamata di `ContextInitializedEventData.ToString` genera "Entity Framework Core 5.0.0 inizializzato" BlogsContext "utilizzando il provider" Microsoft. EntityFrameworkCore. sqlite "con options: None".
 
-L' [esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/DiagnosticListeners) contiene una semplice applicazione console che apporta modifiche al database blogging e stampa gli eventi di diagnostica rilevati.
+L' [esempio](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/DiagnosticListeners) contiene una semplice applicazione console che apporta modifiche al database blogging e stampa gli eventi di diagnostica rilevati.
 
 <!--
     public static void Main()

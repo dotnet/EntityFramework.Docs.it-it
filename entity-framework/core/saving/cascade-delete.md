@@ -4,12 +4,12 @@ description: Configurazione dei comportamenti di propagazione attivati quando un
 author: ajcvickers
 ms.date: 01/07/2021
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 27ba84fa5d7e0d72e66ccbd96df9b6a5008791fb
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 6e897be6b4f5e6550d9ed3590445df60bef4fb3c
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983339"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023614"
 ---
 # <a name="cascade-delete"></a>Eliminazione a catena
 
@@ -30,7 +30,7 @@ La seconda opzione è valida per qualsiasi tipo di relazione ed è nota come "Ca
 > Questo documento descrive le eliminazioni a catena (ed Elimina gli orfani) dal punto di vista dell'aggiornamento del database. Viene utilizzato in modo intensivo i concetti introdotti in [rilevamento modifiche in EF Core](xref:core/change-tracking/index) e la [modifica di chiavi esterne e spostamenti](xref:core/change-tracking/relationship-changes). Assicurarsi di comprendere completamente questi concetti prima di affrontare il materiale qui.
 
 > [!TIP]  
-> È possibile eseguire ed eseguire il debug in tutto il codice di questo documento [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/CascadeDeletes).
+> È possibile eseguire ed eseguire il debug in tutto il codice di questo documento [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/CascadeDeletes).
 
 ## <a name="when-cascading-behaviors-happen"></a>Quando si verificano i comportamenti a catena
 

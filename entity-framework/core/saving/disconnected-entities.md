@@ -4,12 +4,12 @@ description: Utilizzo di entità disconnesse e non registrate tra più istanze d
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 4ddae08b68aa99fb81de77fed8a195c60927e0bb
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 1a86c28257449252a9cf7d3e1e65cd54bd5aa461
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128849"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023499"
 ---
 # <a name="disconnected-entities"></a>Entità disconnesse
 
@@ -19,7 +19,7 @@ Tuttavia, a volte le entità vengono sottoposte a query usando un'istanza di con
 
 <!-- markdownlint-disable MD028 -->
 > [!TIP]
-> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Disconnected/) di questo articolo in GitHub.
+> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Saving/Disconnected/) di questo articolo in GitHub.
 
 > [!TIP]
 > EF Core può eseguire il rilevamento delle modifiche per una sola istanza di qualsiasi entità con un determinato valore di chiave primaria. Il modo migliore per evitare che ciò diventi un problema consiste nell'usare un contesto di breve durata per ogni unità di lavoro, in modo che il contesto sia inizialmente vuoto, abbia entità collegate, salvi queste entità, per poi essere eliminato e rimosso.

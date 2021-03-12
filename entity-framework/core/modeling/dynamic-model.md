@@ -4,12 +4,12 @@ description: Alternanza tra più modelli con lo stesso tipo di DbContext usando 
 author: AndriySvyryd
 ms.date: 01/03/2020
 uid: core/modeling/dynamic-model
-ms.openlocfilehash: 0e0af67eab5262ab2b26edadea470c753b6349a0
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 0c418000b85c508569b8146af63bff205ae6d222
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071524"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024030"
 ---
 # <a name="alternating-between-multiple-models-with-the-same-dbcontext-type"></a>Alternanza tra più modelli con lo stesso tipo di DbContext
 
@@ -31,4 +31,4 @@ Infine, registrare il nuovo `IModelCacheKeyFactory` nel contesto `OnConfiguring`
 
 [!code-csharp[Main](../../../samples/core/Modeling/DynamicModel/DynamicContext.cs?name=OnConfiguring)]
 
-Per ulteriori informazioni sul contesto, vedere il [progetto di esempio completo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/DynamicModel) .
+Per ulteriori informazioni sul contesto, vedere il [progetto di esempio completo](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Modeling/DynamicModel) .

@@ -2,14 +2,14 @@
 title: Strumenti ed estensioni - EF Core
 description: Strumenti ed estensioni esterni per Entity Framework Core
 author: ErikEJ
-ms.date: 01/06/2021
+ms.date: 02/21/2021
 uid: core/extensions/index
-ms.openlocfilehash: 1198cd586902cd6222a94225056d076c847c9197
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 67d078250d8bfdb845cf98949ee1412a8fe842bd
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129018"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024381"
 ---
 # <a name="ef-core-tools--extensions"></a>Strumenti ed estensioni di EF Core
 
@@ -276,3 +276,13 @@ Abilita reverse engineering un modello di EF Core da un pacchetto di applicazion
 Genera contenuto DGML (Graph) che Visualizza il DbContext. Aggiunge il metodo di estensione AsDgml () alla classe DbContext. Per EF Core: 3, 5.
 
 [Wiki di GitHub](https://github.com/ErikEJ/EFCorePowerTools/wiki/Inspect-your-DbContext-model)
+
+### <a name="entityframeworkexceptions"></a>EntityFramework. Exceptions
+
+Quando si usa Entity Framework Core tutte le eccezioni del database vengono incapsulate in eccezione dbupdateexception. EntityFramework. Exceptions gestisce tutti i dettagli specifici del database per individuare il vincolo violato e consente di usare eccezioni tipizzate, ad esempio,,, `UniqueConstraintException` `CannotInsertNullException` `MaxLengthExceededException` `NumericOverflowException` `ReferenceConstraintException` quando la query viola i vincoli del database.
+
+Supporta SQL Server, Postgres, MySql, SQLite e Oracle
+
+Per EF Core: 3, 5.
+
+[Repository GitHub](https://github.com/Giorgi/EntityFramework.Exceptions)

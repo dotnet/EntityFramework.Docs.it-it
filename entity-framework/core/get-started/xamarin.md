@@ -5,12 +5,12 @@ author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: e4a26d7a0c6909002be0974ee9fe1c5db7c1046a
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: edec7dfec3d6ac8313f9fc07af8844e4a19c3bb2
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983599"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024277"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>Introduzione con EF Core e Novell
 
@@ -19,7 +19,7 @@ In questa esercitazione si creerà un'applicazione [Novell. Forms](/xamarin/get-
 È possibile seguire l'esercitazione con Visual Studio in Windows o Visual Studio per Mac.
 
 > [!TIP]
-> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Xamarin) di questo articolo in GitHub.
+> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Xamarin) di questo articolo in GitHub.
 
 ## <a name="prerequisites"></a>Prerequisiti
 
@@ -144,7 +144,7 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-### <a name="create"></a>Crea
+### <a name="create"></a>Create
 
 * Inserire un nuovo record.
   * La `Save_Clicked` funzione di `AddBlogPage.xaml.cs` inserisce un nuovo `Blog` oggetto nel database SQLite.

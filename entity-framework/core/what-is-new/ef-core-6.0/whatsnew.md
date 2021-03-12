@@ -2,14 +2,14 @@
 title: Novità di EF Core 6,0
 description: Panoramica delle nuove funzionalità di EF Core 6,0
 author: ajcvickers
-ms.date: 01/28/2021
+ms.date: 03/08/2021
 uid: core/what-is-new/ef-core-6.0/whatsnew
-ms.openlocfilehash: bcc2b3ce9047a2c6b5a89e99b96919914bcf42fe
-ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
+ms.openlocfilehash: 15ab49f60d8831c60e599d8c06b3700aace74bda
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100543198"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023523"
 ---
 # <a name="whats-new-in-ef-core-60"></a>Novità di EF Core 6,0
 
@@ -17,10 +17,95 @@ EF Core 6,0 è attualmente in fase di sviluppo. Questo articolo contiene una pan
 
 Questa pagina non duplica il [piano per EF Core 6,0](xref:core/what-is-new/ef-core-6.0/plan). Il piano descrive i temi generali per EF Core 6,0, inclusi tutti gli elementi che si prevede di includere prima di distribuire la versione finale.
 
-## <a name="ef-core-60-preview-1"></a>EF Core 6,0 Preview 1
-
 > [!TIP]
-> È possibile eseguire ed eseguire il debug in tutti gli esempi di anteprima 1 mostrati di seguito [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/NewInEFCore6).
+> È possibile eseguire ed eseguire il debug in tutti gli esempi di anteprima 1 mostrati di seguito [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/NewInEFCore6).
+
+## <a name="ef-core-60-preview-2"></a>EF Core 6,0 Preview 2
+
+### <a name="preserve-synchronization-context-in-savechangesasync"></a>Mantieni il contesto di sincronizzazione in SaveChangesAsync
+
+Problema di GitHub: [#23971](https://github.com/dotnet/efcore/issues/23971).
+
+[Il codice EF Core nella versione 5,0](https://github.com/dotnet/efcore/issues/10164) è stato modificato in modo da impostare <xref:System.Threading.Tasks.Task.ConfigureAwait%2A?displayProperty=nameWithType> su `false` in tutte le posizioni in cui è presente il `await` codice asincrono. Si tratta in genere di una scelta migliore per l'utilizzo EF Core. Tuttavia, <xref:System.Data.Entity.DbContext.SaveChangesAsync%2A> è un caso speciale perché EF Core imposterà i valori generati in entità rilevate dopo il completamento dell'operazione asincrona sul database. Queste modifiche possono quindi attivare le notifiche che, ad esempio, possono essere eseguite in U.I. thread. Di conseguenza, questa modifica viene ripristinata in EF Core 6,0 solo per il <xref:System.Data.Entity.DbContext.SaveChangesAsync%2A> metodo.
+
+### <a name="translate-stringconcat-with-multiple-arguments"></a>Traduci String. Concat con più argomenti
+
+Problema di GitHub: [#23859](https://github.com/dotnet/efcore/issues/23859). Questa funzionalità è stata aggiunta come contributo da [@wmeints](https://github.com/wmeints) .
+
+A partire da EF Core 6,0, le chiamate a <xref:System.String.Concat%2A?displayProperty=nameWithType> con più argomenti vengono ora convertite in SQL. Ad esempio, la query seguente:
+
+<!--
+        var shards = context.Shards
+            .Where(e => string.Concat(e.Token1, e.Token2, e.Token3) != e.TokensProcessed).ToList();
+-->
+[!code-csharp[StringConcat](../../../../samples/core/Miscellaneous/NewInEFCore6/StringConcatSample.cs?name=StringConcat)]
+
+Verrà convertito nel codice SQL seguente quando si usa SQL Server:
+
+```sql
+SELECT [s].[Id], [s].[Token1], [s].[Token2], [s].[Token3], [s].[TokensProcessed]
+FROM [Shards] AS [s]
+WHERE ((COALESCE([s].[Token1], N'') + (COALESCE([s].[Token2], N'') + COALESCE([s].[Token3], N''))) <> [s].[TokensProcessed]) OR [s].[TokensProcessed] IS NULL
+```
+
+### <a name="smoother-integration-with-systemlinqasync"></a>Integrazione più uniforme con System. Linq. Async
+
+Problema di GitHub: [#24041](https://github.com/dotnet/efcore/issues/24041).
+
+Il pacchetto [System. Linq. Async](https://www.nuget.org/packages/System.Linq.Async/) aggiunge l'elaborazione LINQ asincrona sul lato client. L'uso di questo pacchetto con le versioni precedenti di EF Core è stato complesso a causa di uno scontro di spazio dei nomi per i metodi LINQ asincroni. In EF Core 6,0 abbiamo sfruttato i vantaggi dei criteri di ricerca in C# <xref:System.Collections.Generic.IAsyncEnumerable%601> , in modo che il EF Core esposto non <xref:Microsoft.EntityFrameworkCore.DbSet%601> debba implementare direttamente l'interfaccia.
+
+Si noti che non è necessario che la maggior parte delle applicazioni usi System. Linq. Async, perché le query EF Core vengono in genere convertite completamente nel server.
+
+### <a name="more-flexible-free-text-search"></a>Ricerca di testo libero più flessibile
+
+Problema di GitHub: [#23921](https://github.com/dotnet/efcore/issues/23921).
+
+In EF Core 6,0 sono stati attenuati i requisiti dei parametri per <xref:Microsoft.EntityFrameworkCore.SqlServerDbFunctionsExtensions.FreeText(Microsoft.EntityFrameworkCore.DbFunctions,System.String,System.String)> e <xref:Microsoft.EntityFrameworkCore.SqlServerDbFunctionsExtensions.Contains%2A> . Questo consente di utilizzare queste funzioni con colonne binarie o con colonne mappate mediante un convertitore di valori. Si consideri, ad esempio, un tipo di entità con una `Name` proprietà definita come oggetto valore:
+
+<!--
+    public class Customer
+    {
+        public int Id { get; set; }
+
+        public Name Name{ get; set; }
+    }
+
+    public class Name
+    {
+        public string First { get; set; }
+        public string MiddleInitial { get; set; }
+        public string Last { get; set; }
+    }
+-->
+[!code-csharp[EntityType](../../../../samples/core/Miscellaneous/NewInEFCore6/ContainsFreeTextSample.cs?name=EntityType)]
+
+Viene eseguito il mapping a JSON nel database:
+
+<!--
+            modelBuilder.Entity<Customer>()
+                .Property(e => e.Name)
+                .HasConversion(
+                    v => JsonSerializer.Serialize(v, null),
+                    v => JsonSerializer.Deserialize<Name>(v, null));
+-->
+[!code-csharp[ConfigureCompositeValueObject](../../../../samples/core/Miscellaneous/NewInEFCore6/ContainsFreeTextSample.cs?name=ConfigureCompositeValueObject)]
+
+È ora possibile eseguire una query usando `Contains` o `FreeText` anche se il tipo della proprietà non è `Name` `string` . Ad esempio:
+
+<!--
+        var result = context.Customers.Where(e => EF.Functions.Contains(e.Name, "Martin")).ToList();
+-->
+[!code-csharp[Query](../../../../samples/core/Miscellaneous/NewInEFCore6/ContainsFreeTextSample.cs?name=Query)]
+
+Viene generato il codice SQL seguente quando si usa SQL Server:
+
+```sql
+SELECT [c].[Id], [c].[Name]
+FROM [Customers] AS [c]
+WHERE CONTAINS([c].[Name], N'Martin')
+```
+
+## <a name="ef-core-60-preview-1"></a>EF Core 6,0 Preview 1
 
 ### <a name="unicodeattribute"></a>UnicodeAttribute
 
@@ -342,7 +427,7 @@ public partial class Blog
 ## <a name="microsoftdatasqlite-60-preview-1"></a>Microsoft. Data. sqlite 6,0 Preview 1
 
 > [!TIP]
-> È possibile eseguire ed eseguire il debug in tutti gli esempi di anteprima 1 mostrati di seguito [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/NewInEFCore6).
+> È possibile eseguire ed eseguire il debug in tutti gli esempi di anteprima 1 mostrati di seguito [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/NewInEFCore6).
 
 ### <a name="savepoints-api"></a>API salvataggio
 

@@ -4,19 +4,19 @@ description: Informazioni approfondite sugli operatori di query LINQ più comple
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/complex-query-operators
-ms.openlocfilehash: 84c2518972355d31cf5a6a7bafc57b44162412c8
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: bdcb2f4d00ee4833ae9e0a10d307e5124bafb4b6
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430482"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023757"
 ---
 # <a name="complex-query-operators"></a>Operatori di query complessi
 
 LINQ (Language Integrated Query) contiene molti operatori complessi, che combinano più origini dati o eseguono elaborazioni complesse. Non tutti gli operatori LINQ hanno traduzioni appropriate sul lato server. In alcuni casi, una query in un modulo viene convertita nel server, ma se scritta in un formato diverso non viene convertita anche se il risultato è lo stesso. In questa pagina vengono descritti alcuni degli operatori complessi e le relative varianti supportate. Nelle versioni future, è possibile riconoscere più modelli e aggiungere le relative traduzioni. È anche importante tenere presente che il supporto della traduzione varia tra i provider. Una query specifica, che viene convertita in SqlServer, potrebbe non funzionare per i database SQLite.
 
 > [!TIP]
-> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/ComplexQuery) di questo articolo in GitHub.
+> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Querying/ComplexQuery) di questo articolo in GitHub.
 
 ## <a name="join"></a>Join
 

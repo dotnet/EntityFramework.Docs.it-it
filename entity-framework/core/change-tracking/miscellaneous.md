@@ -4,12 +4,12 @@ description: Varie funzionalità e scenari che coinvolgono EF Core rilevamento d
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/miscellaneous
-ms.openlocfilehash: 9eb3186f4eef300e4824dc86700497444ece4a2c
-ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
+ms.openlocfilehash: 63d96227b6862e920d900a5cc3f1f85d7c6d85ac
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100543419"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024433"
 ---
 # <a name="additional-change-tracking-features"></a>Funzionalità aggiuntive di Rilevamento modifiche
 
@@ -19,7 +19,7 @@ Questo documento illustra le varie funzionalità e gli scenari che coinvolgono i
 > In questo documento si presuppone che gli Stati dell'entità e le nozioni di base del EF Core rilevamento delle modifiche siano compresi. Per ulteriori informazioni su questi argomenti, vedere [rilevamento modifiche in EF Core](xref:core/change-tracking/index) .
 
 > [!TIP]
-> È possibile eseguire ed eseguire il debug in tutto il codice di questo documento [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/AdditionalChangeTrackingFeatures).
+> È possibile eseguire ed eseguire il debug in tutto il codice di questo documento [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/AdditionalChangeTrackingFeatures).
 
 ## <a name="add-versus-addasync"></a>`Add` contro `AddAsync`
 

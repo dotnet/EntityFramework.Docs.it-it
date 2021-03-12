@@ -4,12 +4,12 @@ description: Versioni correnti di EF Core e dettagli sulla pianificazione per le
 author: ajcvickers
 ms.date: 01/12/2021
 uid: core/what-is-new/index
-ms.openlocfilehash: 18d8055840b5a38dc62d20e7e18c440b7360c9e4
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 15e0f50bfe27e52c8c545c56c3ee5b4b141152c1
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128329"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023562"
 ---
 # <a name="ef-core-releases-and-planning"></a>Versioni e pianificazione di EF Core
 
@@ -38,7 +38,7 @@ Per informazioni sulla scadenza del supporto e sulle versioni con supporto a lun
 
 ## <a name="release-planning-and-schedules"></a>Pianificazione delle versioni
 
-Le versioni EF Core sono allineate con la [pianificazione della distribuzione di .NET Core](https://github.com/dotnet/core/blob/master/roadmap.md).
+Le versioni EF Core sono allineate con la [pianificazione della distribuzione di .NET Core](https://github.com/dotnet/core/blob/main/roadmap.md).
 
 Le versioni patch vengono in genere distribuite mensilmente, ma hanno un lead time lungo.
 Stiamo lavorando per migliorare questo aspetto.
@@ -46,7 +46,7 @@ Stiamo lavorando per migliorare questo aspetto.
 Per altre informazioni su come viene deciso quali elementi rilasciare in ogni versione, vedere il [processo di pianificazione delle versioni](xref:core/what-is-new/release-planning).
 In genere non viene eseguita una pianificazione dettagliata a lungo termine, oltre la versione principale o secondaria successiva.
 
-## <a name="ef-core-60"></a>EF Core 6,0
+## <a name="ef-core-60"></a>EF Core 6.0
 
 La versione stabile successiva pianificata è **EF Core 6,0**, pianificata per il **2021 novembre**.
 

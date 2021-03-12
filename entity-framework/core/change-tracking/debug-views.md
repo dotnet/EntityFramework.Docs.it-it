@@ -4,12 +4,12 @@ description: Uso di ChangeTracker DebugView e dei messaggi di log per eseguire i
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/debug-views
-ms.openlocfilehash: 76108120cf7f532d085fef12121bb639b065add0
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: cda81728beb5ffbc8604c191e84b3553a7343ec0
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129730"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023172"
 ---
 # <a name="change-tracker-debugging"></a>Debug del rilevamento modifiche
 
@@ -22,7 +22,7 @@ Lo strumento di rilevamento delle modifiche Entity Framework Core (EF Core) gene
 > In questo documento si presuppone che gli Stati dell'entità e le nozioni di base del EF Core rilevamento delle modifiche siano compresi. Per ulteriori informazioni su questi argomenti, vedere [rilevamento modifiche in EF Core](xref:core/change-tracking/index) .
 
 > [!TIP]
-> È possibile eseguire ed eseguire il debug in tutto il codice di questo documento [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeTrackerDebugging).
+> È possibile eseguire ed eseguire il debug in tutto il codice di questo documento [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/ChangeTrackerDebugging).
 
 ## <a name="change-tracker-debug-view"></a>Visualizzazione debug di rilevamento modifiche
 

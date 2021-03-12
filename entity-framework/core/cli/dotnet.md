@@ -4,12 +4,12 @@ description: Guida di riferimento per gli strumenti di interfaccia della riga di
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/dotnet
-ms.openlocfilehash: 5f25ad67060e59507285af6e78269baa784c5288
-ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
+ms.openlocfilehash: f33d598c444eb9cb9aba754d629934b7b2240919
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100543393"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024420"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Guida di riferimento agli strumenti di Entity Framework Core-interfaccia della riga di comando di .NET Core
 
@@ -273,13 +273,13 @@ Le [Opzioni comuni](#common-options) sono elencate in precedenza.
 
 ## `dotnet ef migrations remove`
 
-Rimuove l'ultima migrazione (esegue il rollback delle modifiche del codice eseguite per la migrazione).
+Rimuove l'ultima migrazione chiamando il `Down` metodo della migrazione più recente. Il comando esegue il rollback delle modifiche del codice eseguite per la migrazione più recente.
 
 Opzioni:
 
 | Opzione                 | Short             | Descrizione                                                                     |
 |:-----------------------|:------------------|:--------------------------------------------------------------------------------|
-| <nobr>`--force`</nobr> | <nobr>`-f`</nobr> | Ripristinare la migrazione, ovvero eseguire il rollback delle modifiche applicate al database. |
+| <nobr>`--force`</nobr> | <nobr>`-f`</nobr> | Ripristinare la migrazione più recente, eseguendo il rollback delle modifiche apportate al database durante l'ultima migrazione. |
 
 Le [Opzioni comuni](#common-options) sono elencate in precedenza.
 

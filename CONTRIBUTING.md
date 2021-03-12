@@ -4,7 +4,7 @@ Il processo per contribuire alla documentazione di Entity Framework con articoli
 
 ## <a name="how-to-make-a-simple-correction-or-suggestion"></a>Come effettuare una semplice correzione o suggerire una modifica
 
-Gli articoli sono archiviati come file markdown in questo repository. Per apportare modifiche semplici al contenuto di un file markdown, fare clic sul collegamento **Edit** (Modifica) nell'angolo superiore destro della finestra del browser. Potrebbe essere necessario espandere la barra delle **opzioni**per visualizzare il collegamento **Edit** (Modifica). Seguire le istruzioni per creare una richiesta pull. La richiesta pull verrà esaminata dal team EF e accettata oppure verranno suggerite modifiche.
+Gli articoli sono archiviati come file markdown in questo repository. Per apportare modifiche semplici al contenuto di un file markdown, fare clic sul collegamento **Edit** (Modifica) nell'angolo superiore destro della finestra del browser. Potrebbe essere necessario espandere la barra delle **opzioni** per visualizzare il collegamento **Edit** (Modifica). Seguire le istruzioni per creare una richiesta pull. La richiesta pull verrà esaminata dal team EF e accettata oppure verranno suggerite modifiche.
 
 ## <a name="how-to-make-a-more-complex-submission"></a>Come effettuare un invio più complesso
 
@@ -12,12 +12,12 @@ Sono necessarie delle conoscenze di base di [Git e GitHub.com](https://guides.gi
 
 * Aprire un [problema](https://github.com/dotnet/EntityFramework.Docs/issues/new) che descriva ciò che si vuole fare, ad esempio modificare un articolo esistente o crearne uno nuovo. Attendere l'approvazione dal team EF prima di investire molto tempo.
 * Creare un fork del repository [DotNet/EntityFramework.Doc](https://github.com/dotnet/EntityFramework.Docs/) e creare un ramo per le modifiche.
-* Inviare una richiesta pull (PR) al master con le modifiche.
+* Inviare una richiesta pull (PR) al principale con le modifiche apportate.
 * Rispondere ai commenti e suggerimenti per la richiesta pull.
 
 ## <a name="markdown-syntax"></a>Sintassi di Markdown
 
-Gli articoli sono scritti nel linguaggio [DocFx Flavored Markdown (DFM)](http://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html), che è un superset di [GitHub Flavored Markdown (GFM)](https://guides.github.com/features/mastering-markdown/). Per esempi della sintassi e dei metadati DFM per le funzionalità dell'interfaccia utente comunemente usate nella documentazione di EF, vedere il [modello di metadati e Markdown](https://github.com/dotnet/docs/blob/master/styleguide/template.md) nella guida di stile del repository .NET Core.
+Gli articoli sono scritti nel linguaggio [DocFx Flavored Markdown (DFM)](http://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html), che è un superset di [GitHub Flavored Markdown (GFM)](https://guides.github.com/features/mastering-markdown/). Per esempi di sintassi e metadati di DFM per le funzionalità dell'interfaccia utente comunemente usate nella documentazione di EF, vedere [Metadata and Markdown template](https://docs.microsoft.com/contribute/dotnet/dotnet-style-guide).
 
 ## <a name="folder-structure-conventions"></a>Convenzioni per la struttura di cartelle
 
@@ -96,4 +96,4 @@ DocFX richiede .NET Framework in Windows o Mono (per Linux o macOS).
 
 ## <a name="voice-and-tone"></a>Voce e tono
 
-L'obiettivo è quello di scrivere documentazione facilmente comprensibile per il più ampio pubblico possibile. A tale scopo, sono state definite linee guida per lo stile di scrittura che i collaboratori dovranno seguire. Per altre informazioni, vedere [Linee guida per la voce e il tono](https://github.com/dotnet/docs/blob/master/styleguide/voice-tone.md) nel repository .NET Core.
+L'obiettivo è quello di scrivere documentazione facilmente comprensibile per il più ampio pubblico possibile. A tale scopo, sono state definite linee guida per lo stile di scrittura che i collaboratori dovranno seguire. Per altre informazioni, vedere [linee guida per la voce e il tono](https://docs.microsoft.com/contribute/dotnet/dotnet-voice-tone).

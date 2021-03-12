@@ -4,12 +4,12 @@ description: Registrazione da un EF Core DbContext con LogTo
 author: ajcvickers
 ms.date: 10/03/2020
 uid: core/logging-events-diagnostics/simple-logging
-ms.openlocfilehash: 5c2dc41122dfa3919d1e6a26b0760883d77ee1a0
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 24a3de668a0e587dcc0ab2ae5f061b0eb4d4edcf
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129213"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024212"
 ---
 # <a name="simple-logging"></a>Registrazione semplice
 
@@ -17,7 +17,7 @@ ms.locfileid: "98129213"
 > Questa funzionalità è stata introdotta in EF Core 5,0.
 
 > [!TIP]
-> È possibile [scaricare l'esempio di questo articolo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging/SimpleLogging) da GitHub.
+> È possibile [scaricare l'esempio di questo articolo](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Logging/SimpleLogging) da GitHub.
 
 È possibile utilizzare la registrazione semplice Entity Framework Core (EF Core) per ottenere facilmente i log durante lo sviluppo e il debug di applicazioni. Questa forma di registrazione richiede una configurazione minima e nessun pacchetto NuGet aggiuntivo.
 

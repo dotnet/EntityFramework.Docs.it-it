@@ -4,12 +4,12 @@ description: Elenco completo delle modifiche di rilievo introdotte in Entity Fra
 author: bricelam
 ms.date: 11/07/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: 4a463e785edaceaf5dd96164c39e2cc9b5f86de4
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: e52b77e8c19ab3005aee50e1cf4e170d3ee1f502
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128745"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023445"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>Modifiche di rilievo nella EF Core 5,0
 
@@ -19,14 +19,14 @@ Le modifiche alle API e al comportamento seguenti hanno il rischio di interrompe
 
 | **Modifica di rilievo**                                                                                                                   | **Impatto** |
 |:--------------------------------------------------------------------------------------------------------------------------------------|------------|
-| [EF Core 5,0 non supporta .NET Framework](#netstandard21)                                                                         | Media     |
-| [IProperty. getColumnName () è obsoleto](#getcolumnname-obsolete)                                                                  | Media     |
-| [La precisione e la scala sono necessarie per i numeri decimali](#decimals)                                                                            | Media     |
-| [Obbligatorio per la navigazione da principale a dipendente con semantica diversa](#required-dependent)                                 | Media     |
-| [La definizione della query viene sostituita con metodi specifici del provider](#defining-query)                                                          | Media     |
-| [Le esplorazioni di riferimento non null non vengono sovrascritte dalle query](#nonnullreferences)                                                   | Media     |
-| [Toview () viene considerato in modo diverso dalle migrazioni](#toview)                                                                              | Media     |
-| [ToTable (null) contrassegna il tipo di entità come non mappato a una tabella](#totable)                                                              | Media     |
+| [EF Core 5,0 non supporta .NET Framework](#netstandard21)                                                                         | Medio     |
+| [IProperty. getColumnName () è obsoleto](#getcolumnname-obsolete)                                                                  | Medio     |
+| [La precisione e la scala sono necessarie per i numeri decimali](#decimals)                                                                            | Medio     |
+| [Obbligatorio per la navigazione da principale a dipendente con semantica diversa](#required-dependent)                                 | Medio     |
+| [La definizione della query viene sostituita con metodi specifici del provider](#defining-query)                                                          | Medio     |
+| [Le esplorazioni di riferimento non null non vengono sovrascritte dalle query](#nonnullreferences)                                                   | Medio     |
+| [Toview () viene considerato in modo diverso dalle migrazioni](#toview)                                                                              | Medio     |
+| [ToTable (null) contrassegna il tipo di entità come non mappato a una tabella](#totable)                                                              | Medio     |
 | [Metodo HasGeometricDimension rimosso dall'estensione SQLite NTS](#geometric-sqlite)                                                   | Basso        |
 | [Cosmos: la chiave di partizione è stata aggiunta alla chiave primaria](#cosmos-partition-key)                                                        | Basso        |
 | [Cosmos: `id` proprietà rinominata in `__id`](#cosmos-id)                                                                                 | Basso        |
@@ -64,7 +64,7 @@ Questa operazione fa parte dello spostamento più ampio tra i team .NET finalizz
 
 #### <a name="mitigations"></a>Soluzioni di prevenzione
 
-.NET Framework applicazioni possono continuare a usare EF Core 3,1, che è una [versione di supporto a lungo termine (LTS)](https://dotnet.microsoft.com/platform/support/policy/dotnet-core). In alternativa, è possibile aggiornare le applicazioni per l'uso di .NET Core 2,1, .NET Core 3,1 o .NET 5, che supportano tutti .NET Standard 2,1.
+.NET Framework applicazioni possono continuare a usare EF Core 3,1, che è una [versione di supporto a lungo termine (LTS)](https://dotnet.microsoft.com/platform/support/policy/dotnet-core). In alternativa, è possibile aggiornare le applicazioni per l'uso di .NET Core 3,1 o .NET 5, che supportano entrambe .NET Standard 2,1.
 
 <a name="getcolumnname-obsolete"></a>
 

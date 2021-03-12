@@ -4,12 +4,12 @@ description: Uso di filtri di query globali per filtrare i risultati con Entity 
 author: maumar
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: 6436f9f8e2e09d44ef9528fd2022720d40095fe0
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: d28f34cd3846203675b5a03343e0211460797b0a
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430131"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023744"
 ---
 # <a name="global-query-filters"></a>Filtri di query globali
 
@@ -23,7 +23,7 @@ I filtri di query globali sono predicati di query LINQ applicati ai tipi di enti
 Nell'esempio seguente viene illustrato come utilizzare i filtri di query globali per implementare comportamenti di query di multi-tenant e di eliminazione temporanea in un semplice modello di Blog.
 
 > [!TIP]
-> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/QueryFilters) di questo articolo in GitHub.
+> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Querying/QueryFilters) di questo articolo in GitHub.
 
 Prima di tutto, definire le entità:
 

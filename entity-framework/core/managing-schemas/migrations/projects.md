@@ -4,19 +4,19 @@ description: Utilizzo di un progetto di migrazione separato per la gestione degl
 author: bricelam
 ms.date: 11/06/2020
 uid: core/managing-schemas/migrations/projects
-ms.openlocfilehash: 2d1c093e0bb307584e2bf19cb93deec98aa10692
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 9a6b8977f9d7bcdae0fb9aea6966a7eb43e9e7db
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429806"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024147"
 ---
 # <a name="using-a-separate-migrations-project"></a>Uso di un progetto di migrazioni separate
 
 Potrebbe essere necessario archiviare le migrazioni in un progetto diverso da quello contenente il `DbContext` . È anche possibile usare questa strategia per gestire più set di migrazioni, ad esempio uno per lo sviluppo e un altro per gli aggiornamenti di versione a rilascio.
 
 > [!TIP]
-> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Schemas/ThreeProjectMigrations) di questo articolo in GitHub.
+> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Schemas/ThreeProjectMigrations) di questo articolo in GitHub.
 
 ## <a name="steps"></a>Passaggi
 

@@ -4,12 +4,12 @@ description: Rilevamento delle modifiche alle proprietà e alle relazioni median
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/change-detection
-ms.openlocfilehash: 39dc66a3ba74be89d3e470cfe788a357401965d1
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: fae8bdb1a89478531535b377f4ba8b02d1c848f4
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129732"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023185"
 ---
 # <a name="change-detection-and-notifications"></a>Rilevamento delle modifiche e notifiche
 
@@ -18,7 +18,7 @@ Ogni <xref:Microsoft.EntityFrameworkCore.DbContext> istanza tiene traccia delle 
 Per il rilevamento delle modifiche alle proprietà e alle relazioni è necessario che DbContext sia in grado di rilevare tali modifiche. In questo documento viene illustrato il modo in cui si verifica questo rilevamento, nonché come utilizzare le notifiche delle proprietà o i proxy di rilevamento delle modifiche per forzare il rilevamento immediato delle modifiche.
 
 > [!TIP]
-> È possibile eseguire ed eseguire il debug in tutto il codice di questo documento [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeDetectionAndNotifications).
+> È possibile eseguire ed eseguire il debug in tutto il codice di questo documento [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/ChangeDetectionAndNotifications).
 
 ## <a name="snapshot-change-tracking"></a>Rilevamento modifiche basato su snapshot
 

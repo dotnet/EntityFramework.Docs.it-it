@@ -4,12 +4,12 @@ description: Esercitazione introduttiva a Entity Framework Core
 author: rick-anderson
 ms.date: 09/17/2019
 uid: core/get-started/overview/first-app
-ms.openlocfilehash: ee2b8f87e48f466f8385548b0b9e20a3791ba2a3
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 560a6f293e32f4e1f75c13367291c4e31e83b157
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431559"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024342"
 ---
 # <a name="getting-started-with-ef-core"></a>Introduzione a EF Core
 
@@ -17,7 +17,7 @@ In questa esercitazione viene creata un'app console .NET Core che esegue l'acces
 
 È possibile eseguire l'esercitazione usando Visual Studio in Windows oppure usando l'interfaccia della riga di comando di .NET Core in Windows, macOS o Linux.
 
-[Visualizzare l'esempio di questo articolo su GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/GetStarted).
+[Visualizzare l'esempio di questo articolo su GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/GetStarted).
 
 ## <a name="prerequisites"></a>Prerequisiti
 
@@ -30,7 +30,7 @@ Installare il software seguente:
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [Visual Studio 2019 versione 16.3 o successiva](https://www.visualstudio.com/downloads/) con questo carico di lavoro:
-  * **Sviluppo multipiattaforma .NET Core** (in **Altri set di strumenti** )
+  * **Sviluppo multipiattaforma .NET Core** (in **Altri set di strumenti**)
 
 ---
 
@@ -144,20 +144,7 @@ dotnet run
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Visual Studio usa una directory di lavoro incoerente quando si eseguono app console .NET Core. (vedere [dotnet/project-system#3619](https://github.com/dotnet/project-system/issues/3619)) Questa operazione causa la generazione di un'eccezione: *Nessuna tabella di questo tipo: Blogs*. Per aggiornare la directory di lavoro:
-
-* Fare clic con il pulsante destro del mouse sul progetto e scegliere **Modifica file di progetto**
-* Subito dopo la proprietà *TargetFramework* aggiungere quanto segue:
-
-  ```xml
-  <StartWorkingDirectory>$(MSBuildProjectDirectory)</StartWorkingDirectory>
-  ```
-
-* Salvare il file
-
-A questo punto è possibile eseguire l'app:
-
-* **Debug > Avvia senza eseguire debug**
+**Debug > Avvia senza eseguire debug**
 
 ---
 

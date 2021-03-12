@@ -4,12 +4,12 @@ description: I temi e le funzionalità pianificati per EF Core 6,0
 author: ajcvickers
 ms.date: 01/12/2021
 uid: core/what-is-new/ef-core-6.0/plan
-ms.openlocfilehash: 612461bc6ad30778baa5c6d10dda5cabac91dcb2
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: d6d4f957a57d8ab6a11232b66a5b2a1238df59a3
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129782"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023484"
 ---
 # <a name="plan-for-entity-framework-core-60"></a>Pianificare Entity Framework Core 6,0
 
@@ -34,7 +34,7 @@ EF Core 6,0 non viene eseguito su .NET Framework.
 
 EF Core 6,0 si allineerà con .NET 6 come [versione di supporto a lungo termine (LTS)](https://dotnet.microsoft.com/platform/support/policy/dotnet-core).
 
-### <a name="breaking-changes"></a>Modifiche di rilievo
+### <a name="breaking-changes"></a>Modifiche che causano un'interruzione
 
 EF Core 6,0 conterrà un numero ridotto di [modifiche di rilievo](xref:core/what-is-new/ef-core-6.0/breaking-changes) Man mano che si continua a evolvere sia EF core che la piattaforma .NET. Il nostro obiettivo è consentire l'aggiornamento della maggior parte delle applicazioni senza interruzioni.
 

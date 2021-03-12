@@ -4,19 +4,19 @@ description: Configurazione di convertitori di valori in un modello di Entity Fr
 author: ajcvickers
 ms.date: 01/16/2021
 uid: core/modeling/value-conversions
-ms.openlocfilehash: d9d3753c7f0b257a2109e4af1f587df913c15b44
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 114a18e41804c85c97791047aa915c2ec38dea15
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983443"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023887"
 ---
 # <a name="value-conversions"></a>Conversioni di valori
 
 I convertitori di valori consentono di convertire i valori delle proprietà durante la lettura o la scrittura nel database. Questa conversione può provenire da un valore a un altro dello stesso tipo (ad esempio, la crittografia di stringhe) o da un valore di un tipo a un valore di un altro tipo, ad esempio la conversione di valori enum da e verso stringhe nel database.
 
 > [!TIP]
-> È possibile eseguire ed eseguire il debug in tutto il codice di questo documento [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/ValueConversions/).
+> È possibile eseguire ed eseguire il debug in tutto il codice di questo documento [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Modeling/ValueConversions/).
 
 ## <a name="overview"></a>Panoramica
 

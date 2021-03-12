@@ -4,12 +4,12 @@ description: Valutazione del client e del server delle query con Entity Framewor
 author: smitpatel
 ms.date: 11/09/2020
 uid: core/querying/client-eval
-ms.openlocfilehash: a1ddfb625be36cb05f01da08eb3be29512c54ab5
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: a1f37cb4f9c10f825d7dcbe54e9eecf75fa109a3
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430144"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023783"
 ---
 # <a name="client-vs-server-evaluation"></a>Valutazione client e server
 
@@ -19,7 +19,7 @@ Come regola generale, Entity Framework Core tenta di valutare il più possibile 
 > Prima della versione 3,0, Entity Framework Core la valutazione client supportata in qualsiasi punto della query. Per ulteriori informazioni, vedere la [sezione versioni precedenti](#previous-versions).
 
 > [!TIP]
-> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/ClientEvaluation) di questo articolo in GitHub.
+> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Querying/ClientEvaluation) di questo articolo in GitHub.
 
 ## <a name="client-evaluation-in-the-top-level-projection"></a>Valutazione client nella proiezione di primo livello
 
@@ -53,9 +53,9 @@ In questi casi, è possibile acconsentire esplicitamente alla valutazione del cl
 
 Poiché la conversione e la compilazione di query sono costose, EF Core memorizza nella cache il piano di query compilato. Il delegato memorizzato nella cache può usare il codice client durante la valutazione client della proiezione di primo livello. EF Core genera parametri per le parti valutate dal client dell'albero di e riutilizza il piano di query sostituendo i valori dei parametri. Tuttavia, alcune costanti nell'albero delle espressioni non possono essere convertite in parametri. Se il delegato memorizzato nella cache contiene tali costanti, tali oggetti non possono essere sottoposti a Garbage Collection perché sono ancora a cui viene fatto riferimento. Se un oggetto di questo tipo contiene un DbContext o altri servizi, può causare un aumento dell'utilizzo della memoria dell'app nel tempo. Questo comportamento è in genere un segno di una perdita di memoria. EF Core genera un'eccezione ogni volta che viene rilevata una costante di un tipo che non può essere mappato utilizzando il provider di database corrente. Di seguito sono riportate le cause più comuni e le relative soluzioni:
 
-- **Uso di un metodo di istanza** : quando si usano i metodi di istanza in una proiezione client, l'albero delle espressioni contiene una costante dell'istanza. Se il metodo non utilizza dati provenienti dall'istanza, provare a rendere statico il metodo. Se sono necessari dati dell'istanza nel corpo del metodo, passare i dati specifici come argomento al metodo.
-- **Passaggio di argomenti costanti al metodo** : questo caso si verifica generalmente usando `this` in un argomento del metodo client. Provare a suddividere l'argomento in in più argomenti scalari, che possono essere mappati dal provider di database.
-- **Altre costanti** : se una costante si trova in un altro caso, è possibile valutare se la costante è necessaria nell'elaborazione. Se è necessario disporre della costante o se non è possibile usare una soluzione nei casi precedenti, creare una variabile locale per archiviare il valore e usare la variabile locale nella query. EF Core convertirà la variabile locale in un parametro.
+- **Uso di un metodo di istanza**: quando si usano i metodi di istanza in una proiezione client, l'albero delle espressioni contiene una costante dell'istanza. Se il metodo non utilizza dati provenienti dall'istanza, provare a rendere statico il metodo. Se sono necessari dati dell'istanza nel corpo del metodo, passare i dati specifici come argomento al metodo.
+- **Passaggio di argomenti costanti al metodo**: questo caso si verifica generalmente usando `this` in un argomento del metodo client. Provare a suddividere l'argomento in in più argomenti scalari, che possono essere mappati dal provider di database.
+- **Altre costanti**: se una costante si trova in un altro caso, è possibile valutare se la costante è necessaria nell'elaborazione. Se è necessario disporre della costante o se non è possibile usare una soluzione nei casi precedenti, creare una variabile locale per archiviare il valore e usare la variabile locale nella query. EF Core convertirà la variabile locale in un parametro.
 
 ## <a name="previous-versions"></a>Versioni precedenti
 

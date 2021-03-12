@@ -4,12 +4,12 @@ description: Guida alle prestazioni per eseguire query efficienti tramite Entity
 author: roji
 ms.date: 12/1/2020
 uid: core/performance/efficient-querying
-ms.openlocfilehash: e945a1e0f734d62ce8948904bcbe819455fcbefa
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: e14837b779f2fbe8d5bf10206c6a336a952fc35b
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128485"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023874"
 ---
 # <a name="efficient-querying"></a>Esecuzione di query efficienti
 
@@ -180,7 +180,7 @@ Negli scenari di sola lettura in cui le modifiche non vengono salvate nel databa
 
 Per illustrare, si supponga di caricare un numero elevato di post dal database, così come il Blog a cui viene fatto riferimento da ogni post. Se 100 post che fanno riferimento allo stesso Blog, una query di rilevamento rileva questo problema tramite la risoluzione di identità e tutte le istanze post faranno riferimento alla stessa istanza di Blog deduplicata. Una query senza rilevamento, al contrario, duplica lo stesso Blog 100 volte e il codice dell'applicazione deve essere scritto di conseguenza.
 
-Di seguito sono riportati i risultati di un benchmark per il confronto tra rilevamento e nessun rilevamento per una query che carica 10 Blog con 20 post ciascuno. [Il codice sorgente è disponibile qui](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Benchmarks/QueryTrackingBehavior.cs)e può essere usato come base per le misurazioni.
+Di seguito sono riportati i risultati di un benchmark per il confronto tra rilevamento e nessun rilevamento per una query che carica 10 Blog con 20 post ciascuno. [Il codice sorgente è disponibile qui](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Benchmarks/QueryTrackingBehavior.cs)e può essere usato come base per le misurazioni.
 
 |       Metodo | NumBlogs | NumPostsPerBlog |       Media |    Errore |   StdDev |     Mediana | Proporzioni | RatioSD |   Generazione 0 |   Generazione 1 | Generazione 2 | Allocato |
 |------------- |--------- |---------------- |-----------:|---------:|---------:|-----------:|------:|--------:|--------:|--------:|------:|----------:|

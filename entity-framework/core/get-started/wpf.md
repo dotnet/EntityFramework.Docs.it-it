@@ -5,12 +5,12 @@ author: jeremylikness
 ms.author: jeliknes
 ms.date: 07/24/2020
 uid: core/get-started/wpf
-ms.openlocfilehash: f183064fafbe2d0e7b8dbdafa921169afc9ffe78
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 8b489207c297f0de5bb23b46c71a302300f538b0
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429923"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024329"
 ---
 # <a name="getting-started-with-wpf"></a>Introduzione a WPF
 
@@ -21,7 +21,7 @@ Il modello definisce due tipi che fanno parte di una relazione uno-a-molti: **ca
 Le schermate e gli elenchi di codice in questa procedura dettagliata sono ricavati da Visual Studio 2019 16.6.5.
 
 > [!TIP]
-> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/WPF) di questo articolo in GitHub.
+> È possibile visualizzare l'[esempio](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/WPF) di questo articolo in GitHub.
 
 ## <a name="pre-requisites"></a>Prerequisiti
 
@@ -32,7 +32,7 @@ Per completare questa procedura dettagliata, è necessario aver installato Visua
 1. Aprire Visual Studio.
 2. Nella finestra iniziale scegliere **Crea nuovo progetto**.
 3. Cercare "WPF", scegliere **app WPF (.NET Core)** , quindi fare clic su **Avanti**.
-4. Nella schermata successiva assegnare un nome al progetto, ad esempio **GetStartedWPF** , e scegliere **Crea.**
+4. Nella schermata successiva assegnare un nome al progetto, ad esempio **GetStartedWPF**, e scegliere **Crea.**
 
 ## <a name="install-the-entity-framework-nuget-packages"></a>Installare i pacchetti NuGet di Entity Framework
 
@@ -95,7 +95,7 @@ La proprietà **Products** della classe **Category** e della proprietà **Catego
 
 EF Core offre la possibilità di caricare automaticamente le entità correlate dal database al primo accesso alla proprietà di navigazione. Con questo tipo di caricamento (denominato caricamento lazy), tenere presente che la prima volta che si accede a ogni proprietà di navigazione viene eseguita una query separata sul database se il contenuto non è già presente nel contesto.
 
-Quando si usano tipi di entità POCO (Plain Old C# Object), EF Core ottiene il caricamento lazy creando istanze di tipi proxy derivati durante il runtime e quindi eseguendo l'override delle proprietà virtuali nelle classi per aggiungere l'hook di caricamento. Per ottenere il caricamento lazy di oggetti correlati, è necessario dichiarare i getter della proprietà di navigazione come **public** e **Virtual** ( **sottoponibile a override** in Visual Basic) e la classe non deve essere **sealed** ( **NotOverridable** in Visual Basic). Quando si usa Database First, le proprietà di navigazione vengono rese automaticamente virtuali per consentire il caricamento lazy.
+Quando si usano tipi di entità POCO (Plain Old C# Object), EF Core ottiene il caricamento lazy creando istanze di tipi proxy derivati durante il runtime e quindi eseguendo l'override delle proprietà virtuali nelle classi per aggiungere l'hook di caricamento. Per ottenere il caricamento lazy di oggetti correlati, è necessario dichiarare i getter della proprietà di navigazione come **public** e **Virtual** (**sottoponibile a override** in Visual Basic) e la classe non deve essere **sealed** (**NotOverridable** in Visual Basic). Quando si usa Database First, le proprietà di navigazione vengono rese automaticamente virtuali per consentire il caricamento lazy.
 
 ## <a name="bind-object-to-controls"></a>Associa oggetto a controlli
 

@@ -4,12 +4,12 @@ description: Intercettazione per operazioni di database e altri eventi
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: e3b2f1a0f1a97d211bcaba0633955a7fe9c0aa91
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 459c0495e9a2f81e2e84388988f04ca9787080cc
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128589"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024225"
 ---
 # <a name="interceptors"></a>Intercettori
 
@@ -76,7 +76,7 @@ Ogni coppia di metodi ha sia la sincronizzazione che le variazioni asincrone. Ci
 ### <a name="example-command-interception-to-add-query-hints"></a>Esempio: intercettazione di comandi per aggiungere hint per la query
 
 > [!TIP]
-> È possibile [scaricare l'esempio Command Interceptor](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/CommandInterception) da GitHub.
+> È possibile [scaricare l'esempio Command Interceptor](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/CommandInterception) da GitHub.
 
 Un oggetto <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbCommandInterceptor> può essere utilizzato per modificare SQL prima di essere inviato al database. Questo esempio illustra come modificare SQL per includere un hint per la query.
 
@@ -149,7 +149,7 @@ FROM [Blogs] AS [b]
 ### <a name="example-connection-interception-for-sql-azure-authentication-using-add"></a>Esempio: intercettazione della connessione per l'autenticazione SQL Azure usando Aggiungi
 
 > [!TIP]
-> È possibile [scaricare l'esempio Connection Interceptor](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/ConnectionInterception) da GitHub.
+> È possibile [scaricare l'esempio Connection Interceptor](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/ConnectionInterception) da GitHub.
 
 Un oggetto <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbConnectionInterceptor> può essere utilizzato per modificare l'oggetto <xref:System.Data.Common.DbConnection> prima che venga utilizzato per connettersi al database. Questa operazione può essere usata per ottenere un token di accesso Azure Active Directory (AAD). Ad esempio:
 
@@ -193,7 +193,7 @@ public class AadAuthenticationInterceptor : DbConnectionInterceptor
 ### <a name="example-advanced-command-interception-for-caching"></a>Esempio: intercettazione dei comandi avanzati per la memorizzazione nella cache
 
 > [!TIP]
-> È possibile [scaricare l'esempio Advanced Command Interceptor](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/CachingInterception) da GitHub.
+> È possibile [scaricare l'esempio Advanced Command Interceptor](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/CachingInterception) da GitHub.
 
 Gli intercettori di EF Core possono:
 
@@ -299,7 +299,7 @@ Se non è disponibile alcun messaggio memorizzato nella cache o se è scaduto, i
 
 #### <a name="demonstration"></a>Dimostrazione
 
-L' [esempio di intercettore Caching](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/CachingInterception) contiene una semplice applicazione console che esegue query per i messaggi giornalieri per testare la memorizzazione nella cache:
+L' [esempio di intercettore Caching](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/CachingInterception) contiene una semplice applicazione console che esegue query per i messaggi giornalieri per testare la memorizzazione nella cache:
 
 <!--
         // 1. Initialize the database with some daily messages.
@@ -399,7 +399,7 @@ Si noti che dall'output del log l'applicazione continua a usare il messaggio mem
 > L'intercettazione di SaveChanges è stata introdotta in EF Core 5,0.
 
 > [!TIP]
-> È possibile [scaricare l'esempio di intercettore SaveChanges](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) da GitHub.
+> È possibile [scaricare l'esempio di intercettore SaveChanges](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/SaveChangesInterception) da GitHub.
 
 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A><xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>i punti di intercettazione e sono definiti dall' <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor> interfaccia. Come per gli altri intercettori, la <xref:Microsoft.EntityFrameworkCore.Diagnostics.SaveChangesInterceptor> classe base con metodi no-op viene fornita come praticità.
 
@@ -415,7 +415,7 @@ Si noti che dall'output del log l'applicazione continua a usare il messaggio mem
 
 #### <a name="the-application-context"></a>Contesto dell'applicazione
 
-L' [esempio per il controllo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) usa un DbContext semplice con Blog e post.
+L' [esempio per il controllo](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/SaveChangesInterception) usa un DbContext semplice con Blog e post.
 
 <!--
 public class BlogsContext : DbContext
@@ -673,7 +673,7 @@ L'errore viene gestito in modo analogo all'esito positivo, ma <xref:Microsoft.En
 
 #### <a name="demonstration"></a>Dimostrazione
 
-L' [esempio di controllo](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) contiene una semplice applicazione console che apporta modifiche al database blogging e quindi Mostra il controllo creato.
+L' [esempio di controllo](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/SaveChangesInterception) contiene una semplice applicazione console che apporta modifiche al database blogging e quindi Mostra il controllo creato.
 
 <!--
         // Insert, update, and delete some entities

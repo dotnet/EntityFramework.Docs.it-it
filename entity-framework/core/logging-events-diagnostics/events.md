@@ -4,17 +4,17 @@ description: Eventi .NET definiti da EF Core
 author: ajcvickers
 ms.date: 10/15/2020
 uid: core/logging-events-diagnostics/events
-ms.openlocfilehash: 0888009af0bedfb63690e72c4a0e08979a9e9cf3
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: c26032d19d7bc05d30d4576534c7425da4472072
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129252"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024238"
 ---
 # <a name="net-events-in-ef-core"></a>Eventi .NET in EF Core
 
 > [!TIP]
-> È possibile [scaricare l'esempio di eventi](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Events) da GitHub.
+> È possibile [scaricare l'esempio di eventi](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Events) da GitHub.
 
 Entity Framework Core (EF Core) espone [gli eventi .NET](/dotnet/standard/events/) da utilizzare come callback quando si verificano determinate operazioni nel codice EF core. Gli eventi sono più semplici degli [intercettori](xref:core/logging-events-diagnostics/interceptors) e consentono una registrazione più flessibile. Tuttavia, sono solo sincronizzati e pertanto non possono eseguire operazioni di I/O asincrone non bloccanti.
 
@@ -24,7 +24,7 @@ Gli eventi vengono registrati per ogni `DbContext` istanza. Usare un [listener d
 
 Gli eventi seguenti vengono generati da EF Core:
 
-| Event | Versione introdotta | Quando viene generato
+| Evento | Versione introdotta | Quando viene generato
 |:------|--------------------|-------
 | <xref:Microsoft.EntityFrameworkCore.DbContext.SavingChanges?displayProperty=nameWithType> | 5.0 | All'inizio di <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> o <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
 | <xref:Microsoft.EntityFrameworkCore.DbContext.SavedChanges?displayProperty=nameWithType> | 5.0 | Alla fine di un'operazione riuscita <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> o <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
@@ -90,7 +90,7 @@ Questo metodo ha la firma appropriata da usare come gestore eventi per gli `Trac
 
 Entrambi gli eventi sono necessari perché le nuove entità generano `Tracked` eventi quando vengono rilevati per la prima volta. `StateChanged` gli eventi vengono generati solo per le entità che cambiano lo stato mentre sono _già_ rilevate.
 
-L' [esempio per questo esempio contiene](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Events) una semplice applicazione console che apporta modifiche al database blogging:
+L' [esempio per questo esempio contiene](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Events) una semplice applicazione console che apporta modifiche al database blogging:
 
 <!--
         using (var context = new BlogsContext())

@@ -4,12 +4,12 @@ description: Panoramica dell'uso delle migrazioni per gestire gli schemi del dat
 author: bricelam
 ms.date: 10/28/2020
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: b9547298714af59453aeae6d05742a03c067708b
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 27f94ad24e0255f023025d16b0ae1950d0ed4cc7
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "95003395"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024186"
 ---
 # <a name="migrations-overview"></a>Panoramica delle migrazioni
 
@@ -153,4 +153,6 @@ Sopra è stata riportata solo una breve introduzione alle migrazioni. Leggere le
 
 ## <a name="additional-resources"></a>Risorse aggiuntive
 
+* Guida di [riferimento agli strumenti di Entity Framework Core-interfaccia della riga di comando di .NET Core](xref:core/cli/dotnet) : include i comandi per aggiornare, eliminare, aggiungere, rimuovere e altro ancora.
+* Guida di [riferimento agli strumenti di Entity Framework Core-Console di gestione pacchetti in Visual Studio](xref:core/cli/powershell) : include i comandi per aggiornare, eliminare, aggiungere, rimuovere e altro ancora.
 * [EF Core sessione standup della community](https://www.youtube.com/watch?v=mSsGERmrhnE&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=20) passa alle nuove funzionalità di migrazione in EF Core 5,0.

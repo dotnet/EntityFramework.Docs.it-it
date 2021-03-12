@@ -4,12 +4,12 @@ description: Uso di EntityEntry, DbContext. entrys e DbSet. local per accedere a
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/entity-entries
-ms.openlocfilehash: f385016aba61535f33e34c622dd43ce6dc823fc5
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 758d21f44dfeb8b1de2702165df0d705edfb91b6
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129735"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024511"
 ---
 # <a name="accessing-tracked-entities"></a>Accesso alle entità rilevate
 
@@ -26,7 +26,7 @@ Ognuno di questi elementi viene descritto più dettagliatamente nelle sezioni se
 > In questo documento si presuppone che gli Stati dell'entità e le nozioni di base del EF Core rilevamento delle modifiche siano compresi. Per ulteriori informazioni su questi argomenti, vedere [rilevamento modifiche in EF Core](xref:core/change-tracking/index) .
 
 > [!TIP]
-> È possibile eseguire ed eseguire il debug in tutto il codice di questo documento [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/AccessingTrackedEntities).
+> È possibile eseguire ed eseguire il debug in tutto il codice di questo documento [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/AccessingTrackedEntities).
 
 ## <a name="using-dbcontextentry-and-entityentry-instances"></a>Uso di istanze di DbContext. entry e EntityEntry
 
@@ -582,12 +582,12 @@ Ciò significa che la visualizzazione locale può essere usata per modificare le
 
 L'output rimane invariato rispetto all'esempio precedente, perché le modifiche apportate alla visualizzazione locale vengono sincronizzate con DbContext.
 
-### <a name="using-the-local-view-for-windows-forms-or-wpf-data-binding"></a>Uso della visualizzazione locale per Windows Forms o WPF data binding
+### <a name="using-the-local-view-for-windows-forms-or-wpf-data-binding"></a>Uso della visualizzazione locale per Windows Form o WPF data binding
 
-<xref:Microsoft.EntityFrameworkCore.DbSet%601.Local?displayProperty=nameWithType> costituisce la base per data binding per EF Core entità. Tuttavia, sia Windows Forms che WPF funzionano meglio se usati con il tipo specifico di raccolta di notifica che prevedono. La visualizzazione locale supporta la creazione di questi tipi di raccolta specifici:
+<xref:Microsoft.EntityFrameworkCore.DbSet%601.Local?displayProperty=nameWithType> costituisce la base per data binding per EF Core entità. Tuttavia, sia Windows Form che WPF funzionano meglio se usati con il tipo specifico di raccolta di notifica che prevedono. La visualizzazione locale supporta la creazione di questi tipi di raccolta specifici:
 
 - <xref:Microsoft.EntityFrameworkCore.ChangeTracking.LocalView%601.ToObservableCollection?displayProperty=nameWithType> Restituisce un oggetto <xref:System.Collections.ObjectModel.ObservableCollection%601> per Data Binding WPF.
-- <xref:Microsoft.EntityFrameworkCore.ChangeTracking.LocalView%601.ToBindingList?displayProperty=nameWithType> Restituisce un oggetto <xref:System.ComponentModel.BindingList%601> per Windows Forms Data Binding.
+- <xref:Microsoft.EntityFrameworkCore.ChangeTracking.LocalView%601.ToBindingList?displayProperty=nameWithType> Restituisce un oggetto <xref:System.ComponentModel.BindingList%601> per Windows Form Data Binding.
 
 Ad esempio:
 

@@ -4,12 +4,12 @@ description: Panoramica del rilevamento delle modifiche per EF Core
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/index
-ms.openlocfilehash: 8cfa4590af07ec1715eb48ec0c7acb3426b6a6b4
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: ccd14947cf53e3f8a38d2e0ddf2601b29e845775
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983261"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024446"
 ---
 # <a name="change-tracking-in-ef-core"></a>Rilevamento modifiche in EF Core
 
@@ -18,10 +18,10 @@ Ogni <xref:Microsoft.EntityFrameworkCore.DbContext> istanza tiene traccia delle 
 In questo documento viene presentata una panoramica del rilevamento delle modifiche Entity Framework Core (EF Core) e del modo in cui è correlato a query e aggiornamenti.
 
 > [!TIP]
-> È possibile eseguire ed eseguire il debug in tutto il codice di questo documento [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeTrackingInEFCore).
+> È possibile eseguire ed eseguire il debug in tutto il codice di questo documento [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/ChangeTrackingInEFCore).
 
 > [!TIP]
-> Per semplicità, in questo documento vengono usati e i riferimenti a metodi sincroni, ad esempio <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> invece i relativi equivalenti asincroni, ad esempio <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> . La chiamata e l'attesa del metodo asincrono possono essere sostituite se non diversamente specificato.
+> Per semplicità, questo documento usa e fa riferimento a metodi sincroni come, <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> anziché ai relativi equivalenti asincroni, ad esempio <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> . La chiamata e l'attesa del metodo asincrono possono essere sostituite se non diversamente specificato.
 
 ## <a name="how-to-track-entities"></a>Come tenere traccia delle entità
 

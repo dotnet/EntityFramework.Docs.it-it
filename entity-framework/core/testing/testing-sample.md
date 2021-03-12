@@ -11,24 +11,24 @@ no-loc:
 - Tags
 - items
 - tags
-ms.openlocfilehash: 7af516421a6ec3040b636507a6cd7976cabce3a9
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: a1c858333ee8ebe5a0ad82358c518c86576cdd32
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128797"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023458"
 ---
 # <a name="ef-core-testing-sample"></a>Esempio di test di EF Core
 
 > [!TIP]
-> Il codice in questo documento è disponibile in GitHub come [esempio eseguibile](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/).
+> Il codice in questo documento è disponibile in GitHub come [esempio eseguibile](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Testing/ItemsWebApi/).
 > Si noti che alcuni di questi test **dovrebbero avere esito negativo**. I motivi di questo problema sono descritti di seguito.
 
 Questo documento illustra un esempio per il test del codice che usa EF Core.
 
 ## <a name="the-application"></a>Applicazione
 
-L' [esempio](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) contiene due progetti:
+L' [esempio](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Testing/ItemsWebApi/) contiene due progetti:
 
 - ItemsWebApi: un' [API Web molto semplice supportata da ASP.NET Core](/aspnet/core/tutorials/first-web-api) con un singolo controller
 - Test: un progetto di test [xUnit](https://xunit.net/) per testare il controller
@@ -43,7 +43,7 @@ Il modello che supporta questa API è costituito da due tipi di entità: Items e
   - Se un elemento viene contrassegnato con la stessa etichetta più di una volta, il conteggio del tag esistente con tale etichetta viene incrementato al posto di un nuovo tag creato.
 - L'eliminazione di un oggetto Item deve eliminare tutti gli associati Tags .
 
-#### <a name="the-no-locitem-entity-type"></a>ItemTipo di entità
+#### <a name="the-item-entity-type"></a>ItemTipo di entità
 
 `Item`Tipo di entità:
 
@@ -68,7 +68,7 @@ Si noti che il tipo di entità vincola il modo in cui può essere usato per rifl
   - Inoltre, non Tag definisce una proprietà di chiave esterna.
     Al contrario, EF creerà e gestirà una proprietà in stato shadow.
 
-#### <a name="the-no-loctag-entity-type"></a>TagTipo di entità
+#### <a name="the-tag-entity-type"></a>TagTipo di entità
 
 `Tag`Tipo di entità:
 
@@ -80,7 +80,7 @@ E la relativa configurazione in `DbContext.OnModelCreating` :
 
 In modo analogo a Item , Tag nasconde la chiave primaria e rende la proprietà di sola `Label` lettura.
 
-### <a name="the-no-locitemscontroller"></a>Il Items controller
+### <a name="the-itemscontroller"></a>Il Items controller
 
 Il controller API Web è piuttosto semplice.
 Ottiene un oggetto `DbContext` dal contenitore di inserimento delle dipendenze tramite l'inserimento del costruttore:

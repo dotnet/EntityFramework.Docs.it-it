@@ -4,12 +4,12 @@ description: Panoramica delle nuove funzionalità di EF Core 5,0
 author: ajcvickers
 ms.date: 09/10/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: 64b72ba2a6f752b9d71ea9b64ab08f4cf92ef03d
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: ab6a49fa0b23aff83ee64446e498b7e94c632020
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129278"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023509"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Novità di EF Core 5,0
 
@@ -115,7 +115,7 @@ var blogs = context.Blogs
 
 Questa query restituirà i Blog insieme a ogni post associato, ma solo quando il titolo post contiene "Cheese".
 
-Per ulteriori informazioni, [vedere la documentazione completa sulle query suddivise](xref:core/querying/related-data/eager#filtered-include).
+Per ulteriori informazioni, [vedere la documentazione completa sull'inclusione filtrata](xref:core/querying/related-data/eager#filtered-include).
 
 ## <a name="table-per-type-tpt-mapping"></a>Mapping tabella per tipo (TPT)
 
@@ -382,7 +382,7 @@ Per ulteriori informazioni, [vedere la documentazione completa sui contatori deg
 * Il recupero di dati binari e di tipo stringa con GetBytes, GetChars e GetTextReader è ora più efficiente mediante l'uso di SqliteBlob e flussi.
 * L'inizializzazione di SqliteConnection è ora Lazy.
 
-### <a name="other"></a>Altro
+### <a name="other"></a>Altri
 
 * È possibile generare proxy di rilevamento delle modifiche che implementano automaticamente [INotifyPropertyChanging](/dotnet/api/system.componentmodel.inotifypropertychanging) e [INotifyPropertyChanged](/dotnet/api/system.componentmodel.inotifypropertychanged). Questo approccio offre un approccio alternativo al rilevamento delle modifiche che non esegue l'analisi delle modifiche quando `SaveChanges` viene chiamato.
 * <xref:System.Data.Common.DbConnection>È ora possibile modificare una stringa di connessione o in un DbContext già inizializzato.

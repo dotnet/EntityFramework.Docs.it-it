@@ -4,12 +4,12 @@ description: Come configurare ed eseguire il mapping di tipi di entità usando E
 author: roji
 ms.date: 10/06/2020
 uid: core/modeling/entity-types
-ms.openlocfilehash: ca8cb8560afe374218e763bc0476839187a40ece
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 6c8029b64210dd9bc69fd53d9a3b4aa06bf519e0
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635770"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023991"
 ---
 # <a name="entity-types"></a>Tipi di entità
 
@@ -68,7 +68,7 @@ Per convenzione, ogni tipo di entità verrà configurato per eseguire il mapping
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableName.cs?Name=TableName&highlight=3-4)]
 
-**_
+***
 
 ## <a name="table-schema"></a>Schema della tabella
 
@@ -84,7 +84,7 @@ Quando si utilizza un database relazionale, le tabelle vengono create per conven
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableNameAndSchema.cs?name=TableNameAndSchema&highlight=3-4)]
 
-_*_
+***
 
 Anziché specificare lo schema per ogni tabella, è anche possibile definire lo schema predefinito a livello di modello con l'API Fluent:
 
@@ -104,7 +104,7 @@ Si noti che l'impostazione dello schema predefinito influirà anche su altri ogg
  Il mapping a una vista consente di rimuovere il mapping predefinito della tabella, ma a partire da EF 5,0 il tipo di entità può anche essere mappato in modo esplicito a una tabella. In questo caso, il mapping delle query verrà usato per le query e il mapping delle tabelle verrà usato per gli aggiornamenti.
 
 > [!TIP]
-> Per testare i tipi di entità di cui è stato eseguito il mapping alle viste usando il provider in memoria, eseguirne il mapping a una query tramite `ToInMemoryQuery` . Per altri dettagli, vedere un [esempio eseguibile](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) usando questa tecnica.
+> Per testare i tipi di entità di cui è stato eseguito il mapping alle viste usando il provider in memoria, eseguirne il mapping a una query tramite `ToInMemoryQuery` . Per altri dettagli, vedere un [esempio eseguibile](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Testing/ItemsWebApi/) usando questa tecnica.
 
 ## <a name="table-valued-function-mapping"></a>Mapping di funzioni con valori di tabella
 
@@ -164,4 +164,4 @@ WHERE [b].[PostCount] > 3
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableComment.cs?name=TableComment&highlight=4)]
 
-_**
+***

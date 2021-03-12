@@ -4,12 +4,12 @@ description: Risoluzione di più istanze di entità in una singola istanza con v
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/identity-resolution
-ms.openlocfilehash: d4c8f935c8d0ab92eaecd8fc7a4156bd824713d4
-ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
+ms.openlocfilehash: 24b2fbeea5f740dd2830676bfe8a49720c2b86a9
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100543614"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024459"
 ---
 # <a name="identity-resolution-in-ef-core"></a>Risoluzione di identità in EF Core
 
@@ -19,7 +19,7 @@ Un oggetto <xref:Microsoft.EntityFrameworkCore.DbContext> può rilevare solo un'
 > In questo documento si presuppone che gli Stati dell'entità e le nozioni di base del EF Core rilevamento delle modifiche siano compresi. Per ulteriori informazioni su questi argomenti, vedere [rilevamento modifiche in EF Core](xref:core/change-tracking/index) .
 
 > [!TIP]
-> È possibile eseguire ed eseguire il debug in tutto il codice di questo documento [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/IdentityResolutionInEFCore).
+> È possibile eseguire ed eseguire il debug in tutto il codice di questo documento [scaricando il codice di esempio da GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/IdentityResolutionInEFCore).
 
 ## <a name="introduction"></a>Introduzione
 

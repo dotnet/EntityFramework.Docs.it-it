@@ -4,12 +4,12 @@ description: Aggiunta, rimozione e gestione delle migrazioni dello schema di dat
 author: bricelam
 ms.date: 10/27/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: ef5e1b9bb10d6f1cd428db2fee327ec513c3f528
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: a6e64bde753ae34b6dccb10b228d1ea87a79357b
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "95003276"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024173"
 ---
 # <a name="managing-migrations"></a>Gestione delle migrazioni
 
@@ -195,7 +195,7 @@ Remove-Migration
 Dopo la rimozione della migrazione, è possibile apportare le modifiche aggiuntive al modello. La migrazione può quindi essere aggiunta di nuovo.
 
 > [!WARNING]
-> Prestare attenzione a non rimuovere le migrazioni già applicate ai database di produzione. In caso contrario, non sarà possibile ripristinarlo e potrebbe interrompere le ipotesi effettuate dalle successive migrazioni.
+> Evitare di rimuovere le migrazioni che sono già state applicate ai database di produzione. In questo modo, non sarà possibile ripristinare tali migrazioni dai database e le ipotesi effettuate dalle successive migrazioni.
 
 ## <a name="listing-migrations"></a>Elenco delle migrazioni
 
@@ -231,3 +231,8 @@ In alcuni casi estremi, potrebbe essere necessario rimuovere tutte le migrazioni
 
 > [!WARNING]
 > Quando la cartella **Migrations** viene eliminata, eventuali [codici di migrazione personalizzati](#customize-migration-code) andranno perduti.  Tutte le personalizzazioni devono essere applicate manualmente alla nuova migrazione iniziale per poter essere mantenute.
+
+## <a name="additional-resources"></a>Risorse aggiuntive
+
+* Guida di [riferimento agli strumenti di Entity Framework Core-interfaccia della riga di comando di .NET Core](xref:core/cli/dotnet) : include i comandi per aggiornare, eliminare, aggiungere, rimuovere e altro ancora.
+* Guida di [riferimento agli strumenti di Entity Framework Core-Console di gestione pacchetti in Visual Studio](xref:core/cli/powershell) : include i comandi per aggiornare, eliminare, aggiungere, rimuovere e altro ancora.

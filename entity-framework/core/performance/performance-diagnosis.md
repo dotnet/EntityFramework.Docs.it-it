@@ -4,12 +4,12 @@ description: Diagnosi delle prestazioni Entity Framework Core e identificazione 
 author: roji
 ms.date: 12/1/2020
 uid: core/performance/performance-diagnosis
-ms.openlocfilehash: 9416acf3326056ef7a5d732c4bd456dac751167b
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 85ffd1826723ad97bdcce517781f920c193e4286
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: it-IT
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97657805"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023848"
 ---
 # <a name="performance-diagnosis"></a>Diagnosi delle prestazioni
 
@@ -98,7 +98,7 @@ Per ulteriori informazioni, vedere la pagina dedicata sui [contatori degli event
 Alla fine della giornata, a volte è necessario sapere se un particolare metodo di scrittura o di esecuzione di una query è più veloce rispetto a un altro. È importante non presupporre o speculare la risposta ed è estremamente semplice mettere insieme un benchmark rapido per ottenere la risposta. Quando si scrivono i benchmark, è consigliabile usare la nota libreria [BenchmarkDotNet](https://benchmarkdotnet.org/index.html) , che gestisce molti problemi riscontrati dagli utenti durante il tentativo di scrivere i propri benchmark: sono state eseguite alcune iterazioni di riscaldamento? Quante iterazioni eseguono effettivamente il benchmark e perché? Verrà ora esaminato il benchmark con EF Core.
 
 > [!TIP]
-> Il progetto di benchmark completo per l'origine seguente è disponibile [qui](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Benchmarks/AverageBlogRanking.cs). Si consiglia di copiarlo e usarlo come modello per i propri benchmark.
+> Il progetto di benchmark completo per l'origine seguente è disponibile [qui](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Benchmarks/AverageBlogRanking.cs). Si consiglia di copiarlo e usarlo come modello per i propri benchmark.
 
 Come semplice scenario di benchmark, è possibile confrontare i seguenti metodi diversi per calcolare la classificazione media di tutti i Blog nel database:
 
@@ -107,7 +107,7 @@ Come semplice scenario di benchmark, è possibile confrontare i seguenti metodi 
 * Evitare di caricare le intere istanze di entità del Blog, proiettando solo la classificazione. Il non consente di trasferire le altre colonne non necessarie del tipo di entità Blog.
 * Calcolare la media nel database facendola parte della query. Questo è il modo più veloce, poiché tutto viene calcolato nel database e solo il risultato viene trasferito al client.
 
-Con BenchmarkDotNet è possibile scrivere il codice per eseguire il benchmarking come metodo semplice, proprio come un unit test e BenchmarkDotNet esegue automaticamente ogni metodo per un numero sufficiente di iterazioni, misurando in modo affidabile il tempo necessario e la quantità di memoria allocata. Ecco il metodo diverso ([il codice di benchmark completo può essere visualizzato qui](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Benchmarks/AverageBlogRanking.cs)):
+Con BenchmarkDotNet è possibile scrivere il codice per eseguire il benchmarking come metodo semplice, proprio come un unit test e BenchmarkDotNet esegue automaticamente ogni metodo per un numero sufficiente di iterazioni, misurando in modo affidabile il tempo necessario e la quantità di memoria allocata. Ecco il metodo diverso ([il codice di benchmark completo può essere visualizzato qui](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Benchmarks/AverageBlogRanking.cs)):
 
 ### <a name="load-entities"></a>[Carica entità](#tab/load-entities)
 
